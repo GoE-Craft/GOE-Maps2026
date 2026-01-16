@@ -1,0 +1,27 @@
+{
+   "biome_id" : 0,
+   "block_layers" : [
+    {
+         "block_data" : 0,
+         "block_name" : "minecraft:bedrock",
+         "count" : 1
+    },
+    {
+         "block_data" : 0,
+         "block_name" : "minecraft:dirt",
+         "count" : 4
+    },
+	{
+         "block_data" : 0,
+         "block_name" : "minecraft:sand",
+         "count" : 25
+    },
+    {
+         "block_data" : 0,
+         "block_name" : "minecraft:water",
+         "count" : 33      
+	}
+   ],
+   "encoding_version" : 4,
+   "structure_options" : null
+}

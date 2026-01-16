@@ -1,0 +1,9 @@
+{
+	"biome_id":0,
+	"block_layers":
+	[
+		{"block_data":0,"block_id":0,"count":3}
+	],
+	"encoding_version":3,
+	"structure_options":null
+}

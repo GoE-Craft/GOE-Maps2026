@@ -1,0 +1,6 @@
+# SetContainerSlot x y z slot itemName itemDamage count [ItemIdentifier]
+
+# BOOK
+# SetContainerSlot x y z 10 book:guidebook 0 1
+
+SetContainerSlot -443 103 78 13 book:dark_temple 0 1

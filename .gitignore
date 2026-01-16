@@ -1,0 +1,12 @@
+ValidatorSettings.txt
+PrevSelected.txt
+settings.txt
+Bedrock_Output
+hs_err_pid*.log
+*.bat
+*.ps1
+.vscode
+.mcattributes
+
+*/textures/particle
+*Convert_Results

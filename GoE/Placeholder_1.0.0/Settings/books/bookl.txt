@@ -1,0 +1,18 @@
+TITLE=xxxxxxxxxx
+AUTHOR=xxxxxx
+//PAGE 1
+
+§rLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 
+//PAGE 2
+§rLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 
+//PAGE 3
+§rLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 
+//PAGE 4
+§rLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 
+//PAGE 5
+§r§lThanks for playing xxxxxxxxx!
+
+§rDon't forget to rate this map 5 STARS on the Marketplace.
+
+§rYour support helps us create more awesome adventures for you!
+//PAGE 6

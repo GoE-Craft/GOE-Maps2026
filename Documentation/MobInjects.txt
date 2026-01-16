@@ -1,0 +1,272 @@
+
+###### Legend:
+=========================================================================
+
+1.     Sign syntax.
+===================================================
+1.1.   Old sign syntax (backward compatibility 1.12)
+1.2.   Minecraft\GoE mobs (on java 1.13, partial on 1.12)
+1.3.   Light block
+1.4.   Spawner block
+1.5.   Mob rotation
+
+2.     Mob inject setting file syntax
+===================================================
+2.1.   Name of mob
+2.2.   Type of mob
+2.3.   Custom name
+2.4.   Commonly used parameters
+2.5.   Attributes
+2.6.   Definitions and components
+2.7.   Special converter definitions
+2.7.1. Illegal mob names
+2.7.2. InjectOnSign
+2.7.3. InjectOffers
+2.8.   All useful entity parameters
+
+
+
+
+
+###### Content:
+=========================================================================
+
+
+1.     Sign syntax.
+===================================================
+Sign contains 4 lines, 15 characters max on each line.
+
+In old converter we define few main parameters only in sign, so the mob type is stated in line 1.
+
+In new converter we add settings file, so line1 is free text, with mob name in the settings file,
+and the mob type will be stated in the setting file.
+
+So we can have sign with "#horse_blue" and "#horse_big" that both defained in settings to summon a horse with 
+some different parameters.
+
+
+
+1.1.   Old sign syntax (backward compatibility 1.12)
+===================================================
+Line1: Type of mob (horse,cat,etc). Must start with # character. Only java 1.12 mobs
+Line2: Custem name of mob (will be visible in game) (optional)
+Line3: Variant number (optional - default=0)
+Line4: 1 or empty for moving (to state mob can move), 0 (to state mob can't move)
+
+Also support special case of chicken rotation, for EpicRaceBuilders car inject. Replaces line 4 (for example 0:90)
+
+
+1.2.   Minecraft\GoE mobs (on Minecraft Java 1.13 or higher)
+===================================================
+Line1: Type of mob (free text). Must start with # (for minecraft mobs) or ! (For GoE Mobs).
+       Examples: #horse, #horse2, #black_horse, #farmer, #fisherman, !lamp, !bench, !sign_left.
+Line2: Custem name of mob (will be visible in game) (optional)
+Line3: Variant number (optional - default=0)
+Line4: 1 or empty moving (to state mob can move), 0 (to state mob can't move)
+
+This will place a mob, and most of the mob's interesting parameters can be overriden in the settings file
+as detailed blow.
+
+
+1.3.   Light block
+===================================================
+Line1: #light_block
+Line2: number (0-15) or empty 
+Line3: empty
+Line4: empty
+
+This will place a light block instead of the diamond_block.
+Light value is 0-15, with default of 15 (if line 2 is empty).
+
+
+1.4.   Spawner block
+===================================================
+Line1: !spawner
+Line2: Minecraft default mob types (exmaples: cow, zombie)
+Line3: Down=X (or empty)
+Line4: empty
+
+This will place a mob spawner in the place of the diamond block, spawning some valid minecraft mob.
+Line 3 (optional) - if set to "Down=X", will place the spawner X blocks below the diamond block.
+This is to allow hiding the spawner below carpet or some other decoration, so we place the inject above the carpet,
+but state Down=2 so it'll be actually below it.
+
+1.5.   Mob rotation
+===================================================
+Rotation of the mob is taken from the sign rotation.
+
+
+
+2.     Mob inject setting file syntax
+===================================================
+Examples:
+
+#horse
+type=horse
+
+#tamed_horse
+type=horse
+IsTamed=1
+Saddled=1
+
+#cleric
+type=villager_v2
+PreferredProfession=cleric
+
+#child
+type=villager_v2
+IsBaby=1
+
+
+
+
+2.1.   Injection ID
+===================================================
+The first line of any injtected mob, but be equal to what we write on signs.
+So if we want to have a sign with "#horse_black", then we also must prepare mob data starting with "#horse_black" in the settings file.
+The line must start with # (for minecart mobs) or ! (for GoE mobs). No need to write the prefix in this line.
+
+Illegal mob names:
+If line1 of the sign is not found in the definition settings (illegal value), we will place a baby panda instead.
+This is to make it easier to notice this in game.
+
+
+
+2.2.   Type of mob
+===================================================
+For every inject mob, after the name we must state the type of the mob. Prefix (minecraft: or goe:) is not required.
+Examples:
+type=chicken
+type=npc_toto
+type=npc_villager
+
+
+
+2.3.   Custom name
+===================================================
+This optional. We can state what name will appear above the mob, or leave empty (display no name). 
+This is free text, and can contain font format and color codes for bedrock.
+Eamples:
+CustomName=§eToto
+CustomName=§l§4M U L T I P L A Y E R
+
+
+
+2.4.   Commonly used parameters
+===================================================
+movement=0.22
+This can state the movement speed of mob, or set to 0 for stationary mob.
+
+IsTamed=1
+Can be placed on tamable mobs (horses, mules, lammas, pigs, wolves)
+
+Saddled=1
+Can be placed on ridable mobs (horses, mules, lammas)
+
+IsBaby=1
+Can be used on mobs with baby\child state (villagers, most animals)
+
+MarkVariant=0
+Variant=1
+These 2 params are used for different minecraft mobs to control appearance (cat color, etc).
+
+PreferredProfession=farmer
+This can state the profession of injected villager_v2. Will also create the component addition.
+
+
+
+2.5.   Attributes
+===================================================
+Some global attributes available for each entity, describing min\max\current values. We can override current value:
+health=20.0 (unlimited)
+luck=0 (max is 1024)
+movement=0.4 (unlimited)
+underwater_movement=0.02 (unlimited)
+lava_movement=0.02 (unlimited)
+absorption=0 (max is 16.0)
+knockback_resistance=0 (max is 1)
+fall_damage=1.0 (unlimited)
+follow_range=16.0 (max is 2048)
+
+for horses only:
+horse.jump_strength=0.7043704 (unlimited)
+
+
+
+2.6.   Definitions and components
+===================================================
+Mob behaviour components can be added by lines starting with + character.
+
+Examples:
++goe:bubble_off
++goe:text_off
++goe:egg
+
+
+
+2.7.   Special converter definitions
+===================================================
+
+2.7.1. Illegal mob names
+===================================================
+If line1 of the sign is not found in the definition settings (illegal value), we will place a baby panda instead.
+This is to make it easier to notice this in game.
+
+
+2.7.2. InjectOnSign:
+===================================================
+If we add the line InjectOnSign=true to a mob, it will injected into the block of the sign instead of the diamond_block.
+Note - if the mob is not ignoring gravity (defined in behaviour), it will just fall 1 block to the diamond_block position.
+
+Syntax example:
+InjectOnSign=true
+
+2.7.3. InjectOffers
+===================================================
+Added specially for traders in bedrwars game. We want traders to be able to sell blocks and items with
+specal data of "CanPlaceOn" and "CanDestroy" that is not supported by normal trader json files.
+The details of the blocks and trades is placed in different files in folder \settings\InjectTrades
+
+Syntax example:
+InjectOffers=Armors
+
+
+2.8.   All useful entity parameters (with default values)
+===================================================
+Chested=0
+hasBoundOrigin=0
+Invulnerable=0
+IsAngry=0
+IsAutonomous=0
+IsGliding=0
+IsGlobal=0
+IsIllagerCaptain=0
+IsOrphaned=0
+IsRoaring=0
+IsScared=0
+IsStunned=0
+IsSwimming=0
+LootDropped=0
+NaturalSpawn=0
+OnGround=0
+Persistent=0
+Saddled=0
+Sheared=0
+ShowBottom=0
+Sitting=0
+Surface=0
+Air=300
+AttackTime=0
+DeathTime=0
+HurtTime=0
+Fire=0
+Color=0
+Color2=0
+Riches=0
+Strength=0
+StrengthMax=0
+boundX=0
+boundY=0
+boundZ=0
+limitedLife=0
+FallDistance=0

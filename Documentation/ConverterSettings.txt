@@ -1,0 +1,38 @@
+Info about ConverterSettings.txt parameters:
+
+1. The following parameters are leftovers from past changes, and are ignored by converter and you can stop using them:
+ConvertMobs (was used to convert mbos from java before we had good mob injection)
+
+ChunkPalettedFormat (was used in java 1.12-1.13 transition)
+
+MakePaintingsInvulnerable (was used in java 1.12)
+We stopped using this long ago, taking value from java or setting false.
+
+AddTranslation - now decided by converter itself (if item name is used somewhere in functions), to decide if to make translation of english folder to other folders. Was needed to kill item with name=red_wool etc in bewars to work for other languages.
+
+2. AddItemExtraDataToItemChests
+This is used in games like bedwars, where we add the special tags CanDestroy and CanPlaceOn (from the relevant settings files) to items in vendors and chests.
+
+3. UseBedrockCommands
+This determines if converter will validate commands in functions using bedrock or java syntax.
+Should always be true as we stopped updating our Java syntax validation over a year ago (only needed java for very old games).
+
+4. UseBedrockCommandBlocks
+Same thing, for command blocks
+
+5. FillUnderground
+When we convert worlds with no content in chunks -4 to -1, if this is true then we fill those chunks with stone (otherwise skip this step)
+
+6. StretchUnderground
+When we convert worlds with no content in chunks -4 to -1, if this is true then we copy the content of chunk 0 into chunks -4 to -1.
+We use this for worlds like Survival Games, where we had arenas above big cylinder of stone, and we wanted to stretch the cylinder down to chunk -4 (instead of filling the chunks in store with the previous setting, which would give us cylinder going down to chuck 0 and then turning into box.
+
+These 2 paras (FillUnderground and StretchUnderground) are for java < 1.17 worlds only, in new java worlds (where we have content below chunk 0), this can't be used.
+
+7. ConvertLightBlocks
+We allow to convert light blocks from java, or prevent that (replacing them with air) so only injected ligth blocks are added to bedrock.
+This is false by default
+
+8. ConvertPartialChunks
+Since 1.18 or 1.19 java worlds can cave partial information of chunks which creates problems in the converted chunk that are not allowed on bedrock.
+This is false by deafult, so those partial chunks are ignored.

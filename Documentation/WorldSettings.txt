@@ -1,0 +1,139 @@
+World setting parameters: default value and possible values
+============================================================
+
+DefaultGameMode=survival
+Values: survival,adventure,creative
+
+Difficulty=normal
+Values: peaceful,easy,normal,hard
+
+SimulationDistance=4
+Values: 1..10
+
+WorldType=normal
+Values: normal,flat,default
+
+Seed=0
+Values: any number
+
+InitialSpawn=0 70 0
+Values: any position
+
+texturePacksRequired=true
+Values: true,false
+Explanatin: when true, we force friends that visit the player's world to download first the RP+BP
+
+FriendlyFire=true
+Values: true,false
+Explanation: pvp allowed
+
+ShowCoordinates=false
+Values: true,false
+
+FireSpreads=true
+Values: true,false
+
+TNTExplodes=true
+Values: true,false
+
+MobLoot=true
+Values: true,false
+
+NaturalRegeneration=true
+Values: true,false
+
+TileDrops=true
+Values: true,false
+
+ImmediateRespawn=false
+Values: true,false
+
+ActivateCheats=false
+Values: true,false
+
+AlwaysDay=false
+Values: true,false
+
+DoDaylightCycle=true
+Values: true,false
+
+RespawnRadius=0
+Values: true,false
+
+KeepInventory=false
+Values: true,false
+
+MobGriefing=true
+Values: true,false
+
+EntitiesDropLoot=true
+Values: true,false
+
+WeatherCycle=true
+Values: true,false
+
+FallDamage=true
+Values: true,false
+
+DoFireTick=true
+Values: true,false
+
+DoInsomnia=true
+Values: true,false
+
+DrowningDamage=true
+Values: true,false
+
+FireDamage=true
+Values: true,false
+
+UseExperimentalGameplay=false
+Values: true,false
+
+EducationalEdition=false
+Values: true,false
+
+CommandBlocksEnabled=true
+Values: true,false
+
+MaxCommandChainLength=65536
+Values: 1..65536 (don't change this)
+
+SendCommandFeedback=false
+Values: true,false
+
+CommandBlockOutput=false
+Values: true,false
+
+RandomTickSpeed=1
+Values: 0..?
+
+DoLimitedCrafting=false
+Values: true,false
+
+FreezeDamage=true
+Values: true,false
+
+FunctionCommandLimit=10000
+Values: 1..65536 (don't change this)
+
+PlayersSleepingPercentage=100
+Values: 1..100 (don't change this)
+
+pvp=true
+Values: true,false
+
+RecipesUnlock=true
+Values: true,false
+
+RespawnBlocksExplode=true
+Values: true,false
+
+ShowBorderEffect=true
+Values: true,false
+
+ShowDeathMessages=true
+Values: true,false
+
+ShowTags=true
+Values: true,false
