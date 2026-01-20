@@ -1,0 +1,64 @@
+{
+	"format_version": "1.20.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "goe_tnt:mecha_suit",
+			"is_spawnable": true,
+			"is_summonable": true
+		},
+		"components": {
+			"minecraft:damage_sensor": {
+				"triggers": [
+					{
+						"cause": "fall",
+						"deals_damage": false
+					}
+				]
+			},
+			"minecraft:health": {
+				"value": {
+					"range_min": 100,
+					"range_max": 100
+				}
+			},
+			"minecraft:physics": {
+				"has_gravity": true,
+				"has_collision": true
+			},
+			"minecraft:pushable": {
+				"is_pushable": false
+			},
+			"minecraft:push_through": {
+				"value": 1
+			},
+			"minecraft:movement": {
+				"value": 0.13
+			},
+			"minecraft:collision_box": { "height": 2.5, "width": 2.0 },
+			"minecraft:movement.basic": { },
+			"minecraft:navigation.generic": { },
+			"minecraft:can_power_jump": { },
+			"minecraft:horse.jump_strength": {
+				"value": {
+					"range_min": 1,
+					"range_max": 1
+				}
+			},
+			"minecraft:input_ground_controlled": { },
+			"minecraft:rideable": {
+				"seat_count": 1,
+				"seats": [
+					{
+						"position": [ 0, 2.25, 0 ]
+					}
+				]
+			},
+			"minecraft:variable_max_auto_step": {
+				"base_value": 1.2,
+				"controlled_value": 1.2
+			}
+		},
+		"events": {
+		}
+	}
+}

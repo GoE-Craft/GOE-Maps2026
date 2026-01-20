@@ -1,0 +1,9 @@
+{
+  "resource_pack_name": "TNT Add-On",
+  "texture_name": "atlas.items",
+    "texture_data": {
+        "goe_tnt:mecha_suit_spawn_egg": {
+            "textures": "textures/goe/tnt/items/spawn_egg/mecha_suit"
+        }
+    }
+}
