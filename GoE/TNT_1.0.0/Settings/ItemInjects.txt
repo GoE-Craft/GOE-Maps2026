@@ -1,0 +1,2 @@
+# # ReplaceCotainedItem oldItemName oldItemDamage itemName itemDamage
+# # SetContainerSlot x y z slot itemName itemDamage count [ItemIdentifier]

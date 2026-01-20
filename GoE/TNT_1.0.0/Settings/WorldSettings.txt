@@ -1,0 +1,11 @@
+WorldName=TNTAdd-On
+OwnerPrefix=goe_tnt
+DoFireTick=true
+InitialSpawn=-88 62 292
+Seed=0
+ShowTags=false
+SendCommandFeedback=true
+CommandBlockOutput=true
+WorldType=flat
+DefaultGameMode=creative
+ActivateCheats=true

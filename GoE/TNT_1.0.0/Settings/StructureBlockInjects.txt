@@ -1,0 +1,18 @@
+// Every inject start with the name of load, started with "#" character
+//
+//# Mandatory parameters:
+// Corner1=x y z
+// Corner2=x y z
+//
+// Optional parameters:
+// IncludeEntities=true\false (default=true)
+// RemoveBlocks=true\false
+
+
+/////////////////////////////////////
+
+
+
+
+
+/////////////////////////////////////
