@@ -1,6 +1,7 @@
 import { world, system, ItemStack, BlockComponentRegistry } from "@minecraft/server";
 import * as utils from "./utils";
 import * as game_events from "./game_events";
+import * as mecha_suit from "./mecha_suit";
 
 let onLoadStarted = false;
 let onLoadFinished = false;
@@ -47,6 +48,9 @@ async function onLoad() {
 
   // initialize modules
   await game_events.onLoad();
+
+  //Mecha Suit
+  mecha_suit.initMechaSuit();
 
   // Subscribe to world events
   world.afterEvents.playerSpawn.subscribe(game_events.onPlayerSpawn);

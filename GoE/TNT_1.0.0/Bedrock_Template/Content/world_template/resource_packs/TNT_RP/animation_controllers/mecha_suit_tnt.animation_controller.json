@@ -1,0 +1,29 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.goe.tnt.mecha_suit_tnt": {
+      "initial_state": "idle",
+      "states": {
+        "idle": {
+          "transitions": [
+            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" },
+            { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" }
+          ]
+        },
+        "charge": {
+          "animations": ["charge"],
+          "transitions": [
+            { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ]
+        },
+        "fire": {
+          "animations": ["fire_right"],
+          "transitions": [
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ]
+        }
+      }
+    }
+  }
+}

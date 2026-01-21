@@ -1,7 +1,7 @@
 ﻿pack.name=TNT Add-On
 pack.description=TNT Add-On Resource Pack
 
-action.hint.exit.goe_tnt:mecha_suit=Press SNEAK to dismount
+action.hint.exit.goe_tnt:mecha_suit=Interact with TNT block to fire it.
 
 entity.goe_tnt:mecha_suit.name=Mecha Suit
 item.spawn_egg.entity.goe_tnt:mecha_suit.name=Mecha Suit
