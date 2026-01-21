@@ -1,14 +1,18 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
 import * as script_events from "./script_events";
-import { TntCustomComponent } from "./components/blocks/tnt_component";
+import * as tnt_component from "./components/blocks/tnt_component";
 import { GuideBookComponent } from "./book";
+import * as tntManager from "./tnt_manager";
 
 
 export async function onLoadFirstTime(player0) {}
 
 export async function onWorldInitialize(event) {}
 
-export async function onLoad() {}
+export async function onLoad() {
+    // Restore any active TNT from before script reload
+    tntManager.restoreTNT();
+}
 
 export async function onTick() {}
 
@@ -50,8 +54,12 @@ export async function onPlayerPlaceBlock(event) {}
 
 export async function onPlayerInteractWithEntity(event) {}
 
+export async function onExplosion(event) {
+    tnt_component.handleExplosionEvent(event);
+}
+
 export async function onStartup(event) {
       const { blockComponentRegistry, itemComponentRegistry } = event;
-      blockComponentRegistry.registerCustomComponent("goe_tnt:custom_tnt", TntCustomComponent);
+      blockComponentRegistry.registerCustomComponent("goe_tnt:custom_tnt", tnt_component.TntCustomComponent);
       itemComponentRegistry.registerCustomComponent("goe_tnt:guide_book", GuideBookComponent);
 }

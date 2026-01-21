@@ -18,10 +18,13 @@
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
-      "minecraft:destructible_by_explosion": { "explosion_resistance": 15 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 100 },
       "minecraft:geometry": "minecraft:geometry.full_block",
-      "minecraft:material_instances": { "*": { "texture": "dirt", "render_method": "alpha_test" } },
-      "minecraft:redstone_conductivity": {},
+      "minecraft:material_instances": { "*": { "texture": "tnt_side", "render_method": "alpha_test" } },
+      "minecraft:redstone_conductivity": {
+        "redstone_conductor": true
+      },
+      "minecraft:tick": { "interval_range": [5, 5] },
       "goe_tnt:custom_tnt": {}
     },
     "permutations": [

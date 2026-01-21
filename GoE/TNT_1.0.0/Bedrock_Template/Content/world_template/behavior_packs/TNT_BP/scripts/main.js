@@ -66,6 +66,7 @@ async function onLoad() {
   world.afterEvents.weatherChange.subscribe(game_events.onWeatherChange);
   world.afterEvents.playerPlaceBlock.subscribe(game_events.onPlayerPlaceBlock);
   world.afterEvents.playerInteractWithEntity.subscribe(game_events.onPlayerInteractWithEntity);
+  world.beforeEvents.explosion.subscribe(game_events.onExplosion);
   // Disabled as profiler showed high time usage & not used
   //world.beforeEvents.itemUse.subscribe(game_events.onItemUseBefore);
 

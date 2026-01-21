@@ -4,20 +4,20 @@ export const TNT_GLD = {
         fuseTime: 80,
         power: 4,
         fuseEffects: {
-            particleEffect: "goe_tnt:smoke_particle_effect",
+            particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "goe_tnt:tnt_primed_sound",
+            soundEffect: "random.fuse",
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:large_explosion_particle_effect",
+            particleEffect: "minecraft:large_explosion",
             particleDelay: 0,
-            soundEffect: "goe_tnt:large_explosion_sound",
+            soundEffect: "minecraft:entity.generic.explode",
             soundDelay: 0
         },
         explosionProperties: {
             createsFire: false,
-            breakBlocks: true,
+            breaksBlocks: true,
             summonMob: null,
             summonDelay: 20,
             specialAction: null
@@ -31,13 +31,13 @@ export const TNT_GLD = {
             fuseTime: 100,
             power: 10,
             fuseEffects: {
-                particleEffect: "minecraft:smoke",
+                particleEffect: "minecraft:basic_smoke_particle",
                 particleDelay: 10,
-                soundEffect: "minecraft:entity.tnt.primed",
+                soundEffect: "random.fuse",
                 soundDelay: 0
             },
             explosionEffects: {
-                particleEffect: "minecraft:large_explosion_particle_effect",
+                particleEffect: "minecraft:large_explosion",
                 particleDelay: 0,
                 soundEffect: "minecraft:entity.generic.explode",
                 soundDelay: 0
@@ -45,9 +45,9 @@ export const TNT_GLD = {
             explosionProperties: {
                 createsFire: false,
                 allowUnderwater: false,
-                breakBlocks: true,
+                breaksBlocks: true,
                 summonMob: null,
-                summonDelay: 20,
+                summonDelay: 10,
                 specialAction: null
             }
         }
