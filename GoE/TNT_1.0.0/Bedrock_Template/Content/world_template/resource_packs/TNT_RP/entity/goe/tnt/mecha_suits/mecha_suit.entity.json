@@ -1,31 +1,40 @@
 {
-  "format_version": "1.19.0",
-  "minecraft:client_entity": {
-    "description": {
-      "identifier": "goe_tnt:mecha_suit",
-      "materials": {
-        "default": "entity_alphatest"
-      },
-      "textures": {
-        "default": "textures/goe/tnt/entity/mecha_suits/mecha_suit"
-      },
-      "geometry": {
-        "default": "geometry.goe_tnt.mecha_suit"
-      },
-      "render_controllers": ["controller.render.default"],
-      "animations": {
-        "controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",
-        "idle": "animation.mecha_suit.idle",
-        "walk_forward": "animation.mecha_suit.walk",
-        "walk_back": "animation.mecha_suit.walk_back",
-        "walk_left": "animation.mecha_suit.strafe_left",
-        "walk_right": "animation.mecha_suit.strafe_right",
-        "walk_to_idle": "animation.mecha_suit.walk_to_idle"
-      },
-      "scripts": {
-        "animate": ["controller.mecha_suit"]
-      },
-      "spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }
-    }
-  }
+	"format_version": "1.19.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "goe_tnt:mecha_suit",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/goe/tnt/entity/mecha_suits/mecha_suit"
+			},
+			"geometry": {
+				"default": "geometry.goe_tnt.mecha_suit"
+			},
+			"render_controllers": [ "controller.render.default" ],
+			"animations": {
+				"controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",
+				"controller.mecha_suit_tnt": "controller.animation.goe.tnt.mecha_suit_tnt",
+
+				"idle": "animation.mecha_suit.idle",
+				"walk_forward": "animation.mecha_suit.walk",
+				"walk_back": "animation.mecha_suit.walk_back",
+				"walk_left": "animation.mecha_suit.strafe_left",
+				"walk_right": "animation.mecha_suit.strafe_right",
+				"walk_to_idle": "animation.mecha_suit.walk_to_idle",
+
+				"charge": "animation.mecha_suit.charge",
+				"fire_right": "animation.mecha_suit.fire_right"
+			},
+
+			"scripts": {
+				"animate": [
+					"controller.mecha_suit",
+					"controller.mecha_suit_tnt"
+				]
+			},
+			"spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }
+		}
+	}
 }
