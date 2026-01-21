@@ -1,6 +1,7 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
 import * as script_events from "./script_events";
 import { TntCustomComponent } from "./components/blocks/tnt_component";
+import { GuideBookComponent } from "./book";
 
 
 export async function onLoadFirstTime(player0) {}
@@ -50,6 +51,7 @@ export async function onPlayerPlaceBlock(event) {}
 export async function onPlayerInteractWithEntity(event) {}
 
 export async function onStartup(event) {
-      const { blockComponentRegistry } = event;
+      const { blockComponentRegistry, itemComponentRegistry } = event;
       blockComponentRegistry.registerCustomComponent("goe_tnt:custom_tnt", TntCustomComponent);
+      itemComponentRegistry.registerCustomComponent("goe_tnt:guide_book", GuideBookComponent);
 }
