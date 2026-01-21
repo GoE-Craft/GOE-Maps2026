@@ -1,0 +1,31 @@
+{
+  "format_version": "1.19.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:mecha_suit",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/mecha_suits/mecha_suit"
+      },
+      "geometry": {
+        "default": "geometry.goe_tnt.mecha_suit"
+      },
+      "render_controllers": ["controller.render.default"],
+      "animations": {
+        "controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",
+        "idle": "animation.mech_suit.idle",
+        "walk_forward": "animation.mech_suit.walk",
+        "walk_back": "animation.mech_suit.walk_back",
+        "walk_left": "animation.mech_suit.strafe_left",
+        "walk_right": "animation.mech_suit.strafe_right",
+        "walk_to_idle": "animation.mech_suit.walk_to_idle"
+      },
+      "scripts": {
+        "animate": ["controller.mecha_suit"]
+      },
+      "spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }
+    }
+  }
+}
