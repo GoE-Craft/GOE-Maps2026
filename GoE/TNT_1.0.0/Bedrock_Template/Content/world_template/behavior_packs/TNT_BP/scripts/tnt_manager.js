@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world, system, BlockPermutation } from "@minecraft/server";
 import * as tnt_gld from "./gld/tnt_gld";
 
 // Used for TNT tracking across script reloads and world saves
@@ -8,25 +8,21 @@ const activeTimeouts = new Map();
 const countdownIntervals = new Map();
 const fuseEffectIntervals = new Map();
 
-// Explosion batching queue
-const explosionQueue = [];
-let explosionJobRunning = false;
-const EXPLOSIONS_PER_TICK = 500; // Process up to 10 explosions per tick
-
 /**
  * Register a TNT entity with timer and fuse
  */
-export function registerTNT(entity, timerDuration, fuseDuration, tntData) {
+export function igniteTNT(location, timerDuration, fuseDuration, tntData, dimension, impulse) {
+    const dim = world.getDimension(dimension);
+    const entity = dim.spawnEntity("goe_tnt:tnt", location);
     const startTick = system.currentTick;
-    entity.applyImpulse({ x: 0, y: 0.2, z: 0 });
-    
-    system.run(() => {
-        // Only apply impulse if TNT is not already moving
-        const vel = entity.getVelocity?.();
-        if (!vel || (Math.abs(vel.x) < 0.01 && Math.abs(vel.y) < 0.01 && Math.abs(vel.z) < 0.01)) {
-            
-        }
-    });
+
+    // If impulse provided, apply it (TNT shot or TNT knocked by explosion)
+    if (impulse) {
+        entity.applyImpulse(impulse);
+    } else {
+        entity.applyImpulse({ x: Math.random() * 0.2 - 0.1, y: 0.2, z: Math.random() * 0.2 - 0.1 });
+    }
+
     // Only store what is needed for persistence
     entity.setDynamicProperty("goe_tnt_start_tick", startTick);
     entity.setDynamicProperty("goe_tnt_stage", "timer");
@@ -171,7 +167,7 @@ function stopFuseEffects(entity) {
 }
 
 /**
- * Explode the TNT - adds to batch queue
+ * Explode the TNT
  */
 function explode(entity, tntData) {
     const dim = entity.dimension;
@@ -188,54 +184,35 @@ function explode(entity, tntData) {
         entity.setDynamicProperty("goe_tnt_tnt_type", undefined);
         entity.setDynamicProperty("goe_tnt_fuse_start", undefined);
     } catch (e) {}
+    // Effects
+    if (tntData?.explosionEffects) {
+        try {
+            if (tntData.explosionEffects.particleEffect) {
+                dim.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+            }
+            if (tntData.explosionEffects.soundEffect) {
+                dim.playSound(tntData.explosionEffects.soundEffect, loc);
+            }
+        } catch (e) {}
+    }
+    // Explosion
+    try {
+        dim.createExplosion(loc, tntData.power, {
+            causesFire: tntData.explosionProperties.createsFire,
+            breaksBlocks: tntData.explosionProperties.breaksBlocks,
+            allowUnderwater: tntData.explosionProperties.allowUnderwater,
+            source: entity
+        });
+    } catch (e) {}
+    // Special actions only if defined
+    if (tntData?.explosionProperties?.specialAction) {
+        try { handleSpecialAction(dim, loc, tntData); } catch (e) {}
+    }
+    // Summon mob only if defined
+    if (tntData?.explosionProperties?.summonMob) {
+        try { handleSummonMob(dim, loc, tntData); } catch (e) {}
+    }
     entity.remove();
-    explosionQueue.push({ dim, loc, tntData });
-    if (!explosionJobRunning) {
-        explosionJobRunning = true;
-        system.runJob(processExplosionBatch());
-    }
-}
-
-/**
- * Process explosions in batches
- */
-function* processExplosionBatch() {
-    while (explosionQueue.length > 0) {
-        // Process up to EXPLOSIONS_PER_TICK explosions
-        const batch = explosionQueue.splice(0, EXPLOSIONS_PER_TICK);
-
-        for (const { dim, loc, tntData } of batch) {
-            // Effects
-            if (tntData?.explosionEffects) {
-                try {
-                    if (tntData.explosionEffects.particleEffect) {
-                        dim.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-                    }
-                    if (tntData.explosionEffects.soundEffect) {
-                        dim.playSound(tntData.explosionEffects.soundEffect, loc);
-                    }
-                } catch (e) {}
-            }
-            // Explosion
-            try {
-                dim.createExplosion(loc, tntData.power, {
-                    causesFire: tntData.explosionProperties.createsFire,
-                    breaksBlocks: tntData.explosionProperties.breaksBlocks,
-                    allowUnderwater: tntData.explosionProperties.allowUnderwater
-                });
-            } catch (e) {}
-            // Special actions only if defined
-            if (tntData?.explosionProperties?.specialAction) {
-                try { handleSpecialAction(dim, loc, tntData); } catch (e) {}
-            }
-            // Summon mob only if defined
-            if (tntData?.explosionProperties?.summonMob) {
-                try { handleSummonMob(dim, loc, tntData); } catch (e) {}
-            }
-        }
-        yield; // Yield after each batch to allow other work
-    }
-    explosionJobRunning = false;
 }
 
 /**
@@ -369,5 +346,71 @@ function handleSpecialAction(dimension, location, tntData) {
             
         default:
             break;
+    }
+}
+
+export function handleExplosionEvent(event) {
+    const impactedBlocks = event.getImpactedBlocks();
+
+    if (impactedBlocks.length === 0) return;
+    // Get explosion location from source entity or estimate from impacted blocks
+    let explosionLoc = event.source ? event.source.location : null;
+    if (!explosionLoc) {
+        let sumX = 0, sumY = 0, sumZ = 0;
+        for (const block of impactedBlocks) {
+            sumX += block.location.x;
+            sumY += block.location.y;
+            sumZ += block.location.z;
+        }
+        explosionLoc = {
+            x: sumX / impactedBlocks.length,
+            y: sumY / impactedBlocks.length,
+            z: sumZ / impactedBlocks.length
+        };
+    }
+    
+    for (const block of impactedBlocks) {
+        try {
+            // Check if the block is our custom TNT
+            if (block.typeId === "goe_tnt:sample_tnt") {
+                applyKnockbackToTNT(block, explosionLoc);
+            }
+        } catch (e) {
+            // Block might already be destroyed
+        }
+    }
+}
+
+function applyKnockbackToTNT(block, explosionLoc) {
+    const knockbackRadius = 6;
+    const knockbackStrength = 1;
+
+    try {
+        const location = block.location;
+        const dx = location.x - explosionLoc.x;
+        const dy = location.y - explosionLoc.y;
+        const dz = location.z - explosionLoc.z;
+
+        const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (distance < 0.1) return;
+
+        const falloff = Math.max(0.3, 1 - (distance / knockbackRadius));
+        const strength = knockbackStrength * falloff;
+
+        const impulse = {
+            x: (dx / distance) * strength,
+            y: Math.min(0.2, Math.max(0.05, (dy / distance) * strength)), // Clamp Y
+            z: (dz / distance) * strength
+        };
+
+        // Short fuse for chain reaction
+        const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
+
+        system.run(() => {
+            block.setPermutation(BlockPermutation.resolve("minecraft:air"));
+            igniteTNT(location, 0, chainFuseTicks, tnt_gld.getTntDataByBlockId(block.typeId), block.dimension.id, impulse);
+        })
+    } catch (e) {
+        // Block might already be destroyed
     }
 }

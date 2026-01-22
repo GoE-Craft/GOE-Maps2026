@@ -19,11 +19,7 @@ export function handleScriptEvent(event) {
         const data = JSON.parse(message);
         const tntData = tnt_gld.getTntDataByName(data.tnt_name);
 
-        // Spawn and ignite TNT
-        const dimension = world.getDimension(data.dimension);
-        const tntEntity = dimension.spawnEntity("goe_tnt:tnt", data.location);
-
-        // Register with TNT manager (handles timer -> fuse -> explode)
-        tntManager.registerTNT(tntEntity, data.timer, data.fuse ?? tntData.fuseTime, tntData);
+        // Ignite TNT
+        tntManager.igniteTNT(data.location, data.timer, data.fuse ?? tntData.fuseTime, tntData, data.dimension);
     }
 }

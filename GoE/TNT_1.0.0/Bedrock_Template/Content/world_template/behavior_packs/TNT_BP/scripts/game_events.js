@@ -2,7 +2,7 @@ import { world, system, EquipmentSlot } from "@minecraft/server";
 import * as script_events from "./script_events";
 import * as tnt_component from "./components/blocks/tnt_component";
 import { GuideBookComponent } from "./book";
-import * as tntManager from "./tnt_manager";
+import * as tnt_manager from "./tnt_manager";
 
 
 export async function onLoadFirstTime(player0) {}
@@ -11,7 +11,7 @@ export async function onWorldInitialize(event) {}
 
 export async function onLoad() {
     // Restore any active TNT from before script reload
-    tntManager.restoreTNT();
+    tnt_manager.restoreTNT();
 }
 
 export async function onTick() {}
@@ -55,7 +55,7 @@ export async function onPlayerPlaceBlock(event) {}
 export async function onPlayerInteractWithEntity(event) {}
 
 export async function onExplosion(event) {
-    tnt_component.handleExplosionEvent(event);
+    tnt_manager.handleExplosionEvent(event);
 }
 
 export async function onStartup(event) {

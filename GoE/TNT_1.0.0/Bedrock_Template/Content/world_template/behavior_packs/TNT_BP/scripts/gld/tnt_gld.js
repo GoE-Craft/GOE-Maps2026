@@ -28,8 +28,8 @@ export const TNT_GLD = {
         {
             blockId: "gld_tnt:sample_tnt",
             tntType: "sample_tnt",
-            fuseTime: 100,
-            power: 10,
+            fuseTime: 80,
+            power: 2,
             fuseEffects: {
                 particleEffect: "minecraft:basic_smoke_particle",
                 particleDelay: 10,
@@ -57,6 +57,15 @@ export const TNT_GLD = {
 export function getTntDataByName(tntName) {
     for (const tntData of TNT_GLD.custom) {
         if (tntData.tntType === tntName) {
+            return tntData;
+        }
+    }
+    return TNT_GLD.default;
+}
+
+export function getTntDataByBlockId(blockId) {
+    for (const tntData of TNT_GLD.custom) {
+        if (tntData.blockId === blockId) {
             return tntData;
         }
     }

@@ -1,5 +1,9 @@
-import { world, system, BlockPermutation, ItemStack, EquipmentSlot, Direction } from "@minecraft/server";
+import { world, system, BlockPermutation, GameMode, EquipmentSlot, Direction } from "@minecraft/server";
 import * as utils from "../../utils";
+import * as tnt_gld from "../../gld/tnt_gld";
+import * as tnt_manager from "../../tnt_manager";
+
+// Helper script component for custom TNT blocks interaction and redstone ignition
 
 export const TntCustomComponent = {
     onPlayerInteract(eventData) {
@@ -13,7 +17,7 @@ export const TntCustomComponent = {
             toggleTimer(block);
             player.playSound("minecraft:item.book.page_turn", block.location);
         } else if (itemInHand?.typeId === "minecraft:flint_and_steel") {
-            igniteTNT(block, player);
+            igniteTNT(block);
         } else if (itemInHand && isPlaceableBlock(itemInHand.typeId)) {
             // Manually place the block on the clicked face
             placeBlockOnFace(block, face, itemInHand, player);
@@ -24,140 +28,21 @@ export const TntCustomComponent = {
         
         // Check adjacent blocks for redstone power
         if (isReceivingRedstonePower(block)) {
-            igniteTNTFromRedstone(block);
+            igniteTNT(block);
         }
     }
 };
 
-function igniteTNT(block, player) {
-    const timerEnabled = block.permutation.getState("goe_tnt:timer");
-
-    const location = block.center();
-    location.y -= 0.5; // Adjust to ground level
-
-    const message = {
-        tnt_name: "sample_tnt",
-        timer: timerEnabled ? 600 : 0, // 30 seconds = 600 ticks when enabled
-        location: location,
-        dimension: block.dimension.id
-    }
-
-    system.run(() => {
-        block.dimension.runCommand(`scriptevent goe_tnt:tnt_ignite ${JSON.stringify(message)}`);
-        block.setPermutation(BlockPermutation.resolve("minecraft:air"))
-    })
-};
-
-export function handleExplosionEvent(event) {
-    const impactedBlocks = event.getImpactedBlocks();
-    const dimension = event.dimension;
-    
-
-    if (impactedBlocks.length === 0) return;
-    // Get explosion location from source entity or estimate from impacted blocks
-    
-    let sumX = 0, sumY = 0, sumZ = 0;
-    for (const block of impactedBlocks) {
-        sumX += block.location.x;
-        sumY += block.location.y;
-        sumZ += block.location.z;
-    }
-    const explosionLoc = {
-        x: sumX / impactedBlocks.length,
-        y: sumY / impactedBlocks.length,
-        z: sumZ / impactedBlocks.length
-    };
-    
-    for (const block of impactedBlocks) {
-        try {
-            // Check if the block is our custom TNT
-            if (block.typeId === "goe_tnt:sample_tnt") {
-                igniteTNTFromExplosion(block);
-            }
-        } catch (e) {
-            // Block might already be destroyed
-        }
-    }
-
-    // Apply knockback to nearby TNT entities
-    system.runTimeout(() => applyKnockbackToTNT(dimension, explosionLoc), 1);
-}
-
-function applyKnockbackToTNT(dimension, explosionLoc) {
-    const knockbackRadius = 4;
-    const knockbackStrength = 1;
-    
-    const nearbyEntities = dimension.getEntities({
-        location: explosionLoc,
-        maxDistance: knockbackRadius,
-        type: "goe_tnt:tnt"
-    });
-    
-    for (const entity of nearbyEntities) {
-        try {
-            const vel = entity.getVelocity();
-            if (vel && (Math.abs(vel.x) > 0.1 || Math.abs(vel.y) > 0.1 || Math.abs(vel.z) > 0.1)) {
-                // Already moving, skip knockback
-                continue;
-            }
-            const entityLoc = entity.location;
-            const dx = entityLoc.x - explosionLoc.x;
-            const dy = entityLoc.y - explosionLoc.y;
-            const dz = entityLoc.z - explosionLoc.z;
-            
-            const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
-            if (distance < 0.1) continue;
-            
-            const falloff = Math.max(0.3, 1 - (distance / knockbackRadius));
-            const strength = knockbackStrength * falloff;
-
-            const impulse = {
-                x: (dx / distance) * strength,
-                y: Math.min(0.2, Math.max(0.05, (dy / distance) * strength)), // Clamp Y
-                z: (dz / distance) * strength
-            };
-            
-            entity.applyImpulse(impulse);
-        } catch (e) {}
-    }
-}
-
-function igniteTNTFromExplosion(block) {
-    const location = block.center();
-    location.y -= 0.5;
-
-    // Short fuse for chain reaction
-    const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
-
-    const message = {
-        tnt_name: "sample_tnt",
-        timer: 0, // No timer delay when triggered by explosion
-        fuse: chainFuseTicks,
-        location: location,
-        dimension: block.dimension.id
-    }
-
-    system.run(() => {
-        block.dimension.runCommand(`scriptevent goe_tnt:tnt_ignite ${JSON.stringify(message)}`);
-        block.setPermutation(BlockPermutation.resolve("minecraft:air"))
-    })
-};
-
-function igniteTNTFromRedstone(block) {
+function igniteTNT(block) {
     const timerEnabled = block.permutation.getState("goe_tnt:timer");
     const location = block.center();
-    location.y -= 0.5;
+    location.y -= 0.5; // Adjust to bottom center
 
-    const message = {
-        tnt_name: "sample_tnt",
-        timer: timerEnabled ? 600 : 0, // Respect timer setting
-        location: location,
-        dimension: block.dimension.id
-    }
+    const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
+    block.setPermutation(BlockPermutation.resolve("minecraft:air"))
 
     system.run(() => {
-        block.dimension.runCommand(`scriptevent goe_tnt:tnt_ignite ${JSON.stringify(message)}`);
-        block.setPermutation(BlockPermutation.resolve("minecraft:air"))
+        tnt_manager.igniteTNT(location, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, block.dimension.id);
     })
 };
 
@@ -232,7 +117,7 @@ function placeBlockOnFace(block, face, itemInHand, player) {
         if (targetBlock && targetBlock.isAir) {
             // Place the block
             targetBlock.setPermutation(BlockPermutation.resolve(itemInHand.typeId));
-            
+            if (player.getGameMode() === GameMode.Creative) return;
             // Decrease item count (creative mode auto-handles this)
             const equipment = player.getComponent("minecraft:equippable");
             if (equipment) {
