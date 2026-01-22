@@ -18,6 +18,19 @@ const lastUseTickByMecha = new Map();
 const previousGameModeByPlayer = new Map();
 const wasRidingMechaByPlayer = new Map();
 
+const PREVIOUS_GAMEMODE_PROP = "goe_prev_gamemode";
+
+// register the player dynamic property
+if (world.afterEvents?.worldInitialize?.subscribe) {
+	world.afterEvents.worldInitialize.subscribe((event) => {
+		try {
+			const def = new DynamicPropertiesDefinition();
+			def.defineString(PREVIOUS_GAMEMODE_PROP, 32);
+			event.propertyRegistry.registerEntityTypeDynamicProperties(def, "minecraft:player");
+		} catch {}
+	});
+}
+
 // returns the entity the player is currently riding
 function getRiddenEntity(player) {
 	try {
@@ -83,24 +96,55 @@ function consumeOneFromSelectedHotbarSlotSafe(player, itemId) {
 	return true;
 }
 
-// spawns a TNT entity in front of the mecha and sends it forward
+// spawns a TNT entity from the mecha's hand position and propels it forward
 function spawnPropelledTnt(mecha, player) {
 	const dimension = mecha.dimension;
 
+	// direction used for propulsion
 	const viewDir = mecha.getViewDirection?.() ?? player.getViewDirection();
+
+	// get yaw rotation of the mecha
+	let rot;
+	try { rot = mecha.getRotation?.(); } catch { rot = undefined; }
+
+	const yawDeg =
+		rot && typeof rot.y === "number"
+			? rot.y
+			: Math.atan2(viewDir.x, viewDir.z) * (180 / Math.PI);
+
+	const yaw = yawDeg * (Math.PI / 180);
+
+	// define local axes explicitly
+	const forward = {
+		x: -Math.sin(yaw),
+		z:  Math.cos(yaw),
+	};
+
+	const right = {
+		x:  Math.cos(yaw),
+		z:  Math.sin(yaw),
+	};
+
+	// hand offsets 
+	const FORWARD = 1.5;  // forward from mecha
+	const SIDE = -1.5;     // right-hand offset
+	const HEIGHT = 3.15;  // hand height
+
 	const spawnPos = {
-		x: mecha.location.x + viewDir.x - 0.5,
-		y: mecha.location.y + 3.3,
-		z: mecha.location.z + viewDir.z * 4.2,
+		x: mecha.location.x + forward.x * FORWARD + right.x * SIDE,
+		y: mecha.location.y + HEIGHT,
+		z: mecha.location.z + forward.z * FORWARD + right.z * SIDE,
 	};
 
 	const tntEntity = dimension.spawnEntity("minecraft:tnt", spawnPos);
 	tntEntity.addTag("goe_tnt_projectile");
 
+	// store previous position for collision
 	try { tntEntity.setDynamicProperty("goe_prev_x", spawnPos.x); } catch {}
 	try { tntEntity.setDynamicProperty("goe_prev_y", spawnPos.y); } catch {}
 	try { tntEntity.setDynamicProperty("goe_prev_z", spawnPos.z); } catch {}
 
+	// propel the TNT forward
 	try {
 		if (typeof tntEntity.applyImpulse === "function") {
 			tntEntity.applyImpulse({
@@ -113,6 +157,9 @@ function spawnPropelledTnt(mecha, player) {
 
 	return tntEntity;
 }
+
+
+
 
 // detonates a TNT projectile and triggers nearby TNT projectiles
 function detonateProjectile(tntEntity) {
@@ -225,7 +272,7 @@ function isRidingMechaWithTntSelected(player, itemStack) {
 	return true;
 }
 
-// registers item use and block placement handlers while riding the mecha (before events don't work)
+// registers item use and block placement handlers while riding the mecha
 function setupUseHandlers() {
 	if (world.beforeEvents?.itemUseOn?.subscribe) {
 		world.beforeEvents.itemUseOn.subscribe((event) => {
@@ -366,11 +413,23 @@ function setupMechaRidingModeLock() {
 			const wasRidingMecha = wasRidingMechaByPlayer.get(player.id) ?? false;
 
 			if (isRidingMecha && !wasRidingMecha) {
+				let persistedPrevious;
+				try {
+					const v = player.getDynamicProperty(PREVIOUS_GAMEMODE_PROP);
+					if (typeof v === "string" && v.length > 0) persistedPrevious = v;
+				} catch {}
+
 				let gameMode;
 				try { gameMode = player.getGameMode(); } catch { gameMode = undefined; }
 
-				if (gameMode !== undefined) {
-					previousGameModeByPlayer.set(player.id, String(gameMode).toLowerCase());
+				// if we already have a persisted previous mode (player relogged while in mecha),
+				// do not overwrite it with the current adventure mode
+				if (persistedPrevious) {
+					previousGameModeByPlayer.set(player.id, persistedPrevious);
+				} else if (gameMode !== undefined) {
+					const prev = String(gameMode).toLowerCase();
+					previousGameModeByPlayer.set(player.id, prev);
+					try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, prev); } catch {}
 				}
 
 				try { player.runCommand("gamemode adventure"); } catch {}
@@ -378,13 +437,21 @@ function setupMechaRidingModeLock() {
 			}
 
 			if (!isRidingMecha && wasRidingMecha) {
-				const previousGameMode = previousGameModeByPlayer.get(player.id);
+				let previousGameMode = previousGameModeByPlayer.get(player.id);
+
+				if (!previousGameMode) {
+					try {
+						const v = player.getDynamicProperty(PREVIOUS_GAMEMODE_PROP);
+						if (typeof v === "string" && v.length > 0) previousGameMode = v;
+					} catch {}
+				}
 
 				if (previousGameMode) {
 					try { player.runCommand(`gamemode ${previousGameMode}`); } catch {}
 				}
 
 				previousGameModeByPlayer.delete(player.id);
+				try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, ""); } catch {}
 				wasRidingMechaByPlayer.set(player.id, false);
 			}
 		}
