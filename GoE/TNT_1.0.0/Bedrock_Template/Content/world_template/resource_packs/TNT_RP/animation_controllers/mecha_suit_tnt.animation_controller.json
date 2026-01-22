@@ -6,22 +6,30 @@
       "states": {
         "idle": {
           "transitions": [
-            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" },
-            { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" }
+            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
           ]
         },
         "charge": {
           "animations": ["charge"],
           "transitions": [
+            { "charge_idle": "query.property('goe_tnt:tnt_action') == 'charge_idle'" }
+          ],
+          "blend_transition": 0.3
+        },
+        "charge_idle": {
+          "animations": ["charge_idle"],
+          "transitions": [
             { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
             { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
-          ]
+          ],
+          "blend_transition": 0.3
         },
         "fire": {
           "animations": ["fire_right"],
           "transitions": [
-            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
-          ]
+            { "charge_idle": "query.property('goe_tnt:tnt_action') == 'charge_idle'" }
+          ],
+          "blend_transition": 0.3
         }
       }
     }

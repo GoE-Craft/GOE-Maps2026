@@ -13,11 +13,16 @@
 				"default": "geometry.goe_tnt.mecha_suit"
 			},
 			"render_controllers": [ "controller.render.default" ],
+			
+			"particle_effects": {
+				"mecha_suit_fire": "goe_tnt:mecha_suit_fire"
+			},
 			"animations": {
 				"controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",
 				"controller.mecha_suit_tnt": "controller.animation.goe.tnt.mecha_suit_tnt",
 
 				"idle": "animation.mecha_suit.idle",
+				"charge_idle": "animation.mecha_suit.charge_idle",
 				"walk_forward": "animation.mecha_suit.walk",
 				"walk_back": "animation.mecha_suit.walk_back",
 				"walk_left": "animation.mecha_suit.strafe_left",

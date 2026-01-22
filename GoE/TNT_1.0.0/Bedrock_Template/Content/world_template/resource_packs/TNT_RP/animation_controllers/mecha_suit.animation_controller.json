@@ -9,9 +9,8 @@
           "transitions": [
             { "walk_forward": "q.modified_move_speed > 0.1" }
           ],
-          "blend_transition": 0.1
+          "blend_transition": 0.3
         },
-
         "walk_forward": {
           "animations": [ "walk_forward" ],
           "transitions": [
