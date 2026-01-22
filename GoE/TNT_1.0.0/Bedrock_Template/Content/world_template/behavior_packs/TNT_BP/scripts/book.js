@@ -1,4 +1,6 @@
 import { ActionFormData } from "@minecraft/server-ui";
+import { ShopItems, formatPrice } from "./gld/book_gld";
+import { purchaseItem } from "./shop";
 
 export const GuideBookComponent = {
     onUse(event, params) {
@@ -91,7 +93,7 @@ async function showInfoPage(player) {
             "§c- §e75 unique§r§c milestones to complete\n\n" +
             "§cGear up, explore the world, and begin your journey!§r"
         )
-        .button("§l§cBACK§r", "textures/goe/tnt/ui/back");
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
         if (response.canceled) {
@@ -106,7 +108,7 @@ async function showSettingsPage(player) {
     const form = new ActionFormData()
         .title("§l§eSettings§r")
         .body("§f  TODO  §r")
-        .button("§l§cBACK§r", "textures/goe/tnt/ui/back");
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
         if (response.canceled) {
@@ -119,16 +121,137 @@ async function showSettingsPage(player) {
 
 async function showShopPage(player) {
     const form = new ActionFormData()
-        .title("§l§6Shop§r")
-        .body("§f  TODO  §r")
-        .button("§l§cBACK§r", "textures/goe/tnt/ui/back");
+        .title("§l§6TNT Shop§r")
+        .body(
+            "§cWelcome to §eTNT Shop§r§c!\n\n" +
+            "§cInside this shop you can unlock powerful explosive tools and unique §eTNT§r§c technology.\n\n" +
+            "§c- 20+ different custom §eTNTs§r§c with special effects\n" +
+            "§c- §eTNT Mecha suit§r§c parts and upgrades\n" +
+            "§c- §eTNT Detonator§r§c for remote explosions\n" +
+            "§c- §e5 craftable §eStructures§r§c for testing\n\n" +
+            "§cCollect resources, experiment, and become the ultimate §eTNT§r§c Engineer!§r"
+        )
+        .button("§l§cTNT Accessories§r")
+        .button("§l§cTNT's§r")
+        .button("§l§cTNT Structures§r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
         if (response.canceled) {
             return;
         }
         // add sound
-        showMainPage(player);
+        switch (response.selection) {
+            case 0:
+                // TNT Accessories category
+                showAccessoriesPage(player);
+                break;
+            case 1:
+                // TNT's category
+                showTntsPage(player);
+                break;
+            case 2:
+                // TNT Structures category
+                showStructuresPage(player);
+                break;
+            case 3:
+                // Back button
+                showMainPage(player);
+                break;
+        }
+    });
+}
+
+async function showAccessoriesPage(player) {
+    const items = ShopItems.accessories || [];
+
+    const form = new ActionFormData()
+        .title("§l§6TNT Accessories§r");
+
+    // Add buttons for each accessory item
+    for (const item of items) {
+        const buttonText = `§l§d${item.name}§r\n§7${formatPrice(item.price)}§r`;
+        form.button(buttonText, item.icon);
+    }
+
+    form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then(async (response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === items.length) {
+            // Back button
+            showShopPage(player);
+        } else {
+            // Item selected - purchase directly
+            const selectedItem = items[response.selection];
+            await purchaseItem(player, selectedItem);
+            // Return to accessories page (sound and particles already played)
+            showAccessoriesPage(player);
+        }
+    });
+}
+
+async function showTntsPage(player) {
+    const items = ShopItems.tnts || [];
+
+    const form = new ActionFormData()
+        .title("§l§6TNT's§r")
+
+    // Add buttons for each item
+    for (const item of items) {
+        const buttonText = `§l§d${item.name}§r\n§7${formatPrice(item.price)}§r`;
+        form.button(buttonText, item.icon);
+    }
+
+    form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then(async (response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === items.length) {
+            // Back button
+            showShopPage(player);
+        } else {
+            // Item selected - purchase directly
+            const selectedItem = items[response.selection];
+            await purchaseItem(player, selectedItem);
+            // Return to TNT's page (sound and particles already played)
+            showTntsPage(player);
+        }
+    });
+}
+
+async function showStructuresPage(player) {
+    const items = ShopItems.structures || [];
+
+    const form = new ActionFormData()
+        .title("§l§6TNT Structures§r");
+
+    // Add buttons for each item
+    for (const item of items) {
+        const buttonText = `§l§d${item.name}§r\n§7${formatPrice(item.price)}§r`;
+        form.button(buttonText, item.icon);
+    }
+
+    form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then(async (response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === items.length) {
+            // Back button
+            showShopPage(player);
+        } else {
+            // Item selected - purchase directly
+            const selectedItem = items[response.selection];
+            await purchaseItem(player, selectedItem);
+            // Return to Structures page (sound and particles already played)
+            showStructuresPage(player);
+        }
     });
 }
 
@@ -136,7 +259,7 @@ async function showAchievementListPage(player) {
     const form = new ActionFormData()
         .title("§l§aAchievements§r")
         .body("§f  TODO  §r")
-        .button("§l§cBACK§r", "textures/goe/tnt/ui/back");
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
         if (response.canceled) {
