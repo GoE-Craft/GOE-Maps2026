@@ -1,0 +1,35 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:directional_tnt",
+      "materials": {
+        "default": "goe_mob"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/directional_tnt"
+      },
+      "geometry": {
+        "default": "geometry.directional_tnt"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.wobble = Math.sin(query.swell_amount * 5730) * query.swell_amount * 0.01 + 1.0;",
+          "variable.swelling_scale1 = (Math.pow(Math.clamp(query.swell_amount, 0.0, 1.0), 4.0) * 0.4 + 1.0) * variable.wobble;",
+          "variable.swelling_scale2 = (Math.pow(Math.clamp(query.swell_amount, 0.0, 1.0), 4.0) * 0.1 + 1.0) / variable.wobble;",
+          "variable.flash = Math.mod(Math.Round(query.swell_amount * 10.0), 2.0);"
+        ],
+        "animate": [
+          "tnt_swelling.controller",
+          { "anim_explode.first_state": "query.mark_variant == 1"}
+        ]
+      },
+      "animations": {
+        "anim_explode.first_state": "animation.directional_tnt.explode.first_state",
+        "tnt_swelling": "animation.directional_tnt.swelling",
+        "tnt_swelling.controller": "controller.animation.tnt.swelling"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
-  "format_version": "1.21.100",
+  "format_version": "1.21.130",
   "minecraft:block": {
     "description": {
-      "identifier": "goe_tnt:sample_tnt",
+      "identifier": "goe_tnt:directional_tnt",
       "menu_category": { "category": "construction" },
       "traits": {
         "minecraft:placement_direction": {
@@ -14,13 +14,17 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Sample TNT",
+      "minecraft:display_name": "Directional TNT",
       "minecraft:collision_box": true,
-      "minecraft:selection_box": true,
+      "minecraft:selection_box": { "origin": [
+        -8,
+        0,
+        -8
+      ], "size": [16, 16, 16] },
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
-      "minecraft:destructible_by_explosion": { "explosion_resistance": 5 },
-      "minecraft:geometry": "minecraft:geometry.full_block",
-      "minecraft:material_instances": { "*": { "texture": "tnt_side", "render_method": "alpha_test" } },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
+      "minecraft:geometry": "geometry.directional_tnt",
+      "minecraft:material_instances": { "*": { "texture": "directional_tnt", "render_method": "alpha_test" } },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },

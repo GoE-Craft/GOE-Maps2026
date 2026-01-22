@@ -39,10 +39,25 @@ function igniteTNT(block) {
     location.y -= 0.5; // Adjust to bottom center
 
     const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
+    
+    const direction = block.permutation.getState("minecraft:cardinal_direction");
+    const dimension = block.dimension;
     block.setPermutation(BlockPermutation.resolve("minecraft:air"))
 
     system.run(() => {
-        tnt_manager.igniteTNT(location, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, block.dimension.id);
+        // Try to derive spawn yaw from block facing state/properties
+        let spawnYaw = undefined;
+        try {
+            if (direction && typeof direction === "string") {
+                const f = direction.toLowerCase();
+                if (f.includes("north")) spawnYaw = 180;
+                else if (f.includes("south")) spawnYaw = 0;
+                else if (f.includes("west")) spawnYaw = 90;
+                else if (f.includes("east")) spawnYaw = -90;
+            }
+        } catch (e) {}
+
+        tnt_manager.igniteTNT(location, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
     })
 };
 

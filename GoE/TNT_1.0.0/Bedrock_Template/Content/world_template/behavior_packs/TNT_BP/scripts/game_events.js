@@ -3,6 +3,7 @@ import * as script_events from "./script_events";
 import * as tnt_component from "./components/blocks/tnt_component";
 import { GuideBookComponent } from "./book";
 import * as tnt_manager from "./tnt_manager";
+import * as tnt_gld from "./gld/tnt_gld";
 
 
 export async function onLoadFirstTime(player0) {}
@@ -20,7 +21,9 @@ export async function onPlayerJoin(event) {}
 
 export async function onPlayerSpawn(event) {}
 
-export async function onEntitySpawn(event) {}
+export async function onEntitySpawn(event) {
+    tnt_manager.handleEntitySpawn(event);
+}
 
 export async function onEntityHealthChanged(event) {}
 
