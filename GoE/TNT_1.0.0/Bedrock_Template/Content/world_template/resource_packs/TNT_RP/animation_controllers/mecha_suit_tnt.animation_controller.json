@@ -10,14 +10,15 @@
           ]
         },
         "charge": {
-          "animations": ["charge"],
+          "animations": [ "charge" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
           "transitions": [
-            { "charge_idle": "query.property('goe_tnt:tnt_action') == 'charge_idle'" }
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
           ],
           "blend_transition": 0.3
         },
-        "charge_idle": {
-          "animations": ["charge_idle"],
+        "charged": {
+          "animations": [ "charged" ],
           "transitions": [
             { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
             { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
@@ -25,9 +26,10 @@
           "blend_transition": 0.3
         },
         "fire": {
-          "animations": ["fire_right"],
+          "animations": [ "fire_right" ],
+          "sound_effects": [ { "effect": "fire_right" } ],
           "transitions": [
-            { "charge_idle": "query.property('goe_tnt:tnt_action') == 'charge_idle'" }
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
           ],
           "blend_transition": 0.3
         }

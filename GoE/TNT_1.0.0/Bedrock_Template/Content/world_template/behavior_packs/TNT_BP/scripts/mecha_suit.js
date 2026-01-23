@@ -31,7 +31,7 @@ const isChargeIdleByMecha = new Map();
 const idlePendingByMecha = new Map();
 const lastMechaAnimStateByMecha = new Map();
 
-// fire to charge_idle
+// fire to charged
 const FIRE_ANIM_TICKS = 12;
 const fireReturnTickByMecha = new Map();
 
@@ -151,8 +151,8 @@ function scheduleReturnToChargeIdle(mechaKey, mecha, player) {
 
 		if (stillHoldingTnt) {
 			isChargeIdleByMecha.set(mechaKey, true);
-			try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch { }
-			lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
+			try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
+			lastMechaAnimStateByMecha.set(mechaKey, "charged");
 		} else {
 			try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 			lastMechaAnimStateByMecha.set(mechaKey, "idle");
@@ -375,8 +375,8 @@ function* tryFireMechaTnt(player, mecha) {
 
 		if ((chargeReadyTickByMecha.get(mechaKey) ?? 0) <= system.currentTick) {
 			isChargeIdleByMecha.set(mechaKey, true);
-			try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch { }
-			lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
+			try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
+			lastMechaAnimStateByMecha.set(mechaKey, "charged");
 		}
 	}, RESET_TO_IDLE_TICKS);
 
@@ -439,13 +439,13 @@ function setupChargeAnimationByHeldItemTick() {
 				lastMechaAnimStateByMecha.set(mechaKey, "charge");
 			}
 
-			// if tnt deselected go idle only from charge_idle
+			// if tnt deselected go idle only from charged
 			if (!isTntSelected && wasTntSelected) {
 				wasTntSelectedByPlayer.set(player.id, false);
 
 				const chargeIdle = isChargeIdleByMecha.get(mechaKey) ?? false;
 
-				// if in charge_idle go idle now
+				// if in charged go idle now
 				if (chargeIdle) {
 					try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 					lastMechaAnimStateByMecha.set(mechaKey, "idle");
@@ -455,19 +455,19 @@ function setupChargeAnimationByHeldItemTick() {
 					isChargeIdleByMecha.delete(mechaKey);
 					idlePendingByMecha.delete(mechaKey);
 				} else {
-					// if still charging wait to finishthen charge_idle
+					// if still charging wait to finishthen charged
 					idlePendingByMecha.set(mechaKey, true);
 				}
 			}
 
-			// if charge finished enter charge_idle if still holding tnt, otherwise enter charge_idle
+			// if charge finished enter charged if still holding tnt, otherwise enter charged
 			const readyTick = chargeReadyTickByMecha.get(mechaKey);
 			const chargeIdle = isChargeIdleByMecha.get(mechaKey) ?? false;
 
 			if (!chargeIdle && typeof readyTick === "number" && currentTick >= readyTick) {
 				isChargeIdleByMecha.set(mechaKey, true);
-				try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch { }
-				lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
+				try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
+				lastMechaAnimStateByMecha.set(mechaKey, "charged");
 
 				const idlePending = idlePendingByMecha.get(mechaKey) ?? false;
 

@@ -8,10 +8,16 @@
 			"properties": {
 				"goe_tnt:tnt_action": {
 					"type": "enum",
-					"values": [ "idle", "charge", "charge_idle", "fire" ],
+					"values": [ "idle", "charge", "charged", "fire" ],
 					"default": "idle",
 					"client_sync": true
 				}
+			},
+			"animations": {
+				"test": "controller.animation.test"
+			},
+			"scripts": {
+				"animate": [ "test" ]
 			}
 		},
 		"components": {
@@ -46,8 +52,8 @@
 			"goe:idle_tnt": {
 				"set_property": { "goe_tnt:tnt_action": "idle" }
 			},
-			"goe:charge_idle_tnt": {
-				"set_property": { "goe_tnt:tnt_action": "charge_idle" }
+			"goe:charged_tnt": {
+				"set_property": { "goe_tnt:tnt_action": "charged" }
 			}
 		}
 	}

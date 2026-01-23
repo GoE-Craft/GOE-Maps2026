@@ -38,6 +38,18 @@
 				{ "name": "sounds/mob/mecha_suit/walk3", "volume": 2 },
 				{ "name": "sounds/mob/mecha_suit/walk4", "volume": 2 }
 			]
+		},
+		"goe_tnt:mecha_suit_fire_right": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/shoot1", "volume": 1 }
+			]
+		},
+		"goe_tnt:mecha_suit_charge_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/charge_sound", "volume": 1 }
+			]
 		}
 	}
 }

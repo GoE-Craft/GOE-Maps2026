@@ -29,7 +29,7 @@
               "death": "!q.is_alive"
             }
           ],
-          "blend_transition": 0.3
+          "blend_transition": 0.1
         },
         "walk_forward": {
           "animations": [
