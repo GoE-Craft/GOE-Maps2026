@@ -7,14 +7,14 @@ export const ShopItems = {
         {
             id: "tnt_mecha_suit",
             name: "TNT Mecha Suit",
-            price: { type: "diamond", amount: 2 },
+            price: { type: "emerald", amount: 2 },
             icon: "textures/goe/tnt/items/spawn_egg/mecha_suit",
             itemId: "goe_tnt:mecha_suit_spawn_egg"
         },
         {
             id: "tnt_detonator",
             name: "TNT Detonator",
-            price: { type: "copper_ingot", amount: 1 },
+            price: { type: "iron_ingot", amount: 1 },
             icon: "textures/goe/tnt/items/detonator",
             itemId: "goe_tnt:detonator"
         }
@@ -43,6 +43,17 @@ export const ShopItems = {
     ]
 };
 
+const CurrencyColors = {
+    "copper_ingot": "§n",
+    "copper_ingots": "§n",
+    "iron_ingot": "§0",
+    "iron_ingots": "§0",
+    "gold_ingot": "§e",
+    "gold_ingots": "§e",
+    "emerald": "§2",
+    "emeralds": "§2"
+};
+
 // Helper function to format price text
 export function formatPrice(price) {
     if (!price || !price.type || !price.amount) {
@@ -50,12 +61,14 @@ export function formatPrice(price) {
     }
 
     const typeInfo = PriceTypeNames[price.type];
+    const colorCode = CurrencyColors[price.type] || "§f";
+
     if (!typeInfo) {
-        return `§fPrice: ${price.amount} ${price.type}`;
+        return `${colorCode}Price: ${price.amount} ${price.type}§r`;
     }
 
     const typeName = price.amount > 1 ? typeInfo.plural : typeInfo.singular;
-    return `§fPrice: ${price.amount} ${typeName}`;
+    return `${colorCode}Price: ${price.amount} ${typeName}§r`;
 }
 
 // Map shop item IDs to actual Minecraft item IDs
@@ -68,7 +81,7 @@ export const PriceTypeToItemId = {
     "copper_ingot": "minecraft:copper_ingot",
     "iron_ingot": "minecraft:iron_ingot",
     "gold_ingot": "minecraft:gold_ingot",
-    "diamond": "minecraft:diamond"
+    "emerald": "minecraft:emerald"
 };
 
 // Map price types to display names (singular and plural)
@@ -79,6 +92,6 @@ export const PriceTypeNames = {
     "iron_ingots": { singular: "Iron Ingot", plural: "Iron Ingots" },
     "gold_ingot": { singular: "Gold Ingot", plural: "Gold Ingots" },
     "gold_ingots": { singular: "Gold Ingot", plural: "Gold Ingots" },
-    "diamond": { singular: "Diamond", plural: "Diamonds" },
-    "diamonds": { singular: "Diamond", plural: "Diamonds" }
+    "emerald": { singular: "Emerald", plural: "Emeralds" },
+    "emeralds": { singular: "Emerald", plural: "Emeralds" }
 };

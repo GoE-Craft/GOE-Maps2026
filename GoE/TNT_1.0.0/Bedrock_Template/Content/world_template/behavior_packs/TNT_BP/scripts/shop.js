@@ -164,20 +164,28 @@ function getItemIdFromPriceType(priceType) {
 
 function playPurchaseSuccess(player) {
     try {
-        // Play success sound
         player.playSound("random.levelup", { volume: 1.0, pitch: 1.2 });
 
-        // Spawn success particles
+        const dir = player.getViewDirection();
+        const pos = player.location;
+        const rotation = player.getRotation();
+
+        const summonCommand = `summon goe_tnt:shop_buy ${pos.x + dir.x * 3} ${pos.y} ${pos.z + dir.z * 3} ${rotation.y} ${rotation.x}`;
+        player.dimension.runCommand(summonCommand);
     } catch (e) {
     }
 }
 
 function playPurchaseFailure(player) {
     try {
-        // Play failure sound
         player.playSound("mob.villager.death", { volume: 1.0, pitch: 0.5 });
 
-        // Spawn failure particles
+        const dir = player.getViewDirection();
+        const pos = player.location;
+        const rotation = player.getRotation();
+
+        const summonCommand = `summon goe_tnt:shop_decline ${pos.x + dir.x * 3} ${pos.y} ${pos.z + dir.z * 3} ${rotation.y} ${rotation.x}`;
+        player.dimension.runCommand(summonCommand);
     } catch (e) {
     }
 }

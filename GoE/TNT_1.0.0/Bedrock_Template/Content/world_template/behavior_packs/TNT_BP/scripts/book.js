@@ -34,7 +34,7 @@ export async function onItemUse(player) {
 
 export async function showIntroPage(player) {
     const IntroForm = new ActionFormData()
-        .title("§l§6TNT Guide Book§r")
+        .title("§l§4TNT Guide Book§r")
         .body(
             `§fWelcome, §a${player.name}§r!\n\n` +
             "§fUnleash chaos with §l§620+ craftable TNTs§r§f, pilot the §l§6TNT Mecha Suit§r§f, and §l§6destroy custom Structures§r§f found all across your world.\n\n" +
@@ -58,12 +58,11 @@ export async function showIntroPage(player) {
 
 export async function showMainPage(player) {
     const form = new ActionFormData()
-        .title("§l§6TNT Guide Book§r")
-        .body("§f  TODO  §r")
-        .button("§l§bInfo§r", "textures/goe/tnt/ui/info")
-        .button("§l§eSettings§r", "textures/goe/tnt/ui/settings")
-        .button("§l§6Shop§r", "textures/goe/tnt/ui/shop")
-        .button("§l§aAchievements§r", "textures/goe/tnt/ui/achievements");
+        .title("§l§4TNT Guide Book§r")
+        .button("§l§2Info§r", "textures/goe/tnt/ui/info")
+        .button("§l§1Settings§r", "textures/goe/tnt/ui/settings")
+        .button("§l§4Shop§r", "textures/goe/tnt/ui/shop")
+        .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements");
 
     form.show(player).then((response) => {
         if (response.canceled) {
@@ -89,7 +88,7 @@ export async function showMainPage(player) {
 
 async function showInfoPage(player) {
     const form = new ActionFormData()
-        .title("§l§bInfo§r")
+        .title("§l§2Info§r")
         .body(
             "§cWelcome to §eTNT info§r§c!\n\n" +
             "§cPrepare for massive explosions, advanced engineering, and hidden secrets. This §eAdd-On§r§c provides everything you need to dominate your world and master the art of demolition.\n\n" +
@@ -113,7 +112,7 @@ async function showInfoPage(player) {
 
 async function showSettingsPage(player) {
     const form = new ActionFormData()
-        .title("§l§eSettings§r")
+        .title("§l§1Settings§r")
         .body("§f  TODO  §r")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -128,7 +127,7 @@ async function showSettingsPage(player) {
 
 async function showShopPage(player) {
     const form = new ActionFormData()
-        .title("§l§6TNT Shop§r")
+        .title("§l§4TNT Shop§r")
         .body(
             "§cWelcome to §eTNT Shop§r§c!\n\n" +
             "§cInside this shop you can unlock powerful explosive tools and unique §eTNT§r§c technology.\n\n" +
@@ -264,7 +263,7 @@ async function showStructuresPage(player) {
 
 async function showAchievementListPage(player) {
     const form = new ActionFormData()
-        .title("§l§aAchievements§r")
+        .title("§l§5Achievements§r")
         .body("§f  TODO  §r")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 

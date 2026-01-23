@@ -34,6 +34,14 @@
                     "effect": "intro"
                 }
             }
+        },
+        "animation.goe_tnt.shop.particles": {
+            "animation_length": 5,
+            "particle_effects": {
+                "0.1": {
+                    "effect": "particle"
+                }
+            }
         }
     }
 }
