@@ -2463,8 +2463,6 @@
 					"locator": "cannon_locator_left"
 				}
 			}
-<<<<<<< Updated upstream
-=======
 		},
 		"animation.mecha_suit.charged": {
 			"loop": true,
@@ -2487,7 +2485,6 @@
 					"scale": 1
 				}
 			}
->>>>>>> Stashed changes
 		}
 	}
 }

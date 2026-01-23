@@ -29,13 +29,10 @@
 				"controller.mecha_suit_tnt": "controller.animation.goe.tnt.mecha_suit_tnt",
 
 				"idle": "animation.mecha_suit.idle",
-<<<<<<< Updated upstream
 				"spawn" : "animation.mecha_suit.spawn",
 				"death" : "animation.mecha_suit.death",
 				"charge_idle": "animation.mecha_suit.charge_idle",
-=======
 				"charged": "animation.mecha_suit.charged",
->>>>>>> Stashed changes
 				"walk_forward": "animation.mecha_suit.walk",
 				"walk_back": "animation.mecha_suit.walk_back",
 				"walk_left": "animation.mecha_suit.strafe_left",
