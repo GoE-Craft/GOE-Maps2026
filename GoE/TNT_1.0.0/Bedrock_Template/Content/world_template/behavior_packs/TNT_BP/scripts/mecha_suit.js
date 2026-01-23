@@ -1,4 +1,6 @@
 import { world, system, ItemStack } from "@minecraft/server";
+import * as tnt_manager from "./tnt_manager.js";
+import * as tnt_gld from "./gld/tnt_gld.js";
 
 const MECHA_ID = "goe_tnt:mecha_suit";
 const TNT_ITEM_ID = "minecraft:tnt";
@@ -29,14 +31,14 @@ const isChargeIdleByMecha = new Map();
 const idlePendingByMecha = new Map();
 const lastMechaAnimStateByMecha = new Map();
 
-// fire to charge_idle 
+// fire to charge_idle
 const FIRE_ANIM_TICKS = 12;
 const fireReturnTickByMecha = new Map();
 
 // register the player dynamic property
 if (world.afterEvents?.worldInitialize?.subscribe) {
 	world.afterEvents.worldInitialize.subscribe((_event) => {
-		try {} catch {}
+		try { } catch { }
 	});
 }
 
@@ -76,9 +78,9 @@ function isEntityValid(entity) {
 // collects available game dimensions
 function getDimensionsSafe() {
 	const dimensions = [];
-	try { const overworld = world.getDimension("overworld"); if (overworld) dimensions.push(overworld); } catch {}
-	try { const nether = world.getDimension("nether"); if (nether) dimensions.push(nether); } catch {}
-	try { const theEnd = world.getDimension("the_end"); if (theEnd) dimensions.push(theEnd); } catch {}
+	try { const overworld = world.getDimension("overworld"); if (overworld) dimensions.push(overworld); } catch { }
+	try { const nether = world.getDimension("nether"); if (nether) dimensions.push(nether); } catch { }
+	try { const theEnd = world.getDimension("the_end"); if (theEnd) dimensions.push(theEnd); } catch { }
 	return dimensions;
 }
 
@@ -105,7 +107,16 @@ function consumeOneFromSelectedHotbarSlotSafe(player, itemId) {
 	return true;
 }
 
-function isPlayerHoldingTntNow(player) {
+// returns custom TNT data only (vanilla TNT is handled separately)
+function getTntDataForItemTypeId(itemTypeId) {
+	try {
+		const d = tnt_gld.getTntDataByBlockId(itemTypeId);
+		if (d) return d;
+	} catch { }
+	return undefined;
+}
+
+function isPlayerHoldingAnyTntNow(player) {
 	try {
 		const inventoryContainer = player.getComponent("minecraft:inventory")?.container;
 		if (!inventoryContainer) return false;
@@ -114,7 +125,10 @@ function isPlayerHoldingTntNow(player) {
 		if (hotbarSlotIndex < 0) return false;
 
 		const heldStack = inventoryContainer.getItem(hotbarSlotIndex);
-		return heldStack?.typeId === TNT_ITEM_ID;
+		if (!heldStack) return false;
+
+		if (heldStack.typeId === TNT_ITEM_ID) return true;
+		return getTntDataForItemTypeId(heldStack.typeId) !== undefined;
 	} catch {
 		return false;
 	}
@@ -133,14 +147,14 @@ function scheduleReturnToChargeIdle(mechaKey, mecha, player) {
 		const expected = fireReturnTickByMecha.get(mechaKey);
 		if (expected !== returnAt) return;
 
-		const stillHoldingTnt = isPlayerHoldingTntNow(player);
+		const stillHoldingTnt = isPlayerHoldingAnyTntNow(player);
 
 		if (stillHoldingTnt) {
 			isChargeIdleByMecha.set(mechaKey, true);
-			try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch {}
+			try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch { }
 			lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
 		} else {
-			try { mecha.triggerEvent("goe:idle_tnt"); } catch {}
+			try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 			lastMechaAnimStateByMecha.set(mechaKey, "idle");
 
 			chargeStartTickByMecha.delete(mechaKey);
@@ -152,13 +166,11 @@ function scheduleReturnToChargeIdle(mechaKey, mecha, player) {
 }
 
 // spawns a tnt entity from the mecha's hand position and propels it forward
-function spawnPropelledTnt(mecha, player) {
+function spawnPropelledTnt(mecha, player, tntData, isVanilla) {
 	const dimension = mecha.dimension;
 
-	// direction used for propulsion
 	const viewDir = mecha.getViewDirection?.() ?? player.getViewDirection();
 
-	// get yaw rotation of the mecha
 	let rot;
 	try { rot = mecha.getRotation?.(); } catch { rot = undefined; }
 
@@ -169,21 +181,12 @@ function spawnPropelledTnt(mecha, player) {
 
 	const yaw = yawDeg * (Math.PI / 180);
 
-	// define local axes explicitly
-	const forward = {
-		x: -Math.sin(yaw),
-		z:  Math.cos(yaw),
-	};
+	const forward = { x: -Math.sin(yaw), z: Math.cos(yaw) };
+	const right = { x: Math.cos(yaw), z: Math.sin(yaw) };
 
-	const right = {
-		x:  Math.cos(yaw),
-		z:  Math.sin(yaw),
-	};
-
-	// hand offsets 
-	const FORWARD = 1.5;  // forward from mecha
-	const SIDE = -1.5;     // right-hand offset
-	const HEIGHT = 3.15;  // hand height
+	const FORWARD = 1.5;
+	const SIDE = -1.5;
+	const HEIGHT = 3.15;
 
 	const spawnPos = {
 		x: mecha.location.x + forward.x * FORWARD + right.x * SIDE,
@@ -191,6 +194,7 @@ function spawnPropelledTnt(mecha, player) {
 		z: mecha.location.z + forward.z * FORWARD + right.z * SIDE,
 	};
 
+	// particle for shooting
 	try {
 		if (typeof dimension.spawnParticle === "function") {
 			dimension.spawnParticle("goe_tnt:mecha_suit_fire", spawnPos);
@@ -199,28 +203,52 @@ function spawnPropelledTnt(mecha, player) {
 		} else if (typeof player.runCommand === "function") {
 			player.runCommand(`particle goe_tnt:mecha_suit_fire ${spawnPos.x} ${spawnPos.y} ${spawnPos.z}`);
 		}
-	} catch {}
+	} catch { }
 
-	const tntEntity = dimension.spawnEntity("minecraft:tnt", spawnPos);
-	tntEntity.addTag("goe_tnt_projectile");
+	// vanilla TNT
+	if (isVanilla) {
+		let tntEntity;
+		try { tntEntity = dimension.spawnEntity("minecraft:tnt", spawnPos); } catch { tntEntity = undefined; }
+		if (!tntEntity) return;
 
-	// store previous position for collision
-	try { tntEntity.setDynamicProperty("goe_prev_x", spawnPos.x); } catch {}
-	try { tntEntity.setDynamicProperty("goe_prev_y", spawnPos.y); } catch {}
-	try { tntEntity.setDynamicProperty("goe_prev_z", spawnPos.z); } catch {}
+		try {
+			if (typeof tntEntity.applyImpulse === "function") {
+				tntEntity.applyImpulse({
+					x: viewDir.x * PROJECTILE_SPEED,
+					y: 0.1,
+					z: viewDir.z * PROJECTILE_SPEED,
+				});
+			}
+		} catch { }
 
-	// propel the tnt forward
-	try {
-		if (typeof tntEntity.applyImpulse === "function") {
-			tntEntity.applyImpulse({
-				x: viewDir.x * PROJECTILE_SPEED,
-				y: 0.1,
-				z: viewDir.z * PROJECTILE_SPEED,
-			});
-		}
-	} catch {}
+		return;
+	}
 
-	return tntEntity;
+	// custom TNT 
+	if (!tntData) return;
+
+	const dimId = dimension.id;
+	const dimKey =
+		dimId === "minecraft:overworld" ? "overworld" :
+			dimId === "minecraft:nether" ? "nether" :
+				dimId === "minecraft:the_end" ? "the_end" :
+					"overworld";
+
+	const impulse = {
+		x: viewDir.x * PROJECTILE_SPEED,
+		y: 0.1,
+		z: viewDir.z * PROJECTILE_SPEED,
+	};
+
+	tnt_manager.igniteTNT(
+		spawnPos,
+		0,
+		tntData.fuseTime,
+		tntData,
+		dimKey,
+		impulse,
+		yawDeg
+	);
 }
 
 // detonates a tnt projectile and triggers nearby tnt projectiles
@@ -230,7 +258,7 @@ function detonateProjectile(tntEntity) {
 	try {
 		if (tntEntity.hasTag("goe_tnt_detonating")) return;
 		tntEntity.addTag("goe_tnt_detonating");
-	} catch {}
+	} catch { }
 
 	const dimension = tntEntity.dimension;
 	const explosionPos = tntEntity.location;
@@ -243,7 +271,7 @@ function detonateProjectile(tntEntity) {
 				location: explosionPos,
 				maxDistance: TNT_CHAIN_RADIUS,
 			});
-		} catch {}
+		} catch { }
 
 		if (nearbyProjectiles) {
 			for (const otherProjectile of nearbyProjectiles) {
@@ -251,13 +279,13 @@ function detonateProjectile(tntEntity) {
 				if (otherProjectile.id === tntEntity.id) continue;
 
 				let alreadyDetonating = false;
-				try { alreadyDetonating = otherProjectile.hasTag("goe_tnt_detonating"); } catch {}
+				try { alreadyDetonating = otherProjectile.hasTag("goe_tnt_detonating"); } catch { }
 				if (alreadyDetonating) continue;
 
 				detonateProjectile(otherProjectile);
 			}
 		}
-	} catch {}
+	} catch { }
 
 	try {
 		dimension.createExplosion(explosionPos, EXPLOSION_POWER, {
@@ -265,17 +293,17 @@ function detonateProjectile(tntEntity) {
 			causesFire: false,
 		});
 	} catch {
-		try { dimension.createExplosion(explosionPos, EXPLOSION_POWER); } catch {}
+		try { dimension.createExplosion(explosionPos, EXPLOSION_POWER); } catch { }
 	}
 
 	try {
 		if (typeof tntEntity.remove === "function") tntEntity.remove();
 		else if (typeof tntEntity.kill === "function") tntEntity.kill();
-	} catch {}
+	} catch { }
 }
 
 // handles tnt firing logic and cooldowns
-function tryFireMechaTnt(player, mecha) {
+function* tryFireMechaTnt(player, mecha) {
 	const mechaKey = mecha.id;
 	const currentTick = system.currentTick;
 
@@ -293,54 +321,65 @@ function tryFireMechaTnt(player, mecha) {
 	if (!chargeIdle) return;
 
 	mechaSuitCooldown.set(mechaKey, currentTick + COOLDOWN_TICKS);
+	yield;
 
-	system.run(() => {
+	if (!isEntityValid(player) || !isEntityValid(mecha)) return;
+
+	const riddenEntity = getRiddenEntity(player);
+	if (!riddenEntity || riddenEntity.id !== mecha.id) return;
+
+	const inventoryContainer = player.getComponent("minecraft:inventory")?.container;
+	if (!inventoryContainer) return;
+
+	const hotbarSlotIndex = getSelectedHotbarSlotIndex(player);
+	if (hotbarSlotIndex < 0) return;
+
+	const selectedStack = inventoryContainer.getItem(hotbarSlotIndex);
+	if (!selectedStack) return;
+
+	const isVanilla = selectedStack.typeId === TNT_ITEM_ID;
+	const tntData = isVanilla ? undefined : getTntDataForItemTypeId(selectedStack.typeId);
+	if (!isVanilla && !tntData) return;
+
+	if (!consumeOneFromSelectedHotbarSlotSafe(player, selectedStack.typeId)) return;
+
+	try { mecha.triggerEvent("goe:fire_tnt"); } catch { }
+	lastMechaAnimStateByMecha.set(mechaKey, "fire");
+
+	spawnPropelledTnt(mecha, player, tntData, isVanilla);
+	yield;
+
+	isChargeIdleByMecha.set(mechaKey, true);
+	scheduleReturnToChargeIdle(mechaKey, mecha, player);
+	yield;
+
+	system.runTimeout(() => {
 		if (!isEntityValid(player) || !isEntityValid(mecha)) return;
 
-		const riddenEntity = getRiddenEntity(player);
-		if (!riddenEntity || riddenEntity.id !== mecha.id) return;
+		const riddenEntityAfter = getRiddenEntity(player);
+		if (!riddenEntityAfter || riddenEntityAfter.id !== mecha.id) return;
 
-		const inventoryContainer = player.getComponent("minecraft:inventory")?.container;
-		if (!inventoryContainer) return;
+		const inventoryContainer2 = player.getComponent("minecraft:inventory")?.container;
+		if (!inventoryContainer2) return;
 
-		const hotbarSlotIndex = getSelectedHotbarSlotIndex(player);
-		if (hotbarSlotIndex < 0) return;
+		const hotbarSlotIndex2 = getSelectedHotbarSlotIndex(player);
+		if (hotbarSlotIndex2 < 0) return;
 
-		const selectedStack = inventoryContainer.getItem(hotbarSlotIndex);
-		if (!selectedStack || selectedStack.typeId !== TNT_ITEM_ID) return;
+		const held2 = inventoryContainer2.getItem(hotbarSlotIndex2);
+		if (!held2) return;
 
-		if (!consumeOneFromSelectedHotbarSlotSafe(player, TNT_ITEM_ID)) return;
+		if (held2.typeId !== TNT_ITEM_ID) {
+			const held2Data = getTntDataForItemTypeId(held2.typeId);
+			if (!held2Data) return;
+		}
 
-		try { mecha.triggerEvent("goe:fire_tnt"); } catch {}
-		lastMechaAnimStateByMecha.set(mechaKey, "fire");
+		if ((chargeReadyTickByMecha.get(mechaKey) ?? 0) <= system.currentTick) {
+			isChargeIdleByMecha.set(mechaKey, true);
+			try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch { }
+			lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
+		}
+	}, RESET_TO_IDLE_TICKS);
 
-		spawnPropelledTnt(mecha, player);
-
-		isChargeIdleByMecha.set(mechaKey, true);
-		scheduleReturnToChargeIdle(mechaKey, mecha, player);
-
-		system.runTimeout(() => {
-			if (!isEntityValid(player) || !isEntityValid(mecha)) return;
-
-			const riddenEntityAfter = getRiddenEntity(player);
-			if (!riddenEntityAfter || riddenEntityAfter.id !== mecha.id) return;
-
-			const inventoryContainer2 = player.getComponent("minecraft:inventory")?.container;
-			if (!inventoryContainer2) return;
-
-			const hotbarSlotIndex2 = getSelectedHotbarSlotIndex(player);
-			if (hotbarSlotIndex2 < 0) return;
-
-			const held2 = inventoryContainer2.getItem(hotbarSlotIndex2);
-			if (!held2 || held2.typeId !== TNT_ITEM_ID) return;
-
-			if ((chargeReadyTickByMecha.get(mechaKey) ?? 0) <= system.currentTick) {
-				isChargeIdleByMecha.set(mechaKey, true);
-				try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch {}
-				lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
-			}
-		}, RESET_TO_IDLE_TICKS);
-	});
 }
 
 // checks whether the player is riding a mecha and holding tnt
@@ -350,9 +389,10 @@ function isRidingMechaWithTntSelected(player, itemStack) {
 	const mecha = getRiddenEntity(player);
 	if (!mecha || mecha.typeId !== MECHA_ID) return false;
 
-	if (!itemStack || itemStack.typeId !== TNT_ITEM_ID) return false;
+	if (!itemStack || !itemStack.typeId) return false;
 
-	return true;
+	if (itemStack.typeId === TNT_ITEM_ID) return true;
+	return getTntDataForItemTypeId(itemStack.typeId) !== undefined;
 }
 
 // checks every tick what is selected and updates mecha animation
@@ -378,7 +418,7 @@ function setupChargeAnimationByHeldItemTick() {
 
 				if (inventoryContainer && hotbarSlotIndex >= 0) {
 					const heldStack = inventoryContainer.getItem(hotbarSlotIndex);
-					isTntSelected = heldStack?.typeId === TNT_ITEM_ID;
+					isTntSelected = !!(heldStack && (heldStack.typeId === TNT_ITEM_ID || getTntDataForItemTypeId(heldStack.typeId)));
 				}
 			} catch {
 				isTntSelected = false;
@@ -395,7 +435,7 @@ function setupChargeAnimationByHeldItemTick() {
 				isChargeIdleByMecha.set(mechaKey, false);
 				idlePendingByMecha.set(mechaKey, false);
 
-				try { mecha.triggerEvent("goe:charge_tnt"); } catch {}
+				try { mecha.triggerEvent("goe:charge_tnt"); } catch { }
 				lastMechaAnimStateByMecha.set(mechaKey, "charge");
 			}
 
@@ -407,7 +447,7 @@ function setupChargeAnimationByHeldItemTick() {
 
 				// if in charge_idle go idle now
 				if (chargeIdle) {
-					try { mecha.triggerEvent("goe:idle_tnt"); } catch {}
+					try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 					lastMechaAnimStateByMecha.set(mechaKey, "idle");
 
 					chargeStartTickByMecha.delete(mechaKey);
@@ -415,7 +455,7 @@ function setupChargeAnimationByHeldItemTick() {
 					isChargeIdleByMecha.delete(mechaKey);
 					idlePendingByMecha.delete(mechaKey);
 				} else {
-					// if still charging wait to finishthen charge_idle 
+					// if still charging wait to finishthen charge_idle
 					idlePendingByMecha.set(mechaKey, true);
 				}
 			}
@@ -426,7 +466,7 @@ function setupChargeAnimationByHeldItemTick() {
 
 			if (!chargeIdle && typeof readyTick === "number" && currentTick >= readyTick) {
 				isChargeIdleByMecha.set(mechaKey, true);
-				try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch {}
+				try { mecha.triggerEvent("goe:charge_idle_tnt"); } catch { }
 				lastMechaAnimStateByMecha.set(mechaKey, "charge_idle");
 
 				const idlePending = idlePendingByMecha.get(mechaKey) ?? false;
@@ -435,7 +475,7 @@ function setupChargeAnimationByHeldItemTick() {
 				if (!isTntSelected || idlePending) {
 					system.run(() => {
 						if (!isEntityValid(mecha)) return;
-						try { mecha.triggerEvent("goe:idle_tnt"); } catch {}
+						try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 					});
 
 					lastMechaAnimStateByMecha.set(mechaKey, "idle");
@@ -452,22 +492,6 @@ function setupChargeAnimationByHeldItemTick() {
 
 // registers item use and block placement handlers while riding the mecha
 function setupUseHandlers() {
-	if (world.beforeEvents?.itemUseOn?.subscribe) {
-		world.beforeEvents.itemUseOn.subscribe((event) => {
-			const player = event.source;
-			if (!player || player.typeId !== "minecraft:player") return;
-
-			const mecha = getRiddenEntity(player);
-			if (!mecha || mecha.typeId !== MECHA_ID) return;
-
-			try { event.cancel = true; } catch {}
-
-			if (isRidingMechaWithTntSelected(player, event.itemStack)) {
-				tryFireMechaTnt(player, mecha);
-			}
-		});
-	}
-
 	if (world.beforeEvents?.itemUse?.subscribe) {
 		world.beforeEvents.itemUse.subscribe((event) => {
 			const player = event.source;
@@ -476,11 +500,10 @@ function setupUseHandlers() {
 			const mecha = getRiddenEntity(player);
 			if (!mecha || mecha.typeId !== MECHA_ID) return;
 
-			try { event.cancel = true; } catch {}
-
 			if (isRidingMechaWithTntSelected(player, event.itemStack)) {
-				tryFireMechaTnt(player, mecha);
+				system.runJob(tryFireMechaTnt(player, mecha));
 			}
+			event.cancel = true;
 		});
 	}
 
@@ -492,93 +515,9 @@ function setupUseHandlers() {
 			const mecha = getRiddenEntity(player);
 			if (!mecha || mecha.typeId !== MECHA_ID) return;
 
-			try { event.cancel = true; } catch {}
+			try { event.cancel = true; } catch { }
 		});
 	}
-}
-
-// updates projectile movement, collision detection, and detonation
-function setupProjectileTick() {
-	system.runInterval(() => {
-		const dimensions = getDimensionsSafe();
-
-		for (const dimension of dimensions) {
-			let projectileEntities;
-			try { projectileEntities = dimension.getEntities({ tags: ["goe_tnt_projectile"] }); } catch {}
-			if (!projectileEntities) continue;
-
-			for (const tntEntity of projectileEntities) {
-				if (!isEntityValid(tntEntity)) continue;
-
-				const currentPos = tntEntity.location;
-
-				const prevX = tntEntity.getDynamicProperty("goe_prev_x");
-				const prevY = tntEntity.getDynamicProperty("goe_prev_y");
-				const prevZ = tntEntity.getDynamicProperty("goe_prev_z");
-
-				const previousPos = {
-					x: typeof prevX === "number" ? prevX : currentPos.x,
-					y: typeof prevY === "number" ? prevY : currentPos.y,
-					z: typeof prevZ === "number" ? prevZ : currentPos.z,
-				};
-
-				const sampleSteps = 4;
-				let hitSolidBlock = false;
-
-				for (let stepIndex = 1; stepIndex <= sampleSteps; stepIndex++) {
-					const lerpT = stepIndex / sampleSteps;
-					const samplePos = {
-						x: previousPos.x + (currentPos.x - previousPos.x) * lerpT,
-						y: previousPos.y + (currentPos.y - previousPos.y) * lerpT,
-						z: previousPos.z + (currentPos.z - previousPos.z) * lerpT,
-					};
-
-					const blockPos = {
-						x: Math.floor(samplePos.x),
-						y: Math.floor(samplePos.y),
-						z: Math.floor(samplePos.z),
-					};
-
-					let blockAtSample;
-					try { blockAtSample = dimension.getBlock(blockPos); } catch {}
-
-					if (blockAtSample && blockAtSample.typeId !== "minecraft:air") {
-						hitSolidBlock = true;
-						break;
-					}
-				}
-
-				if (hitSolidBlock) {
-					detonateProjectile(tntEntity);
-					continue;
-				}
-
-				let nearbyEntities;
-				try { nearbyEntities = dimension.getEntities({ location: currentPos, maxDistance: HIT_RADIUS }); } catch {}
-
-				let didDetonate = false;
-
-				if (nearbyEntities) {
-					for (const nearbyEntity of nearbyEntities) {
-						if (!isEntityValid(nearbyEntity)) continue;
-						if (nearbyEntity.id === tntEntity.id) continue;
-						if (nearbyEntity.typeId === "minecraft:item") continue;
-
-						detonateProjectile(tntEntity);
-						didDetonate = true;
-						break;
-					}
-				}
-
-				if (didDetonate) continue;
-				if (!isEntityValid(tntEntity)) continue;
-
-				try { tntEntity.setDynamicProperty("goe_prev_x", currentPos.x); } catch {}
-				try { tntEntity.setDynamicProperty("goe_prev_y", currentPos.y); } catch {}
-				try { tntEntity.setDynamicProperty("goe_prev_z", currentPos.z); } catch {}
-			}
-		}
-	}, 1);
 }
 
 // locks player game mode while riding the mecha and restores it on exit
@@ -595,22 +534,20 @@ function setupMechaRidingModeLock() {
 				try {
 					const v = player.getDynamicProperty(PREVIOUS_GAMEMODE_PROP);
 					if (typeof v === "string" && v.length > 0) persistedPrevious = v;
-				} catch {}
+				} catch { }
 
 				let gameMode;
 				try { gameMode = player.getGameMode(); } catch { gameMode = undefined; }
 
-				// if we already have a persisted previous mode (player relogged while in mecha),
-				// do not overwrite it with the current adventure mode
 				if (persistedPrevious) {
 					previousGameModeByPlayer.set(player.id, persistedPrevious);
 				} else if (gameMode !== undefined) {
 					const prev = String(gameMode).toLowerCase();
 					previousGameModeByPlayer.set(player.id, prev);
-					try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, prev); } catch {}
+					try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, prev); } catch { }
 				}
 
-				try { player.runCommand("gamemode adventure"); } catch {}
+				try { player.runCommand("gamemode adventure"); } catch { }
 				wasRidingMechaByPlayer.set(player.id, true);
 			}
 
@@ -621,15 +558,15 @@ function setupMechaRidingModeLock() {
 					try {
 						const v = player.getDynamicProperty(PREVIOUS_GAMEMODE_PROP);
 						if (typeof v === "string" && v.length > 0) previousGameMode = v;
-					} catch {}
+					} catch { }
 				}
 
 				if (previousGameMode) {
-					try { player.runCommand(`gamemode ${previousGameMode}`); } catch {}
+					try { player.runCommand(`gamemode ${previousGameMode}`); } catch { }
 				}
 
 				previousGameModeByPlayer.delete(player.id);
-				try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, ""); } catch {}
+				try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, ""); } catch { }
 				wasRidingMechaByPlayer.set(player.id, false);
 			}
 		}
@@ -676,7 +613,6 @@ function setupRespawnRecovery() {
 export function initMechaSuit() {
 	setupUseHandlers();
 	setupChargeAnimationByHeldItemTick();
-	setupProjectileTick();
 	setupMechaRidingModeLock();
 	setupRespawnRecovery();
 }
