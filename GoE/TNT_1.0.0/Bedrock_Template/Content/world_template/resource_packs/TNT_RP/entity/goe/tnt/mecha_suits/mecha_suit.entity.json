@@ -27,6 +27,8 @@
 				"controller.mecha_suit_tnt": "controller.animation.goe.tnt.mecha_suit_tnt",
 
 				"idle": "animation.mecha_suit.idle",
+				"spawn" : "animation.mecha_suit.spawn",
+				"death" : "animation.mecha_suit.death",
 				"charge_idle": "animation.mecha_suit.charge_idle",
 				"walk_forward": "animation.mecha_suit.walk",
 				"walk_back": "animation.mecha_suit.walk_back",
