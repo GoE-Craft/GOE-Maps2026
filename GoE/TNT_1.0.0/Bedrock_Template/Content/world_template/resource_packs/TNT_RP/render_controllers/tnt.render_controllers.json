@@ -6,22 +6,10 @@
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
-          "r": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? (!query.is_saddled) ? this: 1.0 : 1.0",
-          "g": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? (!query.is_saddled) ? this: 1.0 : 1.0",
-          "b": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? (!query.is_saddled) ? this: 1.0 : 1.0",
-          "a": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? (!query.is_saddled) ? this: 1.0 : 1.0"
-      },
-      "is_hurt_color": {
-          "r": "0.0",
-          "g": "0.0",
-          "b": "0.0",
-          "a": "0.0"
-      },
-      "on_fire_color": {
-          "r": "0.0",
-          "g": "0.0",
-          "b": "0.0",
-          "a": "0.0"
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "(query.property('goe_tnt:flashing') == true) ? 0.75 : 0.0"
       }
     },
     "controller.render.nuke_tnt_glass": {

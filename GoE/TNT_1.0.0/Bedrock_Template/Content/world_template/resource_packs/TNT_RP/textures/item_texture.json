@@ -7,6 +7,9 @@
         },
         "goe_tnt:guide_book": {
             "textures": "textures/goe/tnt/items/book/guide_book_icon"
-        }
+        },
+		"directional_tnt_spawn_egg": {
+			"textures": ["textures/goe/tnt/items/spawn_egg/directional_tnt_spawn_egg"]
+		},
     }
 }

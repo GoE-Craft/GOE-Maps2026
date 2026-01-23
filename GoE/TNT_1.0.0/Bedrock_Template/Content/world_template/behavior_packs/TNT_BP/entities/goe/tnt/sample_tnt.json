@@ -4,13 +4,17 @@
         "description": {
             "identifier": "goe_tnt:sample_tnt",
             "is_spawnable": false,
-            "is_summonable": true
+            "is_summonable": true,
+            "properties": {
+                "goe_tnt:flashing": {
+                    "type": "bool",
+                    "client_sync": true,
+                    "default": false
+                }
+            }
         },
         "component_groups": {
             "goe_tnt:exploding": {
-                "minecraft:mark_variant": {
-                    "value": 1
-                },
                 "minecraft:explode": {
                     "power": 0,
                     "causes_fire": false,
@@ -47,6 +51,13 @@
             "minecraft:projectile": {
                 "gravity": 0.001,
                 "inertia": 0.999
+            },
+            "minecraft:conditional_bandwidth_optimization": {
+                "default_values": {
+                    "max_optimized_distance": 80.0,
+                    "max_dropped_ticks": 5,
+                    "use_motion_prediction_hints": true
+                }
             }
         },
         "events": {

@@ -47,7 +47,7 @@ function scheduleTimer(entity, timerRemaining, fuseDuration, tntData) {
         startCountdown(entity, timerRemaining);
         
         const timeoutId = system.runTimeout(() => {
-            if (!isEntityValid(entity)) return;
+            if (!entity.isValid) return;
             
             // Stop countdown display
             stopCountdown(entity);
@@ -79,7 +79,7 @@ function startCountdown(entity, timerRemaining) {
     world.sendMessage(`§6TNT Timer: §c${initialSeconds}§6 seconds`);
     
     const intervalId = system.runInterval(() => {
-        if (!isEntityValid(entity)) {
+        if (!entity.isValid) {
             stopCountdown(entity);
             return;
         }
@@ -115,7 +115,7 @@ function scheduleFuse(entity, fuseRemaining, tntData) {
     
     entity.triggerEvent("goe_tnt:explode");
     const timeoutId = system.runTimeout(() => {
-        if (!isEntityValid(entity)) return;
+        if (!entity.isValid) return;
         
         stopFuseEffects(entity);
         explode(entity, tntData);
@@ -133,15 +133,25 @@ function startFuseEffects(entity, tntData) {
     const dim = entity.dimension;
     dim.playSound("random.fuse", entity.location);
 
+    const flashingInterval = system.runInterval(() => {
+        if (!entity.isValid) {
+            system.clearRun(flashingInterval);
+            return;
+        } else {
+            const current = entity.getProperty("goe_tnt:flashing");
+            entity.setProperty("goe_tnt:flashing", !current);
+        }
+    }, 5);
+
     system.runTimeout(() => {
-        if (!isEntityValid(entity)) return;
+        if (!entity.isValid) return;
         try {
             dim.playSound(tntData.fuseEffects.soundEffect, entity.location);
         } catch (e) {}
     }, tntData.fuseEffects.soundDelay || 0);
         
     system.runTimeout(() => {
-        if (!isEntityValid(entity)) return;
+        if (!entity.isValid) return;
         try {
             dim.spawnParticle(tntData.fuseEffects.particleEffect, entity.location);
         } catch (e) {}
@@ -168,24 +178,23 @@ function explode(entity, tntData) {
     const entityId = entity.id;
     stopCountdown(entity);
     activeTimeouts.delete(entityId);
-    // Run immediate, minimal explosion/effects on main thread to avoid blocking
-    system.run(() => {
-        try {
-            if (tntData?.explosionEffects) {
-                try {
-                    if (tntData.explosionEffects.particleEffect) dim.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-                } catch (e) {}
-                try {
-                    if (tntData.explosionEffects.soundEffect) dim.playSound(tntData.explosionEffects.soundEffect, loc);
-                } catch (e) {}
-            }
-        } catch (e) {}
-    });
     // Offload heavier/optional post-explosion work to a job
     system.runJob(explodeJob(dim, entity, tntData, loc, entity.getRotation()));
 }
 
 function* explodeJob(dimension, entity, tntData, loc, rot) {
+    if (tntData?.explosionEffects) {
+        try {
+            if (tntData.explosionEffects.particleEffect) dim.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+        } catch (e) {}
+        try {
+            if (tntData.explosionEffects.soundEffect) dim.playSound(tntData.explosionEffects.soundEffect, loc);
+        } catch (e) {}
+    }
+        
+    yield;
+
+    // Create the explosion
     try {
         dimension.createExplosion(loc, tntData.power, {
             causesFire: tntData.explosionProperties.createsFire,
@@ -264,19 +273,6 @@ function handleSummonMob(dimension, location, tntData) {
             } catch (e) {}
         }
     }, delay);
-}
-
-/**
- * Check if entity still exists
- */
-function isEntityValid(entity) {
-    try {
-        // Try to access a property - will throw if invalid
-        const _ = entity.id;
-        return true;
-    } catch {
-        return false;
-    }
 }
 
 /**
@@ -404,8 +400,8 @@ function handleSpecialAction(dimension, location, tntData, vec) {
         case "directional_drill":
             // Drill horizontally in the direction the entity is facing
             const drillLength = 40;
-            const drillRadius = 3; // radius for width and height
-            directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius);
+            const drillRadius = 2; // radius for width and height
+            directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData);
             break;
         default:
             break;
@@ -457,9 +453,8 @@ function getFacingVectorFromEntity(rot) {
     }
 }
 
-function* directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius) {
+function* directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
     const steps = Math.max(1, Math.floor(length));
-
     // perpendicular horizontal vector for width direction
     const perpX = -vec.z;
     const perpZ = vec.x;
@@ -467,43 +462,61 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
     const px = perpX / perpLen;
     const pz = perpZ / perpLen;
 
+    let batchCount = 0;
+    const batchSize = 5; // Number of columns to process before yielding
+
+    // Calculate the bottom Y coordinate
+    const bottomY = Math.round(location.y);
+    const heightSpan = heightRadius + 2; // extra 2 blocks for clearance
+
     for (let s = 0; s < steps; s++) {
-        // use s + 0.5 to target the block directly in front first
-        const centerX = location.x + vec.x * (s + 0.5);
-        const centerZ = location.z + vec.z * (s + 0.5);
-        const centerY = Math.round(location.y);
+            const baseX = Math.floor(location.x);
+            const baseZ = Math.floor(location.z);
+
+            // Start exactly at the entity's block and move forward
+            const centerX = baseX + Math.round(vec.x * s);
+            const centerZ = baseZ + Math.round(vec.z * s);
 
         // Break the tunnel column-by-column to simulate block breaking
         for (let w = -widthRadius; w <= widthRadius; w++) {
             const columnX = Math.round(centerX + px * w);
             const columnZ = Math.round(centerZ + pz * w);
 
-            for (let h = -heightRadius; h <= heightRadius; h++) {
+            // Start at the bottom and go up
+            for (let h = 0; h < heightSpan; h++) {
                 const bx = columnX;
-                const by = centerY + h;
+                const by = bottomY + h;
                 const bz = columnZ;
                 try {
                     const blockLoc = { x: bx, y: by, z: bz };
                     const block = dimension.getBlock(blockLoc);
                     // Simulate breaking by setting to air
+                    if (block.hasTag("diamond_pick_diggable")) continue;
                     block.setPermutation(BlockPermutation.resolve("minecraft:air"));
                 } catch (e) {}
             }
-            // Yield briefly between columns to simulate progressive breaking
-            yield;
         }
 
-        // Occasional larger visual explosion along the tunnel
-        if (s % 5 === 0) {
-            try {
-                dimension.createExplosion({ x: centerX, y: centerY, z: centerZ }, 0, { causesFire: false, breaksBlocks: false });
-            } catch (e) {}
+        const loc = { x: centerX, y: bottomY, z: centerZ };
+        if (tntData?.explosionEffects) {
+            if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+            if (tntData.explosionEffects.soundEffect) dimension.playSound(tntData.explosionEffects.soundEffect, loc);
         }
-        // Yield after completing the cross-section to pace the drilling
         yield;
+        
     }
 }
 
-function directionalAction(dimension, location, vec, length, widthRadius, heightRadius) {
-    system.runJob(directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius));
+function directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
+    runJobWithDelays(directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius, tntData));
+}
+
+// Helper to run a generator job with tick delays
+function runJobWithDelays(gen) {
+    function step(result) {
+        if (result.done) return;
+        const delay = typeof result.value === "number" ? result.value : 1;
+        system.runTimeout(() => step(gen.next()), delay);
+    }
+    step(gen.next());
 }

@@ -13,7 +13,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "minecraft:large_explosion",
             particleDelay: 0,
-            soundEffect: "minecraft:entity.generic.explode",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {
@@ -40,7 +40,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_orange",
             particleDelay: 0,
-            soundEffect: "minecraft:entity.generic.explode",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {

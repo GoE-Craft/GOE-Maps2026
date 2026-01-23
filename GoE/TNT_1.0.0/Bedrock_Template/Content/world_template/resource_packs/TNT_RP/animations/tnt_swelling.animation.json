@@ -1,10 +1,10 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.directional_tnt.swelling": {
+		"animation.tnt.swelling": {
 			"loop": true,
 			"bones": {
-				"directional_tnt": {
+				"bb_main": {
 					"scale": ["variable.swelling_scale1", "variable.swelling_scale2", "variable.swelling_scale1"]
 				}
 			}
