@@ -10,11 +10,16 @@
                     "type": "bool",
                     "client_sync": true,
                     "default": false
+                },
+                "goe_tnt:swell": {
+                    "type": "bool",
+                    "client_sync": true,
+                    "default": false
                 }
             }
         },
         "component_groups": {
-            "goe_tnt:exploding": {
+            "goe_tnt:ignite": {
                 "minecraft:explode": {
                     "power": 0,
                     "causes_fire": false,
@@ -61,11 +66,16 @@
             }
         },
         "events": {
-            "goe_tnt:explode": {
+            "goe_tnt:trigger_ignite": {
                 "add": {
                     "component_groups": [
-                        "goe_tnt:exploding"
+                        "goe_tnt:ignite"
                     ]
+                }
+            },
+            "goe_tnt:start_swell": {
+                "set_property": {
+                    "goe_tnt:swell": true
                 }
             }
         }

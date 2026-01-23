@@ -1,11 +1,18 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.tnt.swelling": {
-			"loop": true,
+		"animation.tnt.swell": {
+			"loop": "hold_on_last_frame",
 			"bones": {
 				"bb_main": {
-					"scale": ["variable.swelling_scale1", "variable.swelling_scale2", "variable.swelling_scale1"]
+					"scale": {
+						"0.0": [1.0, 1.0, 1.0],
+						"0.1": [1.02, 1.02, 1.02],
+						"0.2": [1.0, 1.0, 1.0],
+						"0.3": [1.05, 1.05, 1.05],
+						"0.4": [1.0, 1.0, 1.0],
+						"0.5": [1.2, 1.2, 1.2]
+					}
 				}
 			}
 		}

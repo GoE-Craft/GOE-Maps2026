@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:big_explosion_orange",
+			"identifier": "goe_tnt:big_explosion_white",
 			"basic_render_parameters": {
 				"material": "particles_alpha",
 				"texture": "textures/particle/particles"
@@ -18,7 +18,7 @@
 		},
 		"components": {
 			"minecraft:emitter_rate_steady": {
-				"spawn_rate": 120,
+				"spawn_rate": 100,
 				"max_particles": 50
 			},
 			"minecraft:emitter_lifetime_looping": {
@@ -49,13 +49,7 @@
 				}
 			},
 			"minecraft:particle_appearance_tinting": {
-				"color": {
-					"interpolant": "variable.gradient",
-					"gradient": {
-						"0.0": "#FFFA8534",
-						"1.0": "#ffFF5733"
-					}
-				}
+				"color": [1, 1, 1, 1]
 			}
 		}
 	}

@@ -10,11 +10,16 @@
                     "type": "bool",
                     "client_sync": true,
                     "default": false
+                },
+                "goe_tnt:swell": {
+                    "type": "bool",
+                    "client_sync": true,
+                    "default": false
                 }
             }
         },
         "component_groups": {
-            "goe_tnt:exploding": {
+            "goe_tnt:explode": {
                 "minecraft:explode": {
                     "power": 0,
                     "causes_fire": false,
@@ -44,7 +49,7 @@
             "minecraft:renders_when_invisible": {},
             "minecraft:physics": {
                 "has_collision": true,
-                "has_gravity": false
+                "has_gravity": true
             },
             "minecraft:pushable": { "is_pushable": false, "is_pushable_by_piston": false },  
             "minecraft:collision_box": {
@@ -60,11 +65,16 @@
             }
         },
         "events": {
-            "goe_tnt:explode": {
+            "goe_tnt:trigger_ignite": {
                 "add": {
                     "component_groups": [
-                        "goe_tnt:exploding"
+                        "goe_tnt:explode"
                     ]
+                }
+            },
+            "goe_tnt:start_swell": {
+                "set_property": {
+                    "goe_tnt:swell": true
                 }
             }
         }

@@ -28,20 +28,17 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:directional_tnt",
         tntType: "directional_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 1,
-        isStatic: true,
         fuseEffects: {
             particleEffect: "goe_tnt:fuse_orange_chunk",
-            particleDelay: 10,
+            particleDelay: 20,
             soundEffect: "goe_tnt:directional_tnt",
-            soundDelay: 20
+            soundDelay: 30
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_orange",
+            particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.explode",
-            soundDelay: 0
         },
         explosionProperties: {
             createsFire: false,

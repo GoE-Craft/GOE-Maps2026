@@ -14,18 +14,14 @@
 			},
 			"scripts": {
 				"pre_animation": [
-					"variable.wobble = Math.sin(query.swell_amount * 5730) * query.swell_amount * 0.01 + 1.0;",
-					"variable.swelling_scale1 = (Math.pow(Math.clamp(query.swell_amount, 0.0, 1.0), 4.0) * 0.4 + 1.0) * variable.wobble;",
-					"variable.swelling_scale2 = (Math.pow(Math.clamp(query.swell_amount, 0.0, 1.0), 4.0) * 0.1 + 1.0) / variable.wobble;",
-					"variable.flash = Math.mod(Math.Round(query.swell_amount * 10.0), 2.0);"
+				"v.should_swell = query.property('goe_tnt:swell');"
 				],
 				"animate": [
-					"swelling_controller"
+				{"tnt_swelling": "v.should_swell"}
 				]
-			},
+					},
 			"animations": {
-				"tnt_swelling": "animation.tnt.swelling",
-				"swelling_controller": "controller.animation.tnt.swelling"
+				"tnt_swelling": "animation.tnt.swell"
 			},
       		"render_controllers": [ "controller.render.tnt" ]
 		}

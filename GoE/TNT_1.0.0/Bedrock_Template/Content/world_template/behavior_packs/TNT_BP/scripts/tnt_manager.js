@@ -111,9 +111,8 @@ function stopCountdown(entity) {
  */
 function scheduleFuse(entity, fuseRemaining, tntData) {
     // Start fuse effects (continuous particle + initial sound)
-    startFuseEffects(entity, tntData);
+    startFuseEffects(entity, tntData, fuseRemaining);
     
-    entity.triggerEvent("goe_tnt:explode");
     const timeoutId = system.runTimeout(() => {
         if (!entity.isValid) return;
         
@@ -127,11 +126,12 @@ function scheduleFuse(entity, fuseRemaining, tntData) {
 /**
  * Start fuse effects - continuous particles during fuse
  */
-function startFuseEffects(entity, tntData) {
+function startFuseEffects(entity, tntData, fuseTime) {
     if (!tntData?.fuseEffects) return;
     
     const dim = entity.dimension;
     dim.playSound("random.fuse", entity.location);
+    entity.triggerEvent("goe_tnt:trigger_ignite");
 
     const flashingInterval = system.runInterval(() => {
         if (!entity.isValid) {
@@ -156,6 +156,13 @@ function startFuseEffects(entity, tntData) {
             dim.spawnParticle(tntData.fuseEffects.particleEffect, entity.location);
         } catch (e) {}
     }, tntData.fuseEffects.particleDelay || 0);
+
+    // Swell if we are 0.5 seconds from explosion
+    const swellTick = fuseTime - 10;
+    system.runTimeout(() => {
+        if (!entity.isValid) return;
+        entity.triggerEvent("goe_tnt:start_swell");
+    }, Math.max(0, swellTick));
 }
 
 /**
@@ -185,11 +192,13 @@ function explode(entity, tntData) {
 function* explodeJob(dimension, entity, tntData, loc, rot) {
     if (tntData?.explosionEffects) {
         try {
-            if (tntData.explosionEffects.particleEffect) dim.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+            if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
         } catch (e) {}
         try {
-            if (tntData.explosionEffects.soundEffect) dim.playSound(tntData.explosionEffects.soundEffect, loc);
-        } catch (e) {}
+            if (tntData.explosionEffects.soundEffect) dimension.playSound(tntData.explosionEffects.soundEffect, loc);
+        } catch (e) {
+            world.sendMessage("Error playing explosion sound: " + e);
+        }
     }
         
     yield;
@@ -401,6 +410,7 @@ function handleSpecialAction(dimension, location, tntData, vec) {
             // Drill horizontally in the direction the entity is facing
             const drillLength = 40;
             const drillRadius = 2; // radius for width and height
+            system.run
             directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData);
             break;
         default:
@@ -462,9 +472,6 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
     const px = perpX / perpLen;
     const pz = perpZ / perpLen;
 
-    let batchCount = 0;
-    const batchSize = 5; // Number of columns to process before yielding
-
     // Calculate the bottom Y coordinate
     const bottomY = Math.round(location.y);
     const heightSpan = heightRadius + 2; // extra 2 blocks for clearance
@@ -499,8 +506,9 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
 
         const loc = { x: centerX, y: bottomY, z: centerZ };
         if (tntData?.explosionEffects) {
-            if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-            if (tntData.explosionEffects.soundEffect) dimension.playSound(tntData.explosionEffects.soundEffect, loc);
+            dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+            dimension.playSound("random.explode", loc);
+            // Play the sound effeect every 3 seconds
         }
         yield;
         
