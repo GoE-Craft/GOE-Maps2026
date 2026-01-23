@@ -15,8 +15,15 @@ export async function onItemUse(player) {
     const hasSeenIntro = player.getDynamicProperty("goe_tnt_has_seen_intro") === true;
     const hasPlayedFx = player.getDynamicProperty("goe_tnt_book_fx_played") === true;
 
+    const dir = player.getViewDirection();
+    const pos = player.location;
+    const rotation = player.getRotation();
+
     if (!hasPlayedFx) {
-        //TODO: Add celebration fx
+        const summonCommand = `summon goe_tnt:intro_fx ${pos.x + dir.x * 3} ${pos.y} ${pos.z + dir.z * 3} ${rotation.y} ${rotation.x}`;
+        player.dimension.runCommand(summonCommand);
+
+        player.setDynamicProperty("goe_tnt_book_fx_played", true);
     }
 
     if (!hasSeenIntro)

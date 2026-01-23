@@ -1,0 +1,37 @@
+{
+    "format_version": "1.21.130",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "goe_tnt:intro_fx",
+            "materials": {
+                "default": "entity",
+                "alpha": "entity_alphatest"
+            },
+            "textures": {
+                "default": "textures/goe/tnt/entity/empty"
+            },
+            "render_controllers": [
+                "controller.render.default"
+            ],
+            "geometry": {
+                "default": "geometry.goe_tnt.empty"
+            },
+            "particle_effects": {
+                "fireworks": "goe_tnt:intro_fireworks"
+            },
+            "sound_effects": {
+                "intro": "goe_tnt:intro_music"
+            },
+            "animations": {
+                "particles": "animation.goe_tnt.intro_fx.particles",
+                "sounds": "animation.goe_tnt.intro_fx.sounds"
+            },
+            "scripts": {
+                "animate": [
+                    "particles",
+                    "sounds"
+                ]
+            }
+        }
+    }
+}

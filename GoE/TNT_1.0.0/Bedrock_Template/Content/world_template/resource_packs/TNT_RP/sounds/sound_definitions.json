@@ -7,6 +7,10 @@
 		"sounds": [
 			"sounds/sfx/tnt/directional_tnt"
 		]
-	}
+	},
+	"goe_tnt:intro_music": {
+      "category": "music",
+      "sounds": [ { "name": "sounds/goe/tnt/sfx/intro_v2", "volume": 0.2 } ]
+    }
   }
 }
