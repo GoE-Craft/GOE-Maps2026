@@ -13,9 +13,14 @@
 				"default": "geometry.goe_tnt.mecha_suit"
 			},
 			"render_controllers": [ "controller.render.default" ],
-			
+
 			"particle_effects": {
 				"mecha_suit_fire": "goe_tnt:mecha_suit_fire"
+			},
+			"sound_effects": {
+				"walk": "goe_tnt:mecha_suit_walk",
+				"death": "goe_tnt:mecha_suit_death",
+				"hurt": "goe_tnt:mecha_suit_hurt"
 			},
 			"animations": {
 				"controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",

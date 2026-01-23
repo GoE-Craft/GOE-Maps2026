@@ -1,16 +1,43 @@
 {
-  "format_version": "1.20.20",
-  "sound_definitions": {
-	"goe_tnt:directional_tnt": {
-		"category": "block",
-		"max_distance": 20.0,
-		"sounds": [
-			"sounds/sfx/tnt/directional_tnt"
-		]
-	},
-	"goe_tnt:intro_music": {
-      "category": "music",
-      "sounds": [ { "name": "sounds/goe/tnt/sfx/intro_v2", "volume": 0.2 } ]
-    }
-  }
+	"format_version": "1.20.20",
+	"sound_definitions": {
+		"goe_tnt:directional_tnt": {
+			"category": "block",
+			"max_distance": 20.0,
+			"sounds": [
+				"sounds/sfx/tnt/directional_tnt"
+			]
+		},
+		"goe_tnt:intro_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/intro_v2", "volume": 0.2 } ]
+		},
+		"goe_tnt:mecha_suit_death": {
+			"category": "hostile",
+			"sounds": [
+				{
+					"name": "sounds/mob/mecha_suit/death",
+					"volume": 1
+				}
+			]
+		},
+		"goe_tnt:mecha_suit_hurt": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/hit1", "volume": 1 },
+				{ "name": "sounds/mob/mecha_suit/hit2", "volume": 1 },
+				{ "name": "sounds/mob/mecha_suit/hit3", "volume": 1 },
+				{ "name": "sounds/mob/mecha_suit/hit4", "volume": 1 }
+			]
+		},
+		"goe_tnt:mecha_suit_walk": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/walk", "volume": 2 },
+				{ "name": "sounds/mob/mecha_suit/walk2", "volume": 2 },
+				{ "name": "sounds/mob/mecha_suit/walk3", "volume": 2 },
+				{ "name": "sounds/mob/mecha_suit/walk4", "volume": 2 }
+			]
+		}
+	}
 }

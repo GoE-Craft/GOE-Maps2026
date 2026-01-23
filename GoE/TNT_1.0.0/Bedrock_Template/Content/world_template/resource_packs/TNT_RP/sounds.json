@@ -1,7 +1,15 @@
 {
   "entity_sounds": {
     "entities": {
-     
+      "goe_tnt:mecha_suit": {
+        "events": {
+          "hurt": "goe_tnt:mecha_suit_hurt",
+          "death": "goe_tnt:mecha_suit_death",
+          "step": "goe_tnt:mecha_suit_walk"
+        },
+        "pitch": [ 0.95, 1.05 ],
+        "volume": 1.0
+      }
     }
   }
 }
