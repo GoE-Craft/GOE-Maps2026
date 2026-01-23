@@ -1,8 +1,8 @@
 import { ItemStack } from "@minecraft/server";
 import { addItemToInventory, getInventoryContainer } from "./utils";
-import { getItemIdFromShopItem, PriceTypeToItemId, PriceTypeNames } from "./gld/book_gld";
+import { getItemIdFromShopItem, PriceTypeToItemId } from "./gld/book_gld";
 
-export async function purchaseItem(player, item) {
+export async function purchaseItem(player, item, onInsufficientResources) {
     if (!item || !item.price || !item.price.type || !item.price.amount) {
         playPurchaseFailure(player);
         return false;
@@ -11,7 +11,12 @@ export async function purchaseItem(player, item) {
     // Check if player has enough resources
     const hasEnough = await checkPlayerResources(player, item.price);
     if (!hasEnough) {
-        playPurchaseFailure(player);
+        // Call callback if provided, otherwise just play failure sound
+        if (onInsufficientResources) {
+            onInsufficientResources();
+        } else {
+            playPurchaseFailure(player);
+        }
         return false;
     }
 
@@ -37,7 +42,7 @@ export async function purchaseItem(player, item) {
         return false;
     }
 
-    playPurchaseSuccess(player);
+    playPurchaseSuccess(player, item);
     return true;
 }
 
@@ -162,7 +167,7 @@ function getItemIdFromPriceType(priceType) {
 }
 
 
-function playPurchaseSuccess(player) {
+function playPurchaseSuccess(player, item) {
     try {
         player.playSound("random.levelup", { volume: 1.0, pitch: 1.2 });
 
@@ -172,6 +177,9 @@ function playPurchaseSuccess(player) {
 
         const summonCommand = `summon goe_tnt:shop_buy ${pos.x + dir.x * 3} ${pos.y} ${pos.z + dir.z * 3} ${rotation.y} ${rotation.x}`;
         player.dimension.runCommand(summonCommand);
+
+        // const successMessage = `§aSuccessfully purchased ${item.name}!§r`;
+        // player.runCommand(`title @s actionbar ${successMessage}`);
     } catch (e) {
     }
 }
@@ -188,4 +196,25 @@ function playPurchaseFailure(player) {
         player.dimension.runCommand(summonCommand);
     } catch (e) {
     }
+}
+
+export async function getPlayerResourceAmount(player, price) {
+    const container = getInventoryContainer(player);
+    if (!container) {
+        return 0;
+    }
+
+    let totalAmount = 0;
+
+    for (let i = 0; i < container.size; i++) {
+        const item = container.getItem(i);
+        if (!item) continue;
+
+        const itemId = item.typeId;
+        if (matchesPriceType(itemId, price.type)) {
+            totalAmount += item.amount;
+        }
+    }
+
+    return totalAmount;
 }

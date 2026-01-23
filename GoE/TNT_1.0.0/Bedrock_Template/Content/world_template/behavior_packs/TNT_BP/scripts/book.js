@@ -1,6 +1,6 @@
 import { ActionFormData } from "@minecraft/server-ui";
-import { ShopItems, formatPrice } from "./gld/book_gld";
-import { purchaseItem } from "./shop";
+import { ShopItems, formatPrice, PriceTypeNames } from "./gld/book_gld";
+import { purchaseItem, getPlayerResourceAmount } from "./shop";
 
 export const GuideBookComponent = {
     onUse(event, params) {
@@ -192,9 +192,14 @@ async function showAccessoriesPage(player) {
         } else {
             // Item selected - purchase directly
             const selectedItem = items[response.selection];
-            await purchaseItem(player, selectedItem);
-            // Return to accessories page (sound and particles already played)
-            showAccessoriesPage(player);
+            const success = await purchaseItem(player, selectedItem, () => {
+                showInsufficientResourcesForm(player, selectedItem, () => {
+                    showAccessoriesPage(player);
+                });
+            });
+            if (success) {
+                showAccessoriesPage(player);
+            }
         }
     });
 }
@@ -223,9 +228,14 @@ async function showTntsPage(player) {
         } else {
             // Item selected - purchase directly
             const selectedItem = items[response.selection];
-            await purchaseItem(player, selectedItem);
-            // Return to TNT's page (sound and particles already played)
-            showTntsPage(player);
+            const success = await purchaseItem(player, selectedItem, () => {
+                showInsufficientResourcesForm(player, selectedItem, () => {
+                    showTntsPage(player);
+                });
+            });
+            if (success) {
+                showTntsPage(player);
+            }
         }
     });
 }
@@ -254,9 +264,14 @@ async function showStructuresPage(player) {
         } else {
             // Item selected - purchase directly
             const selectedItem = items[response.selection];
-            await purchaseItem(player, selectedItem);
-            // Return to Structures page (sound and particles already played)
-            showStructuresPage(player);
+            const success = await purchaseItem(player, selectedItem, () => {
+                showInsufficientResourcesForm(player, selectedItem, () => {
+                    showStructuresPage(player);
+                });
+            });
+            if (success) {
+                showStructuresPage(player);
+            }
         }
     });
 }
@@ -273,5 +288,53 @@ async function showAchievementListPage(player) {
         }
         // add sound
         showMainPage(player);
+    });
+}
+
+async function showInsufficientResourcesForm(player, item, backCallback) {
+    // Play failure sound and effect
+    try {
+        player.playSound("mob.villager.death", { volume: 1.0, pitch: 0.5 });
+
+        const dir = player.getViewDirection();
+        const pos = player.location;
+        const rotation = player.getRotation();
+
+        const summonCommand = `summon goe_tnt:shop_decline ${pos.x + dir.x * 3} ${pos.y} ${pos.z + dir.z * 3} ${rotation.y} ${rotation.x}`;
+        player.dimension.runCommand(summonCommand);
+    } catch (e) {
+    }
+
+    const price = item.price;
+    const playerAmount = await getPlayerResourceAmount(player, price);
+    const neededAmount = price.amount;
+    const missingAmount = neededAmount - playerAmount;
+
+    const typeInfo = PriceTypeNames[price.type];
+    const resourceName = missingAmount > 1 
+        ? (typeInfo ? typeInfo.plural : price.type) 
+        : (typeInfo ? typeInfo.singular : price.type);
+
+    const form = new ActionFormData()
+        .title("§l§cInsufficient Resources§r")
+        .body(
+            `§cYou don't have enough resources to purchase §e${item.name}§r§c!\n\n` +
+            `§fRequired: §e${neededAmount} ${resourceName}§r\n` +
+            `§fYou have: §a${playerAmount} ${resourceName}§r\n` +
+            `§fMissing: §c${missingAmount} ${resourceName}§r\n\n` +
+            `§7Collect more resources and try again.§r`
+        )
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === 0) {
+            // Back button - call the callback to return to previous page
+            if (backCallback) {
+                backCallback();
+            }
+        }
     });
 }
