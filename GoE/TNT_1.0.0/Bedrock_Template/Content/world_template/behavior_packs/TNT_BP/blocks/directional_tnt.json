@@ -10,17 +10,14 @@
         }
       },
       "states": {
-        "goe_tnt:timer": [false, true]
+        "goe_tnt:timer": [false, true],
+        "goe_tnt:is_active": [false, true]
       }
     },
     "components": {
       "minecraft:display_name": "Directional TNT",
       "minecraft:collision_box": true,
-      "minecraft:selection_box": { "origin": [
-        -8,
-        0,
-        -8
-      ], "size": [16, 16, 16] },
+      "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.directional_tnt",

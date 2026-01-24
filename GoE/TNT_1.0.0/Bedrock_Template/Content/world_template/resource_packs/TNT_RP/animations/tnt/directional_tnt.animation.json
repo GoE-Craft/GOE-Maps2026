@@ -11,12 +11,23 @@
 							"post": [0, 0, 0],
 							"lerp_mode": "catmullrom"
 						},
-						"1.0": {
-							"post": [0, 0, 360],
-							"lerp_mode": "catmullrom"
-						},
+						"1.0": [0, 0, 360],
 						"2.0": [0, 0, 1080]
+					},
+					"scale": {
+						"0.0": [1, 1, 1],
+						"1.1": [1, 1, 1],
+						"2.0": [3, 3, 3]
 					}
+				}
+			}
+		},
+		"animation.directional_tnt_drill.push": {
+			"loop": true,
+			"bones": {
+				"drill": {
+					"rotation": [0, 0, "(query.modified_distance_moved * 360) + (query.life_time * 360)"],
+					"scale": 3
 				}
 			}
 		}

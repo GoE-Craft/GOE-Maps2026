@@ -1,0 +1,26 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:directional_tnt_drill",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/directional_tnt_drill"
+      },
+      "geometry": {
+        "default": "geometry.directional_tnt_drill"
+      },
+			"scripts": {
+        "animate": [
+          {"drill": 1}
+        ]
+			},
+      "animations": {
+        "drill": "animation.directional_tnt_drill.push"
+      },
+      "render_controllers": [ "controller.render.default"]
+    }
+  }
+}

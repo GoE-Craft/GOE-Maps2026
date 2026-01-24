@@ -29,6 +29,14 @@
                     "breaks_blocks": false,
                     "fuse_length": 4,
                     "fuse_lit": true
+                },
+                "minecraft:timer": {
+                    "time": 0.5,
+                    "looping": true,
+                    "time_down_event": {
+                        "event": "goe_tnt:toggle_flash",
+                        "target": "self"
+                    }
                 }
             }
         },
@@ -79,6 +87,30 @@
                 "set_property": {
                     "goe_tnt:swell": true
                 }
+            },
+            "goe_tnt:toggle_flash": {
+                "sequence": [
+                    {
+                        "filters": {
+                            "test": "bool_property",
+                            "domain": "goe_tnt:flashing",
+                            "value": false
+                        },
+                        "set_property": {
+                            "goe_tnt:flashing": true
+                        }
+                    },
+                    {
+                        "filters": {
+                            "test": "bool_property",
+                            "domain": "goe_tnt:flashing",
+                            "value": true
+                        },
+                        "set_property": {
+                            "goe_tnt:flashing": false
+                        }
+                    }
+                ]
             }
         }
     }

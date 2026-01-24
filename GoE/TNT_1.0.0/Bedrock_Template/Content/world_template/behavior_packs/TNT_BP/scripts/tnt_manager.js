@@ -133,16 +133,6 @@ function startFuseEffects(entity, tntData, fuseTime) {
     dim.playSound("random.fuse", entity.location);
     entity.triggerEvent("goe_tnt:trigger_ignite");
 
-    const flashingInterval = system.runInterval(() => {
-        if (!entity.isValid) {
-            system.clearRun(flashingInterval);
-            return;
-        } else {
-            const current = entity.getProperty("goe_tnt:flashing");
-            entity.setProperty("goe_tnt:flashing", !current);
-        }
-    }, 5);
-
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
@@ -409,7 +399,7 @@ function handleSpecialAction(dimension, location, tntData, vec) {
             break;
         case "directional_drill":
             // Drill horizontally in the direction the entity is facing
-            const drillLength = 40;
+            const drillLength = 30;
             const drillRadius = 2; // radius for width and height
             system.run
             directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData);
@@ -473,17 +463,29 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
     const px = perpX / perpLen;
     const pz = perpZ / perpLen;
 
+    // Drill entity for visual effect
+    const drillRotation = -Math.atan2(vec.x, vec.z ) * (180 / Math.PI);
+    const drillEntity = dimension.spawnEntity("goe_tnt:directional_tnt_drill", location, {initialRotation: drillRotation});
+    const dirLen = Math.sqrt(vec.x * vec.x + vec.z * vec.z) || 1;
+    const dir = { x: vec.x / dirLen, z: vec.z / dirLen };
+    const speed = 0.3; // Tune as needed 
+
+    // Give the drill some initial speed
+    if (drillEntity.isValid) {
+        drillEntity.applyImpulse({ x: dir.x * 0.5, y: 0, z: dir.z * 0.5 });
+    }
+
     // Calculate the bottom Y coordinate
     const bottomY = Math.round(location.y);
     const heightSpan = heightRadius + 2; // extra 2 blocks for clearance
 
     for (let s = 0; s < steps; s++) {
-            const baseX = Math.floor(location.x);
-            const baseZ = Math.floor(location.z);
+        const baseX = Math.floor(location.x);
+        const baseZ = Math.floor(location.z);
 
-            // Start exactly at the entity's block and move forward
-            const centerX = baseX + Math.round(vec.x * s);
-            const centerZ = baseZ + Math.round(vec.z * s);
+        // Start exactly at the entity's block and move forward
+        const centerX = baseX + Math.round(vec.x * s);
+        const centerZ = baseZ + Math.round(vec.z * s);
 
         // Break the tunnel column-by-column to simulate block breaking
         for (let w = -widthRadius; w <= widthRadius; w++) {
@@ -509,10 +511,17 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
         if (tntData?.explosionEffects) {
             dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
             dimension.playSound("random.explode", loc);
-            // Play the sound effeect every 3 seconds
+        }
+
+        // Move the drill entity forward only every 3 steps
+        if (s % 5 === 0 && drillEntity.isValid) {
+            drillEntity.applyImpulse({ x: dir.x * speed * 5, y: 0, z: dir.z * speed * 5 });
         }
         yield;
-        
+    }
+
+    if (drillEntity.isValid) {
+        drillEntity.remove();
     }
 }
 

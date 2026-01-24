@@ -4,6 +4,7 @@
   "padding": 8,
   "num_mip_levels": 4,
   "texture_data": {
-    "directional_tnt": { "textures": "textures/goe/tnt/entity/directional_tnt" }
+    "directional_tnt": { "textures": "textures/goe/tnt/entity/directional_tnt" },
+    "arcane_tnt": { "textures": "textures/goe/tnt/entity/arcane_tnt" }
   }
 }
