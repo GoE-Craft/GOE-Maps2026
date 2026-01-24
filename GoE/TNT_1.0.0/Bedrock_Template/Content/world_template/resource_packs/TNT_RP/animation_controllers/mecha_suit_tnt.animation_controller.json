@@ -5,6 +5,8 @@
       "initial_state": "idle",
       "states": {
         "idle": {
+          "animations": [ "idle" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
           "transitions": [
             { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
           ]
@@ -15,7 +17,8 @@
           "transitions": [
             { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
           ],
-          "blend_transition": 0.3
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         },
         "charged": {
           "animations": [ "charged" ],
@@ -23,7 +26,8 @@
             { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
             { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
-          "blend_transition": 0.3
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         },
         "fire": {
           "animations": [ "fire_right" ],
@@ -31,7 +35,8 @@
           "transitions": [
             { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
           ],
-          "blend_transition": 0.3
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         }
       }
     }
