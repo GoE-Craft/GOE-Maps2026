@@ -9,12 +9,8 @@
             "spawn"
           ],
           "transitions": [
-            {
-              "idle": "query.all_animations_finished"
-            },
-            {
-              "death": "!q.is_alive"
-            }
+            { "idle": "query.all_animations_finished" },
+            { "death": "!q.is_alive" }
           ]
         },
         "idle": {
@@ -50,9 +46,7 @@
             "walk_to_idle"
           ],
           "transitions": [
-            {
-              "idle": "query.any_animation_finished"
-            },
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
             {
               "walk_forward": "q.modified_move_speed > 0.1"
             },
