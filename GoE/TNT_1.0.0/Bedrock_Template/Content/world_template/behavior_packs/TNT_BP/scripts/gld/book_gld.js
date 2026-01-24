@@ -1,3 +1,5 @@
+import { getPlayerResourceAmount } from "../shop";
+
 // Shop items structure
 // Each category will contain items that can be purchased
 
@@ -43,25 +45,21 @@ export const ShopItems = {
     ]
 };
 
-const CurrencyColors = {
-    "copper_ingot": "§n",
-    "copper_ingots": "§n",
-    "iron_ingot": "§0",
-    "iron_ingots": "§0",
-    "gold_ingot": "§e",
-    "gold_ingots": "§e",
-    "emerald": "§2",
-    "emeralds": "§2"
-};
-
 // Helper function to format price text
-export function formatPrice(price) {
+// If player is provided, colors the price green if they have enough resources, red otherwise
+export async function formatPrice(price, player = null) {
     if (!price || !price.type || !price.amount) {
         return "Free";
     }
 
     const typeInfo = PriceTypeNames[price.type];
-    const colorCode = CurrencyColors[price.type] || "§f";
+    
+    // Determine color based on whether player has enough resources
+    let colorCode = "§f"; // Default white if no player provided
+    if (player) {
+        const playerAmount = await getPlayerResourceAmount(player, price);
+        colorCode = playerAmount >= price.amount ? "§a" : "§c"; // Green if enough, red if not
+    }
 
     if (!typeInfo) {
         return `${colorCode}Price: ${price.amount} ${price.type}§r`;

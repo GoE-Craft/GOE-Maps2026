@@ -10,6 +10,6 @@
         },
 		"directional_tnt_spawn_egg": {
 			"textures": ["textures/goe/tnt/items/spawn_egg/directional_tnt_spawn_egg"]
-		},
+		}
     }
 }

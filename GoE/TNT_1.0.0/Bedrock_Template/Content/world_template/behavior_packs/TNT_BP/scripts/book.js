@@ -41,7 +41,7 @@ export async function showIntroPage(player) {
             "§fOpen the §l§6TNT Guide§r§f to access the §l§6Shop§r§f, view §l§6recipes§r§f, and tweak your §l§6settings§r§f.\n\n" +
             "§fEnjoy the §l§6TNT Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
         )
-        .button("§l§aLET'S EXPLODE!§r");
+        .button("§l§2LET'S EXPLODE!§r");
 
     IntroForm.show(player).then((response) => {
         if (response.canceled) {
@@ -172,11 +172,12 @@ async function showAccessoriesPage(player) {
     const items = ShopItems.accessories || [];
 
     const form = new ActionFormData()
-        .title("§l§6TNT Accessories§r");
+        .title("§l§cTNT Accessories§r");
 
     // Add buttons for each accessory item
     for (const item of items) {
-        const buttonText = `§l§d${item.name}§r\n§7${formatPrice(item.price)}§r`;
+        const priceText = await formatPrice(item.price, player);
+        const buttonText = `§l§d${item.name}§r\n${priceText}§r`;
         form.button(buttonText, item.icon);
     }
 
@@ -212,7 +213,8 @@ async function showTntsPage(player) {
 
     // Add buttons for each item
     for (const item of items) {
-        const buttonText = `§l§d${item.name}§r\n§7${formatPrice(item.price)}§r`;
+        const priceText = await formatPrice(item.price, player);
+        const buttonText = `§l§d${item.name}§r\n${priceText}§r`;
         form.button(buttonText, item.icon);
     }
 
@@ -248,7 +250,8 @@ async function showStructuresPage(player) {
 
     // Add buttons for each item
     for (const item of items) {
-        const buttonText = `§l§d${item.name}§r\n§7${formatPrice(item.price)}§r`;
+        const priceText = await formatPrice(item.price, player);
+        const buttonText = `§l§d${item.name}§r\n${priceText}§r`;
         form.button(buttonText, item.icon);
     }
 
