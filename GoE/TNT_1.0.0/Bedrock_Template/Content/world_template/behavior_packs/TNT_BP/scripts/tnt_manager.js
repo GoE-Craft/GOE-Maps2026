@@ -228,6 +228,7 @@ function* explodeJob(dimension, entity, tntData, loc, rot) {
     } catch (e) {
         console.log("Error handling special action: " + e);
     }
+    yield;
 
     // Summon mobs via main thread dispatch to avoid API issues
     try {

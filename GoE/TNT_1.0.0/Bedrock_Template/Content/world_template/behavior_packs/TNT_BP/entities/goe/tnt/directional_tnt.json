@@ -19,7 +19,10 @@
             }
         },
         "component_groups": {
-            "goe_tnt:explode": {
+            "goe_tnt:ignite": {
+                "minecraft:mark_variant": {
+                    "value": 1
+                },
                 "minecraft:explode": {
                     "power": 0,
                     "causes_fire": false,
@@ -68,7 +71,7 @@
             "goe_tnt:trigger_ignite": {
                 "add": {
                     "component_groups": [
-                        "goe_tnt:explode"
+                        "goe_tnt:ignite"
                     ]
                 }
             },

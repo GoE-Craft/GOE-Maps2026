@@ -17,11 +17,13 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"directional_tnt_drill": "q.mark_variant == 1"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.tnt.swell",
+        "directional_tnt_drill": "animation.directional_tnt.drill"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }
