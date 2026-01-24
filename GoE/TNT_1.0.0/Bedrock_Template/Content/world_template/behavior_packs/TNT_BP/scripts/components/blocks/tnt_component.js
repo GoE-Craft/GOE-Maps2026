@@ -24,12 +24,12 @@ export const TntCustomComponent = {
         }
     },
     onTick(eventData) {
-        // const block = eventData.block;
+        const block = eventData.block;
         
-        // // Check adjacent blocks for redstone power
-        // if (isReceivingRedstonePower(block)) {
-        //     igniteTNT(block);
-        // }
+        // Check adjacent blocks for redstone power
+        if (isReceivingRedstonePower(block)) {
+            igniteTNT(block);
+        }
     }
 };
 
