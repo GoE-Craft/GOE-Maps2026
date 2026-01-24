@@ -135,7 +135,7 @@ export async function onLoad() {
 
     let spawnPoint = world.getDefaultSpawnLocation();
     if (spawnPoint.y > 320) spawnPoint.y = player0.location.y;
-    setWorldParam("goe_mst_default_spawn", spawnPoint);
+    setWorldParam("goe_tnt_default_spawn", spawnPoint);
   }
 }
 

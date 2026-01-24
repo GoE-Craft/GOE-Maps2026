@@ -176,6 +176,15 @@ function explode(entity, tntData) {
     stopCountdown(entity);
     activeTimeouts.delete(entityId);
     // Offload heavier/optional post-explosion work to a job
+    try{
+        dim.createExplosion(loc, tntData.power, {
+            causesFire: tntData.explosionProperties.createsFire,
+            breaksBlocks: tntData.explosionProperties.breaksBlocks,
+            allowUnderwater: tntData.explosionProperties.allowUnderwater,
+            source: entity
+        });
+    } catch(e){}
+
     system.runJob(explodeJob(dim, entity, tntData, loc, entity.getRotation()));
 }
 
@@ -193,19 +202,6 @@ function* explodeJob(dimension, entity, tntData, loc, rot) {
         
     yield;
 
-    // Create the explosion
-    try {
-        dimension.createExplosion(loc, tntData.power, {
-            causesFire: tntData.explosionProperties.createsFire,
-            breaksBlocks: tntData.explosionProperties.breaksBlocks,
-            allowUnderwater: tntData.explosionProperties.allowUnderwater,
-            source: entity
-        });
-    } catch (e) {}
-
-    // Give the engine one tick to settle explosion effects
-    yield;
-
     // Handle optional special actions and mobs in a non-blocking way.
     // Many handlers already start their own jobs (voidAction/directionalAction),
     // so we call them from the job but dispatch any main-thread calls via system.run.
@@ -218,7 +214,6 @@ function* explodeJob(dimension, entity, tntData, loc, rot) {
     } catch (e) {
         console.log("Error handling special action: " + e);
     }
-    yield;
 
     // Summon mobs via main thread dispatch to avoid API issues
     try {
@@ -230,20 +225,8 @@ function* explodeJob(dimension, entity, tntData, loc, rot) {
     // Small yield to spread cleanup work
     yield;
 
-    // Clear dynamic properties and remove entity on main thread
-    try {
-        system.run(() => {
-            try { entity.setDynamicProperty("goe_tnt_start_tick", undefined); } catch (e) {}
-            try { entity.setDynamicProperty("goe_tnt_timer", undefined); } catch (e) {}
-            try { entity.setDynamicProperty("goe_tnt_fuse", undefined); } catch (e) {}
-            try { entity.setDynamicProperty("goe_tnt_stage", undefined); } catch (e) {}
-            try { entity.setDynamicProperty("goe_tnt_tnt_type", undefined); } catch (e) {}
-            try { entity.setDynamicProperty("goe_tnt_fuse_start", undefined); } catch (e) {}
-            try { entity.remove(); } catch (e) {}
-        });
-    } catch (e) {}
-
-    return;
+    // Remove entity on main thread
+    try { if (entity.isValid) entity.remove(); } catch (e) {}
 }
 
 /**
@@ -364,22 +347,46 @@ export function handleEntitySpawn(event) {
     } catch (e) {}
 }
 
+function getImpactedBlocks(impactedBlocks) {
+    const blocks = [];
+    const tnts = [];
+    for (const block of impactedBlocks) {
+        try {
+            if (block.hasTag("goe_tnt:custom_tnt") && block.isValid) {
+                tnts.push(block);
+            } else {
+                blocks.push(block);
+            }
+        } catch (e) {}
+    }
+    return { blocks, tnts };
+}
+
+// Handle explosion events for TNT chain reactions
 export function handleExplosionEvent(event) {
     const impactedBlocks = event.getImpactedBlocks();
     if (!impactedBlocks || impactedBlocks.length === 0) return;
+    
+    // Separate TNT blocks from normal blocks
+    const { blocks, tnts } = getImpactedBlocks(impactedBlocks);
+    event.setImpactedBlocks(blocks);
+    
+    system.runJob(processExplosionEvent(tnts));
+}
 
+// Process explosion event TNT chain reactions in a job
+// Yields after each TNT to spread out processing load
+function* processExplosionEvent(impactedBlocks) {
     for (const block of impactedBlocks) {
         const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
         try {
-            if (block.hasTag("goe_tnt:custom_tnt")) {
-                const gld = tnt_gld.getTntDataByBlockId(block.typeId);
-                system.run(() => {
-                    igniteTNT(block.location, 0, chainFuseTicks, gld, block.dimension.id);
-                    block.setPermutation(BlockPermutation.resolve("minecraft:air"))
-                });
-            }
+            const gld = tnt_gld.getTntDataByBlockId(block.typeId);
+            igniteTNT(block.location, 0, chainFuseTicks, gld, block.dimension.id);
+            block.setPermutation(BlockPermutation.resolve("minecraft:air"));
         } catch (e) {
+            console.log("Error handling TNT chain reaction: " + e);
         }
+        yield;
     }
 }
 
@@ -401,7 +408,6 @@ function handleSpecialAction(dimension, location, tntData, vec) {
             // Drill horizontally in the direction the entity is facing
             const drillLength = 30;
             const drillRadius = 2; // radius for width and height
-            system.run
             directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData);
             break;
         default:

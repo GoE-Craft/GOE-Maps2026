@@ -56,16 +56,16 @@ async function onLoad() {
   world.afterEvents.playerSpawn.subscribe(game_events.onPlayerSpawn);
   //world.afterEvents.playerJoin.subscribe(game_events.onPlayerJoin);
   world.afterEvents.entitySpawn.subscribe(game_events.onEntitySpawn);
-  world.afterEvents.entityDie.subscribe(game_events.onEntityDie);
-  world.afterEvents.entityHurt.subscribe(game_events.onEntityHurt);
-  world.afterEvents.entityHealthChanged.subscribe(game_events.onEntityHealthChanged);
-  world.afterEvents.projectileHitEntity.subscribe(game_events.onProjectileHitEntity);
-  world.afterEvents.itemStopUse.subscribe(game_events.onItemStopUse);
-  world.afterEvents.itemReleaseUse.subscribe(game_events.onItemReleaseUse);
-  world.afterEvents.playerBreakBlock.subscribe(game_events.onPlayerBreakBlock);
-  world.afterEvents.weatherChange.subscribe(game_events.onWeatherChange);
-  world.afterEvents.playerPlaceBlock.subscribe(game_events.onPlayerPlaceBlock);
-  world.afterEvents.playerInteractWithEntity.subscribe(game_events.onPlayerInteractWithEntity);
+  //world.afterEvents.entityDie.subscribe(game_events.onEntityDie);
+  //world.afterEvents.entityHurt.subscribe(game_events.onEntityHurt);
+  //world.afterEvents.entityHealthChanged.subscribe(game_events.onEntityHealthChanged);
+  //world.afterEvents.projectileHitEntity.subscribe(game_events.onProjectileHitEntity);
+  //world.afterEvents.itemStopUse.subscribe(game_events.onItemStopUse);
+  //world.afterEvents.itemReleaseUse.subscribe(game_events.onItemReleaseUse);
+  //world.afterEvents.playerBreakBlock.subscribe(game_events.onPlayerBreakBlock);
+  //world.afterEvents.weatherChange.subscribe(game_events.onWeatherChange);
+  //world.afterEvents.playerPlaceBlock.subscribe(game_events.onPlayerPlaceBlock);
+  //world.afterEvents.playerInteractWithEntity.subscribe(game_events.onPlayerInteractWithEntity);
   world.beforeEvents.explosion.subscribe(game_events.onExplosion);
   // Disabled as profiler showed high time usage & not used
   //world.beforeEvents.itemUse.subscribe(game_events.onItemUseBefore);
