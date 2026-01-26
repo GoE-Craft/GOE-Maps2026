@@ -26,7 +26,6 @@ const chargeReadyTickByMecha = new Map(); // tick when charge becomes ready
 const isChargeIdleByMecha = new Map(); // true when in charged state
 
 const idlePendingByMecha = new Map(); //  idle while still charging
-const lastMechaAnimStateByMecha = new Map(); // last animation state (idle etc)
 
 // fire to charged
 const FIRE_ANIM_TICKS = 12; // duration of fire animation in ticks (when to return to charged/idle)
@@ -74,15 +73,6 @@ function isEntityValid(entity) {
 	} catch {
 		return false;
 	}
-}
-
-// collects available game dimensions
-function getDimensionsSafe() {
-	const dimensions = [];
-	try { const overworld = world.getDimension("overworld"); if (overworld) dimensions.push(overworld); } catch { }
-	try { const nether = world.getDimension("nether"); if (nether) dimensions.push(nether); } catch { }
-	try { const theEnd = world.getDimension("the_end"); if (theEnd) dimensions.push(theEnd); } catch { }
-	return dimensions;
 }
 
 // removes one item from the selected hotbar slot if it matches the given item id
@@ -155,10 +145,8 @@ function scheduleReturnToChargeIdle(mechaKey, mecha, player) {
 		if (stillHoldingTnt) {
 			isChargeIdleByMecha.set(mechaKey, true);
 			try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
-			lastMechaAnimStateByMecha.set(mechaKey, "charged");
 		} else {
 			try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
-			lastMechaAnimStateByMecha.set(mechaKey, "idle");
 
 			chargeStartTickByMecha.delete(mechaKey);
 			chargeReadyTickByMecha.delete(mechaKey);
@@ -174,54 +162,6 @@ function isSolidCollisionBlockType(typeId) {
 	if (typeId === "minecraft:air") return false;
 	if (typeId === "minecraft:water") return false;
 	return true;
-}
-
-// checks if a moving segment intersects any solid blocks by sampling points along the path
-function segmentHitsBlock(dimension, from, to) {
-	const dx = to.x - from.x;
-	const dy = to.y - from.y;
-	const dz = to.z - from.z;
-
-	// distance of the segment in 3d space 
-	const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-	// step count chosen so we sample roughly every 0.25 blocks 
-	const steps = Math.max(1, Math.ceil(dist / 0.25));
-
-	// offsets sample around the point to approximate projectile volume and catch near-misses on edges/corners
-	const offsets = [
-		{ x: 0.0, y: 0.0, z: 0.0 },
-		{ x: 0.25, y: 0.0, z: 0.0 },
-		{ x: -0.25, y: 0.0, z: 0.0 },
-		{ x: 0.0, y: 0.25, z: 0.0 },
-		{ x: 0.0, y: -0.25, z: 0.0 },
-		{ x: 0.0, y: 0.0, z: 0.25 },
-		{ x: 0.0, y: 0.0, z: -0.25 }
-	];
-
-	for (let i = 1; i <= steps; i++) {
-		const t = i / steps; // interpolation factor along the segment [0..1]
-		const px = from.x + dx * t;
-		const py = from.y + dy * t;
-		const pz = from.z + dz * t;
-
-		for (const o of offsets) {
-			// convert to block coordinates by flooring
-			const bx = Math.floor(px + o.x);
-			const by = Math.floor(py + o.y);
-			const bz = Math.floor(pz + o.z);
-
-			let block;
-			try { block = dimension.getBlock({ x: bx, y: by, z: bz }); } catch { block = undefined; }
-			if (!block) continue;
-
-			let typeId;
-			try { typeId = block.typeId; } catch { typeId = undefined; }
-			if (isSolidCollisionBlockType(typeId)) return true;
-		}
-	}
-
-	return false;
 }
 
 // checks if a position is adjacent to any solid blocks (used when projectile stops moving near a wall)
@@ -246,7 +186,6 @@ function isTouchingSolidBlock(dimension, pos) {
 
 	return false;
 }
-
 
 // maps minecraft dimension ids to the keys expected by tnt_manager
 function toTntManagerDimKey(dimId) {
@@ -477,7 +416,6 @@ function* tryFireMechaTnt(player, mecha) {
 	if (!consumeOneFromSelectedHotbarSlotSafe(player, selectedStack.typeId)) return;
 
 	try { mecha.triggerEvent("goe:fire_tnt"); } catch { }
-	lastMechaAnimStateByMecha.set(mechaKey, "fire");
 
 	spawnPropelledTnt(mecha, player, tntData, isVanilla);
 	yield;
@@ -509,7 +447,6 @@ function* tryFireMechaTnt(player, mecha) {
 		if ((chargeReadyTickByMecha.get(mechaKey) ?? 0) <= system.currentTick) {
 			isChargeIdleByMecha.set(mechaKey, true);
 			try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
-			lastMechaAnimStateByMecha.set(mechaKey, "charged");
 		}
 	}, RESET_TO_IDLE_TICKS);
 }
@@ -568,7 +505,6 @@ function setupChargeAnimationByHeldItemTick() {
 				idlePendingByMecha.set(mechaKey, false);
 
 				try { mecha.triggerEvent("goe:charge_tnt"); } catch { }
-				lastMechaAnimStateByMecha.set(mechaKey, "charge");
 			}
 
 			// if tnt deselected go idle only from charged
@@ -580,7 +516,6 @@ function setupChargeAnimationByHeldItemTick() {
 				// if in charged go idle now
 				if (chargeIdle) {
 					try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
-					lastMechaAnimStateByMecha.set(mechaKey, "idle");
 
 					chargeStartTickByMecha.delete(mechaKey);
 					chargeReadyTickByMecha.delete(mechaKey);
@@ -599,7 +534,6 @@ function setupChargeAnimationByHeldItemTick() {
 			if (!chargeIdle && typeof readyTick === "number" && currentTick >= readyTick) {
 				isChargeIdleByMecha.set(mechaKey, true);
 				try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
-				lastMechaAnimStateByMecha.set(mechaKey, "charged");
 
 				const idlePending = idlePendingByMecha.get(mechaKey) ?? false;
 
@@ -609,8 +543,6 @@ function setupChargeAnimationByHeldItemTick() {
 						if (!isEntityValid(mecha)) return;
 						try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 					});
-
-					lastMechaAnimStateByMecha.set(mechaKey, "idle");
 
 					chargeStartTickByMecha.delete(mechaKey);
 					chargeReadyTickByMecha.delete(mechaKey);
@@ -724,7 +656,6 @@ function setupRespawnRecovery() {
 				chargeReadyTickByMecha.delete(dead.id);
 				isChargeIdleByMecha.delete(dead.id);
 				idlePendingByMecha.delete(dead.id);
-				lastMechaAnimStateByMecha.delete(dead.id);
 				fireReturnTickByMecha.delete(dead.id);
 			}
 		});
