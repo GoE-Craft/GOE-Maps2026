@@ -361,42 +361,55 @@ async function showStructuresPage(player) {
 }
 
 async function showAchievementListPage(player) {
-    const form = new ActionFormData()
-        .title("§l§5Achievements§r")
-        .body("§fSelect a category to view achievements§r")
-        .button("§l§6TNT Discoveries§r", "textures/goe/tnt/ui/achievements")
-        .button("§l§6Milestones§r", "textures/goe/tnt/ui/achievements/milestone")
-        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
-
-    form.show(player).then((response) => {
-        if (response.canceled) {
-            return;
-        }
-        // add sound
-        switch (response.selection) {
-            case 0:
-                showTntAchievementsPage(player);
-                break;
-            case 1:
-                showMilestoneAchievementsPage(player);
-                break;
-            case 2:
-                showMainPage(player);
-                break;
-        }
-    });
-}
-
-async function showTntAchievementsPage(player) {
-    const allAchievements = getAchievementsByCategory("tnt_individual");
+    const allMilestones = getAchievementsByCategory("milestones");
+    const allTntAchievements = getAchievementsByCategory("tnt_individual");
+    const unlockedMilestones = achievements.getUnlockedMilestones(player);
     const unlockedTnts = achievements.getUnlockedTntAchievements(player);
 
-    const form = new ActionFormData()
-        .title("§l§6TNT Discoveries§r");
+    // Sort milestones: locked first, then unlocked
+    const sortedMilestones = [...allMilestones].sort((a, b) => {
+        const aUnlocked = unlockedMilestones.includes(a.milestoneNumber);
+        const bUnlocked = unlockedMilestones.includes(b.milestoneNumber);
+        if (aUnlocked === bUnlocked) {
+            return a.milestoneNumber - b.milestoneNumber; // If same status, sort by number
+        }
+        return aUnlocked ? 1 : -1; // Locked first
+    });
 
-    // Add buttons for each TNT achievement
+    // Sort TNT achievements: locked first, then unlocked
+    const sortedTntAchievements = [...allTntAchievements].sort((a, b) => {
+        const aUnlocked = unlockedTnts.includes(a.tntType);
+        const bUnlocked = unlockedTnts.includes(b.tntType);
+        if (aUnlocked === bUnlocked) {
+            return a.name.localeCompare(b.name); // If same status, sort alphabetically
+        }
+        return aUnlocked ? 1 : -1; // Locked first
+    });
+
+    // Combine: milestones first, then TNT achievements
+    const allAchievements = [...sortedMilestones, ...sortedTntAchievements];
+
+    const form = new ActionFormData()
+        .title("§l§5Achievements§r")
+        .body(
+            "§cWelcome to the §eTNT Achievement Hall§r§c!§r\n\n" +
+            "§cTrack your progress as you master the art of destruction engineering.\n\n" +
+            "§c- 75 unique explosive milestones to conquer\n" +
+            "§c- Master 20+ custom §eTNTs§r§c and their special effects\n" +
+            "§c- Unlock all §eMecha Suit§r§c upgrades and parts\n" +
+            "§c- Deploy and test every §eTNT§r§c-based structure\n\n" +
+            "§cPush your limits, earn every badge, and become the ultimate §eTNT Legend§r§c!§r"
+        );
+
+    // Add buttons for all achievements
     for (const achievement of allAchievements) {
-        const isUnlocked = unlockedTnts.includes(achievement.tntType);
+        let isUnlocked = false;
+        if (achievement.milestoneNumber !== undefined) {
+            isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
+        } else if (achievement.tntType) {
+            isUnlocked = unlockedTnts.includes(achievement.tntType);
+        }
+
         const statusColor = isUnlocked ? "§a" : "§c";
         const statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
         const buttonText = `§l§d${achievement.name}§r\n${statusColor}STATUS: ${statusText}§r`;
@@ -411,48 +424,12 @@ async function showTntAchievementsPage(player) {
         }
         if (response.selection === allAchievements.length) {
             // Back button
-            showAchievementListPage(player);
+            showMainPage(player);
         } else {
             // Achievement selected - show details
             const selectedAchievement = allAchievements[response.selection];
             showAchievementDetailsPage(player, selectedAchievement, () => {
-                showTntAchievementsPage(player);
-            });
-        }
-    });
-}
-
-async function showMilestoneAchievementsPage(player) {
-    const allMilestones = getAchievementsByCategory("milestones");
-    const unlockedMilestones = achievements.getUnlockedMilestones(player);
-
-    const form = new ActionFormData()
-        .title("§l§6Milestones§r");
-
-    // Add buttons for each milestone achievement
-    for (const achievement of allMilestones) {
-        const isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
-        const statusColor = isUnlocked ? "§a" : "§c";
-        const statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
-
-        const buttonText = `§l§d${achievement.name}§r\n${statusColor}STATUS: ${statusText}`;
-        form.button(buttonText, achievement.icon);
-    }
-
-    form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
-
-    form.show(player).then((response) => {
-        if (response.canceled) {
-            return;
-        }
-        if (response.selection === allMilestones.length) {
-            // Back button
-            showAchievementListPage(player);
-        } else {
-            // Achievement selected - show details
-            const selectedAchievement = allMilestones[response.selection];
-            showAchievementDetailsPage(player, selectedAchievement, () => {
-                showMilestoneAchievementsPage(player);
+                showAchievementListPage(player);
             });
         }
     });
