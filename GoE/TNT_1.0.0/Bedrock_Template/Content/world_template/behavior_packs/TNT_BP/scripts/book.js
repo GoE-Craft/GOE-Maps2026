@@ -1,6 +1,7 @@
 import { ActionFormData } from "@minecraft/server-ui";
-import { ShopItems, formatPrice, PriceTypeNames } from "./gld/book_gld";
+import { ShopItems, formatPrice, PriceTypeNames, Achievements, getAllAchievements, getAchievementsByCategory } from "./gld/book_gld";
 import { purchaseItem, getPlayerResourceAmount } from "./shop";
+import * as achievements from "./achievements";
 
 export const GuideBookComponent = {
     onUse(event, params) {
@@ -99,6 +100,10 @@ async function showInfoPage(player) {
             "§c- §e75 unique§r§c milestones to complete\n\n" +
             "§cGear up, explore the world, and begin your journey!§r"
         )
+        .button("§l§4Mecha Suit§r")
+        .button("§l§4TNT Detonator§r")
+        .button("§l§4TNT'S§r")
+        .button("§l§4Structures§r")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -106,7 +111,83 @@ async function showInfoPage(player) {
             return;
         }
         //todo add sound
-        showMainPage(player);
+        switch (response.selection) {
+            case 0:
+                showMechaSuitPage(player);
+                break;
+            case 1:
+                showTntDetonatorPage(player);
+                break;
+            case 2:
+                showTntsInfoPage(player);
+                break;
+            case 3:
+                showStructuresInfoPage(player);
+                break;
+            case 4:
+                showMainPage(player);
+                break;
+        }
+    });
+}
+
+async function showMechaSuitPage(player) {
+    const form = new ActionFormData()
+        .title("§l§6Mecha Suit§r")
+        .body("§f  TODO  §r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        // add sound
+        showInfoPage(player);
+    });
+}
+
+async function showTntDetonatorPage(player) {
+    const form = new ActionFormData()
+        .title("§l§4TNT Detonator§r")
+        .body("§f  TODO  §r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        // add sound
+        showInfoPage(player);
+    });
+}
+
+async function showTntsInfoPage(player) {
+    const form = new ActionFormData()
+        .title("§l§6TNT'S§r")
+        .body("§f  TODO  §r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        // add sound
+        showInfoPage(player);
+    });
+}
+
+async function showStructuresInfoPage(player) {
+    const form = new ActionFormData()
+        .title("§l§6Structures§r")
+        .body("§f  TODO  §r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        // add sound
+        showInfoPage(player);
     });
 }
 
@@ -282,7 +363,9 @@ async function showStructuresPage(player) {
 async function showAchievementListPage(player) {
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
-        .body("§f  TODO  §r")
+        .body("§fSelect a category to view achievements§r")
+        .button("§l§6TNT Discoveries§r", "textures/goe/tnt/ui/achievements")
+        .button("§l§6Milestones§r", "textures/goe/tnt/ui/achievements/milestone")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -290,7 +373,126 @@ async function showAchievementListPage(player) {
             return;
         }
         // add sound
-        showMainPage(player);
+        switch (response.selection) {
+            case 0:
+                showTntAchievementsPage(player);
+                break;
+            case 1:
+                showMilestoneAchievementsPage(player);
+                break;
+            case 2:
+                showMainPage(player);
+                break;
+        }
+    });
+}
+
+async function showTntAchievementsPage(player) {
+    const allAchievements = getAchievementsByCategory("tnt_individual");
+    const unlockedTnts = achievements.getUnlockedTntAchievements(player);
+
+    const form = new ActionFormData()
+        .title("§l§6TNT Discoveries§r");
+
+    // Add buttons for each TNT achievement
+    for (const achievement of allAchievements) {
+        const isUnlocked = unlockedTnts.includes(achievement.tntType);
+        const statusColor = isUnlocked ? "§a" : "§c";
+        const statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
+        const buttonText = `§l§d${achievement.name}§r\n${statusColor}STATUS: ${statusText}§r`;
+        form.button(buttonText, achievement.icon);
+    }
+
+    form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === allAchievements.length) {
+            // Back button
+            showAchievementListPage(player);
+        } else {
+            // Achievement selected - show details
+            const selectedAchievement = allAchievements[response.selection];
+            showAchievementDetailsPage(player, selectedAchievement, () => {
+                showTntAchievementsPage(player);
+            });
+        }
+    });
+}
+
+async function showMilestoneAchievementsPage(player) {
+    const allMilestones = getAchievementsByCategory("milestones");
+    const unlockedMilestones = achievements.getUnlockedMilestones(player);
+
+    const form = new ActionFormData()
+        .title("§l§6Milestones§r");
+
+    // Add buttons for each milestone achievement
+    for (const achievement of allMilestones) {
+        const isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
+        const statusColor = isUnlocked ? "§a" : "§c";
+        const statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
+
+        const buttonText = `§l§d${achievement.name}§r\n${statusColor}STATUS: ${statusText}`;
+        form.button(buttonText, achievement.icon);
+    }
+
+    form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === allMilestones.length) {
+            // Back button
+            showAchievementListPage(player);
+        } else {
+            // Achievement selected - show details
+            const selectedAchievement = allMilestones[response.selection];
+            showAchievementDetailsPage(player, selectedAchievement, () => {
+                showMilestoneAchievementsPage(player);
+            });
+        }
+    });
+}
+
+async function showAchievementDetailsPage(player, achievement, backCallback) {
+    let isUnlocked = false;
+    let statusText = "";
+    let statusColor = "";
+
+    // Check if it's a TNT individual achievement or milestone
+    if (achievement.tntType) {
+        const unlockedTnts = achievements.getUnlockedTntAchievements(player);
+        isUnlocked = unlockedTnts.includes(achievement.tntType);
+    } else if (achievement.milestoneNumber !== undefined) {
+        const unlockedMilestones = achievements.getUnlockedMilestones(player);
+        isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
+    }
+
+    statusColor = isUnlocked ? "§a" : "§c";
+    statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
+
+    const form = new ActionFormData()
+        .title(`§l§5${achievement.name}§r`)
+        .body(
+            `${achievement.description}\n\n` +
+            `${statusColor}STATUS: ${statusText}§r`
+        )
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        if (response.selection === 0) {
+            // Back button
+            if (backCallback) {
+                backCallback();
+            }
+        }
     });
 }
 
@@ -314,8 +516,8 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
     const missingAmount = neededAmount - playerAmount;
 
     const typeInfo = PriceTypeNames[price.type];
-    const resourceName = missingAmount > 1 
-        ? (typeInfo ? typeInfo.plural : price.type) 
+    const resourceName = missingAmount > 1
+        ? (typeInfo ? typeInfo.plural : price.type)
         : (typeInfo ? typeInfo.singular : price.type);
 
     const form = new ActionFormData()
