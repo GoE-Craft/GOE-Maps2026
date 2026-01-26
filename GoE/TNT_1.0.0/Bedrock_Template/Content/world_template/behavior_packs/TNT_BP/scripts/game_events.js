@@ -1,6 +1,7 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
 import * as script_events from "./script_events";
 import * as tnt_component from "./components/blocks/tnt_component";
+import * as tnt_detonator from "./components/items/tnt_detonator";
 import { GuideBookComponent } from "./book";
 import * as tnt_manager from "./tnt_manager";
 import * as tnt_gld from "./gld/tnt_gld";
@@ -65,4 +66,7 @@ export async function onStartup(event) {
       const { blockComponentRegistry, itemComponentRegistry } = event;
       blockComponentRegistry.registerCustomComponent("goe_tnt:custom_tnt", tnt_component.TntCustomComponent);
       itemComponentRegistry.registerCustomComponent("goe_tnt:guide_book", GuideBookComponent);
+      itemComponentRegistry.registerCustomComponent("goe_tnt:tnt_detonator", tnt_detonator.TntDetonatorComponent);
+
+
 }

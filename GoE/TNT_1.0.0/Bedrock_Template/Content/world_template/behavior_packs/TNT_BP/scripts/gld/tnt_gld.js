@@ -10,12 +10,6 @@ export const TNT_GLD = [
             soundEffect: "random.fuse",
             soundDelay: 0
         },
-        explosionEffects: {
-            particleEffect: "minecraft:large_explosion",
-            particleDelay: 0,
-            soundEffect: "random.explode",
-            soundDelay: 0
-        },
         explosionProperties: {
             createsFire: false,
             allowUnderwater: false,
@@ -66,5 +60,5 @@ export function getTntDataByBlockId(blockId) {
             return tntData;
         }
     }
-    return undefined;
+    return null;
 }

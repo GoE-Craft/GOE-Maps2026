@@ -17,7 +17,7 @@ export const TntCustomComponent = {
             toggleTimer(block);
             player.playSound("minecraft:item.book.page_turn", block.location);
         } else if (itemInHand?.typeId === "minecraft:flint_and_steel") {
-            igniteTNT(block);
+            tnt_manager.activateTNTBlock(block);
         } else if (itemInHand && isPlaceableBlock(itemInHand.typeId)) {
             // Manually place the block on the clicked face
             placeBlockOnFace(block, face, itemInHand, player);
@@ -28,37 +28,9 @@ export const TntCustomComponent = {
         
         // Check adjacent blocks for redstone power
         if (isReceivingRedstonePower(block)) {
-            igniteTNT(block);
+            tnt_manager.activateTNTBlock(block);
         }
     }
-};
-
-function igniteTNT(block) {
-    const timerEnabled = block.permutation.getState("goe_tnt:timer");
-    const location = block.center();
-    location.y -= 0.5; // Adjust to bottom center
-
-    const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
-    
-    const direction = block.permutation.getState("minecraft:cardinal_direction");
-    const dimension = block.dimension;
-    block.setPermutation(BlockPermutation.resolve("minecraft:air"))
-
-    system.run(() => {
-        // Try to derive spawn yaw from block facing state/properties
-        let spawnYaw = undefined;
-        try {
-            if (direction && typeof direction === "string") {
-                const f = direction.toLowerCase();
-                if (f.includes("north")) spawnYaw = 180;
-                else if (f.includes("south")) spawnYaw = 0;
-                else if (f.includes("west")) spawnYaw = 90;
-                else if (f.includes("east")) spawnYaw = -90;
-            }
-        } catch (e) {}
-
-        tnt_manager.igniteTNT(location, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
-    })
 };
 
 function toggleTimer(block) {

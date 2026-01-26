@@ -1,0 +1,37 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:attachable": {
+		"description": {
+			"identifier": "goe_tnt:tnt_detonator",
+			"render_controllers": ["controller.render.item_default"],
+			"materials": {
+				"default": "entity_alphatest",
+				"enchanted": "entity_alphatest_glint"
+			},
+			"textures": {
+				"default": "textures/goe/tnt/items/tnt_detonator/tnt_detonator",
+				"enchanted": "textures/misc/enchanted_item_glint"
+			},
+			"geometry": {
+				"default": "geometry.tnt_detonator"
+			},
+			"animations": {
+				"first_person_hold": "animation.tnt_detonator.first_person_hold",
+				"third_person_hold": "animation.tnt_detonator.third_person_hold",
+				"push": "animation.tnt_detonator.push",
+				"detonator_controller": "controller.animation.tnt_detonator"
+			},
+			"scripts": {
+				"animate": [
+					{
+						"first_person_hold": "c.is_first_person"
+					},
+					{
+						"third_person_hold": "!c.is_first_person"
+					},
+					"detonator_controller"
+				]
+			}
+		}
+	}
+}

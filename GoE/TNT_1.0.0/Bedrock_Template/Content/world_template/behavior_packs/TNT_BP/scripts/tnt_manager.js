@@ -9,6 +9,38 @@ const countdownIntervals = new Map();
 const fuseEffectIntervals = new Map();
 
 /**
+ * Activate a TNT block at the given location
+ * @param {Block} block - The TNT block to activate
+ */
+export function activateTNTBlock(block) {
+    const timerEnabled = block.permutation.getState("goe_tnt:timer");
+    const location = block.center();
+    location.y -= 0.5; // Adjust to bottom center
+
+    const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
+    
+    const direction = block.permutation.getState("minecraft:cardinal_direction");
+    const dimension = block.dimension;
+    block.setPermutation(BlockPermutation.resolve("minecraft:air"))
+
+    system.run(() => {
+        // Try to derive spawn yaw from block facing state/properties
+        let spawnYaw = undefined;
+        try {
+            if (direction && typeof direction === "string") {
+                const f = direction.toLowerCase();
+                if (f.includes("north")) spawnYaw = 180;
+                else if (f.includes("south")) spawnYaw = 0;
+                else if (f.includes("west")) spawnYaw = 90;
+                else if (f.includes("east")) spawnYaw = -90;
+            }
+        } catch (e) {}
+
+        igniteTNT(location, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
+    });
+}
+
+/**
  * Register a TNT entity with timer and fuse
  */
 
@@ -378,6 +410,7 @@ export function handleExplosionEvent(event) {
 // Yields after each TNT to spread out processing load
 function* processExplosionEvent(impactedBlocks) {
     for (const block of impactedBlocks) {
+        if ( !block.isValid || block.isAir ) continue;
         const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
         try {
             const gld = tnt_gld.getTntDataByBlockId(block.typeId);

@@ -1,0 +1,24 @@
+{
+	"format_version": "1.21.130",
+	"minecraft:item": {
+		"description": {
+			"identifier": "goe_tnt:tnt_detonator",
+			"menu_category": {
+				"category": "equipment",
+                "is_hidden_in_commands": false
+			}
+		},
+		"components": {
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": "tnt_detonator",
+			"minecraft:cooldown": {
+				"category": "item_use",
+				"duration": 0.2
+			},
+			"goe_tnt:tnt_detonator": {
+				"area": true,
+				"radius": 5
+			}
+		}
+	}
+}
