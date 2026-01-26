@@ -230,29 +230,23 @@ function isTouchingSolidBlock(dimension, pos) {
 	const by = Math.floor(pos.y);
 	const bz = Math.floor(pos.z);
 
-	// current block + 6 axis neighbors (simple adjacency test)
-	const neighbors = [
-		{ x: bx, y: by, z: bz },
-		{ x: bx + 1, y: by, z: bz },
-		{ x: bx - 1, y: by, z: bz },
-		{ x: bx, y: by + 1, z: bz },
-		{ x: bx, y: by - 1, z: bz },
-		{ x: bx, y: by, z: bz + 1 },
-		{ x: bx, y: by, z: bz - 1 },
-	];
+	for (let dx = -1; dx <= 1; dx++) {
+		for (let dy = -1; dy <= 1; dy++) {
+			for (let dz = -1; dz <= 1; dz++) {
+				let block;
+				try { block = dimension.getBlock({ x: bx + dx, y: by + dy, z: bz + dz }); } catch { block = undefined; }
+				if (!block) continue;
 
-	for (const p of neighbors) {
-		let block;
-		try { block = dimension.getBlock(p); } catch { block = undefined; }
-		if (!block) continue;
-
-		let typeId;
-		try { typeId = block.typeId; } catch { typeId = undefined; }
-		if (isSolidCollisionBlockType(typeId)) return true;
+				let typeId;
+				try { typeId = block.typeId; } catch { typeId = undefined; }
+				if (isSolidCollisionBlockType(typeId)) return true;
+			}
+		}
 	}
 
 	return false;
 }
+
 
 // maps minecraft dimension ids to the keys expected by tnt_manager
 function toTntManagerDimKey(dimId) {
@@ -326,35 +320,17 @@ function setupCustomProjectileCollisionTick() {
 
 			const dim = entity.dimension;
 
-			const prev = info.lastPos ?? { x: entity.location.x, y: entity.location.y, z: entity.location.z };
 			const now = { x: entity.location.x, y: entity.location.y, z: entity.location.z };
+			info.lastPos = now;
 
-			const ddx = now.x - prev.x;
-			const ddy = now.y - prev.y;
-			const ddz = now.z - prev.z;
-
-			// movement magnitude per tick (used to detect "stuck" on a surface)
-			const moved = Math.sqrt(ddx * ddx + ddy * ddy + ddz * ddz);
-
-			// detect tunneling by checking the swept segment between ticks
-			if (segmentHitsBlock(dim, prev, now)) {
-				customProjectileById.delete(id);
-				explodeCustomProjectileNow(entity, tntData);
-				continue;
-			}
-
-			// if we basically stopped moving, but we were moving last tick, check if we're touching a solid block
-			if (moved < 0.001) {
-				const wasMoving = info.wasMoving ?? false;
-				if (wasMoving && isTouchingSolidBlock(dim, now)) {
+			// only start proximity detonation after the projectile has existed for at least 1 tick
+			if ((system.currentTick - spawnTick) >= 1) {
+				if (isTouchingSolidBlock(dim, now)) {
 					customProjectileById.delete(id);
 					explodeCustomProjectileNow(entity, tntData);
 					continue;
 				}
 			}
-
-			info.wasMoving = moved > 0.03;
-			info.lastPos = now;
 		}
 	}, 1);
 }

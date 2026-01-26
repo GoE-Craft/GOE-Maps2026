@@ -11,7 +11,7 @@
       "textures": ["Texture.default"],
       "part_visibility": [
         // Hiding hands from t pose
-        { "indie_hand*": 0 }
+        { "indie_hand*": "q.mark_variant == 2" }
       ]
     }
   }

@@ -24,6 +24,14 @@
           "animations": [ "charged" ],
           "transitions": [
             { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
+            { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "discharge": {
+          "animations": [ "discharge" ],
+          "transitions": [
             { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
           "blend_transition": 0.3,

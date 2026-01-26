@@ -11,7 +11,9 @@
           "transitions": [
             { "idle": "query.all_animations_finished" },
             { "death": "q.mark_variant == 2" }
-          ]
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         },
         "idle": {
           "animations": [
@@ -21,7 +23,8 @@
             {"walk_forward": "q.modified_move_speed > 0.1"},
             {"death": "q.mark_variant == 2"}
           ],
-          "blend_transition": 0.1
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         },
         "walk_forward": {
           "animations": [
@@ -31,7 +34,8 @@
             {"walk_to_idle": "q.modified_move_speed < 0.1"},
             {"death": "q.mark_variant == 2"}
           ],
-          "blend_transition": 0.1
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         },
         "walk_to_idle": {
           "animations": [
@@ -42,7 +46,8 @@
             {"walk_forward": "q.modified_move_speed > 0.1"},
             {"death": "q.mark_variant == 2"}
           ],
-          "blend_transition": 0.1
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
         },
         "death": {
           "animations": [
