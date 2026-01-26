@@ -13,7 +13,7 @@ export const TntDetonatorComponent = {
         player.playSound("random.click", player.location);
         
         // Get the block the player is looking at within a certain range
-        const maxDistance = 50;
+        const maxDistance = params.range ?? 20;
         const ray = player.getBlockFromViewDirection({ maxDistance: maxDistance });
         const block = ray?.block;
         if (!block) return;
