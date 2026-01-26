@@ -8,22 +8,69 @@
       "properties": {
         "goe_tnt:tnt_action": {
           "type": "enum",
-          "values": ["idle", "charge", "charged", "fire"],
+          "values": [ "idle", "charge", "charged", "fire" ],
           "default": "idle",
           "client_sync": true
         }
+      },
+      "animations": {
+        "controller.mecha_suit.root": "controller.animation.goe.tnt.mecha_suit",
+        "death": "animation.goe_tnt.mecha_suit.death"
+      },
+
+      "scripts": {
+        "animate": [
+          "controller.mecha_suit.root"
+        ]
+      }
+    },
+    "component_groups": {
+      "goe_tnt:death": {
+        "minecraft:mark_variant": {
+          "value": 2
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "cause": "all",
+              "deals_damage": "no"
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "time": 3,
+          "looping": false,
+          "time_down_event": {
+            "event": "goe_tnt:despawn",
+            "target": "self"
+          }
+        }
+      },
+      "goe_tnt:despawn": {
+        "minecraft:instant_despawn": { "remove_child_entities": true }
       }
     },
     "components": {
+      "minecraft:knockback_resistance": {
+        "value": 5,
+        "max": 5
+      },
       "minecraft:damage_sensor": {
         "triggers": [
-          { "cause": "fall", "deals_damage": false }
+          { "cause": "fall", "deals_damage": false },
+          { "cause": "all", "deals_damage": true, "on_damage": {
+              "event": "goe_tnt:death",
+              "target": "self",
+              "filters": [
+                { "test": "actor_health", "value": 1, "operator": "<=" }
+              ]
+            }
+          }
         ]
       },
 
-      "minecraft:health": {
-        "value": { "range_min": 100, "range_max": 100 }
-      },
+
+      "minecraft:health": { "value": 100, "max": 100, "min": 1 },
 
       "minecraft:physics": {
         "has_gravity": true,
@@ -44,22 +91,22 @@
       },
 
       "minecraft:movement": { "value": 0.13 },
-      "minecraft:movement.basic": {},
+      "minecraft:movement.basic": { },
 
-      "minecraft:navigation.generic": {},
+      "minecraft:navigation.generic": { },
 
-      "minecraft:can_power_jump": {},
+      "minecraft:can_power_jump": { },
 
       "minecraft:horse.jump_strength": {
         "value": { "range_min": 1, "range_max": 1 }
       },
 
-      "minecraft:input_ground_controlled": {},
+      "minecraft:input_ground_controlled": { },
 
       "minecraft:rideable": {
         "seat_count": 1,
         "seats": [
-          { "position": [0, 2.25, 0] }
+          { "position": [ 0, 2.25, 0 ] }
         ]
       },
 
@@ -70,6 +117,9 @@
     },
 
     "events": {
+      "goe_tnt:death": { "add": { "component_groups": [ "goe_tnt:death" ] }
+      },
+      "goe_tnt:despawn": { "add": { "component_groups": [ "goe_tnt:despawn" ] } },
       "goe:charge_tnt": {
         "set_property": { "goe_tnt:tnt_action": "charge" }
       },

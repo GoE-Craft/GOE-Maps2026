@@ -10,7 +10,7 @@
           ],
           "transitions": [
             { "idle": "query.all_animations_finished" },
-            { "death": "!q.is_alive" }
+            { "death": "q.mark_variant == 2" }
           ]
         },
         "idle": {
@@ -18,12 +18,8 @@
             "idle"
           ],
           "transitions": [
-            {
-              "walk_forward": "q.modified_move_speed > 0.1"
-            },
-            {
-              "death": "!q.is_alive"
-            }
+            {"walk_forward": "q.modified_move_speed > 0.1"},
+            {"death": "q.mark_variant == 2"}
           ],
           "blend_transition": 0.1
         },
@@ -32,12 +28,8 @@
             "walk_forward"
           ],
           "transitions": [
-            {
-              "walk_to_idle": "q.modified_move_speed < 0.1"
-            },
-            {
-              "death": "!q.is_alive"
-            }
+            {"walk_to_idle": "q.modified_move_speed < 0.1"},
+            {"death": "q.mark_variant == 2"}
           ],
           "blend_transition": 0.1
         },
@@ -47,12 +39,8 @@
           ],
           "transitions": [
             { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
-            {
-              "walk_forward": "q.modified_move_speed > 0.1"
-            },
-            {
-              "death": "!q.is_alive"
-            }
+            {"walk_forward": "q.modified_move_speed > 0.1"},
+            {"death": "q.mark_variant == 2"}
           ],
           "blend_transition": 0.1
         },
