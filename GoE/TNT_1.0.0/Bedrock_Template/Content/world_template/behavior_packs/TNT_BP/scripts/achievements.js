@@ -42,7 +42,33 @@ function unlockTntAchievement(player, tntType) {
     const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
     const achievementName = achievement ? achievement.name : tntType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-    utils.showPlayerInfoMessage(player, `§aAchievement Unlocked: §e${achievementName}§r`);
+    player.playSound("random.levelup", { volume: 1.0, pitch: 1.0 });
+
+    utils.title(player, "@s", `§a§lAchievement Unlocked!`);
+    utils.subtitle(player, "@s", `§e${achievementName}`, true);
+
+    utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §r- You have unlocked this achievement!`);
+
+    const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
+
+    // Create a burst effect with multiple particles
+    for (let i = 0; i < 20; i++) {
+        system.runTimeout(() => {
+            const location = player.location;
+            const offsetX = (Math.random() - 0.5) * 2;
+            const offsetY = Math.random() * 2;
+            const offsetZ = (Math.random() - 0.5) * 2;
+
+            // Randomly choose between villager_happy and totem_particle for each particle
+            const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+
+            player.dimension.spawnParticle(particleType, {
+                x: location.x + offsetX,
+                y: location.y + offsetY,
+                z: location.z + offsetZ
+            });
+        }, i * 2);
+    }
 }
 
 function hasMilestoneAchievement(player, milestoneNumber) {
@@ -60,8 +86,34 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
 
     // Delay milestone message to show after TNT achievement message (40 ticks = ~2 seconds)
     system.runTimeout(() => {
-        utils.showPlayerInfoMessage(player, `§6Milestone Unlocked: §e${milestoneName}§r`);
-    }, 40);
+        player.playSound("random.levelup", { volume: 1.0, pitch: 1.0 });
+
+        utils.title(player, "@s", `§6§lMilestone Unlocked!`);
+        utils.subtitle(player, "@s", `§e${milestoneName}`, true);
+
+        utils.tellraw(player, "@s", `§6[Milestone] §e${milestoneName} §r- You have reached this milestone!`);
+
+        const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
+
+        // Create a burst effect with multiple particles
+        for (let i = 0; i < 20; i++) {
+            system.runTimeout(() => {
+                const location = player.location;
+                const offsetX = (Math.random() - 0.5) * 2;
+                const offsetY = Math.random() * 2;
+                const offsetZ = (Math.random() - 0.5) * 2;
+
+                // Randomly choose between villager_happy and totem_particle for each particle
+                const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+
+                player.dimension.spawnParticle(particleType, {
+                    x: location.x + offsetX,
+                    y: location.y + offsetY,
+                    z: location.z + offsetZ
+                });
+            }, i * 2);
+        }
+    }, 55);
 }
 
 export function onPlayerPlaceBlock(event) {
@@ -88,7 +140,7 @@ export function onPlayerPlaceBlock(event) {
 
     // Update unique TNTs count
     const currentCount = player.getDynamicProperty("goe_tnt_unique_tnts_count");
-    const newCount = (currentCount !== undefined ? currentCount : 0) + 1;
+    const newCount = (currentCount !== undefined ? currentCount : 0) + 3;
     player.setDynamicProperty("goe_tnt_unique_tnts_count", newCount);
 
     // Check for milestone achievements (every 5 unique TNTs)
