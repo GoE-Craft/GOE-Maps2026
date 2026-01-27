@@ -36,13 +36,21 @@
 				"walk_to_idle": "animation.mecha_suit.walk_to_idle",
 				"charge": "animation.mecha_suit.charge",
 				"discharge": "animation.mecha_suit.discharge",
-				"fire_right": "animation.mecha_suit.fire_right"
+				"fire_right": "animation.mecha_suit.fire_right",
+				"fire_left": "animation.mecha_suit.fire_left",
+				"jump": "animation.mecha_suit.jump",
+				"jump_walk": "animation.mecha_suit.jump_walk",
+				"look_at": "animation.mecha_suit.look_at"
 			},
 
 			"scripts": {
+				"pre_animation": [
+					"v.look_at = math.clamp(q.camera_rotation('y'), -35, 0);"
+				],
 				"animate": [
 					"controller.mecha_suit",
-					"controller.mecha_suit_tnt"
+					"controller.mecha_suit_tnt",
+					"look_at"
 				]
 			},
 			"spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }

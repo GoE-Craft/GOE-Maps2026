@@ -15,7 +15,8 @@
           "animations": [ "charge" ],
           "sound_effects": [ { "effect": "charge_sound" } ],
           "transitions": [
-            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true
@@ -23,7 +24,8 @@
         "charged": {
           "animations": [ "charged" ],
           "transitions": [
-            { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
+            { "fire_right": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'right'" },
+            { "fire_left": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'left'" },
             { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
           "blend_transition": 0.3,
@@ -32,16 +34,30 @@
         "discharge": {
           "animations": [ "discharge" ],
           "transitions": [
-            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
+            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true
         },
-        "fire": {
+        "fire_right": {
           "animations": [ "fire_right" ],
           "sound_effects": [ { "effect": "fire_right" } ],
           "transitions": [
-            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
+            { "fire_left": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'left'" },
+            { "charged": "query.any_animation_finished || query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "fire_left": {
+          "animations": [ "fire_left" ],
+          "sound_effects": [ { "effect": "fire_right" } ],
+          "transitions": [
+            { "fire_right": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'right'" },
+            { "charged": "query.any_animation_finished || query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true

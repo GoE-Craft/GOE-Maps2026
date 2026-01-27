@@ -11,6 +11,12 @@
           "values": [ "idle", "charge", "charged", "fire" ],
           "default": "idle",
           "client_sync": true
+        },
+        "goe_tnt:fire_hand": {
+          "type": "enum",
+          "values": [ "right", "left" ],
+          "default": "right",
+          "client_sync": true
         }
       }
     },
@@ -48,7 +54,15 @@
       "minecraft:damage_sensor": {
         "triggers": [
           { "cause": "fall", "deals_damage": false },
-          { "cause": "all", "deals_damage": true, "on_damage": {
+          {
+            "cause": "all",
+            "deals_damage": true,
+            "damage_multiplier": 0.2
+          },
+          {
+            "cause": "all",
+            "deals_damage": true,
+            "on_damage": {
               "event": "goe_tnt:death",
               "target": "self",
               "filters": [
@@ -58,45 +72,21 @@
           }
         ]
       },
-
-
-      "minecraft:health": { "value": 100, "max": 100, "min": 1 },
-
-      "minecraft:physics": {
-        "has_gravity": true,
-        "has_collision": true
-      },
-
-      "minecraft:collision_box": {
-        "height": 2.5,
-        "width": 2.0
-      },
-
-      "minecraft:push_through": {
-        "value": 0
-      },
-
-      "minecraft:pushable": {
-        "is_pushable": true
-      },
-
+      "minecraft:health": { "value": 20, "max": 20, "min": 1 },
+      "minecraft:physics": { "has_gravity": true, "has_collision": true },
+      "minecraft:collision_box": { "height": 2.5, "width": 2.0 },
+      "minecraft:push_through": { "value": 0 },
+      "minecraft:pushable": { "is_pushable": true },
       "minecraft:movement": { "value": 0.13 },
       "minecraft:movement.basic": { },
-
       "minecraft:navigation.generic": { },
-
       "minecraft:can_power_jump": { },
-
-      "minecraft:horse.jump_strength": {
-        "value": { "range_min": 1, "range_max": 1 }
-      },
-
+      "minecraft:horse.jump_strength": { "value": { "range_min": 1.5, "range_max": 1.5 } },
       "minecraft:input_ground_controlled": { },
-
       "minecraft:rideable": {
         "seat_count": 1,
         "seats": [
-          { "position": [ 0, 2.25, 0 ] }
+          { "position": [ 0, 2.25, 0.25 ] }
         ]
       },
 
@@ -107,20 +97,34 @@
     },
 
     "events": {
-      "goe_tnt:death": { "add": { "component_groups": [ "goe_tnt:death" ] }
+      "goe_tnt:death": {
+        "add": { "component_groups": [ "goe_tnt:death" ] }
       },
-      "goe_tnt:despawn": { "add": { "component_groups": [ "goe_tnt:despawn" ] } },
+      "goe_tnt:despawn": {
+        "add": { "component_groups": [ "goe_tnt:despawn" ] }
+      },
+
       "goe:charge_tnt": {
         "set_property": { "goe_tnt:tnt_action": "charge" }
-      },
-      "goe:fire_tnt": {
-        "set_property": { "goe_tnt:tnt_action": "fire" }
       },
       "goe:idle_tnt": {
         "set_property": { "goe_tnt:tnt_action": "idle" }
       },
       "goe:charged_tnt": {
         "set_property": { "goe_tnt:tnt_action": "charged" }
+      },
+
+      "goe:fire_tnt_right": {
+        "set_property": {
+          "goe_tnt:fire_hand": "right",
+          "goe_tnt:tnt_action": "fire"
+        }
+      },
+      "goe:fire_tnt_left": {
+        "set_property": {
+          "goe_tnt:fire_hand": "left",
+          "goe_tnt:tnt_action": "fire"
+        }
       }
     }
   }

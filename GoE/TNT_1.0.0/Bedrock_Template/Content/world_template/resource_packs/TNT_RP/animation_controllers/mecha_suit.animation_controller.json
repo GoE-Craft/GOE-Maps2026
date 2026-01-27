@@ -5,54 +5,67 @@
       "initial_state": "spawn",
       "states": {
         "spawn": {
-          "animations": [
-            "spawn"
-          ],
+          "animations": [ "spawn" ],
           "transitions": [
             { "idle": "query.all_animations_finished" },
-            { "death": "q.mark_variant == 2" }
+            { "death": "q.mark_variant == 2" } // variant is set in bp
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true
         },
         "idle": {
-          "animations": [
-            "idle"
-          ],
+          "animations": [ "idle" ],
           "transitions": [
-            {"walk_forward": "q.modified_move_speed > 0.1"},
-            {"death": "q.mark_variant == 2"}
+            { "walk_forward": "q.modified_move_speed > 0.1" },
+            { "jump": "q.vertical_speed > 1 && !q.is_on_ground" },
+            { "death": "q.mark_variant == 2" }
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true
         },
         "walk_forward": {
-          "animations": [
-            "walk_forward"
-          ],
+          "animations": [ "walk_forward" ],
           "transitions": [
-            {"walk_to_idle": "q.modified_move_speed < 0.1"},
-            {"death": "q.mark_variant == 2"}
+            { "walk_to_idle": "q.modified_move_speed < 0.1" },
+            { "jump_walk": "q.vertical_speed > 1 && !q.is_on_ground" },
+            { "death": "q.mark_variant == 2" }
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true
         },
         "walk_to_idle": {
-          "animations": [
-            "walk_to_idle"
-          ],
+          "animations": [ "walk_to_idle" ],
           "transitions": [
-            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
-            {"walk_forward": "q.modified_move_speed > 0.1"},
-            {"death": "q.mark_variant == 2"}
+            { "idle": "q.all_animations_finished" },
+            { "walk_forward": "q.modified_move_speed > 0.1" },
+            { "jump": "q.vertical_speed > 1 && !q.is_on_ground" },
+            { "death": "q.mark_variant == 2" }
           ],
           "blend_transition": 0.3,
           "blend_via_shortest_path": true
         },
+        "jump": {
+          "animations": [ "jump" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
+          "transitions": [
+            { "idle": "q.is_on_ground" },
+            { "death": "q.mark_variant == 2" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "jump_walk": {
+          "animations": [ "jump_walk" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
+          "transitions": [
+            { "walk_forward": "q.is_on_ground" },
+            { "death": "q.mark_variant == 2" }
+          ],
+          "blend_transition": 0.6,
+          "blend_via_shortest_path": true
+        },
         "death": {
-          "animations": [
-            "death"
-          ]
+          "animations": [ "death" ]
         }
       }
     }
