@@ -24,6 +24,20 @@ export const TntCustomComponent = {
         } else if (itemInHand && isPlaceableBlock(itemInHand.typeId)) {
             // Manually place the block on the clicked face
             placeBlockOnFace(block, face, itemInHand, player);
+        } else if (itemInHand?.typeId === "minecraft:gunpowder") {
+            const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
+            if (chargeLevel >= 4) {
+                player.onScreenDisplay.setActionBar(`TNT Charge Level: §cMaxed Out`);
+                return;
+            }
+            const targetCharge = Math.min(chargeLevel + 1, 4);
+            console.log(`Setting TNT charge level to ${targetCharge}`);
+            block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
+            player.onScreenDisplay.setActionBar(`TNT Charge Level: §a${targetCharge}`);
+            player.playSound("random.pop", block.location);
+            const location = block.center();
+            location.y += 1;
+            block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location);
         }
     },
     onTick(eventData) {
@@ -42,10 +56,10 @@ function toggleTimer(block, player) {
     const targetState = !timer;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
     player.onScreenDisplay.setActionBar(`TNT Timer: ${targetState ? "§aEnabled \n§rUse Flint & Steel to activate it." : "§cDisabled"}`);
-    player.playSound(`block.copper_bulb.turn_${targetState ? "on" : "off"}`, block.location);
+    block.dimension.playSound(`block.copper_bulb.turn_${targetState ? "on" : "off"}`, block.location, {volume: 5, pitch: 2});
     const location = block.center();
-    location.y += 1;
-    block.dimension.spawnParticle(`minecraft:totem_particle`, location);
+    location.y += 0.5;
+    block.dimension.spawnParticle(`goe_tnt:timer_${targetState ? "on" : "off"}`, location);
     updateTimerSet(block.location, block.dimension.id, targetState);
 }
 

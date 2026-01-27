@@ -22,7 +22,7 @@ export function activateTNTBlock(block) {
         console.log(`TNT data not found for block ID: ${block.typeId}`);
         return;
     }
-    
+    const chargeLevel = block.permutation.getState("goe_tnt:charge_level") || 1;
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const dimension = block.dimension;
     block.setPermutation(BlockPermutation.resolve("minecraft:air"))
@@ -40,7 +40,7 @@ export function activateTNTBlock(block) {
             }
         } catch (e) {}
 
-        igniteTNT(location, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
+        igniteTNT(location, chargeLevel, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
     });
 }
 
@@ -48,7 +48,7 @@ export function activateTNTBlock(block) {
  * Register a TNT entity with timer and fuse
  */
 
-export function igniteTNT(location, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw) {
+export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw) {
     const dim = world.getDimension(dimension);
     const entity = dim.spawnEntity(tntData.blockId, location, {initialRotation: spawnYaw ?? 0});
     const startTick = system.currentTick;
@@ -64,6 +64,8 @@ export function igniteTNT(location, timerDuration, fuseDuration, tntData, dimens
     entity.setDynamicProperty("goe_tnt_start_tick", startTick);
     entity.setDynamicProperty("goe_tnt_stage", "timer");
     entity.setDynamicProperty("goe_tnt_tnt_type", tntData.tntType);
+    entity.setDynamicProperty("goe_tnt_charge_level", chargeLevel);
+
     // Only store timer/fuse if not default for this TNT type
     if (timerDuration !== tntData.timer) {
         entity.setDynamicProperty("goe_tnt_timer", timerDuration);
@@ -71,13 +73,13 @@ export function igniteTNT(location, timerDuration, fuseDuration, tntData, dimens
     if (fuseDuration !== tntData.fuse) {
         entity.setDynamicProperty("goe_tnt_fuse", fuseDuration);
     }
-    scheduleTimer(entity, timerDuration, fuseDuration, tntData);
+    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData);
 }
 
 /**
  * Schedule the timer -> fuse -> explode sequence
  */
-function scheduleTimer(entity, timerRemaining, fuseDuration, tntData) {
+function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData) {
     if (timerRemaining > 0) {
         // Start countdown display (every second = 20 ticks)
         startCountdown(entity, timerRemaining);
@@ -91,7 +93,7 @@ function scheduleTimer(entity, timerRemaining, fuseDuration, tntData) {
             entity.setDynamicProperty("goe_tnt_stage", "fuse");
             entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
             
-            scheduleFuse(entity, fuseDuration, tntData);
+            scheduleFuse(entity, chargeLevel, fuseDuration, tntData);
         }, timerRemaining);
         
         activeTimeouts.set(entity.id, timeoutId);
@@ -100,7 +102,7 @@ function scheduleTimer(entity, timerRemaining, fuseDuration, tntData) {
         entity.setDynamicProperty("goe_tnt_stage", "fuse");
         entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
         
-        scheduleFuse(entity, fuseDuration, tntData);
+        scheduleFuse(entity, chargeLevel, fuseDuration, tntData);
     }
 }
 
@@ -157,7 +159,7 @@ function stopCountdown(entity) {
 /**
  * Schedule the fuse -> explode
  */
-function scheduleFuse(entity, fuseRemaining, tntData) {
+function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData) {
     // Start fuse effects (continuous particle + initial sound)
     startFuseEffects(entity, tntData, fuseRemaining);
     
@@ -165,7 +167,7 @@ function scheduleFuse(entity, fuseRemaining, tntData) {
         if (!entity.isValid) return;
         
         stopFuseEffects(entity);
-        explode(entity, tntData);
+        explode(entity, chargeLevel, tntData);
     }, fuseRemaining);
     
     activeTimeouts.set(entity.id, timeoutId);
@@ -217,26 +219,31 @@ function stopFuseEffects(entity) {
 /**
  * Explode the TNT
  */
-function explode(entity, tntData) {
+function explode(entity, chargeLevel, tntData) {
     const dim = entity.dimension;
     const loc = { x: entity.location.x, y: entity.location.y, z: entity.location.z };
     const entityId = entity.id;
     stopCountdown(entity);
     activeTimeouts.delete(entityId);
-    // Offload heavier/optional post-explosion work to a job
+    const power = tntData.power * ((0.25*tntData.power) * chargeLevel);
+
+    // We will need a custom explosion implementation
+    // Vanilla explosion implementation supports max 10 block radius
     try{
-        dim.createExplosion(loc, tntData.power, {
+        dim.createExplosion(loc, power, {
             causesFire: tntData.explosionProperties.createsFire,
             breaksBlocks: tntData.explosionProperties.breaksBlocks,
             allowUnderwater: tntData.explosionProperties.allowUnderwater,
             source: entity
         });
-    } catch(e){}
+    } catch(e){
+        if (entity.isValid) entity.remove();
+    }
 
-    system.runJob(explodeJob(dim, entity, tntData, loc, entity.getRotation()));
+    system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, entity.getRotation()));
 }
 
-function* explodeJob(dimension, entity, tntData, loc, rot) {
+function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
     if (tntData?.explosionEffects) {
         try {
             if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
@@ -257,7 +264,7 @@ function* explodeJob(dimension, entity, tntData, loc, rot) {
         if (tntData?.explosionProperties?.specialAction) {
             // If the special action is expensive, the handler should itself use runJob.
             const vec = getFacingVectorFromEntity(rot);
-            try { system.run(() => handleSpecialAction(dimension, loc, tntData, vec)); } catch (e) {}
+            try { system.run(() => handleSpecialAction(dimension, loc, tntData, chargeLevel, vec)); } catch (e) {}
         }
     } catch (e) {
         console.log("Error handling special action: " + e);
@@ -437,7 +444,8 @@ function* processExplosionEvent(impactedBlocks) {
         const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
         try {
             const gld = tnt_gld.getTntDataByBlockId(block.typeId);
-            igniteTNT(block.location, 0, chainFuseTicks, gld, block.dimension.id);
+            const power = block.permutation.getState("goe_tnt:charge_level") || 1;
+            igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id);
             block.setPermutation(BlockPermutation.resolve("minecraft:air"));
         } catch (e) {
             console.log("Error handling TNT chain reaction: " + e);
@@ -450,7 +458,7 @@ function* processExplosionEvent(impactedBlocks) {
  * Handle special actions on explosion
  * Add custom action handlers here
  */
-function handleSpecialAction(dimension, location, tntData, vec) {
+function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
     const action = tntData.explosionProperties.specialAction;
     if (!action) return;
 
