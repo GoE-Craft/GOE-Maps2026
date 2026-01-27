@@ -239,9 +239,9 @@ async function showShopPage(player) {
     const form = new ActionFormData()
         .title("§l§4TNT Shop§r")
 
-        .button("§l§cTNT Accessories§r")
-        .button("§l§cTNT's§r")
-        .button("§l§cTNT Structures§r")
+        .button("§l§4TNT Blocks§r")
+        .button("§l§4TNT Accessories§r")
+        .button("§l§4TNT Testing Areas§r")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -251,15 +251,15 @@ async function showShopPage(player) {
         // add sound
         switch (response.selection) {
             case 0:
+                // TNT Blocks category
+                showTntsPage(player);
+                break;
+            case 1:
                 // TNT Accessories category
                 showAccessoriesPage(player);
                 break;
-            case 1:
-                // TNT's category
-                showTntsPage(player);
-                break;
             case 2:
-                // TNT Structures category
+                // TNT Testing Areas category
                 showStructuresPage(player);
                 break;
             case 3:
@@ -274,7 +274,7 @@ async function showAccessoriesPage(player) {
     const items = ShopItems.accessories || [];
 
     const form = new ActionFormData()
-        .title("§l§cTNT Accessories§r");
+        .title("§l§4TNT Accessories§r");
 
     // Add buttons for each accessory item
     for (const item of items) {
@@ -311,7 +311,7 @@ async function showTntsPage(player) {
     const items = ShopItems.tnts || [];
 
     const form = new ActionFormData()
-        .title("§l§6TNT's§r")
+        .title("§l§4TNT Blocks§r")
 
     // Add buttons for each item
     for (const item of items) {
@@ -348,7 +348,7 @@ async function showStructuresPage(player) {
     const items = ShopItems.structures || [];
 
     const form = new ActionFormData()
-        .title("§l§6TNT Structures§r");
+        .title("§l§4TNT Testing Areas§r");
 
     // Add buttons for each item
     for (const item of items) {
