@@ -18,6 +18,10 @@ export function activateTNTBlock(block) {
     location.y -= 0.5; // Adjust to bottom center
 
     const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
+    if (!tntData) {
+        console.log(`TNT data not found for block ID: ${block.typeId}`);
+        return;
+    }
     
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const dimension = block.dimension;
@@ -80,9 +84,9 @@ function scheduleTimer(entity, timerRemaining, fuseDuration, tntData) {
         
         const timeoutId = system.runTimeout(() => {
             if (!entity.isValid) return;
-            
             // Stop countdown display
             stopCountdown(entity);
+            
             
             entity.setDynamicProperty("goe_tnt_stage", "fuse");
             entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
@@ -106,9 +110,13 @@ function scheduleTimer(entity, timerRemaining, fuseDuration, tntData) {
 function startCountdown(entity, timerRemaining) {
     const startTick = system.currentTick;
     const endTick = startTick + timerRemaining;
+    const initialTimer = Math.ceil(timerRemaining / 20);
     
-    const initialSeconds = Math.ceil(timerRemaining / 20);
-    world.sendMessage(`§6TNT Timer: §c${initialSeconds}§6 seconds`);
+    let location = entity.location;
+    location.y += 1.5;
+    let textLocation = { x: location.x, y: location.y+0.5, z: location.z };
+    entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
+    entity.dimension.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
     
     const intervalId = system.runInterval(() => {
         if (!entity.isValid) {
@@ -119,8 +127,16 @@ function startCountdown(entity, timerRemaining) {
         const remaining = endTick - system.currentTick;
         const seconds = Math.ceil(remaining / 20);
         
+        
         if (seconds > 0) {
-            world.sendMessage(`§6TNT Timer: §c${seconds}§6 seconds`);
+            location = entity.location;
+            location.y += 1.5;
+            textLocation = { x: location.x, y: location.y+0.5, z: location.z };
+            entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
+            entity.dimension.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
+        } else {
+            entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
+            entity.dimension.spawnParticle(`goe_tnt:timer_particle_0`, location);
         }
     }, 20);
     
@@ -290,10 +306,15 @@ function handleSummonMob(dimension, location, tntData) {
     }, delay);
 }
 
+export function onLoad() {
+    system.runJob(restoreTNT());
+    
+}
+
 /**
  * Restore TNT states after script reload
  */
-export function restoreTNT() {
+function* restoreTNT() {
     const currentTick = system.currentTick;
     
     for (const dim of ["overworld", "nether", "the_end"]) {
@@ -328,8 +349,10 @@ export function restoreTNT() {
 
                     scheduleFuse(entity, remaining, tntData);
                 }
+                yield;
             }
         } catch (e) {}
+        yield;
     }
 }
 

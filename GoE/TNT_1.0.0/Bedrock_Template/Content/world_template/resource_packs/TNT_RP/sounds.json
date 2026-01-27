@@ -11,5 +11,13 @@
         "volume": 1.0
       }
     }
+  },
+  "block_sounds": {
+    "goe_tnt:sample_tnt": {
+      "events": {
+        "break": "dig.grass",
+        "place": "hit.grass"
+      }
+    }
   }
 }

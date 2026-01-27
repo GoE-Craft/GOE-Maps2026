@@ -18,10 +18,10 @@
       "minecraft:display_name": "Sample TNT",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
       "minecraft:geometry": "minecraft:geometry.full_block",
-      "minecraft:material_instances": { "*": { "texture": "tnt_side", "render_method": "alpha_test" } },
+      "minecraft:material_instances": { "*": { "texture": "tnt_side", "render_method": "alpha_test", "face_dimming": true} },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },

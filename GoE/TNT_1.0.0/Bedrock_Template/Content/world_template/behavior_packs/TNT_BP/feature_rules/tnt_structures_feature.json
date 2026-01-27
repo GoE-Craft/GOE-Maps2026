@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:feature_rules": {
+    "description": {
+      "identifier": "goe_tnt:tnt_structures_feature",
+      "places_feature": "goe_tnt:select_tnt_structure_feature"
+    },
+    "conditions": {
+      "placement_pass": "surface_pass",
+      "minecraft:biome_filter": {
+        "test": "has_biome_tag",
+        "operator": "==",
+        "value": "forest"
+      }
+    },
+    "distribution": {
+      "iterations": 1,
+      "scatter_chance": {
+        "numerator": 2,
+        "denominator": 100
+      },
+      "x": {
+        "distribution": "uniform",
+        "extent": [0, 64]
+      },
+      "y": "q.heightmap(v.worldx, v.worldz)",
+      "z": {
+        "distribution": "uniform",
+        "extent": [0, 64]
+      }
+    }
+  }
+}

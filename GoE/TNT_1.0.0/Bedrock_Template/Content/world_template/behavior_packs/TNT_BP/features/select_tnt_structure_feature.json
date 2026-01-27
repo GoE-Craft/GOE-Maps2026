@@ -1,0 +1,19 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:weighted_random_feature": {
+    "description": {
+      "identifier": "goe_tnt:select_tnt_structure_feature"
+    },
+    "features": [
+      ["goe_tnt:singularity_tnt_structure_feature", 1],
+      ["goe_tnt:directional_tnt_structure_feature", 1],
+      ["goe_tnt:party_tnt_structure_feature", 1],
+      ["goe_tnt:tree_planter_tnt_structure_feature", 1],
+      ["goe_tnt:weather_station_tnt_structure_feature", 1],
+      ["goe_tnt:teleportation_tnt_structure_feature", 1],
+      ["goe_tnt:honey_tnt_structure_feature", 1],
+      ["goe_tnt:endermite_decoy_tnt_structure_feature", 1],
+      ["goe_tnt:glass_tnt_structure_feature", 1]
+    ]
+  }
+}

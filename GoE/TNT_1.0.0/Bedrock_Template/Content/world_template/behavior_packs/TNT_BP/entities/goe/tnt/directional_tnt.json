@@ -67,6 +67,10 @@
                 "height": 0.98,
                 "width": 0.98
             },
+            "minecraft:projectile": {
+                "gravity": 0.001,
+                "inertia": 0.999
+            },
             "minecraft:conditional_bandwidth_optimization": {
                 "default_values": {
                     "max_optimized_distance": 80.0,
