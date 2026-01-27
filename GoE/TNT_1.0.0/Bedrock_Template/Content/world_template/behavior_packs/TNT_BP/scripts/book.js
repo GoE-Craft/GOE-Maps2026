@@ -59,11 +59,11 @@ export async function showIntroPage(player) {
 
 export async function showMainPage(player) {
     const form = new ActionFormData()
-        .title("§l§4TNT Guide Book§r")
-        .button("§l§2Info§r", "textures/goe/tnt/ui/info")
-        .button("§l§1Settings§r", "textures/goe/tnt/ui/settings")
-        .button("§l§4Shop§r", "textures/goe/tnt/ui/shop")
-        .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements");
+        .title("§l§4TNT Guide§r")
+        .button("§l§4Info§r", "textures/goe/tnt/ui/info")
+        .button("§l§2Shop§r", "textures/goe/tnt/ui/shop")
+        .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements")
+        .button("§l§1Settings§r", "textures/goe/tnt/ui/settings");
 
     form.show(player).then((response) => {
         if (response.canceled) {
@@ -75,13 +75,13 @@ export async function showMainPage(player) {
                 showInfoPage(player);
                 break;
             case 1:
-                showSettingsPage(player);
-                break;
-            case 2:
                 showShopPage(player);
                 break;
-            case 3:
+            case 2:
                 showAchievementListPage(player);
+                break;
+            case 3:
+                showSettingsPage(player);
                 break;
         }
     });
@@ -89,21 +89,14 @@ export async function showMainPage(player) {
 
 async function showInfoPage(player) {
     const form = new ActionFormData()
-        .title("§l§2Info§r")
-        .body(
-            "§cWelcome to §eTNT info§r§c!\n\n" +
-            "§cPrepare for massive explosions, advanced engineering, and hidden secrets. This §eAdd-On§r§c provides everything you need to dominate your world and master the art of demolition.\n\n" +
-            "§c- Over 20+ custom §eTNTs§r§c unique appereance and §eMecha Suit§r§c technology\n" +
-            "§c- Discover custom structures hidden through the world containing rare loot\n" +
-            "§c- Deploy §eCraftable Structures§r§c designed specifically for experimenting with §eTNTs§r§c\n" +
-            "§c- Use §eCustom Settings§r§c menu to tailor the §eAdd-On§r§c features to your playstyle\n" +
-            "§c- §e75 unique§r§c milestones to complete\n\n" +
-            "§cGear up, explore the world, and begin your journey!§r"
-        )
-        .button("§l§4Mecha Suit§r")
-        .button("§l§4TNT Detonator§r")
-        .button("§l§4TNT'S§r")
-        .button("§l§4Structures§r")
+        .title("§l§4Info§r")
+
+        .button("§l§4TNT Blocks§r")
+        .button("§l§4TNT Mecha Suit§r")
+        .button("§l§nStructures§r")
+        .button("§l§2Shop§r")
+        .button("§l§5Achievements§r")
+        .button("§l§1Settings§r")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -113,18 +106,24 @@ async function showInfoPage(player) {
         //todo add sound
         switch (response.selection) {
             case 0:
-                showMechaSuitPage(player);
-                break;
-            case 1:
-                showTntDetonatorPage(player);
-                break;
-            case 2:
                 showTntsInfoPage(player);
                 break;
-            case 3:
+            case 1:
+                showMechaSuitPage(player);
+                break;
+            case 2:
                 showStructuresInfoPage(player);
                 break;
+            case 3:
+                showShopInfoPage(player);
+                break;
             case 4:
+                showAchievementsInfoPage(player);
+                break;
+            case 5:
+                showSettingsInfoPage(player);
+                break;
+            case 6:
                 showMainPage(player);
                 break;
         }
@@ -146,9 +145,39 @@ async function showMechaSuitPage(player) {
     });
 }
 
-async function showTntDetonatorPage(player) {
+async function showShopInfoPage(player) {
     const form = new ActionFormData()
-        .title("§l§4TNT Detonator§r")
+        .title("§l§4Shop§r")
+        .body("§f  TODO  §r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        // add sound
+        showInfoPage(player);
+    });
+}
+
+async function showSettingsInfoPage(player) {
+    const form = new ActionFormData()
+        .title("§l§1Settings§r")
+        .body("§f  TODO  §r")
+        .button("§l§cBack§r", "textures/goe/tnt/ui/back");
+
+    form.show(player).then((response) => {
+        if (response.canceled) {
+            return;
+        }
+        // add sound
+        showInfoPage(player);
+    });
+}
+
+async function showAchievementsInfoPage(player) {
+    const form = new ActionFormData()
+        .title("§l§5Achievements§r")
         .body("§f  TODO  §r")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -209,15 +238,7 @@ async function showSettingsPage(player) {
 async function showShopPage(player) {
     const form = new ActionFormData()
         .title("§l§4TNT Shop§r")
-        .body(
-            "§cWelcome to §eTNT Shop§r§c!\n\n" +
-            "§cInside this shop you can unlock powerful explosive tools and unique §eTNT§r§c technology.\n\n" +
-            "§c- 20+ different custom §eTNTs§r§c with special effects\n" +
-            "§c- §eTNT Mecha suit§r§c parts and upgrades\n" +
-            "§c- §eTNT Detonator§r§c for remote explosions\n" +
-            "§c- §e5 craftable §eStructures§r§c for testing\n\n" +
-            "§cCollect resources, experiment, and become the ultimate §eTNT§r§c Engineer!§r"
-        )
+
         .button("§l§cTNT Accessories§r")
         .button("§l§cTNT's§r")
         .button("§l§cTNT Structures§r")
@@ -391,15 +412,7 @@ async function showAchievementListPage(player) {
 
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
-        .body(
-            "§cWelcome to the §eTNT Achievement Hall§r§c!§r\n\n" +
-            "§cTrack your progress as you master the art of destruction engineering.\n\n" +
-            "§c- 75 unique explosive milestones to conquer\n" +
-            "§c- Master 20+ custom §eTNTs§r§c and their special effects\n" +
-            "§c- Unlock all §eMecha Suit§r§c upgrades and parts\n" +
-            "§c- Deploy and test every §eTNT§r§c-based structure\n\n" +
-            "§cPush your limits, earn every badge, and become the ultimate §eTNT Legend§r§c!§r"
-        );
+
 
     // Add buttons for all achievements
     for (const achievement of allAchievements) {
