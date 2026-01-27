@@ -155,11 +155,8 @@ async function showShopInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§2Shop§r")
         .body(
-            "§fAccessible from the first page of the §4TNT Guide§f, the §4TNT Shop§f allows you to purchase any asset from this §4TNT Add-On§f:\n\n" +
-            "§f- §4TNT Blocks§f\n" +
-            "§f- §4TNT Mecha Suit§f\n" +
-            "§f- §4TNT Detonator§f\n" +
-            "§f- §4TNT Testing Areas§f\n\n" +
+            "§fThe §4TNT Shop§f allows you to purchase any asset from this §4TNT Add-On§f such as: §4TNT Blocks§f, §4TNT Mecha Suit§f, §4TNT Detonator§f or §4TNT Testing Areas.§f\n\n" +
+            "§fYou can access shop by pressing \"§4TNT Shop§f\" button in main UI menu.§f\n\n" +
             "§fYou can use §nCopper Ingots§f, §iIron Ingots§f, §6Gold Ingots§f, or §aEmeralds§f to purchase them. The better the asset, the higher its price.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
