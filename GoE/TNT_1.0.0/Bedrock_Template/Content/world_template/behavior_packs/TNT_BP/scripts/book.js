@@ -266,8 +266,8 @@ async function showShopPage(player) {
         .title("§l§2Shop§r")
 
         .button("§l§4TNT Blocks§r", "textures/goe/tnt/ui/shop/blocks_button")
-        .button("§l§4TNT Accessories§r", "textures/goe/tnt/ui/shop/accessories_button")
-        .button("§l§4TNT Testing Areas§r", "textures/goe/tnt/ui/shop/testing_areas_button")
+        .button("§l§9TNT Accessories§r", "textures/goe/tnt/ui/shop/accessories_button")
+        .button("§l§eTNT Testing Areas§r", "textures/goe/tnt/ui/shop/testing_areas_button")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -300,7 +300,7 @@ async function showAccessoriesPage(player) {
     const items = ShopItems.accessories || [];
 
     const form = new ActionFormData()
-        .title("§l§4TNT Accessories§r");
+        .title("§l§9TNT Accessories§r");
 
     // Add buttons for each accessory item
     for (const item of items) {
@@ -374,7 +374,7 @@ async function showStructuresPage(player) {
     const items = ShopItems.structures || [];
 
     const form = new ActionFormData()
-        .title("§l§4TNT Testing Areas§r");
+        .title("§l§eTNT Testing Areas§r");
 
     // Add buttons for each item
     for (const item of items) {
