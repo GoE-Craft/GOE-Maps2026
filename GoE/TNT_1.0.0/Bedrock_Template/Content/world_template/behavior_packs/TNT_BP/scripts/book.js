@@ -91,12 +91,12 @@ async function showInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§4Info§r")
 
-        .button("§l§4TNT Blocks§r")
-        .button("§l§4TNT Mecha Suit§r")
-        .button("§l§nStructures§r")
-        .button("§l§2Shop§r")
-        .button("§l§5Achievements§r")
-        .button("§l§1Settings§r")
+        .button("§l§4TNT Blocks§r", "textures/goe/tnt/ui/info/tnt_blocks_info")
+        .button("§l§4TNT Mecha Suit§r", "textures/goe/tnt/ui/info/tnt_mecha_suit_info")
+        .button("§l§nStructures§r", "textures/goe/tnt/ui/info/structures_info")
+        .button("§l§2Shop§r", "textures/goe/tnt/ui/info/shop_info")
+        .button("§l§5Achievements§r", "textures/goe/tnt/ui/info/achievements_info")
+        .button("§l§1Settings§r", "textures/goe/tnt/ui/info/settings_info")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -263,11 +263,11 @@ async function showSettingsPage(player) {
 
 async function showShopPage(player) {
     const form = new ActionFormData()
-        .title("§l§4TNT Shop§r")
+        .title("§l§2Shop§r")
 
-        .button("§l§4TNT Blocks§r")
-        .button("§l§4TNT Accessories§r")
-        .button("§l§4TNT Testing Areas§r")
+        .button("§l§4TNT Blocks§r", "textures/goe/tnt/ui/shop/blocks_button")
+        .button("§l§4TNT Accessories§r", "textures/goe/tnt/ui/shop/accessories_button")
+        .button("§l§4TNT Testing Areas§r", "textures/goe/tnt/ui/shop/testing_areas_button")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
