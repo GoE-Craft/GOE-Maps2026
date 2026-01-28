@@ -29,7 +29,6 @@ const tntUiStateByMecha = new Map(); // "idle" | "charge" | "charged" | "fire"
 const UI_TOTAL_BOXES = 10;
 const UI_BOX_CHAR = "■";
 const firstCooldownUiDelayUntilByPlayer = new Map();
-
 const lastActionbarByPlayer = new Map();
 
 // left/right alternating fire

@@ -73,6 +73,7 @@
 		"animation.mecha_suit.walk": {
 			"loop": true,
 			"animation_length": 2,
+			"anim_time_update": "query.modified_distance_moved / 11.0",
 			"bones": {
 				"body": {
 					"rotation": {
