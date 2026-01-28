@@ -12,44 +12,92 @@
 			"category": "music",
 			"sounds": [ { "name": "sounds/goe/tnt/sfx/intro_v2", "volume": 0.2 } ]
 		},
+		// mecha_suit sounds
 		"goe_tnt:mecha_suit_death": {
 			"category": "hostile",
 			"sounds": [
-				{
-					"name": "sounds/mob/mecha_suit/death",
-					"volume": 1
-				}
+				{"name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_death","volume": 1}
 			]
 		},
 		"goe_tnt:mecha_suit_hurt": {
 			"category": "hostile",
 			"sounds": [
-				{ "name": "sounds/mob/mecha_suit/hit1", "volume": 1 },
-				{ "name": "sounds/mob/mecha_suit/hit2", "volume": 1 },
-				{ "name": "sounds/mob/mecha_suit/hit3", "volume": 1 },
-				{ "name": "sounds/mob/mecha_suit/hit4", "volume": 1 }
+				{"name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_hurt","volume": 1}
 			]
 		},
 		"goe_tnt:mecha_suit_walk": {
 			"category": "hostile",
 			"sounds": [
-				{ "name": "sounds/mob/mecha_suit/walk", "volume": 2 },
-				{ "name": "sounds/mob/mecha_suit/walk2", "volume": 2 },
-				{ "name": "sounds/mob/mecha_suit/walk3", "volume": 2 },
-				{ "name": "sounds/mob/mecha_suit/walk4", "volume": 2 }
-			]
-		},
-		"goe_tnt:mecha_suit_fire_right": {
-			"category": "hostile",
-			"sounds": [
-				{ "name": "sounds/mob/mecha_suit/shoot1", "volume": 1 }
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_walk", "volume": 3 },
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_walkv2", "volume": 3 }
 			]
 		},
 		"goe_tnt:mecha_suit_charge_sound": {
 			"category": "hostile",
 			"sounds": [
-				{ "name": "sounds/mob/mecha_suit/charge_sound", "volume": 1 }
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_charge", "volume": 1 }
 			]
-		}
+		},
+		"goe_tnt:mecha_suit_discharge_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_discharge", "volume": 2 }
+			]
+		},
+		"goe_tnt:mecha_suit_fire_right_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_fire", "volume": 1 }
+			]
+		},
+		"goe_tnt:mecha_suit_fire_left_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_fire", "volume": 1 }
+			]
+		},
+		"goe_tnt:mecha_suit_jump_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_jump", "volume": 3 }
+			]
+		},
+		"goe_tnt:mecha_suit_land_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_land", "volume": 0.75 }
+			]
+		},
+		"goe_tnt:mecha_suit_spawn_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_spawn", "volume": 1 }
+			]
+		},
+		"goe_tnt:mecha_suit_fly_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_fly", "volume": 1 }
+			]
+		},
+		"goe_tnt:mecha_suit_idle_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_idle", "volume": 0.2 }
+			]
+		},
+		"goe_tnt:mecha_suit_mount_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_mount", "volume": 1 }
+			]
+		}/* ,
+		"goe_tnt:mecha_suit_dismount_sound": {
+			"category": "hostile",
+			"sounds": [
+				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_dismount", "volume": 1 }
+			]
+		} */
+
 	}
 }

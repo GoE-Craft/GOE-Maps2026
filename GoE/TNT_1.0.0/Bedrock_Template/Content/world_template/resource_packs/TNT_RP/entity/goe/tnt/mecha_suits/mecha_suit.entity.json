@@ -21,12 +21,22 @@
 				"walk": "goe_tnt:mecha_suit_walk",
 				"death": "goe_tnt:mecha_suit_death",
 				"hurt": "goe_tnt:mecha_suit_hurt",
-				"fire_right": "goe_tnt:mecha_suit_fire_right",
-				"charge_sound": "goe_tnt:mecha_suit_charge_sound"
+				"fire_right_sound": "goe_tnt:mecha_suit_fire_right_sound",
+				"fire_left_sound": "goe_tnt:mecha_suit_fire_left_sound",
+				"charge_sound": "goe_tnt:mecha_suit_charge_sound",
+				"discharge_sound": "goe_tnt:mecha_suit_discharge_sound",
+				"jump_sound": "goe_tnt:mecha_suit_jump_sound",
+				"land_sound": "goe_tnt:mecha_suit_land_sound",
+				"spawn_sound": "goe_tnt:mecha_suit_spawn_sound",
+				"fly_sound": "goe_tnt:mecha_suit_fly_sound",
+				"mount_sound": "goe_tnt:mecha_suit_mount_sound"
 			},
 			"animations": {
 				"controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",
 				"controller.mecha_suit_tnt": "controller.animation.goe.tnt.mecha_suit_tnt",
+				"land_controller" : "controller.animation.goe.tnt.mecha_suit.land",
+				"spawn_controller": "controller.animation.goe_tnt.mecha_suit_spawn",
+				"mount_controller": "controller.animation.goe_tnt.mecha_suit_mount",
 
 				"idle": "animation.mecha_suit.idle",
 				"spawn" : "animation.mecha_suit.spawn",
@@ -40,7 +50,9 @@
 				"fire_left": "animation.mecha_suit.fire_left",
 				"jump": "animation.mecha_suit.jump",
 				"jump_walk": "animation.mecha_suit.jump_walk",
-				"look_at": "animation.mecha_suit.look_at"
+				"look_at": "animation.mecha_suit.look_at",
+
+				"land" : "animation.mecha_suit.land"
 			},
 
 			"scripts": {
@@ -50,6 +62,9 @@
 				"animate": [
 					"controller.mecha_suit",
 					"controller.mecha_suit_tnt",
+					"land_controller",
+					"spawn_controller",
+					"mount_controller",
 					"look_at"
 				]
 			},

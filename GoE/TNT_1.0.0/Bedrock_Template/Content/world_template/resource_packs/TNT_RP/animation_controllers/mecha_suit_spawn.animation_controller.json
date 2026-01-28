@@ -1,0 +1,23 @@
+{
+    "format_version": "1.10.0",
+    "animation_controllers": {
+        "controller.animation.goe_tnt.mecha_suit_spawn": {
+            "initial_state": "idle",
+            "states": {
+                "idle": {
+                    "animations": [ "idle" ],
+                    "transitions": [
+                        { "spawn": "q.mark_variant == 3" }
+                    ]
+                },
+                "spawn": {
+                    "animations": [ "spawn" ],
+                    "sound_effects": [ { "effect": "spawn_sound" } ],
+                    "transitions": [
+                        { "idle": "query.all_animations_finished" }
+                    ]
+                }
+            }
+        }
+    }
+}

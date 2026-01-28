@@ -44,10 +44,26 @@
       },
       "goe_tnt:despawn": {
         "minecraft:instant_despawn": { "remove_child_entities": true }
+      },
+      "goe_tnt:spawn": {
+        "minecraft:mark_variant": { "value": 3 },
+        "minecraft:timer": {
+          "time": 2.5,
+          "looping": false,
+          "time_down_event": {
+            "event": "goe_tnt:spawn_reset",
+            "target": "self"
+          }
+        }
+      },
+      "goe_tnt:spawn_reset": {
+        "minecraft:mark_variant": { "value": 0 }
       }
     },
     "components": {
-
+      "minecraft:type_family": {
+        "family": [ "player" ]
+      },
       "minecraft:knockback_resistance": {
         "value": 5,
         "max": 5
@@ -81,9 +97,9 @@
       },
       "minecraft:health": { "value": 20, "max": 20, "min": 1 },
       "minecraft:physics": { "has_gravity": true, "has_collision": true },
-      "minecraft:collision_box": { "height": 2.5, "width": 2.0 },
+      "minecraft:collision_box": { "height": 4, "width": 3.0 },
       "minecraft:push_through": { "value": 0 },
-      "minecraft:pushable": { "is_pushable": true },
+      "minecraft:pushable": { "is_pushable": false },
       "minecraft:movement": { "value": 0.17 },
       "minecraft:movement.basic": { },
       "minecraft:navigation.generic": { },
@@ -104,6 +120,9 @@
     },
 
     "events": {
+      "goe_tnt:spawn_reset": { "add": { "component_groups": [ "goe_tnt:spawn_reset" ] } },
+      
+      "minecraft:entity_spawned": { "add": { "component_groups": [ "goe_tnt:spawn" ] } },
       "goe_tnt:death": { "add": { "component_groups": [ "goe_tnt:death" ] } },
       "goe_tnt:despawn": { "add": { "component_groups": [ "goe_tnt:despawn" ] } },
 

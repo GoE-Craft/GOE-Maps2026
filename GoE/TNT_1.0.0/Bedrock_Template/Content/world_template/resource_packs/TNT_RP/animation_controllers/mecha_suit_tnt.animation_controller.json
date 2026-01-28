@@ -6,7 +6,6 @@
       "states": {
         "idle": {
           "animations": [ "idle" ],
-          "sound_effects": [ { "effect": "charge_sound" } ],
           "transitions": [
             { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
           ]
@@ -33,6 +32,7 @@
         },
         "discharge": {
           "animations": [ "discharge" ],
+          "sound_effects": [ { "effect": "discharge_sound" } ],
           "transitions": [
             { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
             { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
@@ -42,7 +42,7 @@
         },
         "fire_right": {
           "animations": [ "fire_right" ],
-          "sound_effects": [ { "effect": "fire_right" } ],
+          "sound_effects": [ { "effect": "fire_right_sound" } ],
           "transitions": [
             { "fire_left": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'left'" },
             { "charged": "query.any_animation_finished || query.property('goe_tnt:tnt_action') == 'charged'" },
@@ -53,7 +53,7 @@
         },
         "fire_left": {
           "animations": [ "fire_left" ],
-          "sound_effects": [ { "effect": "fire_right" } ],
+          "sound_effects": [ { "effect": "fire_left_sound" } ],
           "transitions": [
             { "fire_right": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'right'" },
             { "charged": "query.any_animation_finished || query.property('goe_tnt:tnt_action') == 'charged'" },

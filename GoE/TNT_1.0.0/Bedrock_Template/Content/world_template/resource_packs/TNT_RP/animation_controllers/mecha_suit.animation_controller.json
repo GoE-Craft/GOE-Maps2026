@@ -2,19 +2,11 @@
   "format_version": "1.10.0",
   "animation_controllers": {
     "controller.animation.goe.tnt.mecha_suit": {
-      "initial_state": "spawn",
+      "initial_state": "idle",
       "states": {
-        "spawn": {
-          "animations": [ "spawn" ],
-          "transitions": [
-            { "idle": "query.all_animations_finished" },
-            { "death": "q.mark_variant == 2" } // variant is set in bp
-          ],
-          "blend_transition": 0.3,
-          "blend_via_shortest_path": true
-        },
         "idle": {
           "animations": [ "idle" ],
+/*           "sound_effects": [ { "effect": "idle_sound" } ], */
           "transitions": [
             { "walk_forward": "q.modified_move_speed > 0.1" },
             { "jump": "q.vertical_speed > 1 && !q.is_on_ground" },
@@ -46,7 +38,7 @@
         },
         "jump": {
           "animations": [ "jump" ],
-          "sound_effects": [ { "effect": "charge_sound" } ],
+          "sound_effects": [ { "effect": "jump_sound" } ],
           "transitions": [
             { "idle": "q.is_on_ground" },
             { "death": "q.mark_variant == 2" }
@@ -56,7 +48,7 @@
         },
         "jump_walk": {
           "animations": [ "jump_walk" ],
-          "sound_effects": [ { "effect": "charge_sound" } ],
+          "sound_effects": [ { "effect": "jump_sound" } ],
           "transitions": [
             { "walk_forward": "q.is_on_ground" },
             { "death": "q.mark_variant == 2" }

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.goe.tnt.mecha_suit.land": {
+      "initial_state": "initial",
+      "states": {
+        "initial": {
+          "animations": [
+            "idle"
+          ],
+          "transitions": [
+            { "airborn": "!q.is_on_ground" }
+          ]
+        },
+        "airborn": {
+          "animations": [
+            "idle"
+          ],
+          "transitions": [
+            { "land": "q.is_on_ground" }
+          ]
+        },
+        "land": {
+          "animations": [
+            "land"
+          ],
+          "sound_effects": [ { "effect": "land_sound" } ],
+          "transitions": [
+            { "airborn": "!q.is_on_ground" }
+          ],
+          "blend_transition": 0.2
+        }
+      }
+    }
+  }
+}
