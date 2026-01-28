@@ -94,7 +94,7 @@ export async function showMainPage(player) {
 async function showInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§4Info§r")
-
+        .body("§fInfo:§r")
         .button("§l§4TNT Blocks§r", "textures/goe/tnt/ui/info/tnt_blocks_info")
         .button("§l§4TNT Mecha Suit§r", "textures/goe/tnt/ui/info/tnt_mecha_suit_info")
         .button("§l§nStructures§r", "textures/goe/tnt/ui/info/structures_info")
@@ -268,7 +268,7 @@ async function showSettingsPage(player) {
 async function showShopPage(player) {
     const form = new ActionFormData()
         .title("§l§2Shop§r")
-
+        .body("§fShop:§r")
         .button("§l§4TNT Blocks§r", "textures/goe/tnt/ui/shop/blocks_button")
         .button("§l§9TNT Accessories§r", "textures/goe/tnt/ui/shop/accessories_button")
         .button("§l§eTNT Testing Areas§r", "textures/goe/tnt/ui/shop/testing_areas_button")
@@ -455,7 +455,7 @@ async function showAchievementListPage(player) {
 
         const statusColor = isUnlocked ? "§a" : "§c";
         const statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
-        const buttonText = `§l§d${achievement.name}§r\n${statusColor}STATUS: ${statusText}§r`;
+        const buttonText = `§l§d${achievement.name}§r\n${statusColor}Status: ${statusText}§r`;
         form.button(buttonText, achievement.icon);
     }
 
@@ -499,7 +499,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
         .title(`§l§5${achievement.name}§r`)
         .body(
             `${achievement.description}\n\n` +
-            `${statusColor}STATUS: ${statusText}§r`
+            `${statusColor}Status: ${statusText}§r`
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -567,20 +567,10 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
 
 // Helper function to give the guide book to the player
 
-function giveGuideBook(player) {
-	const guideBook = new ItemStack("goe_tnt:guide_book", 1);
-	const inventory = player.getComponent("minecraft:inventory").container;
-
-	if (inventory) {
-		inventory.addItem(guideBook);
-		player.setDynamicProperty("goe_tnt_has_guide_book", true);
-	}
-}
 export function onPlayerSpawn(event) {
 	const player = event.player;
 
-	// TODO - replace this illegal item giving into structure load
 	if (!player.getDynamicProperty("goe_tnt_has_guide_book")) {
-		system.runTimeout(() => { giveGuideBook(player); }, 100);
+        utils.runPlayerCommand(player, `structure load goe_tnt:guide_book ~ ~ ~`);
 	}
 }

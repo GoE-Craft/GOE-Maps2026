@@ -47,6 +47,13 @@ function unlockTntAchievement(player, tntType) {
     utils.title(player, "@s", `§a§lAchievement Unlocked!`);
     utils.subtitle(player, "@s", `§e${achievementName}`, true);
 
+    // Increment total achievements count
+    const currentTotal = player.getDynamicProperty("goe_tnt_total_achievements_count");
+    const newTotal = (currentTotal !== undefined ? currentTotal : 0) + 1;
+    player.setDynamicProperty("goe_tnt_total_achievements_count", newTotal);
+
+    utils.actionbar(player, "@s", `§a Achievement Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`);
+
     utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §r- You have unlocked this achievement!`);
 
     const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
@@ -90,6 +97,13 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
 
         utils.title(player, "@s", `§6§lMilestone Unlocked!`);
         utils.subtitle(player, "@s", `§e${milestoneName}`, true);
+
+        // Increment total achievements count
+        const currentTotal = player.getDynamicProperty("goe_tnt_total_achievements_count");
+        const newTotal = (currentTotal !== undefined ? currentTotal : 0) + 1;
+        player.setDynamicProperty("goe_tnt_total_achievements_count", newTotal);
+
+        utils.actionbar(player, "@s", `§6 Milestone Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`);
 
         utils.tellraw(player, "@s", `§6[Milestone] §e${milestoneName} §r- You have reached this milestone!`);
 
