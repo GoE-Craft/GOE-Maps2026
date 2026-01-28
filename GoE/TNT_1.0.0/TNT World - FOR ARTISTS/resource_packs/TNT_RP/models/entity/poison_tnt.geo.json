@@ -260,7 +260,7 @@
 					]
 				},
 				{
-					"name": "glass",
+					"name": "semitransparent",
 					"pivot": [6.9, -1, -7.1],
 					"cubes": [
 						{
