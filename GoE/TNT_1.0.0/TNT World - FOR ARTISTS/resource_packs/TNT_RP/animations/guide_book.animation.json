@@ -1,0 +1,64 @@
+{
+    "format_version": "1.8.0",
+    "animations": {
+        "animation.goe_tnt.guide_book.hold.tp": {
+            "loop": "hold_on_last_frame",
+            "bones": {
+                "rightitem": {
+                    "rotation": [
+                        72.77061,
+                        -7.06413,
+                        17.64205
+                    ],
+                    "position": [
+                        3.89161,
+                        2.709,
+                        5.0641
+                    ],
+                    "scale": 1
+                },
+                "book": {
+                    "rotation": [
+                        178.0524,
+                        11.94124,
+                        -195.85057
+                    ],
+                    "position": [
+                        -4.31018,
+                        9.15594,
+                        -12.22745
+                    ]
+                }
+            }
+        },
+        "animation.goe_tnt.guide_book.hold.fp": {
+            "loop": true,
+            "bones": {
+                "rightitem": {
+                    "rotation": [
+                        150.45231,
+                        2.85956,
+                        18.33209
+                    ],
+                    "position": [
+                        -8.03088,
+                        5.06347,
+                        -3.98324
+                    ]
+                },
+                "book": {
+                    "rotation": [
+                        -181.23917,
+                        -359.9492,
+                        164.20126
+                    ],
+                    "position": [
+                        3.1834,
+                        5.87959,
+                        -10.33513
+                    ]
+                }
+            }
+        }
+    }
+}

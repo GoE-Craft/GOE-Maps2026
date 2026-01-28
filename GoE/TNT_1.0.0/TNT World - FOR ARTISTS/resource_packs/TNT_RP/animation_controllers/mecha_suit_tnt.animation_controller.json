@@ -1,0 +1,44 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.goe.tnt.mecha_suit_tnt": {
+      "initial_state": "idle",
+      "states": {
+        "idle": {
+          "animations": [ "idle" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
+          "transitions": [
+            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
+          ]
+        },
+        "charge": {
+          "animations": [ "charge" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
+          "transitions": [
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "charged": {
+          "animations": [ "charged" ],
+          "transitions": [
+            { "fire": "query.property('goe_tnt:tnt_action') == 'fire'" },
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "fire": {
+          "animations": [ "fire_right" ],
+          "sound_effects": [ { "effect": "fire_right" } ],
+          "transitions": [
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        }
+      }
+    }
+  }
+}

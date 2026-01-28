@@ -1,0 +1,67 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.goe.tnt.mecha_suit": {
+      "initial_state": "spawn",
+      "states": {
+        "spawn": {
+          "animations": [
+            "spawn"
+          ],
+          "transitions": [
+            { "idle": "query.all_animations_finished" },
+            { "death": "!q.is_alive" }
+          ]
+        },
+        "idle": {
+          "animations": [
+            "idle"
+          ],
+          "transitions": [
+            {
+              "walk_forward": "q.modified_move_speed > 0.1"
+            },
+            {
+              "death": "!q.is_alive"
+            }
+          ],
+          "blend_transition": 0.1
+        },
+        "walk_forward": {
+          "animations": [
+            "walk_forward"
+          ],
+          "transitions": [
+            {
+              "walk_to_idle": "q.modified_move_speed < 0.1"
+            },
+            {
+              "death": "!q.is_alive"
+            }
+          ],
+          "blend_transition": 0.1
+        },
+        "walk_to_idle": {
+          "animations": [
+            "walk_to_idle"
+          ],
+          "transitions": [
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
+            {
+              "walk_forward": "q.modified_move_speed > 0.1"
+            },
+            {
+              "death": "!q.is_alive"
+            }
+          ],
+          "blend_transition": 0.1
+        },
+        "death": {
+          "animations": [
+            "death"
+          ]
+        }
+      }
+    }
+  }
+}

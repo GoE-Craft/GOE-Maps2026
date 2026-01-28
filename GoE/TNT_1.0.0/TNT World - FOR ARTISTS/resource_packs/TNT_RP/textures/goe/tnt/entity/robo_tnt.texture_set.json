@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "robo_tnt",
+		"metalness_emissive_roughness": "robo_tnt_mer",
+		"heightmap": "robo_tnt_height"
+	}
+}

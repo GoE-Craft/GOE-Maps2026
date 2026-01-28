@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "bloom_tnt",
+		"metalness_emissive_roughness_subsurface": "bloom_tnt_mers",
+		"heightmap": "bloom_tnt_height"
+	}
+}

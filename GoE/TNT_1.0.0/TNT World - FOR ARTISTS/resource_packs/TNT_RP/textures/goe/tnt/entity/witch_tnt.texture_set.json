@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "witch_tnt",
+		"metalness_emissive_roughness": "witch_tnt_mer",
+		"heightmap": "witch_tnt_height"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "crater_tnt",
+		"metalness_emissive_roughness": "crater_tnt_mer",
+		"heightmap": "crater_tnt_height"
+	}
+}

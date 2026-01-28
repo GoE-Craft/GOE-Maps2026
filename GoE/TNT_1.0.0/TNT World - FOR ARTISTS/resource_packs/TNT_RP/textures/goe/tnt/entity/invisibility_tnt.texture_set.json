@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "invisibility_tnt",
+		"metalness_emissive_roughness": "invisibility_tnt_mer",
+		"heightmap": "invisibility_tnt_height"
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "acid_tnt",
+		"metalness_emissive_roughness_subsurface": "acid_tnt_mers",
+		"heightmap": "acid_tnt_height"
+	}
+}

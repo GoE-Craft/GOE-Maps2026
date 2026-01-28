@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "maze_tnt",
+		"metalness_emissive_roughness": "maze_tnt_mer",
+		"heightmap": "maze_tnt_height"
+	}
+}

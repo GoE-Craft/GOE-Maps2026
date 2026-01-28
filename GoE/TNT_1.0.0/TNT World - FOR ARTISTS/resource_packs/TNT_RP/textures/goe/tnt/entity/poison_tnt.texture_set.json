@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "poison_tnt",
+		"metalness_emissive_roughness_subsurface": "poison_tnt_mers",
+		"heightmap": "poison_tnt_height"
+	}
+}

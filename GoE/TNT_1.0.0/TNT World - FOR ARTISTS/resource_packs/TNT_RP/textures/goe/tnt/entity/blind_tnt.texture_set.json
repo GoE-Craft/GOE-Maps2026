@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "blind_tnt",
+		"metalness_emissive_roughness": "blind_tnt_mer",
+		"heightmap": "blind_tnt_height"
+	}
+}

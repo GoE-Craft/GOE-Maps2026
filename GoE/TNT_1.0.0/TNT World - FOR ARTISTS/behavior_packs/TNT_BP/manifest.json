@@ -1,0 +1,44 @@
+{
+  "format_version": 2,
+  "header": {
+    "min_engine_version": [ 1, 21, 130 ],
+    "name": "pack.name",
+    "description": "Tons of TNT's!!!.",
+    "uuid": "18943ca9-7d9a-4c26-bc9e-4fe933672ca8",
+    "pack_scope": "world",
+    "version": [ 1, 0, 0 ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "4422d894-7b9c-4346-b1ac-5f7bbe6c27ba",
+      "version": [ 1, 0, 0 ]
+    },
+    {
+      "description": "Game Main Loop",
+      "type": "script",
+      "uuid": "bf108d26-3883-4ade-9842-fa65e643f33b",
+      "version": [ 1, 0, 0 ],
+      "language": "javascript",
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.4.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    },
+    {
+      "uuid": "eb91a2b9-ca42-4082-9a42-fbf2b460ecbe",
+      "version": [ 1, 0, 0 ]
+    }
+  ],
+  "metadata": {
+    "product_type": "addon",
+    "authors": [ "GOE Craft", "All Rights Reserved." ]
+  }
+}

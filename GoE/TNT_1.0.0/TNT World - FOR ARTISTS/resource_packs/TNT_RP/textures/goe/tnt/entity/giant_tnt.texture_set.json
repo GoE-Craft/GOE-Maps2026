@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "giant_tnt",
+		"metalness_emissive_roughness": "giant_tnt_mer",
+		"heightmap": "giant_tnt_height"
+	}
+}

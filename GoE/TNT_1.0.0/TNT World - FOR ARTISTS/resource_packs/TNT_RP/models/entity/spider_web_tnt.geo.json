@@ -1,0 +1,30 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.spider_web_tnt",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "bone",
+					"pivot": [-0.55, 20.4, -0.61464],
+					"cubes": [
+						{"origin": [-8.05, -0.1, -8.01464], "size": [16, 16, 16], "uv": [0, 0]},
+						{"origin": [-3.38536, -0.1, 11.3392], "size": [0, 10, 7], "pivot": [-3.35, 4.9, 0.03536], "rotation": [0, 90, 0], "uv": [46, 34]},
+						{"origin": [-0.01464, -0.1, 14.6392], "size": [0, 10, 7], "pivot": [-0.05, 4.9, 3.33536], "rotation": [-180, 0, 180], "uv": [46, 53], "mirror": true},
+						{"origin": [0.05607, -0.1, 7.96849], "size": [0, 10, 7], "uv": [64, 34]},
+						{"origin": [3.31464, -0.1, 11.3392], "size": [0, 10, 7], "pivot": [3.35, 4.9, 0.03536], "rotation": [0, -90, 0], "uv": [64, 53]},
+						{"origin": [-0.55, 15.9, -9.91464], "size": [0, 9, 22], "pivot": [-0.55, 20.4, 0.58536], "rotation": [0, 134, 0], "uv": [0, 32]},
+						{"origin": [-0.55, 15.9, -11.11464], "size": [0, 9, 22], "pivot": [-0.55, 20.4, -0.61464], "rotation": [0, 44.5, 0], "uv": [0, 32]}
+					]
+				}
+			]
+		}
+	]
+}

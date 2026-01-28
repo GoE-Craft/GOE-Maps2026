@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "puzzle_tnt",
+		"metalness_emissive_roughness": "puzzle_tnt_mer",
+		"heightmap": "puzzle_tnt_height"
+	}
+}

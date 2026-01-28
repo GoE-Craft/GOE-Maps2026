@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "directional_tnt",
+		"metalness_emissive_roughness": "directional_tnt_mer",
+		"heightmap": "directional_tnt_height"
+	}
+}

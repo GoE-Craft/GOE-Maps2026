@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "void_hole_tnt",
+		"metalness_emissive_roughness": "void_hole_tnt_mer",
+		"heightmap": "void_hole_tnt_height"
+	}
+}

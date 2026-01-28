@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "crops_tnt",
+		"metalness_emissive_roughness_subsurface": "crops_tnt_mers",
+		"heightmap": "crops_tnt_height"
+	}
+}

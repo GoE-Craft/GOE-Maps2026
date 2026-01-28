@@ -1,0 +1,32 @@
+{
+    "format_version": "1.21.130",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "goe_tnt:shop_buy",
+            "materials": {
+                "default": "entity",
+                "alpha": "entity_alphatest"
+            },
+            "textures": {
+                "default": "textures/goe/tnt/entity/empty"
+            },
+            "render_controllers": [
+                "controller.render.default"
+            ],
+            "geometry": {
+                "default": "geometry.goe_tnt.empty"
+            },
+            "particle_effects": {
+                "particle": "goe_tnt:shop_buy"
+            },
+            "animations": {
+                "particles": "animation.goe_tnt.shop.particles"
+            },
+            "scripts": {
+                "animate": [
+                    "particles"
+                ]
+            }
+        }
+    }
+}

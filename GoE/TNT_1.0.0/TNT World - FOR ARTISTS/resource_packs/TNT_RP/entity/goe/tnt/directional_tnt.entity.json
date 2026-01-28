@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:directional_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/directional_tnt"
+      },
+      "geometry": {
+        "default": "geometry.directional_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"tnt_swelling": "v.should_swell"},
+          {"directional_tnt_drill": "q.mark_variant == 1"}
+        ]
+			},
+      "animations": {
+        "tnt_swelling": "animation.tnt.swell",
+        "directional_tnt_drill": "animation.directional_tnt.drill"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "healing_tnt",
+		"metalness_emissive_roughness": "healing_tnt_mer",
+		"heightmap": "healing_tnt_height"
+	}
+}

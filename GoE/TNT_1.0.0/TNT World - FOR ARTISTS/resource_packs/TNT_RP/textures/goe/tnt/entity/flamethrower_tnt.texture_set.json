@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "flamethrower_tnt",
+		"metalness_emissive_roughness": "flamethrower_tnt_mer",
+		"heightmap": "flamethrower_tnt_height"
+	}
+}

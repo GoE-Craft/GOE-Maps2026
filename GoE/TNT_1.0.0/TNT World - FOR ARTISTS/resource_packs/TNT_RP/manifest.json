@@ -1,0 +1,31 @@
+{
+  "format_version": 2,
+  "header": {
+    "min_engine_version": [ 1, 21, 130 ],
+    "name": "pack.name",
+    "description": "Tons of TNT's!!!.",
+    "uuid": "eb91a2b9-ca42-4082-9a42-fbf2b460ecbe",
+    "pack_scope": "world",
+    "version": [ 1, 0, 0 ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "f5fd7dbe-d4ed-432a-8431-93e059ea77b4",
+      "version": [ 1, 0, 0 ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "18943ca9-7d9a-4c26-bc9e-4fe933672ca8",
+      "version": [ 1, 0, 0 ]
+    }
+  ],
+  "capabilities": [
+    "pbr"
+  ],
+  "metadata": {
+    "product_type": "addon",
+    "authors": [ "GOE Craft", "All Rights Reserved." ]
+  }
+}

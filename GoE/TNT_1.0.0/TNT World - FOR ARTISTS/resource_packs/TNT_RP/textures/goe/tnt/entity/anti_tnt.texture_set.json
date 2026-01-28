@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "anti_tnt",
+		"metalness_emissive_roughness": "anti_tnt_mer",
+		"heightmap": "anti_tnt_height"
+	}
+}

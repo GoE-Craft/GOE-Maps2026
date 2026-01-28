@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "zombie_tnt",
+		"metalness_emissive_roughness": "zombie_tnt_mer",
+		"heightmap": "zombie_tnt_height"
+	}
+}

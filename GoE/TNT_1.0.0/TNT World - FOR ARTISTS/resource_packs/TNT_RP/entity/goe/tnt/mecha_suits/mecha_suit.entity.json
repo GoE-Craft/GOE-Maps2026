@@ -1,0 +1,54 @@
+{
+	"format_version": "1.19.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "goe_tnt:mecha_suit",
+			"materials": {
+				"default": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/goe/tnt/entity/mecha_suits/mecha_suit"
+			},
+			"geometry": {
+				"default": "geometry.goe_tnt.mecha_suit"
+			},
+			"render_controllers": [ "controller.render.goe_tnt.mecha_suit" ],
+
+			"particle_effects": {
+				"mecha_suit_fire": "goe_tnt:mecha_suit_fire"
+			},
+			"sound_effects": {
+				"walk": "goe_tnt:mecha_suit_walk",
+				"death": "goe_tnt:mecha_suit_death",
+				"hurt": "goe_tnt:mecha_suit_hurt",
+				"fire_right": "goe_tnt:mecha_suit_fire_right",
+				"charge_sound": "goe_tnt:mecha_suit_charge_sound"
+			},
+			"animations": {
+				"controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",
+				"controller.mecha_suit_tnt": "controller.animation.goe.tnt.mecha_suit_tnt",
+
+				"idle": "animation.mecha_suit.idle",
+				"spawn" : "animation.mecha_suit.spawn",
+				"death" : "animation.mecha_suit.death",
+				"charged": "animation.mecha_suit.charged",
+				"walk_forward": "animation.mecha_suit.walk",
+				"walk_back": "animation.mecha_suit.walk_back",
+				"walk_left": "animation.mecha_suit.strafe_left",
+				"walk_right": "animation.mecha_suit.strafe_right",
+				"walk_to_idle": "animation.mecha_suit.walk_to_idle",
+
+				"charge": "animation.mecha_suit.charge",
+				"fire_right": "animation.mecha_suit.fire_right"
+			},
+
+			"scripts": {
+				"animate": [
+					"controller.mecha_suit",
+					"controller.mecha_suit_tnt"
+				]
+			},
+			"spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }
+		}
+	}
+}
