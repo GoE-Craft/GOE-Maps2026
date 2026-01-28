@@ -1,3 +1,18 @@
+//////////////////// GUIDE BOOK ////////////////////
+
+#guide_book
+type=items
+item=goe_tnt:guide_book 0 1
+
+/////////////////// STARTER KIT /////////////////////
+
+#starter_kit
+type=items
+item=minecraft:gunpowder 0 3
+item=minecraft:tnt 0 3
+item=goe_tnt:directional_tnt 0 1
+
+///////////////////////////////////////////////////
 
 #singularity_tnt_structure
 type=area

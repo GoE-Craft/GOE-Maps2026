@@ -6,6 +6,7 @@ import { GuideBookComponent } from "./book";
 import * as tnt_manager from "./tnt_manager";
 import * as tnt_gld from "./gld/tnt_gld";
 import * as achievements from "./achievements";
+import * as book from "./book";
 
 
 export async function onLoadFirstTime(player0) {}
@@ -22,7 +23,9 @@ export async function onTick() {}
 
 export async function onPlayerJoin(event) {}
 
-export async function onPlayerSpawn(event) {}
+export async function onPlayerSpawn(event) {
+      await book.onPlayerSpawn(event);
+}
 
 export async function onEntitySpawn(event) {
     tnt_manager.handleEntitySpawn(event);

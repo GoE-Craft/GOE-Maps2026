@@ -1,7 +1,10 @@
+import { system, ItemStack } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 import { ShopItems, formatPrice, PriceTypeNames, Achievements, getAllAchievements, getAchievementsByCategory } from "./gld/book_gld";
 import { purchaseItem, getPlayerResourceAmount } from "./shop";
 import * as achievements from "./achievements";
+import * as utils from "./utils";
+
 
 export const GuideBookComponent = {
     onUse(event, params) {
@@ -51,6 +54,7 @@ export async function showIntroPage(player) {
 
         if (response.selection === 0) {
             // add sound
+            utils.runPlayerCommand(player, `structure load goe_tnt:starter_kit ~ ~ ~`);
             player.setDynamicProperty("goe_tnt_has_seen_intro", true);
             showMainPage(player);
         }
@@ -558,4 +562,25 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
             }
         }
     });
+}
+
+
+// Helper function to give the guide book to the player
+
+function giveGuideBook(player) {
+	const guideBook = new ItemStack("goe_tnt:guide_book", 1);
+	const inventory = player.getComponent("minecraft:inventory").container;
+
+	if (inventory) {
+		inventory.addItem(guideBook);
+		player.setDynamicProperty("goe_tnt_has_guide_book", true);
+	}
+}
+export function onPlayerSpawn(event) {
+	const player = event.player;
+
+	// TODO - replace this illegal item giving into structure load
+	if (!player.getDynamicProperty("goe_tnt_has_guide_book")) {
+		system.runTimeout(() => { giveGuideBook(player); }, 100);
+	}
 }
