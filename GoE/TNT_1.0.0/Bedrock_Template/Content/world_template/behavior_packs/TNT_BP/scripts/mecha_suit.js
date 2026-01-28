@@ -36,7 +36,7 @@ const lastActionbarByPlayer = new Map();
 const nextFireHandRightByMecha = new Map(); // true = fire_right next, false = fire_left next
 
 // custom tnt contact explosion tracking
-const customProjectileById = new Map(); // entity, tntData, lastPos, spawnTick, dimKey, yawDeg, wasMoving
+const customProjectileById = new Map(); // entity, tntData, lastPos, spawnTick, dimensionId, yawDeg, wasMoving
 let customProjectileCollisionTickSetup = false; // ensures collision tick loop is only registered once
 
 const CLAMP_PITCH_MIN = -35; // projectile pitch clamp min (matches animation)
@@ -315,28 +315,33 @@ function toTntManagerDimKey(dimId) {
 
 // immediately detonates a custom projectile using tnt_manager logic (skipping fuse)
 function explodeCustomProjectileNow(entity, tntData) {
-	if (!isEntityValid(entity)) return;
+	if (!isEntityValid(entity) || !tntData) return;
 
-	let dim;
 	let dimId;
 	let loc;
 	let rot;
 
-	try { dim = entity.dimension; } catch { dim = undefined; }
-	try { dimId = dim?.id; } catch { dimId = undefined; }
+	try { dimId = entity.dimension?.id; } catch { dimId = undefined; }
 	try { loc = { x: entity.location.x, y: entity.location.y, z: entity.location.z }; } catch { loc = undefined; }
 	try { rot = entity.getRotation?.(); } catch { rot = undefined; }
 
-	if (!dim || !loc || !tntData) return;
+	if (!dimId || !loc) return;
 
-	const dimKey = toTntManagerDimKey(dimId);
 	const yaw = (rot && typeof rot.y === "number") ? rot.y : undefined;
 
 	try { entity.remove(); } catch { }
 
-	// use tnt_manager custom explosion logic, but skip fuse (0 ticks)
 	try {
-		tnt_manager.igniteTNT(loc, 0, 0, tntData, dimKey, undefined, yaw);
+		tnt_manager.igniteTNT(
+			loc,
+			1,
+			0,
+			0,
+			tntData,
+			dimId,
+			{ x: 0, y: 0, z: 0 },
+			yaw
+		);
 	} catch { }
 }
 
@@ -354,14 +359,23 @@ function setupCustomProjectileCollisionTick() {
 			if (!entity || !tntData || !isEntityValid(entity)) {
 				const spawnTick2 = info?.spawnTick ?? system.currentTick;
 				const lastPos2 = info?.lastPos;
-				const dimKey2 = info?.dimKey;
+				const dimensionId2 = info?.dimensionId;
 				const yawDeg2 = info?.yawDeg;
 
 				customProjectileById.delete(id);
 
-				if (lastPos2 && dimKey2 && (system.currentTick - spawnTick2) > 0) {
+				if (lastPos2 && dimensionId2) {
 					try {
-						tnt_manager.igniteTNT(lastPos2, 0, 0, tntData, dimKey2, undefined, yawDeg2);
+						tnt_manager.igniteTNT(
+							lastPos2,
+							1,
+							0,
+							0,
+							tntData,
+							dimensionId2,
+							{ x: 0, y: 0, z: 0 },
+							yawDeg2
+						);
 					} catch { }
 				}
 
@@ -501,7 +515,7 @@ function spawnPropelledTnt(mecha, player, tntData, isVanilla, fireRight) {
 		tntData: tntData,
 		lastPos: { x: shotEntity.location.x, y: shotEntity.location.y, z: shotEntity.location.z },
 		spawnTick: system.currentTick,
-		dimKey: toTntManagerDimKey(dimension?.id),
+		dimensionId: dimension?.id,
 		yawDeg: undefined
 	});
 
