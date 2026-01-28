@@ -34,7 +34,7 @@ export const ShopItems = {
         {
             id: "directional_tnt",
             name: "Directional TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/directional_tnt",
             itemId: "goe_tnt:directional_tnt"
         },
@@ -48,182 +48,182 @@ export const ShopItems = {
         {
             id: "magnet_tnt",
             name: "Magnet TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 4 },
             icon: "textures/goe/tnt/ui/shop/tnt/magnet_tnt",
             itemId: "goe_tnt:magnet_tnt"
         },
         {
             id: "chunker_tnt",
             name: "Chunker TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "gold_ingot", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/chunker_tnt",
             itemId: "goe_tnt:chunker_tnt"
         },
         {
             id: "ultron_tnt",
             name: "Ultron TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/ultron_tnt",
             itemId: "goe_tnt:ultron_tnt"
         },
         {
             id: "freezing_tnt",
             name: "Freezing TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/freezing_tnt",
             itemId: "goe_tnt:freezing_tnt"
         },
         {
             id: "tree_planter_tnt",
             name: "Tree Planter TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "copper_ingot", amount: 2 },
             icon: "textures/goe/tnt/ui/shop/tnt/tree_planter_tnt",
             itemId: "goe_tnt:tree_planter_tnt"
         },
         {
             id: "thunderstorm_tnt",
             name: "Thunderstorm TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/thunderstorm_tnt",
             itemId: "goe_tnt:thunderstorm_tnt"
         },
         {
             id: "dimensional_tnt",
             name: "Dimensional TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/dimensional_tnt",
             itemId: "goe_tnt:dimensional_tnt"
         },
         {
             id: "weather_station_tnt",
             name: "Weather Station TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/weather_station_tnt",
             itemId: "goe_tnt:weather_station_tnt"
         },
         {
             id: "time_freeze_tnt",
             name: "Time Freeze TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "gold_ingot", amount: 25 },
             icon: "textures/goe/tnt/ui/shop/tnt/time_freeze_tnt",
             itemId: "goe_tnt:time_freeze_tnt"
         },
         {
             id: "arrow_storm_tnt",
             name: "Arrow Storm TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/arrow_storm_tnt",
             itemId: "goe_tnt:arrow_storm_tnt"
         },
         {
             id: "teleportation_tnt",
             name: "Teleportation TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/teleportation_tnt",
             itemId: "goe_tnt:teleportation_tnt"
         },
         {
             id: "prison_tnt",
             name: "Prison TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/prison_tnt",
             itemId: "goe_tnt:prison_tnt"
         },
         {
             id: "structure_tnt",
             name: "Structure TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "copper_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/structure_tnt",
             itemId: "goe_tnt:structure_tnt"
         },
         {
             id: "atmosphere_tnt",
             name: "Atmosphere TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "copper_ingot", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/atmosphere_tnt",
             itemId: "goe_tnt:atmosphere_tnt"
         },
         {
             id: "healing_tnt",
             name: "Healing TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/healing_tnt",
             itemId: "goe_tnt:healing_tnt"
         },
         {
             id: "villager_decoy_tnt",
             name: "Villager Decoy TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/villager_decoy_tnt",
             itemId: "goe_tnt:villager_decoy_tnt"
         },
         {
             id: "honey_tnt",
             name: "Honey TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "copper_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/honey_tnt",
             itemId: "goe_tnt:honey_tnt"
         },
         {
             id: "cloning_tnt",
             name: "Cloning TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/cloning_tnt",
             itemId: "goe_tnt:cloning_tnt"
         },
         {
             id: "beacon_tnt",
             name: "Beacon TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/beacon_tnt",
             itemId: "goe_tnt:beacon_tnt"
         },
         {
             id: "endermite_decoy_tnt",
             name: "Endermite Decoy TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 30 },
             icon: "textures/goe/tnt/ui/shop/tnt/endermite_decoy_tnt",
             itemId: "goe_tnt:endermite_decoy_tnt"
         },
         {
             id: "glass_tnt",
             name: "Glass TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "gold_ingot", amount: 20 },
             icon: "textures/goe/tnt/ui/shop/tnt/glass_tnt",
             itemId: "goe_tnt:glass_tnt"
         },
         {
             id: "furnace_tnt",
             name: "Furnace TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "copper_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/furnace_tnt",
             itemId: "goe_tnt:furnace_tnt"
         },
         {
             id: "mob_eraser_tnt",
             name: "Mob Eraser TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "emerald", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/mob_eraser_tnt",
             itemId: "goe_tnt:mob_eraser_tnt"
         },
         {
             id: "magma_eraser_tnt",
             name: "Magma Eraser TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "gold_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/magma_eraser_tnt",
             itemId: "goe_tnt:magma_eraser_tnt"
         },
         {
             id: "light_up_tnt",
             name: "Light Up TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "gold_ingot", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/light_up_tnt",
             itemId: "goe_tnt:light_up_tnt"
         },
         {
             id: "theif_tnt",
             name: "Thief TNT",
-            price: { type: "copper_ingot", amount: 4 },
+            price: { type: "iron_ingot", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/theif_tnt",
             itemId: "goe_tnt:theif_tnt"
         }
@@ -231,13 +231,37 @@ export const ShopItems = {
 
     // TNT Structures category
     structures: [
-        // Structure items will be added here
-        // {
-        //     id: "structure_id",
-        //     name: "Structure Name",
-        //     price: { type: "copper_ingot", amount: 10 },
-        //     icon: "textures/goe/tnt/ui/shop/structures/structure_name"
-        // }
+        //Structure items will be added here
+        {
+            id: "structure_id",
+            name: "Directional TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/directional_tnt"
+        },
+        {
+            id: "structure_id",
+            name: "Party TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/party_tnt"
+        },
+        {
+            id: "structure_id",
+            name: "Magnet TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/magnet_tnt"
+        },
+        {
+            id: "structure_id",
+            name: "Ultron TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/ultron_tnt"
+        },
+        {
+            id: "structure_id",
+            name: "Chunker TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/chunker_tnt"
+        }
     ]
 };
 
