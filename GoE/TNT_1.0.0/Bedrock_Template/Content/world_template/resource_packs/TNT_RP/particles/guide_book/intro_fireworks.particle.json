@@ -17,16 +17,12 @@
 				"max_particles": 250
 			},
 			"minecraft:emitter_lifetime_once": {
-				"active_time": 1.21
+				"active_time": 2.21
 			},
 			"minecraft:emitter_shape_disc": {
-				"offset": [
-					0,
-					5,
-					0
-				],
-				"radius": 2,
-				"plane_normal": "z",
+				"offset": ["-math.cos(variable.emitter_age*200)*3", 5, "-math.sin(variable.emitter_age*200)*3"],
+				"radius": 1,
+				"plane_normal": ["math.cos(variable.emitter_age*300)*4", "math.sin(variable.emitter_age*300)*4", "math.cos(variable.emitter_age*300)*4"],
 				"direction": "outwards"
 			},
 			"minecraft:particle_initialization": {
@@ -40,35 +36,19 @@
 			},
 			"minecraft:particle_initial_speed": 6,
 			"minecraft:particle_motion_dynamic": {
-				"linear_acceleration": [
-					"math.sin(v.particle_age * 90)",
-					-10,
-					"math.cos(v.particle_age * 40)"
-				],
+				"linear_acceleration": ["math.sin(v.particle_age * 90)", -10, "math.cos(v.particle_age * 40)"],
 				"linear_drag_coefficient": 1
 			},
 			"minecraft:particle_appearance_billboard": {
-				"size": [
-					"0.5 * v.size_over_life",
-					"0.6 * v.size_over_life"
-				],
+				"size": ["(0.3 * v.size_over_life) * v.particle_random_3", "0.6 * v.size_over_life"],
 				"facing_camera_mode": "lookat_direction",
 				"uv": {
 					"texture_width": 32,
 					"texture_height": 192,
 					"flipbook": {
-						"base_UV": [
-							0,
-							98
-						],
-						"size_UV": [
-							32,
-							32
-						],
-						"step_UV": [
-							0,
-							32
-						],
+						"base_UV": [0, 98],
+						"size_UV": [32, 32],
+						"step_UV": [0, 32],
 						"frames_per_second": 14,
 						"max_frame": 7,
 						"stretch_to_lifetime": true
