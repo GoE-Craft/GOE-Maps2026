@@ -21,7 +21,7 @@
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.matrix_tnt",
-      "minecraft:material_instances": { "*": { "texture": "matrix_tnt", "render_method": "alpha_test" } },
+      "minecraft:material_instances": { "*": { "texture": "matrix_tnt", "render_method": "blend"} },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },
