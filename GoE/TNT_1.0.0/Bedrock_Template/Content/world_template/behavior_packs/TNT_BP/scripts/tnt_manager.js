@@ -32,16 +32,7 @@ export function activateTNTBlock(block) {
 
     system.run(() => {
         // Try to derive spawn yaw from block facing state/properties
-        let spawnYaw = undefined;
-        try {
-            if (direction && typeof direction === "string") {
-                const f = direction.toLowerCase();
-                if (f.includes("north")) spawnYaw = 180;
-                else if (f.includes("south")) spawnYaw = 0;
-                else if (f.includes("west")) spawnYaw = 90;
-                else if (f.includes("east")) spawnYaw = -90;
-            }
-        } catch (e) {}
+        const spawnYaw = getYawFromFace(direction);
 
         igniteTNT(location, chargeLevel, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
     });
@@ -53,7 +44,8 @@ export function activateTNTBlock(block) {
 
 export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw) {
     const dim = world.getDimension(dimension);
-    const entity = dim.spawnEntity(tntData.blockId, location, {initialRotation: spawnYaw ?? 0});
+    const yaw = spawnYaw ?? 0;
+    const entity = dim.spawnEntity(tntData.blockId, location, {initialRotation: yaw});
     const startTick = system.currentTick;
 
     // If impulse provided, apply it (TNT shot or TNT knocked by explosion)
@@ -66,7 +58,6 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
     // Only store what is needed for persistence
     entity.setDynamicProperty("goe_tnt_start_tick", startTick);
     entity.setDynamicProperty("goe_tnt_stage", "timer");
-    entity.setDynamicProperty("goe_tnt_tnt_type", tntData.tntType);
     entity.setDynamicProperty("goe_tnt_charge_level", chargeLevel);
 
     // Only store timer/fuse if not default for this TNT type
@@ -76,7 +67,7 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
     if (fuseDuration !== tntData.fuse) {
         entity.setDynamicProperty("goe_tnt_fuse", fuseDuration);
     }
-    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData, spawnYaw);
+    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData, yaw);
 }
 
 /**
@@ -340,28 +331,29 @@ function* restoreTNT() {
                 const startTick = entity.getDynamicProperty("goe_tnt_start_tick");
                 const timer = entity.getDynamicProperty("goe_tnt_timer") || 0;
                 const fuse = entity.getDynamicProperty("goe_tnt_fuse") || 80;
-                const tntType = entity.getDynamicProperty("goe_tnt_tnt_type") || "sample_tnt";
                 const chargeLevel = entity.getDynamicProperty("goe_tnt_charge_level") || 0;
 
                 // Fetch tntData from gld using stored type
-                const tntData = tnt_gld.getTntDataByName(tntType);
+                const tntData = tnt_gld.getTntDataByBlockId(entity.typeId);
 
                 if (stage === "timer") {
                     const elapsed = currentTick - startTick;
                     const remaining = Math.max(0, timer - elapsed);
 
-                    scheduleTimer(entity, chargeLevel, remaining, fuse, tntData);
+                    scheduleTimer(entity, chargeLevel, remaining, fuse, tntData, 0);
 
                 } else if (stage === "fuse") {
                     const fuseStart = entity.getDynamicProperty("goe_tnt_fuse_start") || startTick + timer;
                     const elapsed = currentTick - fuseStart;
                     const remaining = Math.max(0, fuse - elapsed);
 
-                    scheduleFuse(entity, chargeLevel, remaining, tntData);
+                    scheduleFuse(entity, chargeLevel, remaining, tntData, 0);
                 }
                 yield;
             }
-        } catch (e) {}
+        } catch (e) {
+            console.log("Error restoring TNT in dimension " + dim + ": " + e);
+        }
         yield;
     }
 }
@@ -386,6 +378,7 @@ export function handleEntitySpawn(event) {
         if (!tntData) return;
         
         let foundDispenser = false;
+        let spawnYaw = undefined;
         for (let dx = -1; dx <= 1 && !foundDispenser; dx++) {
             for (let dy = -1; dy <= 1 && !foundDispenser; dy++) {
                 for (let dz = -1; dz <= 1 && !foundDispenser; dz++) {
@@ -395,6 +388,12 @@ export function handleEntitySpawn(event) {
                         if (!block) continue;
                         const t = (block.typeId || "").toLowerCase();
                         if (t === "minecraft:dispenser") {
+                            const direction = block.permutation.getState("facing_direction"); // This is vanilla property 2-5
+                            spawnYaw = direction === 2 ? 180 :
+                                       direction === 3 ? 0 :
+                                       direction === 4 ? 90 :
+                                       direction === 5 ? 270 : undefined;
+                                       console.log("Dispenser facing direction: " + direction + " spawnYaw: " + spawnYaw);
                             foundDispenser = true;
                             break;
                         }
@@ -404,12 +403,15 @@ export function handleEntitySpawn(event) {
         }
 
         if (!foundDispenser) return;
-
-        // Ignite TNT immediately with no timer, default fuse
-        igniteTNT(entity.location, 0, tntData.fuseTime, tntData, entity.dimension.id);
-        // Remove the item entity
+        console.log("Dispenser detected spawning TNT item.");
         entity.remove();
-    } catch (e) {}
+        // Ignite TNT immediately with no timer, default fuse
+        igniteTNT(loc, 1, 0, tntData.fuseTime, tntData, dim.id, undefined, spawnYaw);
+        console.log("Ignited TNT spawned by dispenser.");
+        // Remove the item entity
+    } catch (e) {
+        console.log("Error handling dispenser TNT spawn: " + e);
+    }
 }
 
 function getImpactedBlocks(impactedBlocks) {
@@ -447,8 +449,12 @@ function* processExplosionEvent(impactedBlocks) {
         const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
         try {
             const gld = tnt_gld.getTntDataByBlockId(block.typeId);
-            const power = block.permutation.getState("goe_tnt:charge_level") || 1;
-            igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id);
+            if (!gld) continue;
+            const perm = block.permutation;
+            const power = perm.getState("goe_tnt:charge_level") || 1;
+            const direction = perm.getState("minecraft:cardinal_direction");
+            const spawnYaw = getYawFromFace(direction);
+            igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id, undefined, spawnYaw);
             block.setPermutation(BlockPermutation.resolve("minecraft:air"));
         } catch (e) {
             console.log("Error handling TNT chain reaction: " + e);
@@ -480,6 +486,10 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
         case "party": 
             // Spawn party TNT effect
             system.runJob(partyAction(dimension, chargeLevel, location));
+            break;
+        case "atmosphere":
+            // Atmosphere TNT - change the time
+            atmosphereAction(dimension, location);
             break;
         default:
             break;
@@ -599,7 +609,6 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
     }
 }
 
-
 function* partyAction(dimension, chargeLevel, location) {
     dimension.playSound("firework.blast", location);
     const radius = 2 + Math.floor(((2*0.25) * chargeLevel));
@@ -621,6 +630,10 @@ function* partyAction(dimension, chargeLevel, location) {
     }   
 }
 
+function atmosphereAction(dimension, location) {
+    // Do something
+}
+
 // Helper to run a generator job with tick delays
 function runJobWithDelays(gen) {
     function step(result) {
@@ -629,4 +642,16 @@ function runJobWithDelays(gen) {
         system.runTimeout(() => step(gen.next()), delay);
     }
     step(gen.next());
+}
+
+function getYawFromFace(direction) {
+    let spawnYaw = undefined;
+    if (direction && typeof direction === "string") {
+        const f = direction.toLowerCase();
+        if (f.includes("north")) spawnYaw = 180;
+        else if (f.includes("south")) spawnYaw = 0;
+        else if (f.includes("west")) spawnYaw = 90;
+        else if (f.includes("east")) spawnYaw = -90;
+    }
+    return spawnYaw;
 }

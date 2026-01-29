@@ -172,6 +172,7 @@
 				},
 				{
 					"name": "bone",
+					"parent": "bb_main",
 					"pivot": [-1.08, 5.965, 8.9],
 					"cubes": [
 						{
@@ -214,6 +215,7 @@
 				},
 				{
 					"name": "bone2",
+					"parent": "bb_main",
 					"pivot": [0.36763, 7.28144, -8.28515],
 					"rotation": [0, 180, 0],
 					"cubes": [
