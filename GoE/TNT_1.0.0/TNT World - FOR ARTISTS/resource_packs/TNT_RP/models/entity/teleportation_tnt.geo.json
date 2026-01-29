@@ -114,14 +114,7 @@
 								"up": {"uv": [78.1, 49.5], "uv_size": [2.4, 2]},
 								"down": {"uv": [90.1, 58.9], "uv_size": [14.8, -14.8]}
 							}
-						}
-					]
-				},
-				{
-					"name": "semitransparent",
-					"parent": "middle",
-					"pivot": [0, 0, 0],
-					"cubes": [
+						},
 						{
 							"origin": [-7.5, 3.6, -7.5],
 							"size": [15, 12, 15],

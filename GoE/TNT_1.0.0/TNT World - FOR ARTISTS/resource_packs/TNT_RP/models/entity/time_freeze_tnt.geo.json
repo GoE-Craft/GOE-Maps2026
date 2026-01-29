@@ -16,6 +16,7 @@
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{"origin": [-8, 2, -8], "size": [16, 6, 16], "uv": [80, 26]},
+						{"origin": [-8, 7.6, -8], "size": [16, 10, 16], "inflate": -0.3, "uv": [80, 0]},
 						{
 							"origin": [-8, 15.5, -8],
 							"size": [16, 6, 16],
@@ -69,14 +70,6 @@
 								"down": {"uv": [16, 83], "uv_size": [16, 0]}
 							}
 						}
-					]
-				},
-				{
-					"name": "semitransparent",
-					"parent": "bb_main",
-					"pivot": [0, 0, 0],
-					"cubes": [
-						{"origin": [-8, 7.6, -8], "size": [16, 10, 16], "inflate": -0.3, "uv": [80, 0]}
 					]
 				},
 				{
