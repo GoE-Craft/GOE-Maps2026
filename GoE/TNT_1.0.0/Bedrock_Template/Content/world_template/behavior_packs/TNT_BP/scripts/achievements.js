@@ -42,7 +42,8 @@ function unlockTntAchievement(player, tntType) {
     const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
     const achievementName = achievement ? achievement.name : tntType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-    player.playSound("random.levelup", { volume: 1.0, pitch: 1.0 });
+    // 1 achievement sound
+    player.playSound("goe_tnt:discovery_achievement_music"); // 1 achievement sound
 
     utils.title(player, "@s", `§a§lAchievement Unlocked!`);
     utils.subtitle(player, "@s", `§e${achievementName}`, true);
@@ -93,7 +94,7 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
 
     // Delay milestone message to show after TNT achievement message (40 ticks = ~2 seconds)
     system.runTimeout(() => {
-        player.playSound("random.levelup", { volume: 1.0, pitch: 1.0 });
+        player.playSound("goe_tnt:milestone_achievement_music"); // milestone achievements sound
 
         utils.title(player, "@s", `§6§lMilestone Unlocked!`);
         utils.subtitle(player, "@s", `§e${milestoneName}`, true);

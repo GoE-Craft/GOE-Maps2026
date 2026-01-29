@@ -14,7 +14,7 @@ export const GuideBookComponent = {
 };
 
 export async function onItemUse(player) {
-    player.playSound("goe_tnt:book_open");
+    player.playSound("goe_tnt:book_open_music"); // add sound
 
     const hasSeenIntro = player.getDynamicProperty("goe_tnt_has_seen_intro") === true;
     const hasPlayedFx = player.getDynamicProperty("goe_tnt_book_fx_played") === true;
@@ -53,7 +53,7 @@ export async function showIntroPage(player) {
         }
 
         if (response.selection === 0) {
-            // add sound
+            player.playSound("goe_tnt:book_page_change_music"); // add sound
             utils.runPlayerCommand(player, `structure load goe_tnt:starter_kit ~ ~ ~`);
             player.setDynamicProperty("goe_tnt_has_seen_intro", true);
             showMainPage(player);
@@ -73,7 +73,7 @@ export async function showMainPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         switch (response.selection) {
             case 0:
                 showInfoPage(player);
@@ -107,7 +107,7 @@ async function showInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        //todo add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         switch (response.selection) {
             case 0:
                 showTntsInfoPage(player);
@@ -150,7 +150,7 @@ async function showMechaSuitPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showInfoPage(player);
     });
 }
@@ -169,7 +169,7 @@ async function showShopInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showInfoPage(player);
     });
 }
@@ -186,7 +186,7 @@ async function showSettingsInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showInfoPage(player);
     });
 }
@@ -205,7 +205,7 @@ async function showAchievementsInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showInfoPage(player);
     });
 }
@@ -226,7 +226,7 @@ async function showTntsInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showInfoPage(player);
     });
 }
@@ -245,7 +245,7 @@ async function showStructuresInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showInfoPage(player);
     });
 }
@@ -260,7 +260,7 @@ async function showSettingsPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         showMainPage(player);
     });
 }
@@ -278,7 +278,7 @@ async function showShopPage(player) {
         if (response.canceled) {
             return;
         }
-        // add sound
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         switch (response.selection) {
             case 0:
                 // TNT Blocks category
@@ -315,12 +315,15 @@ async function showAccessoriesPage(player) {
 
     form.button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
+
+
     form.show(player).then(async (response) => {
         if (response.canceled) {
             return;
         }
         if (response.selection === items.length) {
             // Back button
+            player.playSound("goe_tnt:book_page_change_music"); // add sound
             showShopPage(player);
         } else {
             // Item selected - purchase directly
@@ -358,7 +361,7 @@ async function showTntsPage(player) {
         }
         if (response.selection === items.length) {
             // Back button
-            showShopPage(player);
+            player.playSound("goe_tnt:book_page_change_music"); // add sound
         } else {
             // Item selected - purchase directly
             const selectedItem = items[response.selection];
@@ -395,6 +398,7 @@ async function showStructuresPage(player) {
         }
         if (response.selection === items.length) {
             // Back button
+            player.playSound("goe_tnt:book_page_change_music"); // add sound
             showShopPage(player);
         } else {
             // Item selected - purchase directly
@@ -412,6 +416,7 @@ async function showStructuresPage(player) {
 }
 
 async function showAchievementListPage(player) {
+
     const allMilestones = getAchievementsByCategory("milestones");
     const allTntAchievements = getAchievementsByCategory("tnt_individual");
     const unlockedMilestones = achievements.getUnlockedMilestones(player);
@@ -468,6 +473,7 @@ async function showAchievementListPage(player) {
         if (response.selection === allAchievements.length) {
             // Back button
             showMainPage(player);
+            player.playSound("goe_tnt:book_page_change_music"); // add sound
         } else {
             // Achievement selected - show details
             const selectedAchievement = allAchievements[response.selection];
@@ -479,6 +485,8 @@ async function showAchievementListPage(player) {
 }
 
 async function showAchievementDetailsPage(player, achievement, backCallback) {
+    player.playSound("goe_tnt:book_page_change_music"); // add sound
+
     let isUnlocked = false;
     let statusText = "";
     let statusColor = "";
@@ -512,6 +520,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
         }
         if (response.selection === 0) {
             // Back button
+            player.playSound("goe_tnt:book_page_change_music"); // add sound
             if (backCallback) {
                 backCallback();
             }
@@ -522,7 +531,8 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
 async function showInsufficientResourcesForm(player, item, backCallback) {
     // Play failure sound and effect
     try {
-        player.playSound("mob.villager.death", { volume: 1.0, pitch: 0.5 });
+
+        player.playSound("goe_tnt:shop_decline_music"); // add sound
 
         const dir = player.getViewDirection();
         const pos = player.location;
@@ -558,6 +568,7 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
         if (response.canceled) {
             return;
         }
+        player.playSound("goe_tnt:book_page_change_music"); // add sound
         if (response.selection === 0) {
             // Back button - call the callback to return to previous page
             if (backCallback) {
@@ -571,9 +582,9 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
 // Helper function to give the guide book to the player
 
 export function onPlayerSpawn(event) {
-	const player = event.player;
+    const player = event.player;
 
-	if (!player.getDynamicProperty("goe_tnt_has_guide_book")) {
+    if (!player.getDynamicProperty("goe_tnt_has_guide_book")) {
         utils.runPlayerCommand(player, `structure load goe_tnt:guide_book ~ ~ ~`);
-	}
+    }
 }

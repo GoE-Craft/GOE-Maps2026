@@ -169,7 +169,8 @@ function getItemIdFromPriceType(priceType) {
 
 function playPurchaseSuccess(player, item) {
     try {
-        player.playSound("random.levelup", { volume: 1.0, pitch: 1.2 });
+        
+        player.playSound("goe_tnt:shop_buy_music"); // add sound
 
         const dir = player.getViewDirection();
         const pos = player.location;
@@ -186,7 +187,7 @@ function playPurchaseSuccess(player, item) {
 
 function playPurchaseFailure(player) {
     try {
-        player.playSound("mob.villager.death", { volume: 1.0, pitch: 0.5 });
+        player.playSound("goe_tnt:shop_decline_music"); // add sound
 
         const dir = player.getViewDirection();
         const pos = player.location;

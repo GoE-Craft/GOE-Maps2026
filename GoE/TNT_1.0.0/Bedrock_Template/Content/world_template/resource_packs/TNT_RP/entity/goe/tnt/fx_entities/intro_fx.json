@@ -20,7 +20,7 @@
                 "fireworks": "goe_tnt:intro_fireworks"
             },
             "sound_effects": {
-                "intro": "goe_tnt:intro_music"
+                "book_intro_music": "goe_tnt:book_intro_music"
             },
             "animations": {
                 "particles": "animation.goe_tnt.intro_fx.particles",

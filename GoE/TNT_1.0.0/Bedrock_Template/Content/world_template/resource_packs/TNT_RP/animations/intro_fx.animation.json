@@ -31,7 +31,7 @@
             "animation_length": 5,
             "sound_effects": {
                 "0.0": {
-                    "effect": "intro"
+                    "effect": "book_intro_music"
                 }
             }
         },
