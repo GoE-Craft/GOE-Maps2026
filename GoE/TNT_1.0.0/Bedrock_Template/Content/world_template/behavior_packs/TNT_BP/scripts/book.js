@@ -495,12 +495,15 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
     statusColor = isUnlocked ? "§a" : "§c";
     statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
 
+    let body = `§9Info:§r\n${achievement.info || ""}\n\n`;
+    if (achievement.tips && achievement.tips.trim()) {
+        body += `§6Tip:§r\n${achievement.tips}\n\n`;
+    }
+    body += `${statusColor}Status: ${statusText}§r`;
+
     const form = new ActionFormData()
         .title(`§l§5${achievement.name}§r`)
-        .body(
-            `${achievement.description}\n\n` +
-            `${statusColor}Status: ${statusText}§r`
-        )
+        .body(body)
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
