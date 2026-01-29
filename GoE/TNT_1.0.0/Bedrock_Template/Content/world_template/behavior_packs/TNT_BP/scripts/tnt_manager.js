@@ -8,6 +8,9 @@ const activeTimeouts = new Map();
 const countdownIntervals = new Map();
 const fuseEffectIntervals = new Map();
 
+// Used for tracking explosion power
+const explosionEntities = new Set();
+
 /**
  * Activate a TNT block at the given location
  * @param {Block} block - The TNT block to activate
@@ -236,11 +239,11 @@ function explode(entity, chargeLevel, tntData) {
             allowUnderwater: tntData.explosionProperties.allowUnderwater,
             source: entity
         });
+        
+        system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, entity?.getRotation()));
     } catch(e){
         if (entity.isValid) entity.remove();
     }
-
-    system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, entity.getRotation()));
 }
 
 function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
@@ -339,6 +342,7 @@ function* restoreTNT() {
                 const timer = entity.getDynamicProperty("goe_tnt_timer") || 0;
                 const fuse = entity.getDynamicProperty("goe_tnt_fuse") || 80;
                 const tntType = entity.getDynamicProperty("goe_tnt_tnt_type") || "sample_tnt";
+                const chargeLevel = entity.getDynamicProperty("goe_tnt_charge_level") || 0;
 
                 // Fetch tntData from gld using stored type
                 const tntData = tnt_gld.getTntDataByName(tntType);
@@ -347,14 +351,14 @@ function* restoreTNT() {
                     const elapsed = currentTick - startTick;
                     const remaining = Math.max(0, timer - elapsed);
 
-                    scheduleTimer(entity, remaining, fuse, tntData);
+                    scheduleTimer(entity, chargeLevel, remaining, fuse, tntData);
 
                 } else if (stage === "fuse") {
                     const fuseStart = entity.getDynamicProperty("goe_tnt_fuse_start") || startTick + timer;
                     const elapsed = currentTick - fuseStart;
                     const remaining = Math.max(0, fuse - elapsed);
 
-                    scheduleFuse(entity, remaining, tntData);
+                    scheduleFuse(entity, chargeLevel, remaining, tntData);
                 }
                 yield;
             }

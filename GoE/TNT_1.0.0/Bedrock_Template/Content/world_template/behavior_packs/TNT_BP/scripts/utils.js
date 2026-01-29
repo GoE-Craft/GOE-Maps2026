@@ -1,4 +1,4 @@
-import { ItemStack, world, system, Block, Entity, EntityComponentTypes, BlockPermutation } from "@minecraft/server";
+import { ItemStack, world, system, Block, Entity, EntityComponentTypes, BlockPermutation, GameMode } from "@minecraft/server";
 import * as Vector3 from "./vector3";
 
 export let overworld = undefined;
@@ -597,4 +597,24 @@ export function setBlockState(block, state, value, blockPermutation = undefined)
   block.setPermutation(
     blockPermutation ? blockPermutation.withState(state, value) : block.permutation.withState(state, value)
   );
+}
+
+export function damageHeldItem(player, amount) {
+  if (player.getGameMode() === GameMode.Creative) return;
+  const itemInHand = getItemInHand(player);
+  if (!itemInHand) return;
+
+  const durabilityComponent = itemInHand.getComponent("minecraft:durability");
+  if (!durabilityComponent) return;
+
+  if (durabilityComponent.damage >= durabilityComponent.maxDurability) {
+    // Item broke
+    setItemInHand(player, undefined);
+    player.playSound("random.break", { volume: 0.8 });
+    return;
+  } else {
+    durabilityComponent.damage += amount;
+  }
+
+  setItemInHand(player, itemInHand);
 }

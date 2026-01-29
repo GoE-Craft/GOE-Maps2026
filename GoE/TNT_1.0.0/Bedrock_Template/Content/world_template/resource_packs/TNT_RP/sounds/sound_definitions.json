@@ -91,13 +91,20 @@
 			"sounds": [
 				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_mount", "volume": 1 }
 			]
-		}/* ,
+		},
+		/* ,
 		"goe_tnt:mecha_suit_dismount_sound": {
 			"category": "hostile",
 			"sounds": [
 				{ "name": "sounds/mob/mecha_suit/goe_tnt_mecha_suit_dismount", "volume": 1 }
 			]
-		} */
+		}, */
+		"goe_tnt:tnt_detonator_laser": {
+			"category": "player",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/laser", "volume": 0.2, "pitch": 1.2 }
+			]
+		}
 
 	}
 }

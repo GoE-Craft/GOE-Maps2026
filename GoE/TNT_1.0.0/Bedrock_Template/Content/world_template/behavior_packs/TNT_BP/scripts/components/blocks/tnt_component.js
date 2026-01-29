@@ -1,7 +1,7 @@
 import { world, system, BlockPermutation, GameMode, EquipmentSlot, Direction, BlockVolume } from "@minecraft/server";
 import * as utils from "../../utils";
-import * as tnt_gld from "../../gld/tnt_gld";
 import * as tnt_manager from "../../tnt_manager";
+import { fireLaser } from "../items/tnt_detonator";
 
 // Helper script component for custom TNT blocks interaction and redstone ignition
 
@@ -31,13 +31,22 @@ export const TntCustomComponent = {
                 return;
             }
             const targetCharge = Math.min(chargeLevel + 1, 4);
-            console.log(`Setting TNT charge level to ${targetCharge}`);
             block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
             player.onScreenDisplay.setActionBar(`TNT Charge Level: §a${targetCharge}`);
             player.playSound("random.pop", block.location);
             const location = block.center();
             location.y += 1;
             block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location);
+        } else if (itemInHand?.typeId === "goe_tnt:tnt_detonator") {
+            // This overrides the item use on event so we are handling it here
+            const comp = itemInHand.getComponent("goe_tnt:tnt_detonator");
+            const params = comp.customComponentParameters;
+            if (!params) return;
+            
+            // Damage the held item
+            utils.damageHeldItem(player, 1);
+    
+            fireLaser(player, params);
         }
     },
     onTick(eventData) {
@@ -66,7 +75,6 @@ function toggleTimer(block, player) {
 export function updateTimerSet(location, dimension, timerState) {
     // Do not mutate the location object; use a plain object for the key
     const locKey = JSON.stringify({ x: location.x, y: location.y, z: location.z, dimension });
-    console.log(`Updating timer set for ${locKey} to ${timerState}`);
     if (timerState) {
         tntTimers.add(locKey);
     } else {

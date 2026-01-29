@@ -11,15 +11,26 @@
 		"components": {
 			"minecraft:max_stack_size": 1,
 			"minecraft:icon": "tnt_detonator",
+			"minecraft:durability": {
+				"damage_chance": {
+					"max": 100,
+					"min": 100
+				},
+				"max_durability": 20
+			},
 			"minecraft:cooldown": {
 				"category": "item_use",
 				"duration": 0.2
 			},
 			"goe_tnt:tnt_detonator": {
-				"range": 50,
+				"range": 30,
 				"area": true,
-				"radius": 5
-			}
+				"radius": 3
+			},
+			"minecraft:use_modifiers": {
+				"use_duration": 0
+			},
+			"minecraft:use_animation": "none"
 		}
 	}
 }
