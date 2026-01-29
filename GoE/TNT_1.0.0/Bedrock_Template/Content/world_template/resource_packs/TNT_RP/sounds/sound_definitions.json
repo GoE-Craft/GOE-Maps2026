@@ -8,11 +8,48 @@
 				"sounds/sfx/tnt/directional_tnt"
 			]
 		},
-		"goe_tnt:intro_music": {
+		// UI //////////////////////////////////////////
+		"goe_tnt:book_close_music": {
 			"category": "music",
-			"sounds": [ { "name": "sounds/goe/tnt/sfx/intro_v2", "volume": 0.2 } ]
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_book_close", "volume": 1 } ]
 		},
-		// mecha_suit sounds
+		"goe_tnt:book_intro_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_book_intro", "volume": 1 } ]
+		},
+		"goe_tnt:book_open_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_book_open", "volume": 1 } ]
+		},
+		"goe_tnt:book_page_change_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_book_page_change", "volume": 1 } ]
+		},
+		"goe_tnt:button_click_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_button_click", "volume": 1 } ]
+		},
+		"goe_tnt:discovery_achievement_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_discovery_achievement", "volume": 1 } ]
+		},
+		"goe_tnt:done_all_achievements_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_done_all_achievements", "volume": 1 } ]
+		},
+		"goe_tnt:milestone_achievement_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_milestone_achievement", "volume": 1 } ]
+		},
+		"goe_tnt:shop_buy_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_shop_buy", "volume": 1 } ]
+		},
+		"goe_tnt:shop_decline_music": {
+			"category": "music",
+			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_shop_decline", "volume": 1 } ]
+		},
+		// mecha_suit //////////////////////////////////
 		"goe_tnt:mecha_suit_death": {
 			"category": "hostile",
 			"sounds": [
