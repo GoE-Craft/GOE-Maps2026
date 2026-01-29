@@ -73,7 +73,7 @@ export async function showMainPage(player) {
         if (response.canceled) {
             return;
         }
-        player.playSound("goe_tnt:book_page_change_music"); // add sound
+        player.playSound("goe_tnt:button_click_music"); // add sound
         switch (response.selection) {
             case 0:
                 showInfoPage(player);
@@ -107,28 +107,35 @@ async function showInfoPage(player) {
         if (response.canceled) {
             return;
         }
-        player.playSound("goe_tnt:book_page_change_music"); // add sound
+
         switch (response.selection) {
             case 0:
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showTntsInfoPage(player);
                 break;
             case 1:
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showMechaSuitPage(player);
                 break;
             case 2:
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showStructuresInfoPage(player);
                 break;
             case 3:
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showShopInfoPage(player);
                 break;
             case 4:
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showAchievementsInfoPage(player);
                 break;
             case 5:
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showSettingsInfoPage(player);
                 break;
             case 6:
                 showMainPage(player);
+                player.playSound("goe_tnt:book_page_change_music"); // add sound
                 break;
         }
     });
@@ -278,22 +285,25 @@ async function showShopPage(player) {
         if (response.canceled) {
             return;
         }
-        player.playSound("goe_tnt:book_page_change_music"); // add sound
         switch (response.selection) {
             case 0:
                 // TNT Blocks category
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showTntsPage(player);
                 break;
             case 1:
                 // TNT Accessories category
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showAccessoriesPage(player);
                 break;
             case 2:
                 // TNT Testing Areas category
+                player.playSound("goe_tnt:button_click_music"); // add sound
                 showStructuresPage(player);
                 break;
             case 3:
                 // Back button
+                player.playSound("goe_tnt:book_page_change_music"); // add sound
                 showMainPage(player);
                 break;
         }
@@ -362,6 +372,7 @@ async function showTntsPage(player) {
         if (response.selection === items.length) {
             // Back button
             player.playSound("goe_tnt:book_page_change_music"); // add sound
+            showShopPage(player);
         } else {
             // Item selected - purchase directly
             const selectedItem = items[response.selection];
@@ -485,7 +496,7 @@ async function showAchievementListPage(player) {
 }
 
 async function showAchievementDetailsPage(player, achievement, backCallback) {
-    player.playSound("goe_tnt:book_page_change_music"); // add sound
+    player.playSound("goe_tnt:button_click_music"); // add sound
 
     let isUnlocked = false;
     let statusText = "";
