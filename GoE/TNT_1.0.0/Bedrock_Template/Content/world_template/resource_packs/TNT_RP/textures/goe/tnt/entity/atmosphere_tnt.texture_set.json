@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "atmosphere_tnt",
+		"metalness_emissive_roughness_subsurface": "atmosphere_tnt_mers",
+		"heightmap": "atmosphere_tnt_height"
+	}
+}

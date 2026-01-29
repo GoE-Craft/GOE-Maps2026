@@ -42,6 +42,28 @@ export const TNT_GLD = [
             summonDelay: 0,
             specialAction: "directional_drill"
         }
+    },
+    {
+        blockId: "goe_tnt:party_tnt",
+        fuseTime: 40,
+        power: 0,
+        fuseEffects: {
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "firework.twinkle",
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 0,
+            specialAction: "party"
+        }
     }
 ]
 

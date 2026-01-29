@@ -187,8 +187,8 @@ function* updateTimerParticles() {
             tntTimers.delete(loc);
             continue;
         }
-        dim.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + 2, z: location.z + 0.5 });
-        dim.spawnParticle(`goe_tnt:timer_particle_30`, { x: location.x + 0.5, y: location.y + 1.5, z: location.z + 0.5 });
+        dim.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + 2.5, z: location.z + 0.5 });
+        dim.spawnParticle(`goe_tnt:timer_particle_30`, { x: location.x + 0.5, y: location.y + 2, z: location.z + 0.5 });
         yield;
     }
 }

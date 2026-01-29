@@ -118,7 +118,7 @@ function startCountdown(entity, timerRemaining) {
     const initialTimer = Math.ceil(timerRemaining / 20);
     
     let location = entity.location;
-    location.y += 1.5;
+    location.y += 2;
     let textLocation = { x: location.x, y: location.y+0.5, z: location.z };
     entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
     entity.dimension.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
@@ -135,7 +135,7 @@ function startCountdown(entity, timerRemaining) {
         
         if (seconds > 0) {
             location = entity.location;
-            location.y += 1.5;
+            location.y += 2;
             textLocation = { x: location.x, y: location.y+0.5, z: location.z };
             entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
             entity.dimension.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
@@ -478,6 +478,10 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
             const drillRadius = 2; // radius for width and height
             directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData);
             break;
+        case "party": 
+            // Spawn party TNT effect
+            system.runJob(partyAction(dimension, chargeLevel, location));
+            break;
         default:
             break;
     }
@@ -601,6 +605,28 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
 
 function directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
     runJobWithDelays(directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius, tntData));
+}
+
+
+function* partyAction(dimension, chargeLevel, location) {
+    dimension.playSound("firework.blast", location);
+    const radius = 2 + Math.floor(((2*0.25) * chargeLevel));
+    for (let x = location.x - radius; x <= location.x + radius; x++) {
+        for (let z = location.z - radius; z <= location.z + radius; z++) {
+
+            const topBlock = dimension.getTopmostBlock({x: x, z: z});
+            if (!topBlock ) continue;
+
+            const block = dimension.getBlock({x: x, y: topBlock.location.y + 1, z: z});
+            
+            try{
+                block.setPermutation(BlockPermutation.resolve("minecraft:cake"));
+            } catch(e){
+                console.log("Error setting block to cake: " + e);
+            }
+            yield;
+        }
+    }   
 }
 
 // Helper to run a generator job with tick delays

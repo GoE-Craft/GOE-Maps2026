@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "tree_planter_tnt",
+		"metalness_emissive_roughness": "tree_planter_tnt_mer",
+		"heightmap": "tree_planter_tnt_height"
+	}
+}
