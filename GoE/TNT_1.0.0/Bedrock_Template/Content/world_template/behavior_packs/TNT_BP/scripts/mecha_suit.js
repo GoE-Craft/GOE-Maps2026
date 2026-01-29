@@ -14,6 +14,9 @@ const FIRE_ANIM_TICKS = 14; // duration of fire animation in ticks (when to retu
 
 const PREVIOUS_GAMEMODE_PROP = "goe_prev_gamemode"; // previous gamemode
 
+const PERSIST_TNT_UI_STATE_PROP = "goe_mecha_tnt_ui_state";
+const PERSIST_TNT_CHARGE_IDLE_PROP = "goe_mecha_tnt_charge_idle";
+
 const mechaSuitCooldown = new Map(); // tick when firing is allowed again
 const lastUseTickByMecha = new Map(); // last tick we processed itemUse
 const previousGameModeByPlayer = new Map(); // previous gamemode
@@ -75,6 +78,7 @@ function clearActionbar(player) {
 		);
 	} catch { }
 }
+
 function setupShootCooldownUiTick() {
 	system.runInterval(() => {
 		const currentTick = system.currentTick;
@@ -154,6 +158,64 @@ function clampNumber(v, min, max) {
 	if (v < min) return min;
 	if (v > max) return max;
 	return v;
+}
+
+function persistMechaTntUiStateForPlayer(player, mechaKey) {
+	try {
+		player.setDynamicProperty(PERSIST_TNT_UI_STATE_PROP, tntUiStateByMecha.get(mechaKey) ?? "idle");
+		player.setDynamicProperty(PERSIST_TNT_CHARGE_IDLE_PROP, (isChargeIdleByMecha.get(mechaKey) ?? false) === true);
+	} catch { }
+}
+
+function restoreMechaTntUiStateForPlayer(player, mecha) {
+	try {
+		if (!player || !mecha) return;
+
+		const mechaKey = mecha.id;
+
+		const storedUi = player.getDynamicProperty(PERSIST_TNT_UI_STATE_PROP);
+		const storedChargeIdle = player.getDynamicProperty(PERSIST_TNT_CHARGE_IDLE_PROP) === true;
+
+		const holdingTnt = isPlayerHoldingAnyTntNow(player);
+
+		if (holdingTnt && storedUi === "charged" && storedChargeIdle) {
+			wasTntSelectedByPlayer.set(player.id, true);
+
+			isChargeIdleByMecha.set(mechaKey, true);
+			tntUiStateByMecha.set(mechaKey, "charged");
+			try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
+
+			const currentTick = system.currentTick;
+			chargeStartTickByMecha.set(mechaKey, currentTick - CHARGE_TICKS);
+			chargeReadyTickByMecha.set(mechaKey, currentTick);
+			idlePendingByMecha.set(mechaKey, false);
+			return;
+		}
+
+		if (holdingTnt) {
+			wasTntSelectedByPlayer.set(player.id, true);
+
+			const currentTick = system.currentTick;
+
+			chargeStartTickByMecha.set(mechaKey, currentTick);
+			chargeReadyTickByMecha.set(mechaKey, currentTick + CHARGE_TICKS);
+			isChargeIdleByMecha.set(mechaKey, false);
+			idlePendingByMecha.set(mechaKey, false);
+
+			tntUiStateByMecha.set(mechaKey, "charge");
+			try { mecha.triggerEvent("goe:charge_tnt"); } catch { }
+		} else {
+			wasTntSelectedByPlayer.set(player.id, false);
+
+			tntUiStateByMecha.set(mechaKey, "idle");
+			try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
+
+			chargeStartTickByMecha.delete(mechaKey);
+			chargeReadyTickByMecha.delete(mechaKey);
+			isChargeIdleByMecha.delete(mechaKey);
+			idlePendingByMecha.delete(mechaKey);
+		}
+	} catch { }
 }
 
 // register the player dynamic property
@@ -725,6 +787,8 @@ function setupChargeAnimationByHeldItemTick() {
 					idlePendingByMecha.delete(mechaKey);
 				}
 			}
+
+			persistMechaTntUiStateForPlayer(player, mechaKey);
 		}
 	}, 1);
 }
@@ -793,6 +857,8 @@ function setupMechaRidingModeLock() {
 					const mechaKey = mecha.id;
 					tntUiStateByMecha.set(mechaKey, "idle");
 				} catch { }
+
+				try { restoreMechaTntUiStateForPlayer(player, mecha); } catch { }
 
 				try { player.runCommand("gamemode adventure"); } catch { }
 				wasRidingMechaByPlayer.set(player.id, true);
@@ -866,6 +932,13 @@ function setupRespawnRecovery() {
 				try { player.runCommand(`gamemode ${previousGameMode}`); } catch { }
 				try { player.setDynamicProperty(PREVIOUS_GAMEMODE_PROP, ""); } catch { }
 			}
+
+			try {
+				const mecha = getRiddenEntity(player);
+				if (mecha && mecha.typeId === MECHA_ID) {
+					restoreMechaTntUiStateForPlayer(player, mecha);
+				}
+			} catch { }
 
 			wasRidingMechaByPlayer.delete(player.id);
 			previousGameModeByPlayer.delete(player.id);

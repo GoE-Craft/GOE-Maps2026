@@ -1,8 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "weather_tnt",
-		"metalness_emissive_roughness": "weather_tnt_mer",
-		"heightmap": "weather_tnt_height"
-	}
-}

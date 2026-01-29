@@ -630,7 +630,103 @@ function* partyAction(dimension, chargeLevel, location) {
     }   
 }
 
+function magnetAction(dimension, location) {
+    // Do something
+}
+
+function chunkerAction(dimension, location) {
+    // Do something
+}
+
+function ultronAction(dimension, location) {
+    // Do something
+}
+
+function freezingAction(dimension, location) {
+    // Do something
+}
+
+function treePlanterAction(dimension, location) {
+    // Do something
+}
+
+function thunderstormAction(dimension, location) {
+    // Do something
+}
+
+function weatherStationAction(dimension, location) {
+    // Do something
+}
+
+function timeFreezeAction(dimension, location) {
+    // Do something
+}
+
+function arrowStormAction(dimension, location) {
+    // Do something
+}
+
+function teleportationAction(dimension, location) {
+    // Do something
+}
+
+function prisonAction(dimension, location) {
+    // Do something
+}
+
+function structureAction(dimension, location) {
+    // Do something
+}
+
 function atmosphereAction(dimension, location) {
+    // Do something
+}
+
+function healingAction(dimension, location) {
+    // Do something
+}
+
+function villagerDecoyAction(dimension, location) {
+    // Do something
+}
+
+function honeyAction(dimension, location) {
+    // Do something
+}
+
+function cloningAction(dimension, location) {
+    // Do something
+}
+
+function beaconAction(dimension, location) {
+    // Do something
+}
+
+function endermiteDecoyAction(dimension, location) {
+    // Do something
+}
+
+function glassAction(dimension, location) {
+    // Do something
+}
+
+function furnaceAction(dimension, location) {
+    // Do something
+}
+
+function mobEraserAction(dimension, location) {
+    // Do something
+}
+
+function magmaEraserAction(dimension, location) {
+    // Do something
+}
+
+function lightUpAction(dimension, location) {
+    // Do something
+}
+
+function thiefAction(dimension, location) {
     // Do something
 }
 

@@ -1,0 +1,29 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:teleportation_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/teleportation_tnt"
+      },
+      "geometry": {
+        "default": "geometry.teleportation_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"tnt_swelling": "v.should_swell"}
+        ]
+			},
+      "animations": {
+        "tnt_swelling": "animation.tnt.swell"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}
