@@ -76,13 +76,13 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
     if (fuseDuration !== tntData.fuse) {
         entity.setDynamicProperty("goe_tnt_fuse", fuseDuration);
     }
-    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData);
+    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData, spawnYaw);
 }
 
 /**
  * Schedule the timer -> fuse -> explode sequence
  */
-function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData) {
+function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData, spawnYaw) {
     if (timerRemaining > 0) {
         // Start countdown display (every second = 20 ticks)
         startCountdown(entity, timerRemaining);
@@ -96,7 +96,7 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
             entity.setDynamicProperty("goe_tnt_stage", "fuse");
             entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
             
-            scheduleFuse(entity, chargeLevel, fuseDuration, tntData);
+            scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw);
         }, timerRemaining);
         
         activeTimeouts.set(entity.id, timeoutId);
@@ -105,7 +105,7 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
         entity.setDynamicProperty("goe_tnt_stage", "fuse");
         entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
         
-        scheduleFuse(entity, chargeLevel, fuseDuration, tntData);
+        scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw);
     }
 }
 
@@ -162,7 +162,7 @@ function stopCountdown(entity) {
 /**
  * Schedule the fuse -> explode
  */
-function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData) {
+function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
     // Start fuse effects (continuous particle + initial sound)
     startFuseEffects(entity, tntData, fuseRemaining);
     
@@ -170,7 +170,7 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData) {
         if (!entity.isValid) return;
         
         stopFuseEffects(entity);
-        explode(entity, chargeLevel, tntData);
+        explode(entity, chargeLevel, tntData, spawnYaw);
     }, fuseRemaining);
     
     activeTimeouts.set(entity.id, timeoutId);
@@ -222,7 +222,7 @@ function stopFuseEffects(entity) {
 /**
  * Explode the TNT
  */
-function explode(entity, chargeLevel, tntData) {
+function explode(entity, chargeLevel, tntData, spawnYaw) {
     const dim = entity.dimension;
     const loc = { x: entity.location.x, y: entity.location.y, z: entity.location.z };
     const entityId = entity.id;
@@ -239,8 +239,7 @@ function explode(entity, chargeLevel, tntData) {
             allowUnderwater: tntData.explosionProperties.allowUnderwater,
             source: entity
         });
-        
-        system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, entity?.getRotation()));
+        system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, spawnYaw));
     } catch(e){
         if (entity.isValid) entity.remove();
     }
@@ -267,7 +266,7 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
         if (tntData?.explosionProperties?.specialAction) {
             // If the special action is expensive, the handler should itself use runJob.
             const vec = getFacingVectorFromEntity(rot);
-            try { system.run(() => handleSpecialAction(dimension, loc, tntData, chargeLevel, vec)); } catch (e) {}
+            system.run(() => handleSpecialAction(dimension, loc, tntData, chargeLevel, vec));
         }
     } catch (e) {
         console.log("Error handling special action: " + e);
@@ -476,7 +475,7 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
             // Drill horizontally in the direction the entity is facing
             const drillLength = 30;
             const drillRadius = 2; // radius for width and height
-            directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData);
+            runJobWithDelays(directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData));
             break;
         case "party": 
             // Spawn party TNT effect
@@ -515,13 +514,10 @@ function voidAction(dimension, location, radius) {
     system.runJob(voidActionJob(dimension, location, radius));
 }
 
-function getFacingVectorFromEntity(rot) {
+function getFacingVectorFromEntity(yaw) {
     try {
-        if (!rot) return { x: 1, z: 0 };
-        // Try common rotation property names
-        const yaw = rot?.y ?? rot?.yaw ?? 0; // degrees
+        if (yaw === undefined || yaw === null) return { x: 1, z: 0 };
         const yawRad = yaw * (Math.PI / 180);
-        // Convert yaw to a horizontal unit vector. Sign may be engine-dependent; this is a reasonable default.
         const dx = -Math.sin(yawRad);
         const dz = Math.cos(yawRad);
         const len = Math.sqrt(dx * dx + dz * dz) || 1;
@@ -532,7 +528,7 @@ function getFacingVectorFromEntity(rot) {
     }
 }
 
-function* directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
+function* directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
     const steps = Math.max(1, Math.floor(length));
     // perpendicular horizontal vector for width direction
     const perpX = -vec.z;
@@ -601,10 +597,6 @@ function* directionalActionJob(dimension, location, vec, length, widthRadius, he
     if (drillEntity.isValid) {
         drillEntity.remove();
     }
-}
-
-function directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
-    runJobWithDelays(directionalActionJob(dimension, location, vec, length, widthRadius, heightRadius, tntData));
 }
 
 
