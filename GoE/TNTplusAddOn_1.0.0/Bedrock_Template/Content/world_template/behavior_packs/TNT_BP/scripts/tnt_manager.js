@@ -45,7 +45,7 @@ export function activateTNTBlock(block) {
 export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw) {
     const dim = world.getDimension(dimension);
     const yaw = spawnYaw ?? 0;
-    const entity = dim.spawnEntity(tntData.blockId, location, {initialRotation: yaw});
+    const entity = dim.spawnEntity(tntData.blockId, location, { initialRotation: yaw });
     const startTick = system.currentTick;
 
     // If impulse provided, apply it (TNT shot or TNT knocked by explosion)
@@ -77,25 +77,25 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
     if (timerRemaining > 0) {
         // Start countdown display (every second = 20 ticks)
         startCountdown(entity, timerRemaining);
-        
+
         const timeoutId = system.runTimeout(() => {
             if (!entity.isValid) return;
             // Stop countdown display
             stopCountdown(entity);
-            
-            
+
+
             entity.setDynamicProperty("goe_tnt_stage", "fuse");
             entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
-            
+
             scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw);
         }, timerRemaining);
-        
+
         activeTimeouts.set(entity.id, timeoutId);
     } else {
         // No timer, go straight to fuse
         entity.setDynamicProperty("goe_tnt_stage", "fuse");
         entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
-        
+
         scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw);
     }
 }
@@ -107,27 +107,27 @@ function startCountdown(entity, timerRemaining) {
     const startTick = system.currentTick;
     const endTick = startTick + timerRemaining;
     const initialTimer = Math.ceil(timerRemaining / 20);
-    
+
     let location = entity.location;
     location.y += 2;
-    let textLocation = { x: location.x, y: location.y+0.5, z: location.z };
+    let textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
     entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
     entity.dimension.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
-    
+
     const intervalId = system.runInterval(() => {
         if (!entity.isValid) {
             stopCountdown(entity);
             return;
         }
-        
+
         const remaining = endTick - system.currentTick;
         const seconds = Math.ceil(remaining / 20);
-        
-        
+
+
         if (seconds > 0) {
             location = entity.location;
             location.y += 2;
-            textLocation = { x: location.x, y: location.y+0.5, z: location.z };
+            textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
             entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
             entity.dimension.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
         } else {
@@ -135,7 +135,7 @@ function startCountdown(entity, timerRemaining) {
             entity.dimension.spawnParticle(`goe_tnt:timer_particle_0`, location);
         }
     }, 20);
-    
+
     countdownIntervals.set(entity.id, intervalId);
 }
 
@@ -156,14 +156,14 @@ function stopCountdown(entity) {
 function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
     // Start fuse effects (continuous particle + initial sound)
     startFuseEffects(entity, tntData, fuseRemaining);
-    
+
     const timeoutId = system.runTimeout(() => {
         if (!entity.isValid) return;
-        
+
         stopFuseEffects(entity);
         explode(entity, chargeLevel, tntData, spawnYaw);
     }, fuseRemaining);
-    
+
     activeTimeouts.set(entity.id, timeoutId);
 }
 
@@ -172,7 +172,7 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
  */
 function startFuseEffects(entity, tntData, fuseTime) {
     if (!tntData?.fuseEffects) return;
-    
+
     const dim = entity.dimension;
     dim.playSound("random.fuse", entity.location);
     entity.triggerEvent("goe_tnt:trigger_ignite");
@@ -181,14 +181,14 @@ function startFuseEffects(entity, tntData, fuseTime) {
         if (!entity.isValid) return;
         try {
             dim.playSound(tntData.fuseEffects.soundEffect, entity.location);
-        } catch (e) {}
+        } catch (e) { }
     }, tntData.fuseEffects.soundDelay || 0);
-        
+
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
             dim.spawnParticle(tntData.fuseEffects.particleEffect, entity.location);
-        } catch (e) {}
+        } catch (e) { }
     }, tntData.fuseEffects.particleDelay || 0);
 
     // Swell if we are 0.5 seconds from explosion
@@ -219,11 +219,11 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
     const entityId = entity.id;
     stopCountdown(entity);
     activeTimeouts.delete(entityId);
-    const power = tntData.power * ((0.25*tntData.power) * chargeLevel);
+    const power = tntData.power * ((0.25 * tntData.power) * chargeLevel);
 
     // We will need a custom explosion implementation
     // Vanilla explosion implementation supports max 10 block radius
-    try{
+    try {
         dim.createExplosion(loc, power, {
             causesFire: tntData.explosionProperties.createsFire,
             breaksBlocks: tntData.explosionProperties.breaksBlocks,
@@ -231,7 +231,7 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
             source: entity
         });
         system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, spawnYaw));
-    } catch(e){
+    } catch (e) {
         if (entity.isValid) entity.remove();
     }
 }
@@ -240,14 +240,14 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
     if (tntData?.explosionEffects) {
         try {
             if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-        } catch (e) {}
+        } catch (e) { }
         try {
             if (tntData.explosionEffects.soundEffect) dimension.playSound(tntData.explosionEffects.soundEffect, loc);
         } catch (e) {
             world.sendMessage("Error playing explosion sound: " + e);
         }
     }
-        
+
     yield;
 
     // Handle optional special actions and mobs in a non-blocking way.
@@ -266,15 +266,15 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
     // Summon mobs via main thread dispatch to avoid API issues
     try {
         if (tntData?.explosionProperties?.summonMob) {
-            try { system.run(() => handleSummonMob(dimension, loc, tntData)); } catch (e) {}
+            try { system.run(() => handleSummonMob(dimension, loc, tntData)); } catch (e) { }
         }
-    } catch (e) {}
+    } catch (e) { }
 
     // Small yield to spread cleanup work
     yield;
 
     // Remove entity on main thread
-    try { if (entity.isValid) entity.remove(); } catch (e) {}
+    try { if (entity.isValid) entity.remove(); } catch (e) { }
 }
 
 /**
@@ -283,32 +283,32 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
 function handleSummonMob(dimension, location, tntData) {
     const mobId = tntData.explosionProperties.summonMob;
     if (!mobId) return;
-    
+
     const delay = tntData.explosionProperties.summonDelay || 0;
     const count = tntData.explosionProperties.summonCount || 1;
-    
+
     system.runTimeout(() => {
         for (let i = 0; i < count; i++) {
             // Slight random offset for multiple mobs
             const offsetX = count > 1 ? (Math.random() - 0.5) * 2 : 0;
             const offsetZ = count > 1 ? (Math.random() - 0.5) * 2 : 0;
-            
+
             const spawnLoc = {
                 x: location.x + offsetX,
                 y: location.y,
                 z: location.z + offsetZ
             };
-            
+
             try {
                 dimension.spawnEntity(mobId, spawnLoc);
-            } catch (e) {}
+            } catch (e) { }
         }
     }, delay);
 }
 
 export function onLoad() {
     system.runJob(restoreTNT());
-    
+
 }
 
 /**
@@ -316,7 +316,7 @@ export function onLoad() {
  */
 function* restoreTNT() {
     const currentTick = system.currentTick;
-    
+
     for (const dim of ["overworld", "nether", "the_end"]) {
         try {
             // Some TNT entities may use different identifiers (sample_tnt, directional_tnt, etc.).
@@ -376,7 +376,7 @@ export function handleEntitySpawn(event) {
         const itemTypeId = comp.itemStack.typeId;
         const tntData = tnt_gld.getTntDataByBlockId(itemTypeId);
         if (!tntData) return;
-        
+
         let foundDispenser = false;
         let spawnYaw = undefined;
         for (let dx = -1; dx <= 1 && !foundDispenser; dx++) {
@@ -390,14 +390,14 @@ export function handleEntitySpawn(event) {
                         if (t === "minecraft:dispenser") {
                             const direction = block.permutation.getState("facing_direction"); // This is vanilla property 2-5
                             spawnYaw = direction === 2 ? 180 :
-                                       direction === 3 ? 0 :
-                                       direction === 4 ? 90 :
-                                       direction === 5 ? 270 : undefined;
-                                       console.log("Dispenser facing direction: " + direction + " spawnYaw: " + spawnYaw);
+                                direction === 3 ? 0 :
+                                    direction === 4 ? 90 :
+                                        direction === 5 ? 270 : undefined;
+                            console.log("Dispenser facing direction: " + direction + " spawnYaw: " + spawnYaw);
                             foundDispenser = true;
                             break;
                         }
-                    } catch (e) {}
+                    } catch (e) { }
                 }
             }
         }
@@ -424,7 +424,7 @@ function getImpactedBlocks(impactedBlocks) {
             } else {
                 blocks.push(block);
             }
-        } catch (e) {}
+        } catch (e) { }
     }
     return { blocks, tnts };
 }
@@ -433,11 +433,11 @@ function getImpactedBlocks(impactedBlocks) {
 export function handleExplosionEvent(event) {
     const impactedBlocks = event.getImpactedBlocks();
     if (!impactedBlocks || impactedBlocks.length === 0) return;
-    
+
     // Separate TNT blocks from normal blocks
     const { blocks, tnts } = getImpactedBlocks(impactedBlocks);
     event.setImpactedBlocks(blocks);
-    
+
     system.runJob(processExplosionEvent(tnts));
 }
 
@@ -445,7 +445,7 @@ export function handleExplosionEvent(event) {
 // Yields after each TNT to spread out processing load
 function* processExplosionEvent(impactedBlocks) {
     for (const block of impactedBlocks) {
-        if ( !block.isValid || block.isAir ) continue;
+        if (!block.isValid || block.isAir) continue;
         const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
         try {
             const gld = tnt_gld.getTntDataByBlockId(block.typeId);
@@ -483,9 +483,13 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
             const drillRadius = 2; // radius for width and height
             runJobWithDelays(directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData));
             break;
-        case "party": 
+        case "party":
             // Spawn party TNT effect
             system.runJob(partyAction(dimension, chargeLevel, location));
+            break;
+        case "magnet":
+            // Spawn magnet TNT effect
+            runJobWithDelays(magnetAction(dimension, chargeLevel, location));
             break;
         case "atmosphere":
             // Atmosphere TNT - change the time
@@ -498,7 +502,7 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
 
 function* voidActionJob(dimension, location, radius) {
     const minY = -64; // Minimum Y level in Minecraft
-    
+
     for (let y = location.y; y >= minY; y--) {
         for (let x = -radius; x <= radius; x++) {
             for (let z = -radius; z <= radius; z++) {
@@ -512,7 +516,7 @@ function* voidActionJob(dimension, location, radius) {
                     try {
                         const block = dimension.getBlock(blockLoc);
                         block.setPermutation(BlockPermutation.resolve("minecraft:air"));
-                    } catch (e) {}
+                    } catch (e) { }
                 }
             }
         }
@@ -548,8 +552,8 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
     const pz = perpZ / perpLen;
 
     // Drill entity for visual effect
-    const drillRotation = -Math.atan2(vec.x, vec.z ) * (180 / Math.PI);
-    const drillEntity = dimension.spawnEntity("goe_tnt:directional_tnt_drill", location, {initialRotation: drillRotation});
+    const drillRotation = -Math.atan2(vec.x, vec.z) * (180 / Math.PI);
+    const drillEntity = dimension.spawnEntity("goe_tnt:directional_tnt_drill", location, { initialRotation: drillRotation });
     const dirLen = Math.sqrt(vec.x * vec.x + vec.z * vec.z) || 1;
     const dir = { x: vec.x / dirLen, z: vec.z / dirLen };
     const speed = 0.3; // Tune as needed 
@@ -587,7 +591,7 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
                     // Simulate breaking by setting to air
                     if (block.hasTag("diamond_pick_diggable")) continue;
                     block.setPermutation(BlockPermutation.resolve("minecraft:air"));
-                } catch (e) {}
+                } catch (e) { }
             }
         }
 
@@ -614,27 +618,109 @@ function* partyAction(dimension, chargeLevel, location) {
     dimension.spawnParticle("goe_tnt:cake_explosion", location);
 
     yield;
-    const radius = 2 + Math.floor(((2*0.25) * chargeLevel));
+    const radius = 2 + Math.floor(((2 * 0.25) * chargeLevel));
     for (let x = location.x - radius; x <= location.x + radius; x++) {
         for (let z = location.z - radius; z <= location.z + radius; z++) {
 
-            const topBlock = dimension.getTopmostBlock({x: x, z: z});
-            if (!topBlock ) continue;
+            const topBlock = dimension.getTopmostBlock({ x: x, z: z });
+            if (!topBlock) continue;
 
-            const block = dimension.getBlock({x: x, y: topBlock.location.y + 1, z: z});
-            
-            try{
+            const block = dimension.getBlock({ x: x, y: topBlock.location.y + 1, z: z });
+
+            try {
                 block.setPermutation(BlockPermutation.resolve("minecraft:cake"));
-            } catch(e){
+            } catch (e) {
                 console.log("Error setting block to cake: " + e);
             }
             yield;
         }
-    }   
+    }
 }
 
-function magnetAction(dimension, location) {
-    // Do something
+function* magnetAction(dimension, chargeLevel, location) {
+    const radius = 10;
+    const pullTicks = 20 * 5;
+
+    const pullStrength = 0.08 + (chargeLevel * 0.01);
+    const maxPull = 0.25 + (chargeLevel * 0.03);
+
+    const pushStrength = 1.2 + (chargeLevel * 0.2);
+
+    for (let t = 0; t < pullTicks; t++) {
+        try {
+            if (t % 2 === 0) dimension.spawnParticle("goe_tnt:magnet_pull", location);
+        } catch (e) { }
+
+        let entities = [];
+        try {
+            entities = dimension.getEntities({ location, maxDistance: radius });
+        } catch (e) { }
+
+        for (const e of entities) {
+            try {
+                if (!e?.isValid) continue;
+                if (e.typeId === "minecraft:player") continue;
+                if (e.typeId === "minecraft:item") continue;
+                if ((e.typeId || "").startsWith("goe_tnt:")) continue;
+
+                const dx = location.x - e.location.x;
+                const dy = (location.y + 0.5) - e.location.y;
+                const dz = location.z - e.location.z;
+
+                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+
+                const nx = dx / dist;
+                const ny = dy / dist;
+                const nz = dz / dist;
+
+                const scale = Math.min(maxPull, pullStrength + (0.02 * (1 - Math.min(1, dist / radius))));
+                e.applyImpulse({ x: nx * scale, y: ny * scale, z: nz * scale });
+            } catch (e2) { }
+        }
+
+        yield;
+    }
+
+    try { dimension.spawnParticle("goe_tnt:magnet_explosion", location); } catch (e) { }
+    try { dimension.playSound("random.explode", location); } catch (e) { }
+
+    let entities2 = [];
+    try {
+        entities2 = dimension.getEntities({ location, maxDistance: radius });
+    } catch (e) { }
+
+    for (const e of entities2) {
+        try {
+            if (!e?.isValid) continue;
+            if (e.typeId === "minecraft:player") continue;
+            if (e.typeId === "minecraft:item") continue;
+            if ((e.typeId || "").startsWith("goe_tnt:")) continue;
+
+            const dx = e.location.x - location.x;
+            const dy = e.location.y - (location.y + 0.2);
+            const dz = e.location.z - location.z;
+
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const nz = dz / dist;
+
+            e.applyImpulse({
+                x: nx * pushStrength,
+                y: Math.max(0.2, ny * pushStrength * 0.6),
+                z: nz * pushStrength
+            });
+        } catch (e3) { }
+    }
+
+    try {
+        dimension.createExplosion(location, 2, {
+            causesFire: false,
+            breaksBlocks: false,
+            allowUnderwater: true
+        });
+    } catch (e) { }
 }
 
 function chunkerAction(dimension, location) {

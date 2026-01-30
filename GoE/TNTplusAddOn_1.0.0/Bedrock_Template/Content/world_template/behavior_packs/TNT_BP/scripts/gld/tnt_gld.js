@@ -2,7 +2,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:sample_tnt",
         fuseTime: 80,
-        power: 1, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -77,7 +77,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:magnet_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0,
         fuseEffects: {
             particleEffect: "goe_tnt:fuse_orange_chunk",
@@ -86,9 +86,9 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:magnet_explosion",
+            particleEffect: null,
             particleDelay: 0,
-            soundEffect: "random.explode",
+            soundEffect: null,
             soundDelay: 0
         },
         explosionProperties: {
