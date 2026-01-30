@@ -49,6 +49,7 @@ export async function showIntroPage(player) {
 
     IntroForm.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
 
@@ -71,6 +72,7 @@ export async function showMainPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:button_click_music"); // add sound
@@ -105,6 +107,7 @@ async function showInfoPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
 
@@ -155,6 +158,7 @@ async function showMechaSuitPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -174,6 +178,7 @@ async function showShopInfoPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -191,6 +196,7 @@ async function showSettingsInfoPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -210,6 +216,7 @@ async function showAchievementsInfoPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -231,6 +238,7 @@ async function showTntsInfoPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -250,6 +258,7 @@ async function showStructuresInfoPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -265,6 +274,7 @@ async function showSettingsPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
@@ -283,6 +293,7 @@ async function showShopPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         switch (response.selection) {
@@ -329,6 +340,7 @@ async function showAccessoriesPage(player) {
 
     form.show(player).then(async (response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         if (response.selection === items.length) {
@@ -367,6 +379,7 @@ async function showTntsPage(player) {
 
     form.show(player).then(async (response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         if (response.selection === items.length) {
@@ -405,6 +418,7 @@ async function showStructuresPage(player) {
 
     form.show(player).then(async (response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         if (response.selection === items.length) {
@@ -479,6 +493,7 @@ async function showAchievementListPage(player) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         if (response.selection === allAchievements.length) {
@@ -527,6 +542,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         if (response.selection === 0) {
@@ -577,6 +593,7 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
 
     form.show(player).then((response) => {
         if (response.canceled) {
+            player.playSound("goe_tnt:book_close_music");
             return;
         }
         player.playSound("goe_tnt:book_page_change_music"); // add sound
