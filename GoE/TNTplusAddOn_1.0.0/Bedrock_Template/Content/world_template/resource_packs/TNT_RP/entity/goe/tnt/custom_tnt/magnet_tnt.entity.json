@@ -18,15 +18,14 @@
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell"},
-          {"explode": "v.should_swell"}
+          {"charge": "q.mark_variant == 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell",
-        "explode": "animation.magnet_tnt.explosion"
+        "charge": "animation.magnet_tnt.charge"
       },
       "particle_effects": {
-        "big_explosion_white": "goe_tnt:big_explosion_white",
         "magnet_explosion": "goe_tnt:magnet_explosion",
         "magnet_pull": "goe_tnt:magnet_pull"
       },

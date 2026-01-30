@@ -2,9 +2,9 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:magnet_pull",
+			"identifier": "goe_tnt:magnet_out",
 			"basic_render_parameters": {
-				"material": "particles_blend",
+				"material": "particles_add",
 				"texture": "textures/goe/tnt/particles/magnet_particle"
 			}
 		},
@@ -18,23 +18,22 @@
 		},
 		"components": {
 			"minecraft:emitter_rate_instant": {
-				"num_particles": 100
+				"num_particles": 150
 			},
-			"minecraft:emitter_lifetime_looping": {
+			"minecraft:emitter_lifetime_once": {
 				"active_time": 1
 			},
-			"minecraft:emitter_shape_sphere": {
-				"radius": 5,
-				"surface_only": true,
-				"direction": "inwards"
-			},
+			"minecraft:emitter_shape_point": {},
 			"minecraft:particle_lifetime_expression": {
 				"max_lifetime": 2
 			},
-			"minecraft:particle_initial_speed": 2.5,
-			"minecraft:particle_motion_dynamic": {},
+			"minecraft:particle_initial_speed": 50,
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": ["math.random(1,5)", "math.random(1,5)", "math.random(1,5)"],
+				"linear_drag_coefficient": 1
+			},
 			"minecraft:particle_appearance_billboard": {
-				"size": ["0.4 * v.particle_random_2", "0.4* v.particle_random_2"],
+				"size": ["1 * v.particle_random_2", "1 * v.particle_random_2"],
 				"facing_camera_mode": "lookat_xyz"
 			},
 			"minecraft:particle_appearance_tinting": {

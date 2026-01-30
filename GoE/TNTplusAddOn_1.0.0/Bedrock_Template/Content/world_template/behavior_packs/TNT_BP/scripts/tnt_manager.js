@@ -521,7 +521,7 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, ent
             break;
         case "magnet":
             // Spawn magnet TNT effect
-            runJobWithDelays(magnetAction(dimension, chargeLevel, location));
+            system.runJob(magnetAction(dimension, chargeLevel, location));
             break;
         case "freezing":
             // Freeze mobs and turn blocks to ice
@@ -707,6 +707,8 @@ function* magnetAction(dimension, chargeLevel, location) {
         entities = dimension.getEntities({ location, maxDistance: radius });
     } catch (e) { }
 
+    dimension.spawnParticle("goe_tnt:magnet_out", location);
+
     for (const e of entities) {
         try {
             if (!e?.isValid) continue;
@@ -746,6 +748,21 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
 
     let tick = 0;
 
+    entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_red", entity.location);
+    system.runTimeout(() => {
+        entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_blue", entity.location);
+    }, 15);
+    system.runTimeout(() => {
+        entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_red", entity.location);
+    }, 30);
+    system.runTimeout(() => {
+        entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_blue", entity.location);
+    }, 45);
+    entity.dimension.spawnParticle("goe_tnt:magnet_pull", entity.location);
+    system.runTimeout(() => {
+        entity.dimension.spawnParticle("goe_tnt:magnet_pull", entity.location);
+    }, 20);
+
     // one interval per entity, store it so stopFuseEffects clears it
     const intervalId = system.runInterval(() => {
         if (!entity.isValid) {
@@ -754,13 +771,6 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
         }
 
         const center = entity.location;
-
-        // pull particle every 4 ticks
-        try {
-            if ((tick % 4) === 0) {
-                entity.dimension.spawnParticle("goe_tnt:magnet_pull", center);
-            }
-        } catch (e) { }
 
         let entities = [];
         try {
