@@ -2,7 +2,7 @@
   "format_version": "1.21.130",
   "minecraft:block": {
     "description": {
-      "identifier": "goe_tnt:endermite_decoy_tnt.",
+      "identifier": "goe_tnt:endermite_decoy_tnt",
       "menu_category": { "category": "construction" },
       "traits": {
         "minecraft:placement_direction": {
