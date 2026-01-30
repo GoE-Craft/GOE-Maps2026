@@ -141,6 +141,12 @@
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/laser", "volume": 0.2, "pitch": 1.2 }
 			]
+		},
+		"goe_tnt:ice_blast": {
+			"category": "neutral",
+			"sounds": [
+				{ "name": "sounds/sfx/tnt/ice", "volume": 1, "pitch": 0.7 }
+			]
 		}
 
 	}

@@ -11,7 +11,8 @@
       },
       "states": {
         "goe_tnt:timer": [false, true],
-        "goe_tnt:is_active": [false, true]
+        "goe_tnt:is_active": [false, true],
+        "goe_tnt:charge_level": [0, 1, 2, 3, 4]
       }
     },
     "components": {

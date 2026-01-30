@@ -20,6 +20,7 @@
     "camouflage_tnt": { "textures": "textures/goe/tnt/entity/camouflage_tnt" },
     "cloning_tnt": { "textures": "textures/goe/tnt/entity/cloning_tnt" },
     "cluster_tnt": { "textures": "textures/goe/tnt/entity/cluster_tnt" },
+    "chunker_tnt": { "textures": "textures/goe/tnt/entity/chunker_tnt" },
     "comet_tnt": { "textures": "textures/goe/tnt/entity/comet_tnt" },
     "crater_tnt": { "textures": "textures/goe/tnt/entity/crater_tnt" },
     "crops_tnt": { "textures": "textures/goe/tnt/entity/crops_tnt" },

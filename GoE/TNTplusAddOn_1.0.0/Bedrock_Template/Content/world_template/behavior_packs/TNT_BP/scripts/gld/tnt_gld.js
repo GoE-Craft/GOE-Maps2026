@@ -106,7 +106,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:chunker_tnt",
         fuseTime: 80,
-        power: 4,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -114,9 +114,9 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
+            particleEffect: "goe_tnt:huge_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {
@@ -162,25 +162,26 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:freezing_tnt",
         fuseTime: 40,
-        power: 0,
+        power: 1,
         fuseEffects: {
             particleEffect: null,
             particleDelay: 0,
-            soundEffect: "random.fuse",
-            soundDelay: 0
+            soundEffect: "goe_tnt:ice_blast",
+            soundDelay: 35
         },
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_blue",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: null,
             soundDelay: 0
         },
         explosionProperties: {
             createsFire: false,
             allowUnderwater: false,
             breaksBlocks: false,
-            summonMob: null,
-            summonDelay: 10,
+            summonMob: "goe_tnt:ice_cube",
+            summonMobCount: 3,
+            summonDelay: 0,
             specialAction: "freezing"
         },
         preExplosionProperties: {

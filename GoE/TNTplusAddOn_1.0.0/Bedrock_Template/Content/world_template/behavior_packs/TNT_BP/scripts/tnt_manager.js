@@ -312,13 +312,13 @@ function handleSummonMob(dimension, location, tntData) {
     if (!mobId) return;
 
     const delay = tntData.explosionProperties.summonDelay || 0;
-    const count = tntData.explosionProperties.summonCount || 1;
+    const count = tntData.explosionProperties.summonMobCount || 1;
 
     system.runTimeout(() => {
         for (let i = 0; i < count; i++) {
-            // Slight random offset for multiple mobs
-            const offsetX = count > 1 ? (Math.random() - 0.5) * 2 : 0;
-            const offsetZ = count > 1 ? (Math.random() - 0.5) * 2 : 0;
+
+            const offsetX = (Math.random() * 2 - 1) * 10;
+            const offsetZ = (Math.random() * 2 - 1) * 10;
 
             const spawnLoc = {
                 x: location.x + offsetX,
@@ -473,20 +473,25 @@ export function handleExplosionEvent(event) {
 function* processExplosionEvent(impactedBlocks) {
     for (const block of impactedBlocks) {
         if (!block.isValid || block.isAir) continue;
-        const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
-        try {
-            const gld = tnt_gld.getTntDataByBlockId(block.typeId);
-            if (!gld) continue;
-            const perm = block.permutation;
-            const power = perm.getState("goe_tnt:charge_level") || 1;
-            const direction = perm.getState("minecraft:cardinal_direction");
-            const spawnYaw = getYawFromFace(direction);
-            igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id, undefined, spawnYaw);
-            block.setPermutation(BlockPermutation.resolve("minecraft:air"));
-        } catch (e) {
-            console.log("Error handling TNT chain reaction: " + e);
-        }
+        
+        processExplosion(block);
         yield;
+    }
+}
+
+function processExplosion(block) {
+    const chainFuseTicks = Math.random() * 20 + 10; // 0.5-1 seconds (vanilla is 0.5-1s)
+    try {
+        const gld = tnt_gld.getTntDataByBlockId(block.typeId);
+        if (!gld) return;
+        const perm = block.permutation;
+        const power = perm.getState("goe_tnt:charge_level") || 1;
+        const direction = perm.getState("minecraft:cardinal_direction");
+        const spawnYaw = getYawFromFace(direction);
+        igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id, undefined, spawnYaw);
+        block.setPermutation(BlockPermutation.resolve("minecraft:air"));
+    } catch (e) {
+        console.log("Error handling TNT chain reaction: " + e);
     }
 }
 
@@ -525,6 +530,11 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, ent
         case "atmosphere":
             // Atmosphere TNT - change the time
             atmosphereAction(dimension, location);
+            break;
+        case "chunker":
+            // Chunker TNT - removes a chunk of blocks above the explosion
+            console.log("Starting chunker action");
+            runJobWithDelays(chunkerAction(dimension, location, chargeLevel));
             break;
         default:
             break;
@@ -646,7 +656,7 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
         const loc = { x: centerX, y: bottomY, z: centerZ };
         if (tntData?.explosionEffects) {
             dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-            dimension.playSound("random.explode", loc);
+            
         }
 
         // Move the drill entity forward only every 3 steps
@@ -798,8 +808,25 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
 
 
 
-function chunkerAction(dimension, location) {
-    // Do something - for milos, also needs geo and textures and particles
+function* chunkerAction(dimension, location, charge_level) {
+    const radius = 8 + Math.floor(((2 * 0.25) * charge_level));
+
+    for (let y = location.y + radius; y > location.y - radius ; y--) {
+        for (let x = location.x - radius/2; x <= location.x + radius/2; x++) {
+            for (let z = location.z - radius/2; z <= location.z + radius/2; z++) {
+                // Do something
+                const block = dimension.getBlock({ x: x, y: y, z: z });
+                if (!block || block.isAir) continue;
+                if (block.hasTag("diamond_pick_diggable")) continue;
+                if (block.hasTag("goe_tnt:custom_tnt")) processExplosion(block);
+                
+                block.setPermutation(BlockPermutation.resolve("minecraft:air"));
+            }
+        }
+        dimension.spawnParticle("goe_tnt:huge_explosion_white", { x: location.x, y: y, z: location.z });
+        dimension.playSound("random.explode", { x: location.x, y: y, z: location.z }, {volume: 5, pitch: 0.5});
+        yield;
+    }
 }
 
 function ultronAction(dimension, location) {
@@ -864,7 +891,7 @@ function* freezingAction(dimension, chargeLevel, location, entityId) {
             e.addEffect("slowness", freezeTicks, { amplifier: 100, showParticles: true });
 
             // Spawn ice cube entity at mob location, y+1
-            const iceCubeLoc = { x: e.location.x, y: e.location.y + 1, z: e.location.z };
+            const iceCubeLoc = { x: e.location.x, y: e.location.y, z: e.location.z };
             dimension.spawnEntity("goe_tnt:ice_cube", iceCubeLoc);
             e.clearVelocity();
         } catch { }

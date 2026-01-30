@@ -7,21 +7,23 @@
         "default": "entity_alphatest"
       },
       "textures": {
-				"default": "textures/blocks/tnt_side"
+				"default": "textures/goe/tnt/entity/chunker_tnt"
       },
       "geometry": {
-				"default": "geometry.goe_tnt.tnt"
+				"default": "geometry.chunker_tnt"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"activate": "q.mark_variant == 1"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.tnt.swell",
+        "activate": "animation.chunker_tnt.activate"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }
