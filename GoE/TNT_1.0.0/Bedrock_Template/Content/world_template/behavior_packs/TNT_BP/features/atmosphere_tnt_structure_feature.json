@@ -1,0 +1,35 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:structure_template_feature": {
+    "description": {
+      "identifier": "goe_tnt:atmosphere_tnt_structure_feature"
+    },
+    "structure_name": "goe_tnt:atmosphere_tnt_structure",
+    "facing_direction": "random",
+    "adjustment_radius": 16,
+    "constraints": {
+      "grounded": {},
+      "unburied": {},
+      "block_intersection": {
+        "block_allowlist": [
+          "minecraft:air",
+          "minecraft:grass",
+          "minecraft:tall_grass",
+          "minecraft:short_grass",
+          "minecraft:fern",
+          "minecraft:large_fern",
+          "minecraft:dirt",
+          "minecraft:bee_nest",
+          "minecraft:sunflower",
+          "minecraft:sweet_berry_bush",
+          "minecraft:leaf_litter",
+          "minecraft:leaves",
+          "minecraft:log",
+          "minecraft:sapling",
+          "minecraft:wildflowers",
+          "minecraft:firefly_bush"
+        ]
+      }
+    }
+  }
+}

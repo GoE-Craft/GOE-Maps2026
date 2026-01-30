@@ -149,6 +149,26 @@ item=goe_tnt:directional_tnt 0 1
 
 ///////////////////////////////////////////////////
 
+#atmosphere_tnt_structure
+type=area
+location=348 35 27 321 1 0
+replace=gray_stained_glass structure_void
+
+#beacon_tnt_structure
+type=area
+location=421 1 0 448 44 27
+replace=gray_stained_glass structure_void
+
+#cloning_tnt_structure
+type=area
+location=471 1 0 498 29 27
+replace=gray_stained_glass structure_void
+
+#chunker_tnt_structure
+type=area
+location=21 1 50 48 33 77
+replace=gray_stained_glass structure_void
+
 #singularity_tnt_structure
 type=area
 location=71 1 150 98 39 177
@@ -192,4 +212,79 @@ replace=gray_stained_glass structure_void
 #directional_tnt_structure
 type=area
 location=21 1 150 48 28 177
+replace=gray_stained_glass structure_void
+
+#dimensional_tnt_structure
+type=area
+location=171 1 50 198 30 70
+replace=gray_stained_glass structure_void
+
+#arrow_storm_tnt_structure
+type=area
+location=171 1 0 198 24 27
+replace=gray_stained_glass structure_void
+
+#freezing_tnt_structure
+type=area
+location=71 1 50 98 31 77
+replace=gray_stained_glass structure_void
+
+#furnace_tnt_structure
+type=area
+location=421 1 50 448 40 77
+replace=gray_stained_glass structure_void
+
+#healing_tnt_structure
+type=area
+location=398 37 27 371 1 0
+replace=gray_stained_glass structure_void
+
+#light_up_tnt_structure
+type=area
+location=271 1 0 298 28 27
+replace=gray_stained_glass structure_void
+
+#magma_eraser_tnt_structure
+type=area
+location=271 1 50 298 29 77
+replace=gray_stained_glass structure_void
+
+#magnet_tnt_structure
+type=area
+location=21 1 0 48 29 27
+replace=gray_stained_glass structure_void
+
+#mob_eraser_tnt_structure
+type=area
+location=371 1 50 398 28 77
+replace=gray_stained_glass structure_void
+
+#prison_tnt_structure
+type=area
+location=221 1 50 248 22 77
+replace=gray_stained_glass structure_void
+
+#structure_tnt_structure
+type=area
+location=348 27 77 321 1 50
+replace=gray_stained_glass structure_void
+
+#theif_tnt_structure
+type=area
+location=221 1 0 248 23 27
+replace=gray_stained_glass structure_void
+
+#thunderstorm_tnt_structure
+type=area
+location=121 1 50 148 41 77
+replace=gray_stained_glass structure_void
+
+#ultron_tnt_structure
+type=area
+location=71 1 0 98 29 27
+replace=gray_stained_glass structure_void
+
+#villager_decoy_tnt_structure
+type=area
+location=471 1 50 498 71 77
 replace=gray_stained_glass structure_void

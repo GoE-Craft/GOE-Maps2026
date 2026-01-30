@@ -13,7 +13,27 @@
       ["goe_tnt:teleportation_tnt_structure_feature", 1],
       ["goe_tnt:honey_tnt_structure_feature", 1],
       ["goe_tnt:endermite_decoy_tnt_structure_feature", 1],
-      ["goe_tnt:glass_tnt_structure_feature", 1]
+      ["goe_tnt:glass_tnt_structure_feature", 1],
+      ["goe_tnt:magnet_tnt_structure_feature", 1],
+      ["goe_tnt:chunker_tnt_structure_feature", 1],
+      ["goe_tnt:ultron_tnt_structure_feature", 1],
+      ["goe_tnt:freezing_tnt_structure_feature", 1],
+      ["goe_tnt:thunderstorm_tnt_structure_feature", 1],
+      ["goe_tnt:dimensional_tnt_structure_feature", 1],
+      ["goe_tnt:arrow_storm_tnt_structure_feature", 1],
+      ["goe_tnt:time_freeze_structure_feature", 1],
+      ["goe_tnt:prison_tnt_structure_feature", 1],
+      ["goe_tnt:structure_tnt_structure_feature", 1],
+      ["goe_tnt:atmosphere_tnt_structure_feature", 1],
+      ["goe_tnt:healing_tnt_structure_feature", 1],
+      ["goe_tnt:villager_decoy_tnt_structure_feature", 1],
+      ["goe_tnt:cloning_tnt_structure_feature", 1],
+      ["goe_tnt:beacon_tnt_structure_feature", 1],
+      ["goe_tnt:furnace_tnt_structure_feature", 1],
+      ["goe_tnt:mob_eraser_tnt_structure_feature", 1],
+      ["goe_tnt:magma_eraser_tnt_structure_feature", 1],
+      ["goe_tnt:light_up_tnt_structure_feature", 1],
+      ["goe_tnt:theif_tnt_structure_feature", 1]
     ]
   }
 }

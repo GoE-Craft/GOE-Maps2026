@@ -16,17 +16,17 @@
     "distribution": {
       "iterations": 1,
       "scatter_chance": {
-        "numerator": 2,
+        "numerator": 6,
         "denominator": 100
       },
       "x": {
         "distribution": "uniform",
-        "extent": [0, 64]
+        "extent": [0, 32]
       },
       "y": "q.heightmap(v.worldx, v.worldz)",
       "z": {
         "distribution": "uniform",
-        "extent": [0, 64]
+        "extent": [0, 32]
       }
     }
   }
