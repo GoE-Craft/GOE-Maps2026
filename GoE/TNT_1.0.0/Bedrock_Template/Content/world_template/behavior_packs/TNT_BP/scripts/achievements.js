@@ -3,6 +3,21 @@ import * as tnt_gld from "./gld/tnt_gld";
 import { ShopItems, Achievements } from "./gld/book_gld";
 import * as utils from "./utils";
 
+function getTntAchievementRewardStructure(tntType) {
+    const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
+    return achievement?.rewardStructure ?? null;
+}
+
+function getMilestoneRewardStructure(milestoneNumber) {
+    const milestone = Achievements.milestones.find(m => m.milestoneNumber === milestoneNumber);
+    return milestone?.rewardStructure ?? null;
+}
+
+function placeAchievementRewardStructure(player, structureId) {
+    if (!structureId || !player) return;
+    utils.runPlayerCommand(player, `structure load ${structureId} ~ ~ ~`);
+}
+
 function isCustomTnt(blockId) {
     if (!blockId) return false;
     if (!blockId.startsWith("goe_tnt:")) return false;
@@ -57,6 +72,12 @@ function unlockTntAchievement(player, tntType) {
 
     utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §r- You have unlocked this achievement!`);
 
+    // Place reward structure at player location
+    const rewardStructure = getTntAchievementRewardStructure(tntType);
+    if (rewardStructure) {
+        placeAchievementRewardStructure(player, rewardStructure);
+    }
+
     const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
 
     // Create a burst effect with multiple particles
@@ -108,6 +129,12 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
 
         utils.tellraw(player, "@s", `§6[Milestone] §e${milestoneName} §r- You have reached this milestone!`);
 
+        // Place reward structure at player location
+        const rewardStructure = getMilestoneRewardStructure(milestoneNumber);
+        if (rewardStructure) {
+            placeAchievementRewardStructure(player, rewardStructure);
+        }
+
         const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
 
         // Create a burst effect with multiple particles
@@ -155,7 +182,7 @@ export function onPlayerPlaceBlock(event) {
 
     // Update unique TNTs count
     const currentCount = player.getDynamicProperty("goe_tnt_unique_tnts_count");
-    const newCount = (currentCount !== undefined ? currentCount : 0) + 3;
+    const newCount = (currentCount !== undefined ? currentCount : 0) + 1;
     player.setDynamicProperty("goe_tnt_unique_tnts_count", newCount);
 
     // Check for milestone achievements (every 5 unique TNTs)

@@ -1,3 +1,138 @@
+///////////////////// ACHIVMENTS REWARDS ////////////////////
+
+#directional_tnt_reward
+type=items
+item=minecraft:gunpowder 0 5
+
+#party_tnt_reward
+type=items
+item=minecraft:cookie 0 10
+
+#magnet_tnt_reward
+type=items
+item=minecraft:iron_ingot 0 5
+
+#chunker_tnt_reward
+type=items
+item=minecraft:cooked_beef 0 5
+
+#ultron_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#freezing_tnt_reward
+type=items
+item=minecraft:baked_potato 0 5
+
+#tree_planter_tnt_reward
+type=items
+item=minecraft:iron_axe 0 1
+
+#thunderstorm_tnt_reward
+type=items
+item=minecraft:copper_ingot 0 20
+
+#dimensional_tnt_reward
+type=items
+item=minecraft:pumpkin_pie 0 10
+
+#time_freezing_tnt_reward
+type=items
+item=minecraft:clock 0 1
+
+#arrow_storm_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#atmosphere_tnt_reward
+type=items
+item=minecraft:copper_ingot 0 20
+
+#healing_tnt_reward
+type=items
+item=minecraft:golden_apple 0 2
+
+#decoy_tnt_reward
+type=items
+item=minecraft:bread 0 10
+
+#honey_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#cloning_tnt_reward
+type=items
+item=minecraft:melon 0 30
+
+#beacon_tnt_reward
+type=items
+item=minecraft:iron_ingot 0 15
+
+#endermite_decoy_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#glass_tnt_reward
+type=items
+item=minecraft:gold_ingot 0 15
+
+#furnace_tnt_reward
+type=items
+item=minecraft:cooked_chicken 0 10
+
+#mob_eraser_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#magma_eraser_tnt_reward
+type=items
+item=minecraft:iron_ingot 0 10
+
+#light_up_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#thief_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#milestone_5_reward
+type=items
+item=minecraft:tnt 0 5
+item=minecraft:iron_ingot 0 10
+item=minecraft:bread 0 20
+
+#milestone_10_reward
+type=items
+item=minecraft:tnt 0 10
+item=minecraft:iron_ingot 0 20
+item=minecraft:cooked_porkchop 0 25
+
+#milestone_15_reward
+type=items
+item=minecraft:tnt 0 15
+item=minecraft:iron_ingot 0 10
+item=minecraft:cooked_salmon 0 10
+
+#milestone_20_reward
+type=items
+item=goe_tnt:directional_tnt 0 3
+item=minecraft:iron_ingot 0 15
+item=minecraft:cooked_rabbit 0 10
+
+#milestone_25_reward
+type=items
+item=goe_tnt:healing_tnt 0 5
+item=minecraft:iron_ingot 0 20
+item=minecraft:experience_bottle 0 15
+
+#milestone_30_reward
+type=items
+item=goe_tnt:ultron_tnt 0 5
+item=minecraft:gold_ingot 0 10
+item=minecraft:golden_apple 0 3
+
+
 //////////////////// GUIDE BOOK ////////////////////
 
 #guide_book

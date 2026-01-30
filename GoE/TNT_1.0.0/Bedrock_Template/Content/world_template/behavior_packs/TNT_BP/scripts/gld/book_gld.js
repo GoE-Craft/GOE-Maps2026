@@ -326,7 +326,8 @@ export const Achievements = {
             info: "Place Sample TNT",
             tips: "",
             tntType: "sample_tnt",
-            icon: "textures/goe/tnt/ui/achievements/sample_tnt"
+            icon: "textures/goe/tnt/ui/achievements/sample_tnt",
+            rewardStructure: null
         },
         {
             id: "directional_tnt",
@@ -334,7 +335,8 @@ export const Achievements = {
             info: "Explodes in the direction the drill faces, creating a tunnel and destroying everything except ores.",
             tips: "Place Directional TNT and dig the hole.",
             tntType: "directional_tnt",
-            icon: "textures/goe/tnt/ui/achievements/directional_tnt"
+            icon: "textures/goe/tnt/ui/achievements/directional_tnt",
+            rewardStructure: "goe_tnt:directional_tnt_reward"
         },
         {
             id: "party_tnt",
@@ -342,7 +344,8 @@ export const Achievements = {
             info: "On explosion, it rains cookies and cakes. Enjoy it!",
             tips: "Eat cake from Party TNT.",
             tntType: "party_tnt",
-            icon: "textures/goe/tnt/ui/achievements/party_tnt"
+            icon: "textures/goe/tnt/ui/achievements/party_tnt",
+            rewardStructure: "goe_tnt:party_tnt_reward"
         },
         {
             id: "magnet_tnt",
@@ -350,7 +353,8 @@ export const Achievements = {
             info: "Pulls nearby mobs into the blast area, then explodes once they're dragged in!",
             tips: "Pull dozens of mobs with Magnet TNT.",
             tntType: "magnet_tnt",
-            icon: "textures/goe/tnt/ui/achievements/magnet_tnt"
+            icon: "textures/goe/tnt/ui/achievements/magnet_tnt",
+            rewardStructure: "goe_tnt:magnet_tnt_reward"
         },
         {
             id: "chunker_tnt",
@@ -358,7 +362,8 @@ export const Achievements = {
             info: "Simultaneously digs upward and downward, carving a massive straight tunnel through the chunk from top to bottom.",
             tips: "Use Chunker TNT to destroy 1 chunk.",
             tntType: "chunker_tnt",
-            icon: "textures/goe/tnt/ui/achievements/chunker_tnt"
+            icon: "textures/goe/tnt/ui/achievements/chunker_tnt",
+            rewardStructure: "goe_tnt:chunker_tnt_reward"
         },
         {
             id: "ultron_tnt",
@@ -366,7 +371,8 @@ export const Achievements = {
             info: "Detonates in a massive fiery blast with heavy smoke and fog, devastating a huge area where it explodes.",
             tips: "Use Ultron TNT without dying.",
             tntType: "ultron_tnt",
-            icon: "textures/goe/tnt/ui/achievements/ultron_tnt"
+            icon: "textures/goe/tnt/ui/achievements/ultron_tnt",
+            rewardStructure: "goe_tnt:ultron_tnt_reward"
         },
         {
             id: "freezing_tnt",
@@ -374,7 +380,8 @@ export const Achievements = {
             info: "Unleashes a raging blizzard that freezes nearby mobs, slowly damaging them, and turns surrounding terrain into ice.",
             tips: "Freeze mobs with Freezing TNT.",
             tntType: "freezing_tnt",
-            icon: "textures/goe/tnt/ui/achievements/freezing_tnt"
+            icon: "textures/goe/tnt/ui/achievements/freezing_tnt",
+            rewardStructure: "goe_tnt:freezing_tnt_reward"
         },
         {
             id: "tree_planter_tnt",
@@ -382,7 +389,8 @@ export const Achievements = {
             info: "Plants a small instant forest, spawning a few trees around the blast site.",
             tips: "Use Tree Planter TNT to get trees.",
             tntType: "tree_planter_tnt",
-            icon: "textures/goe/tnt/ui/achievements/tree_planter_tnt"
+            icon: "textures/goe/tnt/ui/achievements/tree_planter_tnt",
+            rewardStructure: "goe_tnt:tree_planter_tnt_reward"
         },
         {
             id: "thunderstorm_tnt",
@@ -390,7 +398,8 @@ export const Achievements = {
             info: "Strikes every nearby mob with lightning, shocking everything around the blast zone.",
             tips: "Charge Creeper using Thunderstorm TNT.",
             tntType: "thunderstorm_tnt",
-            icon: "textures/goe/tnt/ui/achievements/thunderstorm_tnt"
+            icon: "textures/goe/tnt/ui/achievements/thunderstorm_tnt",
+            rewardStructure: "goe_tnt:thunderstorm_tnt_reward"
         },
         {
             id: "dimensional_tnt",
@@ -398,7 +407,8 @@ export const Achievements = {
             info: "Erases the ground and all mobs in the area without a trace of existence.",
             tips: "Remove mobs with Dimensional TNT.",
             tntType: "dimensional_tnt",
-            icon: "textures/goe/tnt/ui/achievements/dimensional_tnt"
+            icon: "textures/goe/tnt/ui/achievements/dimensional_tnt",
+            rewardStructure: "goe_tnt:dimensional_tnt_reward"
         },
         {
             id: "weather_station_tnt",
@@ -406,7 +416,8 @@ export const Achievements = {
             info: "Gives you control over the weather, switching between clear weather and rain.",
             tips: "Change the weather using Weather Station TNT.",
             tntType: "weather_station_tnt",
-            icon: "textures/goe/tnt/ui/achievements/weather_station_tnt"
+            icon: "textures/goe/tnt/ui/achievements/weather_station_tnt",
+            rewardStructure: null
         },
         {
             id: "time_freeze_tnt",
@@ -414,7 +425,8 @@ export const Achievements = {
             info: "Freezes the time slowing down all entities.",
             tips: "Slow everyone down using Time Freeze TNT.",
             tntType: "time_freeze_tnt",
-            icon: "textures/goe/tnt/ui/achievements/time_freeze_tnt"
+            icon: "textures/goe/tnt/ui/achievements/time_freeze_tnt",
+            rewardStructure: "goe_tnt:time_freezing_tnt_reward"
         },
         {
             id: "arrow_storm_tnt",
@@ -422,7 +434,8 @@ export const Achievements = {
             info: "The blast launches stacked arrows, spraying them in every direction.",
             tips: "Kill waves of mobs using Arrow TNT.",
             tntType: "arrow_storm_tnt",
-            icon: "textures/goe/tnt/ui/achievements/arrow_storm_tnt"
+            icon: "textures/goe/tnt/ui/achievements/arrow_storm_tnt",
+            rewardStructure: "goe_tnt:arrow_storm_tnt_reward"
         },
         {
             id: "teleportation_tnt",
@@ -430,7 +443,8 @@ export const Achievements = {
             info: "Teleports you and nearby mobs straight to your spawn point, without damaging anything.",
             tips: "Use Teleportation TNT to get back to your spawn point.",
             tntType: "teleportation_tnt",
-            icon: "textures/goe/tnt/ui/achievements/teleportation_tnt"
+            icon: "textures/goe/tnt/ui/achievements/teleportation_tnt",
+            rewardStructure: null
         },
         {
             id: "prison_tnt",
@@ -438,7 +452,8 @@ export const Achievements = {
             info: "Traps nearby mobs inside cages.",
             tips: "Trap mobs using Prison TNT.",
             tntType: "prison_tnt",
-            icon: "textures/goe/tnt/ui/achievements/prison_tnt"
+            icon: "textures/goe/tnt/ui/achievements/prison_tnt",
+            rewardStructure: null
         },
         {
             id: "structure_tnt",
@@ -446,7 +461,8 @@ export const Achievements = {
             info: "Instantly creates one of the vanilla structures.",
             tips: "Build any vanilla structure using Structure TNT.",
             tntType: "structure_tnt",
-            icon: "textures/goe/tnt/ui/achievements/structure_tnt"
+            icon: "textures/goe/tnt/ui/achievements/structure_tnt",
+            rewardStructure: null
         },
         {
             id: "atmosphere_tnt",
@@ -454,7 +470,8 @@ export const Achievements = {
             info: "Replaces the day for night or night for the day.",
             tips: "Use Atmosphere TNT to change the day for night or reversed.",
             tntType: "atmosphere_tnt",
-            icon: "textures/goe/tnt/ui/achievements/atmosphere_tnt"
+            icon: "textures/goe/tnt/ui/achievements/atmosphere_tnt",
+            rewardStructure: "goe_tnt:atmosphere_tnt_reward"
         },
         {
             id: "healing_tnt",
@@ -462,7 +479,8 @@ export const Achievements = {
             info: "Blast regenerating cloud which heals everyone in blast area.",
             tips: "Heal yourself with Healing TNT.",
             tntType: "healing_tnt",
-            icon: "textures/goe/tnt/ui/achievements/healing_tnt"
+            icon: "textures/goe/tnt/ui/achievements/healing_tnt",
+            rewardStructure: "goe_tnt:healing_tnt_reward"
         },
         {
             id: "villager_decoy_tnt",
@@ -470,7 +488,8 @@ export const Achievements = {
             info: "Tricks hostile mobs into chasing it like a villager and leads them into an explosive trap.",
             tips: "Trick hostile mobs using Decoy TNT.",
             tntType: "villager_decoy_tnt",
-            icon: "textures/goe/tnt/ui/achievements/villager_decoy_tnt"
+            icon: "textures/goe/tnt/ui/achievements/villager_decoy_tnt",
+            rewardStructure: "goe_tnt:decoy_tnt_reward"
         },
         {
             id: "honey_tnt",
@@ -478,7 +497,8 @@ export const Achievements = {
             info: "Summons angry bees and coats the ground in sticky honey, slowing anyone caught in the chaos.",
             tips: "Release mad bees.",
             tntType: "honey_tnt",
-            icon: "textures/goe/tnt/ui/achievements/honey_tnt"
+            icon: "textures/goe/tnt/ui/achievements/honey_tnt",
+            rewardStructure: "goe_tnt:honey_tnt_reward"
         },
         {
             id: "cloning_tnt",
@@ -486,7 +506,8 @@ export const Achievements = {
             info: "Doubles all mobs in radius of 10 blocks.",
             tips: "Double any mob you want with single explosion.",
             tntType: "cloning_tnt",
-            icon: "textures/goe/tnt/ui/achievements/cloning_tnt"
+            icon: "textures/goe/tnt/ui/achievements/cloning_tnt",
+            rewardStructure: "goe_tnt:cloning_tnt_reward"
         },
         {
             id: "beacon_tnt",
@@ -494,7 +515,8 @@ export const Achievements = {
             info: "Summons a glowing beam that grants powerful status effects to nearby players and lasts for 10 minutes.",
             tips: "Use Beacon TNT to grant powerful stats.",
             tntType: "beacon_tnt",
-            icon: "textures/goe/tnt/ui/achievements/beacon_tnt"
+            icon: "textures/goe/tnt/ui/achievements/beacon_tnt",
+            rewardStructure: "goe_tnt:beacon_tnt_reward"
         },
         {
             id: "endermite_decoy_tnt",
@@ -502,7 +524,8 @@ export const Achievements = {
             info: "Baits nearby Endermen into swarming it. Only a few obsidian blocks are left as a trace of the explosion.",
             tips: "Bait Enderman using Endermite Decoy TNT.",
             tntType: "endermite_decoy_tnt",
-            icon: "textures/goe/tnt/ui/achievements/endermite_decoy_tnt"
+            icon: "textures/goe/tnt/ui/achievements/endermite_decoy_tnt",
+            rewardStructure: "goe_tnt:endermite_decoy_tnt_reward"
         },
         {
             id: "glass_tnt",
@@ -510,7 +533,8 @@ export const Achievements = {
             info: "Carves a tunnel and turns everything around it into glass except ores so they stay clearly visible and easy to reach.",
             tips: "Use Glass TNT to find valuable ores.",
             tntType: "glass_tnt",
-            icon: "textures/goe/tnt/ui/achievements/glass_tnt"
+            icon: "textures/goe/tnt/ui/achievements/glass_tnt",
+            rewardStructure: "goe_tnt:glass_tnt_reward"
         },
         {
             id: "furnace_tnt",
@@ -518,7 +542,8 @@ export const Achievements = {
             info: "Smelts the world around it turning ores into ingots, wood into coal, and clearing away all other blocks.",
             tips: "Use Furnace TNT to get ores and other goodies around done.",
             tntType: "furnace_tnt",
-            icon: "textures/goe/tnt/ui/achievements/furnace_tnt"
+            icon: "textures/goe/tnt/ui/achievements/furnace_tnt",
+            rewardStructure: "goe_tnt:furnace_tnt_reward"
         },
         {
             id: "mob_eraser_tnt",
@@ -526,7 +551,8 @@ export const Achievements = {
             info: "Erases every mob in the blast area.",
             tips: "Remove every mob in the area using Mob Eraser TNT.",
             tntType: "mob_eraser_tnt",
-            icon: "textures/goe/tnt/ui/achievements/mob_eraser_tnt"
+            icon: "textures/goe/tnt/ui/achievements/mob_eraser_tnt",
+            rewardStructure: "goe_tnt:mob_eraser_tnt_reward"
         },
         {
             id: "magma_eraser_tnt",
@@ -534,7 +560,8 @@ export const Achievements = {
             info: "Erases all lava in the blast area.",
             tips: "Use Magma Eraser TNT to remove all lava in the blast area.",
             tntType: "magma_eraser_tnt",
-            icon: "textures/goe/tnt/ui/achievements/magma_eraser_tnt"
+            icon: "textures/goe/tnt/ui/achievements/magma_eraser_tnt",
+            rewardStructure: "goe_tnt:magma_eraser_tnt_reward"
         },
         {
             id: "light_up_tnt",
@@ -542,7 +569,8 @@ export const Achievements = {
             info: "Its blast lights up every cave and dark corner around you for a minute.",
             tips: "Use Light Up TNT to light your way out of the cave.",
             tntType: "light_up_tnt",
-            icon: "textures/goe/tnt/ui/achievements/light_up_tnt"
+            icon: "textures/goe/tnt/ui/achievements/light_up_tnt",
+            rewardStructure: "goe_tnt:light_up_tnt_reward"
         },
         {
             id: "theif_tnt",
@@ -550,7 +578,8 @@ export const Achievements = {
             info: "Rips up the area caught in the blast and steals all the loot drops.",
             tips: "Get everything on one place.",
             tntType: "theif_tnt",
-            icon: "textures/goe/tnt/ui/achievements/theif_tnt"
+            icon: "textures/goe/tnt/ui/achievements/theif_tnt",
+            rewardStructure: "goe_tnt:thief_tnt_reward"
         }
     ],
 
@@ -561,7 +590,8 @@ export const Achievements = {
             info: "Discover 5 different TNT types",
             tips: "",
             milestoneNumber: 5,
-            icon: "textures/goe/tnt/ui/achievements/milestone_5"
+            icon: "textures/goe/tnt/ui/achievements/milestone_5",
+            rewardStructure: "goe_tnt:milestone_5_reward"
         },
         {
             id: "milestone_10",
@@ -569,7 +599,8 @@ export const Achievements = {
             info: "Discover 10 different TNT types",
             tips: "",
             milestoneNumber: 10,
-            icon: "textures/goe/tnt/ui/achievements/milestone_10"
+            icon: "textures/goe/tnt/ui/achievements/milestone_10",
+            rewardStructure: "goe_tnt:milestone_10_reward"
         },
         {
             id: "milestone_15",
@@ -577,7 +608,8 @@ export const Achievements = {
             info: "Discover 15 different TNT types",
             tips: "",
             milestoneNumber: 15,
-            icon: "textures/goe/tnt/ui/achievements/milestone_15"
+            icon: "textures/goe/tnt/ui/achievements/milestone_15",
+            rewardStructure: "goe_tnt:milestone_15_reward"
         },
         {
             id: "milestone_20",
@@ -585,7 +617,8 @@ export const Achievements = {
             info: "Discover 20 different TNT types",
             tips: "",
             milestoneNumber: 20,
-            icon: "textures/goe/tnt/ui/achievements/milestone_20"
+            icon: "textures/goe/tnt/ui/achievements/milestone_20",
+            rewardStructure: "goe_tnt:milestone_20_reward"
         },
         {
             id: "milestone_25",
@@ -593,7 +626,8 @@ export const Achievements = {
             info: "Discover 25 different TNT types",
             tips: "",
             milestoneNumber: 25,
-            icon: "textures/goe/tnt/ui/achievements/milestone_25"
+            icon: "textures/goe/tnt/ui/achievements/milestone_25",
+            rewardStructure: "goe_tnt:milestone_25_reward"
         },
         {
             id: "milestone_30",
@@ -601,7 +635,8 @@ export const Achievements = {
             info: "Discover 30 different TNT types",
             tips: "",
             milestoneNumber: 30,
-            icon: "textures/goe/tnt/ui/achievements/milestone_30"
+            icon: "textures/goe/tnt/ui/achievements/milestone_30",
+            rewardStructure: "goe_tnt:milestone_30_reward"
         }
     ]
 };
