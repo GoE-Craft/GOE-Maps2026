@@ -77,8 +77,8 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:magnet_tnt",
-        fuseTime: 40,
-        power: 0,
+        fuseTime: 60,
+        power: 2,
         fuseEffects: {
             particleEffect: "goe_tnt:fuse_orange_chunk",
             particleDelay: 0,
@@ -86,8 +86,8 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: null,
-            particleDelay: 0,
+            particleEffect: "goe_tnt:magnet_explosion",
+            particleDelay: 10,
             soundEffect: null,
             soundDelay: 0
         },
@@ -100,7 +100,7 @@ export const TNT_GLD = [
             specialAction: "magnet"
         },
         preExplosionProperties: {
-            specialAction: null
+            specialAction: "magnet"
         }
     },
     {
@@ -133,7 +133,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:ultron_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 8,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -150,7 +150,7 @@ export const TNT_GLD = [
         explosionProperties: {
             createsFire: false,
             allowUnderwater: false,
-            breaksBlocks: false,
+            breaksBlocks: true,
             summonMob: null,
             summonDelay: 10,
             specialAction: "ultron"

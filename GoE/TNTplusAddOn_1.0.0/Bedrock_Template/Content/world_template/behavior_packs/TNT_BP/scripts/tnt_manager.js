@@ -157,6 +157,9 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
     // Start fuse effects (continuous particle + initial sound)
     startFuseEffects(entity, tntData, fuseRemaining);
 
+    // Start pre-explosion action (runs during fuse)
+    startPreExplosionAction(entity, chargeLevel, tntData, fuseRemaining);
+
     const timeoutId = system.runTimeout(() => {
         if (!entity.isValid) return;
 
@@ -166,6 +169,8 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
 
     activeTimeouts.set(entity.id, timeoutId);
 }
+
+
 
 /**
  * Start fuse effects - continuous particles during fuse
@@ -500,6 +505,23 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
     }
 }
 
+/**
+ * Handle pre explosion special actions 
+ * Add custom action handlers here
+ */
+function startPreExplosionAction(entity, chargeLevel, tntData, fuseRemaining) {
+    const action = tntData?.preExplosionProperties?.specialAction;
+    if (!action) return;
+
+    switch (action) {
+        case "magnet":
+            magnetPreAction(entity, chargeLevel, fuseRemaining);
+            break;
+        default:
+            break;
+    }
+}
+
 function* voidActionJob(dimension, location, radius) {
     const minY = -64; // Minimum Y level in Minecraft
 
@@ -637,61 +659,23 @@ function* partyAction(dimension, chargeLevel, location) {
     }
 }
 
+// magnet action after fuse
 function* magnetAction(dimension, chargeLevel, location) {
     const radius = 10;
-    const pullTicks = 20 * 5;
 
-    const pullStrength = 0.08 + (chargeLevel * 0.01);
-    const maxPull = 0.25 + (chargeLevel * 0.03);
-
+    // tune feel
     const pushStrength = 1.2 + (chargeLevel * 0.2);
 
-    for (let t = 0; t < pullTicks; t++) {
-        try {
-            if (t % 2 === 0) dimension.spawnParticle("goe_tnt:magnet_pull", location);
-        } catch (e) { }
-
-        let entities = [];
-        try {
-            entities = dimension.getEntities({ location, maxDistance: radius });
-        } catch (e) { }
-
-        for (const e of entities) {
-            try {
-                if (!e?.isValid) continue;
-                if (e.typeId === "minecraft:player") continue;
-                if (e.typeId === "minecraft:item") continue;
-                if ((e.typeId || "").startsWith("goe_tnt:")) continue;
-
-                const dx = location.x - e.location.x;
-                const dy = (location.y + 0.5) - e.location.y;
-                const dz = location.z - e.location.z;
-
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
-
-                const nx = dx / dist;
-                const ny = dy / dist;
-                const nz = dz / dist;
-
-                const scale = Math.min(maxPull, pullStrength + (0.02 * (1 - Math.min(1, dist / radius))));
-                e.applyImpulse({ x: nx * scale, y: ny * scale, z: nz * scale });
-            } catch (e2) { }
-        }
-
-        yield;
-    }
-
-    try { dimension.spawnParticle("goe_tnt:magnet_explosion", location); } catch (e) { }
-    try { dimension.playSound("random.explode", location); } catch (e) { }
-
-    let entities2 = [];
+    let entities = [];
     try {
-        entities2 = dimension.getEntities({ location, maxDistance: radius });
+        entities = dimension.getEntities({ location, maxDistance: radius });
     } catch (e) { }
 
-    for (const e of entities2) {
+    for (const e of entities) {
         try {
             if (!e?.isValid) continue;
+
+            // mobs only
             if (e.typeId === "minecraft:player") continue;
             if (e.typeId === "minecraft:item") continue;
             if ((e.typeId || "").startsWith("goe_tnt:")) continue;
@@ -711,17 +695,82 @@ function* magnetAction(dimension, chargeLevel, location) {
                 y: Math.max(0.2, ny * pushStrength * 0.6),
                 z: nz * pushStrength
             });
-        } catch (e3) { }
+        } catch (e2) { }
     }
 
-    try {
-        dimension.createExplosion(location, 2, {
-            causesFire: false,
-            breaksBlocks: false,
-            allowUnderwater: true
-        });
-    } catch (e) { }
+    yield;
 }
+
+// magnet pre action during fuse
+function magnetPreAction(entity, chargeLevel, fuseRemaining) {
+    const radius = 10;
+
+    const pullStrength = 0.08 + (chargeLevel * 0.01);
+    const maxPull = 0.25 + (chargeLevel * 0.03);
+
+    let tick = 0;
+
+    // one interval per entity, store it so stopFuseEffects clears it
+    const intervalId = system.runInterval(() => {
+        if (!entity.isValid) {
+            stopFuseEffects(entity);
+            return;
+        }
+
+        const center = entity.location;
+
+        // pull particle every 4 ticks
+        try {
+            if ((tick % 4) === 0) {
+                entity.dimension.spawnParticle("goe_tnt:magnet_pull", center);
+            }
+        } catch (e) { }
+
+        let entities = [];
+        try {
+            entities = entity.dimension.getEntities({ location: center, maxDistance: radius });
+        } catch (e) { }
+
+        for (const e of entities) {
+            try {
+                if (!e?.isValid) continue;
+
+                // mobs only
+                if (e.typeId === "minecraft:player") continue;
+                if (e.typeId === "minecraft:item") continue;
+                if ((e.typeId || "").startsWith("goe_tnt:")) continue;
+
+                const dx = center.x - e.location.x;
+                const dy = (center.y + 0.5) - e.location.y;
+                const dz = center.z - e.location.z;
+
+                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+
+                const nx = dx / dist;
+                const ny = dy / dist;
+                const nz = dz / dist;
+
+                const scale = Math.min(
+                    maxPull,
+                    pullStrength + (0.02 * (1 - Math.min(1, dist / radius)))
+                );
+
+                e.applyImpulse({ x: nx * scale, y: ny * scale, z: nz * scale });
+            } catch (e2) { }
+        }
+
+        tick++;
+    }, 1);
+
+    fuseEffectIntervals.set(entity.id, intervalId);
+
+    // guarantee stop after fuse duration even if something goes weird
+    system.runTimeout(() => {
+        stopFuseEffects(entity);
+    }, fuseRemaining);
+}
+
+
 
 function chunkerAction(dimension, location) {
     // Do something
