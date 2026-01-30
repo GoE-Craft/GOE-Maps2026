@@ -1,4 +1,4 @@
-import { world, system, BlockPermutation } from "@minecraft/server";
+import { world, system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
 import * as tnt_gld from "./gld/tnt_gld";
 
 // Used for TNT tracking across script reloads and world saves
@@ -8,6 +8,8 @@ const activeTimeouts = new Map();
 const countdownIntervals = new Map();
 const fuseEffectIntervals = new Map();
 
+const excludePlayer = new Map();
+
 // Used for tracking explosion power
 const explosionEntities = new Set();
 
@@ -15,7 +17,7 @@ const explosionEntities = new Set();
  * Activate a TNT block at the given location
  * @param {Block} block - The TNT block to activate
  */
-export function activateTNTBlock(block) {
+export function activateTNTBlock(block, player) {
     const timerEnabled = block.permutation.getState("goe_tnt:timer");
     const location = block.center();
     location.y -= 0.5; // Adjust to bottom center
@@ -34,7 +36,7 @@ export function activateTNTBlock(block) {
         // Try to derive spawn yaw from block facing state/properties
         const spawnYaw = getYawFromFace(direction);
 
-        igniteTNT(location, chargeLevel, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw);
+        igniteTNT(location, chargeLevel, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw, player);
     });
 }
 
@@ -42,11 +44,15 @@ export function activateTNTBlock(block) {
  * Register a TNT entity with timer and fuse
  */
 
-export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw) {
+export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw, player) {
     const dim = world.getDimension(dimension);
     const yaw = spawnYaw ?? 0;
     const entity = dim.spawnEntity(tntData.blockId, location, { initialRotation: yaw });
     const startTick = system.currentTick;
+
+    if (player) {
+        excludePlayer.set(entity.id, player.id);
+    }
 
     // If this ignite came from a projectile (mecha-shot uses an impulse object),
     // flag it so we can skip fuse particles/sounds.
@@ -186,7 +192,7 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
 function startFuseEffects(entity, tntData, fuseTime) {
     if (!tntData?.fuseEffects) return;
 
-    
+
     // Skip fuse particles/sounds for projectile ignites (mecha shots).
     try {
         if (entity.getDynamicProperty("goe_tnt_skip_fuse_fx") === true) return;
@@ -278,7 +284,7 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
         if (tntData?.explosionProperties?.specialAction) {
             // If the special action is expensive, the handler should itself use runJob.
             const vec = getFacingVectorFromEntity(rot);
-            system.run(() => handleSpecialAction(dimension, loc, tntData, chargeLevel, vec));
+            system.run(() => handleSpecialAction(dimension, loc, tntData, chargeLevel, vec, entity.id));
         }
     } catch (e) {
         console.log("Error handling special action: " + e);
@@ -488,7 +494,7 @@ function* processExplosionEvent(impactedBlocks) {
  * Handle special actions on explosion
  * Add custom action handlers here
  */
-function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
+function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, entityId) {
     const action = tntData.explosionProperties.specialAction;
     if (!action) return;
 
@@ -511,6 +517,10 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec) {
         case "magnet":
             // Spawn magnet TNT effect
             runJobWithDelays(magnetAction(dimension, chargeLevel, location));
+            break;
+        case "freezing":
+            // Freeze mobs and turn blocks to ice
+            system.runJob(freezingAction(dimension, chargeLevel, location, entityId));
             break;
         case "atmosphere":
             // Atmosphere TNT - change the time
@@ -789,16 +799,144 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
 
 
 function chunkerAction(dimension, location) {
-    // Do something
+    // Do something - for milos, also needs geo and textures and particles
 }
 
 function ultronAction(dimension, location) {
-    // Do something
+    // Do something - just changed power, also needs geo and textures and particles
 }
 
-function freezingAction(dimension, location) {
-    // Do something
+// freezing action
+function* freezingAction(dimension, chargeLevel, location, entityId) {
+    const variables = new MolangVariableMap();
+    variables.setFloat("charge_level", Number(chargeLevel));
+    dimension.spawnParticle("goe_tnt:freezing_fog", location, variables);
+    dimension.spawnParticle("goe_tnt:freezing_snow", location, variables);
+    // safe chargeLevel
+    const cl = Number(chargeLevel);
+    const safeChargeLevel = Number.isFinite(cl) ? cl : 0;
+
+    // radius scales with chargeLevel
+    const radius = 2 + Math.floor(((5 * 0.25) * safeChargeLevel));
+
+    const freezeSeconds = 5;
+    const freezeTicks = freezeSeconds * 20;
+
+    // normalize location to Vector3
+    const loc = {
+        x: Number(location?.x ?? 0),
+        y: Number(location?.y ?? 0),
+        z: Number(location?.z ?? 0)
+    };
+
+    // stable integer center for block work
+    const base = {
+        x: Math.floor(loc.x),
+        y: Math.floor(loc.y),
+        z: Math.floor(loc.z)
+    };
+
+    // tag to track frozen entities for dot + cleanup
+    const freezeTag = `goe_tnt_freeze_${system.currentTick}`;
+    yield;
+
+    // freeze mobs in radius + apply effects
+    const entities = dimension.getEntities({
+        location: loc,
+        maxDistance: radius
+    });
+
+    let playerId;
+
+    if (excludePlayer.has(entityId)) {
+        playerId = excludePlayer.get(entityId);
+        excludePlayer.delete(entityId);
+    }
+
+    for (const e of entities) {
+        try {
+            // exclude players
+            if (e.id === playerId) continue;
+
+            e.addTag(freezeTag);
+
+            // effects
+            e.addEffect("slowness", freezeTicks, { amplifier: 100, showParticles: true });
+
+            // Spawn ice cube entity at mob location, y+1
+            const iceCubeLoc = { x: e.location.x, y: e.location.y + 1, z: e.location.z };
+            dimension.spawnEntity("goe_tnt:ice_cube", iceCubeLoc);
+            e.clearVelocity();
+        } catch { }
+    }
+
+    // damage over time while frozen
+    const damageInterval = system.runInterval(() => {
+        const targets = dimension.getEntities({
+            location: loc,
+            maxDistance: radius + 2
+        });
+
+        for (const e of targets) {
+            try {
+                if (!e.hasTag(freezeTag)) continue;
+
+                // half a heart per second (1 hp)
+                e.applyDamage(1);
+                e.clearVelocity();
+            } catch { }
+        }
+    }, 40);
+
+    system.runTimeout(() => {
+        try { system.clearRun(damageInterval); } catch { }
+
+        const targets = dimension.getEntities({
+            location: loc,
+            maxDistance: radius + 2
+        });
+
+        for (const e of targets) {
+            try {
+                if (e.hasTag(freezeTag)) e.removeTag(freezeTag);
+            } catch { }
+        }
+    }, freezeTicks);
+
+    yield;
+
+    const icePerm = BlockPermutation.resolve("ice");
+
+    // replace everything in the radius
+    let ops = 0;
+    for (let x = base.x - radius; x <= base.x + radius; x++) {
+        for (let y = base.y - radius; y <= base.y + radius; y++) {
+            for (let z = base.z - radius; z <= base.z + radius; z++) {
+                const dx = x - base.x;
+                const dy = y - base.y;
+                const dz = z - base.z;
+                if ((dx * dx + dy * dy + dz * dz) > (radius * radius)) continue;
+
+                try {
+                    const b = dimension.getBlock({ x, y, z });
+                    if (!b) continue;
+
+                    // don't replace air
+                    if (b.typeId !== "minecraft:air") {
+                        b.setPermutation(icePerm);
+                    }
+                } catch { }
+
+                ops++;
+                if ((ops % 60) === 0) yield;
+            }
+        }
+    }
+
+    yield;
 }
+
+
 
 function treePlanterAction(dimension, location) {
     // Do something

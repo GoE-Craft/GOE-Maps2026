@@ -1,0 +1,37 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.freezing_tnt.active": {
+			"animation_length": 2,
+			"bones": {
+				"wind_effect": {
+					"rotation": [0, "-(q.anim_time * 360) ", 0],
+					"position": {
+						"0.0": [0, -5, 0],
+						"0.375": [0, 44, 0]
+					},
+					"scale": {
+						"0.0": [15, 0, 15],
+						"0.375": {
+							"pre": [15, 15, 15],
+							"post": [15, 15, 15],
+							"lerp_mode": "catmullrom"
+						},
+						"0.625": [15, 15, 15]
+					}
+				},
+				"flakes_effect": {
+					"rotation": [0, "-q.anim_time * 100", 0],
+					"position": {
+						"0.0": [0, -5, 0],
+						"0.375": [0, 43, 0]
+					},
+					"scale": {
+						"0.0": [15, 0, 15],
+						"0.375": [15, 15, 15]
+					}
+				}
+			}
+		}
+	}
+}

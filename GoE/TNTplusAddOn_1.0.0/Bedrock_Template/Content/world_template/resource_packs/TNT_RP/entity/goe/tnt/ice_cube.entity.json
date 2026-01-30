@@ -1,0 +1,12 @@
+{
+  "format_version": "1.20.60",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:ice_cube",
+      "materials": { "default": "entity_alphatest" },
+      "textures": { "default": "textures/goe/tnt/entity/ice_cube" },
+      "render_controllers": [ "controller.render.default" ],
+      "geometry": { "default": "geometry.goe_tnt.ice_cube" }
+    }
+  }
+}

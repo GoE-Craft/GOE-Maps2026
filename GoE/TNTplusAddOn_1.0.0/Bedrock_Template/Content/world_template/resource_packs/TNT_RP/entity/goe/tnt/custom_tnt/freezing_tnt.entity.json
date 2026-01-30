@@ -12,16 +12,22 @@
       "geometry": {
         "default": "geometry.freezing_tnt"
       },
-			"scripts": {
+      "scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          { "tnt_swelling": "v.should_swell" },
+          { "fuse_effect": "q.mark_variant == 1" }
         ]
-			},
+      },
       "animations": {
+        "fuse_effect": "animation.freezing_tnt.active",
         "tnt_swelling": "animation.tnt.swell"
+      },
+      "particle_effects": {
+        "freezing_fog": "goe_tnt:freezing_fog",
+        "freezing_snow": "goe_tnt:freezing_snow"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

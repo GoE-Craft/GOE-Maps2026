@@ -80,7 +80,7 @@ export const TNT_GLD = [
         fuseTime: 60,
         power: 2,
         fuseEffects: {
-            particleEffect: "goe_tnt:fuse_orange_chunk",
+            particleEffect: null,
             particleDelay: 0,
             soundEffect: "random.fuse",
             soundDelay: 0
@@ -161,16 +161,16 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:freezing_tnt",
-        fuseTime: 80,
-        power: 1,
+        fuseTime: 40,
+        power: 0,
         fuseEffects: {
-            particleEffect: "minecraft:basic_smoke_particle",
-            particleDelay: 10,
+            particleEffect: null,
+            particleDelay: 0,
             soundEffect: "random.fuse",
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
+            particleEffect: "goe_tnt:big_explosion_blue",
             particleDelay: 0,
             soundEffect: "random.fizz",
             soundDelay: 0

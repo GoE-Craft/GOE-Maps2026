@@ -19,7 +19,7 @@ export const TntCustomComponent = {
             toggleTimer(block, player);
             player.playSound("minecraft:item.book.page_turn", block.location);
         } else if (itemInHand?.typeId === "minecraft:flint_and_steel") {
-            tnt_manager.activateTNTBlock(block);
+            tnt_manager.activateTNTBlock(block, player);
             updateTimerSet(block.location, block.dimension.id, false);
         } else if (itemInHand && isPlaceableBlock(itemInHand.typeId)) {
             // Manually place the block on the clicked face
