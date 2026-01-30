@@ -169,9 +169,9 @@ type=area
 location=21 1 50 48 33 77
 replace=gray_stained_glass structure_void
 
-#singularity_tnt_structure
+#time_freeze_tnt_structure
 type=area
-location=71 1 150 98 39 177
+location=121 1 0 148 39 27
 replace=gray_stained_glass structure_void
 
 #endermite_decoy_tnt_structure
@@ -216,7 +216,7 @@ replace=gray_stained_glass structure_void
 
 #dimensional_tnt_structure
 type=area
-location=171 1 50 198 30 70
+location=171 1 50 198 30 77
 replace=gray_stained_glass structure_void
 
 #arrow_storm_tnt_structure
