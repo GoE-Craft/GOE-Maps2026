@@ -87,7 +87,7 @@ export const TNT_GLD = [
         },
         explosionEffects: {
             particleEffect: "goe_tnt:magnet_explosion",
-            particleDelay: 10,
+            particleDelay: 0,
             soundEffect: null,
             soundDelay: 0
         },

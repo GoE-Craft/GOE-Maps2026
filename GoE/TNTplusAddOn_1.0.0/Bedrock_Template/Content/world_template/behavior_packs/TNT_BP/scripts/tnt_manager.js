@@ -48,6 +48,14 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
     const entity = dim.spawnEntity(tntData.blockId, location, { initialRotation: yaw });
     const startTick = system.currentTick;
 
+    // If this ignite came from a projectile (mecha-shot uses an impulse object),
+    // flag it so we can skip fuse particles/sounds.
+    try {
+        if (impulse !== undefined) {
+            entity.setDynamicProperty("goe_tnt_skip_fuse_fx", true);
+        }
+    } catch { }
+
     // If impulse provided, apply it (TNT shot or TNT knocked by explosion)
     if (impulse) {
         entity.applyImpulse(impulse);
@@ -176,6 +184,14 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
  * Start fuse effects - continuous particles during fuse
  */
 function startFuseEffects(entity, tntData, fuseTime) {
+    if (!tntData?.fuseEffects) return;
+
+    
+    // Skip fuse particles/sounds for projectile ignites (mecha shots).
+    try {
+        if (entity.getDynamicProperty("goe_tnt_skip_fuse_fx") === true) return;
+    } catch { }
+
     if (!tntData?.fuseEffects) return;
 
     const dim = entity.dimension;

@@ -381,6 +381,17 @@ function toTntManagerDimKey(dimId) {
 	return "overworld";
 }
 
+function getMechaShotFuseTicks(tntData) {
+	const preAction = tntData?.preExplosionProperties?.specialAction;
+	if (!preAction) return 0;
+
+	if (tntData?.blockId === "goe_tnt:magnet_tnt") {
+		return (typeof tntData.fuseTime === "number" && tntData.fuseTime > 0) ? tntData.fuseTime : 60;
+	}
+
+	return 1;
+}
+
 // immediately detonates a custom projectile using tnt_manager logic (skipping fuse)
 function explodeCustomProjectileNow(entity, tntData, yawDeg, dimKey) {
 	if (!isEntityValid(entity) || !tntData) return;
@@ -399,11 +410,13 @@ function explodeCustomProjectileNow(entity, tntData, yawDeg, dimKey) {
 	const useYaw = (typeof yawDeg === "number") ? yawDeg : undefined;
 
 	try {
+		const fuseTicks = getMechaShotFuseTicks(tntData);
+
 		tnt_manager.igniteTNT(
 			loc,
 			1,
 			0,
-			0,
+			fuseTicks,
 			tntData,
 			useDimKey,
 			{ x: 0, y: 0, z: 0 },
@@ -432,11 +445,13 @@ function setupCustomProjectileCollisionTick() {
 
 				if (lastPos2 && dimKey2) {
 					try {
+						const fuseTicks = getMechaShotFuseTicks(tntData);
+
 						tnt_manager.igniteTNT(
 							lastPos2,
 							1,
 							0,
-							0,
+							fuseTicks,
 							tntData,
 							dimKey2,
 							{ x: 0, y: 0, z: 0 },
