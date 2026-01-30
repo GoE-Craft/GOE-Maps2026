@@ -5,3 +5,5 @@ action.hint.exit.goe_tnt:mecha_suit=Interact with TNT block to fire it.
 
 entity.goe_tnt:mecha_suit.name=Mecha Suit
 item.spawn_egg.entity.goe_tnt:mecha_suit.name=Mecha Suit
+entity.goe_tnt:matrix_mob.name=Matrix Mob
+item.spawn_egg.entity.goe_tnt:matrix_mob.name=Matrix Mob

@@ -1,0 +1,87 @@
+{
+  "format_version": "1.20.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "goe_tnt:matrix_mob",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "properties": {
+        "goe_tnt:tnt_action": {
+          "type": "enum",
+          "values": ["idle", "charge", "charged", "fire"],
+          "default": "idle",
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:damage_sensor": {
+        "triggers": [
+          { "cause": "fall", "deals_damage": false }
+        ]
+      },
+
+      "minecraft:health": {
+        "value": { "range_min": 100, "range_max": 100 }
+      },
+
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+
+      "minecraft:collision_box": {
+        "height": 2.5,
+        "width": 2.0
+      },
+
+      "minecraft:push_through": {
+        "value": 0
+      },
+
+      "minecraft:pushable": {
+        "is_pushable": true
+      },
+
+      "minecraft:movement": { "value": 0.13 },
+      "minecraft:movement.basic": {},
+
+      "minecraft:navigation.generic": {},
+
+      "minecraft:can_power_jump": {},
+
+      "minecraft:horse.jump_strength": {
+        "value": { "range_min": 1, "range_max": 1 }
+      },
+
+      "minecraft:input_ground_controlled": {},
+
+      "minecraft:rideable": {
+        "seat_count": 1,
+        "seats": [
+          { "position": [0, 2.25, 0] }
+        ]
+      },
+
+      "minecraft:variable_max_auto_step": {
+        "base_value": 1.2,
+        "controlled_value": 1.2
+      }
+    },
+
+    "events": {
+      "goe:charge_tnt": {
+        "set_property": { "goe_tnt:tnt_action": "charge" }
+      },
+      "goe:fire_tnt": {
+        "set_property": { "goe_tnt:tnt_action": "fire" }
+      },
+      "goe:idle_tnt": {
+        "set_property": { "goe_tnt:tnt_action": "idle" }
+      },
+      "goe:charged_tnt": {
+        "set_property": { "goe_tnt:tnt_action": "charged" }
+      }
+    }
+  }
+}
