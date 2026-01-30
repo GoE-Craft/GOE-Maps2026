@@ -1,0 +1,71 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:achievement_fireworks_solo",
+			"basic_render_parameters": {
+				"material": "particles_add",
+				"texture": "textures/goe/tnt/particles/firework"
+			}
+		},
+		"components": {
+			"minecraft:emitter_initialization": {
+				"creation_expression": "v.size_over_life = 1;v.random_location_x = math.random(-1, 1) * 4;v.random_location_z = math.random(-1, 1) * 4;"
+			},
+			"minecraft:emitter_rate_instant": {
+				"num_particles": 10
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 2.21
+			},
+			"minecraft:emitter_shape_sphere": {
+				"radius": 1,
+				"direction": "outwards"
+			},
+			"minecraft:particle_initialization": {
+				"per_update_expression": "v.size_over_life = 1 - (v.particle_age / v.particle_lifetime);"
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": 3.2
+			},
+			"minecraft:particle_initial_spin": {
+				"rotation": -90
+			},
+			"minecraft:particle_initial_speed": 6,
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": ["math.sin(v.particle_age * 90)", -10, "math.cos(v.particle_age * 40)"],
+				"linear_drag_coefficient": 1
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["(0.3 * v.size_over_life) * v.particle_random_3", "0.6 * v.size_over_life"],
+				"facing_camera_mode": "lookat_direction",
+				"uv": {
+					"texture_width": 32,
+					"texture_height": 192,
+					"flipbook": {
+						"base_UV": [0, 98],
+						"size_UV": [32, 32],
+						"step_UV": [0, 32],
+						"frames_per_second": 14,
+						"max_frame": 7,
+						"stretch_to_lifetime": true
+					}
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": " v.emitter_random_1",
+					"gradient": {
+						"0.0": "#FFFF0500",
+						"0.11": "#FFFF7900",
+						"0.27": "#FFFDFF00",
+						"0.46": "#FF11FF00",
+						"0.6": "#FF00C0FF",
+						"0.77": "#FF0018FF",
+						"1.0": "#FF9600FF"
+					}
+				}
+			}
+		}
+	}
+}

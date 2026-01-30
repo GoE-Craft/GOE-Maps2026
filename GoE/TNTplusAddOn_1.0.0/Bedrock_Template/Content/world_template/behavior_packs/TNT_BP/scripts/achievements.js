@@ -30,21 +30,11 @@ function unlockAllCompleteReward(player) {
             placeAchievementRewardStructure(player, allComplete.rewardStructure);
         }
 
-        const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle", "minecraft:end_rod"];
-        for (let i = 0; i < 30; i++) {
-            system.runTimeout(() => {
-                const location = player.location;
-                const offsetX = (Math.random() - 0.5) * 3;
-                const offsetY = Math.random() * 3;
-                const offsetZ = (Math.random() - 0.5) * 3;
-                const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
-                player.dimension.spawnParticle(particleType, {
-                    x: location.x + offsetX,
-                    y: location.y + offsetY,
-                    z: location.z + offsetZ
-                });
-            }, i * 2);
-        }
+        spawnAchievementParticles(player, {
+            particleTypes: ["minecraft:villager_happy", "minecraft:totem_particle", "minecraft:end_rod"],
+            count: 30,
+            spread: 3
+        });
     }, 60);
 }
 
@@ -121,26 +111,7 @@ function unlockTntAchievement(player, tntType) {
         placeAchievementRewardStructure(player, rewardStructure);
     }
 
-    const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
-
-    // Create a burst effect with multiple particles
-    for (let i = 0; i < 20; i++) {
-        system.runTimeout(() => {
-            const location = player.location;
-            const offsetX = (Math.random() - 0.5) * 2;
-            const offsetY = Math.random() * 2;
-            const offsetZ = (Math.random() - 0.5) * 2;
-
-            // Randomly choose between villager_happy and totem_particle for each particle
-            const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
-
-            player.dimension.spawnParticle(particleType, {
-                x: location.x + offsetX,
-                y: location.y + offsetY,
-                z: location.z + offsetZ
-            });
-        }, i * 2);
-    }
+    spawnAchievementParticles(player, { count: 20, spread: 2 });
 
     tryUnlockAllCompleteReward(player);
 }
@@ -180,26 +151,7 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
             placeAchievementRewardStructure(player, rewardStructure);
         }
 
-        const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"];
-
-        // Create a burst effect with multiple particles
-        for (let i = 0; i < 20; i++) {
-            system.runTimeout(() => {
-                const location = player.location;
-                const offsetX = (Math.random() - 0.5) * 2;
-                const offsetY = Math.random() * 2;
-                const offsetZ = (Math.random() - 0.5) * 2;
-
-                // Randomly choose between villager_happy and totem_particle for each particle
-                const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
-
-                player.dimension.spawnParticle(particleType, {
-                    x: location.x + offsetX,
-                    y: location.y + offsetY,
-                    z: location.z + offsetZ
-                });
-            }, i * 2);
-        }
+        spawnAchievementParticles(player, { count: 20, spread: 2 });
 
         tryUnlockAllCompleteReward(player);
     }, 55);
@@ -267,4 +219,28 @@ export function getUnlockedMilestones(player) {
     }
 
     return unlocked;
+}
+
+function spawnAchievementParticles(player, options = {}) {
+    const {
+        particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle"],
+        count = 20,
+        spread = 2
+    } = options;
+
+    player.dimension.spawnParticle("goe_tnt:achievement_fireworks", player.location);
+    for (let i = 0; i < count; i++) {
+        system.runTimeout(() => {
+            const location = player.location;
+            const offsetX = (Math.random() - 0.5) * spread;
+            const offsetY = Math.random() * spread;
+            const offsetZ = (Math.random() - 0.5) * spread;
+            const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+            player.dimension.spawnParticle(particleType, {
+                x: location.x + offsetX,
+                y: location.y + offsetY,
+                z: location.z + offsetZ
+            });
+        }, i * 2);
+    }
 }

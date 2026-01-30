@@ -597,5 +597,6 @@ export function onPlayerSpawn(event) {
 
     if (!player.getDynamicProperty("goe_tnt_has_guide_book")) {
         utils.runPlayerCommand(player, `structure load goe_tnt:guide_book ~ ~ ~`);
+        player.setDynamicProperty("goe_tnt_has_guide_book", true);
     }
 }
