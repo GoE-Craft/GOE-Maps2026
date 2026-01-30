@@ -13,6 +13,49 @@ function getMilestoneRewardStructure(milestoneNumber) {
     return milestone?.rewardStructure ?? null;
 }
 
+const TOTAL_ACHIEVEMENTS = () => Achievements.tnt_individual.length + Achievements.milestones.length;
+
+function unlockAllCompleteReward(player) {
+    player.setDynamicProperty("goe_tnt_all_achievements_reward_received", true);
+
+    const allComplete = Achievements.allComplete;
+    if (!allComplete) return;
+
+    system.runTimeout(() => {
+        player.playSound("goe_tnt:done_all_achievements_music");
+        utils.title(player, "@s", `§d§lAll Achievements Complete!`);
+        utils.tellraw(player, "@s", `§d[Completion] §eTNT Master §r- You have discovered every TNT achievement!`);
+
+        if (allComplete.rewardStructure) {
+            placeAchievementRewardStructure(player, allComplete.rewardStructure);
+        }
+
+        const particleTypes = ["minecraft:villager_happy", "minecraft:totem_particle", "minecraft:end_rod"];
+        for (let i = 0; i < 30; i++) {
+            system.runTimeout(() => {
+                const location = player.location;
+                const offsetX = (Math.random() - 0.5) * 3;
+                const offsetY = Math.random() * 3;
+                const offsetZ = (Math.random() - 0.5) * 3;
+                const particleType = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+                player.dimension.spawnParticle(particleType, {
+                    x: location.x + offsetX,
+                    y: location.y + offsetY,
+                    z: location.z + offsetZ
+                });
+            }, i * 2);
+        }
+    }, 60);
+}
+
+function tryUnlockAllCompleteReward(player) {
+    const total = player.getDynamicProperty("goe_tnt_total_achievements_count");
+    const count = total !== undefined ? total : 0;
+    if (count === TOTAL_ACHIEVEMENTS() && player.getDynamicProperty("goe_tnt_all_achievements_reward_received") !== true) {
+        unlockAllCompleteReward(player);
+    }
+}
+
 function placeAchievementRewardStructure(player, structureId) {
     if (!structureId || !player) return;
     utils.runPlayerCommand(player, `structure load ${structureId} ~ ~ ~`);
@@ -98,6 +141,8 @@ function unlockTntAchievement(player, tntType) {
             });
         }, i * 2);
     }
+
+    tryUnlockAllCompleteReward(player);
 }
 
 function hasMilestoneAchievement(player, milestoneNumber) {
@@ -155,6 +200,8 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
                 });
             }, i * 2);
         }
+
+        tryUnlockAllCompleteReward(player);
     }, 55);
 }
 

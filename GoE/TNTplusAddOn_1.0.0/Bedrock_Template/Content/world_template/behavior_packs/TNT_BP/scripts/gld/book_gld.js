@@ -638,7 +638,11 @@ export const Achievements = {
             icon: "textures/goe/tnt/ui/achievements/milestone_30",
             rewardStructure: "goe_tnt:milestone_30_reward"
         }
-    ]
+    ],
+
+    allComplete: {
+        rewardStructure: "goe_tnt:all_achievements_reward" 
+    }
 };
 
 export function getAllAchievements() {
