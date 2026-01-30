@@ -4,8 +4,8 @@
 		"description": {
 			"identifier": "goe_tnt:big_explosion_white",
 			"basic_render_parameters": {
-				"material": "particles_alpha",
-				"texture": "textures/particle/particles"
+				"material": "particles_blend",
+				"texture": "textures/goe/tnt/particles/explode"
 			}
 		},
 		"curves": {
@@ -36,15 +36,14 @@
 				"size": [1, 1],
 				"facing_camera_mode": "lookat_xyz",
 				"uv": {
-					"texture_width": 128,
-					"texture_height": 128,
+					"texture_width": 16,
+					"texture_height": 96,
 					"flipbook": {
-						"base_UV": [0, 80],
-						"size_UV": [8, 8],
-						"step_UV": [8, 0],
-						"frames_per_second": 8,
-						"max_frame": 16,
-						"stretch_to_lifetime": true
+						"base_UV": [0, 0],
+						"size_UV": [16, 16],
+						"step_UV": [0, 16],
+						"frames_per_second": 16,
+						"max_frame": 6
 					}
 				}
 			},

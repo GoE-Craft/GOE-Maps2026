@@ -610,7 +610,10 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
 }
 
 function* partyAction(dimension, chargeLevel, location) {
-    dimension.playSound("firework.blast", location);
+    dimension.spawnParticle("goe_tnt:cookie_explosion", location);
+    dimension.spawnParticle("goe_tnt:cake_explosion", location);
+
+    yield;
     const radius = 2 + Math.floor(((2*0.25) * chargeLevel));
     for (let x = location.x - radius; x <= location.x + radius; x++) {
         for (let z = location.z - radius; z <= location.z + radius; z++) {

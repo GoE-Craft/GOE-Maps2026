@@ -53,7 +53,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:party_tnt",
         fuseTime: 40,
-        power: 1,
+        power: 0,
         fuseEffects: {
             particleEffect: "goe_tnt:fuse_orange_chunk",
             particleDelay: 0,
@@ -63,7 +63,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white", // We need cookie rain particle effect here
             particleDelay: 0,
-            soundEffect: "firework.twinkle", // Also appropriate sound effect
+            soundEffect: "random.explode", // Also appropriate sound effect
             soundDelay: 0
         },
         explosionProperties: {
