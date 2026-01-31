@@ -1,4 +1,4 @@
-import { world, system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
+import { world, system, BlockPermutation, MolangVariableMap, ItemStack, GameMode } from "@minecraft/server";
 import * as tnt_gld from "./gld/tnt_gld";
 
 // Used for TNT tracking across script reloads and world saves
@@ -338,6 +338,32 @@ export function onLoad() {
 
 }
 
+// Handle block place event to replace vanilla TNT with custom TNT
+export function onBlockPlace(event) {
+    const block = event.block;
+    const dim = block.dimension;
+    if (block.typeId !== "minecraft:tnt") return;
+
+    system.run(() => {
+        // Replace with our custom TNT block
+        block.setPermutation(BlockPermutation.resolve("goe_tnt:tnt"));
+    });
+}
+
+export function onPlayerBreakBlockBefore(event) {
+    const block = event.block;
+    const dim = block.dimension;
+    const player = event.player;
+    if (block.typeId !== "goe_tnt:tnt") return;
+
+    system.run(() => {
+        // Replace with vanilla TNT block
+        if (player.getGameMode() === GameMode.Creative) return;
+        dim.spawnItem(new ItemStack("minecraft:tnt", 1), block.location);
+    });
+}
+
+
 /**
  * Restore TNT states after script reload
  */
@@ -346,7 +372,7 @@ function* restoreTNT() {
 
     for (const dim of ["overworld", "nether", "the_end"]) {
         try {
-            // Some TNT entities may use different identifiers (sample_tnt, directional_tnt, etc.).
+            // Some TNT entities may use different identifiers (tnt, directional_tnt, etc.).
             // Retrieve all entities in the dimension and filter by our namespace prefix.
             const allEntities = world.getDimension(dim).getEntities();
             const entities = allEntities.filter(e => e?.typeId && e.typeId.startsWith("goe_tnt:"));
@@ -386,6 +412,7 @@ function* restoreTNT() {
 }
 
 // This should handle dispenser events that spawn TNT items
+// This also prevents dropping goe TNT items on the ground
 export function handleEntitySpawn(event) {
     const entity = event?.entity || event.entity;
     if (!entity) return;
@@ -401,6 +428,12 @@ export function handleEntitySpawn(event) {
 
         // Check if the item is one of our TNT items{
         const itemTypeId = comp.itemStack.typeId;
+
+        // We want to prevent dropping our TNT on the ground
+        // so remove the item entity if it's one of our custom TNT items
+        // Other part is handled in onPlayerBreakBlockBefore
+        if (itemTypeId === "goe_tnt:tnt") entity.remove();
+        
         const tntData = tnt_gld.getTntDataByBlockId(itemTypeId);
         if (!tntData) return;
 

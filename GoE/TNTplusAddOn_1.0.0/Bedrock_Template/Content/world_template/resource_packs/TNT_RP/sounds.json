@@ -13,7 +13,7 @@
     }
   },
   "block_sounds": {
-    "goe_tnt:sample_tnt": {
+    "goe_tnt:tnt": {
       "events": {
         "break": "dig.grass",
         "place": "hit.grass"

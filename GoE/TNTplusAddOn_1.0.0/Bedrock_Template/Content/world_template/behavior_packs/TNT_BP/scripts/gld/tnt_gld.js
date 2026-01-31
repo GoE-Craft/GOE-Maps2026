@@ -1,6 +1,6 @@
 export const TNT_GLD = [
     {
-        blockId: "goe_tnt:sample_tnt",
+        blockId: "goe_tnt:tnt",
         fuseTime: 80,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -12,7 +12,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {

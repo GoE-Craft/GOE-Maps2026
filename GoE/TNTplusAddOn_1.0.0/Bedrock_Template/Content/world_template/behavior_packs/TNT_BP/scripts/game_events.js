@@ -61,6 +61,11 @@ export async function onWeatherChange(event) {}
 
 export async function onPlayerPlaceBlock(event) {
     achievements.onPlayerPlaceBlock(event);
+    tnt_manager.onBlockPlace(event);
+}
+
+export async function onPlayerBreakBlockBefore(event) {
+    tnt_manager.onPlayerBreakBlockBefore(event);
 }
 
 export async function onPlayerInteractWithEntity(event) {}

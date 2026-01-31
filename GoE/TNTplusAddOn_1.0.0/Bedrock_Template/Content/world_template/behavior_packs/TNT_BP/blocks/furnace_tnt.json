@@ -19,7 +19,7 @@
       "minecraft:display_name": "Furnace TNT",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "minecraft:geometry.full_block",
       "minecraft:material_instances": { "*": { "texture": "tnt_side", "render_method": "alpha_test", "face_dimming": true} },

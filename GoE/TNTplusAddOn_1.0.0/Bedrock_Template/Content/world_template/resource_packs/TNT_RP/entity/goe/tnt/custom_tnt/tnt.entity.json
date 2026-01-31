@@ -2,15 +2,15 @@
 	"format_version": "1.19.0",
 	"minecraft:client_entity": {
 		"description": {
-			"identifier": "goe_tnt:sample_tnt",
+			"identifier": "goe_tnt:tnt",
 			"materials": {
 				"default": "entity_alphatest"
 			},
 			"textures": {
-				"default": "textures/blocks/tnt_side"
+				"default": "textures/goe/tnt/entity/tnt"
 			},
 			"geometry": {
-				"default": "geometry.goe_tnt.tnt"
+				"default": "geometry.tnt"
 			},
 			"scripts": {
 				"pre_animation": [

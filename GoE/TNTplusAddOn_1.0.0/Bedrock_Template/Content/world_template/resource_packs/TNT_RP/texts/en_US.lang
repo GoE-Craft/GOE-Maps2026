@@ -8,7 +8,7 @@ item.spawn_egg.entity.goe_tnt:mecha_suit.name=Mecha Suit
 
 item.goe_tnt:tnt_detonator=TNT Detonator
 
-entity.goe_tnt:sample_tnt.name=Sample TNT
+entity.goe_tnt:tnt.name=Sample TNT
 entity.goe_tnt:directional_tnt.name=Directional TNT
 entity.goe_tnt:party_tnt.name=Party TNT
 entity.goe_tnt:magnet_tnt.name=Magnet TNT

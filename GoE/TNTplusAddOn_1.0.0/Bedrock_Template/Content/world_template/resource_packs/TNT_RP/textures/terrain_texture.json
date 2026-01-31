@@ -4,6 +4,7 @@
   "padding": 8,
   "num_mip_levels": 4,
   "texture_data": {
+    "tnt": { "textures": "textures/goe/tnt/entity/tnt" },
     "acid_tnt": { "textures": "textures/goe/tnt/entity/acid_tnt" },
     "allay_tnt": { "textures": "textures/goe/tnt/entity/allay_tnt" },
     "anti_tnt": { "textures": "textures/goe/tnt/entity/anti_tnt" },

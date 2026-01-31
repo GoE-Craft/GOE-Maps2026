@@ -25,11 +25,11 @@ export const ShopItems = {
     // TNT's category
     tnts: [
         {
-            id: "sample_tnt",
-            name: "Sample TNT",
+            id: "tnt",
+            name: "TNT",
             price: { type: "copper_ingot", amount: 4 },
-            icon: "textures/goe/tnt/ui/shop/tnt/sample_tnt",
-            itemId: "goe_tnt:sample_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/tnt",
+            itemId: "goe_tnt:tnt"
         },
         {
             id: "directional_tnt",
@@ -321,12 +321,12 @@ export const PriceTypeNames = {
 export const Achievements = {
     tnt_individual: [
         {
-            id: "sample_tnt",
+            id: "tnt",
             name: "Sample TNT",
             info: "Place Sample TNT",
             tips: "",
-            tntType: "sample_tnt",
-            icon: "textures/goe/tnt/ui/achievements/sample_tnt",
+            tntType: "tnt",
+            icon: "textures/goe/tnt/ui/achievements/tnt",
             rewardStructure: null
         },
         {

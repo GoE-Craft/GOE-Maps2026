@@ -19,7 +19,7 @@
       "minecraft:display_name": "Villager Decoy TNT",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.5 },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.villager_decoy_tnt",
       "minecraft:material_instances": { "*": { "texture": "villager_decoy_tnt", "render_method": "alpha_test" } },

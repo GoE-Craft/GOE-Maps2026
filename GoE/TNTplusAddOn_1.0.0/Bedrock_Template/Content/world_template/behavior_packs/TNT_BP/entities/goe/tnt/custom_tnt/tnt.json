@@ -2,7 +2,7 @@
     "format_version": "1.21.130",
     "minecraft:entity": {
         "description": {
-            "identifier": "goe_tnt:sample_tnt",
+            "identifier": "goe_tnt:tnt",
             "is_spawnable": false,
             "is_summonable": true,
             "properties": {
@@ -52,14 +52,13 @@
                 "max": 1
             },
             "minecraft:renders_when_invisible": {},
-            "minecraft:is_collidable": {},
             "minecraft:physics": {
                 "has_collision": true,
                 "has_gravity": true
             },
             "minecraft:collision_box": {
-                "height": 1,
-                "width": 1
+                "height": 0.98,
+                "width": 0.98
             },
             "minecraft:projectile": {
                 "gravity": 0.001,

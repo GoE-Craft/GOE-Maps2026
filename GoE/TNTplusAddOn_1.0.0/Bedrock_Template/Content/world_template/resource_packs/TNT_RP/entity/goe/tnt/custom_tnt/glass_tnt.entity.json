@@ -10,7 +10,7 @@
 				"default": "textures/blocks/tnt_side"
       },
       "geometry": {
-				"default": "geometry.goe_tnt.tnt"
+				"default": "geometry.tnt"
       },
 			"scripts": {
         "pre_animation": [
