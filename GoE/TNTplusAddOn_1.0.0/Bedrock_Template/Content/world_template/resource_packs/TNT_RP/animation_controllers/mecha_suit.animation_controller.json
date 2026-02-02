@@ -6,7 +6,7 @@
       "states": {
         "idle": {
           "animations": [ "idle" ],
-/*           "sound_effects": [ { "effect": "idle_sound" } ], */
+          /*           "sound_effects": [ { "effect": "idle_sound" } ], */
           "transitions": [
             { "walk_forward": "q.modified_move_speed > 0.1" },
             { "jump": "q.vertical_speed > 1 && !q.is_on_ground" },
@@ -39,6 +39,10 @@
         "jump": {
           "animations": [ "jump" ],
           "sound_effects": [ { "effect": "jump_sound" } ],
+          "particle_effects": [
+            { "effect": "mecha_suit_jump", "locator": "locator_footright" },
+            { "effect": "mecha_suit_jump", "locator": "locator_footleft" }
+          ],
           "transitions": [
             { "idle": "q.is_on_ground" },
             { "death": "q.mark_variant == 2" }
@@ -49,6 +53,10 @@
         "jump_walk": {
           "animations": [ "jump_walk" ],
           "sound_effects": [ { "effect": "jump_sound" } ],
+          "particle_effects": [
+            { "effect": "mecha_suit_jump", "locator": "locator_footright" },
+            { "effect": "mecha_suit_jump", "locator": "locator_footleft" }
+          ],
           "transitions": [
             { "walk_forward": "q.is_on_ground" },
             { "death": "q.mark_variant == 2" }

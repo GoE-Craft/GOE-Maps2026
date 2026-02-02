@@ -14,7 +14,7 @@
                     "animations": [ "spawn" ],
                     "sound_effects": [ { "effect": "spawn_sound" } ],
                     "transitions": [
-                        { "idle": "query.all_animations_finished" }
+                        { "idle": "q.mark_variant != 3" }
                     ]
                 }
             }

@@ -5,26 +5,26 @@
       "initial_state": "initial",
       "states": {
         "initial": {
-          "animations": [
-            "idle"
-          ],
+          "animations": ["idle"],
           "transitions": [
             { "airborn": "!q.is_on_ground" }
           ]
         },
         "airborn": {
-          "animations": [
-            "idle"
-          ],
+          "animations": ["idle"],
           "transitions": [
             { "land": "q.is_on_ground" }
           ]
         },
         "land": {
-          "animations": [
-            "land"
+          "animations": ["land"],
+          "sound_effects": [
+            { "effect": "land_sound" }
           ],
-          "sound_effects": [ { "effect": "land_sound" } ],
+          "particle_effects": [
+            { "effect": "mecha_suit_land", "locator": "locator_footright" },
+            { "effect": "mecha_suit_land", "locator": "locator_footleft" }
+          ],
           "transitions": [
             { "airborn": "!q.is_on_ground" }
           ],
