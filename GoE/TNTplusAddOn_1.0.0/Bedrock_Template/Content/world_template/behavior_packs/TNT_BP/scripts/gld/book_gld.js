@@ -320,15 +320,15 @@ export const PriceTypeNames = {
 
 export const Achievements = {
     tnt_individual: [
-        {
-            id: "tnt",
-            name: "Sample TNT",
-            info: "Place Sample TNT",
-            tips: "",
-            tntType: "tnt",
-            icon: "textures/goe/tnt/ui/achievements/tnt",
-            rewardStructure: null
-        },
+        // {
+        //     id: "tnt",
+        //     name: "Sample TNT",
+        //     info: "Place Sample TNT",
+        //     tips: "",
+        //     tntType: "tnt",
+        //     icon: "textures/goe/tnt/ui/achievements/tnt",
+        //     rewardStructure: null
+        // },
         {
             id: "directional_tnt",
             name: "Directional TNT",
