@@ -53,13 +53,11 @@
 				"jump": "animation.mecha_suit.jump",
 				"jump_walk": "animation.mecha_suit.jump_walk",
 				"look_at": "animation.mecha_suit.look_at",
-
 				"land" : "animation.mecha_suit.land"
 			},
 
 			"scripts": {
 				"pre_animation": [
-					/* "v.look_at = math.clamp(q.camera_rotation('y'), -35, 0);" */
 					"v.look_at = q.camera_rotation('y');"
 				],
 				"animate": [
