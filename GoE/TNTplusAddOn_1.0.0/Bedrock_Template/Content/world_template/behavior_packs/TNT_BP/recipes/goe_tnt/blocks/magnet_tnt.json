@@ -1,0 +1,27 @@
+{
+  "format_version": "1.21.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "goe_tnt:magnet_tnt"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "PRP",
+      "RPR",
+      "PRP"
+    ],
+    "key": {
+      "P": "minecraft:gunpowder",
+      "R": "minecraft:iron_ingot"
+    },
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "result": {
+      "item": "goe_tnt:magnet_tnt",
+      "count": 1
+    }
+  }
+}

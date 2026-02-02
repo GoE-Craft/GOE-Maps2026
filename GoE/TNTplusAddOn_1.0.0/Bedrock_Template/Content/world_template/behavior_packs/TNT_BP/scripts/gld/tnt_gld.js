@@ -64,7 +64,8 @@ export const TNT_GLD = [
             particleEffect: "goe_tnt:big_explosion_white", // We need cookie rain particle effect here
             particleDelay: 0,
             soundEffect: "random.explode", // Also appropriate sound effect
-            soundDelay: 0
+            soundDelay: 0,
+            explosionAnimationLength: 2.625
         },
         explosionProperties: {
             createsFire: false,
@@ -170,10 +171,7 @@ export const TNT_GLD = [
             soundDelay: 35
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_blue",
-            particleDelay: 0,
-            soundEffect: null,
-            soundDelay: 0
+            explosionAnimationLength: 1
         },
         explosionProperties: {
             createsFire: false,

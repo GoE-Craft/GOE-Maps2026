@@ -1,0 +1,27 @@
+{
+  "format_version": "1.21.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "goe_tnt:thunderstorm_tnt"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "PRP",
+      "RPR",
+      "PRP"
+    ],
+    "key": {
+      "P": "minecraft:gunpowder",
+      "R": "minecraft:lightning_rod"
+    },
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "result": {
+      "item": "goe_tnt:thunderstorm_tnt",
+      "count": 1
+    }
+  }
+}

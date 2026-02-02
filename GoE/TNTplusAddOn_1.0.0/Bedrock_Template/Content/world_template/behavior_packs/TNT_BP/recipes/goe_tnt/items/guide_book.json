@@ -1,0 +1,25 @@
+{
+  "format_version": "1.21.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "goe_tnt:guide_book"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "PR"
+    ],
+    "key": {
+      "P": "minecraft:tnt",
+      "R": "minecraft:book"
+    },
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "result": {
+      "item": "goe_tnt:guide_book",
+      "count": 1
+    }
+  }
+}

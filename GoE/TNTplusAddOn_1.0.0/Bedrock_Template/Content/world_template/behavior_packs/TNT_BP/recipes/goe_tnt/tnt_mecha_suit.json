@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "goe_tnt:mecha_suit_spawn_egg"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "PRP",
+      "RSR",
+      "PRP"
+    ],
+    "key": {
+      "P": "minecraft:redstone_block",
+      "R": "minecraft:tnt",
+	    "S": "minecraft:iron_ingot"
+    },
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "result": {
+      "item": "goe_tnt:mecha_suit_spawn_egg",
+      "count": 1
+    }
+  }
+}

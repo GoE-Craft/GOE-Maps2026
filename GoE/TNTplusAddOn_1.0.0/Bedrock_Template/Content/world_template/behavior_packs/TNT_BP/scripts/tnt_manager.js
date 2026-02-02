@@ -10,8 +10,6 @@ const fuseEffectIntervals = new Map();
 
 const excludePlayer = new Map();
 
-// Used for tracking explosion power
-const explosionEntities = new Set();
 
 /**
  * Activate a TNT block at the given location
@@ -86,6 +84,8 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
 
 /**
  * Schedule the timer -> fuse -> explode sequence
+ * 
+ * Add comments
  */
 function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData, spawnYaw) {
     if (timerRemaining > 0) {
@@ -248,8 +248,6 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
     activeTimeouts.delete(entityId);
     const power = tntData.power * ((0.25 * tntData.power) * chargeLevel);
 
-    // We will need a custom explosion implementation
-    // Vanilla explosion implementation supports max 10 block radius
     try {
         dim.createExplosion(loc, power, {
             causesFire: tntData.explosionProperties.createsFire,
@@ -257,10 +255,34 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
             allowUnderwater: tntData.explosionProperties.allowUnderwater,
             source: entity
         });
+
+        // Update entity variant to exploded state
+        triggerExplosionEffects(entity, tntData);
         system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, spawnYaw));
     } catch (e) {
+        console.log("Error creating explosion: " + e);
         if (entity.isValid) entity.remove();
     }
+}
+
+function triggerExplosionEffects(entity, tntData) {
+    try {
+        entity.triggerEvent("goe_tnt:trigger_explode");
+
+        const animationLength = tntData.explosionEffects.explosionAnimationLength;
+        if (!animationLength || animationLength <= 0) {
+            if (entity.isValid) entity.remove();
+            return;
+        }
+
+        system.runTimeout(() => {
+            if (entity.isValid) entity.remove();
+        }, animationLength*20);
+    } catch (e) {
+        console.log("Error triggering explosion effects: " + e);
+        if (entity.isValid) entity.remove();
+    }
+    
 }
 
 function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
@@ -271,7 +293,6 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
         try {
             if (tntData.explosionEffects.soundEffect) dimension.playSound(tntData.explosionEffects.soundEffect, loc);
         } catch (e) {
-            world.sendMessage("Error playing explosion sound: " + e);
         }
     }
 
@@ -301,7 +322,8 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
     yield;
 
     // Remove entity on main thread
-    try { if (entity.isValid) entity.remove(); } catch (e) { }
+    // We are leaving entity active, remove it when everything is done
+    //try { if (entity.isValid) entity.remove(); } catch (e) { }
 }
 
 /**
@@ -532,7 +554,7 @@ function processExplosion(block) {
  * Handle special actions on explosion
  * Add custom action handlers here
  */
-function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, entityId) {
+function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, entity) {
     const action = tntData.explosionProperties.specialAction;
     if (!action) return;
 
@@ -540,13 +562,13 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, ent
         case "void":
             // Remove blocks in a radius down to void
             const radius = 10;
-            voidAction(dimension, location, radius);
+            voidAction(dimension, location, radius, entity);
             break;
         case "directional_drill":
             // Drill horizontally in the direction the entity is facing
             const drillLength = 30;
             const drillRadius = 2; // radius for width and height
-            runJobWithDelays(directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData));
+            runJobWithDelays(directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData, entity));
             break;
         case "party":
             // Spawn party TNT effect
@@ -554,20 +576,20 @@ function handleSpecialAction(dimension, location, tntData, chargeLevel, vec, ent
             break;
         case "magnet":
             // Spawn magnet TNT effect
-            system.runJob(magnetAction(dimension, chargeLevel, location));
+            system.runJob(magnetAction(dimension, chargeLevel, location, entity));
             break;
         case "freezing":
             // Freeze mobs and turn blocks to ice
-            system.runJob(freezingAction(dimension, chargeLevel, location, entityId));
+            system.runJob(freezingAction(dimension, chargeLevel, location, entity));
             break;
         case "atmosphere":
             // Atmosphere TNT - change the time
-            atmosphereAction(dimension, location);
+            atmosphereAction(dimension, location, entity);
             break;
         case "chunker":
             // Chunker TNT - removes a chunk of blocks above the explosion
             console.log("Starting chunker action");
-            runJobWithDelays(chunkerAction(dimension, location, chargeLevel));
+            runJobWithDelays(chunkerAction(dimension, location, chargeLevel, entity));
             break;
         default:
             break;
@@ -591,7 +613,7 @@ function startPreExplosionAction(entity, chargeLevel, tntData, fuseRemaining) {
     }
 }
 
-function* voidActionJob(dimension, location, radius) {
+function* voidActionJob(dimension, location, radius, entity) {
     const minY = -64; // Minimum Y level in Minecraft
 
     for (let y = location.y; y >= minY; y--) {
@@ -633,7 +655,7 @@ function getFacingVectorFromEntity(yaw) {
     }
 }
 
-function* directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData) {
+function* directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData, entity) {
     const steps = Math.max(1, Math.floor(length));
     // perpendicular horizontal vector for width direction
     const perpX = -vec.z;
@@ -705,8 +727,6 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
 }
 
 function* partyAction(dimension, chargeLevel, location) {
-    dimension.spawnParticle("goe_tnt:cookie_explosion", location);
-    dimension.spawnParticle("goe_tnt:cake_explosion", location);
 
     yield 20;
     const radius = 2 + Math.floor(((2 * 0.25) * chargeLevel));
@@ -737,7 +757,7 @@ function* partyAction(dimension, chargeLevel, location) {
 }
 
 // magnet action after fuse
-function* magnetAction(dimension, chargeLevel, location) {
+function* magnetAction(dimension, chargeLevel, location, entity) {
     const radius = 10;
 
     // tune feel
@@ -859,7 +879,7 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
 
 
 
-function* chunkerAction(dimension, location, charge_level) {
+function* chunkerAction(dimension, location, charge_level, entity) {
     const radius = 8 + Math.floor(((2 * 0.25) * charge_level));
 
     for (let y = location.y + radius; y > location.y - radius ; y--) {
@@ -885,7 +905,7 @@ function ultronAction(dimension, location) {
 }
 
 // freezing action
-function* freezingAction(dimension, chargeLevel, location, entityId) {
+function* freezingAction(dimension, chargeLevel, location, entity) {
     const variables = new MolangVariableMap();
     variables.setFloat("charge_level", Number(chargeLevel));
     dimension.spawnParticle("goe_tnt:freezing_fog", location, variables);
@@ -926,9 +946,9 @@ function* freezingAction(dimension, chargeLevel, location, entityId) {
 
     let playerId;
 
-    if (excludePlayer.has(entityId)) {
-        playerId = excludePlayer.get(entityId);
-        excludePlayer.delete(entityId);
+    if (excludePlayer.has(entity.id)) {
+        playerId = excludePlayer.get(entity.id);
+        excludePlayer.delete(entity.id);
     }
 
     for (const e of entities) {

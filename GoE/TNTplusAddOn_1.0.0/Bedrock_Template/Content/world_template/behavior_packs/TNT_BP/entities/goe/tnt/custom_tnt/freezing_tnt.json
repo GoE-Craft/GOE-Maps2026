@@ -23,13 +23,6 @@
                 "minecraft:mark_variant": {
                     "value": 1
                 },
-                "minecraft:explode": {
-                    "power": 0,
-                    "causes_fire": false,
-                    "breaks_blocks": false,
-                    "fuse_length": 4,
-                    "fuse_lit": true
-                },
                 "minecraft:timer": {
                     "time": 0.5,
                     "looping": true,
@@ -37,6 +30,11 @@
                         "event": "goe_tnt:toggle_flash",
                         "target": "self"
                     }
+                }
+            },
+            "goe_tnt:explode": {
+                "minecraft:mark_variant": {
+                    "value": 2
                 }
             }
         },
@@ -84,6 +82,13 @@
                 "add": {
                     "component_groups": [
                         "goe_tnt:ignite"
+                    ]
+                }
+            },
+            "goe_tnt:trigger_explode": {
+                "add": {
+                    "component_groups": [
+                        "goe_tnt:explode"
                     ]
                 }
             },
