@@ -20,6 +20,7 @@
         }
       }
     },
+
     "component_groups": {
       "goe_tnt:death": {
         "minecraft:mark_variant": {
@@ -42,13 +43,19 @@
           }
         }
       },
+
       "goe_tnt:despawn": {
-        "minecraft:instant_despawn": { "remove_child_entities": true }
+        "minecraft:instant_despawn": {
+          "remove_child_entities": true
+        }
       },
+
       "goe_tnt:spawn": {
-        "minecraft:mark_variant": { "value": 3 },
+        "minecraft:mark_variant": {
+          "value": 3
+        },
         "minecraft:timer": {
-          "time": 2.5,
+          "time": 2.9,
           "looping": false,
           "time_down_event": {
             "event": "goe_tnt:spawn_reset",
@@ -56,18 +63,50 @@
           }
         }
       },
+
       "goe_tnt:spawn_reset": {
-        "minecraft:mark_variant": { "value": 0 }
+        "minecraft:mark_variant": {
+          "value": 0
+        }
+      },
+
+      "goe_tnt:ride_enabled": {
+        "minecraft:rideable": {
+          "seat_count": 1,
+          "seats": [
+            {
+              "position": [ 0, 2.25, 0.25 ]
+            }
+          ]
+        }
       }
     },
+
     "components": {
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "is_mark_variant", "subject": "self", "value": 3 }
+                ]
+              },
+              "event": "goe_tnt:deny_mount_spawning"
+            }
+          }
+        ]
+      },
       "minecraft:type_family": {
         "family": [ "player" ]
       },
+
       "minecraft:knockback_resistance": {
         "value": 5,
         "max": 5
       },
+
       "minecraft:damage_sensor": {
         "triggers": [
           {
@@ -77,7 +116,11 @@
               "event": "goe_tnt:death",
               "target": "self",
               "filters": [
-                { "test": "actor_health", "value": 1, "operator": "<=" }
+                {
+                  "test": "actor_health",
+                  "value": 1,
+                  "operator": "<="
+                }
               ]
             }
           },
@@ -88,30 +131,63 @@
             "on_damage": {
               "target": "self",
               "filters": [
-                { "test": "actor_health", "value": 1, "operator": ">" }
+                {
+                  "test": "actor_health",
+                  "value": 1,
+                  "operator": ">"
+                }
               ]
             }
           },
-          { "cause": "fall", "deals_damage": false }
+          {
+            "cause": "fall",
+            "deals_damage": false
+          }
         ]
       },
-      "minecraft:health": { "value": 20, "max": 20, "min": 1 },
-      "minecraft:physics": { "has_gravity": true, "has_collision": true },
-      "minecraft:collision_box": { "height": 4, "width": 3.0 },
-      "minecraft:push_through": { "value": 0 },
-      "minecraft:pushable": { "is_pushable": false },
-      "minecraft:movement": { "value": 0.17 },
+
+      "minecraft:health": {
+        "value": 20,
+        "max": 20,
+        "min": 1
+      },
+
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+
+      "minecraft:collision_box": {
+        "height": 4,
+        "width": 3.0
+      },
+
+      "minecraft:push_through": {
+        "value": 0
+      },
+
+      "minecraft:pushable": {
+        "is_pushable": false
+      },
+
+      "minecraft:movement": {
+        "value": 0.17
+      },
+
       "minecraft:movement.basic": { },
+
       "minecraft:navigation.generic": { },
+
       "minecraft:can_power_jump": { },
-      "minecraft:horse.jump_strength": { "value": { "range_min": 1.3, "range_max": 1.3 } },
-      "minecraft:input_ground_controlled": { },
-      "minecraft:rideable": {
-        "seat_count": 1,
-        "seats": [
-          { "position": [ 0, 2.25, 0.25 ] }
-        ]
+
+      "minecraft:horse.jump_strength": {
+        "value": {
+          "range_min": 1.3,
+          "range_max": 1.3
+        }
       },
+
+      "minecraft:input_ground_controlled": { },
 
       "minecraft:variable_max_auto_step": {
         "base_value": 1.2,
@@ -120,16 +196,71 @@
     },
 
     "events": {
-      "goe_tnt:spawn_reset": { "add": { "component_groups": [ "goe_tnt:spawn_reset" ] } },
-      
-      "minecraft:entity_spawned": { "add": { "component_groups": [ "goe_tnt:spawn" ] } },
-      "goe_tnt:death": { "add": { "component_groups": [ "goe_tnt:death" ] } },
-      "goe_tnt:despawn": { "add": { "component_groups": [ "goe_tnt:despawn" ] } },
+      // when player clicks to mount while mecha suit is spawning
+      "goe_tnt:deny_mount_spawning": {
+        "queue_command": {
+          "command": [
+            "playsound note.bass @p ~ ~ ~ 0.3",
+            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§cMecha Suit is still deploying...\"}]}"
+          ]
+        }
+      },
+      "goe_tnt:spawn_reset": {
+        "add": {
+          "component_groups": [
+            "goe_tnt:spawn_reset",
+            "goe_tnt:ride_enabled"
+          ]
+        },
+        // after mecha suit has finished spawning
+        "queue_command": {
+          "command": [
+            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§aTNT Mecha Suit is ready. Interact with it to mount it.\"}]}"
+          ]
+        }
+      },
 
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [ "goe_tnt:spawn" ]
+        }
+      },
 
-      "goe:charge_tnt": { "set_property": { "goe_tnt:tnt_action": "charge" } },
-      "goe:idle_tnt": { "set_property": { "goe_tnt:tnt_action": "idle" } },
-      "goe:charged_tnt": { "set_property": { "goe_tnt:tnt_action": "charged" } },
+      "goe_tnt:death": {
+        // we dismount the player first
+        "queue_command": {
+          "command": [
+            "ride @p stop_riding"
+          ]
+        },
+        "add": {
+          "component_groups": [ "goe_tnt:death" ]
+        }
+      },
+
+      "goe_tnt:despawn": {
+        "add": {
+          "component_groups": [ "goe_tnt:despawn" ]
+        }
+      },
+
+      "goe:charge_tnt": {
+        "set_property": {
+          "goe_tnt:tnt_action": "charge"
+        }
+      },
+
+      "goe:idle_tnt": {
+        "set_property": {
+          "goe_tnt:tnt_action": "idle"
+        }
+      },
+
+      "goe:charged_tnt": {
+        "set_property": {
+          "goe_tnt:tnt_action": "charged"
+        }
+      },
 
       "goe:fire_tnt_right": {
         "set_property": {
@@ -137,6 +268,7 @@
           "goe_tnt:tnt_action": "fire"
         }
       },
+
       "goe:fire_tnt_left": {
         "set_property": {
           "goe_tnt:fire_hand": "left",

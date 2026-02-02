@@ -519,7 +519,7 @@ function getPlayerAimForward(player) {
 	const yawDeg = (rot && typeof rot.y === "number") ? rot.y : 0;
 	let pitchDeg = (rot && typeof rot.x === "number") ? rot.x : 0;
 
-	pitchDeg = clampNumber(pitchDeg, CLAMP_PITCH_MIN, CLAMP_PITCH_MAX);
+/* 	pitchDeg = clampNumber(pitchDeg, CLAMP_PITCH_MIN, CLAMP_PITCH_MAX); */
 
 	const yaw = yawDeg * (Math.PI / 180);
 	const pitch = pitchDeg * (Math.PI / 180);
@@ -837,6 +837,7 @@ function setupUseHandlers() {
 		});
 	}
 }
+
 
 // locks player game mode while riding the mecha and restores it on exit
 function setupMechaRidingModeLock() {

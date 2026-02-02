@@ -15,7 +15,9 @@
 			"render_controllers": [ "controller.render.goe_tnt.mecha_suit" ],
 
 			"particle_effects": {
-				"mecha_suit_fire": "goe_tnt:mecha_suit_fire"
+				"mecha_suit_fire": "goe_tnt:mecha_suit_fire",
+				"mecha_suit_jump": "goe_tnt:mecha_suit_jump",
+				"mecha_suit_land": "goe_tnt:mecha_suit_land"
 			},
 			"sound_effects": {
 				"walk": "goe_tnt:mecha_suit_walk",
@@ -57,7 +59,8 @@
 
 			"scripts": {
 				"pre_animation": [
-					"v.look_at = math.clamp(q.camera_rotation('y'), -35, 0);"
+					/* "v.look_at = math.clamp(q.camera_rotation('y'), -35, 0);" */
+					"v.look_at = q.camera_rotation('y');"
 				],
 				"animate": [
 					"controller.mecha_suit",
