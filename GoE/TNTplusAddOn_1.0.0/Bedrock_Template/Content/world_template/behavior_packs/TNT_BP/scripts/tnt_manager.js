@@ -897,15 +897,15 @@ function ultronAction(dimension, location) {
 // freezing action
 function* freezingAction(dimension, chargeLevel, location, entity) {
     const variables = new MolangVariableMap();
-    variables.setFloat("charge_level", Number(chargeLevel));
-    dimension.spawnParticle("goe_tnt:freezing_fog", location);
+
+    const radius = 2 + Math.floor(((5 * 0.25) * chargeLevel));
+    variables.setFloat("radius", radius);
+    dimension.spawnParticle("goe_tnt:freezing_fog", location, variables);
     dimension.spawnParticle("goe_tnt:freezing_snow", location, variables);
     // safe chargeLevel
     const cl = Number(chargeLevel);
     const safeChargeLevel = Number.isFinite(cl) ? cl : 0;
 
-    // radius scales with chargeLevel
-    const radius = 2 + Math.floor(((5 * 0.25) * safeChargeLevel));
 
     const freezeSeconds = 5;
     const freezeTicks = freezeSeconds * 20;

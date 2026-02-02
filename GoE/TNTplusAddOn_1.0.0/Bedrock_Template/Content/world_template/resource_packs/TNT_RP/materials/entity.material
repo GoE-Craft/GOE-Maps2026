@@ -1,68 +1,32 @@
 {
   "materials": {
     "version": "1.0.0",
-    "boat:entity_alphatest": {
+    "goe_tnt_border:entity_beam_additive": {
+      "+defines": ["USE_UV_ANIM"]
     },
-    "goe_mob:entity_alphatest": {
+    "goe_tnt_border_roots:entity_alphatest": {
+      "+defines": ["USE_UV_ANIM"]
     },
-    "goe_materials:entity_alphatest": {
+    "goe_tnt_slash:entity_alphablend": {
+      "+defines": ["USE_UV_ANIM"]
     },
-    "goe_mob_alpha:entity_alphatest": {
-    },
-    "trident:entity_alphatest": {},
-    "protection:entity_static": {
-      "+defines": [ "USE_UV_ANIM", "ALPHA_TEST" ],
-      "+states": [ "Blending", "DisableCulling" ],
-      "blendSrc": "One",
-      "blendDst": "One",
-      "+samplerStates": [
-        {
-          "samplerIndex": 0,
-          "textureWrap": "Repeat"
-        }
-      ]
-    },
-
-    "goe_horse_leather_armor:entity_change_color": {
-      "+states": [ "DisableAlphaWrite" ],
-      "+defines": [
-        "ALPHA_TEST",
-        "USE_COLOR_MASK"
-      ],
-      "+samplerStates": [
-        {
-          "samplerIndex": 1,
-          "textureWrap": "Repeat"
-        }
-      ]
-    },
-    
-    "transparent:entity": {
-      "+states": [ "Blending", "DisableCulling", "DisableDepthWrite", "DisableAlphaWrite" ],
-      "vertexShader": "shaders/color_uv.vertex",
-      "vrGeometryShader": "shaders/color_uv.geometry",
-      "blendSrc": "SourceAlpha",
-      "blendDst": "OneMinusSrcAlpha",
-      "vertexFields": [
-        { "field": "Position" },
-        { "field": "Color" },
-        { "field": "Normal" },
-        { "field": "UV0" }
-      ],
-      "variants": [
-        {
-          "skinning": {
-            "+defines": [ "USE_SKINNING" ],
-            "vertexFields": [
-              { "field": "Position" },
-              { "field": "BoneId0" },
-              { "field": "Color" },
-              { "field": "Normal" },
-              { "field": "UV0" }
-            ]
-          }
-        }
-      ]
-    }
+    "goe_tnt_sun_light:entity_alphablend": {
+			"-defines": [
+				"FANCY"
+			],
+			"+states": [ "Blending", "DisableDepthWrite", "DisableCulling" ],
+			"blendSrc": "SourceAlpha",
+			"blendDst": "One",
+			"depthFunc": "LessEqual"
+		},
+    "goe_tnt_sun_source:entity_alphablend": {
+      "-defines": [
+				"FANCY"
+			],
+			"+states": [ "Blending", "DisableDepthWrite", "DisableCulling" ],
+			"blendSrc": "SourceAlpha",
+			"blendDst": "OneMinusSrcAlpha",
+			"depthFunc": "LessEqual"
+		}
   }
 }

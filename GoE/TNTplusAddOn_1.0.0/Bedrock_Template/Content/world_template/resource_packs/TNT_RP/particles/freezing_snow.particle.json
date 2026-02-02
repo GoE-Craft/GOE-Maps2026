@@ -29,7 +29,7 @@
 			},
 			"minecraft:emitter_shape_disc": {
 				"offset": [0, "math.random(0, 5)", 0],
-				"radius": "v.charge_level ? (v.charge_level * (5 * 0.25)) + 1: 1",
+				"radius": "v.radius",
 				"direction": "outwards"
 			},
 			"minecraft:particle_lifetime_expression": {
