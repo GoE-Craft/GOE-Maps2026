@@ -27,7 +27,8 @@
       },
       "particle_effects": {
         "magnet_explosion": "goe_tnt:magnet_explosion",
-        "magnet_pull": "goe_tnt:magnet_pull"
+        "magnet_pulsating_blue": "goe_tnt:magnet_pulsating_blue",
+        "magnet_pulsating_red": "goe_tnt:magnet_pulsating_red"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

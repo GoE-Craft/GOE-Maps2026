@@ -55,8 +55,6 @@ export const TNT_GLD = [
         fuseTime: 40,
         power: 0,
         fuseEffects: {
-            particleEffect: "goe_tnt:fuse_orange_chunk",
-            particleDelay: 0,
             soundEffect: "random.fuse",
             soundDelay: 0
         },
@@ -81,16 +79,12 @@ export const TNT_GLD = [
         fuseTime: 60,
         power: 2,
         fuseEffects: {
-            particleEffect: null,
-            particleDelay: 0,
             soundEffect: "random.fuse",
             soundDelay: 0
         },
         explosionEffects: {
             particleEffect: "goe_tnt:magnet_explosion",
             particleDelay: 0,
-            soundEffect: null,
-            soundDelay: 0
         },
         explosionProperties: {
             createsFire: false,
@@ -115,10 +109,9 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:huge_explosion_white",
-            particleDelay: 0,
             soundEffect: "random.explode",
-            soundDelay: 0
+            soundDelay: 0,
+            explosionAnimationLength: 2.5
         },
         explosionProperties: {
             createsFire: false,

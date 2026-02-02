@@ -757,8 +757,13 @@ function* partyAction(dimension, chargeLevel, location) {
 }
 
 // magnet action after fuse
-function* magnetAction(dimension, chargeLevel, location, entity) {
+function* magnetAction(dimension, chargeLevel, location) {
     const radius = 10;
+
+    dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);
+    system.runTimeout(() => {
+        dimension.spawnParticle("goe_tnt:magnet_circle_push_red", location);
+    }, 5);
 
     // tune feel
     const pushStrength = 1.2 + (chargeLevel * 0.2);
@@ -808,21 +813,6 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
     const maxPull = 0.25 + (chargeLevel * 0.03);
 
     let tick = 0;
-
-    entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_red", entity.location);
-    system.runTimeout(() => {
-        entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_blue", entity.location);
-    }, 15);
-    system.runTimeout(() => {
-        entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_red", entity.location);
-    }, 30);
-    system.runTimeout(() => {
-        entity.dimension.spawnParticle("goe_tnt:magnet_circle_pull_blue", entity.location);
-    }, 45);
-    entity.dimension.spawnParticle("goe_tnt:magnet_pull", entity.location);
-    system.runTimeout(() => {
-        entity.dimension.spawnParticle("goe_tnt:magnet_pull", entity.location);
-    }, 20);
 
     // one interval per entity, store it so stopFuseEffects clears it
     const intervalId = system.runInterval(() => {
@@ -908,7 +898,7 @@ function ultronAction(dimension, location) {
 function* freezingAction(dimension, chargeLevel, location, entity) {
     const variables = new MolangVariableMap();
     variables.setFloat("charge_level", Number(chargeLevel));
-    dimension.spawnParticle("goe_tnt:freezing_fog", location, variables);
+    dimension.spawnParticle("goe_tnt:freezing_fog", location);
     dimension.spawnParticle("goe_tnt:freezing_snow", location, variables);
     // safe chargeLevel
     const cl = Number(chargeLevel);

@@ -17,18 +17,19 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"},
+          {"freezing_tnt_swelling": "v.should_swell"},
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell",
+        "freezing_tnt_swelling": "animation.freeze_tnt.swell",
         "charge": "animation.freezing_tnt.charge",
         "explode": "animation.freezing_tnt.explosion"
       },
       "particle_effects": {
-        "freezing_blizzard": "goe_tnt:freezing_blizzard"
+        "freezing_blizzard": "goe_tnt:freezing_blizzard",
+        "tnt_charge": "goe_tnt:tnt_charge_blue"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }
