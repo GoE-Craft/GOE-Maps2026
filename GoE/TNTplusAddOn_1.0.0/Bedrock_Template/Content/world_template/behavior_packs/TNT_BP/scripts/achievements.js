@@ -3,9 +3,11 @@ import * as tnt_gld from "./gld/tnt_gld";
 import { ShopItems, Achievements } from "./gld/book_gld";
 import * as utils from "./utils";
 
-function getTntAchievementRewardStructure(tntType) {
-    const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
-    return achievement?.rewardStructure ?? null;
+const RANDOM_REWARD_STRUCTURES = 10; // random_reward_1 ... random_reward_10
+
+function getRandomTntRewardStructureId() {
+    const num = Math.floor(Math.random() * RANDOM_REWARD_STRUCTURES) + 1;
+    return `goe_tnt:random_reward_${num}`;
 }
 
 function getMilestoneRewardStructure(milestoneNumber) {
@@ -105,10 +107,10 @@ function unlockTntAchievement(player, tntType) {
 
     utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §r- You have unlocked this achievement!`);
 
-    // Place reward structure at player location
-    const rewardStructure = getTntAchievementRewardStructure(tntType);
-    if (rewardStructure) {
-        placeAchievementRewardStructure(player, rewardStructure);
+    placeAchievementRewardStructure(player, getRandomTntRewardStructureId());
+    const xpCount = Math.floor(Math.random() * 31) + 7;
+    for (let i = 0; i < xpCount; i++) {
+        player.dimension.spawnEntity("minecraft:xp_orb", player.location);
     }
 
     spawnAchievementParticles(player, { count: 20, spread: 2 });

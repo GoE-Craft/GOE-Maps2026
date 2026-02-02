@@ -1,5 +1,55 @@
 ///////////////////// ACHIVMENTS REWARDS ////////////////////
 
+#random_reward_1
+type=items
+item=minecraft:gunpowder 0 2
+item=minecraft:emerald 0 1
+
+#random_reward_2
+type=items
+item=minecraft:gunpowder 0 3
+item=minecraft:emerald 0 1
+
+#random_reward_3
+type=items
+item=minecraft:gunpowder 0 4
+item=minecraft:emerald 0 1
+
+#random_reward_4
+type=items
+item=minecraft:gunpowder 0 5
+item=minecraft:emerald 0 1
+
+#random_reward_5
+type=items
+item=minecraft:gunpowder 0 6
+item=minecraft:emerald 0 1
+
+#random_reward_6
+type=items
+item=minecraft:gunpowder 0 2
+item=minecraft:emerald 0 2
+
+#random_reward_7
+type=items
+item=minecraft:gunpowder 0 3
+item=minecraft:emerald 0 2
+
+#random_reward_8
+type=items
+item=minecraft:gunpowder 0 4
+item=minecraft:emerald 0 2
+
+#random_reward_9
+type=items
+item=minecraft:gunpowder 0 5
+item=minecraft:emerald 0 2
+
+#random_reward_10
+type=items
+item=minecraft:gunpowder 0 6
+item=minecraft:emerald 0 2
+
 #directional_tnt_reward
 type=items
 item=minecraft:gunpowder 0 5
@@ -11,6 +61,7 @@ item=minecraft:cookie 0 10
 #magnet_tnt_reward
 type=items
 item=minecraft:iron_ingot 0 5
+
 
 #chunker_tnt_reward
 type=items
