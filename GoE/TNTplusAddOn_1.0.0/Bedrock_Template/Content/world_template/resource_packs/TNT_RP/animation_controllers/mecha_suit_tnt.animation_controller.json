@@ -46,7 +46,7 @@
           "sound_effects": [ { "effect": "fire_right_sound" } ],
           "transitions": [
             { "fire_left": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'left'" },
-            { "charged": "query.any_animation_finished || query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "charged": "query.all_animations_finished && query.property('goe_tnt:tnt_action') == 'charged'" },
             { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
           "blend_transition": 0.3,
@@ -57,7 +57,7 @@
           "sound_effects": [ { "effect": "fire_left_sound" } ],
           "transitions": [
             { "fire_right": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'right'" },
-            { "charged": "query.any_animation_finished || query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "charged": "query.all_animations_finished && query.property('goe_tnt:tnt_action') == 'charged'" },
             { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
           ],
           "blend_transition": 0.3,

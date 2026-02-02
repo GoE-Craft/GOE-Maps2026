@@ -1,8 +1,0 @@
-{
-  "format_version": "1.19.50",
-  "minecraft:camera_preset": {
-    "identifier": "goe_tnt:mecha_follow",
-    "inherit_from": "minecraft:follow_orbit",
-    "control_scheme": "camera_relative"
-  }
-}

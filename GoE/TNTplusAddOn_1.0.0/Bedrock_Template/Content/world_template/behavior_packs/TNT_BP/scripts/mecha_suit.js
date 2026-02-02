@@ -4,6 +4,8 @@ import * as tnt_gld from "./gld/tnt_gld.js";
 
 const MECHA_ID = "goe_tnt:mecha_suit"; // mecha entity identifier
 const TNT_ITEM_ID = "minecraft:tnt"; // vanilla tnt  id
+const VANILLA_PROXY_TNT_ID = "goe_tnt:tnt";
+
 
 const PROJECTILE_SPEED = 2; // impulse multiplier applied to spawned tnt/projectiles
 
@@ -41,10 +43,12 @@ const nextFireHandRightByMecha = new Map(); // true = fire_right next, false = f
 const customProjectileById = new Map(); // entity, tntData, lastPos, spawnTick, dimensionId, yawDeg, wasMoving, dimKey
 let customProjectileCollisionTickSetup = false; // ensures collision tick loop is only registered once
 
-const CLAMP_PITCH_MIN = -35; // projectile pitch clamp min (matches animation)
-const CLAMP_PITCH_MAX = 0; // projectile pitch clamp max (matches animation)
+const CLAMP_PITCH_MIN = -35; // projectile pitch clamp min (matches animation) not used right now
+const CLAMP_PITCH_MAX = 0; // projectile pitch clamp max (matches animation) not used right now
 
 const lastRiddenMechaByPlayer = new Map();
+
+const suppressDischargeUntilByMecha = new Map();
 
 ///////// Shooting cooldown UI ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 function buildCooldownBoxes(greenCount) {
@@ -326,11 +330,16 @@ function scheduleReturnToChargeIdle(mechaKey, mecha, player) {
 		const stillHoldingTnt = isPlayerHoldingAnyTntNow(player);
 
 		if (stillHoldingTnt) {
+			suppressDischargeUntilByMecha.delete(mechaKey);
+
 			isChargeIdleByMecha.set(mechaKey, true);
 
 			tntUiStateByMecha.set(mechaKey, "charged");
 			try { mecha.triggerEvent("goe:charged_tnt"); } catch { }
 		} else {
+			suppressDischargeUntilByMecha.delete(mechaKey);
+			wasTntSelectedByPlayer.set(player.id, false);
+
 			tntUiStateByMecha.set(mechaKey, "idle");
 			try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
 
@@ -505,7 +514,7 @@ function applyMechaProjectileImpulse(entity, viewDir) {
 		if (entity && typeof entity.applyImpulse === "function") {
 			entity.applyImpulse({
 				x: viewDir.x * PROJECTILE_SPEED,
-				y: viewDir.y * PROJECTILE_SPEED,
+				y: viewDir.y * PROJECTILE_SPEED + 0.5,
 				z: viewDir.z * PROJECTILE_SPEED,
 			});
 		}
@@ -519,7 +528,7 @@ function getPlayerAimForward(player) {
 	const yawDeg = (rot && typeof rot.y === "number") ? rot.y : 0;
 	let pitchDeg = (rot && typeof rot.x === "number") ? rot.x : 0;
 
-/* 	pitchDeg = clampNumber(pitchDeg, CLAMP_PITCH_MIN, CLAMP_PITCH_MAX); */
+	/* 	pitchDeg = clampNumber(pitchDeg, CLAMP_PITCH_MIN, CLAMP_PITCH_MAX); */
 
 	const yaw = yawDeg * (Math.PI / 180);
 	const pitch = pitchDeg * (Math.PI / 180);
@@ -582,13 +591,37 @@ function spawnPropelledTnt(mecha, player, tntData, isVanilla, fireRight) {
 	} catch { }
 
 	if (isVanilla) {
-		let tntEntity;
-		try { tntEntity = dimension.spawnEntity("minecraft:tnt", spawnPos); } catch { tntEntity = undefined; }
-		if (!tntEntity) return;
+		const proxyData = getTntDataForItemTypeId("goe_tnt:tnt");
+		if (!proxyData) return;
 
-		applyMechaProjectileImpulse(tntEntity, forward);
+		let shotEntity;
+		try {
+			shotEntity = dimension.spawnEntity(proxyData.blockId, spawnPos);
+		} catch {
+			shotEntity = undefined;
+		}
+		if (!shotEntity) return;
+
+		applyMechaProjectileImpulse(shotEntity, forward);
+
+		const playerYaw = (player.getRotation?.()?.y ?? 0);
+
+		customProjectileById.set(shotEntity.id, {
+			entity: shotEntity,
+			tntData: proxyData,
+			lastPos: { x: shotEntity.location.x, y: shotEntity.location.y, z: shotEntity.location.z },
+			spawnTick: system.currentTick,
+			dimensionId: dimension?.id,
+			dimKey: toTntManagerDimKey(dimension?.id),
+			yawDeg: playerYaw,
+			wasMoving: true
+		});
+
+		try { shotEntity.addTag("goe_tnt_projectile"); } catch { }
+
 		return;
 	}
+
 
 	if (!tntData) return;
 
@@ -623,6 +656,8 @@ function forceMechaTntIdle(mecha) {
 	if (!isEntityValid(mecha)) return;
 
 	const mechaKey = mecha.id;
+
+	suppressDischargeUntilByMecha.delete(mechaKey);
 
 	tntUiStateByMecha.set(mechaKey, "idle");
 	try { mecha.triggerEvent("goe:idle_tnt"); } catch { }
@@ -675,13 +710,22 @@ function* tryFireMechaTnt(player, mecha) {
 	if (!selectedStack) return;
 
 	const isVanilla = selectedStack.typeId === TNT_ITEM_ID;
-	const tntData = isVanilla ? undefined : getTntDataForItemTypeId(selectedStack.typeId);
-	if (!isVanilla && !tntData) return;
+
+	let effectiveIsVanilla = isVanilla;
+	let tntData = isVanilla ? getTntDataForItemTypeId(VANILLA_PROXY_TNT_ID) : getTntDataForItemTypeId(selectedStack.typeId);
+
+	if (isVanilla) {
+		effectiveIsVanilla = false;
+	}
+
+	if (!effectiveIsVanilla && !tntData) return;
 
 	if (!consumeOneFromSelectedHotbarSlotSafe(player, selectedStack.typeId)) return;
 
 	const nextIsRight = nextFireHandRightByMecha.get(mechaKey);
 	const fireRight = (typeof nextIsRight === "boolean") ? nextIsRight : true;
+
+	suppressDischargeUntilByMecha.set(mechaKey, currentTick + FIRE_ANIM_TICKS);
 
 	tntUiStateByMecha.set(mechaKey, "fire");
 
@@ -758,6 +802,11 @@ function setupChargeAnimationByHeldItemTick() {
 			}
 
 			if (!isTntSelected && wasTntSelected) {
+				const suppressUntil = suppressDischargeUntilByMecha.get(mechaKey) ?? 0;
+				if (suppressUntil > currentTick) {
+					continue;
+				}
+
 				wasTntSelectedByPlayer.set(player.id, false);
 
 				const chargeIdle = isChargeIdleByMecha.get(mechaKey) ?? false;
@@ -775,7 +824,6 @@ function setupChargeAnimationByHeldItemTick() {
 				}
 			}
 
-			// if charge finished enter charged if still holding tnt, otherwise enter charged
 			const readyTick = chargeReadyTickByMecha.get(mechaKey);
 			const chargeIdle = isChargeIdleByMecha.get(mechaKey) ?? false;
 
@@ -787,7 +835,6 @@ function setupChargeAnimationByHeldItemTick() {
 
 				const idlePending = idlePendingByMecha.get(mechaKey) ?? false;
 
-				// only switch to idle when not holding tnt (or we requested idle during charge)
 				if (!isTntSelected || idlePending) {
 					system.run(() => {
 						if (!isEntityValid(mecha)) return;
@@ -929,6 +976,7 @@ function setupRespawnRecovery() {
 				fireReturnTickByMecha.delete(dead.id);
 				nextFireHandRightByMecha.delete(dead.id);
 				tntUiStateByMecha.delete(dead.id);
+				suppressDischargeUntilByMecha.delete(dead.id);
 			}
 		});
 	}
@@ -963,6 +1011,7 @@ function setupRespawnRecovery() {
 		});
 	}
 }
+
 
 // initializes all mecha-related systems
 export function initMechaSuit() {
