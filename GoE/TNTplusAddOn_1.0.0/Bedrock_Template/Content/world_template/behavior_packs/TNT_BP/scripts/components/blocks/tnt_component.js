@@ -28,6 +28,7 @@ export const TntCustomComponent = {
             const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
             if (chargeLevel >= 4) {
                 player.onScreenDisplay.setActionBar(`TNT Charge Level: §cMaxed Out`);
+                player.playSound("goe_tnt:tnt_maxed_out", player.location);
                 return;
             }
             const targetCharge = Math.min(chargeLevel + 1, 4);

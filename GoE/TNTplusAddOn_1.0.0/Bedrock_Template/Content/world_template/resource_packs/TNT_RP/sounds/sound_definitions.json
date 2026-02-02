@@ -147,6 +147,12 @@
 			"sounds": [
 				{ "name": "sounds/sfx/tnt/ice", "volume": 1, "pitch": 0.7 }
 			]
+		},
+		"goe_tnt:tnt_maxed_out": {
+			"category": "player",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/tnt_boost_max", "volume": 1, "pitch": 1.2 }
+			]
 		}
 
 	}
