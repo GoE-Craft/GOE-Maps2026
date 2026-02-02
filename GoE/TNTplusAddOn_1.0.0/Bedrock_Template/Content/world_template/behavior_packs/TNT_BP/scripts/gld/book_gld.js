@@ -18,7 +18,7 @@ export const ShopItems = {
             name: "TNT Detonator",
             price: { type: "iron_ingot", amount: 1 },
             icon: "textures/goe/tnt/ui/shop/accessories/tnt_detonator",
-            itemId: "goe_tnt:detonator"
+            itemId: "goe_tnt:tnt_detonator"
         }
     ],
 
@@ -221,11 +221,11 @@ export const ShopItems = {
             itemId: "goe_tnt:light_up_tnt"
         },
         {
-            id: "theif_tnt",
+            id: "thief_tnt",
             name: "Thief TNT",
             price: { type: "iron_ingot", amount: 5 },
-            icon: "textures/goe/tnt/ui/shop/tnt/theif_tnt",
-            itemId: "goe_tnt:theif_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/thief_tnt",
+            itemId: "goe_tnt:thief_tnt"
         }
     ],
 
