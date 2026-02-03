@@ -4,7 +4,7 @@
 		"description": {
 			"identifier": "goe_tnt:magnet_explosion",
 			"basic_render_parameters": {
-				"material": "particles_alpha",
+				"material": "particles_blend",
 				"texture": "textures/goe/tnt/particles/explosion_particle"
 			}
 		},
@@ -62,10 +62,10 @@
 				"color": {
 					"interpolant": "v.particle_random_2 * v.emitter_random_1",
 					"gradient": {
-						"0.0": "#FFFF0000",
-						"0.42": "#FFFF0000",
-						"0.46": "#FF0B00FF",
-						"1.0": "#FF0B00FF"
+						"0.0": "#94FF0000",
+						"0.42": "#94FF0000",
+						"0.46": "#941972CD",
+						"1.0": "#911972CD"
 					}
 				}
 			}
