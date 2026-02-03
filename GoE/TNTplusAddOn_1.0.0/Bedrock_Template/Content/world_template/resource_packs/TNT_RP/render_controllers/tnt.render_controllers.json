@@ -39,6 +39,22 @@
       "geometry": "Geometry.glass",
       "materials": [ { "*": "Material.glass" } ],
       "textures": [ "Texture.default" ]
+    },
+    "controller.render.chunker_tnt": {
+      "geometry": "Geometry.default",
+      "materials": [ 
+        { "*": "Material.default" },
+        { "ui_perimeter": "Material.semi_transparent" },
+        { "ui_perimeter_base": "Material.default" },
+        { "ui_signs": "Material.default" }
+      ],
+      "textures": [ "Texture.default" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
+      }
     }
   }
 }

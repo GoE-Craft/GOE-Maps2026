@@ -4,7 +4,8 @@
     "description": {
       "identifier": "goe_tnt:chunker_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "semi_transparent": "goe_tnt_border"
       },
       "textures": {
 				"default": "textures/goe/tnt/entity/chunker_tnt"
@@ -31,7 +32,7 @@
         "big_explosion_white": "goe_tnt:big_explosion_white",
         "tnt_charge": "goe_tnt:tnt_charge_blue"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ "controller.render.chunker_tnt" ]
     }
   }
 }
