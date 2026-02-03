@@ -21,14 +21,10 @@
           "sound_effects": [
             { "effect": "land_sound" }
           ],
-          "particle_effects": [
-            { "effect": "mecha_suit_land", "locator": "locator_footright" },
-            { "effect": "mecha_suit_land", "locator": "locator_footleft" }
-          ],
           "transitions": [
             { "airborn": "!q.is_on_ground" }
-          ],
-          "blend_transition": 0.2
+          ]/* ,
+          "blend_transition": 0.2 */
         }
       }
     }

@@ -1,0 +1,29 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.tnt_look_at_target": {
+			"initial_state": "default",
+			"states": {
+				"default": {
+					"transitions": [
+						{
+							"charged": "q.property('goe_tnt:tnt_action') == 'charged'"
+						}
+					],
+					"blend_transition": 0.1
+				},
+				"charged": {
+					"animations": [
+						"look_at"
+					],
+					"transitions": [
+						{
+							"default": "query.property('goe_tnt:tnt_action') == 'idle'"
+						}
+					],
+					"blend_transition": 0.1
+				}
+			}
+		}
+	}
+}

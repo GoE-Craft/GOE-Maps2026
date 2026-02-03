@@ -39,6 +39,7 @@
 				"land_controller" : "controller.animation.goe.tnt.mecha_suit.land",
 				"spawn_controller": "controller.animation.goe_tnt.mecha_suit_spawn",
 				"mount_controller": "controller.animation.goe_tnt.mecha_suit_mount",
+				"look_at_target_controller" : "controller.animation.tnt_look_at_target",
 
 				"idle": "animation.mecha_suit.idle",
 				"spawn" : "animation.mecha_suit.spawn",
@@ -58,7 +59,7 @@
 
 			"scripts": {
 				"pre_animation": [
-					"v.look_at = q.camera_rotation('y');"
+					"v.look_at = q.has_rider ? query.rider_head_x_rotation(0) : 0;"
 				],
 				"animate": [
 					"controller.mecha_suit",
@@ -66,7 +67,7 @@
 					"land_controller",
 					"spawn_controller",
 					"mount_controller",
-					"look_at"
+					"look_at_target_controller"
 				]
 			},
 			"spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }
