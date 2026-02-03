@@ -2980,11 +2980,11 @@
 				"0.0": [
 					{
 						"effect": "mecha_suit_jump",
-						"locator": "locator_footright"
+						"locator": "locator_footleft"
 					},
 					{
 						"effect": "mecha_suit_jump",
-						"locator": "locator_footleft"
+						"locator": "locator_footright"
 					}
 				]
 			}
@@ -3965,9 +3965,16 @@
 				}
 			},
 			"particle_effects": {
-				"0.0": {
-					"effect": "mecha_suit_land"
-				}
+				"0.2917": [
+					{
+						"effect": "mecha_suit_land",
+						"locator": "locator_footright"
+					},
+					{
+						"effect": "mecha_suit_land",
+						"locator": "locator_footleft"
+					}
+				]
 			}
 		},
 		"animation.mecha_suit.look_at": {
