@@ -46,7 +46,8 @@
         { "*": "Material.default" },
         { "ui_perimeter": "Material.semi_transparent" },
         { "ui_perimeter_base": "Material.default" },
-        { "ui_signs": "Material.default" }
+        { "ui_signs": "Material.default" },
+        { "beam": "Material.semi_transparent" }
       ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
