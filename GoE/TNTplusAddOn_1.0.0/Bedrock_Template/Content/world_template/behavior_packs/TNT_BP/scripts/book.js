@@ -1,4 +1,4 @@
-import { system, ItemStack } from "@minecraft/server";
+import { system, ItemStack, world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 import { ShopItems, formatPrice, PriceTypeNames, Achievements, getAllAchievements, getAchievementsByCategory } from "./gld/book_gld";
 import { purchaseItem, getPlayerResourceAmount } from "./shop";
@@ -12,6 +12,36 @@ export const GuideBookComponent = {
         onItemUse(player);
     }
 };
+
+
+
+// Check if we have the book in the inventory every 3 minutes
+export function startGuideBookReminderInterval() {
+    system.runInterval(() => {
+        for (const player of world.getPlayers()) {
+
+            const inv = utils.getInventoryContainer(player);
+
+            let hasGuideBook = false;
+
+            if (inv) {
+                for (let i = 0; i < inv.size; i++) {
+                    const item = inv.getItem(i);
+                    if (item && item.typeId === "goe_tnt:guide_book") {
+                        hasGuideBook = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!hasGuideBook) {
+                utils.tellraw( player,"@s","§aYou do not have a §eTNT Guide§r§a. Use vanilla §eTNT + Book§a to craft one.§r");
+                player.playSound("random.orb");
+            }
+        }
+    }, 3600); // 3 minutes interval
+}
+
 
 export async function onItemUse(player) {
     player.playSound("goe_tnt:book_open_music"); // add sound
@@ -38,12 +68,12 @@ export async function onItemUse(player) {
 
 export async function showIntroPage(player) {
     const IntroForm = new ActionFormData()
-        .title("§l§4TNT Guide Book§r")
+        .title("§l§cTNT Guide Book§r")
         .body(
             `§fWelcome, §a${player.name}§r!\n\n` +
-            "§fUnleash chaos with §l§620+ craftable TNTs§r§f, pilot the §l§6TNT Mecha Suit§r§f, and §l§6destroy custom Structures§r§f found all across your world.\n\n" +
-            "§fOpen the §l§6TNT Guide§r§f to access the §l§6Shop§r§f, view §l§6recipes§r§f, and tweak your §l§6settings§r§f.\n\n" +
-            "§fEnjoy the §l§6TNT Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
+            "§fUnleash chaos with §e20+§r§f craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy custom §eStructures§r§f found all across your world.\n\n" +
+            "§fOpen the §eTNT Guide§r§f to access the shop, achievement list, and tweak your settings§r§f.\n\n" +
+            "§fEnjoy the §aTNT Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
         )
         .button("§l§2LET'S EXPLODE!§r");
 
@@ -64,8 +94,8 @@ export async function showIntroPage(player) {
 
 export async function showMainPage(player) {
     const form = new ActionFormData()
-        .title("§l§4TNT Guide§r")
-        .button("§l§4Info§r", "textures/goe/tnt/ui/info")
+        .title("§l§cTNT Guide§r")
+        .button("§l§cInfo§r", "textures/goe/tnt/ui/info")
         .button("§l§2Shop§r", "textures/goe/tnt/ui/shop")
         .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements")
         .button("§l§1Settings§r", "textures/goe/tnt/ui/settings");
@@ -95,9 +125,9 @@ export async function showMainPage(player) {
 
 async function showInfoPage(player) {
     const form = new ActionFormData()
-        .title("§l§4Info§r")
-        .body("§fInfo:§r")
-        .button("§l§4TNT Blocks§r", "textures/goe/tnt/ui/info/tnt_blocks_info")
+        .title("§l§cInfo§r")
+        .body("§cInfo:§r")
+        .button("§l§cTNT Blocks§r", "textures/goe/tnt/ui/info/tnt_blocks_info")
         .button("§l§4TNT Mecha Suit§r", "textures/goe/tnt/ui/info/tnt_mecha_suit_info")
         .button("§l§nStructures§r", "textures/goe/tnt/ui/info/structures_info")
         .button("§l§2Shop§r", "textures/goe/tnt/ui/info/shop_info")
@@ -148,10 +178,10 @@ async function showMechaSuitPage(player) {
     const form = new ActionFormData()
         .title("§l§4TNT Mecha Suit§r")
         .body(
-            "§fThe §4TNT Mecha Suit§f is a powerful combat mount. It allows the player to launch all custom §4TNT Blocks§f as projectiles.\n\n" +
-            "§f- Hold any §4TNT Block§f from this add-on or vanilla §4TNT§f and interact to fire it as a projectile.\n\n" +
-            "§f- Interact with an §9Elytra§f on it to make it §eflyable§f.\n\n" +
-            "§f- Moves §e30%% faster§f than a normal player and features §eincreased jump height§f.\n\n" +
+            "§fThe §4TNT Mecha Suit§f is a powerful combat mount that lets the player launch any custom §4TNT block§f as projectiles.\n\n" +
+            "§f- Hold any §4TNT block§f from this add-on (or vanilla §4TNT§f) and interact to fire it as a projectile.\n\n" +
+            "§f- Interact with an §9Elytra§f to make the suit §eflyable§f.\n\n" +
+            "§f- Moves §e30%% faster§f than a normal player and has §eincreased jump height§f.\n\n" +
             "§f- Has high durability with a §elarge health pool§f.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
@@ -170,9 +200,9 @@ async function showShopInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§2Shop§r")
         .body(
-            "§fThe §4TNT Shop§f allows you to purchase any asset from this §4TNT Add-On§f such as: §4TNT Blocks§f, §4TNT Mecha Suit§f, §4TNT Detonator§f or §4TNT Testing Areas.§f\n\n" +
-            "§fYou can access shop by pressing \"§4TNT Shop§f\" button in main UI menu.§f\n\n" +
-            "§fYou can use §nCopper Ingots§f, §iIron Ingots§f, §6Gold Ingots§f, or §aEmeralds§f to purchase them. The better the asset, the higher its price.§r"
+            "§fThe §4TNT Shop§f lets you purchase any asset from this §4TNT Add-On§f including §4TNT Blocks§f, the §4TNT Mecha Suit§f, the §4TNT Detonator§f or §4TNT Testing Areas.§f\n\n" +
+            "§fYou can access the shop by pressing the \"§4TNT Shop§f\" button in the main UI menu.§f\n\n" +
+            "§fYou can use §nCopper Ingots§f, §iIron Ingots§f, §6Gold Ingots§f, or §aEmeralds§f to make purchases. The better the asset, the higher its price.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -190,7 +220,7 @@ async function showSettingsInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§1Settings§r")
         .body(
-            "§fYou can adjust your expirience in §4TNT Add-On§f by customizing add-on settings as you please.\nYou can acess '§eSettings§f' section from the main UI menu.§r"
+            "§fYou can adjust your expirience in §4TNT Add-On§f by customizing add-on settings as you please.\nYou can acess \"§eSettings§f\" section from the main UI menu.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -208,9 +238,9 @@ async function showAchievementsInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
         .body(
-            "§fTrack your progress as you master the art of destruction engineering. §4TNT Add-on§f offers you §e20+ unique achievements and rewards§f.\n\n" +
-            "§fYou can track your progress from the \"§eAchievements§f\" section. Find the \"§eAchievement§f\" button in the main UI menu where you can find a list of all §eachievements§f. Clicking on them will show you all necessary info.\n\n" +
-            "§fPush your limits, earn every badge, and become the ultimate §4TNT Legend!§r"
+            "§fTrack your progress as you master the art of destruction engineering. The §4TNT Add-on§f offers you §e20+ unique achievements and rewards§f.\n\n" +
+            "§fYou can track your progress in the \"§eAchievements§f\" section. Press the \"§eAchievement§f\" button in the main UI menu to view the full list. Select an §eachievement§f to see all the details and requirements.\n\n" +
+            "§fPush your limits, earn every badge, and become the ultimate §4TNT Legend§f!§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -226,12 +256,13 @@ async function showAchievementsInfoPage(player) {
 
 async function showTntsInfoPage(player) {
     const form = new ActionFormData()
-        .title("§l§4TNT Blocks§r")
+        .title("§l§cTNT Blocks§r")
         .body(
             "§fThis Add-On adds 20+ custom §4TNT Blocks§f with unique explosion effects and helpful abilities.\n\n" +
             "§f- All §4TNT Blocks§f can be activated using vanilla methods such as flint and steel or redstone.\n\n" +
-            "§f- §4TNT Detonator§f allows remote activation from a distance. Look in the direction of a §4TNT Block§f and interact while holding the §4TNT Detonator§f.\n\n" +
-            "§f- §4TNT Timer§f can be used to set a 30-second countdown on §4TNT Blocks§f. By interacting with a §4TNT Block§f, you can add or remove the timer. After adding the timer, you still need to activate the §4TNT Block§f in the regular way, and it will start a 30-second countdown until explosion.\n\n" +
+            "§f- The §4TNT Detonator§f allows remote activation from a distance. Look at §4TNT block§f and interact while holding the §4TNT Detonator§f.\n\n" +
+            "§f- Use a clock to add a 30-second countdown time to §4TNT blocks§f. Interact once to add the timer, and interact again to remove it. After adding the timer, you still need to activate the §4TNT block§f normally-once activated, it will start a 30-second countdown until it explodes.\n\n" +
+            "§f- Gunpowder can boost §4TNT blocks§f up to 4 levels. Hold gunpowder and interact with a §4TNT block§f to increase its power by up to 25% per level.\n\n" +
             "§fExperiment with different §4TNT Blocks§f and master new ways to trigger explosions.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
@@ -251,8 +282,8 @@ async function showStructuresInfoPage(player) {
         .title("§l§nStructures§r")
         .body(
             "§4TNT Add-On§f includes two main types of structures.\n\n" +
-            "§f- §eNaturally generated structures§f: §4TNT§f-looking structures with mazes and mob-fight adventures. Explore them and find hidden treasures.\n\n" +
-            "§f- §eCraftable Structures§f: They are foreseen to be testing areas where you can test all your §4TNT§f assets. Craft them or purchase them in the §4TNT shop§f and enjoy infinite explosions.§r"
+            "§f- §eNaturally generated structures§f: §4TNT§f-themed buildings with mazes and mob-fight adventures. Explore them to uncover hidden treasures.\n\n" +
+            "§f- §eCraftable Structures§f: Designed as testing areas where you can try out all your §4TNT§f assets. Craft them or purchase them in the §4TNT shop§f and enjoy endless explosions.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -330,7 +361,7 @@ async function showAccessoriesPage(player) {
     // Add buttons for each accessory item
     for (const item of items) {
         const priceText = await formatPrice(item.price, player);
-        const buttonText = `§l§d${item.name}§r\n${priceText}§r`;
+        const buttonText = `§l§5${item.name}§r\n${priceText}§r`;
         form.button(buttonText, item.icon);
     }
 
@@ -529,14 +560,20 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
     statusColor = isUnlocked ? "§a" : "§c";
     statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
 
-    let body = `§9Info:§r\n${achievement.info || ""}\n\n`;
-    if (achievement.tips && achievement.tips.trim()) {
-        body += `§6Tip:§r\n${achievement.tips}\n\n`;
+    let body = "";
+    if (achievement.milestoneNumber !== undefined) {
+        // Milestone: use info
+        body = `§f${achievement.info || ""}\n\n`;
+    } else if (achievement.tntType) {
+        // tnt_individual: use name
+        body = `§fUse "${achievement.name || ""}" to unlock this achievement\n\n`;
+    } else {
+        body = `§f${achievement.info || achievement.name || ""}\n\n`;
     }
     body += `${statusColor}Status: ${statusText}§r`;
 
     const form = new ActionFormData()
-        .title(`§l§5${achievement.name}§r`)
+        .title(`§l§d${achievement.name}§r`)
         .body(body)
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -581,7 +618,7 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
         : (typeInfo ? typeInfo.singular : price.type);
 
     const form = new ActionFormData()
-        .title("§l§cInsufficient Resources§r")
+        .title("§l§6Insufficient Resources§r")
         .body(
             `§cYou don't have enough resources to purchase §e${item.name}§r§c!\n\n` +
             `§fRequired: §e${neededAmount} ${resourceName}§r\n` +

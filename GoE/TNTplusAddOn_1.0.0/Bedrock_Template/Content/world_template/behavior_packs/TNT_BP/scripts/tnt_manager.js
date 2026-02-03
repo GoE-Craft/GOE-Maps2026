@@ -1,5 +1,6 @@
 import { world, system, BlockPermutation, MolangVariableMap, ItemStack, GameMode } from "@minecraft/server";
 import * as tnt_gld from "./gld/tnt_gld";
+import * as book_gld from "./gld/book_gld";
 
 // Used for TNT tracking across script reloads and world saves
 
@@ -9,6 +10,8 @@ const countdownIntervals = new Map();
 const fuseEffectIntervals = new Map();
 
 const excludePlayer = new Map();
+
+const lastPlaceHintTick = new Map();
 
 
 /**
@@ -360,16 +363,65 @@ export function onLoad() {
 
 }
 
+// Show TNT placement hint 
+function showTntPlaceHint(player, blockTypeId) {
+    try {
+        if (!player) return;
+
+        const now = system.currentTick;
+        const last = lastPlaceHintTick.get(player.id) ?? -999999;
+        if (now - last < 10) return; // 0.5s throttle
+        lastPlaceHintTick.set(player.id, now);
+
+        // map "goe_tnt:directional_tnt" -> "directional_tnt"
+        const suffix = (blockTypeId || "").startsWith("goe_tnt:")
+            ? blockTypeId.substring("goe_tnt:".length)
+            : blockTypeId;
+
+        const entry = book_gld.Achievements?.tnt_individual?.find(a =>
+            a?.tntType === suffix || a?.id === suffix
+        );
+
+        if (!entry) return;
+
+        const info = entry.info ?? "";
+        const tips = entry.tips ?? "";
+
+        // Show Info first
+        player.onScreenDisplay?.setActionBar(`§aInfo:§r ${info}`);
+
+        // After 3 seconds, show Tip
+        system.runTimeout(() => {
+            try {
+                if (!player?.isValid) return;
+                player.onScreenDisplay?.setActionBar(`§6Tip:§r ${tips}`);
+            } catch {}
+        }, 60); // 60 ticks = 3 seconds
+
+    } catch {}
+}
+
 // Handle block place event to replace vanilla TNT with custom TNT
 export function onBlockPlace(event) {
     const block = event.block;
     const dim = block.dimension;
-    if (block.typeId !== "minecraft:tnt") return;
+    const player = event.player;
 
-    system.run(() => {
-        // Replace with our custom TNT block
-        block.setPermutation(BlockPermutation.resolve("goe_tnt:tnt"));
-    });
+    // Check for vanilla TNT placement
+    if (block.typeId === "minecraft:tnt") {
+        system.run(() => {
+            block.setPermutation(BlockPermutation.resolve("goe_tnt:tnt"));
+            showTntPlaceHint(player, "goe_tnt:tnt");
+        });
+        return;
+    }
+
+    // Check if the item in hand is one of our custom TNT items
+    try {
+        if ((block.typeId || "").startsWith("goe_tnt:") && block.hasTag("goe_tnt:custom_tnt")) {
+            showTntPlaceHint(player, block.typeId);
+        }
+    } catch {}
 }
 
 export function onPlayerBreakBlockBefore(event) {

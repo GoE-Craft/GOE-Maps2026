@@ -17,6 +17,7 @@ export async function onLoad() {
     // Restore any active TNT from before script reload
     tnt_manager.onLoad();
     tnt_component.onLoad();
+    book.startGuideBookReminderInterval();
 }
 
 export async function onTick() {}

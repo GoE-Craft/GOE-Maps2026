@@ -201,7 +201,7 @@
         "queue_command": {
           "command": [
             "playsound note.bass @p ~ ~ ~ 0.3",
-            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§cMecha Suit is still deploying...\"}]}"
+            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§6Mecha Suit is still deploying...\"}]}"
           ]
         }
       },
@@ -215,7 +215,7 @@
         // after mecha suit has finished spawning
         "queue_command": {
           "command": [
-            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§aTNT Mecha Suit is ready. Interact with it to mount it.\"}]}"
+            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§a[Info] TNT Mecha Suit is ready. Interact with it to mount it.\"}]}"
           ]
         }
       },

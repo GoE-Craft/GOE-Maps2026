@@ -27,13 +27,31 @@ export const TntCustomComponent = {
         } else if (itemInHand?.typeId === "minecraft:gunpowder") {
             const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
             if (chargeLevel >= 4) {
-                player.onScreenDisplay.setActionBar(`TNT Charge Level: §cMaxed Out`);
+                player.onScreenDisplay.setActionBar(`§o§cTNT is already upgraded to max level§o§c`);
                 player.playSound("goe_tnt:tnt_maxed_out", player.location);
                 return;
             }
             const targetCharge = Math.min(chargeLevel + 1, 4);
             block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
-            player.onScreenDisplay.setActionBar(`TNT Charge Level: §a${targetCharge}`);
+            // Color codes: 1=§e, 2=§6, 3=§c, 4=§4
+            let color;
+            switch (targetCharge) {
+                case 1:
+                    color = "§e"; // yellow
+                    break;
+                case 2:
+                    color = "§6"; // orange
+                    break;
+                case 3:
+                    color = "§c"; // red
+                    break;
+                case 4:
+                    color = "§4"; // Dark Red
+                    break;
+                default:
+                    color = "§a"; // Green fallback
+            }
+            player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${targetCharge}§o`);
             player.playSound("random.pop", block.location);
             const location = block.center();
             location.y += 1;
@@ -65,7 +83,7 @@ function toggleTimer(block, player) {
     const timer = block.permutation.getState("goe_tnt:timer");
     const targetState = !timer;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
-    player.onScreenDisplay.setActionBar(`TNT Timer: ${targetState ? "§aEnabled \n§rUse Flint & Steel to activate it." : "§cDisabled"}`);
+    player.onScreenDisplay.setActionBar(`§oTNT Timer: ${targetState ? "§aEnabled §o \n§r§c§oUse Flint and Steel or other way to activate it.§c§o" : "§cDisabled"}`);
     block.dimension.playSound(`block.copper_bulb.turn_${targetState ? "on" : "off"}`, block.location, {volume: 5, pitch: 2});
     const location = block.center();
     location.y += 0.5;

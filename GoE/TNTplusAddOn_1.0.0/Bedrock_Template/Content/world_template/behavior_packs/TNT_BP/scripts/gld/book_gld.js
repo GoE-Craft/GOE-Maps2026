@@ -332,7 +332,7 @@ export const Achievements = {
         {
             id: "directional_tnt",
             name: "Directional TNT",
-            info: "Explodes in the direction the drill faces, creating a tunnel and destroying everything except ores.",
+            info: "Explodes in the direction the drill faces, \n\n" + "creating a tunnel and destroying everything except ores.",
             tips: "Place Directional TNT and dig the hole.",
             tntType: "directional_tnt",
             icon: "textures/goe/tnt/ui/achievements/directional_tnt",
@@ -587,7 +587,7 @@ export const Achievements = {
         {
             id: "milestone_5",
             name: "5 Unique TNTs",
-            info: "Discover 5 different TNT types",
+            info: "Discover 5 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 5,
             icon: "textures/goe/tnt/ui/achievements/milestone_5",
@@ -596,7 +596,7 @@ export const Achievements = {
         {
             id: "milestone_10",
             name: "10 Unique TNTs",
-            info: "Discover 10 different TNT types",
+            info: "Discover 10 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 10,
             icon: "textures/goe/tnt/ui/achievements/milestone_10",
@@ -605,7 +605,7 @@ export const Achievements = {
         {
             id: "milestone_15",
             name: "15 Unique TNTs",
-            info: "Discover 15 different TNT types",
+            info: "Discover 15 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 15,
             icon: "textures/goe/tnt/ui/achievements/milestone_15",
@@ -614,7 +614,7 @@ export const Achievements = {
         {
             id: "milestone_20",
             name: "20 Unique TNTs",
-            info: "Discover 20 different TNT types",
+            info: "Discover 20 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 20,
             icon: "textures/goe/tnt/ui/achievements/milestone_20",
@@ -623,7 +623,7 @@ export const Achievements = {
         {
             id: "milestone_25",
             name: "25 Unique TNTs",
-            info: "Discover 25 different TNT types",
+            info: "Discover 25 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 25,
             icon: "textures/goe/tnt/ui/achievements/milestone_25",
@@ -632,7 +632,7 @@ export const Achievements = {
         {
             id: "milestone_30",
             name: "30 Unique TNTs",
-            info: "Discover 30 different TNT types",
+            info: "Discover 30 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 30,
             icon: "textures/goe/tnt/ui/achievements/milestone_30",
