@@ -22,15 +22,15 @@
 						"locator2": {
 							"offset": [0, 0, 0],
 							"rotation": [180, 0, 0]
-						}
+						},
+						"locator3": [0, 0, 0]
 					}
 				},
 				{
 					"name": "explosion_locator",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"locator4": [0, 0, 0],
-						"locator3": [0, 0, 0]
+						"locator4": [0, 0, 0]
 					}
 				},
 				{
