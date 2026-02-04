@@ -155,7 +155,7 @@
 			]
 		},
 
-		//TEST
+		//Custom TNT Sounds
 		"goe_tnt:magnet_tnt_ignite": {
 			"category": "music",
 			"sounds": [
@@ -172,6 +172,25 @@
 			"category": "music",
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/magnet_tnt/magnet_tnt_explosion", "volume": 1}
+			]
+		},
+
+		"goe_tnt:freezing_tnt_ignite": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/freezing_tnt/freezing_tnt_ignite", "volume": 1}
+			]
+		},
+		"goe_tnt:freezing_tnt_charge": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/freezing_tnt/freezing_tnt_charge", "volume": 1}
+			]
+		},
+		"goe_tnt:freezing_tnt_explosion": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/freezing_tnt/freezing_tnt_explosion", "volume": 1}
 			]
 		}
 

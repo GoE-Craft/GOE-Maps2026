@@ -90,6 +90,11 @@
 					}
 				}
 			},
+			"sound_effects": {
+				"0.0": {
+					"effect": "explosion"
+				}
+			},
 			"particle_effects": {
 				"0.0": {
 					"effect": "freezing_blizzard",
@@ -193,6 +198,14 @@
 						"1.1875": [15, 13.1, 15],
 						"2.0": [2.2286, 13.1, 2.2286]
 					}
+				}
+			},
+			"sound_effects": {
+				"0.0": {
+					"effect": "ignite"
+				},
+				"0.0625": {
+					"effect": "charge"
 				}
 			},
 			"particle_effects": {
