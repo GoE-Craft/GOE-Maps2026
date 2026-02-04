@@ -1,5 +1,5 @@
 import { world, system, ItemStack } from "@minecraft/server";
-import * as tnt_manager from "./tnt_manager.js";
+import * as tnt_manager from "./tnt/tnt_manager.js";
 import * as tnt_gld from "./gld/tnt_gld.js";
 
 const MECHA_ID = "goe_tnt:mecha_suit"; // mecha entity identifier

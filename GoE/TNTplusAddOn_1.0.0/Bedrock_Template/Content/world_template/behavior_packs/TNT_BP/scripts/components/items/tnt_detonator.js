@@ -1,5 +1,5 @@
 import { world, system, BlockPermutation, GameMode, EquipmentSlot, Direction } from "@minecraft/server";
-import * as tnt_manager from "../../tnt_manager.js";
+import * as tnt_manager from "../../tnt/tnt_manager";
 import * as utils from "../../utils.js";
 
 // Helper script component for TNT Detonator item

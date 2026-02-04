@@ -1,9 +1,14 @@
 import { world, system, BlockPermutation, GameMode, EquipmentSlot, Direction, BlockVolume } from "@minecraft/server";
-import * as utils from "../../utils";
-import * as tnt_manager from "../../tnt_manager";
-import { fireLaser } from "../items/tnt_detonator";
+import * as utils from "../utils";
+import * as tnt_manager from "./tnt_manager";
+import { fireLaser } from "../components/items/tnt_detonator";
 
-// Helper script component for custom TNT blocks interaction and redstone ignition
+/**
+ * TNT Block Component Module
+ * 
+ * This module defines the custom TNT block component behavior.
+ * It includes player interaction, redstone power detection, and timer management.
+ */
 
 const tntTimers = new Set();
 
@@ -180,7 +185,7 @@ function placeBlockOnFace(block, face, itemInHand, player) {
     } catch (e) {}
 }
 
-export function onLoad() {
+export function restoreTimers() {
     // First scan and get blocks with timers
     const storedTimers = world.getDynamicProperty("goe_tnt:tnt_timers") || "[]";
     const parsedTimers = JSON.parse(storedTimers);

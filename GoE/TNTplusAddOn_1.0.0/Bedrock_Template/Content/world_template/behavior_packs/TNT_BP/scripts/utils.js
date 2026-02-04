@@ -618,3 +618,35 @@ export function damageHeldItem(player, amount) {
 
   setItemInHand(player, itemInHand);
 }
+
+/**
+ * Helper function for placing block on a face
+ * 
+ */
+export function getYawFromFace(direction) {
+    let spawnYaw = undefined;
+    if (direction && typeof direction === "string") {
+        const f = direction.toLowerCase();
+        if (f.includes("north")) spawnYaw = 180;
+        else if (f.includes("south")) spawnYaw = 0;
+        else if (f.includes("west")) spawnYaw = 90;
+        else if (f.includes("east")) spawnYaw = -90;
+    }
+    return spawnYaw;
+}
+
+
+
+export function getFacingVectorFromEntity(yaw) {
+    try {
+        if (yaw === undefined || yaw === null) return { x: 1, z: 0 };
+        const yawRad = yaw * (Math.PI / 180);
+        const dx = -Math.sin(yawRad);
+        const dz = Math.cos(yawRad);
+        const len = Math.sqrt(dx * dx + dz * dz) || 1;
+        return { x: dx / len, z: dz / len };
+    } catch (e) {
+        console.log("Error getting entity facing vector: " + e);
+        return { x: 1, z: 0 };
+    }
+}

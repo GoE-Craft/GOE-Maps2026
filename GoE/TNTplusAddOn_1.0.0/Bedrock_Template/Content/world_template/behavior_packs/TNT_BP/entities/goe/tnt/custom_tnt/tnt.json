@@ -80,6 +80,13 @@
                     ]
                 }
             },
+            "goe_tnt:trigger_explode": {
+                "add": {
+                    "component_groups": [
+                        "goe_tnt:explode"
+                    ]
+                }
+            },
             "goe_tnt:start_swell": {
                 "set_property": {
                     "goe_tnt:swell": true

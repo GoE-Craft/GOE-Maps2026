@@ -1,10 +1,7 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
-import * as script_events from "./script_events";
-import * as tnt_component from "./components/blocks/tnt_component";
 import * as tnt_detonator from "./components/items/tnt_detonator";
 import { GuideBookComponent } from "./book";
-import * as tnt_manager from "./tnt_manager";
-import * as tnt_gld from "./gld/tnt_gld";
+import * as tnt_events from "./tnt/tnt_events";
 import * as achievements from "./achievements";
 import * as book from "./book";
 
@@ -15,8 +12,7 @@ export async function onWorldInitialize(event) {}
 
 export async function onLoad() {
     // Restore any active TNT from before script reload
-    tnt_manager.onLoad();
-    tnt_component.onLoad();
+    tnt_events.onLoad();
     book.startGuideBookReminderInterval();
 }
 
@@ -29,7 +25,7 @@ export async function onPlayerSpawn(event) {
 }
 
 export async function onEntitySpawn(event) {
-    tnt_manager.handleEntitySpawn(event);
+    tnt_events.onEntitySpawnEvent(event);
 }
 
 export async function onEntityHealthChanged(event) {}
@@ -54,32 +50,31 @@ export async function onItemUseOn(event) {}
 
 export async function onPlayerBreakBlock(event) {}
 
-export async function onScriptEventReceive(event) {
-    script_events.handleScriptEvent(event);
-}
+export async function onScriptEventReceive(event) {}
 
 export async function onWeatherChange(event) {}
 
 export async function onPlayerPlaceBlock(event) {
     achievements.onPlayerPlaceBlock(event);
-    tnt_manager.onBlockPlace(event);
+    tnt_events.onBlockPlace(event);
 }
 
 export async function onPlayerBreakBlockBefore(event) {
-    tnt_manager.onPlayerBreakBlockBefore(event);
+    tnt_events.onPlayerBreakBlockBefore(event);
 }
 
 export async function onPlayerInteractWithEntity(event) {}
 
 export async function onExplosion(event) {
-    tnt_manager.handleExplosionEvent(event);
+    tnt_events.onExplosionEvent(event);
 }
 
 export async function onStartup(event) {
-      const { blockComponentRegistry, itemComponentRegistry } = event;
-      blockComponentRegistry.registerCustomComponent("goe_tnt:custom_tnt", tnt_component.TntCustomComponent);
-      itemComponentRegistry.registerCustomComponent("goe_tnt:guide_book", GuideBookComponent);
-      itemComponentRegistry.registerCustomComponent("goe_tnt:tnt_detonator", tnt_detonator.TntDetonatorComponent);
+    tnt_events.onStartup(event);
+
+    const { itemComponentRegistry } = event;
+    itemComponentRegistry.registerCustomComponent("goe_tnt:guide_book", GuideBookComponent);
+    itemComponentRegistry.registerCustomComponent("goe_tnt:tnt_detonator", tnt_detonator.TntDetonatorComponent);
 
 
 }
