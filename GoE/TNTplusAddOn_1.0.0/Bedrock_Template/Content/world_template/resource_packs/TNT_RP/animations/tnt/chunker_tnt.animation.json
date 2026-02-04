@@ -363,6 +363,11 @@
 				"2.0": {
 					"effect": "big_explosion_white"
 				}
+			},
+			"sound_effects": {
+				"3.0": {
+					"effect": "chunker_explosion3"
+				}
 			}
 		},
 		"animation.chunker_tnt.explosion": {
