@@ -145,7 +145,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "structure":
             // Structure TNT - places a structure at the location
-            system.runJob(structureTNTAction(dimension, location));
+            system.runJob(structureTNTAction(dimension, location, vec));
             break;
         default:
             break;
