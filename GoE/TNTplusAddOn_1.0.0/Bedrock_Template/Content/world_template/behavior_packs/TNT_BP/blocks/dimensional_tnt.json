@@ -10,7 +10,12 @@
         }
       },
       "states": {
-        "goe_tnt:timer": [false, true],
+        "goe_tnt:timer": {
+          "values": {
+            "max": 12,
+            "min": 0
+          }
+        },
         "goe_tnt:is_active": [false, true],
         "goe_tnt:charge_level": [0, 1, 2, 3, 4]
       }

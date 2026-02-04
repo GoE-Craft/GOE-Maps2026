@@ -10,7 +10,7 @@ import { fireLaser } from "../components/items/tnt_detonator";
  * It includes player interaction, redstone power detection, and timer management.
  */
 
-const tntTimers = new Set();
+const tntTimers = new Map();
 
 export const TntCustomComponent = {
     onPlayerInteract(eventData) {
@@ -21,7 +21,7 @@ export const TntCustomComponent = {
         const itemInHand = utils.getItemInHand(player);
 
         if (itemInHand?.typeId === "minecraft:clock") {
-            toggleTimer(block, player);
+            handleTimer(block, player);
             player.playSound("minecraft:item.book.page_turn", block.location);
         } else if (itemInHand?.typeId === "minecraft:flint_and_steel") {
             tnt_manager.activateTNTBlock(block, player);
@@ -84,25 +84,45 @@ export const TntCustomComponent = {
     },
 };
 
-function toggleTimer(block, player) {
+function handleTimer(block, player) {
     const timer = block.permutation.getState("goe_tnt:timer");
-    const targetState = !timer;
+
+    if (timer === 12) {
+        block.setPermutation(block.permutation.withState("goe_tnt:timer", 0));
+        player.onScreenDisplay.setActionBar(`§oTNT Timer: §cDisabled`);
+        block.dimension.playSound(`block.copper_bulb.turn_off`, block.location, {volume: 5, pitch: 2});
+        const location = block.center();
+        location.y += 0.5;
+        block.dimension.spawnParticle(`goe_tnt:timer_off`, location);
+        updateTimerSet(block.location, block.dimension.id, 0);
+        return;
+    }
+
+    const targetState = timer + 1;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
-    player.onScreenDisplay.setActionBar(`§oTNT Timer: ${targetState ? "§aEnabled §o \n§r§c§oUse Flint and Steel or other way to activate it.§c§o" : "§cDisabled"}`);
-    block.dimension.playSound(`block.copper_bulb.turn_${targetState ? "on" : "off"}`, block.location, {volume: 5, pitch: 2});
+    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState*10} seconds.§o\n§r§c§o Use Flint and Steel or other way to activate it.§o`);
+    block.dimension.playSound(`block.copper_bulb.turn_on`, block.location, {volume: 5, pitch: 2});
     const location = block.center();
     location.y += 0.5;
-    block.dimension.spawnParticle(`goe_tnt:timer_${targetState ? "on" : "off"}`, location);
+    block.dimension.spawnParticle(`goe_tnt:timer_on`, location);
     updateTimerSet(block.location, block.dimension.id, targetState);
+
 }
 
 export function updateTimerSet(location, dimension, timerState) {
     // Do not mutate the location object; use a plain object for the key
     const locKey = JSON.stringify({ x: location.x, y: location.y, z: location.z, dimension });
     if (timerState) {
-        tntTimers.add(locKey);
+        
+        const time = timerState*10; // Timer state is stored as multiples of 10 seconds
+        tntTimers.set(locKey, time);
     } else {
         tntTimers.delete(locKey);
+        if (tntTimers.size === 0) {
+            tntTimers.clear();
+            world.setDynamicProperty("goe_tnt:tnt_timers", undefined);
+            return;
+        }
     }
     // Ensure all elements are strings (JSON) before storing
     world.setDynamicProperty("goe_tnt:tnt_timers", JSON.stringify([...tntTimers]));
@@ -190,7 +210,12 @@ export function restoreTimers() {
     const storedTimers = world.getDynamicProperty("goe_tnt:tnt_timers") || "[]";
     const parsedTimers = JSON.parse(storedTimers);
     tntTimers.clear();
-    if (parsedTimers.length > 0) tntTimers.add(...parsedTimers);
+    if (parsedTimers.length > 0) {
+        for (const [loc, state] of parsedTimers) {
+            console.log(`Restoring TNT timer at ${loc} with state ${state}`);
+            tntTimers.set(loc, state);
+        }
+    }
     
     // Then start interval to update timer particles
     system.runInterval(() => {
@@ -199,8 +224,13 @@ export function restoreTimers() {
 }
 
 function* updateTimerParticles() {
-    for (const loc of tntTimers) {
+    if (tntTimers.size === 0) return;
+    for (const [loc, state] of tntTimers) {
         if (!loc) continue;
+        if (state <= 0) {
+            tntTimers.delete(loc);
+            continue;
+        }
 
         const location = JSON.parse(loc);
         const dim = world.getDimension(location.dimension);
@@ -211,8 +241,12 @@ function* updateTimerParticles() {
             tntTimers.delete(loc);
             continue;
         }
-        dim.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + 2.5, z: location.z + 0.5 });
-        dim.spawnParticle(`goe_tnt:timer_particle_30`, { x: location.x + 0.5, y: location.y + 2, z: location.z + 0.5 });
+        printTimer(dim, location, state);
         yield;
     }
+}
+
+function printTimer(dimension, location, time) {
+    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + 2.5, z: location.z + 0.5 });
+    dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + 2, z: location.z + 0.5 });
 }

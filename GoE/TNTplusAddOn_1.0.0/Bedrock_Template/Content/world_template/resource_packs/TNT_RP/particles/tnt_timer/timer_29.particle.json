@@ -23,10 +23,10 @@
 				"size": [0.2, 0.2],
 				"facing_camera_mode": "rotate_xyz",
 				"uv": {
-					"texture_width": 64,
-					"texture_height": 64,
-					"uv": [8, 1],
-					"uv_size": [7, 5]
+					"texture_width": 128,
+					"texture_height": 128,
+					"uv": [12, 72],
+					"uv_size": [11, 7]
 				}
 			}
 		}

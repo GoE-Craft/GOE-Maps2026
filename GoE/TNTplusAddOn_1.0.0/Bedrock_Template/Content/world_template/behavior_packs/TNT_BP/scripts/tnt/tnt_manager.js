@@ -24,7 +24,10 @@ const lastPlaceHintTick = new Map();
  * @param {Player} player - (Optional) The player who activated the TNT
  */
 export function activateTNTBlock(block, player) {
-    const timerEnabled = block.permutation.getState("goe_tnt:timer");
+    const timerState = block.permutation.getState("goe_tnt:timer");
+
+    let timerSeconds = timerState * 10; // Default to timer state * 10 seconds
+    
     const location = block.center();
     location.y -= 0.5; // Adjust to bottom center
 
@@ -42,7 +45,7 @@ export function activateTNTBlock(block, player) {
         // Try to derive spawn yaw from block facing state/properties
         const spawnYaw = utils.getYawFromFace(direction);
 
-        igniteTNT(location, chargeLevel, timerEnabled ? 600 : 0, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw, player);
+        igniteTNT(location, chargeLevel, timerSeconds * 20, tntData.fuseTime, tntData, dimension.id, undefined, spawnYaw, player);
     });
 }
 
