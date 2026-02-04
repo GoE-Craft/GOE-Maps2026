@@ -58,8 +58,13 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
     // If this ignite came from a projectile (mecha-shot uses an impulse object),
     // flag it so we can skip fuse particles/sounds.
     try {
-        if (impulse !== undefined) {
-            entity.setDynamicProperty("goe_tnt_skip_fuse_fx", true);
+        const isMagnet = tntData?.blockId === "goe_tnt:magnet_tnt";
+        const isDecoy = tntData?.blockId === "goe_tnt:villager_decoy_tnt";
+
+        if (!isMagnet && !isDecoy) {
+            if (impulse && (Math.abs(impulse.x) + Math.abs(impulse.y) + Math.abs(impulse.z)) > 0.000001) {
+                entity.setDynamicProperty("goe_tnt_skip_fuse_fx", true);
+            }
         }
     } catch { }
 
@@ -280,12 +285,12 @@ function triggerExplosionEffects(entity, tntData) {
 
         system.runTimeout(() => {
             if (entity.isValid) entity.remove();
-        }, animationLength*20);
+        }, animationLength * 20);
     } catch (e) {
         console.log("Error triggering explosion effects: " + e);
         if (entity.isValid) entity.remove();
     }
-    
+
 }
 
 function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
@@ -422,19 +427,19 @@ function showTntPlaceHint(player, blockTypeId) {
             } else if (lastAchTick && Math.abs(currentTick - lastAchTick) < 5) {
                 delayTicks = 70;
             }
-        } catch {}
+        } catch { }
 
         if (delayTicks > 0) {
             system.runTimeout(() => {
                 try {
                     if (!player?.isValid) return;
                     player.onScreenDisplay?.setActionBar(message);
-                } catch {}
+                } catch { }
             }, delayTicks);
         } else {
             player.onScreenDisplay?.setActionBar(message);
         }
-    } catch {}
+    } catch { }
 }
 
 // Handle block place event to replace vanilla TNT with custom TNT
@@ -457,7 +462,7 @@ export function onBlockPlace(event) {
         if ((block.typeId || "").startsWith("goe_tnt:") && block.hasTag("goe_tnt:custom_tnt")) {
             showTntPlaceHint(player, block.typeId);
         }
-    } catch {}
+    } catch { }
 }
 
 export function onPlayerBreakBlockBefore(event) {
@@ -543,7 +548,7 @@ export function handleEntitySpawn(event) {
         // so remove the item entity if it's one of our custom TNT items
         // Other part is handled in onPlayerBreakBlockBefore
         if (itemTypeId === "goe_tnt:tnt") entity.remove();
-        
+
         const tntData = tnt_gld.getTntDataByBlockId(itemTypeId);
         if (!tntData) return;
 
@@ -616,7 +621,7 @@ export function handleExplosionEvent(event) {
 function* processExplosionEvent(impactedBlocks) {
     for (const block of impactedBlocks) {
         if (!block.isValid || block.isAir) continue;
-        
+
         processExplosion(block);
         yield;
     }
@@ -799,7 +804,7 @@ function* directionalAction(dimension, location, vec, length, widthRadius, heigh
         const loc = { x: centerX, y: bottomY, z: centerZ };
         if (tntData?.explosionEffects) {
             dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-            
+
         }
 
         // Move the drill entity forward only every 3 steps
@@ -855,7 +860,7 @@ function* magnetAction(dimension, chargeLevel, location) {
 
     system.runTimeout(() => {
         dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);
-    }, 5); 
+    }, 5);
 
     // tune feel
     const pushStrength = 1.2 + (chargeLevel * 0.2);
@@ -965,15 +970,15 @@ function* chunkerAction(dimension, location, charge_level, entity) {
     const radius = 8 + Math.floor(((2 * 0.25) * charge_level));
     const verticalHeight = 16 + Math.floor(((2 * 0.25) * charge_level));
 
-    for (let y = location.y + verticalHeight; y > location.y - verticalHeight ; y--) {
-        for (let x = location.x - radius/2; x <= location.x + radius/2; x++) {
-            for (let z = location.z - radius/2; z <= location.z + radius/2; z++) {
+    for (let y = location.y + verticalHeight; y > location.y - verticalHeight; y--) {
+        for (let x = location.x - radius / 2; x <= location.x + radius / 2; x++) {
+            for (let z = location.z - radius / 2; z <= location.z + radius / 2; z++) {
                 // Do something
                 const block = dimension.getBlock({ x: x, y: y, z: z });
                 if (!block || block.isAir) continue;
                 if (block.hasTag("diamond_pick_diggable")) continue;
                 if (block.hasTag("goe_tnt:custom_tnt")) processExplosion(block);
-                
+
                 block.setPermutation(BlockPermutation.resolve("minecraft:air"));
             }
         }
