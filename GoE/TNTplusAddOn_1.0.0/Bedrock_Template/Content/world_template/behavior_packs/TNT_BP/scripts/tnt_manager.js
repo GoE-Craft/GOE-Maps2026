@@ -384,20 +384,56 @@ function showTntPlaceHint(player, blockTypeId) {
 
         if (!entry) return;
 
-        const info = entry.info ?? "";
+        let info = entry.info ?? "";
         const tips = entry.tips ?? "";
 
-        // Show Info first
-        player.onScreenDisplay?.setActionBar(`§aInfo:§r ${info}`);
+        // If info is too long, break into two lines (rows)
+        const maxLineLength = 60;
+        let infoLines = [];
+        if (info.length > maxLineLength) {
+            // Try to break at a space before maxLineLength
+            let breakIdx = info.lastIndexOf(' ', maxLineLength);
+            if (breakIdx === -1) breakIdx = maxLineLength;
+            infoLines.push(info.substring(0, breakIdx));
+            infoLines.push(info.substring(breakIdx).trim());
+        } else {
+            infoLines.push(info);
+        }
 
-        // After 3 seconds, show Tip
-        system.runTimeout(() => {
-            try {
-                if (!player?.isValid) return;
-                player.onScreenDisplay?.setActionBar(`§6Tip:§r ${tips}`);
-            } catch {}
-        }, 60); // 60 ticks = 3 seconds
+        // Compose the message: info (1 or 2 lines), then tip
+        let message = `§aInfo:§r ${infoLines[0]}`;
+        if (infoLines.length > 1) {
+            message += `\n${infoLines[1]}`;
+        }
+        message += `\n§6Tip:§r ${tips}`;
 
+        // Determine if player just got an achievement or milestone (set by achievements.js)
+        // We'll use dynamic delay: 0 if no achievement, 80 if single, 160 if both (single+milestone)
+        let delayTicks = 0;
+        try {
+            // Check for recent achievement unlocks
+            // These properties are set in achievements.js when an achievement is unlocked
+            const lastAchTick = player.getDynamicProperty("goe_tnt_last_achievement_tick");
+            const lastMilestoneTick = player.getDynamicProperty("goe_tnt_last_milestone_tick");
+            const currentTick = system.currentTick;
+            // If milestone and achievement both just unlocked, milestone is always after achievement (see achievements.js)
+            if (lastMilestoneTick && Math.abs(currentTick - lastMilestoneTick) < 5) {
+                delayTicks = 140;
+            } else if (lastAchTick && Math.abs(currentTick - lastAchTick) < 5) {
+                delayTicks = 70;
+            }
+        } catch {}
+
+        if (delayTicks > 0) {
+            system.runTimeout(() => {
+                try {
+                    if (!player?.isValid) return;
+                    player.onScreenDisplay?.setActionBar(message);
+                } catch {}
+            }, delayTicks);
+        } else {
+            player.onScreenDisplay?.setActionBar(message);
+        }
     } catch {}
 }
 

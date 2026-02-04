@@ -215,6 +215,7 @@
         // after mecha suit has finished spawning
         "queue_command": {
           "command": [
+            "playsound random.orb @p ~ ~ ~ 1 1",
             "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§a[Info] TNT Mecha Suit is ready. Interact with it to mount it.\"}]}"
           ]
         }

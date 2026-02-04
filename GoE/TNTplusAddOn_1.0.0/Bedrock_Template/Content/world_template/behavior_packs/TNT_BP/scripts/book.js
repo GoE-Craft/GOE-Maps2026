@@ -39,7 +39,7 @@ export function startGuideBookReminderInterval() {
                 player.playSound("random.orb");
             }
         }
-    }, 3600); // 3 minutes interval
+    }, 2400); // 2 minutes interval
 }
 
 

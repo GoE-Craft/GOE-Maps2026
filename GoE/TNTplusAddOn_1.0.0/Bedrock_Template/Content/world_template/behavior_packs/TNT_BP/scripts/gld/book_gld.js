@@ -332,7 +332,7 @@ export const Achievements = {
         {
             id: "directional_tnt",
             name: "Directional TNT",
-            info: "Explodes in the direction the drill faces, \n\n" + "creating a tunnel and destroying everything except ores.",
+            info: "Explodes in the direction the drill faces, creating a tunnel and destroying everything except ores.",
             tips: "Place Directional TNT and dig the hole.",
             tntType: "directional_tnt",
             icon: "textures/goe/tnt/ui/achievements/directional_tnt",

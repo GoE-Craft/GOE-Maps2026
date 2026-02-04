@@ -87,6 +87,10 @@ function hasTntAchievement(player, tntType) {
 function unlockTntAchievement(player, tntType) {
     const key = `goe_tnt_achievement_${tntType}_unlocked`;
     player.setDynamicProperty(key, true);
+    // Mark the tick for achievement unlock (for TNT hint timing)
+    try {
+        player.setDynamicProperty("goe_tnt_last_achievement_tick", system.currentTick);
+    } catch {}
 
     // Find achievement name from Achievements structure
     const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
@@ -126,6 +130,10 @@ function hasMilestoneAchievement(player, milestoneNumber) {
 function unlockMilestoneAchievement(player, milestoneNumber) {
     const key = `goe_tnt_milestone_${milestoneNumber}`;
     player.setDynamicProperty(key, true);
+    // Mark the tick for milestone unlock (for TNT hint timing)
+    try {
+        player.setDynamicProperty("goe_tnt_last_milestone_tick", system.currentTick);
+    } catch {}
 
     // Find milestone name from Achievements structure
     const milestone = Achievements.milestones.find(m => m.milestoneNumber === milestoneNumber);
