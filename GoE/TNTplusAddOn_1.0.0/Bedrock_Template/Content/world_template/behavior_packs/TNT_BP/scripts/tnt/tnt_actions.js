@@ -1,4 +1,5 @@
 import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
+import { structureTNTAction } from "./actions/structure_tnt";
 
 /**
  * TNT Actions Module
@@ -49,7 +50,6 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
     // one interval per entity, store it so stopFuseEffects clears it
     const intervalId = system.runInterval(() => {
         if (!entity.isValid) {
-            stopSpecialActionInterval(entity);
             return;
         }
 
@@ -91,11 +91,9 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
         tick++;
     }, 1);
 
-    specialActionIntervals.set(entity.id, intervalId);
-
     // guarantee stop after fuse duration even if something goes weird
     system.runTimeout(() => {
-        stopSpecialActionInterval(entity);
+        system.clearRun(intervalId)
     }, fuseRemaining);
 }
 
@@ -144,6 +142,10 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "chunker":
             // Chunker TNT - removes a chunk of blocks above the explosion
             runJobWithDelays(chunkerAction(dimension, location, chargeLevel, entity));
+            break;
+        case "structure":
+            // Structure TNT - places a structure at the location
+            system.runJob(structureTNTAction(dimension, location));
             break;
         default:
             break;
@@ -556,6 +558,7 @@ function prisonAction(dimension, location) {
 
 function structureAction(dimension, location) {
     // Do something
+
 }
 
 function atmosphereAction(dimension, location) {
@@ -625,7 +628,6 @@ function runJobWithDelays(gen) {
  *  Helper functions 
  * ---------------------------------------------------------------------------------------
  */
-
 
 /**
  * Stop special action interval
