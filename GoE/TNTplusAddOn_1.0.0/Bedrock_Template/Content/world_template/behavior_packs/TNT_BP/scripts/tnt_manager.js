@@ -817,6 +817,10 @@ function* magnetAction(dimension, chargeLevel, location) {
         dimension.spawnParticle("goe_tnt:magnet_circle_push_red", location);
     }, 5);
 
+    system.runTimeout(() => {
+        dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);
+    }, 5); 
+
     // tune feel
     const pushStrength = 1.2 + (chargeLevel * 0.2);
 
