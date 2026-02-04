@@ -1,2 +1,14 @@
 # # ReplaceCotainedItem oldItemName oldItemDamage itemName itemDamage
 # # SetContainerSlot x y z slot itemName itemDamage count [ItemIdentifier]
+
+SetContainerSlot -15 0 129 0 goe_tnt:guide_book 0 1
+SetContainerSlot -15 0 129 1 goe_tnt:tnt_detonator 0 1
+SetContainerSlot -15 0 129 2 clock 0 1
+SetContainerSlot -15 0 129 3 gunpowder 0 64
+SetContainerSlot -15 0 129 4 flint_and_steel 0 1
+SetContainerSlot -15 0 129 5 goe_tnt:mecha_suit_spawn_egg 0 64
+SetContainerSlot -15 0 129 6 goe_tnt:directional_tnt 0 64
+SetContainerSlot -15 0 129 7 goe_tnt:freezing_tnt 0 64
+SetContainerSlot -15 0 129 8 goe_tnt:party_tnt 0 64
+SetContainerSlot -15 0 129 9 goe_tnt:chunker_tnt 0 64
+SetContainerSlot -15 0 129 10 goe_tnt:magnet_tnt 0 64
