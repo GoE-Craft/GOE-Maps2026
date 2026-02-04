@@ -12,12 +12,12 @@
 			},
 			"bones": [
 				{
-					"name": "bb_main",
+					"name": "bb_main_structure_site",
 					"pivot": [0, 0, 0]
 				},
 				{
 					"name": "cones",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [-9.90841, 3.37267, -16.76286]
 				},
 				{
@@ -210,7 +210,7 @@
 				},
 				{
 					"name": "fences",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [0, 8, -0.025]
 				},
 				{
@@ -1217,7 +1217,7 @@
 				},
 				{
 					"name": "palette3_with_blocks",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [-135, 0, 122],
 					"rotation": [0, 40, 0]
 				},
@@ -1603,7 +1603,7 @@
 				},
 				{
 					"name": "palette3_with_blocks2",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [78, 0, -137],
 					"rotation": [0, -5, 0]
 				},
@@ -1989,7 +1989,7 @@
 				},
 				{
 					"name": "palettes2",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [113, 0, 116]
 				},
 				{
@@ -2599,7 +2599,7 @@
 				},
 				{
 					"name": "palettes",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [-103.70588, 13.42941, -89.85588]
 				},
 				{
@@ -3229,7 +3229,7 @@
 				},
 				{
 					"name": "iron_beams",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [76, 8.93333, -103],
 					"rotation": [0, -27.5, 0]
 				},
@@ -3294,7 +3294,7 @@
 				},
 				{
 					"name": "iron_beams2",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [-82, 8.93333, 73],
 					"rotation": [0, 140, 0]
 				},
@@ -3389,7 +3389,7 @@
 				},
 				{
 					"name": "border",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{
@@ -3406,7 +3406,7 @@
 				},
 				{
 					"name": "locators",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [0, 0, 0],
 					"locators": {
 						"root": [0, 21, 0]
@@ -3414,7 +3414,7 @@
 				},
 				{
 					"name": "stones",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [68.4, -17, -57.35]
 				},
 				{
@@ -3479,7 +3479,7 @@
 				},
 				{
 					"name": "woods",
-					"parent": "bb_main",
+					"parent": "bb_main_structure_site",
 					"pivot": [68.4, -17, -57.35]
 				},
 				{

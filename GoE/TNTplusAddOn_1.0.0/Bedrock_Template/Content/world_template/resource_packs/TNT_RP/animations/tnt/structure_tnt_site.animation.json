@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.structure_tnt_site.construction_site_explosion": {
+		"animation.structure_tnt.structure_site_appear": {
 			"animation_length": 3,
 			"bones": {
 				"bb_main": {
