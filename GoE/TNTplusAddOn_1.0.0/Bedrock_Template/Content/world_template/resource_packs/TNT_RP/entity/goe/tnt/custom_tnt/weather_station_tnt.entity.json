@@ -14,19 +14,23 @@
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.raining = q.property('goe_tnt:is_raining');"
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell"},
-          {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"charge": "q.mark_variant == 1 && !v.raining"},
+          {"charge_sun": "q.mark_variant == 1 && v.raining"},
+          {"explode": "q.mark_variant == 2 && !v.raining"},
+          {"explode_sun": "q.mark_variant == 2 && v.raining"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell_weather",
         "charge": "animation.weather_tnt.charge_rain",
         "charge_sun": "animation.weather_tnt.charge_sun",
-        "explode":"animation.weather_tnt.explode_rain"
+        "explode":"animation.weather_tnt.explode_rain",
+        "explode_sun":"animation.weather_tnt.explode_sun"
       },
         "particle_effects": {
         "weather_rain": "goe_tnt:weather_rain",

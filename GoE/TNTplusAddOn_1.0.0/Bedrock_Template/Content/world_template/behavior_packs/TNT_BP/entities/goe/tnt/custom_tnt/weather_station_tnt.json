@@ -15,6 +15,11 @@
                     "type": "bool",
                     "client_sync": true,
                     "default": false
+                },
+                "goe_tnt:is_raining": {
+                    "type": "bool",
+                    "client_sync": true,
+                    "default": false
                 }
             }
         },
@@ -78,6 +83,30 @@
             }
         },
         "events": {
+            "minecraft:entity_spawned": {
+                "sequence": [
+                    {
+                        "filters": {
+                            "test": "is_weather",
+                            "operator": "!=",
+                            "value": "clear"
+                        },
+                        "set_property": {
+                            "goe_tnt:is_raining": true
+                        }
+                    },
+                    {
+                        "filters": {
+                            "test": "is_weather",
+                            "operator": "==",
+                            "value": "clear"
+                        },
+                        "set_property": {
+                            "goe_tnt:is_raining": false
+                        }
+                    }
+                ]
+            },
             "goe_tnt:trigger_ignite": {
                 "add": {
                     "component_groups": [
