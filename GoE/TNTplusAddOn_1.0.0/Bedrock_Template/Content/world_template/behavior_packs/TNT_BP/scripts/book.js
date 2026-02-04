@@ -500,10 +500,12 @@ async function showAchievementListPage(player) {
 
     // Combine: milestones first, then TNT achievements
     const allAchievements = [...sortedMilestones, ...sortedTntAchievements];
+    const totalUnlocked = unlockedMilestones.length + unlockedTnts.length;
+    const totalCount = allAchievements.length;
 
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
-
+        .body(`§fUnlocked: §e${totalUnlocked}/${totalCount}§r\n\n`)
 
     // Add buttons for all achievements
     for (const achievement of allAchievements) {
