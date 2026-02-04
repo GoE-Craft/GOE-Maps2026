@@ -156,12 +156,13 @@ function startCountdown(entity, timerRemaining) {
     const startTick = system.currentTick;
     const endTick = startTick + timerRemaining;
     const initialTimer = Math.ceil(timerRemaining / 20);
+    const dim = entity.dimension;
 
     let location = entity.location;
     location.y += 2;
     let textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
-    entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
-    entity.dimension.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
+    dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
+    dim.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
 
     const intervalId = system.runInterval(() => {
         if (!entity.isValid) {
@@ -176,12 +177,14 @@ function startCountdown(entity, timerRemaining) {
         if (seconds > 0) {
             location = entity.location;
             location.y += 2;
+            if (dim.isChunkLoaded(location) === false) return;
+            console.log("TNT Timer Particle at " + JSON.stringify(location));
             textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
-            entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
-            entity.dimension.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
+            dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
+            dim.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
         } else {
-            entity.dimension.spawnParticle(`goe_tnt:timer_particle`, textLocation);
-            entity.dimension.spawnParticle(`goe_tnt:timer_particle_0`, location);
+            dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
+            dim.spawnParticle(`goe_tnt:timer_particle_0`, location);
         }
     }, 20);
 
@@ -290,12 +293,15 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
     const power = tntData.power * ((0.25 * tntData.power) * chargeLevel);
 
     try {
-        dim.createExplosion(loc, power, {
-            causesFire: tntData.explosionProperties.createsFire,
-            breaksBlocks: tntData.explosionProperties.breaksBlocks,
-            allowUnderwater: tntData.explosionProperties.allowUnderwater,
-            source: entity
-        });
+        if (dim.isChunkLoaded(loc)) {
+            dim.createExplosion(loc, power, {
+                causesFire: tntData.explosionProperties.createsFire,
+                breaksBlocks: tntData.explosionProperties.breaksBlocks,
+                allowUnderwater: tntData.explosionProperties.allowUnderwater,
+                source: entity
+            });
+        }
+        
 
         // Update entity variant to exploded state
         triggerExplosionEffects(entity, tntData);
