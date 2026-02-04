@@ -923,8 +923,9 @@ function magnetPreAction(entity, chargeLevel, fuseRemaining) {
 
 function* chunkerAction(dimension, location, charge_level, entity) {
     const radius = 8 + Math.floor(((2 * 0.25) * charge_level));
+    const verticalHeight = 16 + Math.floor(((2 * 0.25) * charge_level));
 
-    for (let y = location.y + radius; y > location.y - radius ; y--) {
+    for (let y = location.y + verticalHeight; y > location.y - verticalHeight ; y--) {
         for (let x = location.x - radius/2; x <= location.x + radius/2; x++) {
             for (let z = location.z - radius/2; z <= location.z + radius/2; z++) {
                 // Do something
