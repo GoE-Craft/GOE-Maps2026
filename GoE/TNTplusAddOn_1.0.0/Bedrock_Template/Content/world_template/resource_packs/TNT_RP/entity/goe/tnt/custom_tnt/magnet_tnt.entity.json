@@ -34,6 +34,11 @@
         "magnet_circle_pull_red" : "goe_tnt:magnet_circle_pull_red",
         "tnt_charge": "goe_tnt:tnt_charge_blue_and_red"
       },
+      "sound_effects":{
+        "ignite" : "goe_tnt:magnet_tnt_ignite",
+        "charge" : "goe_tnt:magnet_tnt_charge",
+        "explosion" : "goe_tnt:magnet_tnt_explosion"
+      },  
       "render_controllers": [ "controller.render.tnt" ]
     }
   }

@@ -153,6 +153,26 @@
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/tnt_boost_max", "volume": 1, "pitch": 1.2 }
 			]
+		},
+
+		//TEST
+		"goe_tnt:magnet_tnt_ignite": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/magnet_tnt/magnet_tnt_ignite", "volume": 0.5}
+			]
+		},
+		"goe_tnt:magnet_tnt_charge": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/magnet_tnt/magnet_tnt_charge", "volume": 1}
+			]
+		},
+		"goe_tnt:magnet_tnt_explosion": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/magnet_tnt/magnet_tnt_explosion", "volume": 1}
+			]
 		}
 
 	}

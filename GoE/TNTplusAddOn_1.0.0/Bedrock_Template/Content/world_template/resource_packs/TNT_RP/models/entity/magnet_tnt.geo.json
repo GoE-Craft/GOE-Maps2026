@@ -333,6 +333,7 @@
 				},
 				{
 					"name": "rope",
+					"parent": "bb_main",
 					"pivot": [0, 0, 0]
 				},
 				{
