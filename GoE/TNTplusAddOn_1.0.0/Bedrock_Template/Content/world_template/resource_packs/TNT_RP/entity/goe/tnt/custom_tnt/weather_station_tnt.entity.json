@@ -17,11 +17,26 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.tnt.swell_weather",
+        "charge": "animation.weather_tnt.charge_rain",
+        "charge_sun": "animation.weather_tnt.charge_sun",
+        "explode":"animation.weather_tnt.explode_rain"
+      },
+        "particle_effects": {
+        "weather_rain": "goe_tnt:weather_rain",
+        "weather_rain_explode": "goe_tnt:weather_rain_explode",
+        "weather_rain_fall": "goe_tnt:weather_rain_fall",
+        "weather_ring": "goe_tnt:weather_ring",
+        "weather_sun": "goe_tnt:weather_sun",
+        "weather_sun_explode": "goe_tnt:weather_sun_explode",
+        "weather_sun_fall": "goe_tnt:weather_sun_fall",
+        "tnt_charge_blue": "goe_tnt:tnt_charge_blue"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

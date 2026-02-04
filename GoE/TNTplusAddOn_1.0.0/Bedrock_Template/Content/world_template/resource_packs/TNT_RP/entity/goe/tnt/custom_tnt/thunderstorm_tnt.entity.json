@@ -17,11 +17,24 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.tnt.swell_thunder",
+        "explode":"animation.thunderstorm_tnt.explode",
+        "charge":"animation.thunderstorm_tnt.charge"
+      },
+        "particle_effects": {
+        "thunder_bolt": "goe_tnt:thunder_bolt",
+        "thunder_bolt_center": "goe_tnt:thunder_bolt_center",
+        "thunder_bolt_sphere": "goe_tnt:thunder_bolt_sphere",
+        "thunder_bolt_radius_impact": "goe_tnt:thunder_bolt_radius_impact",
+        "thunder_bolt_radius": "goe_tnt:thunder_bolt_radius",
+        "thunder_cloud": "goe_tnt:thunder_cloud",
+        "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

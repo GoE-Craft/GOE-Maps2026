@@ -206,7 +206,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:thunderstorm_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -214,11 +214,8 @@ export const TNT_GLD = [
             soundEffect: "random.fuse",
             soundDelay: 0
         },
-        explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+       explosionEffects: {
+            explosionAnimationLength: 1.5
         },
         explosionProperties: {
             createsFire: false,
@@ -262,7 +259,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:weather_station_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -270,11 +267,8 @@ export const TNT_GLD = [
             soundEffect: "random.fuse",
             soundDelay: 0
         },
-        explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+         explosionEffects: {
+            explosionAnimationLength: 1.5
         },
         explosionProperties: {
             createsFire: false,
@@ -318,7 +312,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:arrow_storm_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0.5,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -326,11 +320,8 @@ export const TNT_GLD = [
             soundEffect: "random.fuse",
             soundDelay: 0
         },
-        explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+         explosionEffects: {
+            explosionAnimationLength: 1
         },
         explosionProperties: {
             createsFire: false,

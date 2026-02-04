@@ -1,0 +1,72 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:weather_sun_fall",
+			"basic_render_parameters": {
+				"material": "particles_blend",
+				"texture": "textures/goe/tnt/particles/dimension_lines"
+			}
+		},
+		"curves": {
+			"variable.ball": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [5, -30, 0]
+			},
+			"variable.size": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 1, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 10,
+				"max_particles": 100
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 0.8
+			},
+			"minecraft:emitter_shape_disc": {
+				"offset": [0, 6, 0],
+				"radius": 6,
+				"direction": [0, -1, 0]
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": "math.random(1.5,1.8)"
+			},
+			"minecraft:particle_initial_spin": {
+				"rotation": 190,
+				"rotation_rate": "math.random(-1,1)"
+			},
+			"minecraft:particle_initial_speed": 5,
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": [0, -3, 0],
+				"linear_drag_coefficient": 2.5,
+				"rotation_acceleration": "math.random(-1,1)"
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["0.14 * v.particle_random_1", "(5 * v.size )"],
+				"facing_camera_mode": "rotate_xyz"
+			},
+			"minecraft:particle_motion_collision": {
+				"collision_radius": 0.3,
+				"expire_on_contact": true
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.0": "#00FFF0D0",
+						"0.22": "#24FFF9C1",
+						"0.66": "#3DFFEF76",
+						"1.0": "#00A65721"
+					}
+				}
+			}
+		}
+	}
+}

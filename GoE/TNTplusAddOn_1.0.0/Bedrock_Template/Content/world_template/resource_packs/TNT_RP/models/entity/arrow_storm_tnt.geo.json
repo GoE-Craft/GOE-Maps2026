@@ -20,6 +20,7 @@
 				},
 				{
 					"name": "TNT",
+					"parent": "bb_main",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{"origin": [-8, 1, -8], "size": [16, 16, 16], "inflate": 1, "uv": [0, 32]}
