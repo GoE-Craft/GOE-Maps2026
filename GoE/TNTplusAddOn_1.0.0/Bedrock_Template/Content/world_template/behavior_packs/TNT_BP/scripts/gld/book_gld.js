@@ -24,13 +24,13 @@ export const ShopItems = {
 
     // TNT's category
     tnts: [
-        {
-            id: "tnt",
-            name: "TNT",
-            price: { type: "copper_ingot", amount: 4 },
-            icon: "textures/goe/tnt/ui/shop/tnt/tnt",
-            itemId: "goe_tnt:tnt"
-        },
+        // {
+        //     id: "tnt",
+        //     name: "TNT",
+        //     price: { type: "copper_ingot", amount: 4 },
+        //     icon: "textures/goe/tnt/ui/shop/tnt/tnt",
+        //     itemId: "goe_tnt:tnt"
+        // },
         {
             id: "directional_tnt",
             name: "Directional TNT",
@@ -573,12 +573,12 @@ export const Achievements = {
             rewardStructure: "goe_tnt:light_up_tnt_reward"
         },
         {
-            id: "theif_tnt",
+            id: "thief_tnt",
             name: "Thief TNT",
             info: "Rips up the area caught in the blast and steals all the loot drops.",
             tips: "Get everything on one place.",
-            tntType: "theif_tnt",
-            icon: "textures/goe/tnt/ui/achievements/theif_tnt",
+            tntType: "thief_tnt",
+            icon: "textures/goe/tnt/ui/achievements/thief_tnt",
             rewardStructure: "goe_tnt:thief_tnt_reward"
         }
     ],
