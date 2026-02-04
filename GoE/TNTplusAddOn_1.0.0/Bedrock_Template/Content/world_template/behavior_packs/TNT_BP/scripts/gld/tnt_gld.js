@@ -181,7 +181,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:tree_planter_tnt",
-        fuseTime: 40,
+        fuseTime: 80,
         power: 0.5,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -411,7 +411,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            explosionAnimationLength: 1
+            explosionAnimationLength: 5
         },
         explosionProperties: {
             createsFire: false,

@@ -7,10 +7,12 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/goe/tnt/entity/structure_tnt"
+        "default": "textures/goe/tnt/entity/structure_tnt",
+        "structure_tnt_site": "textures/goe/tnt/entity/structure_tnt_site"
       },
       "geometry": {
-        "default": "geometry.structure_tnt"
+        "default": "geometry.structure_tnt",
+        "structure_tnt_site": "geometry.structure_tnt_site"
       },
 			"scripts": {
         "pre_animation": [
@@ -19,19 +21,24 @@
         "animate": [
           //{"tnt_swelling": "v.should_swell"}, --> Charge and Swell are combined
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"structure_site_appear": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
         //"tnt_swelling": "animation.tnt.swell",
         "charge": "animation.structure_tnt.swell",
-        "explode": "animation.structure_tnt.explode"
+        "explode": "animation.structure_tnt.explode",
+        "structure_site_appear": "animation.structure_tnt.structure_site_appear"
       },
       "particle_effects": {
         "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow",
         "one_big_puff": "goe_tnt:one_big_puff"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.structure_tnt.site": "q.mark_variant == 2"}
+      ]
     }
   }
 }
