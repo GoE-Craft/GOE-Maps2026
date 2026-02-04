@@ -192,7 +192,24 @@
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/freezing_tnt/freezing_tnt_explosion", "volume": 1}
 			]
+		},
+		"goe_tnt:chunker_explosion1": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/chunker_tnt/chunker_explosion_1", "volume": 1}
+			]
+		},
+		"goe_tnt:chunker_explosion2": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/chunker_tnt/chunker_explosion_2", "volume": 1}
+			]
+		},
+		"goe_tnt:chunker_explosion3": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/chunker_tnt/chunker_explosion_3", "volume": 1}
+			]
 		}
-
 	}
 }

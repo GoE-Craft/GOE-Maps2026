@@ -978,7 +978,7 @@ function* chunkerAction(dimension, location, charge_level, entity) {
             }
         }
         dimension.spawnParticle("goe_tnt:huge_explosion_white", { x: location.x, y: y, z: location.z });
-        dimension.playSound("random.explode", { x: location.x, y: y, z: location.z }, {volume: 5, pitch: 0.5});
+        //dimension.playSound("random.explode", { x: location.x, y: y, z: location.z }, {volume: 5, pitch: 0.5});
         yield;
     }
 }

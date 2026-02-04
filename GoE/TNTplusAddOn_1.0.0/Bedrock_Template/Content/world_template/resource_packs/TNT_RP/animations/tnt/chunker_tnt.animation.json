@@ -3,6 +3,7 @@
 	"animations": {
 		"animation.chunker_tnt.charge_and_explosion": {
 			"animation_length": 6.6667,
+			
 			"bones": {
 				"bb_main": {
 					"scale": {
@@ -366,6 +367,14 @@
 		},
 		"animation.chunker_tnt.explosion": {
 			"animation_length": 2.5,
+			"sound_effects": {
+				"0.0": {
+					"effect": "chunker_explosion1"
+				},
+				"1.3": {
+					"effect": "chunker_explosion2"
+				}
+			},
 			"bones": {
 				"bb_main": {
 					"scale": 0

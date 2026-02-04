@@ -32,6 +32,11 @@
         "big_explosion_white": "goe_tnt:big_explosion_white",
         "tnt_charge": "goe_tnt:tnt_charge_blue"
       },
+      "sound_effects": {
+        "chunker_explosion1" : "goe_tnt:chunker_explosion1",
+        "chunker_explosion2" : "goe_tnt:chunker_explosion2",
+        "chunker_explosion3" : "goe_tnt:chunker_explosion3"
+      },
       "render_controllers": [ "controller.render.chunker_tnt" ]
     }
   }
