@@ -99,6 +99,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "teleportation":
             system.runJob(teleportationTNTAction(dimension, chargeLevel, location, entity));
+            break;
         case "tree_planter":
             treePlanterAction(dimension, location, entity);
             break;
