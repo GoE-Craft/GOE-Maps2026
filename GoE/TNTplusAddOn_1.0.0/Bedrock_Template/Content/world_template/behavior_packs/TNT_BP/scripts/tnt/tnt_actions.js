@@ -13,7 +13,6 @@ import { ultronTNTAction } from "./actions/ultron_tnt";
 import { arrowStormTNTAction } from "./actions/arrow_storm_tnt"
 import { timeFreezeTNTAction } from "./actions/time_freeze_tnt";
 import { teleportationTNTAction } from "./actions/teleportation_tnt";
-import { treePlanterAction } from "./actions/tree_planter_tnt";
 
 /**
  * TNT Actions Module
@@ -99,9 +98,6 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "teleportation":
             system.runJob(teleportationTNTAction(dimension, chargeLevel, location, entity));
-            break;
-        case "tree_planter":
-            treePlanterAction(dimension, location, entity);
             break;
         default:
             break;
