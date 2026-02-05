@@ -4,7 +4,8 @@
     "description": {
       "identifier": "goe_tnt:teleportation_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "glass": "entity_alphablend"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/teleportation_tnt"
@@ -17,13 +18,22 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
+          {"charge": "q.mark_variant == 1"}
+          //{"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.teleportation_tnt.swell",
+        "charge": "animation.teleportation_tnt.charge"
+        //"explode": ""
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "matrix_effect": "goe_tnt:matrix_effect",
+        "tnt_charge_matrix_blue": "goe_tnt:tnt_charge_matrix_blue",
+        "tnt_charge_blue": "goe_tnt:tnt_charge_blue"
+      },
+      "render_controllers": [ "controller.render.teleportation_tnt" ]
     }
   }
 }

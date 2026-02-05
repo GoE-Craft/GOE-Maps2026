@@ -1,0 +1,7 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "matrix__diemnsion_lines",
+		"metalness_emissive_roughness": [0, 2, 0]
+	}
+}
