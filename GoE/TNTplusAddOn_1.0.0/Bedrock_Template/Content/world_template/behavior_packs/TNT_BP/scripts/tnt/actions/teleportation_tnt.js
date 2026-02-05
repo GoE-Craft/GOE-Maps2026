@@ -92,11 +92,56 @@ export function* teleportationTNTAction(dimension, chargeLevel, location, tntEnt
         }
     } catch {}
 
+    // 1) Try Dynamic properties on the TNT entity 
+    try {
+        if (!activatingPlayer && tntEntity?.getDynamicProperty) {
+            const activatorId =
+                tntEntity.getDynamicProperty("goe_tnt_activator_id") ??
+                tntEntity.getDynamicProperty("goe_tnt_owner_id") ??
+                tntEntity.getDynamicProperty("goe_tnt_player_id");
+
+            if (activatorId) {
+                const idStr = String(activatorId);
+                activatingPlayer = dimension.getPlayers().find(p => p?.isValid && p.id === idStr);
+            }
+        }
+    } catch {}
+
+    // 2) Try excludePlayer map (original behavior)
     try {
         if (!activatingPlayer && tntEntity?.id) {
             const excludedPlayerId = tnt_actions.excludePlayer.get(tntEntity.id);
             if (excludedPlayerId) {
                 activatingPlayer = dimension.getPlayers().find(playerCandidate => playerCandidate.id === excludedPlayerId);
+            }
+        }
+    } catch {}
+
+    // 3) Fallback: nearest player to the explosion 
+    try {
+        if (!activatingPlayer) {
+            const players = dimension.getPlayers();
+            let best = undefined;
+            let bestD2 = Infinity;
+
+            for (const p of players) {
+                try {
+                    if (!p?.isValid) continue;
+                    const pl = p.location;
+                    const dx = (pl.x - explosionLocation.x);
+                    const dy = (pl.y - explosionLocation.y);
+                    const dz = (pl.z - explosionLocation.z);
+                    const d2 = dx * dx + dy * dy + dz * dz;
+                    if (d2 < bestD2) {
+                        bestD2 = d2;
+                        best = p;
+                    }
+                } catch {}
+            }
+
+            // only accept if reasonably close (prevents random remote player being chosen)
+            if (best && bestD2 <= (64 * 64)) {
+                activatingPlayer = best;
             }
         }
     } catch {}
