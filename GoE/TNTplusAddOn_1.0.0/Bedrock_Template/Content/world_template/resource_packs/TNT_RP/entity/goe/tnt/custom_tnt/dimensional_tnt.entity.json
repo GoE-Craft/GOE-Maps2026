@@ -27,13 +27,13 @@
         "tnt_swelling": "animation.tnt.swell_dimension",
         "explode":"animation.dimensional_tnt.explode",
         "charge":"animation.dimensional_tnt.charge"
-      },
+      },/* 
       "particle_effects": {
         "dimension_beam": "goe_tnt:dimension_beam",
         "dimension_beam_explode": "goe_tnt:dimension_beam_explode"
        
-      },
-      "render_controllers": [ "controller.render.dimensional_tnt" ]
+      }, */
+      "render_controllers": [ "controller.render.default" ]
     }
   }
 }
