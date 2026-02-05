@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:tnt_charge_blue",
+			"identifier": "goe_tnt:tnt_charge_purple",
 			"basic_render_parameters": {
 				"material": "particles_add",
 				"texture": "textures/goe/tnt/particles/dimension_lines"
