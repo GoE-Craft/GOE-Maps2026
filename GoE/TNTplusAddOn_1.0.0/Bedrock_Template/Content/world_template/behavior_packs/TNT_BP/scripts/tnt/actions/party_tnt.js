@@ -1,6 +1,6 @@
 import { BlockPermutation } from "@minecraft/server";
 
-export function* partyAction(dimension, chargeLevel, location) {
+export function* partyTNTAction(dimension, chargeLevel, location) {
     yield 20;
     const radius = 2 + Math.floor(((2 * 0.25) * chargeLevel));
     const CAKE_DELAY_TICKS = 1;

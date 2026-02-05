@@ -178,7 +178,6 @@ function startCountdown(entity, timerRemaining) {
             location = entity.location;
             location.y += 2;
             if (dim.isChunkLoaded(location) === false) return;
-            console.log("TNT Timer Particle at " + JSON.stringify(location));
             textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
             dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
             dim.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
@@ -301,7 +300,6 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
                 source: entity
             });
         }
-        
 
         // Update entity variant to exploded state
         triggerExplosionEffects(entity, tntData);
@@ -375,6 +373,7 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
     } catch (e) {
         console.log("Error handling special action: " + e);
     }
+    yield;
 
     // Summon mobs via main thread dispatch to avoid API issues
     try {
@@ -382,13 +381,6 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
             try { system.run(() => handleSummonMob(dimension, loc, tntData)); } catch (e) { }
         }
     } catch (e) { }
-
-    // Small yield to spread cleanup work
-    yield;
-
-    // Remove entity on main thread
-    // We are leaving entity active, remove it when everything is done
-    //try { if (entity.isValid) entity.remove(); } catch (e) { }
 }
 
 /**

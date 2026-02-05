@@ -1,11 +1,11 @@
 import { system } from "@minecraft/server";
-import { voidAction } from "./actions/void_tnt";
-import { directionalAction } from "./actions/directional_tnt";
-import { partyAction } from "./actions/party_tnt";
-import { magnetPreAction, magnetAction } from "./actions/magnet_tnt";
-import { freezingAction } from "./actions/freezing_tnt";
-import { atmosphereAction } from "./actions/atmosphere_tnt";
-import { chunkerAction } from "./actions/chunker_tnt";
+import { voidTNTAction } from "./actions/void_tnt";
+import { directionalTNTAction } from "./actions/directional_tnt";
+import { partyTNTAction } from "./actions/party_tnt";
+import { magnetTNTPreAction, magnetTNTAction } from "./actions/magnet_tnt";
+import { freezingTNTAction } from "./actions/freezing_tnt";
+import { atmosphereTNTAction } from "./actions/atmosphere_tnt";
+import { chunkerTNTAction } from "./actions/chunker_tnt";
 import { structureTNTAction } from "./actions/structure_tnt";
 import { weatherStationAction } from "./actions/weather_station_tnt";
 import { lightningAction } from "./actions/lightning_tnt";
@@ -29,7 +29,7 @@ export function handlePreSpecialAction(entity, chargeLevel, tntData, fuseRemaini
 
     switch (action) {
         case "magnet":
-            magnetPreAction(entity, chargeLevel, fuseRemaining);
+            magnetTNTPreAction(entity, chargeLevel, fuseRemaining);
             break;
         default:
             break;
@@ -46,32 +46,32 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
     switch (action) {
         case "void": {
             const radius = 10;
-            voidAction(dimension, location, radius, entity);
+            voidTNTAction(dimension, location, radius, entity);
             break;
         }
         case "directional_drill": {
             const drillLength = 30;
             const drillRadius = 2;
-            runJobWithDelays(directionalAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData, entity));
+            runJobWithDelays(directionalTNTAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData, entity));
             break;
         }
         case "party":
-            runJobWithDelays(partyAction(dimension, chargeLevel, location));
+            runJobWithDelays(partyTNTAction(dimension, chargeLevel, location));
             break;
         case "magnet":
-            system.runJob(magnetAction(dimension, chargeLevel, location, entity));
+            system.runJob(magnetTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "freezing": {
             const excludePlayerId = excludePlayer.get(entity?.id);
             if (entity?.id && excludePlayer.has(entity.id)) excludePlayer.delete(entity.id);
-            system.runJob(freezingAction(dimension, chargeLevel, location, entity, excludePlayerId));
+            system.runJob(freezingTNTAction(dimension, chargeLevel, location, entity, excludePlayerId));
             break;
         }
         case "atmosphere":
-            atmosphereAction(dimension, location, entity);
+            atmosphereTNTAction(dimension, location, entity);
             break;
         case "chunker":
-            runJobWithDelays(chunkerAction(dimension, location, chargeLevel, entity));
+            runJobWithDelays(chunkerTNTAction(dimension, location, chargeLevel, entity));
             break;
         case "structure":
             system.runJob(structureTNTAction(dimension, location, vec, tntData));
@@ -82,6 +82,8 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "lightning":
             lightningAction(dimension, location, entity);
             break;
+        case "arrow_storm":
+            system.runJob(arrowStormTNTAction(dimension, location, chargeLevel));
         default:
             break;
     }

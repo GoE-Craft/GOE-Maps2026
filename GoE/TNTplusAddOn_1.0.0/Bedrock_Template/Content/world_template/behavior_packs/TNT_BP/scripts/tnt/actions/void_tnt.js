@@ -1,6 +1,6 @@
 import { system, BlockPermutation } from "@minecraft/server";
 
-function* voidActionJob(dimension, location, radius) {
+export function* voidTNTAction(dimension, location, radius) {
     const minY = -64;
 
     for (let y = location.y; y >= minY; y--) {
@@ -22,8 +22,4 @@ function* voidActionJob(dimension, location, radius) {
         }
         yield;
     }
-}
-
-export function voidAction(dimension, location, radius) {
-    system.runJob(voidActionJob(dimension, location, radius));
 }

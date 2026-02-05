@@ -7,7 +7,7 @@ import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
  * @param {import("@minecraft/server").Entity} entity
  * @param {string|undefined} excludePlayerId - player to exclude from freeze (e.g. who activated TNT)
  */
-export function* freezingAction(dimension, chargeLevel, location, entity, excludePlayerId) {
+export function* freezingTNTAction(dimension, chargeLevel, location, entity, excludePlayerId) {
     const variables = new MolangVariableMap();
 
     const radius = 2 + Math.floor(((5 * 0.25) * chargeLevel));

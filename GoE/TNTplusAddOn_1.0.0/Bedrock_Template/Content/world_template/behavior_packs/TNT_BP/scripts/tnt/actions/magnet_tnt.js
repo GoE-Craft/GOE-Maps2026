@@ -1,49 +1,13 @@
 import { system } from "@minecraft/server";
 
-export function magnetPreAction(entity, chargeLevel, fuseRemaining) {
+export function magnetTNTPreAction(entity, chargeLevel, fuseRemaining) {
     const radius = 10;
 
     const pullStrength = 0.08 + (chargeLevel * 0.01);
     const maxPull = 0.25 + (chargeLevel * 0.03);
 
     const intervalId = system.runInterval(() => {
-        if (!entity.isValid) {
-            return;
-        }
-
-        const center = entity.location;
-
-        let entities = [];
-        try {
-            entities = entity.dimension.getEntities({ location: center, maxDistance: radius });
-        } catch (e) { }
-
-        for (const e of entities) {
-            try {
-                if (!e?.isValid) continue;
-
-                if (e.typeId === "minecraft:player") continue;
-                if (e.typeId === "minecraft:item") continue;
-                if ((e.typeId || "").startsWith("goe_tnt:")) continue;
-
-                const dx = center.x - e.location.x;
-                const dy = (center.y + 0.5) - e.location.y;
-                const dz = center.z - e.location.z;
-
-                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
-
-                const nx = dx / dist;
-                const ny = dy / dist;
-                const nz = dz / dist;
-
-                const scale = Math.min(
-                    maxPull,
-                    pullStrength + (0.02 * (1 - Math.min(1, dist / radius)))
-                );
-
-                e.applyImpulse({ x: nx * scale, y: ny * scale, z: nz * scale });
-            } catch (e2) { }
-        }
+        system.runJob(preActionJob(entity, radius, pullStrength, maxPull));
     }, 1);
 
     system.runTimeout(() => {
@@ -51,7 +15,53 @@ export function magnetPreAction(entity, chargeLevel, fuseRemaining) {
     }, fuseRemaining);
 }
 
-export function* magnetAction(dimension, chargeLevel, location) {
+function* preActionJob(entity, radius, pullStrength, maxPull) {
+    if (!entity.isValid) {
+        return;
+    }
+
+    const center = entity.location;
+
+    let entities = [];
+    try {
+        entities = entity.dimension.getEntities({ location: center, maxDistance: radius });
+    } catch (e) { }
+
+    yield;
+
+    for (const e of entities) {
+        try {
+            if (!e?.isValid) continue;
+
+            if (e.typeId === "minecraft:player") continue;
+            if (e.typeId === "minecraft:item") continue;
+            if ((e.typeId || "").startsWith("goe_tnt:")) continue;
+
+            const dx = center.x - e.location.x;
+            const dy = (center.y + 0.5) - e.location.y;
+            const dz = center.z - e.location.z;
+
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+
+            const nx = dx / dist;
+            const ny = dy / dist;
+            const nz = dz / dist;
+
+            const scale = Math.min(
+                maxPull,
+                pullStrength + (0.02 * (1 - Math.min(1, dist / radius)))
+            );
+
+            e.applyImpulse({ x: nx * scale, y: ny * scale, z: nz * scale });
+        } catch (e) {
+            console.log("Error performing magnet pre action", e)
+        }
+
+        yield;
+    }
+}
+
+export function* magnetTNTAction(dimension, chargeLevel, location) {
     const radius = 10;
 
     dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);

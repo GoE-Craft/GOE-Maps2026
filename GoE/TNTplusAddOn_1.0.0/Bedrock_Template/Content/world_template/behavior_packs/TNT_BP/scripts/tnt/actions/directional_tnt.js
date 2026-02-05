@@ -1,6 +1,6 @@
 import { BlockPermutation } from "@minecraft/server";
 
-export function* directionalAction(dimension, location, vec, length, widthRadius, heightRadius, tntData, entity) {
+export function* directionalTNTAction(dimension, location, vec, length, widthRadius, heightRadius, tntData, entity) {
     const steps = Math.max(1, Math.floor(length));
     const perpX = -vec.z;
     const perpZ = vec.x;

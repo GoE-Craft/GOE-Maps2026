@@ -1,7 +1,7 @@
 import { BlockPermutation } from "@minecraft/server";
 import { processExplosion } from "../tnt_manager";
 
-export function* chunkerAction(dimension, location, chargeLevel, entity) {
+export function* chunkerTNTAction(dimension, location, chargeLevel, entity) {
     const radius = 8 + chargeLevel * 2;
     const verticalHeight = 16 + chargeLevel * 2;
     const centerX = Math.floor(location.x);
@@ -31,6 +31,6 @@ export function* chunkerAction(dimension, location, chargeLevel, entity) {
         dimension.spawnParticle("goe_tnt:huge_explosion_white", { x: location.x, y: location.y, z: location.z });
         dimension.playSound("random.explode", { x: location.x, y: location.y, z: location.z }, { volume: 5, pitch: 0.5 });
 
-        yield 3;
+        yield 4;
     }
 }
