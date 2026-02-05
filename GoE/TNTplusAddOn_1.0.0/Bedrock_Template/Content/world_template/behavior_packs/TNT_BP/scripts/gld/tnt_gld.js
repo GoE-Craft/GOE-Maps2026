@@ -223,7 +223,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "thunderstorm"
+            specialAction: "lightning"
         },
         preExplosionProperties: {
             specialAction: null
