@@ -4,7 +4,8 @@
     "description": {
       "identifier": "goe_tnt:dimensional_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "middle_beam": "entity_beam_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/dimensional_tnt"
@@ -17,13 +18,22 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.tnt.swell_dimension",
+        "explode":"animation.dimensional_tnt.explode",
+        "charge":"animation.dimensional_tnt.charge"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "dimension_beam": "goe_tnt:dimension_beam",
+        "dimension_beam_explode": "goe_tnt:dimension_beam_explode"
+       
+      },
+      "render_controllers": [ "controller.render.dimensional_tnt" ]
     }
   }
 }
