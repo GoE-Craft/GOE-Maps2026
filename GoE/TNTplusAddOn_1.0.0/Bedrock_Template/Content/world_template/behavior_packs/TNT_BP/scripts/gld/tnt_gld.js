@@ -231,7 +231,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:dimensional_tnt",
-        fuseTime: 80,
+        fuseTime: 60,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -240,10 +240,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+            explosionAnimationLength: 0.9
         },
         explosionProperties: {
             createsFire: false,
