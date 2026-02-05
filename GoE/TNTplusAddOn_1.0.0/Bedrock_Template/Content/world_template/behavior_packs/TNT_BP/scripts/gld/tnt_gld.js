@@ -284,7 +284,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:time_freeze_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",

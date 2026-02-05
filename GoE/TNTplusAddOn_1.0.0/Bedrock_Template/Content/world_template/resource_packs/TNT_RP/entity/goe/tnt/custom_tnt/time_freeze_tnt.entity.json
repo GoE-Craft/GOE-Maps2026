@@ -4,7 +4,9 @@
     "description": {
       "identifier": "goe_tnt:time_freeze_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "semitransparent" : "entity_alphablend",
+        "gold" : "entity_alphablend"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/time_freeze_tnt"
@@ -17,13 +19,26 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "q.mark_variant == 1"},
+          {"charge" : "q.mark_variant == 1"},
+          {"explode" : "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.time_freeze_tnt.swell",
+        "charge": "animation.time_freeze_tnt.charge",
+        "explode" : "animation.time_freeze_tnt.explosion"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "ring" : "goe_tnt:time_freeze_ring",
+        "sand_tornado" : "goe_tnt:sand_tornado",
+        "sand_tornado_tall" : "goe_tnt:sand_tornado_tall",
+        "tnt_charge" : "goe_tnt:tnt_charge_yellow",
+        "time_freeze_explosion" : "goe_tnt:time_freeze_explosion",
+        "big_explosion_yellow" : "goe_tnt:big_explosion_yellow",        
+        "sand_explosion" : "goe_tnt:sand_explosion"
+      },
+      "render_controllers": [ "controller.render.time_freeze_tnt" ]
     }
   }
 }
