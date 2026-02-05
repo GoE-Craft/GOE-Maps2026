@@ -7,6 +7,8 @@ import { freezingAction } from "./actions/freezing_tnt";
 import { atmosphereAction } from "./actions/atmosphere_tnt";
 import { chunkerAction } from "./actions/chunker_tnt";
 import { structureTNTAction } from "./actions/structure_tnt";
+import { weatherStationAction } from "./actions/weather_station_tnt";
+import { lightningAction } from "./actions/lightning_tnt";
 
 /**
  * TNT Actions Module
@@ -73,6 +75,12 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "structure":
             system.runJob(structureTNTAction(dimension, location, vec, tntData));
+            break;
+        case "weather_station":
+            weatherStationAction(dimension, location, entity);
+            break;
+        case "lightning":
+            lightningAction(dimension, location, entity);
             break;
         default:
             break;
