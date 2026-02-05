@@ -368,7 +368,7 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
         if (tntData?.explosionProperties?.specialAction) {
             // If the special action is expensive, the handler should itself use runJob.
             const vec = utils.getFacingVectorFromEntity(rot);
-            system.run(() => tnt_actions.handleSpecialAction(dimension, loc, tntData, chargeLevel, vec, entity.id));
+            system.run(() => tnt_actions.handleSpecialAction(dimension, loc, tntData, chargeLevel, vec, entity));
         }
     } catch (e) {
         console.log("Error handling special action: " + e);

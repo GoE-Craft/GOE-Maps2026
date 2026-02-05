@@ -11,6 +11,8 @@ import { weatherStationAction } from "./actions/weather_station_tnt";
 import { lightningAction } from "./actions/lightning_tnt";
 import { ultronTNTAction } from "./actions/ultron_tnt";
 import { arrowStormTNTAction } from "./actions/arrow_storm_tnt"
+import { timeFreezeTNTAction } from "./actions/time_freeze_tnt";
+import { teleportationTNTAction } from "./actions/teleportation_tnt";
 
 /**
  * TNT Actions Module
@@ -89,7 +91,14 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "ultron":
             system.runJob(ultronTNTAction(dimension, location, 20));
-
+        case "time_freeze":
+            const excludePlayerId = excludePlayer.get(entity?.id);
+            if (entity?.id && excludePlayer.has(entity.id)) excludePlayer.delete(entity.id);
+            system.runJob(timeFreezeTNTAction(dimension, chargeLevel, location, entity, excludePlayerId));
+            break;
+        case "teleportation":
+            system.runJob(teleportationTNTAction(dimension, chargeLevel, location, entity));
+            break;
         default:
             break;
     }

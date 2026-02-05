@@ -447,7 +447,6 @@ function setupCustomProjectileCollisionTick() {
 			const entity = info?.entity;
 			const tntData = info?.tntData;
 
-			// if projectile entity is gone, optionally fall back to igniting at last known position
 			if (!entity || !tntData || !isEntityValid(entity)) {
 				const lastPos2 = info?.lastPos;
 				const dimensionId2 = info?.dimensionId;
@@ -457,6 +456,12 @@ function setupCustomProjectileCollisionTick() {
 				customProjectileById.delete(id);
 
 				if (lastPos2 && dimKey2 && tntData) {
+					let shooter = undefined;
+					try {
+						const sid = info?.shooterId;
+						if (sid) shooter = world.getPlayers().find(p => p.id === sid);
+					} catch { }
+
 					try {
 						const fuseTicks = getMechaShotFuseTicks(tntData);
 
@@ -467,8 +472,9 @@ function setupCustomProjectileCollisionTick() {
 							fuseTicks,
 							tntData,
 							dimKey2,
-							{ x: 0, y: 0, z: 0 }, // 0 impulse: do not skip fuse fx after the tnt_manager patch
-							(typeof yawDeg2 === "number") ? yawDeg2 : undefined
+							{ x: 0, y: 0, z: 0 },
+							(typeof yawDeg2 === "number") ? yawDeg2 : undefined,
+							shooter
 						);
 					} catch { }
 				}
@@ -478,7 +484,6 @@ function setupCustomProjectileCollisionTick() {
 
 			const spawnTick = info.spawnTick ?? system.currentTick;
 
-			// hard timeout safety
 			if ((system.currentTick - spawnTick) > 200) {
 				customProjectileById.delete(id);
 				try { entity.remove(); } catch { }
@@ -490,7 +495,6 @@ function setupCustomProjectileCollisionTick() {
 			const prev = info.lastPos;
 			const now = { x: entity.location.x, y: entity.location.y, z: entity.location.z };
 
-			// movement tracking (yaw estimation)
 			const dx = now.x - (prev?.x ?? now.x);
 			const dz = now.z - (prev?.z ?? now.z);
 			const moved = (dx * dx + dz * dz) > 0.000001;
@@ -505,8 +509,6 @@ function setupCustomProjectileCollisionTick() {
 
 			info.lastPos = now;
 
-			// after at least 1 tick, if we touch solid blocks, arm-on-impact:
-			// remove projectile and ignite real tnt at contact point (so fuse animations start after contact)
 			if ((system.currentTick - spawnTick) >= 1) {
 				if (isTouchingSolidBlock(dim, now)) {
 					const impactPos = { x: now.x, y: now.y, z: now.z };
@@ -514,6 +516,12 @@ function setupCustomProjectileCollisionTick() {
 					customProjectileById.delete(id);
 
 					try { entity.remove(); } catch { }
+
+					let shooter = undefined;
+					try {
+						const sid = info?.shooterId;
+						if (sid) shooter = world.getPlayers().find(p => p.id === sid);
+					} catch { }
 
 					try {
 						const fuseTicks = getMechaShotFuseTicks(tntData);
@@ -525,8 +533,9 @@ function setupCustomProjectileCollisionTick() {
 							fuseTicks,
 							tntData,
 							info?.dimKey ?? toTntManagerDimKey(dim?.id),
-							{ x: 0, y: 0, z: 0 }, // important: 0 impulse so fuse fx should play
-							(typeof info?.yawDeg === "number") ? info.yawDeg : undefined
+							{ x: 0, y: 0, z: 0 },
+							(typeof info?.yawDeg === "number") ? info.yawDeg : undefined,
+							shooter
 						);
 					} catch { }
 
@@ -536,7 +545,6 @@ function setupCustomProjectileCollisionTick() {
 		}
 	}, 1);
 }
-
 
 function applyMechaProjectileImpulse(entity, viewDir) {
 	try {
@@ -643,14 +651,14 @@ function spawnPropelledTnt(mecha, player, tntData, isVanilla, fireRight) {
 			dimensionId: dimension?.id,
 			dimKey: toTntManagerDimKey(dimension?.id),
 			yawDeg: playerYaw,
-			wasMoving: true
+			wasMoving: true,
+			shooterId: player.id
 		});
 
 		try { shotEntity.addTag("goe_tnt_projectile"); } catch { }
 
 		return;
 	}
-
 
 	if (!tntData) return;
 
@@ -674,7 +682,8 @@ function spawnPropelledTnt(mecha, player, tntData, isVanilla, fireRight) {
 		dimensionId: dimension?.id,
 		dimKey: toTntManagerDimKey(dimension?.id),
 		yawDeg: playerYaw,
-		wasMoving: true
+		wasMoving: true,
+		shooterId: player.id
 	});
 
 	try { shotEntity.addTag("goe_tnt_projectile"); } catch { }

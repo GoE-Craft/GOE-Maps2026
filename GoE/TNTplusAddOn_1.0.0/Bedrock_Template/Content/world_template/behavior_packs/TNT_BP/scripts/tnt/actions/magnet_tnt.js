@@ -1,68 +1,78 @@
 import { system } from "@minecraft/server";
 
-export function magnetTNTPreAction(entity, chargeLevel, fuseRemaining) {
-    const radius = 10;
+// Returns an integer radius using flat +25% of base radius per charge (charges: 0..n)
+function getScaledRadius(baseRadius, chargeLevel) {
+    const numericChargeLevel = Number(chargeLevel);
+    const safeChargeLevel = Number.isFinite(numericChargeLevel) ? Math.max(0, numericChargeLevel) : 0;
+    return baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
+}
+
+export function magnetTNTPreAction(magnetTntEntity, chargeLevel, fuseRemainingTicks) {
+    // Set per-TNT base radius here
+    const baseRadius = 10;
+    const radius = getScaledRadius(baseRadius, chargeLevel);
 
     const pullStrength = 0.08 + (chargeLevel * 0.01);
     const maxPull = 0.25 + (chargeLevel * 0.03);
 
-    const intervalId = system.runInterval(() => {
-        system.runJob(preActionJob(entity, radius, pullStrength, maxPull));
+    const preActionIntervalId = system.runInterval(() => {
+        system.runJob(preActionJob(magnetTntEntity, radius, pullStrength, maxPull));
     }, 1);
 
     system.runTimeout(() => {
-        system.clearRun(intervalId);
-    }, fuseRemaining);
+        system.clearRun(preActionIntervalId);
+    }, fuseRemainingTicks);
 }
 
-function* preActionJob(entity, radius, pullStrength, maxPull) {
-    if (!entity.isValid) {
-        return;
-    }
+function* preActionJob(magnetTntEntity, radius, pullStrength, maxPull) {
+    if (!magnetTntEntity.isValid) return;
 
-    const center = entity.location;
+    const magnetCenterLocation = magnetTntEntity.location;
 
-    let entities = [];
+    let nearbyEntities = [];
     try {
-        entities = entity.dimension.getEntities({ location: center, maxDistance: radius });
-    } catch (e) { }
+        nearbyEntities = magnetTntEntity.dimension.getEntities({ location: magnetCenterLocation, maxDistance: radius });
+    } catch {}
 
     yield;
 
-    for (const e of entities) {
+    for (const nearbyEntity of nearbyEntities) {
         try {
-            if (!e?.isValid) continue;
+            if (!nearbyEntity?.isValid) continue;
 
-            if (e.typeId === "minecraft:player") continue;
-            if (e.typeId === "minecraft:item") continue;
-            if ((e.typeId || "").startsWith("goe_tnt:")) continue;
+            if (nearbyEntity.typeId === "minecraft:player") continue;
+            if (nearbyEntity.typeId === "minecraft:item") continue;
+            if ((nearbyEntity.typeId || "").startsWith("goe_tnt:")) continue;
 
-            const dx = center.x - e.location.x;
-            const dy = (center.y + 0.5) - e.location.y;
-            const dz = center.z - e.location.z;
+            const deltaX = magnetCenterLocation.x - nearbyEntity.location.x;
+            const deltaY = (magnetCenterLocation.y + 0.5) - nearbyEntity.location.y;
+            const deltaZ = magnetCenterLocation.z - nearbyEntity.location.z;
 
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) || 1;
 
-            const nx = dx / dist;
-            const ny = dy / dist;
-            const nz = dz / dist;
+            const directionX = deltaX / distance;
+            const directionY = deltaY / distance;
+            const directionZ = deltaZ / distance;
 
-            const scale = Math.min(
-                maxPull,
-                pullStrength + (0.02 * (1 - Math.min(1, dist / radius)))
-            );
+            const distanceRatio = Math.min(1, distance / radius);
+            const scaledPull = pullStrength + (0.02 * (1 - distanceRatio));
+            const impulseScale = Math.min(maxPull, scaledPull);
 
-            e.applyImpulse({ x: nx * scale, y: ny * scale, z: nz * scale });
-        } catch (e) {
-            console.log("Error performing magnet pre action", e)
-        }
+            nearbyEntity.applyImpulse({
+                x: directionX * impulseScale,
+                y: directionY * impulseScale,
+                z: directionZ * impulseScale
+            });
+        } catch {}
 
         yield;
     }
 }
 
 export function* magnetTNTAction(dimension, chargeLevel, location) {
-    const radius = 10;
+    // Set per-TNT base radius here
+    const baseRadius = 10;
+    const radius = getScaledRadius(baseRadius, chargeLevel);
 
     dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);
     system.runTimeout(() => {
@@ -75,37 +85,37 @@ export function* magnetTNTAction(dimension, chargeLevel, location) {
 
     const pushStrength = 1.2 + (chargeLevel * 0.2);
 
-    let entities = [];
+    let nearbyEntities = [];
     try {
-        entities = dimension.getEntities({ location, maxDistance: radius });
-    } catch (e) { }
+        nearbyEntities = dimension.getEntities({ location, maxDistance: radius });
+    } catch {}
 
     dimension.spawnParticle("goe_tnt:magnet_out", location);
 
-    for (const e of entities) {
+    for (const nearbyEntity of nearbyEntities) {
         try {
-            if (!e?.isValid) continue;
+            if (!nearbyEntity?.isValid) continue;
 
-            if (e.typeId === "minecraft:player") continue;
-            if (e.typeId === "minecraft:item") continue;
-            if ((e.typeId || "").startsWith("goe_tnt:")) continue;
+            if (nearbyEntity.typeId === "minecraft:player") continue;
+            if (nearbyEntity.typeId === "minecraft:item") continue;
+            if ((nearbyEntity.typeId || "").startsWith("goe_tnt:")) continue;
 
-            const dx = e.location.x - location.x;
-            const dy = e.location.y - (location.y + 0.2);
-            const dz = e.location.z - location.z;
+            const deltaX = nearbyEntity.location.x - location.x;
+            const deltaY = nearbyEntity.location.y - (location.y + 0.2);
+            const deltaZ = nearbyEntity.location.z - location.z;
 
-            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) || 1;
 
-            const nx = dx / dist;
-            const ny = dy / dist;
-            const nz = dz / dist;
+            const directionX = deltaX / distance;
+            const directionY = deltaY / distance;
+            const directionZ = deltaZ / distance;
 
-            e.applyImpulse({
-                x: nx * pushStrength,
-                y: Math.max(0.2, ny * pushStrength * 0.6),
-                z: nz * pushStrength
+            nearbyEntity.applyImpulse({
+                x: directionX * pushStrength,
+                y: Math.max(0.2, directionY * pushStrength * 0.6),
+                z: directionZ * pushStrength
             });
-        } catch (e2) { }
+        } catch {}
     }
 
     yield;
