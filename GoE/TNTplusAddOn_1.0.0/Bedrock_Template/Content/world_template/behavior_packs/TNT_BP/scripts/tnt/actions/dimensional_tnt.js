@@ -1,7 +1,6 @@
-import { system, BlockPermutation, world } from "@minecraft/server";
+import { system, BlockPermutation } from "@minecraft/server";
 
 export function* dimensionalTNTAction(dimension, chargeLevel, location, entity) {
-    world.sendMessage("§5Dimensional TNT activated!");
 
     const cl = Number(chargeLevel);
     const safeChargeLevel = Number.isFinite(cl) ? Math.max(0, cl) : 0;
@@ -9,21 +8,19 @@ export function* dimensionalTNTAction(dimension, chargeLevel, location, entity) 
     const baseRadius = 10;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
 
-    yield* destroySphere(dimension, location, radius);
+    yield* destroySphere(dimension, location, radius, entity);
 
     system.runTimeout(() => {
-        system.runJob(destroySphere(dimension, location, radius));
+        system.runJob(destroySphere(dimension, location, radius, entity));
     }, 10);
 
     system.runTimeout(() => {
-        system.runJob(destroySphere(dimension, location, radius));
+        system.runJob(destroySphere(dimension, location, radius, entity));
     }, 20);
-
-    world.sendMessage(`§5Dimensional TNT done. radius: ${radius}`);
 }
 
-// boom
-function* destroySphere(dimension, location, radius) {
+
+function* destroySphere(dimension, location, radius, sourceEntity) {
 
     const cx = Math.floor(location?.x ?? 0);
     const cy = Math.floor(location?.y ?? 0);
@@ -72,7 +69,12 @@ function* destroySphere(dimension, location, radius) {
     for (const e of entities) {
         try {
             if (!e?.isValid) continue;
+
+            // exclude players
             if (e.typeId === "minecraft:player") continue;
+
+            // exclude TNT entity itself if still alive
+            if (sourceEntity && e.id === sourceEntity.id) continue;
 
             e.kill();
         } catch {}
