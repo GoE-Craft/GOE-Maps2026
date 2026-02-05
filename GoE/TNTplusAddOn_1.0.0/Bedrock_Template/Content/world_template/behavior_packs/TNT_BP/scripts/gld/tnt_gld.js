@@ -76,7 +76,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:magnet_tnt",
-        fuseTime: 60,
+        fuseTime: 40,
         power: 2,
         fuseEffects: {
             soundEffect: "random.fuse",
