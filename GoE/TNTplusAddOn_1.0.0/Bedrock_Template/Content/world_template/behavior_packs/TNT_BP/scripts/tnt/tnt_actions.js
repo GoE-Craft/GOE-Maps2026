@@ -16,7 +16,6 @@ import { structureTNTAction } from "./actions/structure_tnt";
  */
 
 export const excludePlayer = new Map();
-
 const specialActionIntervals = new Map();
 
 /**

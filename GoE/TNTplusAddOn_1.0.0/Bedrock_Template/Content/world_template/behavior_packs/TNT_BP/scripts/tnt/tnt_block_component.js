@@ -64,6 +64,12 @@ export const TntCustomComponent = {
         } else if (itemInHand?.typeId === "goe_tnt:tnt_detonator") {
             // This overrides the item use on event so we are handling it here
             const comp = itemInHand.getComponent("goe_tnt:tnt_detonator");
+
+            const cooldown = itemInHand.getComponent("minecraft:cooldown");
+            if (cooldown) {
+                cooldown.startCooldown(player);
+            }
+            
             const params = comp.customComponentParameters;
             if (!params) return;
             
