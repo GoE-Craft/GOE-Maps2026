@@ -9,6 +9,7 @@ export function weatherStationAction(dimension, location, entity) {
             dimension.runCommand(`weather clear ${600}`);
             world.setDynamicProperty("goe_tnt:weather_station_last", "clear");
         } else {
+            dimension.spawnEntity("minecraft:lightning_bolt", location);
             dimension.runCommand(`weather rain ${600}`);
             world.setDynamicProperty("goe_tnt:weather_station_last", "rain");
         }

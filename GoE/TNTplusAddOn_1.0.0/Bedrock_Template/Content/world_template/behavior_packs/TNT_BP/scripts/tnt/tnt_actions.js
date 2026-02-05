@@ -9,6 +9,8 @@ import { chunkerTNTAction } from "./actions/chunker_tnt";
 import { structureTNTAction } from "./actions/structure_tnt";
 import { weatherStationAction } from "./actions/weather_station_tnt";
 import { lightningAction } from "./actions/lightning_tnt";
+import { ultronTNTAction } from "./actions/ultron_tnt";
+import { arrowStormTNTAction } from "./actions/arrow_storm_tnt"
 
 /**
  * TNT Actions Module
@@ -80,10 +82,14 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             weatherStationAction(dimension, location, entity);
             break;
         case "lightning":
-            lightningAction(dimension, location, entity);
+            runJobWithDelays(lightningAction(dimension, location, entity));
             break;
         case "arrow_storm":
             system.runJob(arrowStormTNTAction(dimension, location, chargeLevel));
+            break;
+        case "ultron":
+            system.runJob(ultronTNTAction(dimension, location, 20));
+
         default:
             break;
     }

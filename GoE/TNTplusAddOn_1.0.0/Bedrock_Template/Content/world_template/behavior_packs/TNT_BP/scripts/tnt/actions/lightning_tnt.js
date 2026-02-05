@@ -2,13 +2,13 @@ import { system } from "@minecraft/server";
 
 const LIGHTNING_RADIUS = 7;
 const EXTRA_STRIKES = 4;
-const TICKS_BETWEEN_EXTRA = 4;
+const TICKS_BETWEEN_EXTRA = 5;
 
 function randomOffset(radius) {
     return (Math.random() * 2 - 1) * radius;
 }
 
-export function lightningAction(dimension, location, entity) {
+export function* lightningAction(dimension, location, entity) {
     try {
         const entities = dimension.getEntities({
             location,
@@ -30,18 +30,16 @@ export function lightningAction(dimension, location, entity) {
 
         for (let i = 0; i < EXTRA_STRIKES; i++) {
             const delayTicks = i * TICKS_BETWEEN_EXTRA;
-            system.runTimeout(() => {
-                try {
-                    const x = location.x + randomOffset(LIGHTNING_RADIUS);
-                    const z = location.z + randomOffset(LIGHTNING_RADIUS);
-                    dimension.spawnEntity("minecraft:lightning_bolt", {
-                        x,
-                        y: location.y,
-                        z
-                    });
-                } catch (err) {
-                }
-            }, delayTicks);
+            try {
+                const x = location.x + randomOffset(LIGHTNING_RADIUS);
+                const z = location.z + randomOffset(LIGHTNING_RADIUS);
+                dimension.spawnEntity("minecraft:lightning_bolt", {
+                    x,
+                    y: location.y,
+                    z
+                });
+            } catch (err) {}
+            yield delayTicks;
         }
     } catch (e) {
     }

@@ -11,7 +11,7 @@ export function* arrowStormTNTAction(dimension, location, chargeLevel) {
         const position = {
             x: x + Math.cos(angle) * radius,
             z: z + Math.sin(angle) * radius,
-            y: location.y + 1.5
+            y: location.y + 0.5
         };
         
         const entity = dimension.spawnEntity("minecraft:arrow", position);

@@ -1,4 +1,4 @@
-import { world, StructureRotation, StructureAnimationMode } from "@minecraft/server";
+import { world, system, StructureRotation, StructureAnimationMode } from "@minecraft/server";
 
 // entity: the TNT entity spawned from the block
 export function* structureTNTAction(dimension, location, vec, tntData) {
@@ -31,15 +31,20 @@ export function* structureTNTAction(dimension, location, vec, tntData) {
                 break;
         }
 
+        const length = tntData.explosionEffects.explosionAnimationLength > 0 ? tntData.explosionEffects.explosionAnimationLength : 0;
+
         const structureOptions = {
             animationMode: "Blocks",
-            animationSeconds: tntData.explosionEffects.explosionAnimationLength > 0 ? tntData.explosionEffects.explosionAnimationLength : 0,
+            animationSeconds: length - 1 ,
             includeBlocks: true,
             includeEntities: true,
             rotation: rotation
         }
 
-        structureManager.place(structure, dimension, { x: loadX, y: loadY, z: loadZ }, structureOptions);
+        system.runTimeout(() => {
+            structureManager.place(structure, dimension, { x: loadX, y: loadY, z: loadZ }, structureOptions);
+        }, 20);
+        
         } catch (e) {
         console.log(`[Structure TNT] Error loading structure TNT: ${e}`);
     }
