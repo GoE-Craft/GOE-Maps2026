@@ -359,7 +359,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:prison_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",

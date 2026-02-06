@@ -15,6 +15,7 @@ import { timeFreezeTNTAction } from "./actions/time_freeze_tnt";
 import { teleportationTNTAction } from "./actions/teleportation_tnt";
 import { treePlanterAction } from "./actions/tree_planter_tnt";
 import { dimensionalTNTAction } from "./actions/dimensional_tnt";
+import { prisonTNTAction } from "./actions/prison_tnt";
 
 /**
  * TNT Actions Module
@@ -107,6 +108,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "dimensional":
             system.runJob(dimensionalTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "prison":
+            system.runJob(prisonTNTAction(dimension, location, entity));
             break;
         default:
             break;

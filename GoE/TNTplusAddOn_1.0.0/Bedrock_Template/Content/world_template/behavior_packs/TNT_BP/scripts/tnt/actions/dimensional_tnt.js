@@ -73,8 +73,11 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
             // exclude players
             if (e.typeId === "minecraft:player") continue;
 
-            // exclude TNT entity itself if still alive
-            if (sourceEntity && e.id === sourceEntity.id) continue;
+
+            // exclude all TNT entities
+            if (e.typeId && e.typeId.includes("tnt")) continue;
+            // exclude TNT entity itself if still alive (legacy, covered by above)
+            // if (sourceEntity && e.id === sourceEntity.id) continue;
 
             e.kill();
         } catch {}
