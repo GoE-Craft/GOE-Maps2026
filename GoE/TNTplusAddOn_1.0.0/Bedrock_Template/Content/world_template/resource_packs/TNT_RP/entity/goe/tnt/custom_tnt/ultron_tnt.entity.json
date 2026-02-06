@@ -4,26 +4,37 @@
     "description": {
       "identifier": "goe_tnt:ultron_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "beam": "goe_tnt_border"
       },
       "textures": {
-				"default": "textures/blocks/tnt_side"
+				"default": "textures/goe/tnt/entity/ultron_tnt"
       },
       "geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.ultron_tnt"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
+          {"charge": "q.mark_variant == 1"}
+          //{"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.ultron_tnt.swell",
+        "charge": "animation.ultron_tnt.charge"
+        //"explode": ""
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "ultron_smoke_puff": "goe_tnt:ultron_smoke_puff",
+        "ultron_smoke": "goe_tnt:ultron_smoke",
+        "ultron_impact": "goe_tnt:ultron_impact",
+        "ultron_smoke_large": "goe_tnt:ultron_smoke_large"
+      },
+      "render_controllers": [ "controller.render.ultron_tnt" ]
     }
   }
 }
