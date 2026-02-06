@@ -440,7 +440,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:healing_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -449,10 +449,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+            explosionAnimationLength: 3
         },
         explosionProperties: {
             createsFire: false,
