@@ -99,6 +99,7 @@
     "tree_planter_tnt": { "textures": "textures/goe/tnt/entity/tree_planter_tnt" },
     "tsunami_tnt": { "textures": "textures/goe/tnt/entity/tsunami_tnt" },
     "tunnel_tnt": { "textures": "textures/goe/tnt/entity/tunnel_tnt" },
+    "ultron_tnt": { "textures": "textures/goe/tnt/entity/ultron_tnt" },
     "vine_tnt": { "textures": "textures/goe/tnt/entity/vine_tnt" },
     "void_hole_tnt": { "textures": "textures/goe/tnt/entity/void_hole_tnt" },
     "vortex_tnt": { "textures": "textures/goe/tnt/entity/vortex_tnt" },

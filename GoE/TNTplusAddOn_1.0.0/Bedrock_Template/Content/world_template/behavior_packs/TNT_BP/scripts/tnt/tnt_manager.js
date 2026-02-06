@@ -420,7 +420,7 @@ function handleSummonMob(dimension, location, tntData) {
  * On load behavior - restore TNT states after script reload
  */
 export function onLoad() {
-    system.runJob(restoreTNT());
+    system.run(() => restoreTNT());
 }
 
 /**
@@ -506,7 +506,7 @@ export function showTntPlaceHint(player, blockTypeId) {
  * Restore TNT states after script reload
  * 
  */
-function* restoreTNT() {
+function restoreTNT() {
     const currentTick = system.currentTick;
 
     for (const dim of ["overworld", "nether", "the_end"]) {
@@ -541,12 +541,10 @@ function* restoreTNT() {
 
                     scheduleFuse(entity, chargeLevel, remaining, tntData, 0);
                 }
-                yield;
             }
         } catch (e) {
             console.log("Error restoring TNT in dimension " + dim + ": " + e);
         }
-        yield;
     }
 }
 
