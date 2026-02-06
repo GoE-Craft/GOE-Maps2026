@@ -111,6 +111,31 @@
         "b": "1.0",
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
+    },
+    "controller.render.dimensional_tnt": {
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default",
+          "middle_beam": "Material.middle_beam",
+          "beam": "Material.beam",
+          "beam_light_down": "Material.beam_light_down",
+          "beam_light_up": "Material.beam_light_up",
+          "beam_light_left": "Material.beam_light_left",
+          "beam_light_right": "Material.beam_light_right",
+          "beam_light_front": "Material.beam_light_front",
+          "beam_light_back": "Material.beam_light_back"
+        }
+      ],
+      "textures": [
+        "Texture.default"
+      ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
+      }
     }
   }
 }
