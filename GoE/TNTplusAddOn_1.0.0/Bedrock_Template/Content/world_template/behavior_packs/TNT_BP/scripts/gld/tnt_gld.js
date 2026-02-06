@@ -466,7 +466,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:villager_decoy_tnt",
         fuseTime: 82,
-        power: 4,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

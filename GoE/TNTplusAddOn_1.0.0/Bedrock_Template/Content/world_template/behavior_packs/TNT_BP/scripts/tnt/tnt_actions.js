@@ -16,6 +16,8 @@ import { teleportationTNTAction } from "./actions/teleportation_tnt";
 import { treePlanterAction } from "./actions/tree_planter_tnt";
 import { dimensionalTNTAction } from "./actions/dimensional_tnt";
 import { prisonTNTAction } from "./actions/prison_tnt";
+import { healingTNTAction } from "./actions/healing_tnt";
+import { villagerDecoyTNTAction } from "./actions/villager_decoy_tnt";
 
 /**
  * TNT Actions Module
@@ -110,7 +112,13 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             system.runJob(dimensionalTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "prison":
-            system.runJob(prisonTNTAction(dimension, location, entity));
+            system.runJob(prisonTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "healing":
+            system.runJob(healingTNTAction(dimension, chargeLevel, location));
+            break;
+        case "villager_decoy":
+            system.runJob(villagerDecoyTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;

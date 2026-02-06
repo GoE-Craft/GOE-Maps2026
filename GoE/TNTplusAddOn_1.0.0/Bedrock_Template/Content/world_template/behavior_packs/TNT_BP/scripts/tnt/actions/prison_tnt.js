@@ -1,4 +1,4 @@
-import { world, system, StructureRotation, StructureAnimationMode } from "@minecraft/server";
+import { world, system, StructureRotation, StructureAnimationMode, BlockVolume, BlockPermutation } from "@minecraft/server";
 
 function isSolidBlock(block) {
     try {
@@ -11,6 +11,11 @@ function isSolidBlock(block) {
     } catch {
         return false;
     }
+}
+
+function isAirLike(typeId) {
+    const id = String(typeId || "");
+    return id === "minecraft:air" || id === "minecraft:cave_air" || id === "minecraft:void_air";
 }
 
 function findGroundY(dimension, x, startY, z) {
@@ -76,7 +81,87 @@ function findFreeCell(cellX0, cellY0, cellZ0, minSpacingX, minSpacingY, minSpaci
     return null;
 }
 
-export function* prisonTNTAction(dimension, location, entity) {
+// places the structure only into air-like blocks by snapshotting the area, 
+// placing the structure, then restoring any non-air blocks
+function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure, placePos, structureRotation) {
+    const sx = Math.max(1, Math.floor(Number(prisonStructure?.size?.x ?? 3)));
+    const sy = Math.max(1, Math.floor(Number(prisonStructure?.size?.y ?? 3)));
+    const sz = Math.max(1, Math.floor(Number(prisonStructure?.size?.z ?? 3)));
+
+    const rotatedX = (structureRotation === StructureRotation.Rotate90 || structureRotation === StructureRotation.Rotate270) ? sz : sx;
+    const rotatedZ = (structureRotation === StructureRotation.Rotate90 || structureRotation === StructureRotation.Rotate270) ? sx : sz;
+
+    const startX = Math.floor(Number(placePos?.x ?? 0));
+    const startY = Math.floor(Number(placePos?.y ?? 0));
+    const startZ = Math.floor(Number(placePos?.z ?? 0));
+
+    // Snapshot blocks in the affected volume
+    const snapshot = new Map(); // key -> { typeId, permutation }
+    const keyOf = (x, y, z) => `${x}|${y}|${z}`;
+
+    for (let y = 0; y < sy; y++) {
+        for (let x = 0; x < rotatedX; x++) {
+            for (let z = 0; z < rotatedZ; z++) {
+                const wx = startX + x;
+                const wy = startY + y;
+                const wz = startZ + z;
+
+                let b;
+                try { b = dimension.getBlock({ x: wx, y: wy, z: wz }); } catch { b = undefined; }
+                if (!b) continue;
+
+                let perm;
+                try { perm = b.permutation; } catch { perm = undefined; }
+
+                snapshot.set(keyOf(wx, wy, wz), {
+                    typeId: String(b.typeId || ""),
+                    permutation: perm
+                });
+            }
+        }
+    }
+
+    const structureOptions = {
+        animationMode: StructureAnimationMode.Blocks,
+        animationSeconds: 0,
+        includeBlocks: true,
+        includeEntities: true,
+        rotation: structureRotation
+    };
+
+    // Place structure
+    structureManager.place(prisonStructure, dimension, { x: startX, y: startY, z: startZ }, structureOptions);
+
+    // Revert any position that was not air-like before placement
+    for (const [key, before] of snapshot.entries()) {
+        const [wxStr, wyStr, wzStr] = key.split("|");
+        const wx = Number(wxStr);
+        const wy = Number(wyStr);
+        const wz = Number(wzStr);
+
+        if (!isAirLike(before.typeId)) {
+            let blockAfter;
+            try { blockAfter = dimension.getBlock({ x: wx, y: wy, z: wz }); } catch { blockAfter = undefined; }
+            if (!blockAfter) continue;
+
+            // Only revert if structure actually changed something there
+            const afterType = String(blockAfter.typeId || "");
+            if (afterType !== before.typeId) {
+                try {
+                    if (before.permutation) {
+                        blockAfter.setPermutation(before.permutation);
+                    } else {
+                        blockAfter.setType(before.typeId);
+                    }
+                } catch {
+                    // If revert fails, ignore (better to not crash the TNT)
+                }
+            }
+        }
+    }
+}
+
+export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
     try {
         const structureId = "goe_tnt:temp_prison";
         const structureManager = world.structureManager;
@@ -90,7 +175,20 @@ export function* prisonTNTAction(dimension, location, entity) {
             return;
         }
 
-        const radius = 8;
+        const baseRadius = 8;
+
+        let resolvedChargeLevel = 0;
+        try {
+            const dynamicPropertyChargeLevel = entity?.getDynamicProperty?.("goe_tnt_charge_level");
+            if (dynamicPropertyChargeLevel !== undefined && dynamicPropertyChargeLevel !== null) {
+                resolvedChargeLevel = Number(dynamicPropertyChargeLevel);
+            }
+        } catch { }
+
+        const safeChargeLevel = Number.isFinite(resolvedChargeLevel) ? Math.max(0, resolvedChargeLevel) : 0;
+
+        // Flat +25% of base radius per charge (base 8 -> +2 per charge)
+        const radius = baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
 
         const center = {
             x: Number(location?.x ?? 0),
@@ -219,24 +317,16 @@ export function* prisonTNTAction(dimension, location, entity) {
                     const placeY = Math.floor(prisonCenterY) - 1;
                     const placeZ = Math.floor(prisonCenterZ - halfSizeZ);
 
-                    // use Blocks + 0 seconds: no visible build animation, but placement stays reliable
-                    const structureOptions = {
-                        animationMode: StructureAnimationMode.Blocks,
-                        animationSeconds: 0,
-                        includeBlocks: true,
-                        includeEntities: true,
-                        rotation: structureRotation
-                    };
-
                     try {
-                        structureManager.place(
-                            prisonStructure,
+                        placeStructureOnlyIntoAir(
                             dimension,
+                            structureManager,
+                            prisonStructure,
                             { x: placeX, y: placeY, z: placeZ },
-                            structureOptions
+                            structureRotation
                         );
                     } catch (placeError) {
-                        console.log(`[Prison TNT] structure place failed: ${placeError}`);
+                        console.log(`[Prison TNT] air-only place failed: ${placeError}`);
                         continue;
                     }
 
