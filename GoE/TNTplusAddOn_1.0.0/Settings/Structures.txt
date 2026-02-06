@@ -1,3 +1,165 @@
+///////////////////// CUSTOM TREE STRUCTURES ///////////////////////
+
+#oak_tree_small
+type=area
+location=259 1 259 265 8 265
+replace=gray_stained_glass structure_void
+
+#oak_tree_medium
+type=area
+location=259 1 269 269 16 279
+replace=gray_stained_glass structure_void
+
+#spruce_tree_small
+type=area
+location=272 1 259 278 11 265
+replace=gray_stained_glass structure_void
+
+#spruce_tree_medium
+type=area
+location=272 1 269 282 11 279
+replace=gray_stained_glass structure_void
+
+#birch_tree_small
+type=area
+location=285 1 259 291 10 265
+replace=gray_stained_glass structure_void
+
+#birch_tree_medium
+type=area
+location=285 1 269 295 12 279
+replace=gray_stained_glass structure_void
+
+#jungle_tree_small
+type=area
+location=298 1 259 304 11 265
+replace=gray_stained_glass structure_void
+
+#jungle_tree_medium
+type=area
+location=298 1 269 309 30 281
+replace=gray_stained_glass structure_void
+
+#acacia_tree_small
+type=area
+location=311 1 259 317 11 265
+replace=gray_stained_glass structure_void
+
+#acacia_tree_medium
+type=area
+location=311 1 269 321 10 279
+replace=gray_stained_glass structure_void
+
+#dark_oak_tree_small
+type=area
+location=324 1 259 330 11 265
+replace=gray_stained_glass structure_void
+
+#dark_oak_tree_medium
+type=area
+location=324 1 269 334 12 279
+replace=gray_stained_glass structure_void
+
+#cherry_tree_small
+type=area
+location=337 1 259 343 13 265
+replace=gray_stained_glass structure_void
+
+#cherry_tree_medium
+type=area
+location=337 1 269 347 13 279
+replace=gray_stained_glass structure_void
+
+#pale_oak_tree_small
+type=area
+location=350 1 259 356 11 265
+replace=gray_stained_glass structure_void
+
+#pale_oak_tree_medium
+type=area
+location=350 1 269 360 10 279
+replace=gray_stained_glass structure_void
+
+#mangrove_tree_small
+type=area
+location=362 1 258 370 12 266
+replace=gray_stained_glass structure_void
+
+#mangrove_tree_medium
+type=area
+location=363 1 269 373 19 279
+replace=gray_stained_glass structure_void
+
+#crimson_tree_small
+type=area
+location=376 1 259 382 9 265
+replace=gray_stained_glass structure_void
+
+#crimson_tree_medium
+type=area
+location=376 1 269 386 16 279
+replace=gray_stained_glass structure_void
+
+#warped_tree_small
+type=area
+location=389 1 259 395 11 265
+replace=gray_stained_glass structure_void
+
+#warped_tree_medium
+type=area
+location=389 1 269 399 13 279
+replace=gray_stained_glass structure_void
+
+#red_mushroom_tree_small
+type=area
+location=402 1 259 408 8 265
+replace=gray_stained_glass structure_void
+
+#red_mushroom_tree_medium
+type=area
+location=402 1 269 412 9 279
+replace=gray_stained_glass structure_void
+
+#brown_mushroom_tree_small
+type=area
+location=415 1 259 421 7 265
+replace=gray_stained_glass structure_void
+
+#brown_mushroom_tree_medium
+type=area
+location=415 1 269 425 9 279
+replace=gray_stained_glass structure_void
+
+#large_spruce_tree_small
+type=area
+location=428 1 255 438 19 265
+replace=gray_stained_glass structure_void
+
+#large_spruce_tree_medium
+type=area
+location=428 1 269 438 23 279
+replace=gray_stained_glass structure_void
+
+#azalea_tree_small
+type=area
+location=441 1 259 448 9 265
+replace=gray_stained_glass structure_void
+
+#azalea_tree_medium
+type=area
+location=441 1 269 451 10 279
+replace=gray_stained_glass structure_void
+
+#chorus_tree_small
+type=area
+location=454 1 259 460 12 265
+replace=gray_stained_glass structure_void
+
+#chorus_tree_medium
+type=area
+location=454 1 269 464 18 279
+replace=gray_stained_glass structure_void
+
 ///////////////////// ACHIVMENTS REWARDS ////////////////////
 
 #random_reward_1

@@ -11,6 +11,27 @@ const DELAY_TICKS_BETWEEN_TREES = 3;
 const TREE_ANIMATION_SECONDS = 0.4; 
 
 const GRID_RADIUS = 1;
+const TREE_Y_OFFSET = -2;
+const TREE_BIOME_GLD_DEFAULT = "oak";
+
+const TREE_BIOME_GLD = [
+    { treeKey: "chorus", biomes: ["the_end", "end_barren", "end_highlands", "end_midlands"] },
+    { treeKey: "crimson", biomes: ["crimson_forest"] },
+    { treeKey: "warped", biomes: ["warped_forest"] },
+    { treeKey: "cherry", biomes: ["cherry_grove"] },
+    { treeKey: "pale_oak", biomes: ["pale_garden"] },
+    { treeKey: "mangrove", biomes: ["mangrove_swamp", "mangrove"] },
+    { treeKey: "dark_oak", biomes: ["roofed_forest", "dark_forest"] },
+    { treeKey: "brown_mushroom", biomes: ["swampland"] },
+    { treeKey: "red_mushroom", biomes: ["mooshroom", "mushroom_fields", "roofed_forest", "dark_forest", "swamp"] },
+    { treeKey: "birch", biomes: ["birch_forest"] },
+    { treeKey: "jungle", biomes: ["jungle", "bamboo_jungle", "sparse_jungle"] },
+    { treeKey: "acacia", biomes: ["savanna"] },
+    { treeKey: "large_spruce", biomes: ["mega_taiga", "redwood_taiga", "old_growth_pine_taiga", "old_growth_spruce_taiga"] },
+    { treeKey: "spruce", biomes: ["taiga", "cold_taiga", "extreme_hills_plus_trees", "windswept_forest"] },
+    { treeKey: "oak", biomes: ["forest", "plains", "sunflower_plains", "meadow", "extreme_hills", "windswept_hills", "river", "beach", "flower_forest"] }
+];
+
 
 function getStructureId(treeKey, size) {
     return STRUCTURE_PREFIX + treeKey + "_tree_" + size;
@@ -56,7 +77,7 @@ function placeTree(dimension, structureManager, baseX, baseZ, centerY, structure
         const structure = structureManager.get(structureId);
         if (!structure) return;
 
-        const originY = Math.floor(centerY);
+        const originY = Math.floor(centerY) + TREE_Y_OFFSET;
         const particleX = baseX + structure.size.x / 2;
         const particleZ = baseZ + structure.size.z / 2;
         const particleY = originY + 0.5;
@@ -130,21 +151,3 @@ export function treePlanterAction(dimension, location, entity) {
     }
 }
 
-const TREE_BIOME_GLD_DEFAULT = "oak";
-
-const TREE_BIOME_GLD = [
-    { treeKey: "crimson", biomes: ["crimson_forest"] },
-    { treeKey: "warped", biomes: ["warped_forest"] },
-    { treeKey: "cherry", biomes: ["cherry_grove"] },
-    { treeKey: "pale_oak", biomes: ["pale_garden"] },
-    { treeKey: "mangrove", biomes: ["mangrove_swamp", "mangrove"] },
-    { treeKey: "dark_oak", biomes: ["roofed_forest", "dark_forest"] },
-    { treeKey: "brown_mushroom", biomes: ["swampland"] },
-    { treeKey: "red_mushroom", biomes: ["mooshroom", "mushroom_fields", "roofed_forest", "dark_forest", "swamp"] },
-    { treeKey: "birch", biomes: ["birch_forest"] },
-    { treeKey: "jungle", biomes: ["jungle", "bamboo_jungle", "sparse_jungle"] },
-    { treeKey: "acacia", biomes: ["savanna"] },
-    { treeKey: "large_spruce", biomes: ["mega_taiga", "redwood_taiga", "old_growth_pine_taiga", "old_growth_spruce_taiga"] },
-    { treeKey: "spruce", biomes: ["taiga", "cold_taiga", "extreme_hills_plus_trees", "windswept_forest"] },
-    { treeKey: "oak", biomes: ["forest", "plains", "sunflower_plains", "meadow", "extreme_hills", "windswept_hills", "river", "beach", "flower_forest"] }
-];
