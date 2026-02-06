@@ -491,7 +491,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:honey_tnt",
         fuseTime: 50,
-        power: 2,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -515,8 +515,8 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:cloning_tnt",
-        fuseTime: 80,
-        power: 4,
+        fuseTime: 40,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

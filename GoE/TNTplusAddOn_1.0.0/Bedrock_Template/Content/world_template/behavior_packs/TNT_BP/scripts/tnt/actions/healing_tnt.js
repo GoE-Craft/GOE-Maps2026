@@ -1,7 +1,7 @@
 import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
 
 // Heal TNT Action (heals players to full health in radius, scaled by charge level)
-export function* healingTNTAction(dimension, chargeLevel, location, sourceEntity, excludePlayerId) {
+export function* healingTNTAction(dimension, chargeLevel, location) {
     let resolvedChargeLevel = Number(chargeLevel);
 
     try {

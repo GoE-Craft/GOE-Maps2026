@@ -18,6 +18,8 @@ import { dimensionalTNTAction } from "./actions/dimensional_tnt";
 import { prisonTNTAction } from "./actions/prison_tnt";
 import { healingTNTAction } from "./actions/healing_tnt";
 import { villagerDecoyTNTAction } from "./actions/villager_decoy_tnt";
+import { honeyTNTAction } from "./actions/honey_tnt";
+import { cloningTNTAction } from "./actions/cloning_tnt";
 
 /**
  * TNT Actions Module
@@ -120,7 +122,13 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "villager_decoy":
             system.runJob(villagerDecoyTNTAction(dimension, chargeLevel, location, entity));
             break;
-        default:
+        case "honey":
+            system.runJob(honeyTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "cloning":
+            system.runJob(cloningTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        default:   
             break;
     }
 }
