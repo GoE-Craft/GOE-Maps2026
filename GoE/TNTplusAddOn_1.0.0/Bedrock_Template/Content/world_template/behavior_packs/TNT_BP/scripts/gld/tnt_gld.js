@@ -423,7 +423,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {

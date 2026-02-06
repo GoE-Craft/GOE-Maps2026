@@ -75,7 +75,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         }
         case "atmosphere":
-            atmosphereTNTAction(dimension, location, entity);
+            runJobWithDelays(atmosphereTNTAction(dimension, location, entity));
             break;
         case "chunker":
             runJobWithDelays(chunkerTNTAction(dimension, location, chargeLevel, entity));
