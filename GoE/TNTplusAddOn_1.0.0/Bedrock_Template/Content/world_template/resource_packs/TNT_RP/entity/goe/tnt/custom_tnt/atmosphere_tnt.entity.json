@@ -4,7 +4,10 @@
     "description": {
       "identifier": "goe_tnt:atmosphere_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "beam_day": "entity_beam_additive",
+        "beam_night": "entity_beam_additive",
+        "semitransparent": "entity_alphablend"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/atmosphere_tnt"
@@ -17,13 +20,37 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.tnt.swell_atmosphere",
+        "charge": "animation.atmosphere_tnt.charge_night",
+        "charge_day": "animation.atmosphere_tnt.charge_day",
+        "explode": "animation.atmosphere_tnt.explode"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+       "particle_effects": {
+        "atmosphere_day": "goe_tnt:atmosphere_day",
+        "atmosphere_explode_day": "goe_tnt:atmosphere_explode_day",
+        "atmosphere_explode_night": "goe_tnt:atmosphere_explode_night",
+        "atmosphere_night": "goe_tnt:atmosphere_night",
+        "atmosphere_pull_day": "goe_tnt:atmosphere_pull_day",
+        "atmosphere_pull_night": "goe_tnt:atmosphere_pull_night",
+        "atmosphere_ring_day": "goe_tnt:atmosphere_ring_day",
+        "atmosphere_ring_night": "goe_tnt:atmosphere_ring_night",
+        "atmosphere_rotate_day": "goe_tnt:atmosphere_rotate_day",
+        "atmosphere_rotate_night": "goe_tnt:atmosphere_rotate_night",
+        "atmosphere_smoke": "goe_tnt:atmosphere_smoke",
+        "atmosphere_impact_day": "goe_tnt:atmosphere_impact_day",
+        "atmosphere_impact_night": "goe_tnt:atmosphere_impact_night",
+        "atmosphere_impact_radius_day": "goe_tnt:atmosphere_impact_radius_day",
+        "atmosphere_impact_radius_night": "goe_tnt:atmosphere_impact_radius_night",
+        "ground_shake": "goe_tnt:ground_shake"
+       
+      }, 
+      "render_controllers": [ "controller.render.atmosphere_tnt" ]
     }
   }
 }
