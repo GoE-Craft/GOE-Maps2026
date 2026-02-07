@@ -34,6 +34,8 @@
         "sand_tornado" : "goe_tnt:sand_tornado",
         "sand_tornado_tall" : "goe_tnt:sand_tornado_tall",
         "tnt_charge" : "goe_tnt:tnt_charge_yellow",
+        "time_freeze_gold" : "goe_tnt:time_freeze_gold",
+        "time_freeze_inwards": "goe_tnt:time_freeze_inwards",
         "time_freeze_explosion" : "goe_tnt:time_freeze_explosion",
         "big_explosion_yellow" : "goe_tnt:big_explosion_yellow",        
         "sand_explosion" : "goe_tnt:sand_explosion"
