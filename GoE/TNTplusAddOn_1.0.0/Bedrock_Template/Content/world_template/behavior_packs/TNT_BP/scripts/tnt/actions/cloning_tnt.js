@@ -44,21 +44,16 @@ function applySmallUpwardImpulse(targetEntity, dimension) {
         try {
             if (dimension) {
                 const vars = new MolangVariableMap();
-                dimension.spawnParticle("goe_tnt:time_freeze_gold", targetEntity.location, vars);
+                dimension.spawnParticle("goe_tnt:cloning_mob", targetEntity.location, vars);
             }
         } catch {}
     } catch {}
 }
 
 export function* cloningTNTAction(dimension, chargeLevel, location, sourceEntity) {
-    const numericCharge = Number(chargeLevel);
-
-    const effectiveCharge = Number.isFinite(numericCharge)
-        ? Math.max(0, Math.floor(numericCharge) - 1)
-        : 0;
+    const cloneCountPerEntity = chargeLevel + 1;
 
     const effectRadius = 10;
-    const cloneCountPerEntity = 1 + effectiveCharge;
 
     const centerLocation = {
         x: Number(location?.x ?? sourceEntity?.location?.x ?? 0),

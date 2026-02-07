@@ -2,11 +2,8 @@ import { system, BlockPermutation } from "@minecraft/server";
 
 export function* dimensionalTNTAction(dimension, chargeLevel, location, entity) {
 
-    const cl = Number(chargeLevel);
-    const safeChargeLevel = Number.isFinite(cl) ? Math.max(0, cl) : 0;
-
     const baseRadius = 10;
-    const radius = baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
+    const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     yield* destroySphere(dimension, location, radius, entity);
 
@@ -18,7 +15,6 @@ export function* dimensionalTNTAction(dimension, chargeLevel, location, entity) 
         system.runJob(destroySphere(dimension, location, radius, entity));
     }, 20);
 }
-
 
 function* destroySphere(dimension, location, radius, sourceEntity) {
 
@@ -47,7 +43,6 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
                     if (block.typeId !== "minecraft:air") {
                         block.setPermutation(air);
                     }
-
                 } catch {}
             }
         }
@@ -70,14 +65,8 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
         try {
             if (!e?.isValid) continue;
 
-            // exclude players
             if (e.typeId === "minecraft:player") continue;
-
-
-            // exclude all TNT entities
             if (e.typeId && e.typeId.includes("tnt")) continue;
-            // exclude TNT entity itself if still alive (legacy, covered by above)
-            // if (sourceEntity && e.id === sourceEntity.id) continue;
 
             e.kill();
         } catch {}

@@ -2,23 +2,12 @@ import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
 
 // Freeze TNT Action (applies slow + ice cube + optional damage, and replaces nearby blocks with ice)
 export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntity, excludePlayerId) {
-    let resolvedChargeLevel = Number(chargeLevel);
-
-    try {
-        const dynamicPropertyChargeLevel = sourceEntity?.getDynamicProperty?.("goe_tnt_charge_level");
-        const dynamicPropertyChargeLevelNumber = Number(dynamicPropertyChargeLevel);
-        if (Number.isFinite(dynamicPropertyChargeLevelNumber)) resolvedChargeLevel = dynamicPropertyChargeLevelNumber;
-    } catch {}
-
-    // Charges: allow 0..n (0 = no charges)
-    const safeChargeLevel = Number.isFinite(resolvedChargeLevel) ? resolvedChargeLevel : 0;
-    const normalizedChargeLevel = Math.max(0, safeChargeLevel);
 
     const molangVariables = new MolangVariableMap();
 
     // Base radius 5, each charge adds a flat +25% of base (not compounded)
     const baseRadius = 5;
-    const radius = baseRadius + Math.round(baseRadius * 0.25 * normalizedChargeLevel);
+    const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     molangVariables.setFloat("radius", radius);
     dimension.spawnParticle("goe_tnt:freezing_fog", location, molangVariables);

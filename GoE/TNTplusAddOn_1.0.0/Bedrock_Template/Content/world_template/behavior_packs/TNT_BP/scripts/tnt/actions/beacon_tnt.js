@@ -4,8 +4,7 @@ export function* beaconTNTAction(dimension, chargeLevel, location, entity) {
     const radius = 32;
     const durationTicks = 10 * 60 * 20;
 
-    const charge = Number(chargeLevel);
-    const amplifier = Number.isFinite(charge) ? Math.max(0, Math.floor(charge)) : 0;
+    const amplifier = Math.floor(Number(chargeLevel));
 
     const loc = {
         x: Number(location?.x ?? 0),

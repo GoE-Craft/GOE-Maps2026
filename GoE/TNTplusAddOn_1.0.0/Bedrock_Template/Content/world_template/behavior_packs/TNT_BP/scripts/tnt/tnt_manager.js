@@ -36,7 +36,7 @@ export function activateTNTBlock(block, player) {
         console.log(`TNT data not found for block ID: ${block.typeId}`);
         return;
     }
-    const chargeLevel = block.permutation.getState("goe_tnt:charge_level") || 1;
+    const chargeLevel = block.permutation.getState("goe_tnt:charge_level") ?? 0;
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const dimension = block.dimension;
     block.setPermutation(BlockPermutation.resolve("minecraft:air"))
@@ -559,7 +559,7 @@ export function processExplosion(block) {
         const gld = tnt_gld.getTntDataByBlockId(block.typeId);
         if (!gld) return;
         const perm = block.permutation;
-        const power = perm.getState("goe_tnt:charge_level") || 1;
+        const power = perm.getState("goe_tnt:charge_level") ?? 0;
         const direction = perm.getState("minecraft:cardinal_direction");
         const spawnYaw = utils.getYawFromFace(direction);
         igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id, undefined, spawnYaw);

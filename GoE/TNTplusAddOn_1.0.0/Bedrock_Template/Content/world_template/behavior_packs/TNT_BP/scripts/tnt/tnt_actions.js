@@ -21,7 +21,13 @@ import { villagerDecoyTNTAction } from "./actions/villager_decoy_tnt";
 import { honeyTNTAction } from "./actions/honey_tnt";
 import { cloningTNTAction } from "./actions/cloning_tnt";
 import { beaconTNTAction } from "./actions/beacon_tnt";
-import { endermiteDecoyTNTAction } from "./actions/endermite_decoy_tnt";
+import { endermiteDecoyTNTPreAction, endermiteDecoyTNTAction } from "./actions/endermite_decoy_tnt";
+import { glassTNTAction } from "./actions/glass_tnt";
+import { furnaceTNTAction } from "./actions/furnace_tnt";
+import { mobEraserTNTAction } from "./actions/mob_eraser_tnt";
+import { magmaEraserTNTAction } from "./actions/magma_eraser_tnt";
+import { lightUpTNTAction } from "./actions/light_up_tnt";
+import { thiefTNTAction } from "./actions/thief_tnt";
 
 /**
  * TNT Actions Module
@@ -44,6 +50,10 @@ export function handlePreSpecialAction(entity, chargeLevel, tntData, fuseRemaini
         case "magnet":
             magnetTNTPreAction(entity, chargeLevel, fuseRemaining);
             break;
+        case "endermite_decoy":
+            endermiteDecoyTNTPreAction(entity.dimension, chargeLevel, entity.location, entity, fuseRemaining);
+            break;
+
         default:
             break;
     }
@@ -135,6 +145,24 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "endermite_decoy":
             system.runJob(endermiteDecoyTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "glass":
+            system.runJob(glassTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "furnace":
+            system.runJob(furnaceTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "mob_eraser":
+            system.runJob(mobEraserTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "magma_eraser":
+            system.runJob(magmaEraserTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "light_up":
+            system.runJob(lightUpTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "thief_tnt":
+            system.runJob(thiefTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;

@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:time_freeze_gold",
+			"identifier": "goe_tnt:cloning_mob",
 			"basic_render_parameters": {
 				"material": "particles_blend",
 				"texture": "textures/goe/tnt/particles/magnet_particle"

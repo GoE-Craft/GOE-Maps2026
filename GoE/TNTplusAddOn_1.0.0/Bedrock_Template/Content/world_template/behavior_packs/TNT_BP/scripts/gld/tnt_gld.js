@@ -491,7 +491,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:honey_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 2,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -520,7 +520,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:cloning_tnt",
         fuseTime: 40,
-        power: 4,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -592,12 +592,12 @@ export const TNT_GLD = [
             specialAction: "endermite_decoy"
         },
         preExplosionProperties: {
-            specialAction: null
+            specialAction: "endermite_decoy"
         }
     },
     {
         blockId: "goe_tnt:glass_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 6.5,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -625,7 +625,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:furnace_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -653,7 +653,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:mob_eraser_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -681,7 +681,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:magma_eraser_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 2,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -709,7 +709,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:light_up_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -737,8 +737,8 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:thief_tnt",
-        fuseTime: 80,
-        power: 4,
+        fuseTime: 40,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -757,7 +757,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "thief"
+            specialAction: "thief_tnt"
         },
         preExplosionProperties: {
             specialAction: null

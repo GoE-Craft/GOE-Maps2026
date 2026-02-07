@@ -61,19 +61,8 @@ export function registerRespawnStorage() {
 // Teleportation TNT Action
 export function* teleportationTNTAction(dimension, chargeLevel, location, tntEntity) {
 
-    let resolvedChargeLevel = Number(chargeLevel);
-
-    try {
-        const dynamicPropertyChargeLevel = tntEntity?.getDynamicProperty?.("goe_tnt_charge_level");
-        if (dynamicPropertyChargeLevel !== undefined && dynamicPropertyChargeLevel !== null) {
-            resolvedChargeLevel = Number(dynamicPropertyChargeLevel);
-        }
-    } catch {}
-
-    const safeChargeLevel = Number.isFinite(resolvedChargeLevel) ? Math.max(0, resolvedChargeLevel) : 0;
-
     const baseRadius = 5;
-    const radius = baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
+    const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     const explosionLocation = {
         x: Number(location?.x ?? 0),

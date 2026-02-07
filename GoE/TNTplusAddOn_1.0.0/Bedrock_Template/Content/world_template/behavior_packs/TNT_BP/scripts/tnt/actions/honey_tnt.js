@@ -2,22 +2,18 @@ import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
 
 // Spawn bees and replace blocks in a spherical radius with honey blocks (skips air/water/lava), scaled by charge level
 export function* honeyTNTAction(dimension, chargeLevel, location, sourceEntity) {
-    const charge = Number(chargeLevel);
-
-    const normalizedCharge = Number.isFinite(charge)
-        ? Math.max(0, Math.floor(charge) - 1)
-        : 0;
 
     const baseRadius = 5;
-    const radius = baseRadius + Math.round(baseRadius * 0.25 * normalizedCharge);
+    const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     const molangVariables = new MolangVariableMap();
     molangVariables.setFloat("radius", radius);
 
     const baseMinBees = 7;
     const baseMaxBees = 12;
-    const minBeeCount = baseMinBees + normalizedCharge;
-    const maxBeeCount = baseMaxBees + (normalizedCharge * 2);
+
+    const minBeeCount = baseMinBees + chargeLevel;
+    const maxBeeCount = baseMaxBees + (chargeLevel * 2);
 
     const explosionLocation = {
         x: Number(location?.x ?? 0),

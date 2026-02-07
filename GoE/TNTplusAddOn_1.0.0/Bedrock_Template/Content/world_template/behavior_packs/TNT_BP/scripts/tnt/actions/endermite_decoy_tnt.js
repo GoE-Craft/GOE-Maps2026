@@ -1,29 +1,26 @@
-import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
+import { BlockPermutation } from "@minecraft/server";
 
-export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entity) {
-    const charge = Number(chargeLevel);
-    const safeCharge = Number.isFinite(charge) ? Math.max(0, Math.floor(charge)) : 0;
+export function endermiteDecoyTNTPreAction(dimension, chargeLevel, location, entity, fuseRemaining) {
 
     const baseRadius = 50;
-    const radius = baseRadius + Math.round(baseRadius * 0.25 * safeCharge);
+    const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
-    const loc = {
-        x: Number(location?.x ?? 0),
-        y: Number(location?.y ?? 0),
-        z: Number(location?.z ?? 0)
-    };
-
-    const cx = Math.floor(loc.x);
-    const cy = Math.floor(loc.y);
-    const cz = Math.floor(loc.z);
-
-    yield;
+    const cx = Math.floor(location.x);
+    const cy = Math.floor(location.y);
+    const cz = Math.floor(location.z);
 
     try {
         dimension.runCommand(
             `event entity @e[type=minecraft:enderman,x=${cx},y=${cy},z=${cz},r=${radius}] minecraft:become_angry`
         );
     } catch {}
+}
+
+export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entity) {
+
+    const cx = Math.floor(location.x);
+    const cy = Math.floor(location.y);
+    const cz = Math.floor(location.z);
 
     const obsidianRadius = 2;
     const obsidianRadiusSquared = obsidianRadius * obsidianRadius;
@@ -34,11 +31,12 @@ export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entit
     for (let x = cx - obsidianRadius; x <= cx + obsidianRadius; x++) {
         for (let y = cy - obsidianRadius; y <= cy + obsidianRadius; y++) {
             for (let z = cz - obsidianRadius; z <= cz + obsidianRadius; z++) {
-                const deltaX = x - cx;
-                const deltaY = y - cy;
-                const deltaZ = z - cz;
 
-                if ((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) > obsidianRadiusSquared) continue;
+                const dx = x - cx;
+                const dy = y - cy;
+                const dz = z - cz;
+
+                if ((dx * dx + dy * dy + dz * dz) > obsidianRadiusSquared) continue;
 
                 try {
                     const targetBlock = dimension.getBlock({ x, y, z });
