@@ -103,7 +103,7 @@
     },
     "controller.render.healing_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default",  "beam" : "material.beam"} ],
+      "materials": [ { "*": "Material.default",  "beam*" : "material.beam"} ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
         "r": "1.0",

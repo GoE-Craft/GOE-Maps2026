@@ -138,7 +138,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.explode",
+            soundEffect: "random.fizz",
             soundDelay: 0
         },
         explosionProperties: {
@@ -359,7 +359,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:prison_tnt",
-        fuseTime: 40,
+        fuseTime: 80,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -423,7 +423,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.explode",
+            soundEffect: "random.fizz",
             soundDelay: 0
         },
         explosionProperties: {
@@ -466,7 +466,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:villager_decoy_tnt",
         fuseTime: 82,
-        power: 1,
+        power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -490,33 +490,8 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:honey_tnt",
-        fuseTime: 50,
-        power: 1,
-        fuseEffects: {
-            particleEffect: "minecraft:basic_smoke_particle",
-            particleDelay: 10,
-            soundEffect: "random.fuse",
-            soundDelay: 0
-        },
-        explosionEffects: {
-            explosionAnimationLength: 1
-        },
-        explosionProperties: {
-            createsFire: false,
-            allowUnderwater: false,
-            breaksBlocks: false,
-            summonMob: null,
-            summonDelay: 10,
-            specialAction: "honey"
-        },
-        preExplosionProperties: {
-            specialAction: null
-        }
-    },
-    {
-        blockId: "goe_tnt:cloning_tnt",
-        fuseTime: 40,
-        power: 1,
+        fuseTime: 80,
+        power: 2,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -535,6 +510,31 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
+            specialAction: "honey"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        }
+    },
+    {
+        blockId: "goe_tnt:cloning_tnt",
+        fuseTime: 40,
+        power: 4,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            explosionAnimationLength: 3
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
             specialAction: "cloning"
         },
         preExplosionProperties: {
@@ -543,7 +543,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:beacon_tnt",
-        fuseTime: 40,
+        fuseTime: 80,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -571,7 +571,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:endermite_decoy_tnt",
-        fuseTime: 40,
+        fuseTime: 80,
         power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",

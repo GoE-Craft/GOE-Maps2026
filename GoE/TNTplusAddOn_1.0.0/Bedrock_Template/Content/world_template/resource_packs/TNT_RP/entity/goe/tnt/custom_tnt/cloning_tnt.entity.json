@@ -4,7 +4,8 @@
     "description": {
       "identifier": "goe_tnt:cloning_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "beam" : "goe_tnt_border"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/cloning_tnt"
@@ -16,14 +17,27 @@
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
+        "initialize": [
+          "v.goe_random_rot = math.random(0,360);"
+        ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "q.mark_variant == 1"},
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.cloning_tnt.swell",
+        "charge" : "animation.cloning_tnt.charge",
+        "explosion" : "animation.cloning_tnt.explosion"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "tnt_charge": "goe_tnt:tnt_charge_blue_and_red",
+        "atoms": "goe_tnt:cloning_inwards",
+        "cloning_atom_explosion" : "goe_tnt:cloning_atom_explosion",
+        "cloning_explosion": "goe_tnt:cloning_explosion"
+      },
+      "render_controllers": [ "controller.render.healing_tnt"]
     }
   }
 }
