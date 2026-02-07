@@ -25,5 +25,43 @@ export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entit
         );
     } catch {}
 
+    const obsidianRadius = 2;
+    const obsidianRadiusSquared = obsidianRadius * obsidianRadius;
+    const obsidianPermutation = BlockPermutation.resolve("minecraft:obsidian");
+
+    let operationCounter = 0;
+
+    for (let x = cx - obsidianRadius; x <= cx + obsidianRadius; x++) {
+        for (let y = cy - obsidianRadius; y <= cy + obsidianRadius; y++) {
+            for (let z = cz - obsidianRadius; z <= cz + obsidianRadius; z++) {
+                const deltaX = x - cx;
+                const deltaY = y - cy;
+                const deltaZ = z - cz;
+
+                if ((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) > obsidianRadiusSquared) continue;
+
+                try {
+                    const targetBlock = dimension.getBlock({ x, y, z });
+                    if (!targetBlock) continue;
+
+                    const blockType = targetBlock.typeId || "";
+                    if (
+                        blockType === "minecraft:air" ||
+                        blockType === "minecraft:cave_air" ||
+                        blockType === "minecraft:water" ||
+                        blockType === "minecraft:lava"
+                    ) {
+                        continue;
+                    }
+
+                    targetBlock.setPermutation(obsidianPermutation);
+                } catch {}
+
+                operationCounter++;
+                if ((operationCounter % 60) === 0) yield;
+            }
+        }
+    }
+
     yield;
 }
