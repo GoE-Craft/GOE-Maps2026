@@ -35,7 +35,6 @@ export const TntDetonatorComponent = {
 };
 
 export function fireLaser(player, params) {
-    // Get the block the player is looking at within a certain range
     const maxDistance = params.range ?? 20;
 
     system.runJob(shootLaserProjectile(player, maxDistance));
@@ -43,20 +42,22 @@ export function fireLaser(player, params) {
     const ray = player.getBlockFromViewDirection({ maxDistance: maxDistance });
     const block = ray?.block;
     if (!block) return;
+
     if (block.isValid && block.hasTag("goe_tnt:custom_tnt")) {
-        tnt_manager.activateTNTBlock(block);
+        tnt_manager.activateTNTBlock(block, player);
     }
 
     if (!params.area) return;
 
     const radius = params.radius ? params.radius : 5;
-    system.runJob(activateBlocksInArea(block.location, radius, radius, radius, block.dimension));
+    system.runJob(activateBlocksInArea(block.location, radius, radius, radius, block.dimension, player));
 }
 
-function* activateBlocksInArea(centerLocation, width, height, depth, dimension) {
+function* activateBlocksInArea(centerLocation, width, height, depth, dimension, player) {
     const startX = centerLocation.x - Math.floor(width / 2);
     const startY = centerLocation.y - Math.floor(height / 2);
     const startZ = centerLocation.z - Math.floor(depth / 2);
+
     for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
             for (let z = 0; z < depth; z++) {
@@ -66,7 +67,7 @@ function* activateBlocksInArea(centerLocation, width, height, depth, dimension) 
                     z: startZ + z,
                 });
                 if (block && block.isValid && block.hasTag("goe_tnt:custom_tnt")) {
-                    tnt_manager.activateTNTBlock(block);
+                    tnt_manager.activateTNTBlock(block, player);
                 }
             }
         }
