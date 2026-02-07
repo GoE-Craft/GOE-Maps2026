@@ -1710,6 +1710,35 @@
 					]
 				},
 				{
+					"name": "ui_perimeter_base",
+					"parent": "ui_perimeter",
+					"pivot": [0, -22.25, 0],
+					"cubes": [
+						{
+							"origin": [-4.95, 0.25, -4.95],
+							"size": [9.9, 0.2, 9.9],
+							"inflate": 0.15,
+							"uv": {
+								"north": {"uv": [196, 60], "uv_size": [60, 4]},
+								"east": {"uv": [196, 60], "uv_size": [60, 4]},
+								"south": {"uv": [196, 60], "uv_size": [60, 4]},
+								"west": {"uv": [196, 60], "uv_size": [60, 4]}
+							}
+						},
+						{
+							"origin": [-4.95, 13.65, -4.95],
+							"size": [9.9, 0.2, 9.9],
+							"inflate": 0.15,
+							"uv": {
+								"north": {"uv": [196, 60], "uv_size": [60, 4]},
+								"east": {"uv": [196, 60], "uv_size": [60, 4]},
+								"south": {"uv": [196, 60], "uv_size": [60, 4]},
+								"west": {"uv": [196, 60], "uv_size": [60, 4]}
+							}
+						}
+					]
+				},
+				{
 					"name": "ui_signs",
 					"parent": "ui_perimeter_shake",
 					"pivot": [0, -3, 0]
@@ -1769,39 +1798,6 @@
 							"size": [10, 2, 10],
 							"uv": {
 								"north": {"uv": [196, 207], "uv_size": [60, 49]}
-							}
-						}
-					]
-				},
-				{
-					"name": "ui_perimeter_base",
-					"parent": "ui_perimeter_shake",
-					"pivot": [0, -22.25, 0],
-					"cubes": [
-						{
-							"origin": [-5.15, 0.25, -5.15],
-							"size": [10.3, 0.2, 10.3],
-							"inflate": 0.15,
-							"uv": {
-								"north": {"uv": [196, 60], "uv_size": [60, 4]},
-								"east": {"uv": [196, 60], "uv_size": [60, 4]},
-								"south": {"uv": [196, 60], "uv_size": [60, 4]},
-								"west": {"uv": [196, 60], "uv_size": [60, 4]},
-								"up": {"uv": [196, 0], "uv_size": [60, 60]},
-								"down": {"uv": [196, 60], "uv_size": [60, -60]}
-							}
-						},
-						{
-							"origin": [-5.15, 13.65, -5.15],
-							"size": [10.3, 0.2, 10.3],
-							"inflate": 0.15,
-							"uv": {
-								"north": {"uv": [196, 60], "uv_size": [60, 4]},
-								"east": {"uv": [196, 60], "uv_size": [60, 4]},
-								"south": {"uv": [196, 60], "uv_size": [60, 4]},
-								"west": {"uv": [196, 60], "uv_size": [60, 4]},
-								"up": {"uv": [196, 0], "uv_size": [60, 60]},
-								"down": {"uv": [196, 60], "uv_size": [60, -60]}
 							}
 						}
 					]

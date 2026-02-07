@@ -33,7 +33,9 @@
       },
       "particle_effects": {
         "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow",
-        "one_big_puff": "goe_tnt:one_big_puff"
+        "one_big_puff": "goe_tnt:one_big_puff",
+        "construction_dust": "goe_tnt:construction_dust",
+        "construction_stars": "goe_tnt:construction_stars"
       },
       "render_controllers": [ 
         "controller.render.tnt",
