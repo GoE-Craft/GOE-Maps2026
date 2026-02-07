@@ -2,7 +2,7 @@ import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
 
 export function* beaconTNTAction(dimension, chargeLevel, location, entity) {
     const radius = 32;
-    const durationTicks = 5 * 60 * 20;
+    const durationTicks = 10 * 60 * 20;
 
     const charge = Number(chargeLevel);
     const amplifier = Number.isFinite(charge) ? Math.max(0, Math.floor(charge)) : 0;
@@ -39,7 +39,7 @@ export function* beaconTNTAction(dimension, chargeLevel, location, entity) {
 
         for (const ef of effects) {
             try {
-                p.addEffect(ef.id, durationTicks, { amplifier, showParticles: false });
+                p.addEffect(ef.id, durationTicks, { amplifier, showParticles: true });
             } catch {}
         }
     }

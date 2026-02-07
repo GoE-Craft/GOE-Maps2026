@@ -1,4 +1,4 @@
-import { system } from "@minecraft/server";
+import { system, MolangVariableMap } from "@minecraft/server";
 
 function entityHasMobFamily(targetEntity) {
     let typeFamilyComponent;
@@ -27,7 +27,7 @@ function entityHasMobFamily(targetEntity) {
     return Array.isArray(fallbackFamilies) && fallbackFamilies.includes("mob");
 }
 
-function applySmallUpwardImpulse(targetEntity) {
+function applySmallUpwardImpulse(targetEntity, dimension) {
     try {
         if (!targetEntity?.isValid) return;
 
@@ -40,6 +40,13 @@ function applySmallUpwardImpulse(targetEntity) {
             y: upwardStrength,
             z: Math.sin(randomAngle) * horizontalStrength
         });
+
+        try {
+            if (dimension) {
+                const vars = new MolangVariableMap();
+                dimension.spawnParticle("goe_tnt:time_freeze_gold", targetEntity.location, vars);
+            }
+        } catch {}
     } catch {}
 }
 
@@ -80,7 +87,7 @@ export function* cloningTNTAction(dimension, chargeLevel, location, sourceEntity
     }
 
     for (const originalEntity of mobTargets) {
-        applySmallUpwardImpulse(originalEntity);
+        applySmallUpwardImpulse(originalEntity, dimension);
         yield;
     }
 
@@ -97,7 +104,7 @@ export function* cloningTNTAction(dimension, chargeLevel, location, sourceEntity
         for (let cloneIndex = 0; cloneIndex < cloneCountPerEntity; cloneIndex++) {
             try {
                 const clonedEntity = dimension.spawnEntity(entityTypeId, spawnLocation);
-                applySmallUpwardImpulse(clonedEntity);
+                applySmallUpwardImpulse(clonedEntity, dimension);
             } catch {}
 
             yield;
