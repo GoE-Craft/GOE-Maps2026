@@ -7,7 +7,9 @@
         "default": "entity_alphatest",
         "beam_day": "entity_beam_additive",
         "beam_night": "entity_beam_additive",
-        "semitransparent": "entity_alphablend"
+        "semitransparent_1": "entity_alphablend",
+        "semitransparent_2": "entity_alphablend",
+        "semitransparent_3": "entity_alphablend"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/atmosphere_tnt"
@@ -20,16 +22,17 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"},
+          {"tnt_swelling": "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell_atmosphere",
+        "tnt_swelling": "animation.tnt.swell_atmosphere_night",
         "charge": "animation.atmosphere_tnt.charge_night",
         "charge_day": "animation.atmosphere_tnt.charge_day",
-        "explode": "animation.atmosphere_tnt.explode"
+        "explode": "animation.atmosphere_tnt.explode_night",
+        "explode_day": "animation.atmosphere_tnt.explode_day"
       },
        "particle_effects": {
         "atmosphere_day": "goe_tnt:atmosphere_day",
@@ -47,7 +50,9 @@
         "atmosphere_impact_night": "goe_tnt:atmosphere_impact_night",
         "atmosphere_impact_radius_day": "goe_tnt:atmosphere_impact_radius_day",
         "atmosphere_impact_radius_night": "goe_tnt:atmosphere_impact_radius_night",
-        "ground_shake": "goe_tnt:ground_shake"
+        "ground_shake": "goe_tnt:ground_shake",
+        "tnt_charge_darkblue": "goe_tnt:tnt_charge_darkblue",
+        "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow"
        
       }, 
       "render_controllers": [ "controller.render.atmosphere_tnt" ]

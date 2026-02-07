@@ -412,7 +412,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:atmosphere_tnt",
-        fuseTime: 80,
+        fuseTime: 40,
         power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -421,9 +421,10 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
+            explosionAnimationLength: 0.5,
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {

@@ -22,9 +22,10 @@
 				"max_particles": 130
 			},
 			"minecraft:emitter_lifetime_once": {
-				"active_time": 1
+				"active_time": 2.3
 			},
 			"minecraft:emitter_shape_sphere": {
+				"offset": [0, 0.6, 0],
 				"radius": 1.5,
 				"surface_only": true,
 				"direction": "inwards"
