@@ -39,10 +39,10 @@ export function* timeFreezeTNTAction(dimension, chargeLevel, location, sourceEnt
         try {
             if (excludePlayerId && nearbyEntity.id === excludePlayerId) continue;
 
-            nearbyEntity.addEffect("slowness", freezeTicks, { amplifier: 255, showParticles: true });
+            nearbyEntity.addEffect("slowness", freezeTicks, { amplifier: 100, showParticles: true });
             nearbyEntity.clearVelocity();
         } catch {}
     }
-
+    
     yield;
 }

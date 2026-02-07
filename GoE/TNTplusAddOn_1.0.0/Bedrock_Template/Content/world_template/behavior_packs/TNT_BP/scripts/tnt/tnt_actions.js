@@ -20,6 +20,8 @@ import { healingTNTAction } from "./actions/healing_tnt";
 import { villagerDecoyTNTAction } from "./actions/villager_decoy_tnt";
 import { honeyTNTAction } from "./actions/honey_tnt";
 import { cloningTNTAction } from "./actions/cloning_tnt";
+import { beaconTNTAction } from "./actions/beacon_tnt";
+import { endermiteDecoyTNTAction } from "./actions/endermite_decoy_tnt";
 
 /**
  * TNT Actions Module
@@ -128,7 +130,13 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "cloning":
             system.runJob(cloningTNTAction(dimension, chargeLevel, location, entity));
             break;
-        default:   
+        case "beacon":
+            system.runJob(beaconTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "endermite_decoy":
+            system.runJob(endermiteDecoyTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        default:
             break;
     }
 }
