@@ -1,6 +1,11 @@
-import { BlockPermutation } from "@minecraft/server";
+import { BlockPermutation, system } from "@minecraft/server";
+import { specialActionIntervals } from "../tnt_actions";
 
-export function endermiteDecoyTNTPreAction(dimension, chargeLevel, location, entity, fuseRemaining) {
+export function endermiteDecoyTNTPreAction(entity, chargeLevel, fuseRemaining) {
+    if (!entity?.isValid) return;
+
+    const dimension = entity.dimension;
+    const location = entity.location;
 
     const baseRadius = 50;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
@@ -9,11 +14,31 @@ export function endermiteDecoyTNTPreAction(dimension, chargeLevel, location, ent
     const cy = Math.floor(location.y);
     const cz = Math.floor(location.z);
 
+    const preActionIntervalId = system.runInterval(() => {
+        if (!entity?.isValid) {
+            system.clearRun(preActionIntervalId);
+            return;
+        }
+        system.runJob(preActionJob(dimension, cx, cy, cz, radius));
+    }, 1);
+
+    // Store interval ID so it can be cleaned up on explosion
+    specialActionIntervals.set(entity.id, preActionIntervalId);
+
+    system.runTimeout(() => {
+        system.clearRun(preActionIntervalId);
+        specialActionIntervals.delete(entity.id);
+    }, fuseRemaining);
+}
+
+function* preActionJob(dimension, cx, cy, cz, radius) {
     try {
         dimension.runCommand(
             `event entity @e[type=minecraft:enderman,x=${cx},y=${cy},z=${cz},r=${radius}] minecraft:become_angry`
         );
     } catch {}
+
+    yield;
 }
 
 export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entity) {
@@ -53,7 +78,7 @@ export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entit
                     }
 
                     targetBlock.setPermutation(obsidianPermutation);
-                } catch {}
+                } catch { }
 
                 operationCounter++;
                 if ((operationCounter % 60) === 0) yield;

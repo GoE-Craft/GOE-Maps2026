@@ -572,7 +572,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:endermite_decoy_tnt",
-        fuseTime: 100,
+        fuseTime: 82,
         power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",

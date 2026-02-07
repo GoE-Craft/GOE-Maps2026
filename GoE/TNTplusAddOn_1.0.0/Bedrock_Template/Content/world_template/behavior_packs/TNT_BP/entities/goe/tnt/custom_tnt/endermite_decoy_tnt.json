@@ -40,7 +40,7 @@
         },
         "components": {
             "minecraft:type_family": {
-                "family": [ "custom_tnt", "inanimate", "endermite" ]
+                "family": [ "custom_tnt", "inanimate", "endermite"]
             },
             "minecraft:damage_sensor": {
                 "triggers": [

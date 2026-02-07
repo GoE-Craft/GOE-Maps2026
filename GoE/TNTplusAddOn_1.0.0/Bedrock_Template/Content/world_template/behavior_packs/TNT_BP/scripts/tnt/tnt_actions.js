@@ -37,7 +37,7 @@ import { thiefTNTAction } from "./actions/thief_tnt";
  */
 
 export const excludePlayer = new Map();
-const specialActionIntervals = new Map();
+export const specialActionIntervals = new Map();
 
 /**
  * TNT Pre Explosion Actions
@@ -51,9 +51,8 @@ export function handlePreSpecialAction(entity, chargeLevel, tntData, fuseRemaini
             magnetTNTPreAction(entity, chargeLevel, fuseRemaining);
             break;
         case "endermite_decoy":
-            endermiteDecoyTNTPreAction(entity.dimension, chargeLevel, entity.location, entity, fuseRemaining);
+            endermiteDecoyTNTPreAction(entity, chargeLevel, fuseRemaining);
             break;
-
         default:
             break;
     }

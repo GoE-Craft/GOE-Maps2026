@@ -289,7 +289,7 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
     const entityId = entity.id;
     stopCountdown(entity);
     activeTimeouts.delete(entityId);
-    const power = tntData.power * ((0.25 * tntData.power) * chargeLevel);
+    const power = tntData.power * (1 + ((0.25 * tntData.power) * chargeLevel));
 
     try {
         if (dim.isChunkLoaded(loc)) {
