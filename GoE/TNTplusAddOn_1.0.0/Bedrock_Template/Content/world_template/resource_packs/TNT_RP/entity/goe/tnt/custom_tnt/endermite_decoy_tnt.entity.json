@@ -4,7 +4,9 @@
     "description": {
       "identifier": "goe_tnt:endermite_decoy_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "alphatest": "entity_alphatest",
+        "transparent": "entity_beam_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/endermite_decoy_tnt"
@@ -17,13 +19,27 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.endermite_decoy_tnt.swell",
+        "charge": "animation.endermite_decoy_tnt.charge",
+        "explode": "animation.endermite_decoy_tnt.explode"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "ender_sparkle_pink": "goe_tnt:ender_sparkle_pink",
+        "ender_sparkle": "goe_tnt:ender_sparkle",
+        "tnt_charge_purple": "goe_tnt:tnt_charge_purple",
+        "ender_fog": "goe_tnt:ender_fog",
+        "ender_effect": "goe_tnt:ender_effect",
+        "ender_sparkle_explosion": "goe_tnt:ender_sparkle_explosion",
+        "enderman": "goe_tnt:enderman",
+        "enderman2": "goe_tnt:enderman2"
+      },
+      "render_controllers": [ "controller.render.endermite_decoy_tnt" ]
     }
   }
 }
