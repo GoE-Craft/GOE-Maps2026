@@ -108,7 +108,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             system.runJob(arrowStormTNTAction(dimension, location, chargeLevel));
             break;
         case "ultron":
-            system.runJob(ultronTNTAction(dimension, location, 30, entity));
+            system.runJob(ultronTNTAction(dimension, location, 20, entity));
             break;
         case "time_freeze":
             const excludePlayerId = excludePlayer.get(entity?.id);

@@ -5,7 +5,7 @@ export function* ultronTNTAction(dimension, centerLocation, explosionRadius) {
 
     // CONFIGURATION
     const horizontalRadius = explosionRadius;       
-    const verticalRadius = explosionRadius * 0.5;   // Adjusted for a nice squashed look
+    const verticalRadius = explosionRadius * 0.7;   // Adjusted for a nice squashed look
 
     // 1. COLLECTION PHASE (Fast Math)
     const ceilH = Math.ceil(horizontalRadius);
