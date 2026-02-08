@@ -18,7 +18,7 @@
           "v.raining = q.property('goe_tnt:is_raining');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"},
+          {"tnt_swelling": "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1 && !v.raining"},
           {"charge_sun": "q.mark_variant == 1 && v.raining"},
           {"explode": "q.mark_variant == 2 && !v.raining"},
@@ -26,7 +26,7 @@
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell_weather",
+        "tnt_swelling": "animation.tnt.swell_weather_rain",
         "charge": "animation.weather_tnt.charge_rain",
         "charge_sun": "animation.weather_tnt.charge_sun",
         "explode":"animation.weather_tnt.explode_rain",

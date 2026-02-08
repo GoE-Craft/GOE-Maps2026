@@ -35,7 +35,7 @@ export const TNT_GLD = [
             particleEffect: "goe_tnt:fuse_orange_chunk",
             particleDelay: 20,
             soundEffect: "goe_tnt:directional_tnt",
-            soundDelay: 30
+            soundDelay: 30,
         },
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
@@ -138,7 +138,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.explosion",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {
@@ -257,7 +257,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:weather_station_tnt",
         fuseTime: 40,
-        power: 0,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -290,7 +290,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            explosionAnimationLength: 4
+            explosionAnimationLength: 0.5
         },
         explosionProperties: {
             createsFire: false,
@@ -572,7 +572,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:endermite_decoy_tnt",
-        fuseTime: 82,
+        fuseTime: 100,
         power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",

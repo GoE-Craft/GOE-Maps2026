@@ -20,7 +20,6 @@
         "animate": [
           {"tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
           {"charge": "q.mark_variant == 1"}
-          //{"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {

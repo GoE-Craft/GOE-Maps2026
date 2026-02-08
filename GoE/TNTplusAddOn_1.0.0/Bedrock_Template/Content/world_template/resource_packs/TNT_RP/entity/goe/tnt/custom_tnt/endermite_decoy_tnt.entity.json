@@ -15,11 +15,7 @@
         "default": "geometry.endermite_decoy_tnt"
       },
 			"scripts": {
-        "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
-        ],
         "animate": [
-          {"tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"}
         ]

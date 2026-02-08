@@ -19,7 +19,7 @@ export function* directionalTNTAction(dimension, location, vec, length, widthRad
     }
 
     const bottomY = Math.round(location.y);
-    const heightSpan = heightRadius + 2;
+    const heightSpan = heightRadius + 1;
 
     for (let s = 0; s < steps; s++) {
         const baseX = Math.floor(location.x);

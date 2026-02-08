@@ -25,20 +25,11 @@ export function* healingTNTAction(dimension, chargeLevel, location, excludePlaye
     for (const nearbyEntity of nearbyEntities) {
         try {
             if (!nearbyEntity?.isValid) continue;
-            if (nearbyEntity.typeId !== "minecraft:player") continue;
-            if (excludePlayerId && nearbyEntity.id === excludePlayerId) continue;
-
-            const health = nearbyEntity.getComponent("minecraft:health");
-            if (!health) continue;
-
-            // Heal to full health
-            health.setCurrentValue(health.effectiveMax);
-
-            // Add particle here
-            /* try {
-                dimension.spawnParticle("goe_tnt:someID", nearbyEntity.location, variables);
-            } catch {} */
-        } catch { }
+            
+            nearbyEntity.runCommand(`effect @s instant_health 1 255 true`);
+        } catch (e) {
+            console.error(`Error applying healing effect to entity ${nearbyEntity.id}:`, e);
+        }
     }
 
     yield;

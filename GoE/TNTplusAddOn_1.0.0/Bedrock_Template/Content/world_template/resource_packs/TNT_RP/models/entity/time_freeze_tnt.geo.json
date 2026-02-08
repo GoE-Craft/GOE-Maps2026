@@ -237,7 +237,7 @@
 					"parent": "bb_main_normal",
 					"pivot": [0, 0, 0],
 					"cubes": [
-						{"origin": [-8, 7.6, -8], "size": [16, 10, 16], "inflate": -0.3, "uv": [80, 0]}
+						{"origin": [-8, 7.6, -8], "size": [16, 8, 16], "inflate": -0.3, "uv": [80, 2]}
 					]
 				},
 				{

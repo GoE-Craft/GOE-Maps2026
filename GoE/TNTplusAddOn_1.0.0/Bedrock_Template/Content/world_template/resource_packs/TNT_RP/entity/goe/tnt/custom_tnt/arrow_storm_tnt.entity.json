@@ -17,7 +17,6 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"}
         ]

@@ -256,7 +256,7 @@ function startFuseEffects(entity, tntData, fuseTime) {
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
-            dim.playSound(tntData.fuseEffects.soundEffect, entity.location);
+            dim.playSound(tntData.fuseEffects.soundEffect, entity.location, { pitch: tntData.fuseEffects.soundPitch ?? 1 });
         } catch (e) { }
     }, tntData.fuseEffects.soundDelay || 0);
 

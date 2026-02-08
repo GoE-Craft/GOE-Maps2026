@@ -214,7 +214,7 @@
 			}
 		},
 		"animation.time_freeze_tnt.explosion": {
-			"animation_length": 4,
+			"animation_length": 0.5,
 			"bones": {
 				"bb_main_normal": {
 					"scale": 0

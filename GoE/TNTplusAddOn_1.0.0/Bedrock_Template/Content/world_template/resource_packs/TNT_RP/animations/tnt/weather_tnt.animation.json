@@ -108,16 +108,10 @@
 			}
 		},
 		"animation.weather_tnt.explode_rain": {
-			"animation_length": 1.5,
+			"animation_length": 2,
 			"bones": {
 				"bb_main": {
-					"scale": {
-						"0.0": [1, 1, 1],
-						"0.0833": [1.5, 1, 1.5],
-						"0.125": [1.5, 1.5, 1.5],
-						"0.1667": [0, 1, 0],
-						"0.2083": [0, 0, 0]
-					}
+					"scale": 0
 				}
 			},
 			"particle_effects": {
@@ -133,19 +127,13 @@
 			}
 		},
 		"animation.weather_tnt.explode_sun": {
-			"animation_length": 1.5,
+			"animation_length": 2,
 			"bones": {
 				"Illustrations": {
 					"scale": 1
 				},
 				"bb_main": {
-					"scale": {
-						"0.0": [1, 1, 1],
-						"0.0833": [1.5, 1, 1.5],
-						"0.125": [1.5, 1.5, 1.5],
-						"0.1667": [0, 1, 0],
-						"0.2083": [0, 0, 0]
-					}
+					"scale": 0
 				}
 			},
 			"particle_effects": {
