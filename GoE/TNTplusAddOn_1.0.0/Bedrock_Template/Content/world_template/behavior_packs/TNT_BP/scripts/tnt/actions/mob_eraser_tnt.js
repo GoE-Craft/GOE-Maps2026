@@ -24,7 +24,7 @@ export function* mobEraserTNTAction(dimension, chargeLevel, location, entity) {
     try {
         entities = dimension.getEntities({
             min: { x: minX, y: minY, z: minZ },
-            max: { x: maxX, y: maxY, z: minZ }
+            max: { x: maxX, y: maxY, z: maxZ }
         });
     } catch {
         entities = [];
