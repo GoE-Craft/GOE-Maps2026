@@ -1,4 +1,4 @@
-import { system, ItemStack, world } from "@minecraft/server";
+import { system, ItemStack, world, Player } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 import { ShopItems, formatPrice, PriceTypeNames, Achievements, getAllAchievements, getAchievementsByCategory } from "./gld/book_gld";
 import { purchaseItem, getPlayerResourceAmount } from "./shop";
@@ -9,7 +9,11 @@ import * as utils from "./utils";
 export const GuideBookComponent = {
     onUse(event, params) {
         const player = event.source;
-        onItemUse(player);
+        if (player instanceof Player) {
+            system.run(() => {
+                onItemUse(player);
+            });
+        }
     }
 };
 
@@ -67,12 +71,7 @@ export async function onItemUse(player) {
 }
 
 export async function showIntroPage(player) {
-    let name = "Player";
-    try {
-        name = player?.nameTag ?? player?.name ?? "Player";
-    } catch (e) {
-        name = "Player";
-    }
+    const name = player.name || "Player";
     const IntroForm = new ActionFormData()
         .title("§l§cTNT Guide Book§r")
         .body(
