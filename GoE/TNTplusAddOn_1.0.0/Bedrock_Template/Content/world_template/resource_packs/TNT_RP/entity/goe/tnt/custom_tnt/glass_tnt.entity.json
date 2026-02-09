@@ -8,32 +8,32 @@
         "semi_transparent": "goe_tnt_border"
       },
       "textures": {
-				"default": "textures/blocks/tnt_side"
+				"default": "textures/goe/tnt/entity/glass_tnt"
       },
       "geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.glass_tnt"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"},
+          {"tnt_swelling": "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell",
-        "explode":"animation.glass_tnt.explode",
+        "tnt_swelling": "animation.tnt.swell_weather_rain",
+        "explode":"animation.glass_tnt.explosion",
         "charge":"animation.glass_tnt.charge"
       },
       "particle_effects": {
-        "big_explosion_white": "goe_tnt:big_explosion_white",
-        "tnt_charge": "goe_tnt:tnt_charge_blue"/* , 
-        "glass_impact_radius": "goe_tnt:glass_impact_radius" */
+        "glass_explode": "goe_tnt:glass_explode",
+        "glass_shine": "goe_tnt:glass_shine",
+        "tnt_charge_darkblue": "goe_tnt:tnt_charge_darkblue"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ "controller.render.glass_tnt" ]
     }
   }
 }

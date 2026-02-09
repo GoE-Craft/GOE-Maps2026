@@ -7,21 +7,33 @@
         "default": "entity_alphatest"
       },
       "textures": {
-				"default": "textures/blocks/tnt_side"
+				"default": "textures/goe/tnt/entity/furnace_tnt"
       },
       "geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.furnace_tnt"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling":"animation.tnt.swell_arrow",
+        "explode":"animation.furnace_tnt.explode",
+        "charge":"animation.furnace_tnt.charge"
+      },
+       "particle_effects": {
+        "furnace_explode": "goe_tnt:furnace_explode",
+        "furnace_fire": "goe_tnt:furnace_fire",
+        "furnace_destruct": "goe_tnt:furnace_destruct",
+        "furnace_pull": "goe_tnt:furnace_pull",
+        "furnace_smoke": "goe_tnt:furnace_smoke",
+        "tnt_charge_red": "goe_tnt:tnt_charge_red"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

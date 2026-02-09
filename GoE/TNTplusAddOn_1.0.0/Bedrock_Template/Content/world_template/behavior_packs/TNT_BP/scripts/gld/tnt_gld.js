@@ -595,7 +595,7 @@ export const TNT_GLD = [
             specialAction: "endermite_decoy"
         }
     },
-    {
+   {
         blockId: "goe_tnt:glass_tnt",
         fuseTime: 40,
         power: 6.5,
@@ -609,7 +609,8 @@ export const TNT_GLD = [
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
             soundEffect: "random.fizz",
-            soundDelay: 0
+            soundDelay: 0,
+            explosionAnimationLength: 2
         },
         explosionProperties: {
             createsFire: false,
@@ -635,9 +636,10 @@ export const TNT_GLD = [
         },
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
+            particleDelay: 2,
             soundEffect: "random.fizz",
-            soundDelay: 0
+            soundDelay: 0,
+            explosionAnimationLength: 1
         },
         explosionProperties: {
             createsFire: false,
