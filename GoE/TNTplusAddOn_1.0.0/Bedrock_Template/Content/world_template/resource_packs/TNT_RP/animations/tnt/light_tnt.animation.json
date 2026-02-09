@@ -81,53 +81,53 @@
 			},
 			"particle_effects": {
 				"0.0": {
-					"effect": "light_up_charge_yellow",
+					"effect": "light_charge_yellow",
 					"locator": "body"
 				},
 				"0.25": {
-					"effect": "light_up_sparkles",
+					"effect": "light_sparkles",
 					"locator": "body"
 				},
 				"0.5": [
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator2"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator3"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator4"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator5"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator6"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator7"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator8"
 					},
 					{
-						"effect": "light_up_charge",
+						"effect": "light_charge",
 						"locator": "locator9"
 					}
 				],
 				"1.0": {
-					"effect": "light_up_sphere",
+					"effect": "light_sphere",
 					"locator": "body"
 				}
 			}
@@ -143,7 +143,7 @@
 			"particle_effects": {
 				"0.0": [
 					{
-						"effect": "light_up_explosion"
+						"effect": "light_explosion"
 					},
 					{
 						"effect": "light_big_explosion"
