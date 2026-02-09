@@ -69,13 +69,13 @@ export const TntCustomComponent = {
             if (cooldown) {
                 cooldown.startCooldown(player);
             }
-            
+
             const params = comp.customComponentParameters;
             if (!params) return;
-            
+
             // Damage the held item
             utils.damageHeldItem(player, 1);
-    
+
             fireLaser(player, params);
         }
     },
@@ -94,33 +94,29 @@ function handleTimer(block, player) {
     const timer = block.permutation.getState("goe_tnt:timer");
 
     if (timer === 12) {
-        block.setPermutation(block.permutation.withState("goe_tnt:timer", 0));
-        player.onScreenDisplay.setActionBar(`§oTNT Timer: §cDisabled`);
-        block.dimension.playSound(`block.copper_bulb.turn_off`, block.location, {volume: 5, pitch: 2});
-        const location = block.center();
-        location.y += 0.5;
-        block.dimension.spawnParticle(`goe_tnt:timer_off`, location);
-        updateTimerSet(block.location, block.dimension.id, 0);
+        // keep max (120s), just notify
+        player.onScreenDisplay.setActionBar(`§r§c§oMax timer reached§o`);
+        block.dimension.playSound(`block.copper_bulb.turn_off`, block.location, { volume: 5, pitch: 2 });
         return;
     }
 
     const targetState = timer + 1;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
-    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState*10} seconds.§o\n§r§c§oUse Flint and Steel, TNT Detonator or other way to activate§o`);
-    block.dimension.playSound(`block.copper_bulb.turn_on`, block.location, {volume: 5, pitch: 2});
+    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState * 10} seconds.§o\n§r§c§oUse Flint and Steel, TNT Detonator or other way to activate§o`);
+    block.dimension.playSound(`block.copper_bulb.turn_on`, block.location, { volume: 5, pitch: 2 });
     const location = block.center();
     location.y += 0.5;
     block.dimension.spawnParticle(`goe_tnt:timer_on`, location);
     updateTimerSet(block.location, block.dimension.id, targetState);
-
 }
+
 
 export function updateTimerSet(location, dimension, timerState) {
     // Do not mutate the location object; use a plain object for the key
     const locKey = JSON.stringify({ x: location.x, y: location.y, z: location.z, dimension });
     if (timerState) {
-        
-        const time = timerState*10; // Timer state is stored as multiples of 10 seconds
+
+        const time = timerState * 10; // Timer state is stored as multiples of 10 seconds
         tntTimers.set(locKey, time);
     } else {
         tntTimers.delete(locKey);
@@ -208,7 +204,7 @@ function placeBlockOnFace(block, face, itemInHand, player) {
             // Play place sound
             block.dimension.playSound("dig.stone", targetLoc);
         }
-    } catch (e) {}
+    } catch (e) { }
 }
 
 export function restoreTimers() {
@@ -222,7 +218,7 @@ export function restoreTimers() {
             tntTimers.set(loc, state);
         }
     }
-    
+
     // Then start interval to update timer particles
     system.runInterval(() => {
         system.runJob(updateTimerParticles());
@@ -242,8 +238,7 @@ function* updateTimerParticles() {
         const dim = world.getDimension(location.dimension);
         if (!dim.isChunkLoaded(location)) continue;
         const block = dim.getBlock(location);
-        if (!block.isValid || !block.hasTag("goe_tnt:custom_tnt"))
-        {
+        if (!block.isValid || !block.hasTag("goe_tnt:custom_tnt")) {
             tntTimers.delete(loc);
             continue;
         }

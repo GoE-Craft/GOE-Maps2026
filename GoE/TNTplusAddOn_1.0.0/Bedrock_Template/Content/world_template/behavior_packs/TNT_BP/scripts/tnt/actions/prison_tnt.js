@@ -18,6 +18,36 @@ function isAirLike(typeId) {
     return id === "minecraft:air" || id === "minecraft:cave_air" || id === "minecraft:void_air";
 }
 
+function isReplaceablePrisonBlock(typeId) {
+    const id = String(typeId || "");
+
+    if (
+        id === "minecraft:grass" ||
+        id === "minecraft:tall_grass" ||
+        id === "minecraft:short_grass" ||
+        id === "minecraft:fern" ||
+        id === "minecraft:large_fern" ||
+        id === "minecraft:dirt" ||
+        id === "minecraft:bee_nest" ||
+        id === "minecraft:sunflower" ||
+        id === "minecraft:sweet_berry_bush" ||
+        id === "minecraft:leaf_litter" ||
+        id === "minecraft:wildflowers" ||
+        id === "minecraft:firefly_bush"
+    ) return true;
+
+    // Broad matching for families of blocks
+    if (id.endsWith("_leaves")) return true;
+    if (id.endsWith("_log")) return true;
+    if (id.endsWith("_sapling")) return true;
+
+    // If you also want stripped logs:
+    if (id.endsWith("_wood")) return true;
+    if (id.includes("stripped_") && id.endsWith("_log")) return true;
+
+    return false;
+}
+
 function findGroundY(dimension, x, startY, z) {
     const sx = Math.floor(Number(x ?? 0));
     const sz = Math.floor(Number(z ?? 0));
@@ -81,8 +111,8 @@ function findFreeCell(cellX0, cellY0, cellZ0, minSpacingX, minSpacingY, minSpaci
     return null;
 }
 
-// places the structure only into air-like blocks by snapshotting the area, 
-// placing the structure, then restoring any non-air blocks
+// places the structure only into air-like blocks by snapshotting the area,
+// placing the structure, then restoring any non-air blocks (except replaceables)
 function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure, placePos, structureRotation) {
     const sx = Math.max(1, Math.floor(Number(prisonStructure?.size?.x ?? 3)));
     const sy = Math.max(1, Math.floor(Number(prisonStructure?.size?.y ?? 3)));
@@ -132,14 +162,14 @@ function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure,
     // Place structure
     structureManager.place(prisonStructure, dimension, { x: startX, y: startY, z: startZ }, structureOptions);
 
-    // Revert any position that was not air-like before placement
+    // Revert any position that was not air-like before placement (except replaceables)
     for (const [key, before] of snapshot.entries()) {
         const [wxStr, wyStr, wzStr] = key.split("|");
         const wx = Number(wxStr);
         const wy = Number(wyStr);
         const wz = Number(wzStr);
 
-        if (!isAirLike(before.typeId)) {
+        if (!isAirLike(before.typeId) && !isReplaceablePrisonBlock(before.typeId)) {
             let blockAfter;
             try { blockAfter = dimension.getBlock({ x: wx, y: wy, z: wz }); } catch { blockAfter = undefined; }
             if (!blockAfter) continue;
