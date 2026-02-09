@@ -24,7 +24,7 @@ export function* mobEraserTNTAction(dimension, chargeLevel, location, entity) {
     try {
         entities = dimension.getEntities({
             min: { x: minX, y: minY, z: minZ },
-            max: { x: maxX, y: maxY, z: maxZ }
+            max: { x: maxX, y: maxY, z: minZ }
         });
     } catch {
         entities = [];
@@ -42,6 +42,12 @@ export function* mobEraserTNTAction(dimension, chargeLevel, location, entity) {
             if (typeId === "minecraft:player") continue;
             if (typeId === "minecraft:item") continue;
             if (typeId === "minecraft:xp_orb") continue;
+
+            // exclude tnt entities (vanilla + common custom naming)
+            if (typeId === "minecraft:tnt") continue;
+            if (typeId === "minecraft:tnt_minecart") continue;
+            if (typeId.endsWith("_tnt")) continue;
+            if (typeId.includes(":tnt")) continue;
 
             // only mobs (must have health)
             if (!e.getComponent("minecraft:health")) continue;
