@@ -96,7 +96,7 @@ export const ShopItems = {
         },
         {
             id: "weather_station_tnt",
-            name: "Weather Station TNT",
+            name: "Weather TNT",
             price: { type: "iron_ingot", amount: 15 },
             icon: "textures/goe/tnt/ui/shop/tnt/weather_station_tnt",
             itemId: "goe_tnt:weather_station_tnt"
@@ -586,7 +586,7 @@ export const Achievements = {
     milestones: [
         {
             id: "milestone_5",
-            name: "5 Unique TNTs",
+            name: "TNT Rookie",
             info: "Discover 5 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 5,
@@ -595,7 +595,7 @@ export const Achievements = {
         },
         {
             id: "milestone_10",
-            name: "10 Unique TNTs",
+            name: "Blast Trainee",
             info: "Discover 10 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 10,
@@ -604,7 +604,7 @@ export const Achievements = {
         },
         {
             id: "milestone_15",
-            name: "15 Unique TNTs",
+            name: "Demolition Specialist",
             info: "Discover 15 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 15,
@@ -613,7 +613,7 @@ export const Achievements = {
         },
         {
             id: "milestone_20",
-            name: "20 Unique TNTs",
+            name: "TNT Pro",
             info: "Discover 20 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 20,
@@ -622,7 +622,7 @@ export const Achievements = {
         },
         {
             id: "milestone_25",
-            name: "25 Unique TNTs",
+            name: "Explosion Engineer",
             info: "Discover 25 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 25,
@@ -631,7 +631,7 @@ export const Achievements = {
         },
         {
             id: "milestone_30",
-            name: "30 Unique TNTs",
+            name: "Master Demolitionist",
             info: "Discover 30 different TNT types to unlock this achievement",
             tips: "",
             milestoneNumber: 30,
