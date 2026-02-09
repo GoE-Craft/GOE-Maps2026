@@ -1,0 +1,61 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:daytime_tnt",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam_day": "entity_beam_additive",
+        "beam_night": "entity_beam_additive",
+        "semitransparent_1": "entity_alphablend",
+        "semitransparent_2": "entity_alphablend",
+        "semitransparent_3": "entity_alphablend"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/daytime_tnt"
+      },
+      "geometry": {
+        "default": "geometry.daytime_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"tnt_swelling": "q.mark_variant == 1"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "tnt_swelling": "animation.tnt.swell_daytime_night",
+        "charge": "animation.daytime_tnt.charge_night",
+        "charge_day": "animation.daytime_tnt.charge_day",
+        "explode": "animation.daytime_tnt.explode_night",
+        "explode_day": "animation.daytime_tnt.explode_day"
+      },
+       "particle_effects": {
+        "daytime_day": "goe_tnt:daytime_day",
+        "daytime_explode_day": "goe_tnt:daytime_explode_day",
+        "daytime_explode_night": "goe_tnt:daytime_explode_night",
+        "daytime_night": "goe_tnt:daytime_night",
+        "daytime_pull_day": "goe_tnt:daytime_pull_day",
+        "daytime_pull_night": "goe_tnt:daytime_pull_night",
+        "daytime_ring_day": "goe_tnt:daytime_ring_day",
+        "daytime_ring_night": "goe_tnt:daytime_ring_night",
+        "daytime_rotate_day": "goe_tnt:daytime_rotate_day",
+        "daytime_rotate_night": "goe_tnt:daytime_rotate_night",
+        "daytime_smoke": "goe_tnt:daytime_smoke",
+        "daytime_impact_day": "goe_tnt:daytime_impact_day",
+        "daytime_impact_night": "goe_tnt:daytime_impact_night",
+        "daytime_impact_radius_day": "goe_tnt:daytime_impact_radius_day",
+        "daytime_impact_radius_night": "goe_tnt:daytime_impact_radius_night",
+        "ground_shake": "goe_tnt:ground_shake",
+        "tnt_charge_darkblue": "goe_tnt:tnt_charge_darkblue",
+        "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow"
+       
+      }, 
+      "render_controllers": [ "controller.render.daytime_tnt" ]
+    }
+  }
+}

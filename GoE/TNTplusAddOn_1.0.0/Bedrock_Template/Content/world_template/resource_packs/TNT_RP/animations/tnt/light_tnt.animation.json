@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.light_up_tnt.charge": {
+		"animation.light_tnt.charge": {
 			"animation_length": 2.5,
 			"bones": {
 				"bb_main": {
@@ -132,7 +132,7 @@
 				}
 			}
 		},
-		"animation.light_up_tnt.explode": {
+		"animation.light_tnt.explode": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 1,
 			"bones": {
@@ -146,11 +146,11 @@
 						"effect": "light_up_explosion"
 					},
 					{
-						"effect": "light_up_big_explosion"
+						"effect": "light_big_explosion"
 					}
 				],
 				"0.0417": {
-					"effect": "light_up_leftover_sparks"
+					"effect": "light_leftover_sparks"
 				}
 			}
 		}

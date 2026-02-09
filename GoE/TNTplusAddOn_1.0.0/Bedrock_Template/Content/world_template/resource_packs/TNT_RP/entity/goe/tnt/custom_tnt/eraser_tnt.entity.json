@@ -1,0 +1,47 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:eraser_tnt",
+     "materials": {
+        "default": "entity_alphatest",
+        "middle_beam": "entity_beam_additive",
+        "beam": "entity_beam_additive",
+        "beam_light_down": "entity_beam_additive",
+        "beam_light": "entity_beam_additive",
+        "beam_light_left": "entity_beam_additive",
+        "beam_light_right": "entity_beam_additive",
+        "beam_light_front": "entity_beam_additive",
+        "beam_light_back": "entity_beam_additive"
+        
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/eraser_tnt"
+      },
+      "geometry": {
+        "default": "geometry.eraser_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"tnt_swelling": "v.should_swell"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "tnt_swelling": "animation.tnt.swell_dimension",
+        "explode":"animation.eraser_tnt.explode",
+        "charge":"animation.eraser_tnt.charge"
+      },
+      "particle_effects": {
+        "dimension_beam": "goe_tnt:dimension_beam",
+        "dimension_beam_explode": "goe_tnt:dimension_beam_explode"
+       
+      }, 
+      "render_controllers": [ "controller.render.eraser_tnt" ]
+    }
+  }
+}

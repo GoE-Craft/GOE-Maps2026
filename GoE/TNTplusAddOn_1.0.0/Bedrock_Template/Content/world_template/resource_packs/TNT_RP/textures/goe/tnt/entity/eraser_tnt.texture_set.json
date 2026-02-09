@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "eraser_tnt",
+		"metalness_emissive_roughness": "eraser_tnt_mer",
+		"heightmap": "eraser_tnt_height"
+	}
+}
