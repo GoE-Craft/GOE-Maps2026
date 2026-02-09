@@ -67,10 +67,11 @@ export async function onItemUse(player) {
 }
 
 export async function showIntroPage(player) {
+    const name = player.name || "Player";
     const IntroForm = new ActionFormData()
         .title("§l§cTNT Guide Book§r")
         .body(
-            `§fWelcome, §a${player.name}§r!\n\n` +
+            `§fWelcome, §a${name}§r!\n\n` +
             "§fUnleash chaos with §e20+§r§f craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy custom §eStructures§r§f found all across your world.\n\n" +
             "§fOpen the §eTNT Guide§r§f to access the shop, achievement list, and tweak your settings§r§f.\n\n" +
             "§fEnjoy the §aTNT Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
