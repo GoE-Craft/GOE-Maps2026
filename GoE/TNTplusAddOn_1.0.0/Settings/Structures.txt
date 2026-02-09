@@ -501,3 +501,8 @@ replace=gray_stained_glass structure_void
 type=area
 location=471 1 50 498 71 77
 replace=gray_stained_glass structure_void
+
+#test_area
+type=area
+location=-74 -7 -1 -38 19 90
+replace=gray_stained_glass structure_void

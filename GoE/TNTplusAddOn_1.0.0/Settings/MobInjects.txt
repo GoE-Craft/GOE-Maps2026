@@ -1,0 +1,3 @@
+!mecha_suit
+type=mecha_suit
+Persistent=1
