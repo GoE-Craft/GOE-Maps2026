@@ -202,8 +202,7 @@
       "goe_tnt:deny_mount_spawning": {
         "queue_command": {
           "command": [
-            "playsound note.bass @p ~ ~ ~ 0.3",
-            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§6Mecha Suit is still deploying...\"}]}"
+            "playsound note.bass @p ~ ~ ~ 0.3"
           ]
         }
       },
@@ -218,7 +217,7 @@
         "queue_command": {
           "command": [
             "playsound random.orb @p ~ ~ ~ 1 1",
-            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§a[Info] TNT Mecha Suit is ready. Interact with it to mount it.\"}]}"
+            "titleraw @p actionbar {\"rawtext\":[{\"text\":\"§a[Info] The TNT Mecha Suit is ready, interact to mount.\"}]}"
           ]
         }
       },

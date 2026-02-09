@@ -103,7 +103,7 @@ function setupShootCooldownUiTick() {
 			if (uiState === "idle") {
 				sendActionbarIfChanged(
 					player,
-					"§6[Hint] Interact with TNT block in your hand to fire"
+					"§6[Hint] Hold any TNT block in your hand and Interact to launch it."
 				);
 				continue;
 			}

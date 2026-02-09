@@ -32,7 +32,7 @@ export const TntCustomComponent = {
         } else if (itemInHand?.typeId === "minecraft:gunpowder") {
             const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
             if (chargeLevel >= 4) {
-                player.onScreenDisplay.setActionBar(`§o§cTNT is already upgraded to max level§o§c`);
+                player.onScreenDisplay.setActionBar(`§o§cMax boost level reached§o§c`);
                 player.playSound("goe_tnt:tnt_maxed_out", player.location);
                 return;
             }
@@ -106,7 +106,7 @@ function handleTimer(block, player) {
 
     const targetState = timer + 1;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
-    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState*10} seconds.§o\n§r§c§o Use Flint and Steel or other way to activate it.§o`);
+    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState*10} seconds.§o\n§r§c§oUse Flint and Steel, TNT Detonator or other way to activate§o`);
     block.dimension.playSound(`block.copper_bulb.turn_on`, block.location, {volume: 5, pitch: 2});
     const location = block.center();
     location.y += 0.5;
