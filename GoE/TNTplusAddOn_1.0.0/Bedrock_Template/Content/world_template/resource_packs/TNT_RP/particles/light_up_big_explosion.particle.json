@@ -5,7 +5,7 @@
 			"identifier": "goe_tnt:light_up_big_explosion",
 			"basic_render_parameters": {
 				"material": "particles_blend",
-				"texture": "textures/goe/tnt/particles/cold_fog"
+				"texture": "textures/goe/tnt/particles/light_fog"
 			}
 		},
 		"components": {
