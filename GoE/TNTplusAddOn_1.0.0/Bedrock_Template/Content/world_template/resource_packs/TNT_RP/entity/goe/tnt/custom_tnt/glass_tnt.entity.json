@@ -30,7 +30,8 @@
       },
       "particle_effects": {
         "big_explosion_white": "goe_tnt:big_explosion_white",
-        "tnt_charge": "goe_tnt:tnt_charge_blue"
+        "tnt_charge": "goe_tnt:tnt_charge_blue", 
+        "glass_impact_radius": "goe_tnt:glass_impact_radius"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }
