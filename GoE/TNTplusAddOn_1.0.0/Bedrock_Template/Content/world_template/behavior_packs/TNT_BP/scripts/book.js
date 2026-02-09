@@ -35,7 +35,7 @@ export function startGuideBookReminderInterval() {
             }
 
             if (!hasGuideBook) {
-                utils.tellraw( player,"@s","§aYou do not have a §eTNT Guide§r§a. Use vanilla §eTNT + Book§a to craft one.§r");
+                utils.tellraw(player, "@s", "§aYou do not have a §eTNT Guide§r§a. Use vanilla §eTNT + Book§a to craft one.§r");
                 player.playSound("random.orb");
             }
         }
@@ -67,7 +67,12 @@ export async function onItemUse(player) {
 }
 
 export async function showIntroPage(player) {
-    const name = player.name || "Player";
+    let name = "Player";
+    try {
+        name = player?.nameTag ?? player?.name ?? "Player";
+    } catch (e) {
+        name = "Player";
+    }
     const IntroForm = new ActionFormData()
         .title("§l§cTNT Guide Book§r")
         .body(
