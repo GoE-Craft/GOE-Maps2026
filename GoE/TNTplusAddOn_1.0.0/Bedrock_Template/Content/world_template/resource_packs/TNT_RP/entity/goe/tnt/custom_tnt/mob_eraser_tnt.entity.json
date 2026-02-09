@@ -17,11 +17,24 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "charge": "animation.mob_eraser_tnt.charge",
+        "explode": "animation.mob_eraser_tnt.explode"
+      },
+      "particle_effects": {
+        "mob_eraser_explosion": "goe_tnt:mob_eraser_explosion",
+        "mob_eraser_explosion_pull": "goe_tnt:mob_eraser_explosion_pull",
+        "mob_heads": "goe_tnt:mob_heads",
+        "mob_heads_pull": "goe_tnt:mob_heads_pull",
+        "tnt_charge_colors": "goe_tnt:tnt_charge_colors",
+        "mob_eraser_impact": "goe_tnt:mob_eraser_impact",
+        "mob_eraser_impact_pull": "goe_tnt:mob_eraser_impact_pull",
+        "mob_destroy": "goe_tnt:mob_destroy",
+        "party_sparks": "goe_tnt:party_sparks"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

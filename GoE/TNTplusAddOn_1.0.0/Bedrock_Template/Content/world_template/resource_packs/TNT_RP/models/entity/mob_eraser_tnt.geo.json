@@ -6,9 +6,9 @@
 				"identifier": "geometry.mob_eraser_tnt",
 				"texture_width": 64,
 				"texture_height": 64,
-				"visible_bounds_width": 4,
-				"visible_bounds_height": 3.5,
-				"visible_bounds_offset": [0, 1.25, 0]
+				"visible_bounds_width": 13,
+				"visible_bounds_height": 9,
+				"visible_bounds_offset": [0, 2.5, 0]
 			},
 			"bones": [
 				{
@@ -43,7 +43,33 @@
 					]
 				},
 				{
+					"name": "spark_locators",
+					"parent": "bb_main",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "sparks",
+					"parent": "spark_locators",
+					"pivot": [0, 22, -1],
+					"locators": {
+						"sparks": [0, 22, -1]
+					}
+				},
+				{
+					"name": "sparks2",
+					"parent": "spark_locators",
+					"pivot": [0, 22, -1],
+					"locators": {
+						"sparks2": [0, 22, -1]
+					}
+				},
+				{
+					"name": "overlays",
+					"pivot": [0.41424, 7.33698, 0.5963]
+				},
+				{
 					"name": "overlay",
+					"parent": "overlays",
 					"pivot": [-8.842, 0.679, 4.6],
 					"cubes": [
 						{
@@ -428,6 +454,7 @@
 				},
 				{
 					"name": "overlay2",
+					"parent": "overlays",
 					"pivot": [9.83299, 9.5563, -0.0716],
 					"rotation": [0, 180, 0],
 					"cubes": [
@@ -785,6 +812,7 @@
 				},
 				{
 					"name": "overlay3",
+					"parent": "overlays",
 					"pivot": [-1.16701, 9.5563, 8.9284],
 					"rotation": [0, 90, 0],
 					"cubes": [
@@ -1128,6 +1156,7 @@
 				},
 				{
 					"name": "overlay4",
+					"parent": "overlays",
 					"pivot": [1.83299, 9.5563, -11.0716],
 					"rotation": [0, -90, 0],
 					"cubes": [
@@ -1496,6 +1525,15 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "locators",
+					"pivot": [0, 0, 0],
+					"locators": {
+						"locator": [0, 8, 0],
+						"pulse": [0, 0.1, 0],
+						"mob_heads": [0, 0, 0]
+					}
 				}
 			]
 		}

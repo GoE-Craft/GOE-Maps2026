@@ -653,7 +653,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:mob_eraser_tnt",
-        fuseTime: 40,
+        fuseTime: 50,
         power: 4,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -662,10 +662,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+            explosionAnimationLength: 1
         },
         explosionProperties: {
             createsFire: false,
