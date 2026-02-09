@@ -36,14 +36,15 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
                 const by = cy + y;
                 const bz = cz + z;
 
-                try {
+                try{
                     const block = dimension.getBlock({ x: bx, y: by, z: bz });
-                    if (!block) continue;
-
-                    if (block.typeId !== "minecraft:air") {
-                        block.setPermutation(air);
+                    if (block && block.typeId !== "minecraft:air" && block.typeId !== "minecraft:bedrock") {
+                        block.setType("minecraft:air");
                     }
-                } catch {}
+                } catch (e) {
+                    // Ignore out of bounds errors or any other issues
+                    console.log(`Error processing block at ${bx}, ${by}, ${bz}: ${e}`);
+                }
             }
         }
 

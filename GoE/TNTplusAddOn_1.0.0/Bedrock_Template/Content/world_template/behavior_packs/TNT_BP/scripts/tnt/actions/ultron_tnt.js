@@ -31,8 +31,16 @@ export function* ultronTNTAction(dimension, centerLocation, explosionRadius) {
                         // Store distance for the sorting phase
                         distSq: dx * dx + dy * dy + dz * dz 
                     };
+                    try{
+                        const block = dimension.getBlock(blockPos);
+                        if (block && block.typeId !== "minecraft:air" && block.typeId !== "minecraft:bedrock") {
+                            block.setType("minecraft:air");
+                        }
+                    } catch (e) {
+                        // Ignore out of bounds errors or any other issues
+                        console.log(`Error processing block at ${blockPos.x}, ${blockPos.y}, ${blockPos.z}: ${e}`);
+                    }
                     
-                    dimension.setBlockType(blockPos, "minecraft:air");
                 }
             }
         }
