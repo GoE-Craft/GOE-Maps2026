@@ -45,7 +45,6 @@
 					"uv_size": [64, 64]
 				}
 			},
-			"minecraft:particle_appearance_lighting": {},
 			"minecraft:particle_appearance_tinting": {
 				"color": {
 					"interpolant": "v.particle_age",

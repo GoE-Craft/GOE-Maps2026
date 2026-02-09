@@ -6,9 +6,9 @@
 				"identifier": "geometry.light_up_tnt",
 				"texture_width": 64,
 				"texture_height": 64,
-				"visible_bounds_width": 4,
-				"visible_bounds_height": 3.5,
-				"visible_bounds_offset": [0, 1.25, 0]
+				"visible_bounds_width": 6,
+				"visible_bounds_height": 6,
+				"visible_bounds_offset": [0, 2, 0]
 			},
 			"bones": [
 				{
@@ -20,7 +20,37 @@
 					]
 				},
 				{
+					"name": "locators",
+					"parent": "bb_main",
+					"pivot": [7.6887, 1.9226, -8.0272]
+				},
+				{
+					"name": "sparkles",
+					"parent": "locators",
+					"pivot": [7.6887, 1.9226, -8.0272],
+					"locators": {
+						"locator": [8, 2, 8],
+						"locator2": [-8, 3, 8],
+						"locator3": [-8, 15, 8],
+						"locator4": [8, 15, 8],
+						"locator5": [-8, 15, -7],
+						"locator6": [-8, 2, -8],
+						"locator8": [8, 2, -8],
+						"locator9": [8, 15, -8],
+						"locator7": [-8, 3, 8]
+					}
+				},
+				{
+					"name": "body",
+					"parent": "locators",
+					"pivot": [7.6887, 1.9226, -8.0272],
+					"locators": {
+						"body": [0, 8, 0]
+					}
+				},
+				{
 					"name": "glowingcubes",
+					"parent": "bb_main",
 					"pivot": [7.6887, 1.9226, -8.0272],
 					"cubes": [
 						{
@@ -153,7 +183,8 @@
 				},
 				{
 					"name": "Glow",
-					"pivot": [33.20388, -3.23779, -7.74302],
+					"parent": "bb_main",
+					"pivot": [-0.11007, 9.42959, 0.13614],
 					"cubes": [
 						{
 							"origin": [-16.11612, -2.33779, -5.64302],

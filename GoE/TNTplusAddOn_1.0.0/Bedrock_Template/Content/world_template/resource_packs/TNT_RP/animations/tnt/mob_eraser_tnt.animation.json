@@ -209,9 +209,6 @@
 						"effect": "mob_destroy"
 					},
 					{
-						"effect": "mob_eraser_impact_radius"
-					},
-					{
 						"effect": "mob_eraser_explosion"
 					},
 					{
