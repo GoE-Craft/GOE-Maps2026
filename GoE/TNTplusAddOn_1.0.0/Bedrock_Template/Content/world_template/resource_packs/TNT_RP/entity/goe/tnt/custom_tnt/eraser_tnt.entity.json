@@ -8,7 +8,7 @@
         "middle_beam": "entity_beam_additive",
         "beam": "entity_beam_additive",
         "beam_light_down": "entity_beam_additive",
-        "beam_light": "entity_beam_additive",
+        "beam_light_up": "entity_beam_additive",
         "beam_light_left": "entity_beam_additive",
         "beam_light_right": "entity_beam_additive",
         "beam_light_front": "entity_beam_additive",
