@@ -1,8 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "light_up_tnt",
-		"metalness_emissive_roughness": "light_up_tnt_mer",
-		"heightmap": "light_up_tnt_height"
-	}
-}

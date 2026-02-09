@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:atmosphere_explode_night",
+			"identifier": "goe_tnt:daytime_explode_night",
 			"basic_render_parameters": {
 				"material": "particles_add",
 				"texture": "textures/goe/tnt/particles/dot"

@@ -4,21 +4,21 @@ import { directionalTNTAction } from "./actions/directional_tnt";
 import { partyTNTAction } from "./actions/party_tnt";
 import { magnetTNTPreAction, magnetTNTAction } from "./actions/magnet_tnt";
 import { freezingTNTAction } from "./actions/freezing_tnt";
-import { atmosphereTNTAction } from "./actions/atmosphere_tnt";
+import { daytimeTNTAction } from "./actions/daytime_tnt";
 import { chunkerTNTAction } from "./actions/chunker_tnt";
 import { structureTNTAction } from "./actions/structure_tnt";
 import { weatherStationAction } from "./actions/weather_station_tnt";
 import { lightningAction } from "./actions/lightning_tnt";
 import { ultronTNTAction } from "./actions/ultron_tnt";
-import { arrowStormTNTAction } from "./actions/arrow_storm_tnt"
+import { arrowTNTAction } from "./actions/arrow_tnt"
 import { timeFreezeTNTAction } from "./actions/time_freeze_tnt";
 import { teleportationTNTAction } from "./actions/teleportation_tnt";
 import { treePlanterAction } from "./actions/tree_planter_tnt";
-import { dimensionalTNTAction } from "./actions/dimensional_tnt";
+import { eraserTNTAction } from "./actions/eraser_tnt";
 import { prisonTNTAction } from "./actions/prison_tnt";
 import { healingTNTAction } from "./actions/healing_tnt";
 import { villagerDecoyTNTAction } from "./actions/villager_decoy_tnt";
-import { honeyTNTAction } from "./actions/honey_tnt";
+import { angryBeeTNTAction } from "./actions/angry_bee_tnt";
 import { cloningTNTAction } from "./actions/cloning_tnt";
 import { beaconTNTAction } from "./actions/beacon_tnt";
 import { endermiteDecoyTNTPreAction, endermiteDecoyTNTAction } from "./actions/endermite_decoy_tnt";
@@ -26,7 +26,7 @@ import { glassTNTAction } from "./actions/glass_tnt";
 import { furnaceTNTAction } from "./actions/furnace_tnt";
 import { mobEraserTNTAction } from "./actions/mob_eraser_tnt";
 import { magmaEraserTNTAction } from "./actions/magma_eraser_tnt";
-import { lightUpTNTAction } from "./actions/light_up_tnt";
+import { lightTNTAction } from "./actions/light_tnt";
 import { thiefTNTAction } from "./actions/thief_tnt";
 
 /**
@@ -89,8 +89,8 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             system.runJob(freezingTNTAction(dimension, chargeLevel, location, entity, excludePlayerId));
             break;
         }
-        case "atmosphere":
-            runJobWithDelays(atmosphereTNTAction(dimension, location, entity));
+        case "daytime":
+            runJobWithDelays(daytimeTNTAction(dimension, location, entity));
             break;
         case "chunker":
             runJobWithDelays(chunkerTNTAction(dimension, location, chargeLevel, entity));
@@ -104,8 +104,8 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "lightning":
             runJobWithDelays(lightningAction(dimension, location, entity));
             break;
-        case "arrow_storm":
-            system.runJob(arrowStormTNTAction(dimension, location, chargeLevel));
+        case "arrow":
+            system.runJob(arrowTNTAction(dimension, location, chargeLevel));
             break;
         case "ultron":
             system.runJob(ultronTNTAction(dimension, location, 20, entity));
@@ -121,8 +121,8 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "tree_planter":
             treePlanterAction(dimension, location, entity);
             break;
-        case "dimensional":
-            system.runJob(dimensionalTNTAction(dimension, chargeLevel, location, entity));
+        case "eraser":
+            system.runJob(eraserTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "prison":
             system.runJob(prisonTNTAction(dimension, chargeLevel, location, entity));
@@ -133,8 +133,8 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "villager_decoy":
             system.runJob(villagerDecoyTNTAction(dimension, chargeLevel, location, entity));
             break;
-        case "honey":
-            system.runJob(honeyTNTAction(dimension, chargeLevel, location, entity));
+        case "angry_bee":
+            system.runJob(angryBeeTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "cloning":
             system.runJob(cloningTNTAction(dimension, chargeLevel, location, entity));
@@ -157,8 +157,8 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "magma_eraser":
             system.runJob(magmaEraserTNTAction(dimension, chargeLevel, location, entity));
             break;
-        case "light_up":
-            system.runJob(lightUpTNTAction(dimension, chargeLevel, location, entity));
+        case "light":
+            system.runJob(lightTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "thief_tnt":
             system.runJob(thiefTNTAction(dimension, chargeLevel, location, entity));

@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:atmosphere_impact_radius_night",
+			"identifier": "goe_tnt:daytime_impact_radius_night",
 			"basic_render_parameters": {
 				"material": "particles_add",
 				"texture": "textures/goe/tnt/particles/dimension_lines"

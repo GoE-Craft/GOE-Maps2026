@@ -2,15 +2,15 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "goe_tnt:light_up_tnt",
+      "identifier": "goe_tnt:light_tnt",
       "materials": {
         "default": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/goe/tnt/entity/light_up_tnt"
+        "default": "textures/goe/tnt/entity/light_tnt"
       },
       "geometry": {
-        "default": "geometry.light_up_tnt"
+        "default": "geometry.light_tnt"
       },
 			"scripts": {
         "pre_animation": [
@@ -22,17 +22,17 @@
         ]
 			},
       "animations": {
-        "charge": "animation.light_up_tnt.charge",
-        "explode": "animation.light_up_tnt.explode"
+        "charge": "animation.light_tnt.charge",
+        "explode": "animation.light_tnt.explode"
       },
       "particle_effects": {
-        "light_up_charge_yellow": "goe_tnt:light_up_charge_yellow",
-        "light_up_charge": "goe_tnt:light_up_charge",
-        "light_up_sparkles": "goe_tnt:light_up_sparkles",
-        "light_up_explosion": "goe_tnt:light_up_explosion",
-        "light_up_big_explosion": "goe_tnt:light_up_big_explosion",
-        "light_up_sphere": "goe_tnt:light_up_sphere",
-        "light_up_leftover_sparks": "goe_tnt:light_up_leftover_sparks"
+        "light_charge_yellow": "goe_tnt:light_charge_yellow",
+        "light_charge": "goe_tnt:light_charge",
+        "light_sparkles": "goe_tnt:light_sparkles",
+        "light_explosion": "goe_tnt:light_explosion",
+        "light_big_explosion": "goe_tnt:light_big_explosion",
+        "light_sphere": "goe_tnt:light_sphere",
+        "light_leftover_sparks": "goe_tnt:light_leftover_sparks"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

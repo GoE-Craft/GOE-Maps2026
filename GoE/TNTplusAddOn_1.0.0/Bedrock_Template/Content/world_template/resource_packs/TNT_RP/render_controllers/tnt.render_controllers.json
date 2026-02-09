@@ -123,7 +123,7 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
-    "controller.render.dimensional_tnt": {
+    "controller.render.eraser_tnt": {
       "geometry": "Geometry.default",
       "materials": [
         {
@@ -148,7 +148,7 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
-    "controller.render.atmosphere_tnt": {
+    "controller.render.daytime_tnt": {
       "geometry": "Geometry.default",
       "materials": [
         {

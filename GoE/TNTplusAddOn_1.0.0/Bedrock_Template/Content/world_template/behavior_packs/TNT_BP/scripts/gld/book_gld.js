@@ -88,11 +88,11 @@ export const ShopItems = {
             itemId: "goe_tnt:thunderstorm_tnt"
         },
         {
-            id: "dimensional_tnt",
-            name: "Dimensional TNT",
+            id: "eraser_tnt",
+            name: "Eraser TNT",
             price: { type: "emerald", amount: 5 },
-            icon: "textures/goe/tnt/ui/shop/tnt/dimensional_tnt",
-            itemId: "goe_tnt:dimensional_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/eraser_tnt",
+            itemId: "goe_tnt:eraser_tnt"
         },
         {
             id: "weather_station_tnt",
@@ -109,11 +109,11 @@ export const ShopItems = {
             itemId: "goe_tnt:time_freeze_tnt"
         },
         {
-            id: "arrow_storm_tnt",
-            name: "Arrow Storm TNT",
+            id: "arrow_tnt",
+            name: "Arrow TNT",
             price: { type: "iron_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/tnt/arrow_storm_tnt",
-            itemId: "goe_tnt:arrow_storm_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/arrow_tnt",
+            itemId: "goe_tnt:arrow_tnt"
         },
         {
             id: "teleportation_tnt",
@@ -137,11 +137,11 @@ export const ShopItems = {
             itemId: "goe_tnt:structure_tnt"
         },
         {
-            id: "atmosphere_tnt",
-            name: "Atmosphere TNT",
+            id: "daytime_tnt",
+            name: "Daytime TNT",
             price: { type: "copper_ingot", amount: 15 },
-            icon: "textures/goe/tnt/ui/shop/tnt/atmosphere_tnt",
-            itemId: "goe_tnt:atmosphere_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/daytime_tnt",
+            itemId: "goe_tnt:daytime_tnt"
         },
         {
             id: "healing_tnt",
@@ -158,11 +158,11 @@ export const ShopItems = {
             itemId: "goe_tnt:villager_decoy_tnt"
         },
         {
-            id: "honey_tnt",
-            name: "Honey TNT",
+            id: "angry_bee_tnt",
+            name: "Angry Bee TNT",
             price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/tnt/honey_tnt",
-            itemId: "goe_tnt:honey_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/angry_bee_tnt",
+            itemId: "goe_tnt:angry_bee_tnt"
         },
         {
             id: "cloning_tnt",
@@ -214,11 +214,11 @@ export const ShopItems = {
             itemId: "goe_tnt:magma_eraser_tnt"
         },
         {
-            id: "light_up_tnt",
-            name: "Light Up TNT",
+            id: "light_tnt",
+            name: "Light TNT",
             price: { type: "gold_ingot", amount: 5 },
-            icon: "textures/goe/tnt/ui/shop/tnt/light_up_tnt",
-            itemId: "goe_tnt:light_up_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/light_tnt",
+            itemId: "goe_tnt:light_tnt"
         },
         {
             id: "thief_tnt",
@@ -402,13 +402,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:thunderstorm_tnt_reward"
         },
         {
-            id: "dimensional_tnt",
-            name: "Dimensional TNT",
+            id: "eraser_tnt",
+            name: "Eraser TNT",
             info: "Erases the ground and all Mobs in the area without a trace of existence.",
             tips: "Remove Mobs with the Eraser TNT.",
-            tntType: "dimensional_tnt",
-            icon: "textures/goe/tnt/ui/achievements/dimensional_tnt",
-            rewardStructure: "goe_tnt:dimensional_tnt_reward"
+            tntType: "eraser_tnt",
+            icon: "textures/goe/tnt/ui/achievements/eraser_tnt",
+            rewardStructure: "goe_tnt:eraser_tnt_reward"
         },
         {
             id: "weather_station_tnt",
@@ -429,13 +429,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:time_freezing_tnt_reward"
         },
         {
-            id: "arrow_storm_tnt",
-            name: "Arrow Storm TNT",
+            id: "arrow_tnt",
+            name: "Arrow TNT",
             info: "The blast launches stacked arrows, spraying them in every direction.",
             tips: "Kill waves of Mobs using the Arrow TNT.",
-            tntType: "arrow_storm_tnt",
-            icon: "textures/goe/tnt/ui/achievements/arrow_storm_tnt",
-            rewardStructure: "goe_tnt:arrow_storm_tnt_reward"
+            tntType: "arrow_tnt",
+            icon: "textures/goe/tnt/ui/achievements/arrow_tnt",
+            rewardStructure: "goe_tnt:arrow_tnt_reward"
         },
         {
             id: "teleportation_tnt",
@@ -465,13 +465,13 @@ export const Achievements = {
             rewardStructure: null
         },
         {
-            id: "atmosphere_tnt",
-            name: "Atmosphere TNT",
+            id: "daytime_tnt",
+            name: "Daytime TNT",
             info: "Replaces the day for night or night for the day.",
             tips: "Use the Daytime TNT to change the day time.",
-            tntType: "atmosphere_tnt",
-            icon: "textures/goe/tnt/ui/achievements/atmosphere_tnt",
-            rewardStructure: "goe_tnt:atmosphere_tnt_reward"
+            tntType: "daytime_tnt",
+            icon: "textures/goe/tnt/ui/achievements/daytime_tnt",
+            rewardStructure: "goe_tnt:daytime_tnt_reward"
         },
         {
             id: "healing_tnt",
@@ -492,13 +492,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:decoy_tnt_reward"
         },
         {
-            id: "honey_tnt",
-            name: "Honey TNT",
+            id: "angry_bee_tnt",
+            name: "Angry Bee TNT",
             info: "Summons angry bees and coats the ground in sticky honey, slowing anyone caught in the chaos.",
             tips: "Release mad bees with the Angry Bee TNT.",
-            tntType: "honey_tnt",
-            icon: "textures/goe/tnt/ui/achievements/honey_tnt",
-            rewardStructure: "goe_tnt:honey_tnt_reward"
+            tntType: "angry_bee_tnt",
+            icon: "textures/goe/tnt/ui/achievements/angry_bee_tnt",
+            rewardStructure: "goe_tnt:angry_bee_tnt_reward"
         },
         {
             id: "cloning_tnt",
@@ -564,13 +564,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:magma_eraser_tnt_reward"
         },
         {
-            id: "light_up_tnt",
-            name: "Light Up TNT",
+            id: "light_tnt",
+            name: "Light TNT",
             info: "Lights up any cave or dark corner around you for one minute.",
             tips: "Use the Light TNT to light your way out of dark places.",
-            tntType: "light_up_tnt",
-            icon: "textures/goe/tnt/ui/achievements/light_up_tnt",
-            rewardStructure: "goe_tnt:light_up_tnt_reward"
+            tntType: "light_tnt",
+            icon: "textures/goe/tnt/ui/achievements/light_tnt",
+            rewardStructure: "goe_tnt:light_tnt_reward"
         },
         {
             id: "thief_tnt",

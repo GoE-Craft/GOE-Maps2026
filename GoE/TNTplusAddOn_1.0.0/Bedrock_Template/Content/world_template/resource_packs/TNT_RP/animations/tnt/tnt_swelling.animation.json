@@ -354,7 +354,7 @@
 				}
 			}
 		},
-		"animation.tnt.swell_atmosphere_night": {
+		"animation.tnt.swell_daytime_night": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 2.5,
 			"bones": {
@@ -446,7 +446,7 @@
 				}
 			}
 		},
-		"animation.tnt.swell_atmosphere_day": {
+		"animation.tnt.swell_daytime_day": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 2.5,
 			"bones": {

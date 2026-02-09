@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.arrow_storm_tnt.explode": {
+		"animation.arrow_tnt.explode": {
 			"animation_length": 1,
 			"bones": {
 				"Arrow": {
@@ -319,7 +319,7 @@
 				]
 			}
 		},
-		"animation.arrow_storm_tnt.charge": {
+		"animation.arrow_tnt.charge": {
 			"animation_length": 2,
 			"bones": {
 				"Arrow": {

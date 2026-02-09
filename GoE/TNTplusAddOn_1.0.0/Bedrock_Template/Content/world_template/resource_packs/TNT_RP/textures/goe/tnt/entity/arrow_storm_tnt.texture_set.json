@@ -1,8 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "arrow_storm_tnt",
-		"metalness_emissive_roughness": "arrow_storm_tnt_mer",
-		"heightmap": "arrow_storm_tnt_height"
-	}
-}

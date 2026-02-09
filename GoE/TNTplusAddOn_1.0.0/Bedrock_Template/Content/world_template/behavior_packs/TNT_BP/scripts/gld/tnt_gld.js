@@ -230,7 +230,7 @@ export const TNT_GLD = [
         }
     },
     {
-        blockId: "goe_tnt:dimensional_tnt",
+        blockId: "goe_tnt:eraser_tnt",
         fuseTime: 60,
         power: 0,
         fuseEffects: {
@@ -248,7 +248,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "dimensional"
+            specialAction: "eraser"
         },
         preExplosionProperties: {
             specialAction: null
@@ -305,7 +305,7 @@ export const TNT_GLD = [
         }
     },
     {
-        blockId: "goe_tnt:arrow_storm_tnt",
+        blockId: "goe_tnt:arrow_tnt",
         fuseTime: 40,
         power: 0.5,
         fuseEffects: {
@@ -323,7 +323,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "arrow_storm"
+            specialAction: "arrow"
         },
         preExplosionProperties: {
             specialAction: null
@@ -411,7 +411,7 @@ export const TNT_GLD = [
         }
     },
     {
-        blockId: "goe_tnt:atmosphere_tnt",
+        blockId: "goe_tnt:daytime_tnt",
         fuseTime: 40,
         power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -433,7 +433,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "atmosphere"
+            specialAction: "daytime"
         },
         preExplosionProperties: {
             specialAction: null
@@ -490,7 +490,7 @@ export const TNT_GLD = [
         }
     },
     {
-        blockId: "goe_tnt:honey_tnt",
+        blockId: "goe_tnt:angry_bee_tnt",
         fuseTime: 40,
         power: 2,
         fuseEffects: {
@@ -511,7 +511,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "honey"
+            specialAction: "angry_bee"
         },
         preExplosionProperties: {
             specialAction: null
@@ -705,7 +705,7 @@ export const TNT_GLD = [
         }
     },
     {
-        blockId: "goe_tnt:light_up_tnt",
+        blockId: "goe_tnt:light_tnt",
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -723,7 +723,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "light_up"
+            specialAction: "light"
         },
         preExplosionProperties: {
             specialAction: null
