@@ -33,9 +33,9 @@ export function endermiteDecoyTNTPreAction(entity, chargeLevel, fuseRemaining) {
 
 function* preActionJob(dimension, cx, cy, cz, radius) {
     try {
-        dimension.runCommand(
+/*         dimension.runCommand(
             `event entity @e[type=minecraft:enderman,x=${cx},y=${cy},z=${cz},r=${radius}] minecraft:become_angry`
-        );
+        ); */
     } catch {}
 
     yield;
@@ -72,7 +72,8 @@ export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entit
                         blockType === "minecraft:air" ||
                         blockType === "minecraft:cave_air" ||
                         blockType === "minecraft:water" ||
-                        blockType === "minecraft:lava"
+                        blockType === "minecraft:lava" ||
+                        blockType === "minecraft:bedrock"
                     ) {
                         continue;
                     }

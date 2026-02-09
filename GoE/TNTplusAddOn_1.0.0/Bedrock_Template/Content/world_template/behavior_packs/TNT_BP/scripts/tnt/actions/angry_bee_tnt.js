@@ -75,7 +75,8 @@ export function* angryBeeTNTAction(dimension, chargeLevel, location, sourceEntit
                         blockType === "minecraft:air" ||
                         blockType === "minecraft:cave_air" ||
                         blockType === "minecraft:water" ||
-                        blockType === "minecraft:lava"
+                        blockType === "minecraft:lava" ||
+                        blockType === "minecraft:bedrock"
                     ) {
                         continue;
                     }

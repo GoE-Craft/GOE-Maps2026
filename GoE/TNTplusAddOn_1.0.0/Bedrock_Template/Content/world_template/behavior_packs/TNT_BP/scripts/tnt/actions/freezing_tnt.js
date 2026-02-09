@@ -109,7 +109,7 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
                     const targetBlock = dimension.getBlock({ x, y, z });
                     if (!targetBlock) continue;
 
-                    if (targetBlock.typeId !== "minecraft:air") {
+                    if (targetBlock.typeId !== "minecraft:air" && targetBlock.typeId !== "minecraft:cave_air" && targetBlock.typeId !== "minecraft:bedrock") {
                         targetBlock.setPermutation(icePermutation);
                     }
                 } catch {}
