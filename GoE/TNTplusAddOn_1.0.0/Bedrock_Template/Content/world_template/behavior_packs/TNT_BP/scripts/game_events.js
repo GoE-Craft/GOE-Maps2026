@@ -4,6 +4,7 @@ import { GuideBookComponent } from "./book";
 import * as tnt_events from "./tnt/tnt_events";
 import * as achievements from "./achievements";
 import * as book from "./book";
+import * as light_tnt from "./tnt/actions/light_tnt";
 
 
 export async function onLoadFirstTime(player0) {}
@@ -14,6 +15,7 @@ export async function onLoad() {
     // Restore any active TNT from before script reload
     tnt_events.onLoad();
     book.startGuideBookReminderInterval();
+    light_tnt.startLightCleanupJanitor();
 }
 
 export async function onTick() {}
