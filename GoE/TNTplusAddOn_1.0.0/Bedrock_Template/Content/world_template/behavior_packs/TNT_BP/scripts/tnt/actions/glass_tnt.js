@@ -5,59 +5,81 @@ export function* glassTNTAction(dimension, chargeLevel, location, entity) {
     const cy = Math.floor(location.y);
     const cz = Math.floor(location.z);
 
-    // base size (not radius)
-    // each charge adds a flat +25% of base size (not compounded)
-    const baseSize = 10;
-    const size = baseSize + Math.round(baseSize * 0.25 * chargeLevel);
-
-    const half = Math.floor(size / 2);
-
-    const minX = cx - half;
-    const minY = cy - half;
-    const minZ = cz - half;
-
-    const maxX = minX + size - 1;
-    const maxY = minY + size - 1;
-    const maxZ = minZ + size - 1;
-
-    const airPerm = BlockPermutation.resolve("minecraft:air");
-    const glassPerm = BlockPermutation.resolve("minecraft:glass");
+    const tunnelLength = 23;  // Total length of the tunnel in each direction
 
     let operationCounter = 0;
 
-    for (let x = minX; x <= maxX; x++) {
-        for (let y = minY; y <= maxY; y++) {
-            for (let z = minZ; z <= maxZ; z++) {
-                const isFace =
-                    x === minX || x === maxX ||
-                    y === minY || y === maxY ||
-                    z === minZ || z === maxZ;
+    // North/South (Z-axis) - 5 wide in X, 5 tall in Y with 3x3 hollow core
+    for (const zDir of [-1, 1]) {  // -1 for North, 1 for South
+        for (let i = 0; i < tunnelLength; i++) {
+            const z = cz + (zDir * i);
+            
+            for (let xOff = -2; xOff <= 2; xOff++) {  // 5 wide: xOff = -2, -1, 0, 1, 2
+                for (let yOff = -2; yOff <= 2; yOff++) {  // 5 tall: yOff = -2, -1, 0, 1, 2
+                    const x = cx + xOff;
+                    const y = cy + yOff;
 
-                try {
-                    const b = dimension.getBlock({ x, y, z });
-                    if (!b) continue;
+                    // Check if in inner 3x3 core (xOff: -1 to 1, yOff: -1 to 1)
+                    const isInnerCore = (xOff >= -1 && xOff <= 1) && (yOff >= -1 && yOff <= 1);
 
-                    const typeId = b.typeId || "";
+                    try {
+                        replaceBlock({ x, y, z }, dimension, isInnerCore);
+                    } catch {}
 
-                    // ignore ores and coal
-                    if (
-                        typeId.endsWith("_ore") ||
-                        typeId === "minecraft:coal_ore" ||
-                        typeId === "minecraft:deepslate_coal_ore" ||
-                        typeId === "minecraft:coal_block"
-                    ) {
-                        continue;
-                    }
+                    operationCounter++;
+                    if ((operationCounter % 80) === 0) yield;
+                }
+            }
+        }
+    }
 
-                    // faces become glass, everything else becomes air
-                    b.setPermutation(isFace ? glassPerm : airPerm);
-                } catch {}
+    // East/West (X-axis) - 5 wide in Z, 5 tall in Y with 3x3 hollow core
+    for (const xDir of [1, -1]) {  // 1 for East, -1 for West
+        for (let i = 0; i < tunnelLength; i++) {
+            const x = cx + (xDir * i);
+            
+            for (let zOff = -2; zOff <= 2; zOff++) {  // 5 wide: zOff = -2, -1, 0, 1, 2
+                for (let yOff = -2; yOff <= 2; yOff++) {  // 5 tall: yOff = -2, -1, 0, 1, 2
+                    const z = cz + zOff;
+                    const y = cy + yOff;
 
-                operationCounter++;
-                if ((operationCounter % 80) === 0) yield;
+                    // Check if in inner 3x3 core (zOff: -1 to 1, yOff: -1 to 1)
+                    const isInnerCore = (zOff >= -1 && zOff <= 1) && (yOff >= -1 && yOff <= 1);
+
+                    try {
+                        replaceBlock({ x, y, z }, dimension, isInnerCore);
+                    } catch {}
+
+                    operationCounter++;
+                    if ((operationCounter % 80) === 0) yield;
+                }
             }
         }
     }
 
     yield;
+}
+
+function replaceBlock(location, dimension, isInnerCore) {
+    const b = dimension.getBlock({ x: location.x, y: location.y, z: location.z });
+    if (!b) return;
+
+    const typeId = b.typeId || "";
+
+    // Skip air blocks
+    if (b.isAir) return;
+
+    // Inner core becomes air, outer shell becomes glass
+    if (isInnerCore) {
+        if (typeId.endsWith("_ore")) return;  // Skip ores in the inner core to preserve drops
+        b.setType("minecraft:air");
+    } else {
+        // Skip ores and coal for outer shell
+        if (
+            typeId.endsWith("_ore")
+        ) {
+            return;
+        }
+        b.setType("minecraft:glass");
+    }
 }

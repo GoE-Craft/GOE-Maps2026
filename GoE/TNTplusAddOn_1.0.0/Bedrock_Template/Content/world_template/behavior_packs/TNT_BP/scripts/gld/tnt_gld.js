@@ -588,7 +588,7 @@ export const TNT_GLD = [
    {
         blockId: "goe_tnt:glass_tnt",
         fuseTime: 40,
-        power: 6.5,
+        power: 1,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
