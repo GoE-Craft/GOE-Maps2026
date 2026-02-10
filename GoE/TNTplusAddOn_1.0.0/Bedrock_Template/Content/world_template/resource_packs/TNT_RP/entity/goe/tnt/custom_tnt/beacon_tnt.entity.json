@@ -4,26 +4,56 @@
     "description": {
       "identifier": "goe_tnt:beacon_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphablend",
+        "perimiter": "goe_tnt_border",
+        "perimiter2": "goe_tnt_border",
+        "perimiter3": "goe_tnt_border",
+        "perimiter4": "goe_tnt_border",
+        "perimiter5": "goe_tnt_border",
+        "perimiter6": "goe_tnt_border",
+        "perimiter7": "goe_tnt_border",
+        "perimiter8": "goe_tnt_border",
+        "perimiter9": "goe_tnt_border",
+        "perimiter10": "goe_tnt_border",
+        "perimiter11": "goe_tnt_border",
+        "perimiter12": "goe_tnt_border",
+        "perimiter13": "goe_tnt_border"
+        
       },
       "textures": {
-        "default": "textures/goe/tnt/entity/beacon_tnt"
+        "default": "textures/goe/tnt/entity/beacon_tnt",
+        "beacon_tnt_perimiter" : "textures/goe/tnt/entity/beacon_tnt"
       },
       "geometry": {
-        "default": "geometry.beacon_tnt"
+        "default": "geometry.beacon_tnt",
+        "beacon_tnt_perimiter" : "geometry.beacon_tnt_perimiter"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "charge": "animation.beacon_tnt.charge",
+        "explode": "animation.beacon_tnt.explode"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "buff_effects": "goe_tnt:buff_effects",
+        "blue_collapsing_small": "goe_tnt:blue_collapsing_small",
+        "blue_collapsing_lines": "goe_tnt:blue_collapsing_lines",
+        "blue_pulsing": "goe_tnt:blue_pulsing",
+        "atmosphere_impact_blue":"goe_tnt:atmosphere_impact_blue",
+        "border":"goe_tnt:border",
+        "border_small":"goe_tnt:border_small"
+      },
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.beacon_tnt_perimiter": "q.mark_variant == 2"}
+      ]
     }
   }
 }

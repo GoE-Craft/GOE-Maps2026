@@ -544,7 +544,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:beacon_tnt",
-        fuseTime: 80,
+        fuseTime: 50,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -553,10 +553,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+            explosionAnimationLength: 300
         },
         explosionProperties: {
             createsFire: false,

@@ -1,0 +1,166 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.beacon_tnt_perimiter",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 130,
+				"visible_bounds_height": 269,
+				"visible_bounds_offset": [0, 0.5, 0]
+			},
+			"bones": [
+				{
+					"name": "perimiter",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "asd",
+					"parent": "perimiter",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "asd2",
+					"parent": "asd",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "perimiter2",
+					"parent": "asd",
+					"pivot": [0, 45, 0],
+					"cubes": [
+						{
+							"origin": [-72.28, -0.35, -72.28],
+							"size": [144.56, 232.7, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						},
+						{
+							"origin": [-72.28, -0.35, -71.28],
+							"size": [144.56, 232.7, 0],
+							"pivot": [0, 116, -71.28],
+							"rotation": [0, 180, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						}
+					]
+				},
+				{
+					"name": "asd6",
+					"parent": "perimiter",
+					"pivot": [0, 0, 0],
+					"rotation": [0, 90, 0]
+				},
+				{
+					"name": "asd7",
+					"parent": "asd6",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "perimiter11",
+					"parent": "asd6",
+					"pivot": [0, 45, 0],
+					"cubes": [
+						{
+							"origin": [-72.28, -0.35, -72.28],
+							"size": [144.56, 232.7, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						},
+						{
+							"origin": [-72.28, -0.35, -71.28],
+							"size": [144.56, 232.7, 0],
+							"pivot": [0, 116, -71.28],
+							"rotation": [0, 180, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						}
+					]
+				},
+				{
+					"name": "asd11",
+					"parent": "perimiter",
+					"pivot": [0, 0, 0],
+					"rotation": [0, 180, 0]
+				},
+				{
+					"name": "asd12",
+					"parent": "asd11",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "perimiter8",
+					"parent": "asd11",
+					"pivot": [0, 45, 0],
+					"cubes": [
+						{
+							"origin": [-72.28, -0.35, -72.28],
+							"size": [144.56, 232.7, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						},
+						{
+							"origin": [-72.28, -0.35, -71.28],
+							"size": [144.56, 232.7, 0],
+							"pivot": [0, 116, -71.28],
+							"rotation": [0, 180, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						}
+					]
+				},
+				{
+					"name": "asd16",
+					"parent": "perimiter",
+					"pivot": [0, 0, 0],
+					"rotation": [0, -90, 0]
+				},
+				{
+					"name": "asd17",
+					"parent": "asd16",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "perimiter5",
+					"parent": "asd16",
+					"pivot": [0, 45, 0],
+					"cubes": [
+						{
+							"origin": [-72.28, -0.35, -72.28],
+							"size": [144.56, 232.7, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						},
+						{
+							"origin": [-72.28, -0.35, -71.28],
+							"size": [144.56, 232.7, 0],
+							"pivot": [0, 116, -71.28],
+							"rotation": [0, 180, 0],
+							"uv": {
+								"north": {"uv": [0, 113], "uv_size": [113.5, 15]}
+							}
+						}
+					]
+				},
+				{
+					"name": "locator",
+					"pivot": [0, 0, 0],
+					"locators": {
+						"side1": [0, 0, 0],
+						"side2": [0, 0, 0],
+						"side3": [0, 0, 0],
+						"side4": [0, 0, 0]
+					}
+				}
+			]
+		}
+	]
+}

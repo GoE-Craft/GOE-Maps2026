@@ -1,0 +1,94 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.beacon_tnt_block",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "TNT",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-8, 0, -8], "size": [16, 5, 16], "uv": [0, 32]}
+					]
+				},
+				{
+					"name": "TNT_TNT",
+					"parent": "TNT",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{
+							"origin": [-5.86, 4.04, -5.66],
+							"size": [11.52, 11.52, 11.52],
+							"uv": {
+								"north": {"uv": [16.06, 16.06], "uv_size": [15.88, 15.88]},
+								"east": {"uv": [0.06, 16.06], "uv_size": [15.88, 15.88]},
+								"south": {"uv": [48.06, 16.06], "uv_size": [15.88, 15.88]},
+								"west": {"uv": [32.06, 16.06], "uv_size": [15.88, 15.88]},
+								"up": {"uv": [16.06, 0.06], "uv_size": [15.88, 15.88]},
+								"down": {"uv": [32.06, 15.94], "uv_size": [15.88, -15.88]}
+							}
+						}
+					]
+				},
+				{
+					"name": "semitransparent",
+					"parent": "TNT",
+					"pivot": [4.00084, 16.99946, 0],
+					"cubes": [
+						{
+							"origin": [-7, 5, -7],
+							"size": [14, 12, 14],
+							"uv": {
+								"north": {"uv": [14.06, 67.06], "uv_size": [13.88, 11.88]},
+								"east": {"uv": [0.06, 67.06], "uv_size": [13.88, 11.88]},
+								"south": {"uv": [42.06, 67.06], "uv_size": [13.88, 11.88]},
+								"west": {"uv": [28.06, 67.06], "uv_size": [13.88, 11.88]},
+								"up": {"uv": [14.06, 53.06], "uv_size": [13.88, 13.88]},
+								"down": {"uv": [28.06, 66.94], "uv_size": [13.88, -13.88]}
+							}
+						}
+					]
+				},
+				{
+					"name": "semitransparent2",
+					"parent": "semitransparent",
+					"pivot": [-0.1, 25.8, -0.1]
+				},
+				{
+					"name": "beamoverlay",
+					"parent": "semitransparent",
+					"pivot": [4.00084, 16.99946, 0]
+				},
+				{
+					"name": "particles",
+					"parent": "TNT",
+					"pivot": [-2.068, 22.936, 2]
+				},
+				{
+					"name": "beam",
+					"parent": "TNT",
+					"pivot": [0, 10.5, 0],
+					"cubes": [
+						{
+							"origin": [-2.28, 7.15, -2.28],
+							"size": [4.56, 6.7, 4.56],
+							"uv": {
+								"north": {"uv": [114, 0], "uv_size": [7.5, 128]},
+								"east": {"uv": [114, 0], "uv_size": [7.5, 128]},
+								"south": {"uv": [114, 0], "uv_size": [7.5, 128]},
+								"west": {"uv": [114, 0], "uv_size": [7.5, 128]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

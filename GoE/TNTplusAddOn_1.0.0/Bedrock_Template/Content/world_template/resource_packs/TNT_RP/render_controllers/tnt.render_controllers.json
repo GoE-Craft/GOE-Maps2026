@@ -123,6 +123,35 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
+    "controller.render.beacon_tnt": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default",  "beam" : "material.beam"} ],
+      "textures": [ "Texture.default" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
+      }
+    },
+    "controller.render.beacon_tnt_perimiter": {
+      "geometry": "Geometry.beacon_tnt_perimiter",
+      "materials": [ { "*": "Material.default", 
+      "perimiter": "material.perimiter",
+      "perimiter2": "material.perimiter",
+      "perimiter3": "material.perimiter",
+      "perimiter4": "material.perimiter",
+      "perimiter5": "material.perimiter",
+      "perimiter6": "material.perimiter",
+      "perimiter7": "material.perimiter",
+      "perimiter8": "material.perimiter",
+      "perimiter9": "material.perimiter",
+      "perimiter10": "material.perimiter",
+      "perimiter11": "material.perimiter",
+      "perimiter12": "material.perimiter",
+      "perimiter13": "material.perimiter"
+      
+      }],    
     "controller.render.eraser_tnt": {
       "geometry": "Geometry.default",
       "materials": [
