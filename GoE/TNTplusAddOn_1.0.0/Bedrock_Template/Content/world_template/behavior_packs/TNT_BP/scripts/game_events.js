@@ -5,6 +5,7 @@ import * as tnt_events from "./tnt/tnt_events";
 import * as achievements from "./achievements";
 import * as book from "./book";
 import * as light_tnt from "./tnt/actions/light_tnt";
+import * as test_area from "./utilities/test_area";
 
 
 export async function onLoadFirstTime(player0) {}
@@ -52,7 +53,17 @@ export async function onItemUseOn(event) {}
 
 export async function onPlayerBreakBlock(event) {}
 
-export async function onScriptEventReceive(event) {}
+export async function onScriptEventReceive(event) {
+    if (event.id === "goe_tnt:spawn_monsters") {
+        test_area.spawnTestMonsters();
+    }
+    else if (event.id === "goe_tnt:reset_test_area") {
+        test_area.resetTestArea();
+    }
+    else if (event.id === "goe_tnt:spawn_animals") {
+        test_area.spawnTestAnimals();
+    }
+}
 
 export async function onWeatherChange(event) {}
 
