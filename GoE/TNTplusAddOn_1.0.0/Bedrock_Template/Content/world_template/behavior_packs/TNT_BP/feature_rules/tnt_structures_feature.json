@@ -10,7 +10,7 @@
       "minecraft:biome_filter": {
         "test": "has_biome_tag",
         "operator": "==",
-        "value": "forest"
+        "value": "overworld"
       }
     },
     "distribution": {

@@ -4,7 +4,7 @@
     "description": {
       "identifier": "goe_tnt:time_freeze_structure_feature"
     },
-    "structure_name": "goe_tnt:time_freeze_tnt_structure",
+    "structure_name": "goe_tnt:time_freeze_structure",
     "facing_direction": "random",
     "adjustment_radius": 16,
     "constraints": {
@@ -24,9 +24,14 @@
           "minecraft:sweet_berry_bush",
           "minecraft:leaf_litter",
           "minecraft:leaves",
+          "minecraft:dandelion",
+          "minecraft:poppy",
           "minecraft:log",
           "minecraft:sapling",
           "minecraft:wildflowers",
+          "minecraft:snow",
+          "minecraft:dead_bush",
+          "minecraft:pink_petals",
           "minecraft:firefly_bush"
         ]
       }
