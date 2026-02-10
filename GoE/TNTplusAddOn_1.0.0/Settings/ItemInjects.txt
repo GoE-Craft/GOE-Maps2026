@@ -10,13 +10,13 @@ SetContainerSlot -15 0 129 5 goe_tnt:mecha_suit_spawn_egg 0 64
 
 SetContainerSlot -13 0 129 0 goe_tnt:directional_tnt 0 64
 SetContainerSlot -13 0 129 1 goe_tnt:party_tnt 0 64
-SetContainerSlot -13 0 129 2 goe_tnt:party_tnt 0 64
-SetContainerSlot -13 0 129 3 goe_tnt:magnet_tnt 0 64
-SetContainerSlot -13 0 129 4 goe_tnt:chunker_tnt 0 64
-SetContainerSlot -13 0 129 5 goe_tnt:ultron_tnt 0 64
-SetContainerSlot -13 0 129 6 goe_tnt:freezing_tnt 0 64
-SetContainerSlot -13 0 129 7 goe_tnt:tree_planter_tnt 0 64
-SetContainerSlot -13 0 129 8 goe_tnt:thunderstorm_tnt 0 64
+SetContainerSlot -13 0 129 2 goe_tnt:magnet_tnt 0 64
+SetContainerSlot -13 0 129 3 goe_tnt:chunker_tnt 0 64
+SetContainerSlot -13 0 129 4 goe_tnt:ultron_tnt 0 64
+SetContainerSlot -13 0 129 5 goe_tnt:freezing_tnt 0 64
+SetContainerSlot -13 0 129 6 goe_tnt:tree_planter_tnt 0 64
+SetContainerSlot -13 0 129 7 goe_tnt:thunderstorm_tnt 0 64
+SetContainerSlot -13 0 129 8 goe_tnt:eraser_tnt 0 64
 SetContainerSlot -13 0 129 9 goe_tnt:weather_station_tnt 0 64
 SetContainerSlot -13 0 129 10 goe_tnt:time_freeze_tnt 0 64
 SetContainerSlot -13 0 129 11 goe_tnt:arrow_tnt 0 64
