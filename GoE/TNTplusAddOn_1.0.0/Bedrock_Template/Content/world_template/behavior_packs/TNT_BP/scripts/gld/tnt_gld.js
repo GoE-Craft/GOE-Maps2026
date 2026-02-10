@@ -500,10 +500,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.fizz",
-            soundDelay: 0
+            explosionAnimationLength: 1
         },
         explosionProperties: {
             createsFire: false,
