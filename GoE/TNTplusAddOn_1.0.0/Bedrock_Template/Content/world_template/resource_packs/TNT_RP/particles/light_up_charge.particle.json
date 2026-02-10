@@ -8,18 +8,6 @@
 				"texture": "textures/goe/tnt/particles/dot_white"
 			}
 		},
-		"events": {
-			"explode": {
-				"sequence": [
-					{
-						"particle_effect": {
-							"effect": "amonde:projectile_explosion_2",
-							"type": "emitter"
-						}
-					}
-				]
-			}
-		},
 		"components": {
 			"minecraft:emitter_rate_steady": {
 				"spawn_rate": 120,
@@ -27,9 +15,6 @@
 			},
 			"minecraft:emitter_lifetime_once": {
 				"active_time": 2
-			},
-			"minecraft:emitter_lifetime_events": {
-				"creation_event": "explode"
 			},
 			"minecraft:emitter_shape_point": {},
 			"minecraft:particle_lifetime_expression": {

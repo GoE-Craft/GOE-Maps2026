@@ -8,9 +8,6 @@
 				"texture": "textures/goe/tnt/particles/dot_white"
 			}
 		},
-		"events": {
-			"explo_2": {}
-		},
 		"components": {
 			"minecraft:emitter_rate_instant": {
 				"num_particles": 500
