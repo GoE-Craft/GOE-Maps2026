@@ -7,6 +7,7 @@ SetContainerSlot -15 0 129 2 clock 0 1
 SetContainerSlot -15 0 129 3 gunpowder 0 64
 SetContainerSlot -15 0 129 4 flint_and_steel 0 1
 SetContainerSlot -15 0 129 5 goe_tnt:mecha_suit_spawn_egg 0 64
+
 SetContainerSlot -13 0 129 0 goe_tnt:directional_tnt 0 64
 SetContainerSlot -13 0 129 1 goe_tnt:party_tnt 0 64
 SetContainerSlot -13 0 129 2 goe_tnt:party_tnt 0 64
@@ -32,3 +33,69 @@ SetContainerSlot -13 0 129 21 goe_tnt:glass_tnt 0 64
 SetContainerSlot -13 0 129 22 goe_tnt:mob_eraser_tnt 0 64
 SetContainerSlot -13 0 129 23 goe_tnt:magma_eraser_tnt 0 64
 SetContainerSlot -13 0 129 24 goe_tnt:light_tnt 0 64
+
+SetContainerSlot 42 17 171 4 goe_tnt:directional_tnt 0 3
+SetContainerSlot 34 17 159 11 goe_tnt:directional_tnt 0 2
+
+SetContainerSlot 228 14 206 3 goe_tnt:party_tnt 0 2
+SetContainerSlot 234 14 210 6 goe_tnt:party_tnt 0 3
+
+SetContainerSlot 35 16 21 6 goe_tnt:magnet_tnt 0 3
+SetContainerSlot 35 16 21 22 goe_tnt:magnet_tnt 0 2
+
+SetContainerSlot 37 12 61 13 goe_tnt:chunker_tnt 0 4
+
+SetContainerSlot 83 14 7 21 goe_tnt:ultron_tnt 0 2
+SetContainerSlot 88 14 7 2 goe_tnt:ultron_tnt 0 3
+
+SetContainerSlot 84 7 63 3 goe_tnt:freezing_tnt 0 4
+
+SetContainerSlot 179 14 208 2 goe_tnt:tree_planter_tnt 0 5
+
+SetContainerSlot 133 17 56 11 goe_tnt:thunderstorm_tnt 0 2
+SetContainerSlot 136 17 63 2 goe_tnt:thunderstorm_tnt 0 3
+
+SetContainerSlot 184 3 64 12 goe_tnt:eraser_tnt 0 3
+
+SetContainerSlot 241 15 169 5 goe_tnt:weather_station_tnt 0 3
+SetContainerSlot 227 8 172 2 goe_tnt:weather_station_tnt 0 2
+
+SetContainerSlot 126 3 21 2 goe_tnt:time_freeze_tnt 0 4
+
+SetContainerSlot 184 17 16 15 goe_tnt:arrow_tnt 0 4
+
+SetContainerSlot 26 4 207 13 goe_tnt:teleportation_tnt 0 3
+
+SetContainerSlot 227 13 55 12 goe_tnt:prison_tnt 0 3
+
+SetContainerSlot 327 14 71 12 goe_tnt:structure_tnt 0 3
+SetContainerSlot 332 14 57 15 goe_tnt:structure_tnt 0 3
+
+SetContainerSlot 327 16 21 3 goe_tnt:daytime_tnt 0 5
+
+SetContainerSlot 392 4 13 14 goe_tnt:healing_tnt 0 2
+SetContainerSlot 387 11 15 14 goe_tnt:healing_tnt 0 3
+
+SetContainerSlot 479 35 62 14 goe_tnt:villager_decoy_tnt 0 4
+
+SetContainerSlot 136 16 214 3 goe_tnt:angry_bee_tnt 0 4
+
+SetContainerSlot 474 7 13 16 goe_tnt:cloning_tnt 0 5
+
+SetContainerSlot 431 6 6 11 goe_tnt:beacon_tnt 0 4
+
+SetContainerSlot 192 3 110 14 goe_tnt:endermite_decoy_tnt 0 4
+
+SetContainerSlot 262 11 118 22 goe_tnt:glass_tnt 0 5
+
+SetContainerSlot 427 10 67 15 goe_tnt:furnace_tnt 0 5
+
+SetContainerSlot 392 14 56 11 goe_tnt:mob_eraser_tnt 0 2
+SetContainerSlot 392 14 70 2 goe_tnt:mob_eraser_tnt 0 3
+
+SetContainerSlot 285 14 57 2 goe_tnt:magma_eraser_tnt 0 2
+SetContainerSlot 285 15 65 6 goe_tnt:magma_eraser_tnt 0 3
+
+SetContainerSlot 285 16 15 22 goe_tnt:light_tnt 0 3
+
+SetContainerSlot 237 15 10 12 goe_tnt:thief_tnt 0 5
