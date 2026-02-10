@@ -245,7 +245,7 @@ item=minecraft:iron_axe 0 1
 type=items
 item=minecraft:copper_ingot 0 20
 
-#dimensional_tnt_reward
+#eraser_tnt_reward
 type=items
 item=minecraft:pumpkin_pie 0 10
 
@@ -253,11 +253,11 @@ item=minecraft:pumpkin_pie 0 10
 type=items
 item=minecraft:clock 0 1
 
-#arrow_storm_tnt_reward
+#arrow_tnt_reward
 type=items
 item=minecraft:emerald 0 5
 
-#atmosphere_tnt_reward
+#daytime_tnt_reward
 type=items
 item=minecraft:copper_ingot 0 20
 
@@ -269,7 +269,7 @@ item=minecraft:golden_apple 0 2
 type=items
 item=minecraft:bread 0 10
 
-#honey_tnt_reward
+#angry_bee_tnt_reward
 type=items
 item=minecraft:emerald 0 5
 
@@ -301,7 +301,7 @@ item=minecraft:emerald 0 5
 type=items
 item=minecraft:iron_ingot 0 10
 
-#light_up_tnt_reward
+#light_tnt_reward
 type=items
 item=minecraft:emerald 0 5
 
@@ -362,7 +362,7 @@ item=goe_tnt:directional_tnt 0 1
 
 ///////////////////////////////////////////////////
 
-#atmosphere_tnt_structure
+#daytime_tnt_structure
 type=area
 location=348 35 27 321 1 0
 replace=gray_stained_glass structure_void
@@ -397,7 +397,7 @@ type=area
 location=221 1 100 248 31 127
 replace=gray_stained_glass structure_void
 
-#honey_tnt_structure
+#angry_bee_tnt_structure
 type=area
 location=121 1 200 148 31 227
 replace=gray_stained_glass structure_void
@@ -427,12 +427,12 @@ type=area
 location=21 1 150 48 28 177
 replace=gray_stained_glass structure_void
 
-#dimensional_tnt_structure
+#eraser_tnt_structure
 type=area
 location=171 1 50 198 30 77
 replace=gray_stained_glass structure_void
 
-#arrow_storm_tnt_structure
+#arrow_tnt_structure
 type=area
 location=171 1 0 198 24 27
 replace=gray_stained_glass structure_void
@@ -452,7 +452,7 @@ type=area
 location=398 37 27 371 1 0
 replace=gray_stained_glass structure_void
 
-#light_up_tnt_structure
+#light_tnt_structure
 type=area
 location=271 1 0 298 28 27
 replace=gray_stained_glass structure_void
