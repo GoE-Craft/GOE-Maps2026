@@ -27,7 +27,7 @@
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.teleportation_tnt",
-      "minecraft:material_instances": { "*": { "texture": "teleportation_tnt", "render_method": "alpha_test_to_opaque" } },
+      "minecraft:material_instances": { "*": { "texture": "teleportation_tnt", "render_method": "alpha_test" } },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },
