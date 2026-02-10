@@ -307,7 +307,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:arrow_tnt",
         fuseTime: 40,
-        power: 0.5,
+        power: 2,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -342,7 +342,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {
@@ -370,7 +370,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {
@@ -422,10 +422,6 @@ export const TNT_GLD = [
         },
         explosionEffects: {
             explosionAnimationLength: 0.5,
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.explode",
-            soundDelay: 0
         },
         explosionProperties: {
             createsFire: false,
@@ -627,7 +623,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 2,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0,
             explosionAnimationLength: 1
         },
@@ -731,7 +727,7 @@ export const TNT_GLD = [
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.fizz",
+            soundEffect: "random.explode",
             soundDelay: 0
         },
         explosionProperties: {

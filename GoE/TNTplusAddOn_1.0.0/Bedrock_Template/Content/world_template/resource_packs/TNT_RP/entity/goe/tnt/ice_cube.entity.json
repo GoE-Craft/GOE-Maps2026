@@ -3,7 +3,7 @@
   "minecraft:client_entity": {
     "description": {
       "identifier": "goe_tnt:ice_cube",
-      "materials": { "default": "entity_alphatest" },
+      "materials": { "default": "entity_alphablend" },
       "textures": { "default": "textures/goe/tnt/entity/ice_cube" },
       "render_controllers": [ "controller.render.default" ],
       "geometry": { "default": "geometry.goe_tnt.ice_cube" }
