@@ -8,7 +8,6 @@
     "acid_tnt": { "textures": "textures/goe/tnt/entity/acid_tnt" },
     "allay_tnt": { "textures": "textures/goe/tnt/entity/allay_tnt" },
     "anti_tnt": { "textures": "textures/goe/tnt/entity/anti_tnt" },
-    "arcane_tnt": { "textures": "textures/goe/tnt/entity/arcane_tnt" },
     "arrow_tnt": { "textures": "textures/goe/tnt/entity/arrow_tnt" },
     "daytime_tnt": { "textures": "textures/goe/tnt/entity/daytime_tnt" },
     "balloon_tnt": { "textures": "textures/goe/tnt/entity/balloon_tnt" },

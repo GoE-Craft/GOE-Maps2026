@@ -61,7 +61,7 @@ export function registerRespawnStorage() {
 // Teleportation TNT Action
 export function* teleportationTNTAction(dimension, chargeLevel, location, tntEntity) {
 
-    const baseRadius = 5;
+    const baseRadius = 8;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     const explosionLocation = {

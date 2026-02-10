@@ -1,8 +1,14 @@
-import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
 export function* beaconTNTAction(dimension, chargeLevel, location, entity) {
     const radius = 32;
-    const durationTicks = 10 * 60 * 20;
+
+    // Apply every 2 seconds for 5 minutes
+    const applyEveryTicks = 2 * 20;
+    const totalDurationTicks = 5 * 60 * 20;
+
+    // Each application grants 10 seconds of effects
+    const effectDurationTicks = 10 * 20;
 
     const amplifier = Math.floor(Number(chargeLevel));
 
@@ -26,22 +32,39 @@ export function* beaconTNTAction(dimension, chargeLevel, location, entity) {
         { id: "saturation" }
     ];
 
-    yield;
+    const startTick = system.currentTick;
 
-    let players = [];
-    try {
-        players = dimension.getPlayers({ location: loc, maxDistance: radius });
-    } catch {}
+    while (true) {
+        // Stop if the TNT entity is gone, or time window ended
+        if (!entity?.isValid) break;
 
-    for (const p of players) {
-        if (!p?.isValid) continue;
+        const elapsed = system.currentTick - startTick;
+        if (elapsed >= totalDurationTicks) break;
 
-        for (const ef of effects) {
-            try {
-                p.addEffect(ef.id, durationTicks, { amplifier, showParticles: true });
-            } catch {}
+        let players = [];
+        try {
+            players = dimension.getPlayers({ location: loc, maxDistance: radius });
+        } catch {}
+
+        for (const p of players) {
+            if (!p?.isValid) continue;
+
+            for (const ef of effects) {
+                try {
+                    p.addEffect(ef.id, effectDurationTicks, { amplifier, showParticles: true });
+                } catch {}
+            }
         }
+
+        // Wait 2 seconds before re-applying
+        yield* waitTicks(applyEveryTicks);
     }
 
     yield;
+}
+
+// wait
+function* waitTicks(ticks) {
+    const t = Math.max(0, Math.floor(Number(ticks ?? 0)));
+    for (let i = 0; i < t; i++) yield;
 }

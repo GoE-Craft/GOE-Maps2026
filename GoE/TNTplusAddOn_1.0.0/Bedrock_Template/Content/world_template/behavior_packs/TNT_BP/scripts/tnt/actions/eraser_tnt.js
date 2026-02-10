@@ -5,15 +5,17 @@ export function* eraserTNTAction(dimension, chargeLevel, location, entity) {
     const baseRadius = 10;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
-    yield* destroySphere(dimension, location, radius, entity);
-
     system.runTimeout(() => {
         system.runJob(destroySphere(dimension, location, radius, entity));
-    }, 10);
 
-    system.runTimeout(() => {
-        system.runJob(destroySphere(dimension, location, radius, entity));
-    }, 20);
+        system.runTimeout(() => {
+            system.runJob(destroySphere(dimension, location, radius, entity));
+        }, 10);
+
+        system.runTimeout(() => {
+            system.runJob(destroySphere(dimension, location, radius, entity));
+        }, 20);
+    }, 6);
 }
 
 function* destroySphere(dimension, location, radius, sourceEntity) {
@@ -36,13 +38,12 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
                 const by = cy + y;
                 const bz = cz + z;
 
-                try{
+                try {
                     const block = dimension.getBlock({ x: bx, y: by, z: bz });
                     if (block && block.typeId !== "minecraft:air" && block.typeId !== "minecraft:bedrock") {
                         block.setType("minecraft:air");
                     }
                 } catch (e) {
-                    // Ignore out of bounds errors or any other issues
                     console.log(`Error processing block at ${bx}, ${by}, ${bz}: ${e}`);
                 }
             }
@@ -58,7 +59,7 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
             location,
             maxDistance: radius
         });
-    } catch {}
+    } catch { }
 
     yield;
 
@@ -70,7 +71,7 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
             if (e.typeId && e.typeId.includes("tnt")) continue;
 
             e.kill();
-        } catch {}
+        } catch { }
     }
 
     yield;

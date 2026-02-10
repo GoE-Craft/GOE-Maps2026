@@ -512,7 +512,7 @@ export const Achievements = {
         {
             id: "beacon_tnt",
             name: "Beacon TNT",
-            info: "Summons a glowing beam that grants powerful effects to nearby players and lasts for 10 minutes.",
+            info: "Summons a glowing beam that grants powerful effects to nearby players and lasts for 5 minutes.",
             tips: "Use the Beacon TNT to gain powerful stats.",
             tntType: "beacon_tnt",
             icon: "textures/goe/tnt/ui/achievements/beacon_tnt",
