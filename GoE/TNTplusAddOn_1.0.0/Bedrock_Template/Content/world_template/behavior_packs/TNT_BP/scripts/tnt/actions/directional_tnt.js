@@ -39,7 +39,13 @@ export function* directionalTNTAction(dimension, location, vec, length, widthRad
                 try {
                     const blockLoc = { x: bx, y: by, z: bz };
                     const block = dimension.getBlock(blockLoc);
+                    if (!block) continue;
+
+                    // no touchy
+                    if ((block.typeId || "") === "minecraft:bedrock") continue;
+
                     if (block.hasTag("diamond_pick_diggable")) continue;
+
                     block.setPermutation(BlockPermutation.resolve("minecraft:air"));
                 } catch (e) { }
             }

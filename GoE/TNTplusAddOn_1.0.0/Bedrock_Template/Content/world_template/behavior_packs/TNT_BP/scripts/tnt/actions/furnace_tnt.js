@@ -67,7 +67,6 @@ export function* furnaceTNTAction(dimension, chargeLevel, location, entity) {
     for (let x = cx - r; x <= cx + r; x++) {
         for (let y = cy - r; y <= cy + r; y++) {
             for (let z = cz - r; z <= cz + r; z++) {
-
                 const dx = x - cx;
                 const dy = y - cy;
                 const dz = z - cz;
@@ -80,6 +79,9 @@ export function* furnaceTNTAction(dimension, chargeLevel, location, entity) {
                     if (!b) continue;
 
                     const typeId = b.typeId || "";
+
+                    // don't touch bedrock
+                    if (typeId === "minecraft:bedrock") continue;
 
                     if (typeId === "minecraft:air" || typeId === "minecraft:cave_air") {
                         continue;
