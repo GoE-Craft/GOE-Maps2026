@@ -4,26 +4,45 @@
     "description": {
       "identifier": "goe_tnt:magma_eraser_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "beam" : "goe_tnt_border"
       },
       "textures": {
-				"default": "textures/blocks/tnt_side"
+				"default": "textures/goe/tnt/entity/eruption_tnt"
       },
       "geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.eruption_tnt"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"tnt_swelling": "q.mark_variant == 1"},
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "tnt_swelling": "animation.magma_eraser_tnt.swell",
+        "charge" : "animation.magma_eraser_tnt.charge",
+        "explosion" : "animation.magma_eraser_tnt.explosion"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "particle_effects": {
+        "tnt_charge_yellow" : "goe_tnt:tnt_charge_yellow",
+        "collapsing_lines_orange" : "goe_tnt:collapsing_lines_orange",
+        "eruption" : "goe_tnt:magma_eraser_eruption",
+        "pull" : "goe_tnt:eraser_pull",
+        "pull_stone" : "goe_tnt:eraser_pull_stone",
+        "atmosphere_impact_orange" : "goe_tnt:atmosphere_impact_orange",
+        "atmosphere_impact_orange_reverse" : "goe_tnt:atmosphere_impact_orange_reverse",
+        "explosion_particle" : "goe_tnt:magma_eraser_explosion",
+        "stone_explosion": "goe_tnt:magma_eraser_stone_explosion",
+        "one_big_puff" : "goe_tnt:one_big_puff_orange",
+        "implosion" : "goe_tnt:magma_eraser_implosion",
+        "smoke" : "goe_tnt:magma_smoke"
+      },
+      "render_controllers": [ "controller.render.healing_tnt" ]
     }
   }
 }
