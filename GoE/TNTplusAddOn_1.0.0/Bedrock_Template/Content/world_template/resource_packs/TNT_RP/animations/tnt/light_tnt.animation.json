@@ -151,6 +151,9 @@
 				],
 				"0.0417": {
 					"effect": "light_leftover_sparks"
+				},
+				"0.0833": {
+					"effect": "light_extended"
 				}
 			}
 		}

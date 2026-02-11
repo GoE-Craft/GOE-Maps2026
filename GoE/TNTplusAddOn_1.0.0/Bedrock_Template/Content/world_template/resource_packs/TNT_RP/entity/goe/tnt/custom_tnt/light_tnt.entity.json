@@ -32,7 +32,8 @@
         "light_explosion": "goe_tnt:light_explosion",
         "light_big_explosion": "goe_tnt:light_big_explosion",
         "light_sphere": "goe_tnt:light_sphere",
-        "light_leftover_sparks": "goe_tnt:light_leftover_sparks"
+        "light_leftover_sparks": "goe_tnt:light_leftover_sparks",
+        "light_extended": "goe_tnt:light_extended"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }
