@@ -1,0 +1,61 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:prison_sparks",
+			"basic_render_parameters": {
+				"material": "particles_add",
+				"texture": "textures/goe/tnt/particles/dot_white"
+			}
+		},
+		"components": {
+			"minecraft:emitter_local_space": {
+				"position": true,
+				"rotation": true,
+				"velocity": true
+			},
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 120,
+				"max_particles": 400
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 2
+			},
+			"minecraft:emitter_shape_point": {},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": "math.random(0.25,0.5)"
+			},
+			"minecraft:particle_initial_spin": {
+				"rotation": "math.random(45,-45)",
+				"rotation_rate": "math.random(45,-45)"
+			},
+			"minecraft:particle_initial_speed": "math.random_integer(2,0)",
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": [0, "math.random(4,-40)", 0],
+				"rotation_drag_coefficient": "math.random(5,8)"
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["variable.particle_lifetime/variable.particle_age/800", "variable.particle_lifetime/variable.particle_age/80"],
+				"facing_camera_mode": "rotate_xyz",
+				"uv": {
+					"texture_width": 16,
+					"texture_height": 16,
+					"uv": [0, 0],
+					"uv_size": [16, 16]
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.0": "#00FFFFFF",
+						"0.1": "#F0FFE564",
+						"0.36": "#D4FFFBA9",
+						"0.66": "#E3FFE75B",
+						"1.0": "#00FFFBDB"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,50 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:prison_impact",
+			"basic_render_parameters": {
+				"material": "particles_add",
+				"texture": "textures/goe/tnt/particles/light_fog"
+			}
+		},
+		"curves": {
+			"variable.size": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0.3, 1.6, 0.8]
+			}
+		},
+		"components": {
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 9,
+				"max_particles": 5
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 1
+			},
+			"minecraft:emitter_shape_point": {},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": 1
+			},
+			"minecraft:particle_initial_speed": 0,
+			"minecraft:particle_motion_dynamic": {},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["(1 + v.particle_random_1 * v.size) * v.emitter_age * 20", "(1 + v.particle_random_1 * v.size) * v.emitter_age * 20"],
+				"facing_camera_mode": "rotate_xyz"
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.0": "#ffffffff",
+						"0.05": "#FFC3C3C3",
+						"0.09": "#FF757575",
+						"0.21": "#BF2F2F2F"
+					}
+				}
+			}
+		}
+	}
+}

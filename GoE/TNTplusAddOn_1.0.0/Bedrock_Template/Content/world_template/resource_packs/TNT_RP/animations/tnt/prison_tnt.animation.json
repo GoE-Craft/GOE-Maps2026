@@ -1,0 +1,287 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.prison_tnt.charge": {
+			"animation_length": 2.5,
+			"bones": {
+				"bb_main": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0833": [0, 0, 5],
+						"0.2083": [0, 0, 5],
+						"0.2917": [0, 0, -5],
+						"0.4167": [0, 0, -5],
+						"0.5": [0, 0, 5],
+						"0.5833": [0, 0, 5],
+						"0.7083": [0, 0, -5],
+						"0.7917": [0, 0, -5],
+						"0.9167": [0, 0, 5],
+						"1.0": [0, 0, 5],
+						"1.0833": [0, 0, -5],
+						"1.2083": [0, 0, 0],
+						"1.2917": [0, 0, 0],
+						"1.4167": [0, 0, 5],
+						"1.5": [0, 0, -5],
+						"1.5833": [0, 0, -5],
+						"1.7083": [0, 0, 5],
+						"1.7917": [0, 0, 5],
+						"1.9167": [0, 0, -5],
+						"2.0": [0, 0, -5],
+						"2.0833": [0, 0, 5],
+						"2.2083": [0, 0, 5],
+						"2.2917": [0, 0, -5],
+						"2.4167": [0, 0, 0],
+						"2.5": [0, 0, 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.0833": [0, 3, 0],
+						"0.2083": [0, 0, 0],
+						"0.2917": [0, 3, 0],
+						"0.4167": [0, 0, 0],
+						"0.5": [0, 3, 0],
+						"0.5833": [0, 0, 0],
+						"0.7083": [0, 3, 0],
+						"0.7917": [0, 0, 0],
+						"0.9167": [0, 3, 0],
+						"1.0": [0, 0, 0],
+						"1.0833": [0, 3, 0],
+						"1.2083": [0, 0, 0],
+						"1.2917": [0, 0, 0],
+						"1.4167": [0, 0, 0],
+						"1.5": [0, 3, 0],
+						"1.5833": [0, 0, 0],
+						"1.7083": [0, 3, 0],
+						"1.7917": [0, 0, 0],
+						"1.9167": [0, 3, 0],
+						"2.0": [0, 0, 0],
+						"2.0833": [0, 3, 0],
+						"2.2083": [0, 0, 0],
+						"2.2917": [0, 3, 0],
+						"2.4167": [0, 0, 0],
+						"2.5": [0, 0, 0]
+					},
+					"scale": {
+						"0.7083": [1, 1, 1],
+						"0.7917": [1.02, 1.22, 1.02],
+						"1.0": [1, 0.6, 1],
+						"1.0833": [1.45, 1.55, 1.15],
+						"1.2917": [1.2, 0.5, 1.3],
+						"1.4167": [1.2, 1.3, 1.3],
+						"1.5": [1.7, 0.6, 1.7],
+						"1.7083": [1.7, 2.1, 1.7],
+						"1.7917": [2.2, 0.8, 2.2],
+						"1.9167": [2.2, 0.8, 2.2],
+						"2.0833": [2.2, 2.1, 2.2],
+						"2.2083": [2.2, 1.3, 2.2],
+						"2.4167": [1.8, 2.6, 1.8],
+						"2.5": [2.5, 2.5, 2.5]
+					}
+				},
+				"Chain": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0417": [0, 0, "math.sin(query.anim_time * 2160) * 10"]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.0417": [0, "math.sin(query.anim_time * 2160) * 1", 0]
+					},
+					"scale": 1.1
+				},
+				"tnt": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.0417": ["math.sin(q.anim_time * 360 * 1)*1+0.1", "math.sin(q.anim_time * 360 * 2)*1+0.3", 1]
+					}
+				},
+				"lock": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0417": ["-math.sin(query.anim_time * 480) * 60 - 20", 0, "math.sin(query.anim_time * 2400) * math.random(1,6)"]
+					},
+					"position": [0, 0, -1]
+				}
+			},
+			"particle_effects": {
+				"0.0": [
+					{
+						"effect": "prison_chains",
+						"locator": "chain"
+					},
+					{
+						"effect": "prison_chains",
+						"locator": "chain2"
+					},
+					{
+						"effect": "prison_fog",
+						"locator": "chain"
+					}
+				],
+				"0.6667": [
+					{
+						"effect": "prison_sparks",
+						"locator": "spark"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark2"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark3"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark4"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark5"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark6"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark7"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark8"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark9"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark10"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark11"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark12"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark13"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark14"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark15"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark16"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark17"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark18"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark19"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark20"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark21"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark22"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark23"
+					},
+					{
+						"effect": "prison_sparks",
+						"locator": "spark24"
+					}
+				],
+				"1.0": {
+					"effect": "tnt_charge_yellow",
+					"locator": "chain"
+				}
+			}
+		},
+		"animation.prison_tnt.explosion": {
+			"animation_length": 1,
+			"bones": {
+				"cage": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.0417": [0.94, 0.94, 0.94],
+						"0.0833": [0.8, 0.8, 0.8],
+						"0.1667": [0.2, 0.2, 0.2],
+						"0.2083": [0.06, 0.06, 0.06],
+						"0.25": [0, 0, 0]
+					}
+				},
+				"Chain": {
+					"rotation": {
+						"0.0": ["-math.sin(q.anim_time * 3000) * 3", 0, "math.cos(q.anim_time * 2000) * 3"],
+						"0.0417": [0, 0, 0]
+					},
+					"scale": {
+						"0.0": [1.2, 1.2, 1.2],
+						"0.0417": {
+							"pre": [1.6, 1.6, 1.6],
+							"post": [0, 0, 0]
+						}
+					}
+				},
+				"tnt": {
+					"scale": 0
+				},
+				"lock": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.0417": [0.94, 0.94, 0.94],
+						"0.0833": [0.8, 0.8, 0.8],
+						"0.1667": [0.2, 0.2, 0.2],
+						"0.2083": [0.06, 0.06, 0.06],
+						"0.25": [0, 0, 0]
+					}
+				}
+			},
+			"particle_effects": {
+				"0.0": [
+					{
+						"effect": "prison_impact"
+					},
+					{
+						"effect": "prison_explosion"
+					}
+				],
+				"0.0417": [
+					{
+						"effect": "metal_shards",
+						"locator": "broken_chains"
+					},
+					{
+						"effect": "cage_shards",
+						"locator": "broken_chains"
+					}
+				]
+			}
+		}
+	}
+}

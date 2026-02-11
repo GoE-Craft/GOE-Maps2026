@@ -17,11 +17,23 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          {"tnt_swelling": "v.should_swell"}
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        "tnt_swelling": "animation.tnt.swell"
+        "charge": "animation.prison_tnt.charge",
+        "explode": "animation.prison_tnt.explosion"
+      },
+      "particle_effects": {
+        "prison_chains": "goe_tnt:prison_chains",
+        "prison_impact": "goe_tnt:prison_impact",
+        "prison_sparks": "goe_tnt:prison_sparks",
+        "metal_shards": "goe_tnt:metal_shards",
+        "cage_shards": "goe_tnt:cage_shards",
+        "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow",
+        "prison_explosion": "goe_tnt:prison_explosion",
+        "prison_fog": "goe_tnt:prison_fog"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }
