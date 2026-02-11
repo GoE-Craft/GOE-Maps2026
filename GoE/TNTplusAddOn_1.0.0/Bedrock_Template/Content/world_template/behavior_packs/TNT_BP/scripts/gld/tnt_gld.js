@@ -829,7 +829,34 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         }
-    }
+    },
+    
+    {
+        blockId: "goe_tnt:matrix_tnt",
+        fuseTime: 60,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "random.explode",
+            explosionAnimationLength: 2,
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: ""
+        },
+        preExplosionProperties: {
+            specialAction: null
+        }
+    },
 ]
 
 export function getTntDataByName(tntName) {

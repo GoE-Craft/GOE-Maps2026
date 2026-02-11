@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:matrix_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/matrix_tnt"
+      },
+      "geometry": {
+        "default": "geometry.matrix_tnt"
+      },
+			"scripts": {
+        "animate": [
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge" : "animation.matrix_tnt.charge",
+        "explosion" : "animation.matrix_tnt.split"
+      },
+      "particle_effects": {
+        "tnt_charge": "goe_tnt:tnt_charge_blue_and_red"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}
