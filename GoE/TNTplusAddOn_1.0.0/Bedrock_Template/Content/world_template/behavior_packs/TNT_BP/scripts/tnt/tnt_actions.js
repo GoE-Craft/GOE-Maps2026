@@ -102,7 +102,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             weatherStationAction(dimension, location, entity);
             break;
         case "lightning":
-            //runJobWithDelays(lightningAction(dimension, location, entity));
+            runJobWithDelays(lightningAction(dimension, location, entity));
             break;
         case "arrow":
             system.runJob(arrowTNTAction(dimension, location, chargeLevel));
