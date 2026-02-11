@@ -216,6 +216,7 @@ function stopCountdown(entity) {
 function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
     // Start fuse effects (continuous particle + initial sound)
     startFuseEffects(entity, tntData, fuseRemaining);
+    startChargeEffects(entity, tntData);
 
     // Start pre-explosion action (runs during fuse)
     tnt_actions.handlePreSpecialAction(entity, chargeLevel, tntData, fuseRemaining);
@@ -241,16 +242,12 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
 function startFuseEffects(entity, tntData, fuseTime) {
     if (!tntData?.fuseEffects) return;
 
-
     // Skip fuse particles/sounds for projectile ignites (mecha shots).
     try {
         if (entity.getDynamicProperty("goe_tnt_skip_fuse_fx") === true) return;
     } catch { }
 
-    if (!tntData?.fuseEffects) return;
-
     const dim = entity.dimension;
-    dim.playSound("random.fuse", entity.location);
     entity.triggerEvent("goe_tnt:trigger_ignite");
 
     system.runTimeout(() => {
@@ -273,6 +270,20 @@ function startFuseEffects(entity, tntData, fuseTime) {
         if (!entity.isValid) return;
         entity.triggerEvent("goe_tnt:start_swell");
     }, Math.max(0, swellTick));
+}
+
+function startChargeEffects(entity, tntData) {
+    if (!tntData?.chargeEffects) return;
+
+    const dim = entity.dimension;
+
+    system.runTimeout(() => {
+        if (!entity.isValid) return;
+        try {
+            dim.playSound(tntData.chargeEffects.soundEffect, entity.location, { pitch: tntData.chargeEffects.soundPitch ?? 1 });
+        } catch (e) { }
+    }, tntData.chargeEffects?.soundDelay || 0);
+
 }
 
 /**

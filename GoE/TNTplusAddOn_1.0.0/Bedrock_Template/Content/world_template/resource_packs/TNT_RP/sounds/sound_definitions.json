@@ -210,6 +210,140 @@
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/chunker_tnt/chunker_explosion_3", "volume": 1}
 			]
+		},
+		// Arrow TNT
+		"goe_tnt:arrow_tnt_ignite": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/arrow_tnt/tnt_arrow_storm_fuse", "volume": 1}
+			]
+		},
+		"goe_tnt:arrow_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/arrow_tnt/tnt_arrow_storm_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:arrow_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/arrow_tnt/tnt_arrow_storm_explode", "volume": 1}
+			]
+		},
+		// Teleportation TNT
+		"goe_tnt:teleportation_tnt_ignite": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/teleportation_tnt/tnt_teleportation_fuse", "volume": 1}
+			]
+		},
+		"goe_tnt:teleportation_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/teleportation_tnt/tnt_teleportation_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:teleportation_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/teleportation_tnt/tnt_teleportation_explode", "volume": 1}
+			]
+		},
+		// Thunderstorm TNT
+		"goe_tnt:thunderstorm_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/thunderstorm_tnt/tnt_thunderstorm_fuse", "volume": 1}
+			]
+		},
+		"goe_tnt:thunderstorm_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/thunderstorm_tnt/tnt_thunderstorm_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:thunderstorm_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/thunderstorm_tnt/tnt_thunderstorm_explode", "volume": 1}
+			]
+		},
+		// Tree Planter TNT
+		"goe_tnt:tree_planter_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/tree_planter_tnt/tnt_tree_planter", "volume": 1}
+			]
+		},
+		"goe_tnt:tree_planter_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/tree_planter_tnt/tnt_tree_planter_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:tree_planter_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/tree_planter_tnt/tnt_tree_planter_explode", "volume": 1}
+			]
+		},
+		// Ultron TNT
+		"goe_tnt:ultron_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/ultron_tnt/tnt_ultron_fuse", "volume": 1}
+			]
+		},
+		"goe_tnt:ultron_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/ultron_tnt/tnt_ultron_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:ultron_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/ultron_tnt/tnt_ultron_explode", "volume": 1}
+			]
+		},
+		// Villager Decoy TNT
+		"goe_tnt:villager_decoy_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/villager_decoy_tnt/tnt_villager_decoy_fuse", "volume": 1}
+			]
+		},
+		"goe_tnt:villager_decoy_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/villager_decoy_tnt/tnt_villager_decoy_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:villager_decoy_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/villager_decoy_tnt/tnt_villager_decoy_explode", "volume": 1}
+			]
+		},
+		// Weather Station TNT
+		"goe_tnt:weather_station_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/weather_tnt/tnt_weather_station_fuse", "volume": 1}
+			]
+		},
+		"goe_tnt:weather_station_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/weather_tnt/tnt_weather_station_charging", "volume": 1}
+			]
+		},
+		"goe_tnt:weather_station_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/weather_tnt/tnt_weather_station_explode", "volume": 1}
+			]
 		}
+
 	}
 }
