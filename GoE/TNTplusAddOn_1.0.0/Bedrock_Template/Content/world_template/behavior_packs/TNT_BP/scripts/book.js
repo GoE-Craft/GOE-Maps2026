@@ -39,7 +39,7 @@ export function startGuideBookReminderInterval() {
             }
 
             if (!hasGuideBook) {
-                utils.tellraw(player, "@s", "§aYou do not have a §eTNT Guide§r§a. Use vanilla §eTNT + Book§a to craft one.§r");
+                utils.tellraw(player, "@s", "§aYou do not have a §eTNT Guide§r§a. Use a vanilla §eTNT + Book§a to craft one.§r");
                 player.playSound("random.orb");
             }
         }
@@ -77,8 +77,8 @@ export async function showIntroPage(player) {
         .body(
             `§fWelcome, §a${name}§r!\n\n` +
             "§fUnleash chaos with §e20+§r§f craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy custom §eStructures§r§f found all across your world.\n\n" +
-            "§fOpen the §eTNT Guide§r§f to access the shop, achievement list, and tweak your settings§r§f.\n\n" +
-            "§fEnjoy the §aTNT Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
+            "§fOpen the §eTNT Guide§r§f to access the shop and achievement list, and to tweak your settings§r§f.\n\n" +
+            "§fEnjoy §aTNT+ Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
         )
         .button("§l§2LET'S EXPLODE!§r");
 
@@ -99,7 +99,7 @@ export async function showIntroPage(player) {
 
 export async function showMainPage(player) {
     const form = new ActionFormData()
-        .title("§l§cTNT Guide§r")
+        .title("§l§cTNT+ Add-On§r")
         .button("§l§cInfo§r", "textures/goe/tnt/ui/info")
         .button("§l§2Shop§r", "textures/goe/tnt/ui/shop")
         .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements")
@@ -183,11 +183,9 @@ async function showMechaSuitPage(player) {
     const form = new ActionFormData()
         .title("§l§4TNT Mecha Suit§r")
         .body(
-            "§fThe §4TNT Mecha Suit§f is a powerful combat mount that lets the player launch any custom §4TNT block§f as projectiles.\n\n" +
-            "§f- Hold any §4TNT block§f from this add-on (or vanilla §4TNT§f) and interact to fire it as a projectile.\n\n" +
-            "§f- Interact with an §9Elytra§f to make the suit §eflyable§f.\n\n" +
-            "§f- Moves §e30%% faster§f than a normal player and has §eincreased jump height§f.\n\n" +
-            "§f- Has high durability with a §elarge health pool§f.§r"
+            "§fThe §4TNT Mecha Sui§f is a powerful combat mount that lets you launch any custom §4TNT block§f as a projectile. The TNT Mecha Suit has high durability; it moves 30% faster than a normal player and jumps higher.\n\n" +
+            "§f- Hold any §4TNT block§f (including §4vanilla TNT§f) while mounted in the suit and interact to launch it far away.\n\n" +
+            "§f- Airborne: Hold an §eElytra§f and interact on the suit to make it §eflyable§f.\n\n"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -205,9 +203,9 @@ async function showShopInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§2Shop§r")
         .body(
-            "§fThe §4TNT Shop§f lets you purchase any asset from this §4TNT Add-On§f including §4TNT Blocks§f, the §4TNT Mecha Suit§f, the §4TNT Detonator§f or §4TNT Testing Areas.§f\n\n" +
+            "§fThe §4TNT Shop§f lets you purchase any asset from this Add-On.§f\n\n" +
             "§fYou can access the shop by pressing the \"§4TNT Shop§f\" button in the main UI menu.§f\n\n" +
-            "§fYou can use §nCopper Ingots§f, §iIron Ingots§f, §6Gold Ingots§f, or §aEmeralds§f to make purchases. The better the asset, the higher its price.§r"
+            "§fUse §nCopper Ingots§f, §9Iron Ingots§f, §6Gold Ingots§f, or §aEmeralds§f to make purchases. The better the asset, the higher the price.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -225,7 +223,7 @@ async function showSettingsInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§1Settings§r")
         .body(
-            "§fYou can adjust your expirience in §4TNT Add-On§f by customizing add-on settings as you please.\nYou can acess \"§eSettings§f\" section from the main UI menu.§r"
+            "§fYou can adjust your experience in §4TNT+ Add-On§f by customizing settings as you please. You can access the §eSettings§f section from the main menu.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -243,9 +241,9 @@ async function showAchievementsInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
         .body(
-            "§fTrack your progress as you master the art of destruction engineering. The §4TNT Add-on§f offers you §e20+ unique achievements and rewards§f.\n\n" +
-            "§fYou can track your progress in the \"§eAchievements§f\" section. Press the \"§eAchievement§f\" button in the main UI menu to view the full list. Select an §eachievement§f to see all the details and requirements.\n\n" +
-            "§fPush your limits, earn every badge, and become the ultimate §4TNT Legend§f!§r"
+            "§fTrack your progress as you master the art of destruction engineering. §4TNT+ Add-on§f offers many unique §eachievements and rewards§f.\n\n" +
+            "§fYou can track your progress in the §eAchievements§f section of this Guide Book. Press the §eAchievement§f button in the main menu, select an §eAchievement§f and see all its details and requirements.\n\n" +
+            "§fPush your limits, complete all achievements, and become the ultimate §4TNT Legend§f!§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -263,12 +261,15 @@ async function showTntsInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§cTNT Blocks§r")
         .body(
-            "§fThis Add-On adds 20+ custom §4TNT Blocks§f with unique explosion effects and helpful abilities.\n\n" +
-            "§f- All §4TNT Blocks§f can be activated using vanilla methods such as flint and steel or redstone.\n\n" +
-            "§f- The §4TNT Detonator§f allows remote activation from a distance. Look at §4TNT block§f and interact while holding the §4TNT Detonator§f.\n\n" +
-            "§f- Use a clock to add a 30-second countdown time to §4TNT blocks§f. Interact once to add the timer, and interact again to remove it. After adding the timer, you still need to activate the §4TNT block§f normally-once activated, it will start a 30-second countdown until it explodes.\n\n" +
-            "§f- Gunpowder can boost §4TNT blocks§f up to 4 levels. Hold gunpowder and interact with a §4TNT block§f to increase its power by up to 25% per level.\n\n" +
-            "§fExperiment with different §4TNT Blocks§f and master new ways to trigger explosions.§r"
+            "§fThis Add-On adds many new custom §4TNT Blocks§f with unique effects and useful abilities.\n\n" +
+            "§f- All TNT blocks can be activated with vanilla methods such as flint and steel or redstone.\n\n" +
+            "§4- Remote Detonation:\n" +
+            "§fUse a §eTNT Detonator§f to activate TNT blocks from a distance. Look at remote TNT blocks and interact while holding the §eTNT Detonator§f to activate.\n\n" +
+            "§4- Delayed Activation:\n" +
+            "§fUse a clock to add a 10-second countdown timer to any TNT block. Hold a clock and interact on a TNT block to add the time. Add more delay by interacting more times.\n\n" +
+            "§4- Power Up:\n" +
+            "§fUse gunpowder to boost any TNT block up to 4 times. Hold gunpowder and interact with a TNT block to increase its power by up to 25%.\n\n" +
+            "§fExperiment with different §4TNT Blocks§f and master new ways to use these explosive blocks.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -286,9 +287,9 @@ async function showStructuresInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§nStructures§r")
         .body(
-            "§4TNT Add-On§f includes two main types of structures.\n\n" +
-            "§f- §eNaturally generated structures§f: §4TNT§f-themed buildings with mazes and mob-fight adventures. Explore them to uncover hidden treasures.\n\n" +
-            "§f- §eCraftable Structures§f: Designed as testing areas where you can try out all your §4TNT§f assets. Craft them or purchase them in the §4TNT shop§f and enjoy endless explosions.§r"
+            "§4TNT Add-On§f adds two main types of structures to your game.\n\n" +
+            "§f- §eNaturally generated structures§f: §4TNT§f-themed buildings with maze challenges and mob-fight adventures. Explore them to uncover hidden treasures. Look for them all over the Overworld.\n\n" +
+            "§f- §eCraftable structures§f: Designed as testing areas where you can try out all your new §4TNT§f assets. Craft them or purchase them in the §4TNT Shop§f and enjoy endless explosions.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
@@ -366,7 +367,11 @@ async function showAccessoriesPage(player) {
     // Add buttons for each accessory item
     for (const item of items) {
         const priceText = await formatPrice(item.price, player);
-        const buttonText = `§l§5${item.name}§r\n${priceText}§r`;
+        let color = "§5"; // Default to purple
+        if (item.name === "TNT Detonator" || item.name === "Clock") {
+            color = "§4"; // Red for Detonator and Clock
+        }
+        const buttonText = `§l${color}${item.name}§r\n${priceText}§r`;
         form.button(buttonText, item.icon);
     }
 
@@ -573,7 +578,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
         body = `§f${achievement.info || ""}\n\n`;
     } else if (achievement.tntType) {
         // tnt_individual: use name
-        body = `§fUse "${achievement.name || ""}" to unlock this achievement\n\n`;
+        body = `§fUse "${achievement.name || ""}" to unlock this achievement.\n\n`;
     } else {
         body = `§f${achievement.info || achievement.name || ""}\n\n`;
     }
@@ -627,10 +632,10 @@ async function showInsufficientResourcesForm(player, item, backCallback) {
     const form = new ActionFormData()
         .title("§l§6Insufficient Resources§r")
         .body(
-            `§cYou don't have enough resources to purchase §e${item.name}§r§c!\n\n` +
+            `§cNot enough resources.\n\n` +/* 
             `§fRequired: §e${neededAmount} ${resourceName}§r\n` +
             `§fYou have: §a${playerAmount} ${resourceName}§r\n` +
-            `§fMissing: §c${missingAmount} ${resourceName}§r\n\n` +
+            `§fMissing: §c${missingAmount} ${resourceName}§r\n\n` + */
             `§7Collect more resources and try again.§r`
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");

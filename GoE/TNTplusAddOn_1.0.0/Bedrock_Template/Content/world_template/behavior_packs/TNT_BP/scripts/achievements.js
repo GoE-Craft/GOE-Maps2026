@@ -109,7 +109,7 @@ function unlockTntAchievement(player, tntType) {
 
     utils.actionbar(player, "@s", `§a Achievement Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`);
 
-    utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §r- You have unlocked this achievement!`);
+    utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §rachievement unlocked!`);
 
     placeAchievementRewardStructure(player, getRandomTntRewardStructureId());
     const xpCount = Math.floor(Math.random() * 31) + 7;

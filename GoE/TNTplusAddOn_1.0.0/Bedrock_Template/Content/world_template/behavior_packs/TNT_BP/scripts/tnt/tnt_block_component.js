@@ -102,7 +102,7 @@ function handleTimer(block, player) {
 
     const targetState = timer + 1;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
-    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState * 10} seconds.§o\n§r§c§oUse Flint and Steel, TNT Detonator or other way to activate§o`);
+    player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState * 10}§o\n§r§c§oUse Flint and Steel, TNT Detonator or any other way to activate.§o`);
     block.dimension.playSound(`block.copper_bulb.turn_on`, block.location, { volume: 5, pitch: 2 });
     const location = block.center();
     location.y += 0.5;

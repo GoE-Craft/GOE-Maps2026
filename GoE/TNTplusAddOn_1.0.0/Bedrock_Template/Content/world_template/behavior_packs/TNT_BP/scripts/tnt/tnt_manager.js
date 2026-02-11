@@ -477,7 +477,7 @@ export function showTntPlaceHint(player, blockTypeId) {
         }
 
         // Compose the message: info (1 or 2 lines), then tip
-        let message = `§aInfo:§r ${infoLines[0]}`;
+        let message = `§9Info:§r ${infoLines[0]}`;
         if (infoLines.length > 1) {
             message += `\n${infoLines[1]}`;
         }
