@@ -7,13 +7,18 @@ function getScaledRadius(baseRadius, chargeLevel) {
     return baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
 }
 
+function getScaledStrength(baseValue, chargeLevel) {
+    const numericChargeLevel = Number(chargeLevel);
+    const safeChargeLevel = Number.isFinite(numericChargeLevel) ? Math.max(0, numericChargeLevel) : 0;
+    return baseValue * (1 + 0.25 * safeChargeLevel);
+}
+
 export function magnetTNTPreAction(magnetTntEntity, chargeLevel, fuseRemainingTicks) {
-    // Set per-TNT base radius here
     const baseRadius = 10;
     const radius = getScaledRadius(baseRadius, chargeLevel);
 
-    const pullStrength = 0.08 + (chargeLevel * 0.01);
-    const maxPull = 0.25 + (chargeLevel * 0.03);
+    const pullStrength = getScaledStrength(0.08, chargeLevel);
+    const maxPull = getScaledStrength(0.25, chargeLevel);
 
     const preActionIntervalId = system.runInterval(() => {
         system.runJob(preActionJob(magnetTntEntity, radius, pullStrength, maxPull));
@@ -70,7 +75,6 @@ function* preActionJob(magnetTntEntity, radius, pullStrength, maxPull) {
 }
 
 export function* magnetTNTAction(dimension, chargeLevel, location) {
-    // Set per-TNT base radius here
     const baseRadius = 10;
     const radius = getScaledRadius(baseRadius, chargeLevel);
 
@@ -83,7 +87,7 @@ export function* magnetTNTAction(dimension, chargeLevel, location) {
         dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);
     }, 5);
 
-    const pushStrength = 1.2 + (chargeLevel * 0.2);
+    const pushStrength = getScaledStrength(1.2, chargeLevel);
 
     let nearbyEntities = [];
     try {

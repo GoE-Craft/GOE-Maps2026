@@ -74,7 +74,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "directional_drill": {
             const drillLength = 30;
             const drillRadius = 2;
-            runJobWithDelays(directionalTNTAction(dimension, location, vec, drillLength, drillRadius, drillRadius, tntData, entity));
+            runJobWithDelays(directionalTNTAction(dimension, chargeLevel, location, vec, drillLength, drillRadius, drillRadius, tntData, entity));
             break;
         }
         case "party":

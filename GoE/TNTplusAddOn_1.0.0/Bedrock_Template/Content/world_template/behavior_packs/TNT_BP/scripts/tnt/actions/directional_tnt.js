@@ -1,7 +1,14 @@
 import { BlockPermutation } from "@minecraft/server";
 
-export function* directionalTNTAction(dimension, location, vec, length, widthRadius, heightRadius, tntData, entity) {
-    const steps = Math.max(1, Math.floor(length));
+export function* directionalTNTAction(dimension, chargeLevel, location, vec, length, widthRadius, heightRadius, tntData, entity) {
+    const cl = Math.max(0, Number(chargeLevel) || 0);
+    const scale = 1 + 0.25 * cl;
+
+    const scaledLength = Math.max(1, Math.floor(Number(length) * scale));
+    const scaledWidthRadius = Math.max(0, Math.floor(Number(widthRadius) * scale));
+    const scaledHeightRadius = Math.max(0, Math.floor(Number(heightRadius) * scale));
+
+    const steps = Math.max(1, Math.floor(scaledLength));
     const perpX = -vec.z;
     const perpZ = vec.x;
     const perpLen = Math.sqrt(perpX * perpX + perpZ * perpZ) || 1;
@@ -19,7 +26,7 @@ export function* directionalTNTAction(dimension, location, vec, length, widthRad
     }
 
     const bottomY = Math.round(location.y);
-    const heightSpan = heightRadius + 1;
+    const heightSpan = scaledHeightRadius + 1;
 
     for (let s = 0; s < steps; s++) {
         const baseX = Math.floor(location.x);
@@ -28,7 +35,7 @@ export function* directionalTNTAction(dimension, location, vec, length, widthRad
         const centerX = baseX + Math.round(vec.x * s);
         const centerZ = baseZ + Math.round(vec.z * s);
 
-        for (let w = -widthRadius; w <= widthRadius; w++) {
+        for (let w = -scaledWidthRadius; w <= scaledWidthRadius; w++) {
             const columnX = Math.round(centerX + px * w);
             const columnZ = Math.round(centerZ + pz * w);
 
@@ -41,7 +48,6 @@ export function* directionalTNTAction(dimension, location, vec, length, widthRad
                     const block = dimension.getBlock(blockLoc);
                     if (!block) continue;
 
-                    // no touchy
                     if ((block.typeId || "") === "minecraft:bedrock") continue;
 
                     if (block.hasTag("diamond_pick_diggable")) continue;
