@@ -106,7 +106,7 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
     if (fuseDuration !== tntData.fuse) {
         entity.setDynamicProperty("goe_tnt_fuse", fuseDuration);
     }
-    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData, yaw);
+    scheduleTimer(entity, chargeLevel, timerDuration, fuseDuration, tntData, yaw, player);
 }
 
 /**
@@ -119,7 +119,7 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
  * @param {object} tntData - The TNT data object
  * @param {number} spawnYaw - (Optional) Yaw to spawn the TNT entity with
  */
-function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData, spawnYaw) {
+function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData, spawnYaw, player) {
     if (timerRemaining > 0) {
         // Start countdown display (every second = 20 ticks)
         startCountdown(entity, timerRemaining);
@@ -133,7 +133,7 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
             entity.setDynamicProperty("goe_tnt_stage", "fuse");
             entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
 
-            scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw);
+            scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw, player);
         }, timerRemaining);
 
         activeTimeouts.set(entity.id, timeoutId);
@@ -142,7 +142,7 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
         entity.setDynamicProperty("goe_tnt_stage", "fuse");
         entity.setDynamicProperty("goe_tnt_fuse_start", system.currentTick);
 
-        scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw);
+        scheduleFuse(entity, chargeLevel, fuseDuration, tntData, spawnYaw, player);
     }
 }
 
@@ -213,10 +213,10 @@ function stopCountdown(entity) {
  * @param {object} tntData - The TNT data object
  * @param {number} spawnYaw - (Optional) Yaw to spawn the TNT entity with
  */
-function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
+function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw, player) {
     // Start fuse effects (continuous particle + initial sound)
-    startFuseEffects(entity, tntData, fuseRemaining);
-    startChargeEffects(entity, tntData);
+    startFuseEffects(entity, tntData, fuseRemaining, player);
+    startChargeEffects(entity, tntData, player);
 
     // Start pre-explosion action (runs during fuse)
     tnt_actions.handlePreSpecialAction(entity, chargeLevel, tntData, fuseRemaining);
@@ -224,7 +224,7 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
     const timeoutId = system.runTimeout(() => {
         if (!entity.isValid) return;
 
-        explode(entity, chargeLevel, tntData, spawnYaw);
+        explode(entity, chargeLevel, tntData, spawnYaw, player);
     }, fuseRemaining);
 
     activeTimeouts.set(entity.id, timeoutId);
@@ -239,7 +239,7 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw) {
  * @param {object} tntData - The TNT data object
  * @param {number} fuseTime - The fuse duration in ticks
  */
-function startFuseEffects(entity, tntData, fuseTime) {
+function startFuseEffects(entity, tntData, fuseTime, player) {
     if (!tntData?.fuseEffects) return;
 
     // Skip fuse particles/sounds for projectile ignites (mecha shots).
@@ -253,8 +253,10 @@ function startFuseEffects(entity, tntData, fuseTime) {
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
-            dim.playSound(tntData.fuseEffects.soundEffect, entity.location, { pitch: tntData.fuseEffects.soundPitch ?? 1 });
-        } catch (e) { }
+            player.playSound(tntData.fuseEffects.soundEffect, { pitch: tntData.fuseEffects.soundPitch ?? 1 });
+        } catch (e) {
+            console.log("Error playing fuse sound: " + e);
+        }
     }, tntData.fuseEffects.soundDelay || 0);
 
     system.runTimeout(() => {
@@ -272,16 +274,16 @@ function startFuseEffects(entity, tntData, fuseTime) {
     }, Math.max(0, swellTick));
 }
 
-function startChargeEffects(entity, tntData) {
+function startChargeEffects(entity, tntData, player) {
     if (!tntData?.chargeEffects) return;
-
-    const dim = entity.dimension;
 
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
-            dim.playSound(tntData.chargeEffects.soundEffect, entity.location, { pitch: tntData.chargeEffects.soundPitch ?? 1 });
-        } catch (e) { }
+            player.playSound(tntData.chargeEffects.soundEffect, { pitch: tntData.chargeEffects.soundPitch ?? 1 });
+        } catch (e) {
+            console.log("Error playing charge sound: " + e);
+        }
     }, tntData.chargeEffects?.soundDelay || 0);
 
 }
@@ -293,8 +295,9 @@ function startChargeEffects(entity, tntData) {
  * @param {number} chargeLevel - The charge level of the TNT
  * @param {object} tntData - The TNT data object
  * @param {number} spawnYaw - (Optional) Yaw to spawn the TNT entity with
+ * @param {object} player - The player who ignited the TNT
  */
-function explode(entity, chargeLevel, tntData, spawnYaw) {
+function explode(entity, chargeLevel, tntData, spawnYaw, player) {
     const dim = entity.dimension;
     const loc = { x: entity.location.x, y: entity.location.y, z: entity.location.z };
     const entityId = entity.id;
@@ -313,7 +316,7 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
         }
 
         // Update entity variant to exploded state
-        triggerExplosionEffects(entity, tntData);
+        triggerExplosionEffects(entity, tntData, player);
         system.runJob(explodeJob(dim, entity, chargeLevel, tntData, loc, spawnYaw));
     } catch (e) {
         console.log("Error creating explosion: " + e);
@@ -326,25 +329,44 @@ function explode(entity, chargeLevel, tntData, spawnYaw) {
  * 
  * @param {Entity} entity - The TNT entity
  * @param {object} tntData - The TNT data object
- */
-function triggerExplosionEffects(entity, tntData) {
-    try {
-        entity.triggerEvent("goe_tnt:trigger_explode");
+ * @param {object} player - The player who ignited the TNT  
+ * Note: Some TNT types may not have explosion effects or may not support the explode trigger event.
+*/
 
-        const animationLength = tntData.explosionEffects.explosionAnimationLength;
-        if (!animationLength || animationLength <= 0) {
-            if (entity.isValid) entity.remove();
-            return;
+function triggerExplosionEffects(entity, tntData, player) {
+    const dimension = entity.dimension;
+    const loc = entity.location;
+
+    if (tntData.explosionEffects) {
+        try {
+            if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+        } catch (e) {
+        }
+        try {
+            if (tntData.explosionEffects.soundEffect) player.playSound(tntData.explosionEffects.soundEffect, { pitch: tntData.explosionEffects.soundPitch ?? 1 });
+        } catch (e) {
+            console.log("Error playing explosion sound: " + e);
         }
 
-        system.runTimeout(() => {
+        try {
+            entity.triggerEvent("goe_tnt:trigger_explode");
+
+            const animationLength = tntData.explosionEffects.explosionAnimationLength;
+            if (!animationLength || animationLength <= 0) {
+                if (entity.isValid) entity.remove();
+                return;
+            }
+
+            system.runTimeout(() => {
+                if (entity.isValid) entity.remove();
+            }, animationLength*20);
+        } catch (e) {
+            // If the entity doesn't support the explode trigger, just remove it
+            // This is by design for certain TNT types that don't have custom explosion animations
             if (entity.isValid) entity.remove();
-        }, animationLength*20);
-    } catch (e) {
-        // If the entity doesn't support the explode trigger, just remove it
-        // This is by design for certain TNT types that don't have custom explosion animations
-        if (entity.isValid) entity.remove();
+        }
     }
+
     
 }
 
@@ -360,18 +382,6 @@ function triggerExplosionEffects(entity, tntData) {
  * @param {number} rot - The rotation (yaw) of the TNT entity
  */
 function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
-    if (tntData?.explosionEffects) {
-        try {
-            if (tntData.explosionEffects.particleEffect) dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
-        } catch (e) { }
-        try {
-            if (tntData.explosionEffects.soundEffect) dimension.playSound(tntData.explosionEffects.soundEffect, loc);
-        } catch (e) {
-        }
-    }
-
-    yield;
-
     // Handle optional special actions and mobs in a non-blocking way.
     // Many handlers already start their own jobs (voidAction/directionalAction),
     // so we call them from the job but dispatch any main-thread calls via system.run.
