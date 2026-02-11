@@ -253,7 +253,8 @@ function startFuseEffects(entity, tntData, fuseTime, player) {
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
-            player.playSound(tntData.fuseEffects.soundEffect, { pitch: tntData.fuseEffects.soundPitch ?? 1 });
+            //player.playSound(tntData.fuseEffects.soundEffect, { pitch: tntData.fuseEffects.soundPitch ?? 1 });
+            playSoundsForPlayers(entity.location, dim, tntData.fuseEffects.soundEffect, tntData.fuseEffects.soundPitch);
         } catch (e) {
             console.log("Error playing fuse sound: " + e);
         }
@@ -280,7 +281,7 @@ function startChargeEffects(entity, tntData, player) {
     system.runTimeout(() => {
         if (!entity.isValid) return;
         try {
-            player.playSound(tntData.chargeEffects.soundEffect, { pitch: tntData.chargeEffects.soundPitch ?? 1 });
+            playSoundsForPlayers(entity.location, entity.dimension, tntData.chargeEffects.soundEffect, tntData.chargeEffects.soundPitch);
         } catch (e) {
             console.log("Error playing charge sound: " + e);
         }
@@ -343,7 +344,7 @@ function triggerExplosionEffects(entity, tntData, player) {
         } catch (e) {
         }
         try {
-            if (tntData.explosionEffects.soundEffect) player.playSound(tntData.explosionEffects.soundEffect, { pitch: tntData.explosionEffects.soundPitch ?? 1 });
+            if (tntData.explosionEffects.soundEffect) playSoundsForPlayers(entity.location, entity.dimension, tntData.explosionEffects.soundEffect, tntData.explosionEffects.soundPitch);
         } catch (e) {
             console.log("Error playing explosion sound: " + e);
         }
@@ -366,8 +367,6 @@ function triggerExplosionEffects(entity, tntData, player) {
             if (entity.isValid) entity.remove();
         }
     }
-
-    
 }
 
 /**
@@ -588,4 +587,26 @@ export function processExplosion(block) {
     } catch (e) {
         console.log("Error handling TNT chain reaction: " + e);
     }
+}
+
+export function playSoundsForPlayers(location, dimension, soundEffect, soundPitch) {
+
+    function* job() {
+        try {
+            const players = dimension.getEntities({location: location, maxDistance: 30, families: ["player"]});
+            for (const player of players) {
+                try {
+                    player.playSound(soundEffect, { pitch: soundPitch ?? 1 });
+                } catch (e) {
+                    console.log("Error playing sound for player " + player.name + ": " + e);
+                }
+            }
+        } catch (e) {
+            console.log("Error playing sounds for players: " + e);
+            yield;
+        }
+        yield;
+    }
+
+    system.runJob(job());
 }
