@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "matrix_tnt",
+		"metalness_emissive_roughness": "matrix_tnt_mer",
+		"heightmap": "matrix_tnt_height"
+	}
+}
