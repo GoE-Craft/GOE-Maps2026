@@ -1,0 +1,42 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:thief_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/thief_tnt"
+      },
+      "geometry": {
+        "default": "geometry.thief_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"tnt_swelling": "q.mark_variant == 1"},
+          {"charge": "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "tnt_swelling": "animation.thief_tnt.swell",
+        "charge" : "animation.thief_tnt.charge",
+        "explosion" : "animation.thief_tnt.explosion"
+      },
+      "particle_effects": {
+        "tnt_charge": "goe_tnt:tnt_charge_purple",
+        "thief_fountain": "goe_tnt:thief_fountain",
+        "thief_fog": "goe_tnt:thief_fog",
+        "puff_purple": "goe_tnt:one_big_puff_puple",
+        "thief_implosion": "goe_tnt:thief_implosion",
+        "mask": "goe_tnt:thief_mask",
+        "explosion_purple": "goe_tnt:big_explosion_purple"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}
