@@ -175,7 +175,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:freezing_tnt",
         fuseTime: 40,
-        power: 1,
+        power: 0,
         fuseEffects: {
             particleEffect: null,
             particleDelay: 0,
@@ -322,7 +322,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:time_freeze_tnt",
         fuseTime: 40,
-        power: 1,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -594,7 +594,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:cloning_tnt",
         fuseTime: 40,
-        power: 1,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

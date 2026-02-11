@@ -1,7 +1,7 @@
 WorldName=TNTAdd-On
 OwnerPrefix=goe_tnt
 DoFireTick=true
-InitialSpawn=-1 0 -1
+InitialSpawn=-14 0 126
 Seed=0
 ShowTags=false
 SendCommandFeedback=true
