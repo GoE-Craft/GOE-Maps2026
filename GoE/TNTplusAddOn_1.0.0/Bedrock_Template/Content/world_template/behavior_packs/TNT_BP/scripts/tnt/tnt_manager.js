@@ -593,8 +593,9 @@ export function playSoundsForPlayers(location, dimension, soundEffect, soundPitc
 
     function* job() {
         try {
-            const players = dimension.getEntities({location: location, maxDistance: 24, families: ["player"]});
+            const players = dimension.getEntities({location: location, maxDistance: 40, families: ["player"]});
             for (const player of players) {
+                if (!player?.isValid) continue;
                 try {
                     player.playSound(soundEffect, { pitch: soundPitch ?? 1 });
                 } catch (e) {
