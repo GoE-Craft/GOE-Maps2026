@@ -19,14 +19,12 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          //{"tnt_swelling": "v.should_swell"}, --> Charge and Swell are combined
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"},
           {"structure_site_appear": "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        //"tnt_swelling": "animation.tnt.swell",
         "charge": "animation.structure_tnt.swell",
         "explode": "animation.structure_tnt.explode",
         "structure_site_appear": "animation.structure_tnt.structure_site_appear"

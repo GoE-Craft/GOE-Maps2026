@@ -181,7 +181,7 @@
 			}
 		},
 		"animation.structure_tnt.explode": {
-			"animation_length": 1,
+			"animation_length": 5,
 			"bones": {
 				"bb_main3": {
 					"scale": 0

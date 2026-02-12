@@ -457,7 +457,7 @@ export const TNT_GLD = [
         },
         explosionEffects: {
             soundEffect: "goe_tnt:structure_tnt_explode",
-            explosionAnimationLength: 5
+            explosionAnimationLength: 2
         },
         explosionProperties: {
             createsFire: false,

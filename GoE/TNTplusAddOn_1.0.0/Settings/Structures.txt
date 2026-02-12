@@ -506,3 +506,128 @@ replace=gray_stained_glass structure_void
 type=area
 location=-74 -7 -1 -38 19 90
 replace=gray_stained_glass structure_void
+
+
+
+///////////////////////////////////////////////////
+//////// VANILA STRUCTURES ////////////////////////
+
+#vanilla_desert_structure_1
+type=area
+location=276 1 312 288 18 324
+replace=gray_stained_glass structure_void
+
+#vanilla_desert_structure_2
+type=area
+location=276 1 329 288 6 341
+replace=gray_stained_glass structure_void
+
+#vanilla_desert_structure_3
+type=area
+location=259 1 329 271 5 341
+replace=gray_stained_glass structure_void
+
+#vanilla_desert_structure_4
+type=area
+location=259 1 312 271 6 324
+replace=gray_stained_glass structure_void
+
+#vanilla_plains_structure_1
+type=area
+location=310 1 312 322 6 324
+replace=gray_stained_glass structure_void
+
+#vanilla_plains_structure_2
+type=area
+location=310 1 329 322 13 341
+replace=gray_stained_glass structure_void
+
+#vanilla_plains_structure_3
+type=area
+location=293 1 329 305 10 341
+replace=gray_stained_glass structure_void
+
+#vanilla_plains_structure_4
+type=area
+location=293 1 312 305 7 324
+replace=gray_stained_glass structure_void
+
+#vanilla_savanna_structure_1
+type=area
+location=344 1 312 356 6 324
+replace=gray_stained_glass structure_void
+
+#vanilla_savanna_structure_2
+type=area
+location=344 1 329 356 7 341
+replace=gray_stained_glass structure_void
+
+#vanilla_savanna_structure_3
+type=area
+location=327 1 329 339 7 341
+replace=gray_stained_glass structure_void
+
+#vanilla_savanna_structure_4
+type=area
+location=327 1 312 339 8 324
+replace=gray_stained_glass structure_void
+
+#vanilla_snow_structure_1
+type=area
+location=378 1 312 390 6 324
+replace=gray_stained_glass structure_void
+
+#vanilla_snow_structure_2
+type=area
+location=378 1 329 390 5 341
+replace=gray_stained_glass structure_void
+
+#vanilla_snow_structure_3
+type=area
+location=361 1 329 373 7 341
+replace=gray_stained_glass structure_void
+
+#vanilla_snow_structure_4
+type=area
+location=361 1 312 373 8 324
+replace=gray_stained_glass structure_void
+
+#vanilla_taiga_structure_1
+type=area
+location=412 1 312 424 11 324
+replace=gray_stained_glass structure_void
+
+#vanilla_taiga_structure_2
+type=area
+location=412 1 329 424 7 341
+replace=gray_stained_glass structure_void
+
+#vanilla_taiga_structure_3
+type=area
+location=395 1 329 407 11 341
+replace=gray_stained_glass structure_void
+
+#vanilla_taiga_structure_4
+type=area
+location=395 1 312 407 12 324
+replace=gray_stained_glass structure_void
+
+#vanilla_witch_hut_structure_1
+type=area
+location=429 1 312 441 6 324
+replace=gray_stained_glass structure_void
+
+#vanilla_desert_temple_structure_1
+type=area
+location=259 1 287 279 11 307
+replace=gray_stained_glass structure_void
+
+#vanilla_jungle_temple_structure_1
+type=area
+location=284 1 287 304 14 307
+replace=gray_stained_glass structure_void
+
+#vanilla_pillager_outpost_structure_1
+type=area
+location=309 1 287 329 21 307
+replace=gray_stained_glass structure_void

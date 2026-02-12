@@ -52,8 +52,7 @@
       "overlay_color": {
         "r": "1.0",
         "g": "1.0",
-        "b": "1.0",
-        "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
+        "b": "1.0"
       }
     },
     "controller.render.nuke_tnt_glass": {

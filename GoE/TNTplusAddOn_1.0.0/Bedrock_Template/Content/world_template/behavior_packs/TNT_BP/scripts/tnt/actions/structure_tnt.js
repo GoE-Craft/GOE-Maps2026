@@ -2,9 +2,10 @@ import { world, system, StructureRotation, StructureAnimationMode } from "@minec
 
 // entity: the TNT entity spawned from the block
 export function* structureTNTAction(dimension, location, vec, tntData) {
-    let rot = -Math.atan2(vec.x, vec.z) * (180 / Math.PI);
+    let rot = -Math.atan2(vec.x, vec.z) * (180 / Math.PI) -90;
+    rot = (rot + 360) % 360; 
     try {
-        const structureId = "goe_tnt:directional_tnt_structure";
+        const structureId = STRUCTURES[Math.floor(Math.random() * STRUCTURES.length)];
         const structureManager = world.structureManager;
         const structure = structureManager.get(structureId);
 
@@ -12,6 +13,7 @@ export function* structureTNTAction(dimension, location, vec, tntData) {
         const loadY = Math.floor(location.y);
         const loadZ = location.z - structure.size.z / 2
 
+        console.log(rot);
         let rotation;
         switch (rot) {
             case 0:
@@ -50,3 +52,31 @@ export function* structureTNTAction(dimension, location, vec, tntData) {
     }
     yield;
 }
+
+
+const STRUCTURES = [
+  "goe_tnt:vanilla_desert_structure_1",
+  "goe_tnt:vanilla_desert_structure_2",
+  "goe_tnt:vanilla_desert_structure_3",
+  "goe_tnt:vanilla_desert_structure_4",
+  "goe_tnt:vanilla_plains_structure_1",
+  "goe_tnt:vanilla_plains_structure_2",
+  "goe_tnt:vanilla_plains_structure_3",
+  "goe_tnt:vanilla_plains_structure_4",
+  "goe_tnt:vanilla_savanna_structure_1",
+  "goe_tnt:vanilla_savanna_structure_2",
+  "goe_tnt:vanilla_savanna_structure_3",
+  "goe_tnt:vanilla_savanna_structure_4",
+  "goe_tnt:vanilla_snow_structure_1",
+  "goe_tnt:vanilla_snow_structure_2",
+  "goe_tnt:vanilla_snow_structure_3",
+  "goe_tnt:vanilla_snow_structure_4",
+  "goe_tnt:vanilla_taiga_structure_1",
+  "goe_tnt:vanilla_taiga_structure_2",
+  "goe_tnt:vanilla_taiga_structure_3",
+  "goe_tnt:vanilla_taiga_structure_4",
+  "goe_tnt:vanilla_witch_hut_structure_1",
+  "goe_tnt:vanilla_desert_temple_structure_1",
+  "goe_tnt:vanilla_jungle_temple_structure_1",
+  "goe_tnt:vanilla_pillager_outpost_structure_1"
+]
