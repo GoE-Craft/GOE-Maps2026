@@ -14,13 +14,13 @@ export function* chunkerTNTAction(dimension, location, chargeLevel, entity) {
         for (let dx = -step; dx <= step; dx++) {
             for (let dz = -step; dz <= step; dz++) {
                 if (Math.abs(dx) !== step && Math.abs(dz) !== step) continue;
-
+                
                 const x = centerX + dx;
                 const z = centerZ + dz;
                 for (let y = topY; y >= bottomY; y--) {
                     try {
                         const block = dimension.getBlock({ x: x, y: y, z: z });
-                        if (!block || block.isAir) continue;
+                        if (!block || block.isAir || block.typeId === "minecraft:bedrock") continue;
                         if (block.hasTag("diamond_pick_diggable")) continue;
                         if (block.hasTag("goe_tnt:custom_tnt")) processExplosion(block);
                         block.setPermutation(BlockPermutation.resolve("minecraft:air"));
@@ -28,8 +28,11 @@ export function* chunkerTNTAction(dimension, location, chargeLevel, entity) {
                 }
             }
         }
-        dimension.spawnParticle("goe_tnt:huge_explosion_white", { x: location.x, y: location.y, z: location.z });
-        dimension.playSound("random.explode", { x: location.x, y: location.y, z: location.z }, { volume: 5, pitch: 0.5 });
+
+        try{
+            dimension.spawnParticle("goe_tnt:huge_explosion_white", { x: location.x, y: location.y, z: location.z });
+            dimension.playSound("random.explode", { x: location.x, y: location.y, z: location.z }, { volume: 5, pitch: 0.5 });
+        } catch(e) { }
 
         yield 4;
     }

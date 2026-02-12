@@ -61,14 +61,16 @@ function* activateBlocksInArea(centerLocation, width, height, depth, dimension, 
     for (let x = 0; x < width; x++) {
         for (let y = 0; y < height; y++) {
             for (let z = 0; z < depth; z++) {
-                const block = dimension.getBlock({
-                    x: startX + x,
-                    y: startY + y,
-                    z: startZ + z,
-                });
-                if (block && block.isValid && block.hasTag("goe_tnt:custom_tnt")) {
-                    tnt_manager.activateTNTBlock(block, player);
-                }
+                try{
+                    const block = dimension.getBlock({
+                        x: startX + x,
+                        y: startY + y,
+                        z: startZ + z,
+                    });
+                    if (block && block.isValid && block.hasTag("goe_tnt:custom_tnt")) {
+                        tnt_manager.activateTNTBlock(block, player);
+                    }
+                } catch(e) {}
             }
         }
         yield;
@@ -115,17 +117,20 @@ function* shootLaserProjectile(player, maxDistance) {
             y: body.y * (1 - t) + crosshairPoint.y * t,
             z: body.z * (1 - t) + crosshairPoint.z * t,
         };
-        dim.spawnParticle("goe_tnt:laser", point);
-        // Check for block hit
-        if (!hit) {
-            const block = dim.getBlock({ x: Math.floor(point.x), y: Math.floor(point.y), z: Math.floor(point.z) });
-            if (block && !block.isAir) {
-                dim.spawnParticle("goe_tnt:detonator_impact", point);
-                hit = true;
+        try{
+            
+            dim.spawnParticle("goe_tnt:laser", point);
+            // Check for block hit
+            if (!hit) {
+                const block = dim.getBlock({ x: Math.floor(point.x), y: Math.floor(point.y), z: Math.floor(point.z) });
+                if (block && !block.isAir) {
+                    dim.spawnParticle("goe_tnt:detonator_impact", point);
+                    hit = true;
+                }
+            } else {
+                return;
             }
-        } else {
-            return;
-        }
+        } catch(e) {}
         yield;
     }
 }
