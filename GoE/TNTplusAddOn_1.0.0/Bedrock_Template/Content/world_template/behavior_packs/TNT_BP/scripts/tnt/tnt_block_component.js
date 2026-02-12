@@ -83,10 +83,12 @@ export const TntCustomComponent = {
         const block = eventData.block;
 
         // Check adjacent blocks for redstone power
-        if (isReceivingRedstonePower(block)) {
-            tnt_manager.activateTNTBlock(block);
-            updateTimerSet(block.location, block.dimension.id, false);
-        }
+        try{
+            if (isReceivingRedstonePower(block)) {
+                tnt_manager.activateTNTBlock(block);
+                updateTimerSet(block.location, block.dimension.id, false);
+            }
+        } catch(e) { }
     },
 };
 
