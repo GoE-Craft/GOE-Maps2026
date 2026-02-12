@@ -1,4 +1,4 @@
-import { BlockPermutation, system } from "@minecraft/server";
+import { BlockPermutation, system, EntityDamageCause } from "@minecraft/server";
 import { specialActionIntervals } from "../tnt_actions";
 
 export function endermiteDecoyTNTPreAction(entity, chargeLevel, fuseRemaining) {
@@ -19,10 +19,13 @@ export function endermiteDecoyTNTPreAction(entity, chargeLevel, fuseRemaining) {
             system.clearRun(preActionIntervalId);
             return;
         }
-        system.runJob(preActionJob(dimension, cx, cy, cz, radius));
+
+        system.runJob(preActionJob(dimension, cx, cy, cz, radius, entity));
+
+        system.clearRun(preActionIntervalId);
+        specialActionIntervals.delete(entity.id);
     }, 1);
 
-    // Store interval ID so it can be cleaned up on explosion
     specialActionIntervals.set(entity.id, preActionIntervalId);
 
     system.runTimeout(() => {
@@ -31,11 +34,29 @@ export function endermiteDecoyTNTPreAction(entity, chargeLevel, fuseRemaining) {
     }, fuseRemaining);
 }
 
-function* preActionJob(dimension, cx, cy, cz, radius) {
+function* preActionJob(dimension, cx, cy, cz, radius, entity) {
     try {
-/*         dimension.runCommand(
-            `event entity @e[type=minecraft:enderman,x=${cx},y=${cy},z=${cz},r=${radius}] minecraft:become_angry`
-        ); */
+        const location = { x: cx, y: cy, z: cz };
+
+        let endermen = [];
+        try {
+            endermen = dimension.getEntities({
+                type: "minecraft:enderman",
+                location,
+                maxDistance: radius
+            });
+        } catch {}
+
+        for (const e of endermen) {
+            try {
+                if (!e?.isValid) continue;
+
+                e.applyDamage(1, {
+                    cause: EntityDamageCause.entityAttack,
+                    damagingEntity: entity
+                });
+            } catch {}
+        }
     } catch {}
 
     yield;
@@ -72,7 +93,6 @@ export function* endermiteDecoyTNTAction(dimension, chargeLevel, location, entit
                         blockType === "minecraft:air" ||
                         blockType === "minecraft:cave_air" ||
                         blockType === "minecraft:water" ||
-                        blockType === "minecraft:lava" ||
                         blockType === "minecraft:bedrock"
                     ) {
                         continue;

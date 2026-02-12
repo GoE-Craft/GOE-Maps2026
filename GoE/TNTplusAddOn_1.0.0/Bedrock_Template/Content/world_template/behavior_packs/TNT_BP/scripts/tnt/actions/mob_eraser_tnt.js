@@ -1,5 +1,3 @@
-import { } from "@minecraft/server";
-
 export function* mobEraserTNTAction(dimension, chargeLevel, location, entity) {
     const cx = Math.floor(location.x);
     const cy = Math.floor(location.y);
@@ -42,6 +40,9 @@ export function* mobEraserTNTAction(dimension, chargeLevel, location, entity) {
             if (typeId === "minecraft:player") continue;
             if (typeId === "minecraft:item") continue;
             if (typeId === "minecraft:xp_orb") continue;
+
+            // ignore mecha suit
+            if (typeId === "goe_tnt:mecha_suit") continue;
 
             // exclude tnt entities (vanilla + common custom naming)
             if (typeId === "minecraft:tnt") continue;

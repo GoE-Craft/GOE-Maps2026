@@ -81,6 +81,10 @@ export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
 
             const typeId = e.typeId || "";
 
+            // ignore player + mecha suit
+            if (typeId === "minecraft:player") continue;
+            if (typeId === "goe_tnt:mecha_suit") continue;
+
             // teleport drops to explosion
             if (typeId === "minecraft:item" || typeId === "minecraft:xp_orb") {
                 e.teleport(teleportTo, { dimension });

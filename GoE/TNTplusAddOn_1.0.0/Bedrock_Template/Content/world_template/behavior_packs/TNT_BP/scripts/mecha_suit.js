@@ -391,17 +391,26 @@ function toTntManagerDimKey(dimId) {
 }
 
 function getMechaShotFuseTicks(tntData) {
-	// these should behave like normal tnt after impact (full fuse time)
-	const isMagnet = tntData?.blockId === "goe_tnt:magnet_tnt";
-	const isDecoy = tntData?.blockId === "goe_tnt:villager_decoy_tnt";
+	const blockId = tntData?.blockId;
 
-	if (isMagnet || isDecoy) {
-		return (typeof tntData.fuseTime === "number" && tntData.fuseTime > 0) ? tntData.fuseTime : 60;
+	// fixed fuse per special tnt
+	if (blockId === "goe_tnt:endermite_decoy_tnt") {
+		return 100;
+	}
+
+	if (blockId === "goe_tnt:magnet_tnt") {
+		return 40;
+	}
+
+	if (blockId === "goe_tnt:villager_decoy_tnt") {
+		return 82;
 	}
 
 	// everyone else: explode instantly on impact
 	return 0;
 }
+
+
 
 
 // immediately detonates a custom projectile using tnt_manager logic (skipping fuse)

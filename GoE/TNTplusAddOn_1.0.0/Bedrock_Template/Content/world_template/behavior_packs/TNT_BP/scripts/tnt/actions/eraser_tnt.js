@@ -68,6 +68,7 @@ function* destroySphere(dimension, location, radius, sourceEntity) {
             if (!e?.isValid) continue;
 
             if (e.typeId === "minecraft:player") continue;
+            if (e.typeId === "goe_tnt:mecha_suit") continue;
             if (e.typeId && e.typeId.includes("tnt")) continue;
 
             e.kill();

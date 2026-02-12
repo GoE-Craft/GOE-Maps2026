@@ -40,6 +40,7 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
     for (const nearbyEntity of nearbyEntities) {
         try {
             if (excludePlayerId && nearbyEntity.id === excludePlayerId) continue;
+            if (nearbyEntity.typeId === "goe_tnt:mecha_suit") continue;
 
             nearbyEntity.addTag(freezeTag);
             nearbyEntity.addEffect("slowness", freezeTicks, { amplifier: 255, showParticles: true });
@@ -64,6 +65,7 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
 
         for (const damageTargetEntity of damageCheckEntities) {
             try {
+                if (damageTargetEntity.typeId === "goe_tnt:mecha_suit") continue;
                 if (!damageTargetEntity.hasTag(freezeTag)) continue;
 
                 damageTargetEntity.applyDamage(1);

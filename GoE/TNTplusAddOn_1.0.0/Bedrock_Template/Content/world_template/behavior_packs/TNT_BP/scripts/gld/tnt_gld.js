@@ -733,7 +733,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:mob_eraser_tnt",
         fuseTime: 50,
-        power: 4,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

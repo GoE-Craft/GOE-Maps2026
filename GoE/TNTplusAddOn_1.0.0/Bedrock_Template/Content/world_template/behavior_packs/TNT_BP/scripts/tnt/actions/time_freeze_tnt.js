@@ -26,6 +26,12 @@ export function* timeFreezeTNTAction(dimension, chargeLevel, location, sourceEnt
         try {
             if (excludePlayerId && nearbyEntity.id === excludePlayerId) continue;
 
+            const typeId = nearbyEntity.typeId || "";
+
+            // no effect player or mecha suit
+            if (typeId === "minecraft:player") continue;
+            if (typeId === "goe_tnt:mecha_suit") continue;
+
             nearbyEntity.addEffect("slowness", freezeTicks, { amplifier: 100, showParticles: true });
             nearbyEntity.clearVelocity();
         } catch {}
