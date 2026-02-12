@@ -559,7 +559,12 @@
 			},
 			"particle_effects": {
 				"0.0": {
-					"effect": "big_explosion_white"
+					"effect": "big_explosion_red",
+					"bind_to_actor": false
+				},
+				"0.25": {
+					"effect": "big_explosion_red",
+					"bind_to_actor": false
 				}
 			}
 		},
@@ -905,18 +910,16 @@
 			},
 			"particle_effects": {
 				"0.25": {
-					"effect": "tnt_charge_red_small",
-					"locator": " "
+					"effect": "tnt_charge_red_small"
 				},
 				"1.75": {
-					"effect": "tnt_charge_red_small",
-					"locator": " "
+					"effect": "tnt_charge_red_small"
 				},
 				"2.8333": {
 					"effect": "tnt_charge_red"
 				},
 				"4.125": {
-					"effect": "big_explosion_white"
+					"effect": "big_explosion_red"
 				}
 			}
 		}

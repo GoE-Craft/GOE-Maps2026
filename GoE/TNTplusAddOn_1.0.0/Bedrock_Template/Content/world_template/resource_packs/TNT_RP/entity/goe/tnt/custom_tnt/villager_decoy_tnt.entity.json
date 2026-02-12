@@ -26,7 +26,7 @@
         "explode": "animation.villager_decoy_tnt.explode"
       },
       "particle_effects": {
-        "tnt_big_explosion": "goe_tnt:big_explosion_white",
+        "big_explosion_red": "goe_tnt:big_explosion_red",
         "tnt_charge_red": "goe_tnt:tnt_charge_red",
         "tnt_charge_red_small": "goe_tnt:tnt_charge_red_small"
       },      
