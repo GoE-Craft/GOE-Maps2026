@@ -23,7 +23,8 @@
         "explosion" : "animation.matrix_tnt.split"
       },
       "particle_effects": {
-        "tnt_charge": "goe_tnt:tnt_charge_blue_and_red"
+        "detonator_impact_green": "goe_tnt:detonator_impact_green",
+        "matrix_explode": "goe_tnt:matrix_explode"
       },
       "render_controllers": [ "controller.render.tnt" ]
     }

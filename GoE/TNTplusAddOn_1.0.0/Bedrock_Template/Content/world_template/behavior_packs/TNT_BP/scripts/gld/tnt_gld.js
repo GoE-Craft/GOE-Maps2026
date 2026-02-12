@@ -833,7 +833,7 @@ export const TNT_GLD = [
     
     {
         blockId: "goe_tnt:matrix_tnt",
-        fuseTime: 60,
+        fuseTime: 70,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -843,7 +843,7 @@ export const TNT_GLD = [
         },
         explosionEffects: {
             soundEffect: "random.explode",
-            explosionAnimationLength: 2,
+            explosionAnimationLength: 1.5,
         },
         explosionProperties: {
             createsFire: false,
