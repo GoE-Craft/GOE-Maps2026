@@ -360,7 +360,7 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         chargeEffects: {
-            soundEffect: "goe_tnt:arrow_tnt_charge",
+            soundEffect: "goe_tnt:arrow_tnt_charging",
             soundDelay: 5
         },
          explosionEffects: {

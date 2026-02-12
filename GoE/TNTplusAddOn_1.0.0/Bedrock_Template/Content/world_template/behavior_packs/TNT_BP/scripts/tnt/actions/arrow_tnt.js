@@ -1,5 +1,5 @@
 export function* arrowTNTAction(dimension, location, chargeLevel) {
-    const arrowCount = 20 + (10 * chargeLevel);
+    const arrowCount = 30 + (10 * chargeLevel);
 
     const x = location.x;
     const z = location.z;
