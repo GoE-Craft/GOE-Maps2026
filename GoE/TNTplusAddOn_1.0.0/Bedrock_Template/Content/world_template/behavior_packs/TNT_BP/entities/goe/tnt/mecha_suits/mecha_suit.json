@@ -129,9 +129,11 @@
 
       "minecraft:damage_sensor": {
         "triggers": [
-          {
-            "cause": "all",
-            "deals_damage": true,
+          { "cause": "entity_explosion", "deals_damage": false},
+          { "cause": "block_explosion", "deals_damage": false},
+          { "cause": "fire", "deals_damage": false},
+          { "cause": "fall", "deals_damage": false },
+          { 
             "on_damage": {
               "event": "goe_tnt:death",
               "target": "self",
@@ -143,15 +145,8 @@
           {
             "cause": "all",
             "deals_damage": true,
-            "damage_multiplier": 0.2,
-            "on_damage": {
-              "target": "self",
-              "filters": [
-                { "test": "actor_health", "value": 1, "operator": ">" }
-              ]
-            }
-          },
-          { "cause": "fall", "deals_damage": false }
+            "damage_multiplier": 0.2
+          }
         ]
       },
 
