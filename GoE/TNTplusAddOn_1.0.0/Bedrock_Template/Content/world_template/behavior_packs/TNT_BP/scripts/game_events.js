@@ -16,7 +16,7 @@ export async function onLoad() {
     // Restore any active TNT from before script reload
     tnt_events.onLoad();
     book.startGuideBookReminderInterval();
-    light_tnt.startLightCleanupJanitor();
+    system.runJob(light_tnt.startLightCleanupJob());
 }
 
 export async function onTick() {}

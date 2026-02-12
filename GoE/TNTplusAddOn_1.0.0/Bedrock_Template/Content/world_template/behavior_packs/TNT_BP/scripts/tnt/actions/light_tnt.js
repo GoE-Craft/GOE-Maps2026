@@ -3,23 +3,6 @@ import { BlockPermutation, system, world } from "@minecraft/server";
 const lightCleanupDpKey = "goe_tnt:light_cleanup_v1";
 const lightCleanupDpMaxChars = 14000;
 
-function getDimKeyFromDimension(dimension) {
-    const id = String(dimension?.id ?? "");
-    if (id.includes("nether")) return "nether";
-    if (id.includes("the_end") || id.includes("the end")) return "the_end";
-    return "overworld";
-}
-
-function getDimensionFromDimKey(dimKey) {
-    try {
-        if (dimKey === "nether") return world.getDimension("nether");
-        if (dimKey === "the_end") return world.getDimension("the end");
-        return world.getDimension("overworld");
-    } catch {
-        return world.getDimension("overworld");
-    }
-}
-
 function loadLightCleanupQueue() {
     try {
         const raw = world.getDynamicProperty(lightCleanupDpKey);
@@ -37,19 +20,20 @@ function saveLightCleanupQueue(queue) {
         if (queue.length > 2500) queue.splice(0, queue.length - 2500);
 
         let raw = JSON.stringify(queue);
-        while (raw.length > lightCleanupDpMaxChars && queue.length > 0) {
-            queue.shift();
-            raw = JSON.stringify(queue);
-        }
+        // while (raw.length > lightCleanupDpMaxChars && queue.length > 0) {
+        //     queue.shift();
+        //     raw = JSON.stringify(queue);
+        // }
         world.setDynamicProperty(lightCleanupDpKey, raw);
-    } catch {}
+    } catch {
+    }
 }
 
 function enqueueLightCleanupJob(dimension, lightTypeId, placed, expireTick) {
     try {
         if (!Array.isArray(placed) || placed.length === 0) return;
 
-        const dim = getDimKeyFromDimension(dimension);
+        const dim = dimension.id;
 
         const points = [];
         for (let i = 0; i < placed.length; i++) {
@@ -67,59 +51,80 @@ function enqueueLightCleanupJob(dimension, lightTypeId, placed, expireTick) {
             points
         });
         saveLightCleanupQueue(queue);
-    } catch {}
+    } catch {
+    }
 }
 
-export function startLightCleanupJanitor() {
-    system.runInterval(() => {
-        const nowTick = system.currentTick;
-        const queue = loadLightCleanupQueue();
-        if (!queue.length) return;
+export function* startLightCleanupJob() {
+    const nowTick = system.currentTick;
+    const queue = loadLightCleanupQueue();
+    if (!queue.length) return;
 
-        const keep = [];
-        const airPerm = BlockPermutation.resolve("minecraft:air");
+    const keep = [];
 
-        let processedJobs = 0;
-        const maxJobsPerRun = 40;
+    let processedJobs = 0;
+    const maxJobsPerRun = 40;
 
-        for (let i = 0; i < queue.length; i++) {
-            const job = queue[i];
-            if (!job || typeof job !== "object") continue;
+    for (let i = 0; i < queue.length; i++) {
+        const job = queue[i];
+        if (!job || typeof job !== "object") continue;
 
-            const expireTick = Number(job.expireTick ?? 0);
-            if (expireTick > nowTick) {
-                keep.push(job);
-                continue;
-            }
-
-            const dimension = getDimensionFromDimKey(String(job.dim ?? "overworld"));
-            const lightTypeId = String(job.lightTypeId ?? "");
-            const points = Array.isArray(job.points) ? job.points : [];
-
-            for (let p = 0; p < points.length; p++) {
-                const pt = points[p];
-                if (!pt) continue;
-
-                try {
-                    if (typeof dimension.isChunkLoaded === "function" && !dimension.isChunkLoaded(pt)) continue;
-
-                    const block = dimension.getBlock(pt);
-                    if (!block) continue;
-                    if (lightTypeId && block.typeId !== lightTypeId) continue;
-
-                    block.setPermutation(airPerm);
-                } catch {}
-            }
-
-            processedJobs++;
-            if (processedJobs >= maxJobsPerRun) {
-                for (let j = i + 1; j < queue.length; j++) keep.push(queue[j]);
-                break;
-            }
+        const expireTick = Number(job.expireTick ?? 0);
+        if (expireTick > nowTick) {
+            delayedLightCleanupJob(job);
+            continue;
         }
 
-        saveLightCleanupQueue(keep);
-    }, 100);
+        const dimension = world.getDimension(job.dim ?? "overworld");
+        const lightTypeId = String(job.lightTypeId ?? "");
+        const points = Array.isArray(job.points) ? job.points : [];
+
+        for (let p = 0; p < points.length; p++) {
+            const pt = points[p];
+            if (!pt) continue;
+
+            try {
+                if (typeof dimension.isChunkLoaded === "function" && !dimension.isChunkLoaded(pt)) continue;
+
+                const block = dimension.getBlock(pt);
+                if (!block) continue;
+                if (lightTypeId && block.typeId !== lightTypeId) continue;
+
+                block.setType("minecraft:air");
+            } catch {}
+        }
+
+        processedJobs++;
+        if (processedJobs >= maxJobsPerRun) yield;
+    }
+
+    saveLightCleanupQueue(keep);
+}
+
+export function delayedLightCleanupJob(job) {
+    
+    const expireTick = Number(job.expireTick ?? 0);
+    const dimension = world.getDimension(job.dim ?? "overworld");
+    const lightTypeId = String(job.lightTypeId ?? "");
+    const points = Array.isArray(job.points) ? job.points : [];
+
+    system.runTimeout(() => {
+        for (let p = 0; p < points.length; p++) {
+            const pt = points[p];
+            if (!pt) continue;
+
+            try {
+                if (typeof dimension.isChunkLoaded === "function" && !dimension.isChunkLoaded(pt)) continue;
+
+                const block = dimension.getBlock(pt);
+                if (!block) continue;
+                if (lightTypeId && block.typeId !== lightTypeId) continue;
+
+                block.setType("minecraft:air");
+            } catch {}
+        }
+    }, expireTick - system.currentTick);
+
 }
 
 export function* lightTNTAction(dimension, chargeLevel, location, entity) {
@@ -127,16 +132,15 @@ export function* lightTNTAction(dimension, chargeLevel, location, entity) {
     const centerY = Math.floor(location.y);
     const centerZ = Math.floor(location.z);
 
-    const baseRadius = 30;
+    const baseRadius = 10;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     const durationTicks = 60 * 20;
 
-    const step = 6;
+    const step = 2;
     const lightLevel = 15;
 
     const lightTypeId = `minecraft:light_block_${lightLevel}`;
-    const lightPerm = BlockPermutation.resolve(lightTypeId);
 
     try {
         dimension.spawnParticle("goe_tnt:light_extended", {
@@ -153,44 +157,32 @@ export function* lightTNTAction(dimension, chargeLevel, location, entity) {
 
     for (let dx = -radius; dx <= radius; dx += step) {
         for (let dz = -radius; dz <= radius; dz += step) {
+            // Check if point is within circular radius
             const dist2 = (dx * dx + dz * dz);
             if (dist2 > r2) continue;
 
             const x = centerX + dx;
             const z = centerZ + dz;
 
-            const maxDy = Math.floor(Math.sqrt(r2 - dist2));
+            // Try to place light block at center height, searching up/down for air blocks
+            const searchRange = 8;
 
-            let hash = 0;
-            hash = (hash ^ ((centerX | 0) * 83492791)) | 0;
-            hash = (hash ^ ((centerZ | 0) * 1234567)) | 0;
-            hash = (hash ^ ((dx | 0) * 73856093)) | 0;
-            hash = (hash ^ ((dz | 0) * 19349663)) | 0;
-
-            const u = (hash >>> 0) / 4294967295;
-            const dyBase = Math.round(((u * 2) - 1) * maxDy);
-
-            const tryCount = Math.min(8, maxDy);
-
-            for (let t = 0; t <= tryCount; t++) {
+            for (let t = 0; t <= searchRange; t++) {
                 let dyOffset;
-                if (t === 0) dyOffset = 0;
-                else {
+                if (t === 0) {
+                    dyOffset = 0;
+                } else {
                     const a = Math.ceil(t / 2);
                     dyOffset = (t % 2 === 1) ? a : -a;
                 }
 
-                let dy = dyBase + dyOffset;
-                if (dy > maxDy) dy = maxDy;
-                if (dy < -maxDy) dy = -maxDy;
-
-                const y = centerY + dy;
+                const y = centerY + dyOffset;
 
                 try {
                     const block = dimension.getBlock({ x, y, z });
                     if (!block || !block.isAir) continue;
 
-                    block.setPermutation(lightPerm);
+                    block.setType(lightTypeId);
                     placed.push({ x, y, z });
                     placedCount++;
                     break;
@@ -204,8 +196,6 @@ export function* lightTNTAction(dimension, chargeLevel, location, entity) {
     enqueueLightCleanupJob(dimension, lightTypeId, placed, expireTick);
 
     system.runTimeout(() => {
-        const airPerm = BlockPermutation.resolve("minecraft:air");
-
         for (const p of placed) {
             try {
                 if (typeof dimension.isChunkLoaded === "function" && !dimension.isChunkLoaded(p)) continue;
@@ -214,7 +204,7 @@ export function* lightTNTAction(dimension, chargeLevel, location, entity) {
                 if (!block) continue;
                 if (block.typeId !== lightTypeId) continue;
 
-                block.setPermutation(airPerm);
+                block.setType("minecraft:air");
             } catch {}
         }
     }, durationTicks);
