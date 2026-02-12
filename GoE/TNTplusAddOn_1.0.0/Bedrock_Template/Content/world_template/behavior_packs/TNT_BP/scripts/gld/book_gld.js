@@ -358,7 +358,7 @@ export const Achievements = {
             id: "magnet_tnt",
             name: "Magnet TNT",
             info: "Pulls nearby mobs into the blast area and explodes once they're dragged in!",
-            tips: "Pull dozens of mobs with the Magnet TNT.",
+            tips: "Pull in dozens of mobs with the Magnet TNT.",
             tntType: "magnet_tnt",
             icon: "textures/goe/tnt/ui/achievements/magnet_tnt",
             rewardStructure: "goe_tnt:magnet_tnt_reward"

@@ -405,7 +405,7 @@ function getMechaShotFuseTicks(tntData) {
 
 
 // immediately detonates a custom projectile using tnt_manager logic (skipping fuse)
-function explodeCustomProjectileNow(entity, tntData, yawDeg, dimKey) {
+function explodeCustomProjectileNow(entity, tntData, yawDeg, dimKey, player) {
 	if (!isEntityValid(entity) || !tntData) return;
 
 	let loc;
@@ -432,10 +432,12 @@ function explodeCustomProjectileNow(entity, tntData, yawDeg, dimKey) {
 			tntData,
 			useDimKey,
 			{ x: 0, y: 0, z: 0 },
-			useYaw
+			useYaw,
+			player
 		);
 	} catch { }
 }
+
 
 // sets up a per-tick loop that detects collisions for custom projectiles and detonates them on contact
 function setupCustomProjectileCollisionTick() {
