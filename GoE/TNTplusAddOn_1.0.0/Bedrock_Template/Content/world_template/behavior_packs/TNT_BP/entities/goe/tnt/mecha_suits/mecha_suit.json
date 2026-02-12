@@ -8,13 +8,13 @@
       "properties": {
         "goe_tnt:tnt_action": {
           "type": "enum",
-          "values": [ "idle", "charge", "charged", "fire" ],
+          "values": ["idle", "charge", "charged", "fire"],
           "default": "idle",
           "client_sync": true
         },
         "goe_tnt:fire_hand": {
           "type": "enum",
-          "values": [ "right", "left" ],
+          "values": ["right", "left"],
           "default": "right",
           "client_sync": true
         }
@@ -22,16 +22,9 @@
     },
 
     "component_groups": {
-
       "goe_tnt:family_default": {
         "minecraft:type_family": {
-          "family": [ "mecha_suit" ]
-        }
-      },
-
-      "goe_tnt:family_player": {
-        "minecraft:type_family": {
-          "family": [ "player", "mecha_suit" ]
+          "family": ["mecha_suit"]
         }
       },
 
@@ -78,37 +71,13 @@
         "minecraft:rideable": {
           "seat_count": 1,
           "seats": [
-            { "position": [ 0, 2.25, 0.25 ] }
+            { "position": [0, 2.25, 0.25] }
           ]
         }
       }
     },
 
     "components": {
-
-      "minecraft:environment_sensor": {
-        "triggers": [
-          {
-            "filters": {
-              "test": "rider_count",
-              "subject": "self",
-              "operator": ">",
-              "value": 0
-            },
-            "event": "goe_tnt:family_become_player"
-          },
-          {
-            "filters": {
-              "test": "rider_count",
-              "subject": "self",
-              "operator": "==",
-              "value": 0
-            },
-            "event": "goe_tnt:family_become_default"
-          }
-        ]
-      },
-
       "minecraft:interact": {
         "interactions": [
           {
@@ -129,11 +98,11 @@
 
       "minecraft:damage_sensor": {
         "triggers": [
-          { "cause": "entity_explosion", "deals_damage": false},
-          { "cause": "block_explosion", "deals_damage": false},
-          { "cause": "fire", "deals_damage": false},
+          { "cause": "entity_explosion", "deals_damage": false },
+          { "cause": "block_explosion", "deals_damage": false },
+          { "cause": "fire", "deals_damage": false },
           { "cause": "fall", "deals_damage": false },
-          { 
+          {
             "on_damage": {
               "event": "goe_tnt:death",
               "target": "self",
@@ -183,17 +152,6 @@
     },
 
     "events": {
-
-      "goe_tnt:family_become_player": {
-        "remove": { "component_groups": [ "goe_tnt:family_default" ] },
-        "add": { "component_groups": [ "goe_tnt:family_player" ] }
-      },
-
-      "goe_tnt:family_become_default": {
-        "remove": { "component_groups": [ "goe_tnt:family_player" ] },
-        "add": { "component_groups": [ "goe_tnt:family_default" ] }
-      },
-
       "goe_tnt:deny_mount_spawning": {
         "queue_command": {
           "command": [
@@ -233,13 +191,13 @@
           ]
         },
         "add": {
-          "component_groups": [ "goe_tnt:death" ]
+          "component_groups": ["goe_tnt:death"]
         }
       },
 
       "goe_tnt:despawn": {
         "add": {
-          "component_groups": [ "goe_tnt:despawn" ]
+          "component_groups": ["goe_tnt:despawn"]
         }
       },
 

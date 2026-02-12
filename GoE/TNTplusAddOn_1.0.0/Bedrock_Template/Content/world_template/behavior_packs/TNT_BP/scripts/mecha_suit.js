@@ -947,6 +947,10 @@ function setupMechaRidingModeLock() {
 			if (isRidingMecha && !wasRidingMecha) {
 				lastRiddenMechaByPlayer.set(player.id, mecha);
 
+				try {
+					player.addEffect("resistance", 999999, { amplifier: 255, showParticles: false });
+				} catch { }
+
 				let persistedPrevious;
 				try {
 					const v = player.getDynamicProperty(PREVIOUS_GAMEMODE_PROP);
@@ -978,6 +982,11 @@ function setupMechaRidingModeLock() {
 
 			if (!isRidingMecha && wasRidingMecha) {
 				const lastMecha = lastRiddenMechaByPlayer.get(player.id);
+
+				try {
+					player.removeEffect("resistance");
+				} catch { }
+				
 				if (lastMecha) forceMechaTntIdle(lastMecha);
 				lastRiddenMechaByPlayer.delete(player.id);
 
