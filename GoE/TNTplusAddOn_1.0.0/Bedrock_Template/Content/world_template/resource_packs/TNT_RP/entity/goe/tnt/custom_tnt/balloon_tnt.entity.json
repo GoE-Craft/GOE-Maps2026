@@ -1,0 +1,54 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:balloon_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/balloon_tnt"
+      },
+      "geometry": {
+        "default": "geometry.balloon_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge" : "animation.balloon_tnt.charge",
+        "explosion" : "animation.balloon_tnt.explosion"
+      },
+      "particle_effects": {
+        "balloon_pop" : "goe_tnt:balloon_pop",
+        "balloon_green" : "goe_tnt:balloon_confetti_green",
+        "balloon_yellow" : "goe_tnt:balloon_confetti_yellow",
+        "balloon_red" : "goe_tnt:balloon_confetti_red",
+        "balloon_blue": "goe_tnt:balloon_confetti_blue",
+        "balloon_green2" : "goe_tnt:balloon_confetti_green2",
+        "balloon_yellow2" : "goe_tnt:balloon_confetti_yellow2",
+        "balloon_red2" : "goe_tnt:balloon_confetti_red2",
+        "balloon_blue2": "goe_tnt:balloon_confetti_blue2",
+        "balloon_flash_red" : "goe_tnt:balloon_flash_red",
+        "balloon_flash_yellow" : "goe_tnt:balloon_flash_yellow",
+        "balloon_flash_green" : "goe_tnt:balloon_flash_green",
+        "balloon_flash_blue" : "goe_tnt:balloon_flash_blue",
+        "firework_red" : "goe_tnt:balloon_firework_red",
+        "firework_green" : "goe_tnt:balloon_firework_green",
+        "firework_blue" : "goe_tnt:balloon_firework_blue",
+        "firework_yellow" : "goe_tnt:balloon_firework_yellow",
+        "balloon_fuse" : "got_tnt:balloon_fuse"
+      },
+      "sound_effects": {
+        "firework.blast": "firework.blast"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}

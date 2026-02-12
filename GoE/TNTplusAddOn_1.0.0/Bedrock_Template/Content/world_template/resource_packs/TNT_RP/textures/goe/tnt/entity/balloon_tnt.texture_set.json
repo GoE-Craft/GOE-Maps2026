@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "balloon_tnt",
+		"metalness_emissive_roughness": "balloon_tnt_mer",
+		"heightmap": "balloon_tnt_height"
+	}
+}
