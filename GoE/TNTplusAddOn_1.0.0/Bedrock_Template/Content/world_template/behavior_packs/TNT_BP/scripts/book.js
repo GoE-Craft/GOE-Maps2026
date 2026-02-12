@@ -76,9 +76,9 @@ export async function showIntroPage(player) {
         .title("§l§cTNT Guide Book§r")
         .body(
             `§fWelcome, §a${name}§r!\n\n` +
-            "§fUnleash chaos with §e20+§r§f craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy custom §eStructures§r§f found all across your world.\n\n" +
-            "§fOpen the §eTNT Guide§r§f to access the shop and achievement list, and to tweak your settings§r§f.\n\n" +
-            "§fEnjoy §aTNT+ Add-On§r§f and please give it a §l§e5 STARS RATING§r§f on the Marketplace!§r"
+            "§fUnleash chaos with many new, craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy new, §ecustom Structures§r§f that naturally spawn all across your world.\n\n" +
+            "§fOpen the §eTNT Guide§r§f to access the shop and achievement list and to tweak your settings§r§f.\n\n" +
+            "§fEnjoy §aTNT+ Add-On§r§f and please give it a §l§e5-STAR RATING§r§f on the Marketplace!§r"
         )
         .button("§l§2LET'S EXPLODE!§r");
 
@@ -183,7 +183,7 @@ async function showMechaSuitPage(player) {
     const form = new ActionFormData()
         .title("§l§4TNT Mecha Suit§r")
         .body(
-            "§fThe §4TNT Mecha Sui§f is a powerful combat mount that lets you launch any custom §4TNT block§f as a projectile. The TNT Mecha Suit has high durability; it moves 30% faster than a normal player and jumps higher.\n\n" +
+            "§fThe §4TNT Mecha Sui§f is a powerful combat mount that lets you launch any custom §4TNT block§f as a projectile. The TNT Mecha Suit has high durability; it moves 30%% faster than a normal player and jumps higher.\n\n" +
             "§f- Hold any §4TNT block§f (including §4vanilla TNT§f) while mounted in the suit and interact to launch it far away.\n\n" +
             "§f- Airborne: Hold an §eElytra§f and interact on the suit to make it §eflyable§f.\n\n"
         )
@@ -268,7 +268,7 @@ async function showTntsInfoPage(player) {
             "§4- Delayed Activation:\n" +
             "§fUse a clock to add a 10-second countdown timer to any TNT block. Hold a clock and interact on a TNT block to add the time. Add more delay by interacting more times.\n\n" +
             "§4- Power Up:\n" +
-            "§fUse gunpowder to boost any TNT block up to 4 times. Hold gunpowder and interact with a TNT block to increase its power by up to 25%.\n\n" +
+            "§fUse gunpowder to boost any TNT block up to 4 times. Hold gunpowder and interact with a TNT block to increase its power by up to 25%%.\n\n" +
             "§fExperiment with different §4TNT Blocks§f and master new ways to use these explosive blocks.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
