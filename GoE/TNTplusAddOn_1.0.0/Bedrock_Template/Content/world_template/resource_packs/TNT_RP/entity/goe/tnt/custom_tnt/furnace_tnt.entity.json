@@ -30,7 +30,6 @@
        "particle_effects": {
         "furnace_explode": "goe_tnt:furnace_explode",
         "furnace_fire": "goe_tnt:furnace_fire",
-        "furnace_destruct": "goe_tnt:furnace_destruct",
         "furnace_pull": "goe_tnt:furnace_pull",
         "furnace_smoke": "goe_tnt:furnace_smoke",
         "tnt_charge_red": "goe_tnt:tnt_charge_red"
