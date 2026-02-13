@@ -36,7 +36,7 @@ export function* structureTNTAction(dimension, location, vec, tntData) {
         const length = tntData.explosionEffects.explosionAnimationLength > 0 ? tntData.explosionEffects.explosionAnimationLength : 0;
 
         const structureOptions = {
-            animationMode: "Blocks",
+            animationMode: "Layers",
             animationSeconds: length - 1 ,
             includeBlocks: true,
             includeEntities: true,
