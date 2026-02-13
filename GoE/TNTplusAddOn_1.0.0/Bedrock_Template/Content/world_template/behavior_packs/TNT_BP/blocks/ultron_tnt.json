@@ -26,7 +26,7 @@
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
-      "minecraft:geometry": "geometry.ultron_tnt",
+      "minecraft:geometry": "geometry.ultron_tnt_block",
       "minecraft:material_instances": { "*": { "texture": "ultron_tnt", "render_method": "alpha_test", "face_dimming": true} },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
