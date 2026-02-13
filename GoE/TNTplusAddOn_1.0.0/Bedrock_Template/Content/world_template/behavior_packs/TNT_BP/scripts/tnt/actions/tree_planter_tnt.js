@@ -72,15 +72,40 @@ function pickRandomUnique(arr, n) {
     return copy.slice(0, n);
 }
 
+function getGroundY(dimension, x, yStart, z) {
+    // Scan down from yStart to find the first non-air, non-leaves block
+    for (let y = Math.floor(yStart); y > 0; y--) {
+        try {
+            const block = dimension.getBlock({ x, y, z });
+            if (!block) continue;
+            const id = block.typeId;
+            if (!block.isAir && !id.includes("leaves") && id !== "minecraft:log" && id !== "minecraft:log2" && id !== "minecraft:log3") {
+                return y + 1; // Place tree above ground
+            }
+        } catch (e) {}
+    }
+    return Math.floor(yStart); // fallback
+}
+
 function placeTree(dimension, structureManager, baseX, baseZ, centerY, structureId) {
     try {
         const structure = structureManager.get(structureId);
         if (!structure) return;
 
-        const originY = Math.floor(centerY) + TREE_Y_OFFSET;
+        // Find ground Y at the center of the structure's base
+        const centerX = baseX + Math.floor(structure.size.x / 2);
+        const centerZ = baseZ + Math.floor(structure.size.z / 2);
+        const groundY = getGroundY(dimension, centerX, centerY, centerZ) + TREE_Y_OFFSET;
+
+        // Check if ground block is water; if so, skip placement
+        const groundBlock = dimension.getBlock({ x: centerX, y: groundY - TREE_Y_OFFSET - 1, z: centerZ });
+        if (groundBlock && (groundBlock.typeId === "minecraft:water" || groundBlock.typeId === "minecraft:flowing_water")) {
+            return; // Don't place tree on water
+        }
+
         const particleX = baseX + structure.size.x / 2;
         const particleZ = baseZ + structure.size.z / 2;
-        const particleY = originY + 0.5;
+        const particleY = groundY + 0.5;
 
         dimension.spawnParticle(LEAVES_PARTICLE, { x: particleX, y: particleY, z: particleZ });
         dimension.spawnParticle(LEAVES_EXPLOSION_PARTICLE, { x: particleX, y: particleY, z: particleZ });
@@ -88,7 +113,7 @@ function placeTree(dimension, structureManager, baseX, baseZ, centerY, structure
         const soundLoc = { x: particleX, y: particleY, z: particleZ };
         dimension.playSound("block.bell.hit", soundLoc, { volume: 0.8, pitch: 0.9 });
 
-        structureManager.place(structure, dimension, { x: baseX, y: originY, z: baseZ }, {
+        structureManager.place(structure, dimension, { x: baseX, y: groundY, z: baseZ }, {
             includeBlocks: true,
             includeEntities: true,
             rotation: StructureRotation.None,

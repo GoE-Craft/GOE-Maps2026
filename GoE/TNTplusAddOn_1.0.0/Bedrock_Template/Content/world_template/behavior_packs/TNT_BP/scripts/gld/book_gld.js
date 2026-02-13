@@ -9,7 +9,7 @@ export const ShopItems = {
         {
             id: "tnt_mecha_suit",
             name: "TNT Mecha Suit",
-            price: { type: "emerald", amount: 2 },
+            price: { type: "emerald", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/accessories/mecha_suit",
             itemId: "goe_tnt:mecha_suit_spawn_egg"
         },
@@ -111,7 +111,7 @@ export const ShopItems = {
         {
             id: "time_freeze_tnt",
             name: "Time Freeze TNT",
-            price: { type: "gold_ingot", amount: 25 },
+            price: { type: "iron_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/time_freeze_tnt",
             itemId: "goe_tnt:time_freeze_tnt"
         },

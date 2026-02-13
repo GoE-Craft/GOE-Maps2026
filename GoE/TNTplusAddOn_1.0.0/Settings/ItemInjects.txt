@@ -57,8 +57,8 @@ SetContainerSlot 136 17 63 2 goe_tnt:thunderstorm_tnt 0 3
 
 SetContainerSlot 184 3 64 12 goe_tnt:eraser_tnt 0 3
 
-SetContainerSlot 241 15 169 5 goe_tnt:weather_station_tnt 0 3
-SetContainerSlot 227 8 172 2 goe_tnt:weather_station_tnt 0 2
+SetContainerSlot 241 17 169 5 goe_tnt:weather_station_tnt 0 3
+SetContainerSlot 227 10 172 2 goe_tnt:weather_station_tnt 0 2
 
 SetContainerSlot 126 3 21 2 goe_tnt:time_freeze_tnt 0 4
 

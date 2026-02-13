@@ -352,7 +352,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:arrow_tnt",
         fuseTime: 40,
-        power: 2,
+        power: 5,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
