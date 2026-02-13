@@ -914,7 +914,32 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         }
-    }
+    },
+    {
+        blockId: "goe_tnt:water_eraser_tnt",
+        fuseTime: 40,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            explosionAnimationLength: 1.5
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: null
+        },
+        preExplosionProperties: {
+            specialAction: null
+        }
+    },
 ]
 
 export function getTntDataByName(tntName) {

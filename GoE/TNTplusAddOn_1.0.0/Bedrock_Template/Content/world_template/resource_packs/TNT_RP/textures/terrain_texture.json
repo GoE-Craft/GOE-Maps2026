@@ -98,7 +98,7 @@
     "thunderstorm_tnt": { "textures": "textures/goe/tnt/entity/thunderstorm_tnt" },
     "time_freeze_tnt": { "textures": "textures/goe/tnt/entity/time_freeze_tnt" },
     "tree_planter_tnt": { "textures": "textures/goe/tnt/entity/tree_planter_tnt" },
-    "tsunami_tnt": { "textures": "textures/goe/tnt/entity/tsunami_tnt" },
+    "water_eraser_tnt": { "textures": "textures/goe/tnt/entity/water_eraser_tnt" },
     "tunnel_tnt": { "textures": "textures/goe/tnt/entity/tunnel_tnt" },
     "ultron_tnt": { "textures": "textures/goe/tnt/entity/ultron_tnt" },
     "vine_tnt": { "textures": "textures/goe/tnt/entity/vine_tnt" },
