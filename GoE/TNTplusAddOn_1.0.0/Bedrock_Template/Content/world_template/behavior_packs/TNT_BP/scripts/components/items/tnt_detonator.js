@@ -39,7 +39,12 @@ export function fireLaser(player, params) {
 
     system.runJob(shootLaserProjectile(player, maxDistance));
 
-    const ray = player.getBlockFromViewDirection({ maxDistance: maxDistance });
+    const ray = player.getBlockFromViewDirection({ 
+        maxDistance: maxDistance, 
+        includeLiquidBlocks: false,
+        includePassableBlocks: false
+    });
+
     const block = ray?.block;
     if (!block) return;
 
@@ -123,7 +128,8 @@ function* shootLaserProjectile(player, maxDistance) {
             // Check for block hit
             if (!hit) {
                 const block = dim.getBlock({ x: Math.floor(point.x), y: Math.floor(point.y), z: Math.floor(point.z) });
-                if (block && !block.isAir) {
+
+                if (block && !block.isAir && !block.isLiquid) {
                     dim.spawnParticle("goe_tnt:detonator_impact", point);
                     hit = true;
                 }
