@@ -1126,7 +1126,7 @@ function* flyJob() {
 
 		const impulse = {
 			x: ((-sin * input.y + cos * input.x) * speed - vel.x) * 0.1,
-			y: 0.1,
+			y: 0.15 - vel.y * 0.1,
 			z: ((cos * input.y + sin * input.x) * speed - vel.z) * 0.1,
 		};
 		try {

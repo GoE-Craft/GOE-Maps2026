@@ -19,7 +19,8 @@
 			"particle_effects": {
 				"mecha_suit_fire": "goe_tnt:mecha_suit_fire",
 				"mecha_suit_jump": "goe_tnt:mecha_suit_jump",
-				"mecha_suit_land": "goe_tnt:mecha_suit_land"
+				"mecha_suit_land": "goe_tnt:mecha_suit_land",
+				"mecha_suit_flying": "goe_tnt:mecha_suit_flying"
 			},
 			"sound_effects": {
 				"walk": "goe_tnt:mecha_suit_walk",
@@ -42,6 +43,7 @@
 				"spawn_controller": "controller.animation.goe_tnt.mecha_suit_spawn",
 				"mount_controller": "controller.animation.goe_tnt.mecha_suit_mount",
 				"look_at_target_controller" : "controller.animation.tnt_look_at_target",
+				"flying_controller": "controller.animation.goe_tnt.mecha_suit_flying",
 
 				"idle": "animation.mecha_suit.idle",
 				"spawn" : "animation.mecha_suit.spawn",
@@ -56,7 +58,8 @@
 				"jump": "animation.mecha_suit.jump",
 				"jump_walk": "animation.mecha_suit.jump_walk",
 				"look_at": "animation.mecha_suit.look_at",
-				"land" : "animation.mecha_suit.land"
+				"land" : "animation.mecha_suit.land",
+				"fly": "animation.mecha_suit.flying"
 			},
 
 			"scripts": {
@@ -69,7 +72,8 @@
 					{"land_controller" : "q.mark_variant != 2"},
 					{"spawn_controller": "q.mark_variant != 2"},
 					{"mount_controller": "q.mark_variant != 2"},
-					{"look_at_target_controller": "q.mark_variant != 2"}
+					{"look_at_target_controller": "q.mark_variant != 2"},
+					"flying_controller"
 				]
 			},
 			"spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }

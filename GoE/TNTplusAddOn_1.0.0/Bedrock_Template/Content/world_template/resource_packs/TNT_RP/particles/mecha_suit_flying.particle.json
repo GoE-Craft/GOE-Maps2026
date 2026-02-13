@@ -22,7 +22,7 @@
 				"max_particles": 200
 			},
 			"minecraft:emitter_lifetime_looping": {
-				"active_time": 50
+				"active_time": 0.1
 			},
 			"minecraft:emitter_shape_point": {},
 			"minecraft:particle_lifetime_expression": {
