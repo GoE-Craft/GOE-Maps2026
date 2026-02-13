@@ -1,0 +1,40 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:water_eraser_tnt",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam" : "goe_tnt_border"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/water_eraser_tnt"
+      },
+      "geometry": {
+        "default": "geometry.water_eraser_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"tnt_swelling" : "q.mark_variant == 1"},
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "tnt_swelling" : "animation.water_eraser_tnt.swell",
+        "charge": "animation.water_eraser_tnt.charge",
+        "explode": "animation.water_eraser_tnt.explosion"
+      },
+      "particle_effects": {
+        "tnt_charge" : "goe_tnt:tnt_charge_blue",
+        "bubbles" : "goe_tnt:water_eraser_bubbles",
+        "fog" : "goe_tnt:water_eraser_fog",
+        "implosion" : "goe_tnt:water_eraser_implosion"
+      },
+      "render_controllers": [ "controller.render.healing_tnt" ]
+    }
+  }
+}
