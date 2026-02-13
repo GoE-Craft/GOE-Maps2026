@@ -784,7 +784,7 @@
 				}
 			}
 		},
-		"animation.matrix_mob.bouce_and_transform": {
+		"animation.matrix_mob.bounce_and_transform": {
 			"animation_length": 3,
 			"bones": {
 				"TNT": {
