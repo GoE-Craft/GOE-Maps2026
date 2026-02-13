@@ -97,10 +97,14 @@ function placeTree(dimension, structureManager, baseX, baseZ, centerY, structure
         const centerZ = baseZ + Math.floor(structure.size.z / 2);
         const groundY = getGroundY(dimension, centerX, centerY, centerZ) + TREE_Y_OFFSET;
 
-        // Check if ground block is water; if so, skip placement
-        const groundBlock = dimension.getBlock({ x: centerX, y: groundY - TREE_Y_OFFSET - 1, z: centerZ });
-        if (groundBlock && (groundBlock.typeId === "minecraft:water" || groundBlock.typeId === "minecraft:flowing_water")) {
-            return; // Don't place tree on water
+        // Scan upward from the ground block for water; if any water is found above, skip placement
+        const scanStartY = groundY - TREE_Y_OFFSET - 1;
+        const scanEndY = scanStartY + 20; // Scan up to 20 blocks above ground, can bump this up
+        for (let y = scanStartY; y <= scanEndY; y++) {
+            const block = dimension.getBlock({ x: centerX, y, z: centerZ });
+            if (block && (block.typeId === "minecraft:water" || block.typeId === "minecraft:flowing_water")) {
+                return; // Don't place tree if water is found above
+            }
         }
 
         const particleX = baseX + structure.size.x / 2;
@@ -175,4 +179,3 @@ export function treePlanterAction(dimension, location, entity) {
     } catch (e) {
     }
 }
-

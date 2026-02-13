@@ -17,6 +17,8 @@ const activeTimeouts = new Map();
 const countdownIntervals = new Map();
 const lastPlaceHintTick = new Map();
 
+const pendingHintTimeouts = new Map();
+const pendingHintMessages = new Map();
 
 /**
  * Activate a TNT block at the given location
@@ -492,33 +494,60 @@ export function showTntPlaceHint(player, blockTypeId) {
         }
         message += `\n§6Tip:§r ${tips}`;
 
-        // Determine if player just got an achievement or milestone (set by achievements.js)
-        // We'll use dynamic delay: 0 if no achievement, 80 if single, 160 if both (single+milestone)
-        let delayTicks = 0;
+        const nowTick = system.currentTick;
+
+        let notBefore = 0;
         try {
-            // Check for recent achievement unlocks
-            // These properties are set in achievements.js when an achievement is unlocked
-            const lastAchTick = player.getDynamicProperty("goe_tnt_last_achievement_tick");
-            const lastMilestoneTick = player.getDynamicProperty("goe_tnt_last_milestone_tick");
-            const currentTick = system.currentTick;
-            // If milestone and achievement both just unlocked, milestone is always after achievement (see achievements.js)
-            if (lastMilestoneTick && Math.abs(currentTick - lastMilestoneTick) < 5) {
-                delayTicks = 140;
-            } else if (lastAchTick && Math.abs(currentTick - lastAchTick) < 5) {
-                delayTicks = 70;
-            }
+            notBefore = player.getDynamicProperty("goe_tnt_hint_not_before_tick") ?? 0;
         } catch {}
 
-        if (delayTicks > 0) {
-            system.runTimeout(() => {
-                try {
-                    if (!player?.isValid) return;
-                    player.onScreenDisplay?.setActionBar(message);
-                } catch {}
-            }, delayTicks);
-        } else {
-            player.onScreenDisplay?.setActionBar(message);
+        const delayTicks = Math.max(0, Number(notBefore) - nowTick);
+
+        pendingHintMessages.set(player.id, message);
+
+        const old = pendingHintTimeouts.get(player.id);
+        if (old !== undefined) {
+            try { system.clearRun(old); } catch {}
+            pendingHintTimeouts.delete(player.id);
         }
+
+        const timeoutId = system.runTimeout(() => {
+            pendingHintTimeouts.delete(player.id);
+
+            try {
+                if (!player?.isValid) return;
+
+                const latest = pendingHintMessages.get(player.id);
+                if (!latest) return;
+
+                let notBefore2 = 0;
+                try {
+                    notBefore2 = player.getDynamicProperty("goe_tnt_hint_not_before_tick") ?? 0;
+                } catch {}
+
+                const now2 = system.currentTick;
+                const waitMore = Math.max(0, Number(notBefore2) - now2);
+
+                if (waitMore > 0) {
+                    const timeoutId2 = system.runTimeout(() => {
+                        pendingHintTimeouts.delete(player.id);
+                        try {
+                            if (!player?.isValid) return;
+                            const latest2 = pendingHintMessages.get(player.id);
+                            if (!latest2) return;
+                            player.onScreenDisplay?.setActionBar(latest2);
+                        } catch {}
+                    }, waitMore);
+
+                    pendingHintTimeouts.set(player.id, timeoutId2);
+                    return;
+                }
+
+                player.onScreenDisplay?.setActionBar(latest);
+            } catch {}
+        }, delayTicks);
+
+        pendingHintTimeouts.set(player.id, timeoutId);
     } catch {}
 }
 

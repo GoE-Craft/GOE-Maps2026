@@ -84,13 +84,26 @@ function hasTntAchievement(player, tntType) {
     return player.getDynamicProperty(key) === true;
 }
 
+function bumpTntHintDelay(player) {
+    try {
+        player.setDynamicProperty("goe_tnt_hint_not_before_tick", system.currentTick + 80);
+    } catch { }
+}
+
+
+function centerAchievementName(name, extraSpaces = 0) {
+    const plain = name.replace(/§[0-9a-fklmnor]/gi, "");
+    const pad = Math.max(0, (14 - plain.length) + extraSpaces);
+    return " ".repeat(pad) + name;
+}
+
 function unlockTntAchievement(player, tntType) {
     const key = `goe_tnt_achievement_${tntType}_unlocked`;
     player.setDynamicProperty(key, true);
     // Mark the tick for achievement unlock (for TNT hint timing)
     try {
         player.setDynamicProperty("goe_tnt_last_achievement_tick", system.currentTick);
-    } catch {}
+    } catch { }
 
     // Find achievement name from Achievements structure
     const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
@@ -99,17 +112,20 @@ function unlockTntAchievement(player, tntType) {
     // 1 achievement sound
     player.playSound("goe_tnt:discovery_achievement_music"); // 1 achievement sound
 
-    utils.title(player, "@s", `§a§lAchievement Unlocked!`);
-    utils.subtitle(player, "@s", `§e${achievementName}`, true);
+
 
     // Increment total achievements count
     const currentTotal = player.getDynamicProperty("goe_tnt_total_achievements_count");
     const newTotal = (currentTotal !== undefined ? currentTotal : 0) + 1;
     player.setDynamicProperty("goe_tnt_total_achievements_count", newTotal);
 
-    utils.actionbar(player, "@s", `§a Achievement Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`);
 
-    utils.tellraw(player, "@s", `§a[Achievement] §e${achievementName} §rachievement unlocked!`);
+    // ACHIEVEMENT MESSAGES /////////
+    utils.actionbar(player, "@s", `§aNew TNT unlocked\n${centerAchievementName(achievementName)}§f`);
+    utils.tellraw(player, "@s", `§aNew TNT unlocked - ${achievementName}§f`);
+    /*     utils.actionbar(player, "@s", `§a Achievement Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`); */
+
+    bumpTntHintDelay(player);
 
     placeAchievementRewardStructure(player, getRandomTntRewardStructureId());
     const xpCount = Math.floor(Math.random() * 31) + 7;
@@ -133,7 +149,7 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
     // Mark the tick for milestone unlock (for TNT hint timing)
     try {
         player.setDynamicProperty("goe_tnt_last_milestone_tick", system.currentTick);
-    } catch {}
+    } catch { }
 
     // Find milestone name from Achievements structure
     const milestone = Achievements.milestones.find(m => m.milestoneNumber === milestoneNumber);
@@ -143,17 +159,17 @@ function unlockMilestoneAchievement(player, milestoneNumber) {
     system.runTimeout(() => {
         player.playSound("goe_tnt:milestone_achievement_music"); // milestone achievements sound
 
-        utils.title(player, "@s", `§6§lMilestone Unlocked!`);
-        utils.subtitle(player, "@s", `§e${milestoneName}`, true);
-
         // Increment total achievements count
         const currentTotal = player.getDynamicProperty("goe_tnt_total_achievements_count");
         const newTotal = (currentTotal !== undefined ? currentTotal : 0) + 1;
         player.setDynamicProperty("goe_tnt_total_achievements_count", newTotal);
 
-        utils.actionbar(player, "@s", `§6 Milestone Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`);
+        /*         utils.actionbar(player, "@s", `§6 Milestone Discovered!  - §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`); */
 
-        utils.tellraw(player, "@s", `§6[Milestone] §e${milestoneName} §r- You have reached this milestone!`);
+        utils.actionbar(player, "@s", `§aNew milestone unlocked\n${centerAchievementName(milestoneName, 3)}§f`);
+        utils.tellraw(player, "@s", `§aNew milestone unlocked - ${milestoneName}§f`);
+
+        bumpTntHintDelay(player);
 
         // Place reward structure at player location
         const rewardStructure = getMilestoneRewardStructure(milestoneNumber);
