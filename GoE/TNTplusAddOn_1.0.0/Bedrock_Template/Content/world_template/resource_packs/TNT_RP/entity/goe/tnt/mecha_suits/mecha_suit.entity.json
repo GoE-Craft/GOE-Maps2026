@@ -7,12 +7,14 @@
 				"default": "entity_alphatest"
 			},
 			"textures": {
-				"default": "textures/goe/tnt/entity/mecha_suits/mecha_suit"
+				"default": "textures/goe/tnt/entity/mecha_suits/mecha_suit",
+				"variant2": "textures/goe/tnt/entity/mecha_suits/mecha_suit_wings"
 			},
 			"geometry": {
-				"default": "geometry.goe_tnt.mecha_suit"
+				"default": "geometry.goe_tnt.mecha_suit",
+				"variant2": "geometry.goe_tnt.mecha_suit_wings"
 			},
-			"render_controllers": [ "controller.render.default" ],
+			"render_controllers": [ "controller.render.goe_tnt.mecha_suit" ],
 
 			"particle_effects": {
 				"mecha_suit_fire": "goe_tnt:mecha_suit_fire",

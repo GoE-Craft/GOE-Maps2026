@@ -2,13 +2,27 @@
   "format_version": "1.10.0",
   "render_controllers": {
     "controller.render.goe_tnt.mecha_suit": {
-      "geometry": "Geometry.default",
+      "arrays": {
+        "geometries": {
+          "Array.geos": [
+            "Geometry.default",
+            "Geometry.variant2"
+          ]
+        },
+        "textures": {
+          "Array.textures": [
+            "Texture.default",
+            "Texture.variant2"
+          ]
+        }
+      },
+      "geometry": "Array.geos[query.variant]",
+      "textures": ["Array.textures[query.variant]"],
       "materials": [
         {
           "*": "Material.default"
         }
       ],
-      "textures": ["Texture.default"],
       "part_visibility": [
         // Hiding hands from t pose
         { "indie_hand*": "q.mark_variant == 2" }

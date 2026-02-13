@@ -1,6 +1,7 @@
-import { world, system, ItemStack } from "@minecraft/server";
+import { world, system, ItemStack, InputButton, ButtonState } from "@minecraft/server";
 import * as tnt_manager from "./tnt/tnt_manager.js";
 import * as tnt_gld from "./gld/tnt_gld.js";
+import * as utils from "./utils.js";
 
 const MECHA_ID = "goe_tnt:mecha_suit"; // mecha entity identifier
 const TNT_ITEM_ID = "minecraft:tnt"; // vanilla tnt  id
@@ -11,7 +12,6 @@ const PROJECTILE_SPEED = 2; // impulse multiplier applied to spawned tnt/project
 
 const COOLDOWN_TICKS = 10; // fire cooldown in ticks 0.5 sec
 const CHARGE_TICKS = 10; // charge duration in ticks before "charged" state is allowed
-const RESET_TO_IDLE_TICKS = 30; // fallback reset window after firing
 const FIRE_ANIM_TICKS = 14; // duration of fire animation in ticks (when to return to charged/idle)
 
 const PREVIOUS_GAMEMODE_PROP = "goe_prev_gamemode"; // previous gamemode
@@ -31,6 +31,8 @@ const idlePendingByMecha = new Map(); //  idle while still charging
 const fireReturnTickByMecha = new Map(); // scheduled return tick for post-fire state
 const tntUiStateByMecha = new Map(); // "idle" | "charge" | "charged" | "fire"
 
+const playerMechaFlyMap = new Map(); // player id -> mecha entity they are riding (if any)
+
 const UI_TOTAL_BOXES = 10;
 const UI_BOX_CHAR = "■";
 const firstCooldownUiDelayUntilByPlayer = new Map();
@@ -42,9 +44,6 @@ const nextFireHandRightByMecha = new Map(); // true = fire_right next, false = f
 // custom tnt contact explosion tracking
 const customProjectileById = new Map(); // entity, tntData, lastPos, spawnTick, dimensionId, yawDeg, wasMoving, dimKey
 let customProjectileCollisionTickSetup = false; // ensures collision tick loop is only registered once
-
-const CLAMP_PITCH_MIN = -35; // projectile pitch clamp min (matches animation) not used right now
-const CLAMP_PITCH_MAX = 0; // projectile pitch clamp max (matches animation) not used right now
 
 const lastRiddenMechaByPlayer = new Map();
 
@@ -408,43 +407,6 @@ function getMechaShotFuseTicks(tntData) {
 
 	// everyone else: explode instantly on impact
 	return 0;
-}
-
-
-
-
-// immediately detonates a custom projectile using tnt_manager logic (skipping fuse)
-function explodeCustomProjectileNow(entity, tntData, yawDeg, dimKey, player) {
-	if (!isEntityValid(entity) || !tntData) return;
-
-	let loc;
-	try { loc = { x: entity.location.x, y: entity.location.y, z: entity.location.z }; } catch { loc = undefined; }
-	if (!loc) return;
-
-	try { entity.remove(); } catch { }
-
-	const useDimKey =
-		(typeof dimKey === "string" && dimKey.length > 0)
-			? dimKey
-			: toTntManagerDimKey(entity.dimension?.id);
-
-	const useYaw = (typeof yawDeg === "number") ? yawDeg : undefined;
-
-	try {
-		const fuseTicks = getMechaShotFuseTicks(tntData);
-
-		tnt_manager.igniteTNT(
-			loc,
-			1,
-			0,
-			fuseTicks,
-			tntData,
-			useDimKey,
-			{ x: 0, y: 0, z: 0 },
-			useYaw,
-			player
-		);
-	} catch { }
 }
 
 
@@ -1070,6 +1032,111 @@ function setupRespawnRecovery() {
 	}
 }
 
+//#region Mecha Suit Fly Logic
+
+function setupFlyLogic() {
+	// Placeholder for fly logic setup
+
+	registerInputHandlers();
+	flyLoop();
+}
+
+function registerInputHandlers() {
+	// Placeholder for input handler registration
+	const options = {
+		buttons: [InputButton.Jump]
+	}
+
+	world.afterEvents.playerButtonInput.subscribe(registerButtonInput, options);
+	world.beforeEvents.playerInteractWithEntity.subscribe(upgradeMechaOnItemUseOn);
+}
+
+function registerButtonInput(event) {
+	// Placeholder for fly event loop
+	const player = event.player;
+	if (!player || !player.isValid) return;
+
+	const riding = getRiddenEntity(player);
+	if (!riding || riding.typeId !== MECHA_ID) return;
+	const variant = riding.getComponent("minecraft:variant");
+	if (variant && variant.value === 0) return;
+
+	const state = event.newButtonState;
+
+	if (state === ButtonState.Pressed) {
+		console.log("Jump button pressed while riding mecha");
+		playerMechaFlyMap.set(player.id, riding.id);
+	} else if (state === ButtonState.Released) {
+		console.log("Jump button released while riding mecha");
+		playerMechaFlyMap.delete(player.id);
+	}
+}
+
+function upgradeMechaOnItemUseOn(event) {
+	// Placeholder for item use logic that upgrades the mecha
+	const mecha = event.target;
+	if (!mecha.isValid || mecha.typeId !== MECHA_ID) return;
+	const variant = mecha.getComponent("minecraft:variant");
+	if (variant && variant.value === 1) return;
+
+	const player = event.player;
+	if (!player || !player.isValid) return;
+
+	const itemStack = event.itemStack;
+	if (!itemStack || itemStack.typeId !== "minecraft:elytra") return;
+
+	console.log("Upgrading mecha for player:", player.name);
+	system.run(() => {
+		mecha.triggerEvent("goe_tnt:equip_elytra");
+		utils.setItemInHand(player, undefined);
+	});
+	event.cancel = true;
+}
+
+function flyLoop() {
+	// Placeholder for fly loop logic that applies upward impulse to the mecha
+	system.runInterval(() => {
+		system.runJob(flyJob());
+	}, 1);
+}
+
+function* flyJob() {
+	for (const [playerId, mechaId] of playerMechaFlyMap) {
+		const mecha = world.getEntity(mechaId);
+		const player = world.getEntity(playerId);
+
+		if (!mecha || !mecha.isValid || !player || !player.isValid) {
+			playerMechaFlyMap.delete(playerId);
+			continue;
+		}
+		
+        const input = player.inputInfo.getMovementVector();
+		console.log(JSON.stringify(input));
+
+		const rot = mecha.getRotation();
+        const yaw = (rot.y * Math.PI) / 180;
+        const sin = Math.sin(yaw);
+        const cos = Math.cos(yaw);
+
+		const vel = mecha.getVelocity();
+
+        const speed = 2;	
+
+		const impulse = {
+			x: ((-sin * input.y + cos * input.x) * speed - vel.x) * 0.1,
+			y: 0.1,
+			z: ((cos * input.y + sin * input.x) * speed - vel.z) * 0.1,
+		};
+		try {
+			mecha.applyImpulse(impulse);
+		} catch (error) {
+			console.log("Failed to apply impulse to mecha for player:", player.name, "Error:", error);
+		}
+		yield;
+	}
+}
+
+//#endregion
 
 // initializes all mecha-related systems
 export function initMechaSuit() {
@@ -1079,4 +1146,5 @@ export function initMechaSuit() {
 	setupRespawnRecovery();
 	setupCustomProjectileCollisionTick();
 	setupShootCooldownUiTick();
+	setupFlyLogic();
 }
