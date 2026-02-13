@@ -4134,6 +4134,96 @@
 					"position": [0, 0, 0]
 				}
 			}
+		},
+		"animation.mecha_suit.flying": {
+			"loop": true,
+			"bones": {
+				"tnt_right": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0],
+					"scale": 0
+				},
+				"tnt_left": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0],
+					"scale": 0
+				},
+				"chair": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"body": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"handleft": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"hand2left": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"handright": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"hand2right": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"footleft": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"ankleleft": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"legleft": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"footright": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"ankleright": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"legright": {
+					"rotation": [0, 0, 0],
+					"position": [0, 0, 0]
+				},
+				"indie_hand2_right": {
+					"scale": 0
+				},
+				"indie_hand2_left": {
+					"scale": 0
+				},
+				"jetpack": {
+					"rotation": [0, 0, "math.sin(q.anim_time*800 ) * 0.1"]
+				},
+				"right_wing": {
+					"rotation": ["-math.cos(q.anim_time*900 ) * 1", 0, "math.sin(q.anim_time*1800 ) * 0.5"]
+				},
+				"tube_right": {
+					"rotation": ["-math.cos(q.anim_time*900 ) * 1", 0, "math.sin(q.anim_time*2000 ) * 0.5"]
+				},
+				"propeler_right": {
+					"rotation": [0, "-q.anim_time * -500", 0]
+				},
+				"left_wing": {
+					"rotation": ["-math.sin(q.anim_time*800 ) * 1", 0, "-math.sin(q.anim_time*2000 ) * 0.5"]
+				},
+				"tube_left": {
+					"rotation": ["-math.cos(q.anim_time*900 ) * 1", 0, "-math.sin(q.anim_time*2000 ) * 0.5"]
+				},
+				"propeler_left": {
+					"rotation": [0, "-q.anim_time * 500", 0]
+				}
+			}
 		}
 	}
 }
