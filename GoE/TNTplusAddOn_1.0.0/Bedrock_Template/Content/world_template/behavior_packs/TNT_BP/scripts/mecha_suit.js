@@ -1066,9 +1066,11 @@ function registerButtonInput(event) {
 	if (state === ButtonState.Pressed) {
 		console.log("Jump button pressed while riding mecha");
 		playerMechaFlyMap.set(player.id, riding.id);
+		riding.setProperty("goe_tnt:is_flying", true);
 	} else if (state === ButtonState.Released) {
 		console.log("Jump button released while riding mecha");
 		playerMechaFlyMap.delete(player.id);
+		riding.setProperty("goe_tnt:is_flying", false);
 	}
 }
 

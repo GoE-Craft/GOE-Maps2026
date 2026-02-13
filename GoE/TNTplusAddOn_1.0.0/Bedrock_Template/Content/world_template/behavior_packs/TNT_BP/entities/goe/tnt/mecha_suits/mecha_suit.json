@@ -17,6 +17,11 @@
           "values": ["right", "left"],
           "default": "right",
           "client_sync": true
+        },
+        "goe_tnt:is_flying": {
+          "type": "bool",
+          "default": false,
+          "client_sync": true
         }
       }
     },
