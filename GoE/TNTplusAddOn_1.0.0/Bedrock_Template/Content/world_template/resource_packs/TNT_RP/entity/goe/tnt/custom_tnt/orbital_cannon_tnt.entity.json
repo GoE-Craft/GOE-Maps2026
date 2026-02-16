@@ -1,0 +1,37 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:orbital_cannon_tnt",
+      "materials": {
+        "default": "entity_alphablend",
+        "semi_transparent": "goe_tnt_border"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/orbital_cannon_tnt"
+      },
+      "geometry": {
+        "default": "geometry.orbital_cannon_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge": "animation.orbital_cannon_tnt.charge",
+        "explode": "animation.orbital_cannon_tnt.explode"
+      },
+      "particle_effects": {
+        "random_pulses_purple": "goe_tnt:random_pulses_purple",
+        "detonator_impact_purple": "goe_tnt:detonator_impact_purple",
+        "tnt_charge_purple": "goe_tnt:tnt_charge_purple"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}

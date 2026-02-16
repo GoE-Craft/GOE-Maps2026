@@ -320,6 +320,33 @@ export const TNT_GLD = [
         }
     },
     {
+        blockId: "goe_tnt:orbital_cannon_tnt",
+        fuseTime: 60,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+        },
+        //chargeEffects: {
+        //    soundEffect: "goe_tnt:weather_station_tnt_charging",
+        //    soundDelay: 5
+        //},
+         explosionEffects: {
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: null
+        },
+        preExplosionProperties: {
+            specialAction: null
+        }
+    },   
+    {
         blockId: "goe_tnt:time_freeze_tnt",
         fuseTime: 40,
         power: 0,
