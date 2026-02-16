@@ -967,6 +967,36 @@ export const TNT_GLD = [
             specialAction: null
         }
     },
+        {
+        blockId: "goe_tnt:cluster_tnt",
+        fuseTime: 50,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:cluster_tnt_charge",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:cluster_tnt_explosion",
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: null
+        },
+        preExplosionProperties: {
+            specialAction: null
+        }
+    }
 ]
 
 export function getTntDataByName(tntName) {
