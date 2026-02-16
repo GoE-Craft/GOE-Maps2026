@@ -355,7 +355,8 @@ export const TNT_GLD = [
         },
         preExplosionProperties: {
             specialAction: null
-        }
+        },
+        timerOffsetY: 2.2
     },   
     {
         blockId: "goe_tnt:time_freeze_tnt",
@@ -1027,7 +1028,8 @@ export const TNT_GLD = [
         },
         preExplosionProperties: {
             specialAction: null
-        }
+        },
+        timerOffsetY: 2.1
     },
     {
         blockId: "goe_tnt:void_hole_tnt",
@@ -1057,7 +1059,8 @@ export const TNT_GLD = [
         },
         preExplosionProperties: {
             specialAction: null
-        }
+        },
+        timerOffsetY: 1.4
     }
 ]
 
