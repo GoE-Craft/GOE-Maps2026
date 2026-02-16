@@ -1,6 +1,7 @@
 import { world, system, BlockPermutation, GameMode, EquipmentSlot, Direction, BlockVolume } from "@minecraft/server";
 import * as utils from "../utils";
 import * as tnt_manager from "./tnt_manager";
+import * as tnt_gld from "../gld/tnt_gld";
 import { fireLaser } from "../components/items/tnt_detonator";
 
 /**
@@ -250,6 +251,17 @@ function* updateTimerParticles() {
 }
 
 function printTimer(dimension, location, time) {
-    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + 2.5, z: location.z + 0.5 });
-    dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + 2, z: location.z + 0.5 });
+    // Get the block at the location to determine the TNT type
+    const block = dimension.getBlock({ x: location.x, y: location.y, z: location.z });
+    let timerOffsetY = 2.5;
+    let timerOffsetYNum = 2;
+    if (block && block.typeId && block.typeId.startsWith("goe_tnt:")) {
+        const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
+        if (tntData && typeof tntData.timerOffsetY === "number") { // timerOffsetY here too
+            timerOffsetY = tntData.timerOffsetY + 0.5;
+            timerOffsetYNum = tntData.timerOffsetY;
+        }
+    }
+    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + timerOffsetY, z: location.z + 0.5 });
+    dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + timerOffsetYNum, z: location.z + 0.5 });
 }

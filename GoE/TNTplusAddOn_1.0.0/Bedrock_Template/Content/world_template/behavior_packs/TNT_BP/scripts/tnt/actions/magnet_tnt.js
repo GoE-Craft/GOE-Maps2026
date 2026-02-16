@@ -14,10 +14,10 @@ function getScaledStrength(baseValue, chargeLevel) {
 }
 
 export function magnetTNTPreAction(magnetTntEntity, chargeLevel, fuseRemainingTicks) {
-    const baseRadius = 10;
+    const baseRadius = 20;
     const radius = getScaledRadius(baseRadius, chargeLevel);
 
-    const pullStrength = getScaledStrength(0.08, chargeLevel);
+    const pullStrength = 25; // fixed pull strength
     const maxPull = getScaledStrength(0.25, chargeLevel);
 
     const preActionIntervalId = system.runInterval(() => {
@@ -28,6 +28,7 @@ export function magnetTNTPreAction(magnetTntEntity, chargeLevel, fuseRemainingTi
         system.clearRun(preActionIntervalId);
     }, fuseRemainingTicks);
 }
+
 
 function* preActionJob(magnetTntEntity, radius, pullStrength, maxPull) {
     if (!magnetTntEntity.isValid) return;
@@ -53,7 +54,8 @@ function* preActionJob(magnetTntEntity, radius, pullStrength, maxPull) {
             const deltaY = (magnetCenterLocation.y + 0.5) - nearbyEntity.location.y;
             const deltaZ = magnetCenterLocation.z - nearbyEntity.location.z;
 
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) || 1;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+            if (distance < 0.001) continue;
 
             const directionX = deltaX / distance;
             const directionY = deltaY / distance;
@@ -75,7 +77,7 @@ function* preActionJob(magnetTntEntity, radius, pullStrength, maxPull) {
 }
 
 export function* magnetTNTAction(dimension, chargeLevel, location) {
-    const baseRadius = 10;
+    const baseRadius = 15;
     const radius = getScaledRadius(baseRadius, chargeLevel);
 
     dimension.spawnParticle("goe_tnt:magnet_circle_push_blue", location);
@@ -108,7 +110,8 @@ export function* magnetTNTAction(dimension, chargeLevel, location) {
             const deltaY = nearbyEntity.location.y - (location.y + 0.2);
             const deltaZ = nearbyEntity.location.z - location.z;
 
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) || 1;
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+            if (distance < 0.001) continue;
 
             const directionX = deltaX / distance;
             const directionY = deltaY / distance;

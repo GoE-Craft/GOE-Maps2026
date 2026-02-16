@@ -1,12 +1,10 @@
 import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
 
-// Freeze TNT Action (applies slow + ice cube + optional damage, and replaces nearby blocks with ice)
 export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntity, excludePlayerId) {
 
     const molangVariables = new MolangVariableMap();
 
-    // Base radius 5, each charge adds a flat +25% of base (not compounded)
-    const baseRadius = 5;
+    const baseRadius = 10;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     molangVariables.setFloat("radius", radius);
@@ -31,7 +29,6 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
     const freezeTag = `goe_tnt_freeze_${system.currentTick}`;
     yield;
 
-    // Apply freeze to entities in radius
     const nearbyEntities = dimension.getEntities({
         location: explosionLocation,
         maxDistance: radius
@@ -56,7 +53,6 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
         } catch {}
     }
 
-    // Periodic damage while frozen
     const damageIntervalId = system.runInterval(() => {
         const damageCheckEntities = dimension.getEntities({
             location: explosionLocation,
@@ -68,13 +64,12 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
                 if (damageTargetEntity.typeId === "goe_tnt:mecha_suit") continue;
                 if (!damageTargetEntity.hasTag(freezeTag)) continue;
 
-                damageTargetEntity.applyDamage(1);
+                damageTargetEntity.applyDamage(2);
                 damageTargetEntity.clearVelocity();
             } catch {}
         }
-    }, 40);
+    }, 20);
 
-    // Cleanup tag + interval after freeze duration
     system.runTimeout(() => {
         try { system.clearRun(damageIntervalId); } catch {}
 
@@ -92,32 +87,66 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
 
     yield;
 
-    // Replace blocks in a spherical radius with ice (skips air)
+    // surface-only block freeze (1 block thick), instant (no yields in loops)
     const icePermutation = BlockPermutation.resolve("ice");
 
-    let operationCounter = 0;
+    const airIds = new Set(["minecraft:air", "minecraft:cave_air"]);
+    const skipIds = new Set(["minecraft:air", "minecraft:cave_air", "minecraft:bedrock"]);
+
+    const dirs = [
+        { x: 1, y: 0, z: 0 }, { x: -1, y: 0, z: 0 },
+        { x: 0, y: 1, z: 0 }, { x: 0, y: -1, z: 0 },
+        { x: 0, y: 0, z: 1 }, { x: 0, y: 0, z: -1 }
+    ];
+
+    function getTypeId(px, py, pz) {
+        try {
+            const b = dimension.getBlock({ x: px, y: py, z: pz });
+            return b?.typeId ?? null;
+        } catch {
+            return null;
+        }
+    }
+
+    function tryFreeze(px, py, pz) {
+        try {
+            const b = dimension.getBlock({ x: px, y: py, z: pz });
+            if (!b) return false;
+            if (skipIds.has(b.typeId)) return false;
+            b.setPermutation(icePermutation);
+            return true;
+        } catch {
+            return false;
+        }
+    }
 
     for (let x = explosionBlockBase.x - radius; x <= explosionBlockBase.x + radius; x++) {
         for (let y = explosionBlockBase.y - radius; y <= explosionBlockBase.y + radius; y++) {
             for (let z = explosionBlockBase.z - radius; z <= explosionBlockBase.z + radius; z++) {
 
-                const deltaX = x - explosionBlockBase.x;
-                const deltaY = y - explosionBlockBase.y;
-                const deltaZ = z - explosionBlockBase.z;
+                const dx = x - explosionBlockBase.x;
+                const dy = y - explosionBlockBase.y;
+                const dz = z - explosionBlockBase.z;
 
-                if ((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) > (radius * radius)) continue;
+                if ((dx * dx + dy * dy + dz * dz) > (radius * radius)) continue;
 
-                try {
-                    const targetBlock = dimension.getBlock({ x, y, z });
-                    if (!targetBlock) continue;
+                const centerType = getTypeId(x, y, z);
+                if (!centerType || skipIds.has(centerType)) continue;
 
-                    if (targetBlock.typeId !== "minecraft:air" && targetBlock.typeId !== "minecraft:cave_air" && targetBlock.typeId !== "minecraft:bedrock") {
-                        targetBlock.setPermutation(icePermutation);
+                // surface = touches air in any of 6 directions
+                let touchesAir = false;
+                for (const d of dirs) {
+                    const nType = getTypeId(x + d.x, y + d.y, z + d.z);
+                    if (nType && airIds.has(nType)) {
+                        touchesAir = true;
+                        break;
                     }
-                } catch {}
+                }
 
-                operationCounter++;
-                if ((operationCounter % 60) === 0) yield;
+                if (!touchesAir) continue;
+
+                // freeze only the surface block (1 thick)
+                tryFreeze(x, y, z);
             }
         }
     }

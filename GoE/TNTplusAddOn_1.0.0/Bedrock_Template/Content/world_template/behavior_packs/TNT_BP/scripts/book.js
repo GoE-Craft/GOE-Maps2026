@@ -77,8 +77,8 @@ export async function showIntroPage(player) {
         .body(
             `§fWelcome, §a${name}§r!\n\n` +
             "§fUnleash chaos with many new, craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy new, §ecustom Structures§r§f that naturally spawn all across your world.\n\n" +
-            "§fOpen the §eTNT Guide§r§f to access the shop and achievement list and to tweak your settings§r§f.\n\n" +
-            "§fEnjoy §aTNT+ Add-On§r§f and please give it a §l§e5-STAR RATING§r§f on the Marketplace!§r"
+            "§fOpen the §eTNT Guide§r§f to access the shop, achievements and settings§r§f.\n\n" +
+            "§fEnjoy §aTNT+ Add-On§r§f and please give a §l§e5-STAR RATING§r§f on the Marketplace!§r"
         )
         .button("§l§2LET'S EXPLODE!§r");
 
@@ -132,12 +132,12 @@ async function showInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§cInfo§r")
         .body("§cInfo:§r")
-        .button("§l§cTNT Blocks§r", "textures/goe/tnt/ui/info/tnt_blocks_info")
-        .button("§l§4TNT Mecha Suit§r", "textures/goe/tnt/ui/info/tnt_mecha_suit_info")
-        .button("§l§nStructures§r", "textures/goe/tnt/ui/info/structures_info")
-        .button("§l§2Shop§r", "textures/goe/tnt/ui/info/shop_info")
-        .button("§l§5Achievements§r", "textures/goe/tnt/ui/info/achievements_info")
-        .button("§l§1Settings§r", "textures/goe/tnt/ui/info/settings_info")
+        .button("§l§cTNT Blocks§r", "textures/goe/tnt/ui/tnt_blocks")
+        .button("§l§4TNT Mecha Suit§r", "textures/goe/tnt/ui/mecha_suit")
+        .button("§l§nStructures§r", "textures/goe/tnt/ui/structures")
+        .button("§l§2Shop§r", "textures/goe/tnt/ui/shop")
+        .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements")
+        .button("§l§1Settings§r", "textures/goe/tnt/ui/settings")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -184,7 +184,7 @@ async function showMechaSuitPage(player) {
         .title("§l§4TNT Mecha Suit§r")
         .body(
             "§fThe §4TNT Mecha Sui§f is a powerful combat mount that lets you launch any custom §4TNT block§f as a projectile. The TNT Mecha Suit has high durability; it moves 30%% faster than a normal player and jumps higher.\n\n" +
-            "§f- Hold any §4TNT block§f (including §4vanilla TNT§f) while mounted in the suit and interact to launch it far away.\n\n" +
+            "§f- Hold any §4TNT block§f (including §4vanilla TNT§f) while mounted in the suit and interact to launch it far away.\n" +
             "§f- Airborne: Hold an §eElytra§f and interact on the suit to make it §eflyable§f.\n\n"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
@@ -288,8 +288,8 @@ async function showStructuresInfoPage(player) {
         .title("§l§nStructures§r")
         .body(
             "§4TNT Add-On§f adds two main types of structures to your game.\n\n" +
-            "§f- §eNaturally generated structures§f: §4TNT§f-themed buildings with maze challenges and mob-fight adventures. Explore them to uncover hidden treasures. Look for them all over the Overworld.\n\n" +
-            "§f- §eCraftable structures§f: Designed as testing areas where you can try out all your new §4TNT§f assets. Craft them or purchase them in the §4TNT Shop§f and enjoy endless explosions.§r"
+            "§f- §eNaturally generated structures§f: §4TNT-themed§f buildings with maze challenges and mob-fight adventures. Look for them all over the Overworld to uncover hidden treasures.\n" +
+            "§f- §eCraftable structures§f: Designed as testing areas where you can try out all your new §4TNT assets§f. Craft them or purchase them in the §4TNT Shop§f and enjoy endless explosions.§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
