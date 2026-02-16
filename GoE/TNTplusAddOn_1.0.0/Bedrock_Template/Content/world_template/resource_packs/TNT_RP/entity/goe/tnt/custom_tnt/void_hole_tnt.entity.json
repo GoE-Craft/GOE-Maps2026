@@ -1,0 +1,42 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:void_hole_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/void_hole_tnt"
+      },
+      "geometry": {
+        "default": "geometry.void_hole_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge": "animation.void_hole_tnt.charge",
+        "explode": "animation.void_hole_tnt.explosion"
+      },
+      "particle_effects":{
+        "void_effect": "goe_tnt:void_effect",
+        "void_puddle": "goe_tnt:void_puddle",
+        "void_tentacles": "goe_tnt:void_tentacles",
+        "void_tornado": "goe_tnt:void_tornado",
+        "void_sparkle": "goe_tnt:void_sparkle",
+        "void_bubbles": "goe_tnt:void_bubbles",
+        "void_explosion": "goe_tnt:void_explosion",
+        "void_bubbles_explosion": "goe_tnt:void_bubbles_explosion",
+        "tnt_charge_white": "goe_tnt:tnt_charge_white"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}
