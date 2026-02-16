@@ -152,17 +152,17 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
  * 
  * @param {Entity} entity - The TNT entity
  * @param {number} timerRemaining - The remaining timer duration in ticks
- * @param {object} tntData - The TNT data object (for timerOffsetY)
+ * @param {object} tntData - The TNT data object (for blockHeight)
  */
 function startCountdown(entity, timerRemaining, tntData) {
-    const timerOffsetY = tntData?.timerOffsetY ?? 2; // Y offset for timer particles from tntData // 2 if not defined
+    const blockHeight = tntData?.blockHeight ?? 2; // Y offset for timer particles from tntData // 2 if not defined
     const startTick = system.currentTick;
     const endTick = startTick + timerRemaining;
     const initialTimer = Math.ceil(timerRemaining / 20);
     const dim = entity.dimension;
 
     let location = { ...entity.location };
-    location.y += timerOffsetY;
+    location.y += blockHeight;
     let textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
     dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
     dim.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
@@ -178,7 +178,7 @@ function startCountdown(entity, timerRemaining, tntData) {
 
         if (seconds > 0) {
             location = { ...entity.location };
-            location.y += timerOffsetY;
+            location.y += blockHeight;
             if (dim.isChunkLoaded(location) === false) return;
             textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
             dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);

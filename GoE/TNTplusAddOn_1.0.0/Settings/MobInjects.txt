@@ -1,3 +1,6 @@
 !mecha_suit
 type=mecha_suit
 Persistent=1
++goe_tnt:no_wings
++goe_tnt:ride_enabled
++goe_tnt:spawn

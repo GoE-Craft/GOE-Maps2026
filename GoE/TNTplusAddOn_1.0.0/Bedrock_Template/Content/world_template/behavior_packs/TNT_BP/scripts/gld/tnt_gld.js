@@ -26,7 +26,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.5 // if not defined, defaults to 2
+        blockHeight: 1.5 // if not defined, defaults to 2
     },
     {
         blockId: "goe_tnt:directional_tnt",
@@ -50,7 +50,7 @@ export const TNT_GLD = [
             summonDelay: 0,
             specialAction: "directional_drill"
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:party_tnt",
@@ -81,7 +81,7 @@ export const TNT_GLD = [
             summonDelay: 0,
             specialAction: "party"
         },
-        timerOffsetY: 2
+        blockHeight: 2
     },
     {
         blockId: "goe_tnt:magnet_tnt",
@@ -111,7 +111,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: "magnet"
         },
-        timerOffsetY: 1.7
+        blockHeight: 1.7
     },
     {
         blockId: "goe_tnt:chunker_tnt",
@@ -143,7 +143,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.5
+        blockHeight: 1.5
     },
     {
         blockId: "goe_tnt:ultron_tnt",
@@ -176,7 +176,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.2
+        blockHeight: 2.2
     },
     {
         blockId: "goe_tnt:freezing_tnt",
@@ -203,7 +203,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.6
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:tree_planter_tnt",
@@ -234,7 +234,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.3
+        blockHeight: 1.3
     },
     {
         blockId: "goe_tnt:thunderstorm_tnt",
@@ -266,7 +266,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2
+        blockHeight: 2
     },
     {
         blockId: "goe_tnt:eraser_tnt",
@@ -297,7 +297,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.3
+        blockHeight: 2.3
     },
     {
         blockId: "goe_tnt:weather_station_tnt",
@@ -328,7 +328,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.3
+        blockHeight: 2.3
     },
     {
         blockId: "goe_tnt:orbital_cannon_tnt",
@@ -356,7 +356,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.2
+        blockHeight: 2.2
     },   
     {
         blockId: "goe_tnt:time_freeze_tnt",
@@ -387,7 +387,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2
+        blockHeight: 2
     },
     {
         blockId: "goe_tnt:arrow_tnt",
@@ -418,7 +418,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.7
+        blockHeight: 1.7
     },
     {
         blockId: "goe_tnt:teleportation_tnt",
@@ -451,7 +451,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.9
+        blockHeight: 1.9
     },
     {
         blockId: "goe_tnt:prison_tnt",
@@ -482,7 +482,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:structure_tnt",
@@ -513,7 +513,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:daytime_tnt",
@@ -544,7 +544,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.9
+        blockHeight: 1.9
     },
     {
         blockId: "goe_tnt:healing_tnt",
@@ -575,7 +575,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.2
+        blockHeight: 2.2
     },
     {
         blockId: "goe_tnt:villager_decoy_tnt",
@@ -606,7 +606,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.2
+        blockHeight: 2.2
     },
     {
         blockId: "goe_tnt:angry_bee_tnt",
@@ -637,7 +637,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:cloning_tnt",
@@ -668,7 +668,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2
+        blockHeight: 2
     },
     {
         blockId: "goe_tnt:beacon_tnt",
@@ -699,7 +699,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.5
+        blockHeight: 1.5
     },
     {
         blockId: "goe_tnt:endermite_decoy_tnt",
@@ -730,7 +730,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: "endermite_decoy"
         },
-        timerOffsetY: 1.6
+        blockHeight: 1.6
     },
    {
         blockId: "goe_tnt:glass_tnt",
@@ -761,7 +761,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:furnace_tnt",
@@ -795,7 +795,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.6
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:mob_eraser_tnt",
@@ -826,7 +826,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.9
+        blockHeight: 1.9
     },
     {
         blockId: "goe_tnt:magma_eraser_tnt",
@@ -857,7 +857,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2
+        blockHeight: 2
     },
     {
         blockId: "goe_tnt:light_tnt",
@@ -888,7 +888,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:thief_tnt",
@@ -919,7 +919,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.8
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:matrix_tnt",
@@ -946,7 +946,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.6
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:balloon_tnt",
@@ -972,7 +972,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2
+        blockHeight: 2
     },
     {
         blockId: "goe_tnt:water_eraser_tnt",
@@ -998,7 +998,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.4
+        blockHeight: 1.4
     },
         {
         blockId: "goe_tnt:cluster_tnt",
@@ -1029,7 +1029,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 2.1
+        blockHeight: 2.1
     },
     {
         blockId: "goe_tnt:void_hole_tnt",
@@ -1060,7 +1060,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        timerOffsetY: 1.4
+        blockHeight: 1.4
     }
 ]
 

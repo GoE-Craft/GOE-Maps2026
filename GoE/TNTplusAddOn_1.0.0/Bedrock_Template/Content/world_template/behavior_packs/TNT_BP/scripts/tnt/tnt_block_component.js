@@ -253,15 +253,15 @@ function* updateTimerParticles() {
 function printTimer(dimension, location, time) {
     // Get the block at the location to determine the TNT type
     const block = dimension.getBlock({ x: location.x, y: location.y, z: location.z });
-    let timerOffsetY = 2.5;
-    let timerOffsetYNum = 2;
+    let blockHeight = 2.5;
+    let blockHeightNum = 2;
     if (block && block.typeId && block.typeId.startsWith("goe_tnt:")) {
         const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
-        if (tntData && typeof tntData.timerOffsetY === "number") { // timerOffsetY here too
-            timerOffsetY = tntData.timerOffsetY + 0.5;
-            timerOffsetYNum = tntData.timerOffsetY;
+        if (tntData && typeof tntData.blockHeight === "number") { // blockHeight here too
+            blockHeight = tntData.blockHeight + 0.5;
+            blockHeightNum = tntData.blockHeight;
         }
     }
-    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + timerOffsetY, z: location.z + 0.5 });
-    dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + timerOffsetYNum, z: location.z + 0.5 });
+    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
+    dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + blockHeightNum, z: location.z + 0.5 });
 }
