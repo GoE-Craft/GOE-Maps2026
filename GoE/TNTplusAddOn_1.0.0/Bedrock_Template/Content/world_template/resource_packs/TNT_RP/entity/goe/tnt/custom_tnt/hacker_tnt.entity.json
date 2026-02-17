@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:hacker_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/hacker_tnt"
+      },
+      "geometry": {
+        "default": "geometry.hacker_tnt"
+      },
+			"scripts": {
+        "animate": [
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge" : "animation.hacker_tnt.charge",
+        "explosion" : "animation.hacker_tnt.explode"
+      },
+      "particle_effects": {
+        "scan": "goe_tnt:scan",
+        "tnt_charge_green": "goe_tnt:tnt_charge_green", 
+        "teleportation": "goe_tnt:teleportation", 
+        "scan_impact": "goe_tnt:scan_impact",
+        "hacking": "goe_tnt:hacking",
+        "pulse_green": "goe_tnt:pulse_green"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}

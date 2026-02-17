@@ -206,6 +206,30 @@ export const TNT_GLD = [
         blockHeight: 1.6
     },
     {
+        blockId: "goe_tnt:hacker_tnt",
+        fuseTime: 70,
+        power: 0,
+        fuseEffects: {
+            particleEffect: null,
+            particleDelay: 0
+        },
+        explosionEffects: {
+            explosionAnimationLength: 1
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 0,
+            specialAction: null
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.6
+    },
+    {
         blockId: "goe_tnt:tree_planter_tnt",
         fuseTime: 40,
         power: 0.5,
