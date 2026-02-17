@@ -505,82 +505,82 @@ replace=gray_stained_glass structure_void
 
 #sound_tnt_structure
 type=area
-location= 298 35 227 271 1 200
+location=298 35 227 271 1 200
 replace=gray_stained_glass structure_void
 
 #balloon_tnt_structure
 type=area
-location= 271 1 100 298 40 127
+location=271 1 100 298 40 127
 replace=gray_stained_glass structure_void
 
 #matrix_tnt_structure
 type=area
-location= 271 1 150 298 24 177
+location=271 1 150 298 24 177
 replace=gray_stained_glass structure_void
 
 #tsunami_tnt_structure
 type=area
-location= 321 1 200 348 29 227
+location=321 1 200 348 29 227
 replace=gray_stained_glass structure_void
 
 #proxy_tnt_structure
 type=area
-location= 321 1 100 348 34 127
+location=321 1 100 348 34 127
 replace=gray_stained_glass structure_void
 
 #specialized_tnt_structure
 type=area
-location= 321 1 150 348 30 177
+location=321 1 150 348 30 177
 replace=gray_stained_glass structure_void
 
 #fungi_tnt_structure
 type=area
-location= 121 1 150 148 39 177
+location=121 1 150 148 39 177
 replace=gray_stained_glass structure_void
 
 #silent_tnt_structure
 type=area
-location= 371 1 200 398 25 227
+location=371 1 200 398 25 227
 replace=gray_stained_glass structure_void
 
 #mega_crater_tnt_structure
 type=area
-location= 371 1 150 398 27 177
+location=371 1 150 398 27 177
 replace=gray_stained_glass structure_void
 
 #knockback_tnt_structure
 type=area
-location= 371 1 100 398 28 127
+location=371 1 100 398 28 127
 replace=gray_stained_glass structure_void
 
 #void_hole_tnt_structure
 type=area
-location= 421 1 200 448 21 227
+location=421 1 200 448 21 227
 replace=gray_stained_glass structure_void
 
 #orbital_cannon_tnt_structure
 type=area
-location= 421 1 150 448 42 177
+location=421 1 150 448 42 177
 replace=gray_stained_glass structure_void
 
 #shadow_tnt_structure
 type=area
-location= 421 1 100 448 25 127
+location=421 1 100 448 25 127
 replace=gray_stained_glass structure_void
 
 #hacker_tnt_structure
 type=area
-location= 471 1 200 498 33 227
+location=471 1 200 498 33 227
 replace=gray_stained_glass structure_void
 
 #glitch_tnt_structure
 type=area
-location= 471 1 150 498 31 177
+location=471 1 150 498 31 177
 replace=gray_stained_glass structure_void
 
 #snapshot_tnt_structure
 type=area
-location= 471 1 100 498 43 127
+location=471 1 100 498 43 127
 replace=gray_stained_glass structure_void
 
 #test_area

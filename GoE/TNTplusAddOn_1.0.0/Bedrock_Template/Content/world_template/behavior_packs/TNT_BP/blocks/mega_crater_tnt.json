@@ -3,7 +3,7 @@
   "minecraft:block": {
     "description": {
       "identifier": "goe_tnt:mega_crater_tnt",
-      "menu_category": { "category": "none", "is_hidden_in_commands": true },
+      "menu_category": { "category": "construction" },
       "traits": {
         "minecraft:placement_direction": {
           "enabled_states": ["minecraft:cardinal_direction"]
