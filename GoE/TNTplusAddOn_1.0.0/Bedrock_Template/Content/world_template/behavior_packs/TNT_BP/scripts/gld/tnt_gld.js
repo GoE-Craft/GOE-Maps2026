@@ -26,7 +26,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.5 // if not defined, defaults to 2
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
     },
     {
         blockId: "goe_tnt:directional_tnt",
@@ -337,7 +337,7 @@ export const TNT_GLD = [
             soundEffect: "goe_tnt:weather_station_tnt_charging",
             soundDelay: 5
         },
-         explosionEffects: {
+        explosionEffects: {
             soundEffect: "goe_tnt:weather_station_tnt_explode",
             explosionAnimationLength: 1.5
         },
@@ -366,7 +366,7 @@ export const TNT_GLD = [
         //    soundEffect: "goe_tnt:weather_station_tnt_charging",
         //    soundDelay: 5
         //},
-         explosionEffects: {
+        explosionEffects: {
             explosionAnimationLength: 2
         },
         explosionProperties: {
@@ -381,7 +381,7 @@ export const TNT_GLD = [
             specialAction: null
         },
         blockHeight: 2.2
-    },   
+    },
     {
         blockId: "goe_tnt:time_freeze_tnt",
         fuseTime: 40,
@@ -427,7 +427,7 @@ export const TNT_GLD = [
             soundEffect: "goe_tnt:arrow_tnt_charging",
             soundDelay: 5
         },
-         explosionEffects: {
+        explosionEffects: {
             soundEffect: "goe_tnt:arrow_tnt_explosion",
             explosionAnimationLength: 1
         },
@@ -756,7 +756,7 @@ export const TNT_GLD = [
         },
         blockHeight: 1.6
     },
-   {
+    {
         blockId: "goe_tnt:glass_tnt",
         fuseTime: 40,
         power: 1,
@@ -1017,14 +1017,14 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "water_eraser"
         },
         preExplosionProperties: {
             specialAction: null
         },
         blockHeight: 1.4
     },
-        {
+    {
         blockId: "goe_tnt:cluster_tnt",
         fuseTime: 50,
         power: 0,
@@ -1048,7 +1048,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "cluster"
         },
         preExplosionProperties: {
             specialAction: null
@@ -1079,7 +1079,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "void_hole"
         },
         preExplosionProperties: {
             specialAction: null
@@ -1110,11 +1110,157 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "shadow"
         },
         preExplosionProperties: {
             specialAction: null
-        }
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:mega_crater_tnt",
+        fuseTime: 40,
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "random.explode",
+            soundDelay: 0
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "mega_crater"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:knockback_tnt",
+        fuseTime: 40,
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "random.explode",
+            soundDelay: 0
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "knockback"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:glitch_tnt",
+        fuseTime: 40,
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "random.explode",
+            soundDelay: 0
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "glitch"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:fungit_tnt",
+        fuseTime: 40,
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "random.explode",
+            soundDelay: 0
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "fungit"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:snapshot_tnt",
+        fuseTime: 40,
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "random.explode",
+            soundDelay: 0
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "snapshot"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
     }
 ]
 
