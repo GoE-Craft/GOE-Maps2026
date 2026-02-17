@@ -1,0 +1,98 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.shadow_tnt.charge": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 2.5,
+			"bones": {
+				"Hat": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0417": [0, 0, "math.sin(q.anim_time * 360 * 2)*10+10"],
+						"0.25": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-10)-10"],
+						"0.5": [0, 0, "math.sin(q.anim_time * 360 * 2)*10+10"],
+						"0.75": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-10)-10"],
+						"1.0": [0, 0, "math.sin(q.anim_time * 360 * 2)*10+10"],
+						"1.25": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-10)-10"],
+						"1.5": [0, 0, "math.sin(q.anim_time * 360 * 2)*10+10"],
+						"1.75": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-10)-10"],
+						"2.0": [0, 0, "math.sin(q.anim_time * 360 * 2)*10+10"],
+						"2.25": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-10)-10"],
+						"2.5": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-10)-10"]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.0417": ["-math.sin(q.anim_time * 360 * 1)*1-0.1", "math.sin(q.anim_time * 360 * 2)*2", 0],
+						"2.5": ["-math.sin(q.anim_time * 360 * 1)*1-0.1", "math.sin(q.anim_time * 360 * 2)*2", 0]
+					}
+				},
+				"tnt": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.0417": ["math.sin(q.anim_time * 360 * 1)*1+0.1", "math.sin(q.anim_time * 360 * 2)*1+0.3", 1]
+					}
+				},
+				"suit": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.0417": ["math.abs(math.sin(q.anim_time * 360 * 1)*1)+0.1", "math.abs(math.sin(q.anim_time * 360 * 2)*1)+0.3", 1]
+					}
+				}
+			},
+			"particle_effects": {
+				"0.0": {
+					"effect": "shadow_shadows"
+				},
+				"0.5": {
+					"effect": "shadow_tornado"
+				},
+				"0.75": {
+					"effect": "shadow_puddle",
+					"locator": "locator"
+				},
+				"1.0": {
+					"effect": "shadow_dust"
+				}
+			}
+		},
+		"animation.shadow_tnt.explosion": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1,
+			"bones": {
+				"bb_main": {
+					"scale": 0
+				},
+				"Hat": {
+					"rotation": {
+						"0.0": [0, 0, "math.sin(q.anim_time * 360 * 2)*(-30)-30"],
+						"0.5": [0, 0, 0]
+					},
+					"position": {
+						"0.0": ["-math.sin(q.anim_time * 360 * 1)*1-0.1", "math.sin(q.anim_time * 360 * 2)*2", 0],
+						"0.25": ["-math.sin(q.anim_time * 360 * 1)*1-0.1", "12+math.sin(q.anim_time * 360 * 2)*2", 0],
+						"0.5": [0, -15, 0]
+					},
+					"scale": {
+						"0.5": [1, 1, 1],
+						"0.625": [1.4, 0.2, 1.4],
+						"0.75": [1.5, 1.5, 1.5],
+						"0.8333": [0, 0, 0]
+					}
+				}
+			},
+			"particle_effects": {
+				"0.0": [
+					{
+						"effect": "shadow_wind"
+					},
+					{
+						"effect": "shadow_explosion_lines"
+					},
+					{
+						"effect": "shadow_explosion"
+					}
+				]
+			}
+		}
+	}
+}

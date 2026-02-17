@@ -1,0 +1,40 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:shadow_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/shadow_tnt"
+      },
+      "geometry": {
+        "default": "geometry.shadow_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge": "animation.shadow_tnt.charge",
+        "explode": "animation.shadow_tnt.explosion"
+      },
+      "particle_effects":{
+        "shadow_dust": "goe_tnt:shadow_dust",
+        "shadow_puddle": "goe_tnt:shadow_puddle",
+        "shadow_shadows": "goe_tnt:shadow_shadows",
+        "shadow_tornado": "goe_tnt:shadow_tornado",
+        "shadow_wind": "goe_tnt:shadow_wind",
+        "shadow_explosion": "goe_tnt:shadow_explosion",
+        "shadow_explosion_lines": "goe_tnt:shadow_explosion_lines"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}

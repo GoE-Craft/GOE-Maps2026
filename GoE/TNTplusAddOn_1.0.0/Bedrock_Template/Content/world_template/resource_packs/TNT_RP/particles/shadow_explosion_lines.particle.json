@@ -1,0 +1,50 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:shadow_explosion_lines",
+			"basic_render_parameters": {
+				"material": "particles_blend",
+				"texture": "textures/goe/tnt/particles/light_fog"
+			}
+		},
+		"components": {
+			"minecraft:emitter_rate_instant": {
+				"num_particles": 500
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 1
+			},
+			"minecraft:emitter_shape_point": {
+				"offset": [0, 0.5, 0]
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": 0.75
+			},
+			"minecraft:particle_initial_speed": "math.random_integer(60,25)",
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": ["math.random(-25,25)", "math.random(-25,25)", "math.random(-25,25)"],
+				"linear_drag_coefficient": "math.random_integer(5,7)"
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["0.05/variable.particle_age", "0.05+5"],
+				"facing_camera_mode": "lookat_direction",
+				"uv": {
+					"texture_width": 16,
+					"texture_height": 16,
+					"uv": [0, 0],
+					"uv_size": [16, 16]
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.52": "#FF565656",
+						"0.94": "#ffffffff"
+					}
+				}
+			}
+		}
+	}
+}
