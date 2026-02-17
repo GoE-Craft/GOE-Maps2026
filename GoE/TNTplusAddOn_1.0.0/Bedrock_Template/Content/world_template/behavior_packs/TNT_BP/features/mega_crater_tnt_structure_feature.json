@@ -2,9 +2,9 @@
   "format_version": "1.21.100",
   "minecraft:structure_template_feature": {
     "description": {
-      "identifier": "goe_tnt:time_freeze_structure_feature"
+      "identifier": "goe_tnt:mega_crater_tnt_structure_feature"
     },
-    "structure_name": "goe_tnt:time_freeze_structure",
+    "structure_name": "goe_tnt:mega_crater_tnt_structure",
     "facing_direction": "random",
     "adjustment_radius": 16,
     "constraints": {

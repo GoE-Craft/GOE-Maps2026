@@ -361,6 +361,12 @@ item=minecraft:tnt 0 3
 item=goe_tnt:directional_tnt 0 1
 
 ///////////////////////////////////////////////////
+//////// TNT STRUCTURES ////////////////////////
+
+#arrow__tnt_structure
+type=area
+location=171 1 0 198 24 27
+replace=gray_stained_glass structure_void
 
 #daytime_tnt_structure
 type=area
@@ -372,54 +378,19 @@ type=area
 location=421 1 0 448 44 27
 replace=gray_stained_glass structure_void
 
-#cloning_tnt_structure
-type=area
-location=471 1 0 498 29 27
-replace=gray_stained_glass structure_void
-
 #chunker_tnt_structure
 type=area
 location=21 1 50 48 33 77
 replace=gray_stained_glass structure_void
 
-#time_freeze_tnt_structure
+#cloning_tnt_structure
 type=area
-location=121 1 0 148 39 27
+location=471 1 0 498 29 27
 replace=gray_stained_glass structure_void
 
-#endermite_decoy_tnt_structure
+#eraser_tnt_structure
 type=area
-location=171 1 100 198 24 127
-replace=gray_stained_glass structure_void
-
-#glass_tnt_structure
-type=area
-location=221 1 100 248 31 127
-replace=gray_stained_glass structure_void
-
-#angry_bee_tnt_structure
-type=area
-location=121 1 200 148 31 227
-replace=gray_stained_glass structure_void
-
-#teleportation_tnt_structure
-type=area
-location=21 1 200 48 31 227
-replace=gray_stained_glass structure_void
-
-#tree_planter_tnt_structure
-type=area
-location=171 1 200 198 25 227
-replace=gray_stained_glass structure_void
-
-#weather_station_tnt_structure
-type=area
-location=221 1 150 248 29 177
-replace=gray_stained_glass structure_void
-
-#party_tnt_structure
-type=area
-location=221 1 200 248 35 227
+location=171 1 50 198 30 70
 replace=gray_stained_glass structure_void
 
 #directional_tnt_structure
@@ -427,14 +398,9 @@ type=area
 location=21 1 150 48 28 177
 replace=gray_stained_glass structure_void
 
-#eraser_tnt_structure
+#endermite_decoy_tnt_structure
 type=area
-location=171 1 50 198 30 77
-replace=gray_stained_glass structure_void
-
-#arrow_tnt_structure
-type=area
-location=171 1 0 198 24 27
+location=171 1 100 198 24 127
 replace=gray_stained_glass structure_void
 
 #freezing_tnt_structure
@@ -447,9 +413,19 @@ type=area
 location=421 1 50 448 40 77
 replace=gray_stained_glass structure_void
 
+#glass_tnt_structure
+type=area
+location=221 1 100 248 31 127
+replace=gray_stained_glass structure_void
+
 #healing_tnt_structure
 type=area
 location=398 37 27 371 1 0
+replace=gray_stained_glass structure_void
+
+#angry_bee_tnt_structure
+type=area
+location=121 1 200 148 31 227
 replace=gray_stained_glass structure_void
 
 #light_tnt_structure
@@ -472,6 +448,11 @@ type=area
 location=371 1 50 398 28 77
 replace=gray_stained_glass structure_void
 
+#party_tnt_structure
+type=area
+location=221 1 200 248 35 227
+replace=gray_stained_glass structure_void
+
 #prison_tnt_structure
 type=area
 location=221 1 50 248 22 77
@@ -482,7 +463,12 @@ type=area
 location=348 27 77 321 1 50
 replace=gray_stained_glass structure_void
 
-#theif_tnt_structure
+#teleportation_tnt_structure
+type=area
+location=21 1 200 48 31 227
+replace=gray_stained_glass structure_void
+
+#thief_tnt_structure
 type=area
 location=221 1 0 248 23 27
 replace=gray_stained_glass structure_void
@@ -490,6 +476,16 @@ replace=gray_stained_glass structure_void
 #thunderstorm_tnt_structure
 type=area
 location=121 1 50 148 41 77
+replace=gray_stained_glass structure_void
+
+#time_freeze_structure
+type=area
+location=121 1 0 148 39 27
+replace=gray_stained_glass structure_void
+
+#tree_planter_tnt_structure
+type=area
+location=171 1 200 198 25 227
 replace=gray_stained_glass structure_void
 
 #ultron_tnt_structure
@@ -502,11 +498,95 @@ type=area
 location=471 1 50 498 71 77
 replace=gray_stained_glass structure_void
 
+#weather_station_tnt_structure
+type=area
+location=221 1 150 248 29 177
+replace=gray_stained_glass structure_void
+
+#sound_tnt_structure
+type=area
+location= 298 35 227 271 1 200
+replace=gray_stained_glass structure_void
+
+#balloon_tnt_structure
+type=area
+location= 271 1 100 298 40 127
+replace=gray_stained_glass structure_void
+
+#matrix_tnt_structure
+type=area
+location= 271 1 150 298 24 177
+replace=gray_stained_glass structure_void
+
+#tsunami_tnt_structure
+type=area
+location= 321 1 200 348 29 227
+replace=gray_stained_glass structure_void
+
+#proxy_tnt_structure
+type=area
+location= 321 1 100 348 34 127
+replace=gray_stained_glass structure_void
+
+#specialized_tnt_structure
+type=area
+location= 321 1 150 348 30 177
+replace=gray_stained_glass structure_void
+
+#fungi_tnt_structure
+type=area
+location= 121 1 150 148 39 177
+replace=gray_stained_glass structure_void
+
+#silent_tnt_structure
+type=area
+location= 371 1 200 398 25 227
+replace=gray_stained_glass structure_void
+
+#mega_crater_tnt_structure
+type=area
+location= 371 1 150 398 27 177
+replace=gray_stained_glass structure_void
+
+#knockback_tnt_structure
+type=area
+location= 371 1 100 398 28 127
+replace=gray_stained_glass structure_void
+
+#void_hole_tnt_structure
+type=area
+location= 421 1 200 448 21 227
+replace=gray_stained_glass structure_void
+
+#orbital_cannon_tnt_structure
+type=area
+location= 421 1 150 448 42 177
+replace=gray_stained_glass structure_void
+
+#shadow_tnt_structure
+type=area
+location= 421 1 100 448 25 127
+replace=gray_stained_glass structure_void
+
+#hacker_tnt_structure
+type=area
+location= 471 1 200 498 33 227
+replace=gray_stained_glass structure_void
+
+#glitch_tnt_structure
+type=area
+location= 471 1 150 498 31 177
+replace=gray_stained_glass structure_void
+
+#snapshot_tnt_structure
+type=area
+location= 471 1 100 498 43 127
+replace=gray_stained_glass structure_void
+
 #test_area
 type=area
 location=-74 -7 -1 -38 19 90
 replace=gray_stained_glass structure_void
-
 
 
 ///////////////////////////////////////////////////

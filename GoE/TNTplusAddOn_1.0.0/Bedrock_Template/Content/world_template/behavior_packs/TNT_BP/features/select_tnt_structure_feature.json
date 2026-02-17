@@ -33,7 +33,7 @@
       ["goe_tnt:mob_eraser_tnt_structure_feature", 1],
       ["goe_tnt:magma_eraser_tnt_structure_feature", 1],
       ["goe_tnt:light_tnt_structure_feature", 1],
-      ["goe_tnt:thief_tnt_structure_feature", 1]
+      ["goe_tnt:theif_tnt_structure_feature", 1]
     ]
   }
 }
