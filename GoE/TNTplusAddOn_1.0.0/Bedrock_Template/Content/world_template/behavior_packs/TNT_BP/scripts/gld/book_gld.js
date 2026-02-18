@@ -729,7 +729,7 @@ export const Achievements = {
         },
         {
             id: "void_tnt",
-            name: "Void Hole TNT",
+            name: "Void TNT",
             info: "Sucks up everything in the void!",
             tips: "This is not a joke.",
             tntType: "void_tnt",
@@ -738,7 +738,7 @@ export const Achievements = {
         },
         {
             id: "orbital_cannon_tnt",
-            name: "Orbital Canon TNT",
+            name: "Orbital Cannon TNT",
             info: "Summons big laser from the sky!",
             tips: "This is Alien laser beam?",
             tntType: "orbital_cannon_tnt",
@@ -810,21 +810,12 @@ export const Achievements = {
         },
         {
             id: "water_eraser_tnt",
-            name: "water_eraser TNT",
+            name: "Water Eraser TNT",
             info: "Covers large area in water!",
             tips: "At least I know how to swim.",
             tntType: "water_eraser_tnt",
             icon: "textures/goe/tnt/ui/achievements/water_eraser_tnt",
             rewardStructure: "goe_tnt:water_eraser_tnt_reward"
-        },
-        {
-            id: "proxy_tnt",
-            name: "Proxy TNT",
-            info: "On impact launches small TNT blocks!",
-            tips: "Use with caution!",
-            tntType: "proxy_tnt",
-            icon: "textures/goe/tnt/ui/achievements/proxy_tnt",
-            rewardStructure: "goe_tnt:proxy_tnt_reward"
         },
         {
             id: "proxy_tnt",
