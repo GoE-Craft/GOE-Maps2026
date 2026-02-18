@@ -20,13 +20,13 @@
 				"max_lifetime": 1
 			},
 			"minecraft:particle_appearance_billboard": {
-				"size": [0.4, 0.2],
+				"size": [0.4, 0.4],
 				"facing_camera_mode": "rotate_xyz",
 				"uv": {
-					"texture_width": 128,
-					"texture_height": 128,
-					"uv": [12, 96],
-					"uv_size": [29, 7]
+					"texture_width": 256,
+					"texture_height": 256,
+					"uv": [77, 152],
+					"uv_size": [88, 97]
 				}
 			}
 		}
