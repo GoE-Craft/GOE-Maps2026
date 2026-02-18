@@ -1,0 +1,120 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.matrix_tnt_block",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 9,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "TNT",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "bigtnt",
+					"parent": "TNT",
+					"pivot": [0, 7.9, -11.6]
+				},
+				{
+					"name": "pieces",
+					"parent": "bigtnt",
+					"pivot": [0, 8, 0]
+				},
+				{
+					"name": "upper_pieces",
+					"parent": "pieces",
+					"pivot": [0, 12, 0]
+				},
+				{
+					"name": "spider1",
+					"parent": "upper_pieces",
+					"pivot": [4, 12, 4]
+				},
+				{
+					"name": "spider2",
+					"parent": "upper_pieces",
+					"pivot": [-4, 12, 4],
+					"cubes": [
+						{
+							"origin": [-16, 0, -8],
+							"size": [16, 16, 16],
+							"pivot": [-4, 12, 4],
+							"rotation": [0, -90, 0],
+							"uv": {
+								"north": {"uv": [48, 16], "uv_size": [16, 16]},
+								"east": {"uv": [48, 16], "uv_size": [16, 16]},
+								"south": {"uv": [48, 16], "uv_size": [16, 16]},
+								"west": {"uv": [48, 16], "uv_size": [16, 16]},
+								"up": {"uv": [16, 0], "uv_size": [16, 16]},
+								"down": {"uv": [16, 16], "uv_size": [16, -16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "spider3",
+					"parent": "upper_pieces",
+					"pivot": [-4, 12, -4]
+				},
+				{
+					"name": "spider4",
+					"parent": "upper_pieces",
+					"pivot": [4, 12, -4]
+				},
+				{
+					"name": "lower_pieces",
+					"parent": "pieces",
+					"pivot": [0, 4, 0]
+				},
+				{
+					"name": "spider5",
+					"parent": "lower_pieces",
+					"pivot": [4, 4, 4]
+				},
+				{
+					"name": "spider6",
+					"parent": "lower_pieces",
+					"pivot": [-4, 4, 4]
+				},
+				{
+					"name": "spider7",
+					"parent": "lower_pieces",
+					"pivot": [-4, 4, -4]
+				},
+				{
+					"name": "spider8",
+					"parent": "lower_pieces",
+					"pivot": [4, 4, -4]
+				},
+				{
+					"name": "core",
+					"parent": "pieces",
+					"pivot": [0, 8, 0],
+					"locators": {
+						"locator": [0, 8, 0]
+					}
+				},
+				{
+					"name": "green",
+					"parent": "bigtnt",
+					"pivot": [0, 0.2, 0],
+					"cubes": [
+						{"origin": [-8, 16, 0.1], "size": [16, 5, 0], "uv": [0, 64]},
+						{"origin": [-8.1, 16, 0], "size": [16, 5, 0], "pivot": [-0.1, 19.5, 0], "rotation": [0, -90, 0], "uv": [0, 64]},
+						{"origin": [3.5, 4.5, 0.1], "size": [16, 5, 0], "pivot": [11.5, 8, 0.1], "rotation": [0, 0, 90], "uv": [0, 64]},
+						{"origin": [-8.1, 4.5, 11.5], "size": [16, 5, 0], "pivot": [-0.1, 8, 11.5], "rotation": [-90, 0, 90], "uv": [0, 64]},
+						{"origin": [-8.1, 4.5, -11.5], "size": [16, 5, 0], "pivot": [-0.1, 8, -11.5], "rotation": [90, 0, -90], "uv": [0, 64]},
+						{"origin": [-8, 0, 0.1], "size": [16, 16, 0], "uv": [0, 81]},
+						{"origin": [-8.1, 0, 0], "size": [16, 16, 0], "pivot": [-0.1, 8, 0], "rotation": [0, -90, 0], "uv": [0, 81]},
+						{"origin": [-19.5, 4.5, 0.1], "size": [16, 5, 0], "pivot": [-11.5, 8, 0.1], "rotation": [0, 0, -90], "uv": [0, 64]}
+					]
+				}
+			]
+		}
+	]
+}
