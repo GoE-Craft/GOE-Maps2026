@@ -99,3 +99,44 @@ SetContainerSlot 285 15 65 6 goe_tnt:magma_eraser_tnt 0 3
 SetContainerSlot 285 16 15 22 goe_tnt:light_tnt 0 3
 
 SetContainerSlot 237 15 10 12 goe_tnt:thief_tnt 0 5
+
+SetContainerSlot 287 15 205 12 goe_tnt:sound_tnt 0 4
+
+SetContainerSlot 290 14 168 26 goe_tnt:matrix_tnt 0 3
+SetContainerSlot 291 14 155 1 goe_tnt:matrix_tnt 0 3
+
+SetContainerSlot 286 30 106 8 goe_tnt:balloon_tnt 0 4
+
+SetContainerSlot 331 16 208 6 goe_tnt:water_eraser_tnt 0 3
+SetContainerSlot 338 14 219 12 goe_tnt:water_eraser_tnt 0 3
+
+SetContainerSlot 322 20 122 5 goe_tnt:proxy_tnt 0 3
+SetContainerSlot 347 20 103 3 goe_tnt:proxy_tnt 0 3
+
+SetContainerSlot 335 16 156 14 goe_tnt:specialized_tnt 0 3
+
+SetContainerSlot 136 12 156 13 goe_tnt:fungi_tnt 0 3
+SetContainerSlot 132 12 158 13 goe_tnt:fungi_tnt 0 3
+
+SetContainerSlot 387 15 220 5 goe_tnt:silent_tnt 0 3
+SetContainerSlot 386 15 207 19 goe_tnt:silent_tnt 0 3
+
+SetContainerSlot 392 8 156 22 goe_tnt:mega_crater_tnt 0 4
+
+SetContainerSlot 383 14 112 14 goe_tnt:knockback_tnt 0 3
+SetContainerSlot 389 14 121 14 goe_tnt:knockback_tnt 0 3
+
+SetContainerSlot 433 14 221 14 goe_tnt:void_tnt 0 3
+SetContainerSlot 439 14 209 24 goe_tnt:void_tnt 0 2
+
+SetContainerSlot 435 23 163 5 minecraft:elytra 398 1
+SetContainerSlot 435 23 163 2 goe_tnt:orbital_cannon_tnt 0 4
+
+SetContainerSlot 439 14 121 23 goe_tnt:shadow_tnt 0 3
+SetContainerSlot 430 14 121 23 goe_tnt:shadow_tnt 0 2
+
+SetContainerSlot 477 5 211 14 goe_tnt:hacker_tnt 0 4
+
+SetContainerSlot 481 2 166 11 goe_tnt:glitch_tnt 0 4
+
+SetContainerSlot 472 11 119 12 goe_tnt:snapshot_tnt 0 5
