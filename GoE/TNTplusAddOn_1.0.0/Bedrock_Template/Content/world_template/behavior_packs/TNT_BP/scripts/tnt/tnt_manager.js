@@ -163,7 +163,7 @@ function startCountdown(entity, timerRemaining, tntData) {
 
     let location = { ...entity.location };
     location.y += blockHeight;
-    let textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
+    let textLocation = { x: location.x, y: location.y, z: location.z };
     dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
     dim.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
 
@@ -180,7 +180,7 @@ function startCountdown(entity, timerRemaining, tntData) {
             location = { ...entity.location };
             location.y += blockHeight;
             if (dim.isChunkLoaded(location) === false) return;
-            textLocation = { x: location.x, y: location.y + 0.5, z: location.z };
+            textLocation = { x: location.x, y: location.y, z: location.z };
             dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
             dim.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
         } else {

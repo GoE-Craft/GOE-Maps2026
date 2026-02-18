@@ -99,14 +99,14 @@ function handleTimer(block, player) {
     if (timer === 12) {
         // keep max (120s), just notify
         player.onScreenDisplay.setActionBar(`§r§c§oMax timer reached§o`);
-        block.dimension.playSound(`block.copper_bulb.turn_off`, block.location, { volume: 5, pitch: 2 });
+        player.playSound(`block.copper_bulb.turn_off`, player.location);
         return;
     }
 
     const targetState = timer + 1;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
     player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState * 10}§o\n§r§c§oUse Flint and Steel, TNT Detonator, or any other way to activate.§o`);
-    block.dimension.playSound(`block.copper_bulb.turn_on`, block.location, { volume: 5, pitch: 2 });
+    player.playSound(`block.copper_bulb.turn_on`, player.location);
     const location = block.center();
     location.y += 0.5;
     block.dimension.spawnParticle(`goe_tnt:timer_on`, location);
@@ -262,6 +262,6 @@ function printTimer(dimension, location, time) {
             blockHeightNum = tntData.blockHeight;
         }
     }
-    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
+    dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.52, y: location.y - 0.5 + blockHeight, z: location.z + 0.5 });
     dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + blockHeightNum, z: location.z + 0.5 });
 }
