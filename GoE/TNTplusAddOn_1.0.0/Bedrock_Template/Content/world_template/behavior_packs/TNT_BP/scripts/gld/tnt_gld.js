@@ -206,15 +206,15 @@ export const TNT_GLD = [
         blockHeight: 1.6
     },
     {
-        blockId: "goe_tnt:hacker_tnt",
-        fuseTime: 70,
+blockId: "goe_tnt:hacker_tnt",
+        fuseTime: 120,
         power: 0,
         fuseEffects: {
             particleEffect: null,
             particleDelay: 0
         },
         explosionEffects: {
-            explosionAnimationLength: 1
+            explosionAnimationLength: 1.5
         },
         explosionProperties: {
             createsFire: false,

@@ -4,7 +4,8 @@
     "description": {
       "identifier": "goe_tnt:hacker_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "beam": "entity_alphablend"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/hacker_tnt"
@@ -28,9 +29,13 @@
         "teleportation": "goe_tnt:teleportation", 
         "scan_impact": "goe_tnt:scan_impact",
         "hacking": "goe_tnt:hacking",
-        "pulse_green": "goe_tnt:pulse_green"
+        "pulse_green": "goe_tnt:pulse_green",
+        "pulse_hacker": "goe_tnt:pulse_hacker",
+        "flash": "goe_tnt:flash",
+        "explosion_pixels_green": "goe_tnt:explosion_pixels_green",
+        "explosion_hacking": "goe_tnt:explosion_hacking"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ "controller.render.hacker_tnt" ]
     }
   }
 }
