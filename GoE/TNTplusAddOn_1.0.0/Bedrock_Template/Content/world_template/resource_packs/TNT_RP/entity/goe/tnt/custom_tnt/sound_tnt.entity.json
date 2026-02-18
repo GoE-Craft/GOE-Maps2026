@@ -1,0 +1,48 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:sound_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/sound_tnt"
+      },
+      "geometry": {
+        "default": "geometry.sound_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "charge" : "animation.sound_tnt.charge",
+        "explosion" : "animation.sound_tnt.explode"
+      },
+      "particle_effects": {
+        "sound_bass" : "goe_tnt:sound_bass",
+        "note_blast" : "goe_tnt:sound_notes",
+        "note_blast2" : "goe_tnt:sound_notes_blast",
+        "disco_ball" : "goe_tnt:disco_ball",
+        "disco_light" : "goe_tnt:disco_ball_light",
+        "disco_light_red" : "goe_tnt:disco_ball_light_red",
+        "disco_light_blue" : "goe_tnt:disco_ball_light_blue",
+        "disco_flash_yellow" : "goe_tnt:balloon_flash_yellow",
+        "disco_flash_blue" : "goe_tnt:balloon_flash_blue",
+        "disco_flash_red" : "goe_tnt:balloon_flash_red",
+        "disco_flash_green" : "goe_tnt:balloon_flash_green"
+      },
+      "sound_effects": {
+        "sound_charging": "goe_tnt:healing_tnt_charging",
+        "sound_blast": "goe_tnt:dimensional_tnt_explode"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
+}
