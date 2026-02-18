@@ -510,6 +510,16 @@
 						"bind_to_actor": false
 					}
 				],
+				"0.4167": [
+					{
+						"effect": "flash",
+						"bind_to_actor": false
+					},
+					{
+						"effect": "explosion_pixels_green",
+						"bind_to_actor": false
+					}
+				],
 				"0.5": [
 					{
 						"effect": "scan_impact",
@@ -518,8 +528,16 @@
 					{
 						"effect": "pulse_green",
 						"bind_to_actor": false
+					},
+					{
+						"effect": "pulse_hacker",
+						"bind_to_actor": false
 					}
 				],
+				"0.5833": {
+					"effect": "pulse_green",
+					"bind_to_actor": false
+				},
 				"0.75": {
 					"effect": "scan_impact",
 					"bind_to_actor": false
