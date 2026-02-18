@@ -233,6 +233,118 @@ export const ShopItems = {
             price: { type: "iron_ingot", amount: 5 },
             icon: "textures/goe/tnt/ui/shop/tnt/thief_tnt",
             itemId: "goe_tnt:thief_tnt"
+        },
+        {
+            id: "silent_tnt",
+            name: "Silent TNT",
+            price: { type: "iron_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/silent_tnt",
+            itemId: "goe_tnt:silent_tnt"
+        },
+        {
+            id: "mega_crater_tnt",
+            name: "Mega Crater TNT",
+            price: { type: "gold_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/mega_crater_tnt",
+            itemId: "goe_tnt:mega_crater_tnt"
+        },
+        {
+            id: "knockback_tnt",
+            name: "Knockback TNT",
+            price: { type: "iron_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/knockback_tnt",
+            itemId: "goe_tnt:knockback_tnt"
+        },
+        {
+            id: "void_tnt",
+            name: "Void TNT",
+            price: { type: "emerald", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/void_tnt",
+            itemId: "goe_tnt:void_tnt"
+        },
+        {
+            id: "orbital_canon_tnt",
+            name: "Orbital Canon TNT",
+            price: { type: "emerald", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/orbital_canon_tnt",
+            itemId: "goe_tnt:orbital_canon_tnt"
+        },
+        {
+            id: "shadow_tnt",
+            name: "Shadow TNT",
+            price: { type: "iron_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/shadow_tnt",
+            itemId: "goe_tnt:shadow_tnt"
+        },
+        {
+            id: "hacker_tnt",
+            name: "Hacker TNT",
+            price: { type: "gold_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/hacker_tnt",
+            itemId: "goe_tnt:hacker_tnt"
+        },
+        {
+            id: "glitch_tnt",
+            name: "Glitch TNT",
+            price: { type: "gold_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/glitch_tnt",
+            itemId: "goe_tnt:glitch_tnt"
+        },
+        {
+            id: "fungi_tnt",
+            name: "Fungi TNT",
+            price: { type: "gold_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/fungi_tnt",
+            itemId: "goe_tnt:fungi_tnt"
+        },
+        {
+            id: "snapshot_tnt",
+            name: "Snapshot TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/snapshot_tnt",
+            itemId: "goe_tnt:snapshot_tnt"
+        },
+        {
+            id: "ballon_tnt",
+            name: "Ballon TNT",
+            price: { type: "copper_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/ballon_tnt",
+            itemId: "goe_tnt:ballon_tnt"
+        },
+        {
+            id: "matrix_tnt",
+            name: "Matrix TNT",
+            price: { type: "gold_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/matrix_tnt",
+            itemId: "goe_tnt:matrix_tnt"
+        },
+        {
+            id: "tsunami_tnt",
+            name: "Tsunami TNT",
+            price: { type: "iron_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/tsunami_tnt",
+            itemId: "goe_tnt:tsunami_tnt"
+        },
+        {
+            id: "proxy_tnt",
+            name: "Proxy TNT",
+            price: { type: "iron_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/proxy_tnt",
+            itemId: "goe_tnt:proxy_tnt"
+        },
+        {
+            id: "sound_tnt",
+            name: "Sound TNT",
+            price: { type: "iron_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/sound_tnt",
+            itemId: "goe_tnt:sound_tnt"
+        },
+        {
+            id: "specialized_tnt",
+            name: "Specialized TNT",
+            price: { type: "gold_ingot", amount: 5 },
+            icon: "textures/goe/tnt/ui/shop/tnt/specialized_tnt",
+            itemId: "goe_tnt:specialized_tnt"
         }
     ],
 
@@ -587,6 +699,159 @@ export const Achievements = {
             tntType: "thief_tnt",
             icon: "textures/goe/tnt/ui/achievements/thief_tnt",
             rewardStructure: "goe_tnt:thief_tnt_reward"
+        },
+        {
+            id: "silent_tnt",
+            name: "Silent TNT",
+            info: "Silent Explosion!",
+            tips: "Psssttt.",
+            tntType: "silent_tnt",
+            icon: "textures/goe/tnt/ui/achievements/silent_tnt",
+            rewardStructure: "goe_tnt:silent_tnt_reward"
+        },
+        {
+            id: "mega_crater_tnt",
+            name: "Mega Crater TNT",
+            info: "Leaves large crater behind!",
+            tips: "Look at this hole!",
+            tntType: "mega_crater_tnt",
+            icon: "textures/goe/tnt/ui/achievements/mega_crater_tnt",
+            rewardStructure: "goe_tnt:mega_crater_tnt_reward"
+        },
+        {
+            id: "knockback_tnt",
+            name: "Knockback TNT",
+            info: "Knocks back all enemies!",
+            tips: "I can see that in the distance!",
+            tntType: "knockback_tnt",
+            icon: "textures/goe/tnt/ui/achievements/knockback_tnt",
+            rewardStructure: "goe_tnt:knockback_tnt_reward"
+        },
+        {
+            id: "void_tnt",
+            name: "Void TNT",
+            info: "Sucks up everything in the void!",
+            tips: "This is not a joke.",
+            tntType: "void_tnt",
+            icon: "textures/goe/tnt/ui/achievements/void_tnt",
+            rewardStructure: "goe_tnt:void_tnt_reward"
+        },
+        {
+            id: "orbital_canon_tnt",
+            name: "Orbital Canon TNT",
+            info: "Summons big laser from the sky!",
+            tips: "This is Alien laser beam?",
+            tntType: "orbital_canon_tnt",
+            icon: "textures/goe/tnt/ui/achievements/orbital_canon_tnt",
+            rewardStructure: "goe_tnt:orbital_canon_tnt_reward"
+        },
+        {
+            id: "shadow_tnt",
+            name: "Shadow TNT",
+            info: "Makes hard visibility!",
+            tips: "Don't move.",
+            tntType: "shadow_tnt",
+            icon: "textures/goe/tnt/ui/achievements/shadow_tnt",
+            rewardStructure: "goe_tnt:shadow_tnt_reward"
+        },
+        {
+            id: "hacker_tnt",
+            name: "Hacker TNT",
+            info: "Explodes every enemy near you!",
+            tips: "Don't hack!",
+            tntType: "hacker_tnt",
+            icon: "textures/goe/tnt/ui/achievements/hacker_tnt",
+            rewardStructure: "goe_tnt:hacker_tnt_reward"
+        },
+        {
+            id: "glitch_tnt",
+            name: "Glitch TNT",
+            info: "Does uncontrolled explosions!",
+            tips: "This is isn't meant to be in the game.",
+            tntType: "glitch_tnt",
+            icon: "textures/goe/tnt/ui/achievements/glitch_tnt",
+            rewardStructure: "goe_tnt:glitch_tnt_reward"
+        },
+        {
+            id: "fungi_tnt",
+            name: "Fungi TNT",
+            info: "Summons small mycelium land!",
+            tips: "Mushrooms and cows!",
+            tntType: "fungi_tnt",
+            icon: "textures/goe/tnt/ui/achievements/fungi_tnt",
+            rewardStructure: "goe_tnt:fungi_tnt_reward"
+        },
+        {
+            id: "snapshot_tnt",
+            name: "Snapshot TNT",
+            info: "Blinds the player and makes mobs to run uncontrolled!",
+            tips: "How old is this?",
+            tntType: "snapshot_tnt",
+            icon: "textures/goe/tnt/ui/achievements/snapshot_tnt",
+            rewardStructure: "goe_tnt:snapshot_tnt_reward"
+        },
+        {
+            id: "ballon_tnt",
+            name: "Ballon TNT",
+            info: "Fly and explode on impact!",
+            tips: "I think those don't have helium.",
+            tntType: "ballon_tnt",
+            icon: "textures/goe/tnt/ui/achievements/ballon_tnt",
+            rewardStructure: "goe_tnt:ballon_tnt_reward"
+        },
+        {
+            id: "matrix_tnt",
+            name: "Matrix TNT",
+            info: "Summons small scatters that follow enemies and explode!",
+            tips: "Dodge this!",
+            tntType: "matrix_tnt",
+            icon: "textures/goe/tnt/ui/achievements/matrix_tnt",
+            rewardStructure: "goe_tnt:matrix_tnt_reward"
+        },
+        {
+            id: "tsunami_tnt",
+            name: "Tsunami TNT",
+            info: "Covers large area in water!",
+            tips: "At least I know how to swim.",
+            tntType: "tsunami_tnt",
+            icon: "textures/goe/tnt/ui/achievements/tsunami_tnt",
+            rewardStructure: "goe_tnt:tsunami_tnt_reward"
+        },
+        {
+            id: "proxy_tnt",
+            name: "Proxy TNT",
+            info: "On impact launches small TNT blocks!",
+            tips: "Use with caution!",
+            tntType: "proxy_tnt",
+            icon: "textures/goe/tnt/ui/achievements/proxy_tnt",
+            rewardStructure: "goe_tnt:proxy_tnt_reward"
+        },
+        {
+            id: "proxy_tnt",
+            name: "Proxy TNT",
+            info: "On impact launches small TNT blocks!",
+            tips: "Use with caution!",
+            tntType: "proxy_tnt",
+            icon: "textures/goe/tnt/ui/achievements/proxy_tnt",
+            rewardStructure: "goe_tnt:proxy_tnt_reward"
+        },
+        {
+            id: "sound_tnt",
+            name: "Sound TNT",
+            info: "Produce loud sound that damages enemies!",
+            tips: "Remove your headphones!",
+            tntType: "sound_tnt",
+            icon: "textures/goe/tnt/ui/achievements/sound_tnt",
+            rewardStructure: "goe_tnt:sound_tnt_reward"
+        },
+        {
+            id: "specialized_tnt",
+            name: "Specialized TNT",
+            info: "Destroys large area of the blocks he is placed on!",
+            tips: "Specialization!",
+            tntType: "specialized_tnt",
+            icon: "textures/goe/tnt/ui/achievements/specialized_tnt",
+            rewardStructure: "goe_tnt:specialized_tnt_reward"
         }
     ],
 
