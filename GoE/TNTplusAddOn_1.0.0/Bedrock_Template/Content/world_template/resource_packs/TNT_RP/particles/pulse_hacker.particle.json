@@ -4,7 +4,7 @@
 		"description": {
 			"identifier": "goe_tnt:pulse_hacker",
 			"basic_render_parameters": {
-				"material": "particles_blend",
+				"material": "particles_add",
 				"texture": "textures/goe/tnt/particles/pulse"
 			}
 		},
