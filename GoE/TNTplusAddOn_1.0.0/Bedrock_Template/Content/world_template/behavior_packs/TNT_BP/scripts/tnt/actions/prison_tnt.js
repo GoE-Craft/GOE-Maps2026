@@ -1,5 +1,7 @@
 import { world, system, StructureRotation, StructureAnimationMode, BlockVolume, BlockPermutation } from "@minecraft/server";
 
+const PRISON_TAG = "goe_tnt:in_prison";
+
 function isSolidBlock(block) {
     try {
         if (!block) return false;
@@ -24,28 +26,37 @@ function isReplaceablePrisonBlock(typeId) {
     if (
         id === "minecraft:grass" ||
         id === "minecraft:tall_grass" ||
+        id === "minecraft:short_dry_grass" ||
+        id === "minecraft:tall_dry_grass" ||
         id === "minecraft:short_grass" ||
         id === "minecraft:fern" ||
         id === "minecraft:large_fern" ||
-        id === "minecraft:dirt" ||
-        id === "minecraft:bee_nest" ||
         id === "minecraft:sunflower" ||
         id === "minecraft:sweet_berry_bush" ||
         id === "minecraft:leaf_litter" ||
         id === "minecraft:wildflowers" ||
-        id === "minecraft:firefly_bush"
+        id === "minecraft:firefly_bush" ||
+        id === "minecraft:deadbush"
     ) return true;
 
-    // Broad matching for families of blocks
     if (id.endsWith("_leaves")) return true;
     if (id.endsWith("_log")) return true;
     if (id.endsWith("_sapling")) return true;
 
-    // If you also want stripped logs:
     if (id.endsWith("_wood")) return true;
     if (id.includes("stripped_") && id.endsWith("_log")) return true;
 
     return false;
+}
+
+function isEntityAlreadyImprisoned(entityCandidate) {
+    try {
+        if (!entityCandidate?.isValid) return false;
+        const tags = entityCandidate.getTags?.() || [];
+        return tags.includes(PRISON_TAG);
+    } catch {
+        return false;
+    }
 }
 
 function findGroundY(dimension, x, startY, z) {
@@ -64,19 +75,89 @@ function findGroundY(dimension, x, startY, z) {
     return Math.floor(Number(startY ?? 0)) - 1;
 }
 
-function findFreeCell(cellX0, cellY0, cellZ0, minSpacingX, minSpacingY, minSpacingZ, occupiedCells) {
-    const maxRing = 4;
+function findFootprintGroundY(dimension, startX, startY, startZ, footprintX, footprintZ) {
+    let bestY = null;
 
+    for (let x = 0; x < footprintX; x++) {
+        for (let z = 0; z < footprintZ; z++) {
+            const wx = Math.floor(Number(startX ?? 0)) + x;
+            const wz = Math.floor(Number(startZ ?? 0)) + z;
+            const gy = findGroundY(dimension, wx, Math.floor(Number(startY ?? 0)), wz);
+            if (bestY === null || gy > bestY) bestY = gy;
+        }
+    }
+
+    return bestY !== null ? bestY : Math.floor(Number(startY ?? 0)) - 1;
+}
+
+function findClearPlacementY(dimension, startX, startY, startZ, sizeX, sizeY, sizeZ) {
+    const maxLift = 24;
+    let candidateY = Math.floor(Number(startY ?? 0));
+
+    for (let lift = 0; lift <= maxLift; lift++) {
+        let blocked = false;
+
+        for (let y = 0; y < sizeY; y++) {
+            if (y === 0) continue;
+
+            for (let x = 0; x < sizeX; x++) {
+                for (let z = 0; z < sizeZ; z++) {
+                    const wx = Math.floor(Number(startX ?? 0)) + x;
+                    const wy = candidateY + y;
+                    const wz = Math.floor(Number(startZ ?? 0)) + z;
+
+                    let b;
+                    try { b = dimension.getBlock({ x: wx, y: wy, z: wz }); } catch { b = undefined; }
+                    if (!b) continue;
+
+                    const typeId = String(b.typeId || "");
+                    if (!isAirLike(typeId) && !isReplaceablePrisonBlock(typeId)) {
+                        blocked = true;
+                        break;
+                    }
+                }
+                if (blocked) break;
+            }
+            if (blocked) break;
+        }
+
+        if (!blocked) return candidateY;
+        candidateY += 1;
+    }
+
+    return candidateY;
+}
+
+function findFreeCell(cellX0, cellY0, cellZ0, sizeX, sizeY, sizeZ, occupiedCells) {
+    const maxRing = 6;
     const keyOf = (x, y, z) => `${x}|${y}|${z}`;
-    const isFree = (x, y, z) => !occupiedCells.has(keyOf(x, y, z));
 
-    if (isFree(cellX0, cellY0, cellZ0)) {
+    function boxesIntersect(x1, y1, z1, x2, y2, z2, sx, sy, sz) {
+        const min1 = { x: x1, y: y1, z: z1 };
+        const max1 = { x: x1 + sx - 1, y: y1 + sy - 1, z: z1 + sz - 1 };
+        const min2 = { x: x2, y: y2, z: z2 };
+        const max2 = { x: x2 + sx - 1, y: y2 + sy - 1, z: z2 + sz - 1 };
+        return (
+            min1.x <= max2.x && max1.x >= min2.x &&
+            min1.y <= max2.y && max1.y >= min2.y &&
+            min1.z <= max2.z && max1.z >= min2.z
+        );
+    }
+
+    function isTrulyFree(x, y, z) {
+        for (const occKey of occupiedCells) {
+            const [occX, occY, occZ] = occKey.split("|").map(Number);
+            if (boxesIntersect(x, y, z, occX, occY, occZ, sizeX, sizeY, sizeZ)) return false;
+        }
+        return true;
+    }
+
+    if (isTrulyFree(cellX0, cellY0, cellZ0)) {
         return { cellX: cellX0, cellY: cellY0, cellZ: cellZ0, key: keyOf(cellX0, cellY0, cellZ0) };
     }
 
     for (let ring = 1; ring <= maxRing; ring++) {
         const offsets = [];
-
         for (let dx = -ring; dx <= ring; dx++) {
             for (let dy = -ring; dy <= ring; dy++) {
                 for (let dz = -ring; dz <= ring; dz++) {
@@ -93,11 +174,11 @@ function findFreeCell(cellX0, cellY0, cellZ0, minSpacingX, minSpacingY, minSpaci
         });
 
         for (const offset of offsets) {
-            const candidateCellX = cellX0 + (offset.dx * minSpacingX);
-            const candidateCellY = cellY0 + (offset.dy * minSpacingY);
-            const candidateCellZ = cellZ0 + (offset.dz * minSpacingZ);
+            const candidateCellX = cellX0 + offset.dx;
+            const candidateCellY = cellY0 + offset.dy;
+            const candidateCellZ = cellZ0 + offset.dz;
 
-            if (isFree(candidateCellX, candidateCellY, candidateCellZ)) {
+            if (isTrulyFree(candidateCellX, candidateCellY, candidateCellZ)) {
                 return {
                     cellX: candidateCellX,
                     cellY: candidateCellY,
@@ -111,11 +192,9 @@ function findFreeCell(cellX0, cellY0, cellZ0, minSpacingX, minSpacingY, minSpaci
     return null;
 }
 
-// places the structure only into air-like blocks by snapshotting the area,
-// placing the structure, then restoring any non-air blocks (except replaceables)
 function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure, placePos, structureRotation) {
     const sx = Math.max(1, Math.floor(Number(prisonStructure?.size?.x ?? 3)));
-    const sy = Math.max(1, Math.floor(Number(prisonStructure?.size?.y ?? 3)));
+    const sy = Math.max(1, Math.floor(Number(prisonStructure?.size?.y ?? 5)));
     const sz = Math.max(1, Math.floor(Number(prisonStructure?.size?.z ?? 3)));
 
     const rotatedX = (structureRotation === StructureRotation.Rotate90 || structureRotation === StructureRotation.Rotate270) ? sz : sx;
@@ -125,8 +204,7 @@ function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure,
     const startY = Math.floor(Number(placePos?.y ?? 0));
     const startZ = Math.floor(Number(placePos?.z ?? 0));
 
-    // Snapshot blocks in the affected volume
-    const snapshot = new Map(); // key -> { typeId, permutation }
+    const snapshot = new Map();
     const keyOf = (x, y, z) => `${x}|${y}|${z}`;
 
     for (let y = 0; y < sy; y++) {
@@ -159,10 +237,8 @@ function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure,
         rotation: structureRotation
     };
 
-    // Place structure
     structureManager.place(prisonStructure, dimension, { x: startX, y: startY, z: startZ }, structureOptions);
 
-    // Revert any position that was not air-like before placement (except replaceables)
     for (const [key, before] of snapshot.entries()) {
         const [wxStr, wyStr, wzStr] = key.split("|");
         const wx = Number(wxStr);
@@ -174,7 +250,6 @@ function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure,
             try { blockAfter = dimension.getBlock({ x: wx, y: wy, z: wz }); } catch { blockAfter = undefined; }
             if (!blockAfter) continue;
 
-            // Only revert if structure actually changed something there
             const afterType = String(blockAfter.typeId || "");
             if (afterType !== before.typeId) {
                 try {
@@ -184,7 +259,6 @@ function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure,
                         blockAfter.setType(before.typeId);
                     }
                 } catch {
-                    // If revert fails, ignore (better to not crash the TNT)
                 }
             }
         }
@@ -193,7 +267,7 @@ function placeStructureOnlyIntoAir(dimension, structureManager, prisonStructure,
 
 export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
     try {
-        const structureId = "goe_tnt:temp_prison";
+        const structureId = "goe_tnt:mini_prison";
         const structureManager = world.structureManager;
 
         let prisonStructure;
@@ -216,8 +290,6 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
         } catch { }
 
         const safeChargeLevel = Number.isFinite(resolvedChargeLevel) ? Math.max(0, resolvedChargeLevel) : 0;
-
-        // Flat +25% of base radius per charge (base 8 -> +2 per charge)
         const radius = baseRadius + Math.round(baseRadius * 0.25 * safeChargeLevel);
 
         const center = {
@@ -238,6 +310,7 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
         targetEntities = (targetEntities || []).filter((entityCandidate) => {
             try {
                 if (!entityCandidate?.isValid) return false;
+                if (isEntityAlreadyImprisoned(entityCandidate)) return false;
                 return true;
             } catch {
                 return false;
@@ -245,12 +318,8 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
         });
 
         const structureSizeX = Math.max(1, Math.floor(Number(prisonStructure?.size?.x ?? 3)));
-        const structureSizeY = Math.max(1, Math.floor(Number(prisonStructure?.size?.y ?? 3)));
+        const structureSizeY = Math.max(1, Math.floor(Number(prisonStructure?.size?.y ?? 5)));
         const structureSizeZ = Math.max(1, Math.floor(Number(prisonStructure?.size?.z ?? 3)));
-
-        const minSpacingX = structureSizeX + 2;
-        const minSpacingY = structureSizeY + 2;
-        const minSpacingZ = structureSizeZ + 2;
 
         targetEntities.sort((entityA, entityB) => {
             const ax = Number(entityA?.location?.x ?? 0) - center.x;
@@ -264,13 +333,13 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
 
         const occupiedCells = new Set();
 
-        // 1 tick delay makes placement reliable (chunks settled), still “instant” after fuse
         system.runTimeout(() => {
             let placedCount = 0;
 
             for (const targetEntity of targetEntities) {
                 try {
                     if (!targetEntity?.isValid) continue;
+                    if (isEntityAlreadyImprisoned(targetEntity)) continue;
 
                     const targetLocation = targetEntity.location;
 
@@ -305,27 +374,22 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
 
                     const baseCenterX = Math.floor(Number(targetLocation.x ?? 0)) + 0.5;
                     const baseCenterZ = Math.floor(Number(targetLocation.z ?? 0)) + 0.5;
-
-                    const groundBaseY = findGroundY(
-                        dimension,
-                        baseCenterX,
-                        Number(targetLocation.y ?? 0) - 1,
-                        baseCenterZ
-                    );
-
-                    const baseCenterY = groundBaseY + 1;
+                    const baseCenterY = Math.floor(Number(targetLocation.y ?? 0));
 
                     const baseCellX = Math.floor(baseCenterX);
                     const baseCellY = Math.floor(baseCenterY);
                     const baseCellZ = Math.floor(baseCenterZ);
 
+                    const sizeXForSpacing = Math.max(structureSizeX, structureSizeZ);
+                    const sizeZForSpacing = Math.max(structureSizeX, structureSizeZ);
+
                     const freeCell = findFreeCell(
                         baseCellX,
                         baseCellY,
                         baseCellZ,
-                        minSpacingX,
-                        minSpacingY,
-                        minSpacingZ,
+                        sizeXForSpacing,
+                        structureSizeY,
+                        sizeZForSpacing,
                         occupiedCells
                     );
 
@@ -334,18 +398,41 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
                     const prisonCenterX = freeCell.cellX + 0.5;
                     const prisonCenterZ = freeCell.cellZ + 0.5;
 
-                    const groundFinalY = findGroundY(
+                    const placeX = Math.floor(prisonCenterX - halfSizeX);
+                    const placeZ = Math.floor(prisonCenterZ - halfSizeZ);
+
+                    const rotatedX =
+                        (structureRotation === StructureRotation.Rotate90 || structureRotation === StructureRotation.Rotate270)
+                            ? structureSizeZ
+                            : structureSizeX;
+
+                    const rotatedZ =
+                        (structureRotation === StructureRotation.Rotate90 || structureRotation === StructureRotation.Rotate270)
+                            ? structureSizeX
+                            : structureSizeZ;
+
+                    const groundFinalY = findFootprintGroundY(
                         dimension,
-                        prisonCenterX,
+                        placeX,
                         freeCell.cellY - 1,
-                        prisonCenterZ
+                        placeZ,
+                        rotatedX,
+                        rotatedZ
                     );
 
-                    const prisonCenterY = groundFinalY + 1;
+                    const surfacePlaceY = groundFinalY;
 
-                    const placeX = Math.floor(prisonCenterX - halfSizeX);
-                    const placeY = Math.floor(prisonCenterY) - 1;
-                    const placeZ = Math.floor(prisonCenterZ - halfSizeZ);
+                    const placeY = findClearPlacementY(
+                        dimension,
+                        placeX,
+                        surfacePlaceY,
+                        placeZ,
+                        rotatedX,
+                        structureSizeY,
+                        rotatedZ
+                    );
+
+                    const prisonCenterY = placeY + 1;
 
                     try {
                         placeStructureOnlyIntoAir(
@@ -359,6 +446,8 @@ export function* prisonTNTAction(dimension, chargeLevel, location, entity) {
                         console.log(`[Prison TNT] air-only place failed: ${placeError}`);
                         continue;
                     }
+
+                    try { targetEntity.addTag?.(PRISON_TAG); } catch { }
 
                     try {
                         targetEntity.teleport(
