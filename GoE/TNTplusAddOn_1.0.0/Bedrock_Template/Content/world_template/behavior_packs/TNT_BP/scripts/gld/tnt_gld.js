@@ -1056,7 +1056,7 @@ export const TNT_GLD = [
         blockHeight: 2.1
     },
     {
-        blockId: "goe_tnt:void_hole_tnt",
+        blockId: "goe_tnt:void_tnt",
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1066,11 +1066,11 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         chargeEffects: {
-            soundEffect: "goe_tnt:void_hole_tnt_charge",
+            soundEffect: "goe_tnt:void_tnt_charge",
             soundDelay: 0
         },
         explosionEffects: {
-            soundEffect: "goe_tnt:void_hole_tnt_explosion",
+            soundEffect: "goe_tnt:void_tnt_explosion",
             explosionAnimationLength: 1
         },
         explosionProperties: {
@@ -1079,7 +1079,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "void_hole"
+            specialAction: "void"
         },
         preExplosionProperties: {
             specialAction: null

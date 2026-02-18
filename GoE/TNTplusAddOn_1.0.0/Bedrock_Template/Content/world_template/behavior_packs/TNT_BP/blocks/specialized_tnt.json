@@ -2,7 +2,7 @@
   "format_version": "1.21.100",
   "minecraft:block": {
     "description": {
-      "identifier": "goe_tnt:glitch_tnt",
+      "identifier": "goe_tnt:specialized_tnt",
       "menu_category": { "category": "construction" },
       "traits": {
         "minecraft:placement_direction": {
@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Glitch TNT",
+      "minecraft:display_name": "Specialized TNT",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

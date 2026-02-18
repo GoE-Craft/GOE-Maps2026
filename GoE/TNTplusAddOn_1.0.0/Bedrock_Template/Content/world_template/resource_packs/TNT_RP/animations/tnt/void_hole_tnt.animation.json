@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.void_hole_tnt.charge": {
+		"animation.void_tnt.charge": {
 			"animation_length": 2.5,
 			"bones": {
 				"bb_model": {
@@ -118,7 +118,7 @@
 				}
 			}
 		},
-		"animation.void_hole_tnt.explosion": {
+		"animation.void_tnt.explosion": {
 			"animation_length": 1,
 			"bones": {
 				"bb_model": {

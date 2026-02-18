@@ -2,7 +2,7 @@
   "format_version": "1.21.10",
   "minecraft:recipe_shaped": {
     "description": {
-      "identifier": "goe_tnt:tsunami_tnt"
+      "identifier": "goe_tnt:water_eraser_tnt"
     },
     "tags": [
       "crafting_table"
@@ -20,7 +20,7 @@
       "context": "AlwaysUnlocked"
     },
     "result": {
-      "item": "goe_tnt:tsunami_tnt",
+      "item": "goe_tnt:water_eraser_tnt",
       "count": 1
     }
   }

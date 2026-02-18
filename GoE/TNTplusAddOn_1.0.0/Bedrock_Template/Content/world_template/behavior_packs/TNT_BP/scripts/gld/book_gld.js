@@ -263,11 +263,11 @@ export const ShopItems = {
             itemId: "goe_tnt:void_tnt"
         },
         {
-            id: "orbital_canon_tnt",
-            name: "Orbital Canon TNT",
+            id: "orbital_cannon_tnt",
+            name: "Orbital Cannon TNT",
             price: { type: "emerald", amount: 5 },
-            icon: "textures/goe/tnt/ui/shop/tnt/orbital_canon_tnt",
-            itemId: "goe_tnt:orbital_canon_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/orbital_cannon_tnt",
+            itemId: "goe_tnt:orbital_cannon_tnt"
         },
         {
             id: "shadow_tnt",
@@ -305,11 +305,11 @@ export const ShopItems = {
             itemId: "goe_tnt:snapshot_tnt"
         },
         {
-            id: "ballon_tnt",
-            name: "Ballon TNT",
+            id: "balloon_tnt",
+            name: "Balloon TNT",
             price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/tnt/ballon_tnt",
-            itemId: "goe_tnt:ballon_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/balloon_tnt",
+            itemId: "goe_tnt:balloon_tnt"
         },
         {
             id: "matrix_tnt",
@@ -319,11 +319,11 @@ export const ShopItems = {
             itemId: "goe_tnt:matrix_tnt"
         },
         {
-            id: "tsunami_tnt",
-            name: "Tsunami TNT",
+            id: "water_eraser_tnt",
+            name: "Water Eraser TNT",
             price: { type: "iron_ingot", amount: 5 },
-            icon: "textures/goe/tnt/ui/shop/tnt/tsunami_tnt",
-            itemId: "goe_tnt:tsunami_tnt"
+            icon: "textures/goe/tnt/ui/shop/tnt/water_eraser_tnt",
+            itemId: "goe_tnt:water_eraser_tnt"
         },
         {
             id: "proxy_tnt",
@@ -729,7 +729,7 @@ export const Achievements = {
         },
         {
             id: "void_tnt",
-            name: "Void TNT",
+            name: "Void Hole TNT",
             info: "Sucks up everything in the void!",
             tips: "This is not a joke.",
             tntType: "void_tnt",
@@ -737,13 +737,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:void_tnt_reward"
         },
         {
-            id: "orbital_canon_tnt",
+            id: "orbital_cannon_tnt",
             name: "Orbital Canon TNT",
             info: "Summons big laser from the sky!",
             tips: "This is Alien laser beam?",
-            tntType: "orbital_canon_tnt",
-            icon: "textures/goe/tnt/ui/achievements/orbital_canon_tnt",
-            rewardStructure: "goe_tnt:orbital_canon_tnt_reward"
+            tntType: "orbital_cannon_tnt",
+            icon: "textures/goe/tnt/ui/achievements/orbital_cannon_tnt",
+            rewardStructure: "goe_tnt:orbital_cannon_tnt_reward"
         },
         {
             id: "shadow_tnt",
@@ -791,13 +791,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:snapshot_tnt_reward"
         },
         {
-            id: "ballon_tnt",
-            name: "Ballon TNT",
+            id: "balloon_tnt",
+            name: "Balloon TNT",
             info: "Fly and explode on impact!",
             tips: "I think those don't have helium.",
-            tntType: "ballon_tnt",
-            icon: "textures/goe/tnt/ui/achievements/ballon_tnt",
-            rewardStructure: "goe_tnt:ballon_tnt_reward"
+            tntType: "balloon_tnt",
+            icon: "textures/goe/tnt/ui/achievements/balloon_tnt",
+            rewardStructure: "goe_tnt:balloon_tnt_reward"
         },
         {
             id: "matrix_tnt",
@@ -809,13 +809,13 @@ export const Achievements = {
             rewardStructure: "goe_tnt:matrix_tnt_reward"
         },
         {
-            id: "tsunami_tnt",
-            name: "Tsunami TNT",
+            id: "water_eraser_tnt",
+            name: "water_eraser TNT",
             info: "Covers large area in water!",
             tips: "At least I know how to swim.",
-            tntType: "tsunami_tnt",
-            icon: "textures/goe/tnt/ui/achievements/tsunami_tnt",
-            rewardStructure: "goe_tnt:tsunami_tnt_reward"
+            tntType: "water_eraser_tnt",
+            icon: "textures/goe/tnt/ui/achievements/water_eraser_tnt",
+            rewardStructure: "goe_tnt:water_eraser_tnt_reward"
         },
         {
             id: "proxy_tnt",

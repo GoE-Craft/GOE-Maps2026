@@ -102,7 +102,7 @@
     "tunnel_tnt": { "textures": "textures/goe/tnt/entity/tunnel_tnt" },
     "ultron_tnt": { "textures": "textures/goe/tnt/entity/ultron_tnt" },
     "vine_tnt": { "textures": "textures/goe/tnt/entity/vine_tnt" },
-    "void_hole_tnt": { "textures": "textures/goe/tnt/entity/void_hole_tnt" },
+    "void_tnt": { "textures": "textures/goe/tnt/entity/void_tnt" },
     "vortex_tnt": { "textures": "textures/goe/tnt/entity/vortex_tnt" },
     "wall_tnt": { "textures": "textures/goe/tnt/entity/wall_tnt" },
     "warden_tnt": { "textures": "textures/goe/tnt/entity/warden_tnt" },

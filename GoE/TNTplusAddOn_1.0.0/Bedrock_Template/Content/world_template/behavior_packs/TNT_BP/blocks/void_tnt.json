@@ -1,8 +1,8 @@
 {
-  "format_version": "1.21.100",
+  "format_version": "1.21.130",
   "minecraft:block": {
     "description": {
-      "identifier": "goe_tnt:glitch_tnt",
+      "identifier": "goe_tnt:void_tnt",
       "menu_category": { "category": "construction" },
       "traits": {
         "minecraft:placement_direction": {
@@ -21,13 +21,13 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Glitch TNT",
+      "minecraft:display_name": "Void TNT",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
-      "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
-      "minecraft:geometry": "geometry.tnt",
-      "minecraft:material_instances": { "*": { "texture": "tnt", "render_method": "alpha_test", "face_dimming": true} },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
+      "minecraft:geometry": "geometry.void_tnt",
+      "minecraft:material_instances": { "*": { "texture": "void_tnt", "render_method": "alpha_test" } },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },

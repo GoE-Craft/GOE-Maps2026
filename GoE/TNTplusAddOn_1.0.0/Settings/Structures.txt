@@ -518,7 +518,7 @@ type=area
 location=271 1 150 298 24 177
 replace=gray_stained_glass structure_void
 
-#tsunami_tnt_structure
+#water_eraser_tnt_structure
 type=area
 location=321 1 200 348 29 227
 replace=gray_stained_glass structure_void
@@ -553,7 +553,7 @@ type=area
 location=371 1 100 398 28 127
 replace=gray_stained_glass structure_void
 
-#void_hole_tnt_structure
+#void_tnt_structure
 type=area
 location=421 1 200 448 21 227
 replace=gray_stained_glass structure_void
