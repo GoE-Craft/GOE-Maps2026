@@ -1,0 +1,55 @@
+{
+    "format_version": "1.21.130",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "goe_tnt:orbital_cannon_strike",
+            "is_spawnable": false,
+            "is_summonable": true
+        },
+        "component_groups": {
+            "goe_tnt:despawn": {
+                "minecraft:instant_despawn": {
+                    "remove_child_entities": true
+                }
+            }
+        },
+        "components": {
+            "minecraft:collision_box": {
+                "height": 0,
+                "width": 0
+            },
+            "minecraft:type_family": {
+                "family": [
+                    "tnt_fx"
+                ]
+            },
+            "minecraft:health": {
+                "value": 10,
+                "max": 10
+            },
+            "minecraft:damage_sensor": {
+                "triggers": {
+                    "cause": "all",
+                    "deals_damage": "no"
+                }
+            },
+            "minecraft:timer": {
+                "time": 2,
+                "looping": true,
+                "time_down_event": {
+                    "event": "goe_tnt:despawn",
+                    "target": "self"
+                }
+            }
+        },
+        "events": {
+            "goe_tnt:despawn": {
+                "add": {
+                    "component_groups": [
+                        "goe_tnt:despawn"
+                    ]
+                }
+            }
+        }
+    }
+}

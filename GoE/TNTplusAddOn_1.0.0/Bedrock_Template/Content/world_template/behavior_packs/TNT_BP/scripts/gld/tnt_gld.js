@@ -50,7 +50,7 @@ export const TNT_GLD = [
             summonDelay: 0,
             specialAction: "directional_drill"
         },
-        blockHeight: 1.8
+        blockHeight: 1.4
     },
     {
         blockId: "goe_tnt:party_tnt",
@@ -111,7 +111,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: "magnet"
         },
-        blockHeight: 1.7
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:chunker_tnt",
@@ -176,7 +176,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2.2
+        blockHeight: 1.7
     },
     {
         blockId: "goe_tnt:freezing_tnt",
@@ -227,7 +227,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.6
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:tree_planter_tnt",
@@ -362,10 +362,6 @@ blockId: "goe_tnt:hacker_tnt",
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
         },
-        //chargeEffects: {
-        //    soundEffect: "goe_tnt:weather_station_tnt_charging",
-        //    soundDelay: 5
-        //},
         explosionEffects: {
             explosionAnimationLength: 2
         },
@@ -375,7 +371,7 @@ blockId: "goe_tnt:hacker_tnt",
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "orbital_cannon"
         },
         preExplosionProperties: {
             specialAction: null
@@ -411,7 +407,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2
+        blockHeight: 1.7
     },
     {
         blockId: "goe_tnt:arrow_tnt",
@@ -506,7 +502,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.8
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:structure_tnt",
@@ -599,7 +595,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2.2
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:villager_decoy_tnt",
@@ -1025,7 +1021,7 @@ blockId: "goe_tnt:hacker_tnt",
         blockHeight: 1.4
     },
     {
-        blockId: "goe_tnt:cluster_tnt",
+        blockId: "goe_tnt:proxy_tnt",
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1035,11 +1031,11 @@ blockId: "goe_tnt:hacker_tnt",
             soundDelay: 0
         },
         chargeEffects: {
-            soundEffect: "goe_tnt:cluster_tnt_charge",
+            soundEffect: "goe_tnt:proxy_tnt_charge",
             soundDelay: 0
         },
         explosionEffects: {
-            soundEffect: "goe_tnt:cluster_tnt_explosion",
+            soundEffect: "goe_tnt:proxy_tnt_explosion",
             explosionAnimationLength: 2
         },
         explosionProperties: {
@@ -1048,7 +1044,7 @@ blockId: "goe_tnt:hacker_tnt",
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: "cluster"
+            specialAction: "proxy"
         },
         preExplosionProperties: {
             specialAction: null

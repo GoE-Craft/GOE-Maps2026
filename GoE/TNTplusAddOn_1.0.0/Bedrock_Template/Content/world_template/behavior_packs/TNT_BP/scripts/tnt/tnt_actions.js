@@ -29,6 +29,7 @@ import { magmaEraserTNTAction } from "./actions/magma_eraser_tnt";
 import { lightTNTAction } from "./actions/light_tnt";
 import { thiefTNTAction } from "./actions/thief_tnt";
 import { megaCraterTNTAction } from "./actions/mega_crater_tnt";
+import { orbitalCannonTNTAction } from "./actions/orbital_cannon_tnt";
 
 /**
  * TNT Actions Module
@@ -166,6 +167,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "mega_crater":
             system.runJob(megaCraterTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "orbital_cannon":
+            system.runJob(orbitalCannonTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;

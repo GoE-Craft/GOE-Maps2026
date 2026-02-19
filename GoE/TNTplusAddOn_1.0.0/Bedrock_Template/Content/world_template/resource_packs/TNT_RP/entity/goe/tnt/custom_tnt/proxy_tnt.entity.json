@@ -1,29 +1,39 @@
 {
-	"format_version": "1.19.0",
-	"minecraft:client_entity": {
-		"description": {
-			"identifier": "goe_tnt:proxy_tnt",
-			"materials": {
-				"default": "entity_alphatest"
-			},
-			"textures": {
-				"default": "textures/goe/tnt/entity/tnt"
-			},
-			"geometry": {
-				"default": "geometry.tnt"
-			},
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:proxy_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/proxy_tnt"
+      },
+      "geometry": {
+        "default": "geometry.proxy_tnt"
+      },
 			"scripts": {
-				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
-				],
-				"animate": [
-				{"tnt_swelling": "v.should_swell"}
-				]
-					},
-			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
 			},
-      		"render_controllers": [ "controller.render.tnt" ]
-		}
-	}
+      "animations": {
+        "charge": "animation.proxy_tnt.charge",
+        "explode": "animation.proxy_tnt.explosion"
+      },
+      "particle_effects":{
+        "party_sparks": "goe_tnt:party_sparks",
+        "proxy_laser": "goe_tnt:proxy_laser",
+        "tnt_charge_yellow_small": "goe_tnt:tnt_charge_yellow_small",
+        "proxy_pull_dust": "goe_tnt:proxy_pull_dust",
+        "proxy_explosion": "goe_tnt:proxy_explosion",
+        "proxy_circle_push": "goe_tnt:proxy_circle_push"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
 }

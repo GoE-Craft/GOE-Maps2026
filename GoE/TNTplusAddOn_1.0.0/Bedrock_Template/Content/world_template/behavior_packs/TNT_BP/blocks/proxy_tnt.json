@@ -1,5 +1,5 @@
 {
-  "format_version": "1.21.100",
+  "format_version": "1.21.130",
   "minecraft:block": {
     "description": {
       "identifier": "goe_tnt:proxy_tnt",
@@ -25,9 +25,9 @@
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
-      "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
-      "minecraft:geometry": "geometry.tnt",
-      "minecraft:material_instances": { "*": { "texture": "tnt", "render_method": "alpha_test", "face_dimming": true} },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
+      "minecraft:geometry": "geometry.proxy_tnt",
+      "minecraft:material_instances": { "*": { "texture": "proxy_tnt", "render_method": "alpha_test" } },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },

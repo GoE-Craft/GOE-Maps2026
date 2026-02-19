@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:cluster_circle_push",
+			"identifier": "goe_tnt:proxy_circle_push",
 			"basic_render_parameters": {
 				"material": "particles_add",
 				"texture": "textures/goe/tnt/particles/glow_particle"
