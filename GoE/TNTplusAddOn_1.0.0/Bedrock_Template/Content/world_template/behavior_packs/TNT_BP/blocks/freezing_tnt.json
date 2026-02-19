@@ -26,7 +26,7 @@
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
-      "minecraft:geometry": "geometry.freezing_tnt",
+      "minecraft:geometry": "geometry.freezing_tnt_block",
       "minecraft:material_instances": { "*": { "texture": "freezing_tnt", "render_method": "alpha_test" } },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
