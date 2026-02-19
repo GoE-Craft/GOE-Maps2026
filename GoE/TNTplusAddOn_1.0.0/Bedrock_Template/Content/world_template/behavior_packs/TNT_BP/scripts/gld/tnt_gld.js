@@ -1205,7 +1205,7 @@ blockId: "goe_tnt:hacker_tnt",
         blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
     },
     {
-        blockId: "goe_tnt:fungit_tnt",
+        blockId: "goe_tnt:fungi_tnt",
         fuseTime: 40,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -1285,7 +1285,60 @@ blockId: "goe_tnt:hacker_tnt",
         },
         preExplosionProperties: {
             specialAction: null
-        }
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:proxy_tnt",
+        fuseTime: 50,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "proxy"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:specialized_tnt",
+        fuseTime: 50,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "specialized"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
     }
 ]
 
