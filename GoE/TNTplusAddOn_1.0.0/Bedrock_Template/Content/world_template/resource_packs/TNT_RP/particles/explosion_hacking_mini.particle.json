@@ -1,0 +1,49 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:explosion_hacking",
+			"basic_render_parameters": {
+				"material": "particles_blend",
+				"texture": "textures/goe/tnt/particles/explosion_hacking"
+			}
+		},
+		"curves": {
+			"variable.stretch": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0.66, 1, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_rate_instant": {
+				"num_particles": 60
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 3
+			},
+			"minecraft:emitter_shape_point": {},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": "math.random(0.8,1.5)"
+			},
+			"minecraft:particle_initial_speed": 30,
+			"minecraft:particle_motion_dynamic": {
+				"linear_drag_coefficient": 10
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": [0.2, 0.2],
+				"facing_camera_mode": "rotate_y",
+				"uv": {
+					"texture_width": 36,
+					"texture_height": 54,
+					"uv": ["math.floor(v.particle_random_1 * 2) * 18", "math.floor(v.particle_random_2 * 3) * 18"],
+					"uv_size": [18, 18]
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": [1, 1, 1, "variable.stretch"]
+			}
+		}
+	}
+}
