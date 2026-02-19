@@ -1,10 +1,6 @@
 import { system } from "@minecraft/server";
 
 export function* orbitalCannonTNTAction(dimension, chargeLevel, location, entity) {
-    system.runJob(orbitalRandomStrikes(dimension, chargeLevel, location, entity));
-}
-
-function* orbitalRandomStrikes(dimension, chargeLevel, location, sourceEntity) {
 
     const cx = Math.floor(location?.x ?? 0);
     const cy = Math.floor(location?.y ?? 0);
@@ -28,9 +24,12 @@ function* orbitalRandomStrikes(dimension, chargeLevel, location, sourceEntity) {
     system.runTimeout(() => {
         const surfaceCenter = findSurfaceAtXZ(dimension, center.x, center.z, cy);
         spawnOrbitalStrikeEntity(dimension, surfaceCenter);
-        try { dimension.spawnParticle("goe_tnt:pulse_purple", surfaceCenter); } catch { }
+
+        // block destruction as background job (spreads over ticks)
         system.runJob(destroyImpactSphere(dimension, surfaceCenter, impactRadius));
-        applyMiniStrikeDamage(dimension, surfaceCenter, impactRadius, sourceEntity);
+
+        // damage is instant
+        applyMiniStrikeDamage(dimension, surfaceCenter, impactRadius);
     }, startDelayTicks);
 
     // 2) random strikes on surface
@@ -45,9 +44,9 @@ function* orbitalRandomStrikes(dimension, chargeLevel, location, sourceEntity) {
         system.runTimeout(() => {
             const surfaceImpact = findSurfaceAtXZ(dimension, x, z, cy);
             spawnOrbitalStrikeEntity(dimension, surfaceImpact);
-            try { dimension.spawnParticle("goe_tnt:pulse_purple", surfaceImpact); } catch { }
+
             system.runJob(destroyImpactSphere(dimension, surfaceImpact, impactRadius));
-            applyMiniStrikeDamage(dimension, surfaceImpact, impactRadius, sourceEntity);
+            applyMiniStrikeDamage(dimension, surfaceImpact, impactRadius);
         }, tick);
     }
 
@@ -146,7 +145,7 @@ function findSurfaceAtXZ(dimension, x, z, fallbackY) {
     return { x: bx + 0.5, y: startY + 0.5, z: bz + 0.5 };
 }
 
-function applyMiniStrikeDamage(dimension, center, impactRadius, sourceEntity) {
+function applyMiniStrikeDamage(dimension, center, impactRadius) {
 
     let difficulty = "normal";
     try {
@@ -158,11 +157,17 @@ function applyMiniStrikeDamage(dimension, center, impactRadius, sourceEntity) {
     else if (difficulty === "hard") damageHearts = 110.5;
 
     const damageAmount = damageHearts * 2;
-    const rSq = impactRadius * impactRadius;
+
+    // +1 block extra range so edge entities also take damage
+    const damageRadius = impactRadius + 1;
+    const rSq = damageRadius * damageRadius;
 
     let entities = [];
     try {
-        entities = dimension.getEntities({ location: center, maxDistance: impactRadius });
+        entities = dimension.getEntities({
+            location: center,
+            maxDistance: damageRadius
+        });
     } catch { }
 
     for (const e of entities) {
@@ -182,10 +187,11 @@ function applyMiniStrikeDamage(dimension, center, impactRadius, sourceEntity) {
 
             if ((dx * dx + dy * dy + dz * dz) > rSq) continue;
 
-            e.applyDamage(damageAmount, { damagingEntity: sourceEntity });
+            e.applyDamage(damageAmount);
         } catch { }
     }
 }
+
 
 function* destroyImpactSphere(dimension, location, radius) {
 
