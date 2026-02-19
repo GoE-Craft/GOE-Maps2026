@@ -11,7 +11,7 @@ function* orbitalRandomStrikes(dimension, location, sourceEntity) {
     const cz = Math.floor(location?.z ?? 0);
 
     const strikeAreaRadius = 15;
-    const impactRadius = 4;
+    const impactRadius = 3;
 
     const randomStrikesCount = 13;
 
@@ -114,14 +114,20 @@ function findSurfaceAtXZ(dimension, x, z, fallbackY) {
     const minY = -64;
     const maxY = 320;
 
-    // Start searching around the original TNT Y, but also allow big hills/valleys.
+    const band = 5;
+
     let startY = Math.floor(fallbackY);
     if (startY < minY) startY = minY;
     if (startY > maxY) startY = maxY;
 
-    // 1) Scan downward from a high point (more reliable for cliffs/trees)
-    let y = Math.min(maxY, startY + 80);
-    for (; y >= minY; y--) {
+    let highY = startY + band;
+    let lowY = startY - band;
+
+    if (highY > maxY) highY = maxY;
+    if (lowY < minY) lowY = minY;
+
+    // scan downward within the band, so we "prefer" the highest valid surface in that limited range
+    for (let y = highY; y >= lowY; y--) {
         try {
             const block = dimension.getBlock({ x: bx, y, z: bz });
             if (!block) continue;
@@ -137,9 +143,10 @@ function findSurfaceAtXZ(dimension, x, z, fallbackY) {
         } catch { }
     }
 
-    // 2) Fallback: original plane
-    return { x: bx + 0.5, y: Math.floor(fallbackY) + 0.5, z: bz + 0.5 };
+    // fallback: stay on tnt level (centered)
+    return { x: bx + 0.5, y: startY + 0.5, z: bz + 0.5 };
 }
+
 
 function applyMiniStrikeDamage(dimension, center, impactRadius, sourceEntity) {
 
@@ -188,22 +195,38 @@ function* destroyImpactSphere(dimension, location, radius) {
     const cy = Math.floor(location?.y ?? 0);
     const cz = Math.floor(location?.z ?? 0);
 
-    const rSq = radius * radius;
+    const capRadius = radius;              // 4 (caps)
+    const cylinderRadius = radius + 1;     // 5 (1 block wider cylinder)
 
-    const extraDepth = 5;
+    const capRSq = capRadius * capRadius;
+    const cylinderRSq = cylinderRadius * cylinderRadius;
 
-    const centerY1 = cy;
-    const centerY2 = cy - extraDepth;
+    // "height 13" = cylinder height (caps are extra)
+    const cylinderHeight = 13;
+    const cylinderHalf = Math.floor(cylinderHeight / 2); // 6
 
-    for (let x = -radius; x <= radius; x++) {
-        for (let y = -(radius + extraDepth); y <= radius; y++) {
-            for (let z = -radius; z <= radius; z++) {
+    // total half height includes caps
+    const halfHeight = cylinderHalf + capRadius; // 6 + 4 = 10 (total 21)
 
-                const distSq1 = x * x + (y - (centerY1 - cy)) * (y - (centerY1 - cy)) + z * z;
-                const dy2 = (cy + y) - centerY2;
-                const distSq2 = x * x + dy2 * dy2 + z * z;
+    // we must loop to the widest radius so the cylinder can be wider
+    for (let x = -cylinderRadius; x <= cylinderRadius; x++) {
+        for (let y = -halfHeight; y <= halfHeight; y++) {
+            for (let z = -cylinderRadius; z <= cylinderRadius; z++) {
 
-                if (distSq1 > rSq && distSq2 > rSq) continue;
+                const xzSq = x * x + z * z;
+                const ay = Math.abs(y);
+
+                // inside cylinder band: use wider radius, no vertical contribution
+                if (ay <= cylinderHalf) {
+                    if (xzSq > cylinderRSq) continue;
+                } else {
+                    // in caps: use round cap radius (original radius)
+                    let dy = ay - cylinderHalf;
+                    if (dy < 0) dy = 0;
+
+                    const distSq = xzSq + (dy * dy);
+                    if (distSq > capRSq) continue;
+                }
 
                 const bx = cx + x;
                 const by = cy + y;
