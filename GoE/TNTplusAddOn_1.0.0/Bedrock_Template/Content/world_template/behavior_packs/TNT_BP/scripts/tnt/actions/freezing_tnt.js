@@ -4,7 +4,7 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
 
     const molangVariables = new MolangVariableMap();
 
-    const baseRadius = 10;
+    const baseRadius = 5;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     molangVariables.setFloat("radius", radius);

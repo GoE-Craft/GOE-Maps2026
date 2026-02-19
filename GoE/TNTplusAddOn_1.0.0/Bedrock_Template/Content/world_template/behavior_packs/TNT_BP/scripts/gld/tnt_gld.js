@@ -321,7 +321,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2.3
+        blockHeight: 1.5
     },
     {
         blockId: "goe_tnt:weather_station_tnt",
@@ -626,7 +626,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2.2
+        blockHeight: 1.9
     },
     {
         blockId: "goe_tnt:angry_bee_tnt",
@@ -688,7 +688,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2
+        blockHeight: 1.4
     },
     {
         blockId: "goe_tnt:beacon_tnt",
@@ -939,7 +939,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.8
+        blockHeight: 1.7
     },
     {
         blockId: "goe_tnt:matrix_tnt",
@@ -1049,7 +1049,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2.1
+        blockHeight: 1.9
     },
     {
         blockId: "goe_tnt:void_tnt",
@@ -1080,7 +1080,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.4
+        blockHeight: 1.5
     },
     {
         blockId: "goe_tnt:shadow_tnt",
@@ -1111,7 +1111,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+        blockHeight: 1.7 // if not defined, defaults to 2 - timer height depends on this
     },
     {
         blockId: "goe_tnt:mega_crater_tnt",
@@ -1278,32 +1278,6 @@ blockId: "goe_tnt:hacker_tnt",
             summonMob: null,
             summonDelay: 10,
             specialAction: null
-        },
-        preExplosionProperties: {
-            specialAction: null
-        },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
-    },
-    {
-        blockId: "goe_tnt:proxy_tnt",
-        fuseTime: 50,
-        power: 0,
-        fuseEffects: {
-            particleEffect: "minecraft:basic_smoke_particle",
-            particleDelay: 10,
-            soundEffect: "random.fuse",
-            soundDelay: 0
-        },
-        explosionEffects: {
-            explosionAnimationLength: 2
-        },
-        explosionProperties: {
-            createsFire: false,
-            allowUnderwater: false,
-            breaksBlocks: false,
-            summonMob: null,
-            summonDelay: 10,
-            specialAction: "proxy"
         },
         preExplosionProperties: {
             specialAction: null

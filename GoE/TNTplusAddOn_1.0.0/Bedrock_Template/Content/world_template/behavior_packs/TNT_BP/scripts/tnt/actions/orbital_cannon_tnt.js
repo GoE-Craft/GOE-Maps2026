@@ -1,10 +1,10 @@
 import { system } from "@minecraft/server";
 
 export function* orbitalCannonTNTAction(dimension, chargeLevel, location, entity) {
-    system.runJob(orbitalRandomStrikes(dimension, location, entity));
+    system.runJob(orbitalRandomStrikes(dimension, chargeLevel, location, entity));
 }
 
-function* orbitalRandomStrikes(dimension, location, sourceEntity) {
+function* orbitalRandomStrikes(dimension, chargeLevel, location, sourceEntity) {
 
     const cx = Math.floor(location?.x ?? 0);
     const cy = Math.floor(location?.y ?? 0);
@@ -13,7 +13,8 @@ function* orbitalRandomStrikes(dimension, location, sourceEntity) {
     const strikeAreaRadius = 15;
     const impactRadius = 3;
 
-    const randomStrikesCount = 13;
+    const baseRandomStrikesCount = 13;
+    const randomStrikesCount = baseRandomStrikesCount + (Math.max(0, Math.floor(chargeLevel || 0)) * 2);
 
     const intervalTicks = 5;
     const startDelayTicks = 0;
@@ -126,7 +127,6 @@ function findSurfaceAtXZ(dimension, x, z, fallbackY) {
     if (highY > maxY) highY = maxY;
     if (lowY < minY) lowY = minY;
 
-    // scan downward within the band, so we "prefer" the highest valid surface in that limited range
     for (let y = highY; y >= lowY; y--) {
         try {
             const block = dimension.getBlock({ x: bx, y, z: bz });
@@ -143,10 +143,8 @@ function findSurfaceAtXZ(dimension, x, z, fallbackY) {
         } catch { }
     }
 
-    // fallback: stay on tnt level (centered)
     return { x: bx + 0.5, y: startY + 0.5, z: bz + 0.5 };
 }
-
 
 function applyMiniStrikeDamage(dimension, center, impactRadius, sourceEntity) {
 
@@ -195,20 +193,17 @@ function* destroyImpactSphere(dimension, location, radius) {
     const cy = Math.floor(location?.y ?? 0);
     const cz = Math.floor(location?.z ?? 0);
 
-    const capRadius = radius;              // 4 (caps)
-    const cylinderRadius = radius + 1;     // 5 (1 block wider cylinder)
+    const capRadius = radius;
+    const cylinderRadius = radius + 1;
 
     const capRSq = capRadius * capRadius;
     const cylinderRSq = cylinderRadius * cylinderRadius;
 
-    // "height 13" = cylinder height (caps are extra)
     const cylinderHeight = 13;
-    const cylinderHalf = Math.floor(cylinderHeight / 2); // 6
+    const cylinderHalf = Math.floor(cylinderHeight / 2);
 
-    // total half height includes caps
-    const halfHeight = cylinderHalf + capRadius; // 6 + 4 = 10 (total 21)
+    const halfHeight = cylinderHalf + capRadius;
 
-    // we must loop to the widest radius so the cylinder can be wider
     for (let x = -cylinderRadius; x <= cylinderRadius; x++) {
         for (let y = -halfHeight; y <= halfHeight; y++) {
             for (let z = -cylinderRadius; z <= cylinderRadius; z++) {
@@ -216,11 +211,9 @@ function* destroyImpactSphere(dimension, location, radius) {
                 const xzSq = x * x + z * z;
                 const ay = Math.abs(y);
 
-                // inside cylinder band: use wider radius, no vertical contribution
                 if (ay <= cylinderHalf) {
                     if (xzSq > cylinderRSq) continue;
                 } else {
-                    // in caps: use round cap radius (original radius)
                     let dy = ay - cylinderHalf;
                     if (dy < 0) dy = 0;
 
@@ -242,6 +235,5 @@ function* destroyImpactSphere(dimension, location, radius) {
         }
         yield;
     }
-
     yield;
 }
