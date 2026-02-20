@@ -56,7 +56,7 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
             } catch {}
         }
 
-    }, 30);
+    }, 20);
 
     yield;
 }
