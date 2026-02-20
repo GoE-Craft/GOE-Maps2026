@@ -87,7 +87,6 @@
                     ]
                 }
             },
-            // sdas
             "goe_tnt:start_swell": {
                 "set_property": {
                     "goe_tnt:swell": true

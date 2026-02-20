@@ -32,6 +32,7 @@ import { megaCraterTNTAction } from "./actions/mega_crater_tnt";
 import { orbitalCannonTNTAction } from "./actions/orbital_cannon_tnt";
 import { shadowTNTAction } from "./actions/shadow_tnt";
 import { hackerTNTAction } from "./actions/hacker_tnt";
+import { waterEraserTNTAction } from "./actions/water_eraser_tnt";
 
 /**
  * TNT Actions Module
@@ -178,6 +179,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "hacker":
             system.runJob(hackerTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "water_eraser":
+            system.runJob(waterEraserTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;
