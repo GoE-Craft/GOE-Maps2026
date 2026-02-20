@@ -207,7 +207,7 @@ export const TNT_GLD = [
     },
     {
 blockId: "goe_tnt:hacker_tnt",
-        fuseTime: 120,
+        fuseTime: 100,
         power: 0,
         fuseEffects: {
             particleEffect: null,
@@ -1144,7 +1144,7 @@ blockId: "goe_tnt:hacker_tnt",
     },
     {
         blockId: "goe_tnt:knockback_tnt",
-        fuseTime: 40,
+        fuseTime: 50,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -1153,10 +1153,7 @@ blockId: "goe_tnt:hacker_tnt",
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.explode",
-            soundDelay: 0
+            explosionAnimationLength: 1
         },
         explosionProperties: {
             createsFire: false,
