@@ -15,8 +15,7 @@
       },
 			"scripts": {
         "animate": [
-          {"charge" : "q.mark_variant == 1"},
-          {"explosion" : "q.mark_variant == 2"}
+          {"explosion": 1}
         ]
 			},
       "animations": {
@@ -25,7 +24,9 @@
       "particle_effects": {
         "pulse_green": "goe_tnt:pulse_green",
         "explosion_pixels_green": "goe_tnt:explosion_pixels_green",
-        "explosion_hacking": "goe_tnt:explosion_hacking"
+        "explosion_hacking": "goe_tnt:explosion_hacking",
+        "explosion_hacking_mini": "goe_tnt:explosion_hacking_mini"
+
       },
       "render_controllers": [ "controller.render.hacker_mini_explode" ]
     }
