@@ -33,6 +33,7 @@ import { orbitalCannonTNTAction } from "./actions/orbital_cannon_tnt";
 import { shadowTNTAction } from "./actions/shadow_tnt";
 import { hackerTNTAction } from "./actions/hacker_tnt";
 import { waterEraserTNTAction } from "./actions/water_eraser_tnt";
+import { soundTNTAction } from "./actions/sound_tnt";
 
 /**
  * TNT Actions Module
@@ -182,6 +183,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "water_eraser":
             system.runJob(waterEraserTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "sound":
+            system.runJob(soundTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;
