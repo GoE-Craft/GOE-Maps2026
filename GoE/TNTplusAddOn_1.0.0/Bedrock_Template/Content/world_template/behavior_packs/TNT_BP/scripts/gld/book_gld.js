@@ -703,8 +703,8 @@ export const Achievements = {
         {
             id: "silent_tnt",
             name: "Silent TNT",
-            info: "Silent Explosion!",
-            tips: "Psssttt.",
+            info: "Blinds and disorientate everyone with no sound.",
+            tips: "Use Silent TNT to disorientate enemies.",
             tntType: "silent_tnt",
             icon: "textures/goe/tnt/ui/achievements/silent_tnt",
             rewardStructure: "goe_tnt:silent_tnt_reward"
@@ -712,8 +712,8 @@ export const Achievements = {
         {
             id: "mega_crater_tnt",
             name: "Mega Crater TNT",
-            info: "Leaves large crater behind!",
-            tips: "Look at this hole!",
+            info: "Creates ball shaped crater with large explosion.",
+            tips: "Use Mega Crater TNT only in wide open areas.",
             tntType: "mega_crater_tnt",
             icon: "textures/goe/tnt/ui/achievements/mega_crater_tnt",
             rewardStructure: "goe_tnt:mega_crater_tnt_reward"
@@ -721,8 +721,8 @@ export const Achievements = {
         {
             id: "knockback_tnt",
             name: "Knockback TNT",
-            info: "Knocks back all enemies!",
-            tips: "I can see that in the distance!",
+            info: "Knockbacks the mobs far in the distance.",
+            tips: "Use Knockback TNT to sent mobs flying.",
             tntType: "knockback_tnt",
             icon: "textures/goe/tnt/ui/achievements/knockback_tnt",
             rewardStructure: "goe_tnt:knockback_tnt_reward"
@@ -730,8 +730,8 @@ export const Achievements = {
         {
             id: "void_tnt",
             name: "Void TNT",
-            info: "Sucks up everything in the void!",
-            tips: "This is not a joke.",
+            info: "Deletes all blocks in a large radius, leaving pure empty space.",
+            tips: "Use it far from builds, there is no wway to recover what it removes.",
             tntType: "void_tnt",
             icon: "textures/goe/tnt/ui/achievements/void_tnt",
             rewardStructure: "goe_tnt:void_tnt_reward"
@@ -739,8 +739,8 @@ export const Achievements = {
         {
             id: "orbital_cannon_tnt",
             name: "Orbital Cannon TNT",
-            info: "Summons big laser from the sky!",
-            tips: "This is Alien laser beam?",
+            info: "Fires a massive energy beam from the sky onto the target area.!",
+            tips: "Light it and run, the strike has a short delay but huge impact.",
             tntType: "orbital_cannon_tnt",
             icon: "textures/goe/tnt/ui/achievements/orbital_cannon_tnt",
             rewardStructure: "goe_tnt:orbital_cannon_tnt_reward"
@@ -748,8 +748,8 @@ export const Achievements = {
         {
             id: "shadow_tnt",
             name: "Shadow TNT",
-            info: "Makes hard visibility!",
-            tips: "Don't move.",
+            info: "Covers the area in darkness and spawns shadowy effects.",
+            tips: "Bring night vision or torches to survive inside shadow zone.",
             tntType: "shadow_tnt",
             icon: "textures/goe/tnt/ui/achievements/shadow_tnt",
             rewardStructure: "goe_tnt:shadow_tnt_reward"
@@ -757,8 +757,8 @@ export const Achievements = {
         {
             id: "hacker_tnt",
             name: "Hacker TNT",
-            info: "Explodes every enemy near you!",
-            tips: "Don't hack!",
+            info: "Randomly explodes blocks and mobs in unpredictable ways.",
+            tips: "Use it only with caution, results are impossible to control.",
             tntType: "hacker_tnt",
             icon: "textures/goe/tnt/ui/achievements/hacker_tnt",
             rewardStructure: "goe_tnt:hacker_tnt_reward"
@@ -766,8 +766,8 @@ export const Achievements = {
         {
             id: "glitch_tnt",
             name: "Glitch TNT",
-            info: "Does uncontrolled explosions!",
-            tips: "This is isn't meant to be in the game.",
+            info: "Breaks blocks into corrupted or bugged-looking states.",
+            tips: "If you want your wrold to look weird, use it.",
             tntType: "glitch_tnt",
             icon: "textures/goe/tnt/ui/achievements/glitch_tnt",
             rewardStructure: "goe_tnt:glitch_tnt_reward"
@@ -775,8 +775,8 @@ export const Achievements = {
         {
             id: "fungi_tnt",
             name: "Fungi TNT",
-            info: "Summons small mycelium land!",
-            tips: "Mushrooms and cows!",
+            info: "Spreads mycelium and mushroom cows around.",
+            tips: "Use it if you lack of mushroom soups.",
             tntType: "fungi_tnt",
             icon: "textures/goe/tnt/ui/achievements/fungi_tnt",
             rewardStructure: "goe_tnt:fungi_tnt_reward"
@@ -784,8 +784,8 @@ export const Achievements = {
         {
             id: "snapshot_tnt",
             name: "Snapshot TNT",
-            info: "Blinds the player and makes mobs to run uncontrolled!",
-            tips: "How old is this?",
+            info: "Blinds all the mobs that are in the radius of Snapshot TNT.",
+            tips: "Mobs probably wont going to like it.",
             tntType: "snapshot_tnt",
             icon: "textures/goe/tnt/ui/achievements/snapshot_tnt",
             rewardStructure: "goe_tnt:snapshot_tnt_reward"
@@ -793,8 +793,8 @@ export const Achievements = {
         {
             id: "balloon_tnt",
             name: "Balloon TNT",
-            info: "Fly and explode on impact!",
-            tips: "I think those don't have helium.",
+            info: "Balloon TNT flies and explodes if he hits something in the air.",
+            tips: "Activate it near cliffs or over water for funny results.",
             tntType: "balloon_tnt",
             icon: "textures/goe/tnt/ui/achievements/balloon_tnt",
             rewardStructure: "goe_tnt:balloon_tnt_reward"
@@ -802,8 +802,8 @@ export const Achievements = {
         {
             id: "matrix_tnt",
             name: "Matrix TNT",
-            info: "Summons small scatters that follow enemies and explode!",
-            tips: "Dodge this!",
+            info: "On explosion it releases small scatter mobs that follow the mobs and explode.",
+            tips: "Use on flat terrain to clearly see the full effect.",
             tntType: "matrix_tnt",
             icon: "textures/goe/tnt/ui/achievements/matrix_tnt",
             rewardStructure: "goe_tnt:matrix_tnt_reward"
@@ -811,8 +811,8 @@ export const Achievements = {
         {
             id: "water_eraser_tnt",
             name: "Water Eraser TNT",
-            info: "Covers large area in water!",
-            tips: "At least I know how to swim.",
+            info: "Removes all water in a large radius instantly.",
+            tips: "Perfect for clearing oceans or flooded caves quickly.",
             tntType: "water_eraser_tnt",
             icon: "textures/goe/tnt/ui/achievements/water_eraser_tnt",
             rewardStructure: "goe_tnt:water_eraser_tnt_reward"
@@ -820,8 +820,8 @@ export const Achievements = {
         {
             id: "proxy_tnt",
             name: "Proxy TNT",
-            info: "On impact launches small TNT blocks!",
-            tips: "Use with caution!",
+            info: "On explosion launches small TNT blocks all around.",
+            tips: "Pick a smart direction to run after igniting it.",
             tntType: "proxy_tnt",
             icon: "textures/goe/tnt/ui/achievements/proxy_tnt",
             rewardStructure: "goe_tnt:proxy_tnt_reward"
@@ -829,8 +829,8 @@ export const Achievements = {
         {
             id: "sound_tnt",
             name: "Sound TNT",
-            info: "Produce loud sound that damages enemies!",
-            tips: "Remove your headphones!",
+            info: "Releases powerful sound waves instead of normal explosion damage.",
+            tips: "Use it to damage mobs without destroying terrain.",
             tntType: "sound_tnt",
             icon: "textures/goe/tnt/ui/achievements/sound_tnt",
             rewardStructure: "goe_tnt:sound_tnt_reward"
@@ -838,8 +838,8 @@ export const Achievements = {
         {
             id: "specialized_tnt",
             name: "Specialized TNT",
-            info: "Destroys large area of the blocks he is placed on!",
-            tips: "Specialization!",
+            info: "Adapts its effect based on the block he is standing on destroying just that one.",
+            tips: "Experiment with different blocks.",
             tntType: "specialized_tnt",
             icon: "textures/goe/tnt/ui/achievements/specialized_tnt",
             rewardStructure: "goe_tnt:specialized_tnt_reward"
