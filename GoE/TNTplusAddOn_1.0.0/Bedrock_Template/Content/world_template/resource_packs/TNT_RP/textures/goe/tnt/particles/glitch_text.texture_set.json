@@ -1,0 +1,7 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "glitch_text",
+		"metalness_emissive_roughness": "glitch_text_mer"
+	}
+}

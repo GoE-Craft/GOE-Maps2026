@@ -1,29 +1,43 @@
 {
-	"format_version": "1.19.0",
-	"minecraft:client_entity": {
-		"description": {
-			"identifier": "goe_tnt:glitch_tnt",
-			"materials": {
-				"default": "entity_alphatest"
-			},
-			"textures": {
-				"default": "textures/goe/tnt/entity/tnt"
-			},
-			"geometry": {
-				"default": "geometry.tnt"
-			},
+  "format_version": "1.19.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:glitch_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/glitch_tnt"
+      },
+      "geometry": {
+        "default": "geometry.glitch_tnt"
+      },
 			"scripts": {
-				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
-				],
-				"animate": [
-				{"tnt_swelling": "v.should_swell"}
-				]
-					},
-			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
 			},
-      		"render_controllers": [ "controller.render.tnt" ]
-		}
-	}
+      "animations": {
+        "charge": "animation.glitch_tnt.charge",
+        "explode": "animation.glitch_tnt.explosion"
+      },
+      "particle_effects":{
+        "glitch_explosion_orb": "goe_tnt:glitch_explosion_orb",
+        "glitch_ring": "goe_tnt:glitch_ring",
+        "glitch_explosion": "goe_tnt:glitch_explosion",
+        "glitch_text": "goe_tnt:glitch_text",
+        "glitch_leftover_text": "goe_tnt:glitch_leftover_text",
+        "glitch_pixels": "goe_tnt:glitch_pixels",
+        "glitch_text_smooth": "goe_tnt:glitch_text_smooth",
+        "glitch_numbers": "goe_tnt:glitch_numbers",
+        "glitch_shadows": "goe_tnt:glitch_shadows",
+        "glitch_laser": "goe_tnt:glitch_laser"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
 }
