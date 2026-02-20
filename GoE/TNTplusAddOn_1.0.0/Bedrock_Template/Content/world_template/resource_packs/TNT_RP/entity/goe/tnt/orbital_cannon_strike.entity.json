@@ -4,7 +4,7 @@
     "description": {
       "identifier": "goe_tnt:orbital_cannon_strike",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphablend"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/orbital_cannon_tnt"
@@ -19,6 +19,10 @@
 			},
       "animations": {
         "explosion": "animation.orbital_cannon_strike.explosion"
+      },
+      "particle_effects": {
+        "explosion_pixels_purple" : "goe_tnt:explosion_pixels_purple",
+        "pulse_purple" : "goe_tnt:pulse_purple"
       },
       "render_controllers": [ "controller.render.default"]
     }
