@@ -1,20 +1,28 @@
 {
   "format_version": "1.16.100",
   "minecraft:fog_settings": {
-    "description": {
-      "identifier": "goe_tnt:shadow_fog"
-    },
+    "description": { "identifier": "goe_tnt:shadow_fog" },
     "distance": {
       "air": {
-        "fog_start": 0.5,
-        "fog_end": 6.0,
-        "fog_color": "#000000"
+        "fog_start": 1,
+        "fog_end": 10,
+        "fog_color": "#08000d",
+        "render_distance_type": "fixed"
+      },
+      "weather": {
+        "fog_start": 1,
+        "fog_end": 10,
+        "fog_color": "#08000d",
+        "render_distance_type": "fixed"
       }
     },
     "volumetric": {
       "density": {
-        "max_density": 0.8,
-        "uniform": true
+        "air": {
+          "max_density": 0.0,
+          "zero_density_height": 1.0,
+          "max_density_height": 0.0
+        }
       }
     }
   }

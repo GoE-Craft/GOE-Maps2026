@@ -1116,7 +1116,7 @@ blockId: "goe_tnt:hacker_tnt",
     {
         blockId: "goe_tnt:mega_crater_tnt",
         fuseTime: 40,
-        power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        power: 9, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

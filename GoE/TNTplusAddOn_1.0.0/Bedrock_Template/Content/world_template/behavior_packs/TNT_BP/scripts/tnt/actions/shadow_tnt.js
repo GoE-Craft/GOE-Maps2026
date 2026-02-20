@@ -10,37 +10,42 @@ export function* shadowTNTAction(dimension, chargeLevel, location, entity) {
 
     const center = { x: cx + 0.5, y: cy + 0.5, z: cz + 0.5 };
 
-    /*     // shadow particle
     try {
         dimension.spawnParticle("goe_tnt:shadow_fog", center);
-    } catch { } */
+    } catch { }
 
-    // fog 
-    applyFogToPlayers(dimension, center, explosionRadius, 10);
+    applyBlindnessOnce(dimension, center, explosionRadius);
 
-    applyShadowDamage(dimension, center, explosionRadius);
+    applyDamage(dimension, center, explosionRadius);
 
     system.runJob(destroyExplosionSphere(dimension, center, explosionRadius));
 
     yield;
 }
 
-function applyFogToPlayers(dimension, center, radius, seconds) {
+function applyBlindnessOnce(dimension, center, radius) {
 
-    const durationTicks = Math.max(1, Math.floor(seconds * 20));
+    const durationTicks = 10 * 20; // 10s
+    const amplifier = 1;
 
+    let players = [];
     try {
-        dimension.runCommandAsync(`fog @a[x=${center.x},y=${center.y},z=${center.z},r=${radius}] push goe_tnt:shadow_fog shadow_tnt`);
-    } catch { }
+        players = dimension.getPlayers({ location: center, maxDistance: radius });
+    } catch { players = []; }
 
-    system.runTimeout(() => {
+    for (const p of players) {
         try {
-            dimension.runCommandAsync(`fog @a[x=${center.x},y=${center.y},z=${center.z},r=${radius}] pop shadow_tnt`);
+            if (!p?.isValid) continue;
+
+            p.addEffect("blindness", durationTicks, {
+                amplifier,
+                showParticles: false
+            });
         } catch { }
-    }, durationTicks);
+    }
 }
 
-function applyShadowDamage(dimension, center, radius) {
+function applyDamage(dimension, center, radius) {
 
     let difficulty = "normal";
     try {
@@ -52,7 +57,8 @@ function applyShadowDamage(dimension, center, radius) {
     else if (difficulty === "hard") damageHearts = 42.25;
 
     const damageAmount = damageHearts * 2;
-    const rSq = radius * radius;
+    const fogRadius = radius + 2; // +2 blocks larger than explosion
+    const rSq = fogRadius * fogRadius;
 
     let entities = [];
     try {
