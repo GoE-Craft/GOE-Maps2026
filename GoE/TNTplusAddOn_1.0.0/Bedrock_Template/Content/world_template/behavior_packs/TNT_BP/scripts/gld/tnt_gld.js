@@ -1169,35 +1169,6 @@ blockId: "goe_tnt:hacker_tnt",
         blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
     },
     {
-        blockId: "goe_tnt:glitch_tnt",
-        fuseTime: 40,
-        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
-        fuseEffects: {
-            particleEffect: "minecraft:basic_smoke_particle",
-            particleDelay: 10,
-            soundEffect: "random.fuse",
-            soundDelay: 0
-        },
-        explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.explode",
-            soundDelay: 0
-        },
-        explosionProperties: {
-            createsFire: false,
-            allowUnderwater: false,
-            breaksBlocks: true,
-            summonMob: null,
-            summonDelay: 10,
-            specialAction: "glitch"
-        },
-        preExplosionProperties: {
-            specialAction: null
-        },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
-    },
-    {
         blockId: "goe_tnt:fungi_tnt",
         fuseTime: 40,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
@@ -1301,6 +1272,37 @@ blockId: "goe_tnt:hacker_tnt",
             summonMob: null,
             summonDelay: 10,
             specialAction: "specialized"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:glitch_tnt",
+        fuseTime: 50,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:glitch_tnt_charge",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:glitch_tnt_explosion",
+            explosionAnimationLength: 1
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: null
         },
         preExplosionProperties: {
             specialAction: null

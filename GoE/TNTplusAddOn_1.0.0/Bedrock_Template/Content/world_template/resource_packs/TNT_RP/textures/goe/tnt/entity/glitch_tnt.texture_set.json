@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "glitch_tnt",
+		"metalness_emissive_roughness": "glitch_tnt_mer",
+		"heightmap": "glitch_tnt_height"
+	}
+}
