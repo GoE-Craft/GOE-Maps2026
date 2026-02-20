@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"particle_effect": {
 		"description": {
-			"identifier": "goe_tnt:explosion_hacking",
+			"identifier": "goe_tnt:explosion_hacking_mini",
 			"basic_render_parameters": {
 				"material": "particles_blend",
 				"texture": "textures/goe/tnt/particles/explosion_hacking"
