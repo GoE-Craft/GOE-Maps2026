@@ -10,11 +10,7 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
     const center = { x: cx + 0.5, y: cy + 0.5, z: cz + 0.5 };
 
-    console.warn(`[hackerTNT] center: ${center.x}, ${center.y}, ${center.z} | radius: ${strikeAreaRadius}`);
-
     const targets = getTargetsInSphere(dimension, center, strikeAreaRadius, entity);
-
-    console.warn(`[hackerTNT] targets found: ${targets.length}`);
 
     if (!targets.length) {
         yield;
@@ -23,24 +19,15 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
     const explodePositions = [];
 
-    // spawn entities immediately, queue explosions for later
     for (let i = 0; i < targets.length; i++) {
 
         const target = targets[i];
 
         try {
-            if (!target?.isValid) {
-                console.warn(`[hackerTNT] target ${i} invalid`);
-                continue;
-            }
+            if (!target?.isValid) continue;
 
             const p = target.location;
-            if (!p) {
-                console.warn(`[hackerTNT] target ${i} has no location`);
-                continue;
-            }
-
-            console.warn(`[hackerTNT] immediate spawn at ${target.typeId} | ${p.x.toFixed(2)}, ${p.y.toFixed(2)}, ${p.z.toFixed(2)}`);
+            if (!p) continue;
 
             const explodePos = { x: p.x, y: p.y, z: p.z };
 
@@ -48,14 +35,9 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
             try {
                 dimension.spawnEntity("goe_tnt:hacker_mini_explode", explodePos);
-                console.warn(`[hackerTNT] hacker_mini_explode spawned`);
-            } catch {
-                console.warn(`[hackerTNT] spawnEntity failed`);
-            }
+            } catch {}
 
-        } catch {
-            console.warn(`[hackerTNT] error processing target ${i}`);
-        }
+        } catch {}
     }
 
     if (!explodePositions.length) {
@@ -63,7 +45,6 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
         return;
     }
 
-    // delay only the vanilla explosions
     system.runTimeout(() => {
 
         for (let i = 0; i < explodePositions.length; i++) {
@@ -72,10 +53,7 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
             try {
                 dimension.createExplosion(explodePos, 3);
-                console.warn(`[hackerTNT] vanilla explosion power 3 at ${explodePos.x.toFixed(2)}, ${explodePos.y.toFixed(2)}, ${explodePos.z.toFixed(2)}`);
-            } catch {
-                console.warn(`[hackerTNT] createExplosion failed`);
-            }
+            } catch {}
         }
 
     }, 30);
