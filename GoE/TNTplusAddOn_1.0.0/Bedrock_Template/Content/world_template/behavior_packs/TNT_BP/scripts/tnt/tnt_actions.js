@@ -34,6 +34,7 @@ import { shadowTNTAction } from "./actions/shadow_tnt";
 import { hackerTNTAction } from "./actions/hacker_tnt";
 import { waterEraserTNTAction } from "./actions/water_eraser_tnt";
 import { soundTNTAction } from "./actions/sound_tnt";
+import { glitchTNTAction } from "./actions/glitch_tnt";
 
 /**
  * TNT Actions Module
@@ -186,6 +187,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "sound":
             system.runJob(soundTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "glitch":
+            system.runJob(glitchTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;

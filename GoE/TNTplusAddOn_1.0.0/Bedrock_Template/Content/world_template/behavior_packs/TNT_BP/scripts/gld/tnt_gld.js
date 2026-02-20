@@ -1302,7 +1302,7 @@ blockId: "goe_tnt:hacker_tnt",
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "glitch"
         },
         preExplosionProperties: {
             specialAction: null
