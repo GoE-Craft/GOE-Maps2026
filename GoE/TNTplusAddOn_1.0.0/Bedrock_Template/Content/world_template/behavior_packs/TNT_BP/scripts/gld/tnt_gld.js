@@ -222,7 +222,7 @@ blockId: "goe_tnt:hacker_tnt",
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 0,
-            specialAction: null
+            specialAction: "hacker"
         },
         preExplosionProperties: {
             specialAction: null
