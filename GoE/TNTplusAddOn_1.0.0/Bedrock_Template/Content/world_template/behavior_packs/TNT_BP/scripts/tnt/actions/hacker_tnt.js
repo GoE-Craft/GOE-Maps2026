@@ -6,7 +6,7 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
     const cy = Math.floor(location?.y ?? 0);
     const cz = Math.floor(location?.z ?? 0);
 
-    const strikeAreaRadius = 15;
+    const strikeAreaRadius = 30;
 
     const center = { x: cx + 0.5, y: cy + 0.5, z: cz + 0.5 };
 
@@ -21,7 +21,9 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
         return;
     }
 
-    // only summon entity for debugging
+    const explodePositions = [];
+
+    // spawn entities immediately, queue explosions for later
     for (let i = 0; i < targets.length; i++) {
 
         const target = targets[i];
@@ -38,9 +40,11 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
                 continue;
             }
 
-            console.warn(`[hackerTNT] summoning hacker_mini_explode at ${target.typeId} | ${p.x.toFixed(2)}, ${p.y.toFixed(2)}, ${p.z.toFixed(2)}`);
+            console.warn(`[hackerTNT] immediate spawn at ${target.typeId} | ${p.x.toFixed(2)}, ${p.y.toFixed(2)}, ${p.z.toFixed(2)}`);
 
             const explodePos = { x: p.x, y: p.y, z: p.z };
+
+            explodePositions.push(explodePos);
 
             try {
                 dimension.spawnEntity("goe_tnt:hacker_mini_explode", explodePos);
@@ -53,6 +57,28 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
             console.warn(`[hackerTNT] error processing target ${i}`);
         }
     }
+
+    if (!explodePositions.length) {
+        yield;
+        return;
+    }
+
+    // delay only the vanilla explosions
+    system.runTimeout(() => {
+
+        for (let i = 0; i < explodePositions.length; i++) {
+
+            const explodePos = explodePositions[i];
+
+            try {
+                dimension.createExplosion(explodePos, 3);
+                console.warn(`[hackerTNT] vanilla explosion power 3 at ${explodePos.x.toFixed(2)}, ${explodePos.y.toFixed(2)}, ${explodePos.z.toFixed(2)}`);
+            } catch {
+                console.warn(`[hackerTNT] createExplosion failed`);
+            }
+        }
+
+    }, 30);
 
     yield;
 }
@@ -67,63 +93,45 @@ function getTargetsInSphere(dimension, center, radius, sourceEntity) {
             location: center,
             maxDistance: radius
         });
-        console.warn(`[hackerTNT] entities fetched from dimension: ${entities.length}`);
     } catch {
-        console.warn(`[hackerTNT] getEntities failed`);
+        entities = [];
     }
 
     const out = [];
 
     for (const e of entities) {
         try {
-            if (!e?.isValid) {
-                console.warn(`[hackerTNT] skipped invalid entity`);
-                continue;
-            }
+            if (!e?.isValid) continue;
 
-            if (sourceEntity?.isValid && e.id === sourceEntity.id) {
-                console.warn(`[hackerTNT] skipped source entity`);
-                continue;
-            }
+            if (sourceEntity?.isValid && e.id === sourceEntity.id) continue;
 
-            if (e.typeId === "minecraft:player") {
-                console.warn(`[hackerTNT] skipped player`);
-                continue;
-            }
+            const typeId = e.typeId || "";
 
-            if (e.typeId === "goe_tnt:mecha_suit") {
-                console.warn(`[hackerTNT] skipped mecha_suit`);
-                continue;
-            }
+            if (typeId === "minecraft:player") continue;
+            if (typeId === "minecraft:item") continue;
+            if (typeId === "minecraft:xp_orb") continue;
 
-            if (e.typeId && e.typeId.includes("tnt")) {
-                console.warn(`[hackerTNT] skipped tnt entity: ${e.typeId}`);
-                continue;
-            }
+            if (typeId === "goe_tnt:mecha_suit") continue;
+
+            if (typeId === "minecraft:tnt") continue;
+            if (typeId === "minecraft:tnt_minecart") continue;
+            if (typeId.endsWith("_tnt")) continue;
+            if (typeId.includes(":tnt")) continue;
+
+            if (!e.getComponent("minecraft:health")) continue;
 
             const p = e.location;
-            if (!p) {
-                console.warn(`[hackerTNT] entity without location skipped`);
-                continue;
-            }
+            if (!p) continue;
 
             const dx = p.x - center.x;
             const dy = p.y - center.y;
             const dz = p.z - center.z;
 
-            if ((dx * dx + dy * dy + dz * dz) > rSq) {
-                console.warn(`[hackerTNT] entity outside sphere: ${e.typeId}`);
-                continue;
-            }
+            if ((dx * dx + dy * dy + dz * dz) > rSq) continue;
 
-            console.warn(`[hackerTNT] valid target added: ${e.typeId}`);
             out.push(e);
-        } catch {
-            console.warn(`[hackerTNT] error while filtering entity`);
-        }
+        } catch {}
     }
-
-    console.warn(`[hackerTNT] final targets count: ${out.length}`);
 
     return out;
 }
