@@ -1,0 +1,33 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:hacker_mini_explode",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam": "entity_alphablend"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/hacker_tnt"
+      },
+      "geometry": {
+        "default": "geometry.hacker_mini_explode"
+      },
+			"scripts": {
+        "animate": [
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
+			},
+      "animations": {
+        "explosion" : "animation.hacker_mini_explode.explode"
+      },
+      "particle_effects": {
+        "pulse_green": "goe_tnt:pulse_green",
+        "explosion_pixels_green": "goe_tnt:explosion_pixels_green",
+        "explosion_hacking": "goe_tnt:explosion_hacking"
+      },
+      "render_controllers": [ "controller.render.hacker_mini_explode" ]
+    }
+  }
+}

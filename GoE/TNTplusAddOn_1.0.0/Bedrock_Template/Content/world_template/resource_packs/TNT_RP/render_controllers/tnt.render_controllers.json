@@ -53,6 +53,36 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
+    "controller.render.hacker_mini_explode": {
+      "geometry": "Geometry.default",
+      "materials": [ 
+        { "*": "Material.default" },
+        { "beam": "Material.beam" },
+        { "beam2": "Material.beam" },
+        { "beam3": "Material.beam" },
+        { "beam4": "Material.beam" },
+        { "beam5": "Material.beam" },
+        { "beam6": "Material.beam" },
+        { "beam7": "Material.beam" },
+        { "beam8": "Material.beam" },
+        { "beam9": "Material.beam" },
+        { "beam10": "Material.beam" },
+        { "panel": "Material.beam" },
+        { "panel2": "Material.beam" },
+        { "panel3": "Material.beam" },
+        { "panel4": "Material.beam" },
+        { "panel5": "Material.beam" },
+        { "panel6": "Material.beam" }
+
+      ],
+      "textures": [ "Texture.default" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
+      }
+    },
     "controller.render.teleportation_tnt": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default", "glass": "Material.glass" } ],
