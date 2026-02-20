@@ -7,21 +7,31 @@
 				"default": "entity_alphatest"
 			},
 			"textures": {
-				"default": "textures/goe/tnt/entity/tnt"
+				"default": "textures/goe/tnt/entity/knockback_tnt"
 			},
 			"geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.knockback_tnt"
 			},
 			"scripts": {
 				"pre_animation": [
 				"v.should_swell = query.property('goe_tnt:swell');"
 				],
 				"animate": [
-				{"tnt_swelling": "v.should_swell"}
+          			{"charge" : "q.mark_variant == 1"},
+          			{"explode" : "q.mark_variant == 2"}
 				]
 					},
 			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+        		"charge" : "animation.knockback_tnt.charge",
+        		"explode" : "animation.knockback_tnt.explode"
+			},
+			"particle_effects": {
+        		"tnt_charge_blue" : "goe_tnt:tnt_charge_blue",
+        		"knockback_stars_scatter" : "goe_tnt:knockback_stars_scatter",
+				"knockback_stars" : "goe_tnt:knockback_stars",
+				"atmosphere_impact_night" : "goe_tnt:daytime_impact_night",
+				"light_up_big_explosion" : "goe_tnt:light_big_explosion",
+				"atmosphere_impact_radius_night" : "goe_tnt:daytime_impact_radius_night"
 			},
       		"render_controllers": [ "controller.render.tnt" ]
 		}

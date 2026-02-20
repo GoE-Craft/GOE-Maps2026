@@ -51,7 +51,7 @@
     "infinity_tnt": { "textures": "textures/goe/tnt/entity/infinity_tnt" },
     "invisibility_tnt": { "textures": "textures/goe/tnt/entity/invisibility_tnt" },
     "jocker_tnt": { "textures": "textures/goe/tnt/entity/jocker_tnt" },
-    "knock_back_tnt": { "textures": "textures/goe/tnt/entity/knock_back_tnt" },
+    "knockback_tnt": { "textures": "textures/goe/tnt/entity/knockback_tnt" },
     "light_tnt": { "textures": "textures/goe/tnt/entity/light_tnt" },
     "loader_tnt": { "textures": "textures/goe/tnt/entity/loader_tnt" },
     "magnet_tnt": { "textures": "textures/goe/tnt/entity/magnet_tnt" },
