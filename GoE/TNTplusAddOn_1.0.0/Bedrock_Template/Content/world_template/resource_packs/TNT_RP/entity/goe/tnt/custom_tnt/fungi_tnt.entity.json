@@ -7,22 +7,27 @@
 				"default": "entity_alphatest"
 			},
 			"textures": {
-				"default": "textures/goe/tnt/entity/tnt"
+				"default": "textures/goe/tnt/entity/fungi_tnt"
 			},
 			"geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.fungi_tnt"
 			},
 			"scripts": {
-				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
-				],
 				"animate": [
-				{"tnt_swelling": "v.should_swell"}
-				]
+          			{"charge" : "q.mark_variant == 1"},
+          			{"explosion" : "q.mark_variant == 2"}
+        		]
 					},
 			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+        		"charge" : "animation.fungi_tnt.charge",
+        		"explosion" : "animation.fungi_tnt.explode"
 			},
+			"particle_effects": {
+        		"tnt_charge_red": "goe_tnt:tnt_charge_red", 
+        		"fungi_cloud": "goe_tnt:fungi_cloud",
+				"ender_sparkle_explosion_bigger": "goe_tnt:ender_sparkle_explosion_bigger",
+				"fungi_impact" : "goe_tnt:fungi_impact"
+      		},
       		"render_controllers": [ "controller.render.tnt" ]
 		}
 	}
