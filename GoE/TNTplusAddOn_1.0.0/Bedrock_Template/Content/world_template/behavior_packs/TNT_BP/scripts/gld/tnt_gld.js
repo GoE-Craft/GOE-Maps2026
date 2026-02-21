@@ -944,7 +944,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:silent_tnt",
         fuseTime: 50,
-        power: 4,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
