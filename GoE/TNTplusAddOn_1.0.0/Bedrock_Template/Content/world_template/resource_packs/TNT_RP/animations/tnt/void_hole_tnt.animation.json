@@ -135,11 +135,11 @@
 				"0.0": [
 					{
 						"effect": "void_explosion",
-						"bind_to_actor": false
+						"locator": "explode"
 					},
 					{
 						"effect": "void_bubbles_explosion",
-						"bind_to_actor": false
+						"locator": "explode"
 					}
 				]
 			}
