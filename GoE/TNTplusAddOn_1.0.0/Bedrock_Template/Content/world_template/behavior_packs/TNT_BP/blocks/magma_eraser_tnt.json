@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Magma Eraser TNT",
+      "minecraft:display_name": "§gMagma Eraser TNT§f\nDrains all nearby lava around you!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

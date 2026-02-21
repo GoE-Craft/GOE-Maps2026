@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Ultron TNT",
+      "minecraft:display_name": "§eUltron TNT§f\nUnleash devastation across a huge area!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

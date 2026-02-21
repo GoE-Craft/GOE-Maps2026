@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Thunderstorm TNT",
+      "minecraft:display_name": "§gThunderstorm TNT§f\nStrikes nearby mobs with the lightnings from the sky!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

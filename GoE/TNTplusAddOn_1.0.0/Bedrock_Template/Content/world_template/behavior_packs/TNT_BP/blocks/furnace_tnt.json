@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Furnace TNT",
+      "minecraft:display_name": "§pFurnace TNT§f\nMelts your ores and other goodies!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

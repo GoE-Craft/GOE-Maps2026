@@ -57,7 +57,8 @@ export const TntCustomComponent = {
                 default:
                     color = "§a"; // Green fallback
             }
-            player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${targetCharge}§o`);
+            const visibleBoostLevel = targetCharge + 1;
+            player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${visibleBoostLevel}§o`);
             player.playSound("random.pop", block.location);
             const location = block.center();
             location.y += 1;
@@ -84,12 +85,12 @@ export const TntCustomComponent = {
         const block = eventData.block;
 
         // Check adjacent blocks for redstone power
-        try{
+        try {
             if (isReceivingRedstonePower(block)) {
                 tnt_manager.activateTNTBlock(block);
                 updateTimerSet(block.location, block.dimension.id, false);
             }
-        } catch(e) { }
+        } catch (e) { }
     },
 };
 

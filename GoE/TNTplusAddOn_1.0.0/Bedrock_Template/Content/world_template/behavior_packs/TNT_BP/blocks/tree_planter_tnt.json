@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Tree Planter TNT",
+      "minecraft:display_name": "§aTree Planter TNT§f\nPlants a small forest!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

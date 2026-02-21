@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Teleportation TNT",
+      "minecraft:display_name": "§5Teleportation TNT§f\nTeleports you and all nearby entities to the spawn point!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

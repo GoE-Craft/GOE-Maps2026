@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Prison TNT",
+      "minecraft:display_name": "§iPrison TNT§f\nCapture and imprison all nearby enemies!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

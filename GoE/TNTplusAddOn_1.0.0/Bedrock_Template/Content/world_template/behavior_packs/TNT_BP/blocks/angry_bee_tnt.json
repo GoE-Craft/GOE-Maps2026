@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Angry Bee TNT\n\n§9Info§f: Summons angry bees and coats the ground in sticky honey,§r\n§fslowing anyone caught in the chaos.§r\n§eTip§f: Release mad bees with the Angry Bee TNT.§r",
+      "minecraft:display_name": "§nAngry Bee TNT§f\nRelease angry bees at enemies!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

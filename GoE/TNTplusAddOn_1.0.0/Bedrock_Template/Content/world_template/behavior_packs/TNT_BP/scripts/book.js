@@ -241,8 +241,8 @@ async function showAchievementsInfoPage(player) {
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
         .body(
-            "§fTrack your progress as you master the art of destruction engineering. §4TNT+ Add-on§f offers many unique §eachievements and rewards§f.\n\n" +
-            "§fYou can track your progress in the §eAchievements§f section of this Guide Book. Press the §eAchievement§f button in the main menu, select an §eAchievement§f and see all its details and requirements.\n\n" +
+            "§fTrack your progress as you master the art of destruction engineering. §4TNT+ Add-on§f offers many unique §eachievements and rewards§f.\n" +
+            "§fYou can track your progress in the §eAchievements§f section of this Guide Book. Press the §eAchievement§f button in the main menu, select an §eAchievement§f and see all its details and requirements.\n" +
             "§fPush your limits, complete all achievements, and become the ultimate §4TNT Legend§f!§r"
         )
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
@@ -488,47 +488,93 @@ async function showAchievementListPage(player) {
     const unlockedMilestones = achievements.getUnlockedMilestones(player);
     const unlockedTnts = achievements.getUnlockedTntAchievements(player);
 
-    // Sort milestones: locked first, then unlocked
+    const milestonesSortedByNumber = [...allMilestones].sort((a, b) => (a.milestoneNumber ?? 0) - (b.milestoneNumber ?? 0));
+
+    // status system:
+    // unlocked (green §a) = achievement completed
+    // active (orange §6) = currently available to progress
+    // locked (red §c) = cannot be progressed yet
+    // milestones: only ONE milestone can be active at a time (next in sequence)
+    // single tnt: all non-unlocked ones are active
+
+    let activeMilestoneNumber = undefined;
+    for (let i = 0; i < milestonesSortedByNumber.length; i++) {
+        const m = milestonesSortedByNumber[i];
+        const n = m.milestoneNumber;
+        if (n === undefined) continue;
+
+        const isUnlocked = unlockedMilestones.includes(n);
+        if (isUnlocked) continue;
+
+        if (i === 0) {
+            activeMilestoneNumber = n;
+            break;
+        }
+
+        const prev = milestonesSortedByNumber[i - 1];
+        const prevN = prev?.milestoneNumber;
+        if (prevN !== undefined && unlockedMilestones.includes(prevN)) {
+            activeMilestoneNumber = n;
+            break;
+        }
+
+        activeMilestoneNumber = n;
+        break;
+    }
+
+    const getStatusForAchievement = (achievement) => {
+
+        // milestone logic:
+        // unlocked = green
+        // first non-unlocked milestone = active (orange)
+        // remaining future milestones = locked (red)
+        if (achievement.milestoneNumber !== undefined) {
+            const isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
+            if (isUnlocked) return { key: "unlocked", color: "§a", text: "UNLOCKED", order: 2 };
+
+            const isActive = achievement.milestoneNumber === activeMilestoneNumber;
+            if (isActive) return { key: "active", color: "§6", text: "ACTIVE", order: 0 };
+
+            return { key: "locked", color: "§c", text: "LOCKED", order: 1 };
+        }
+
+        // single tnt achievements:
+        // before completion = ACTIVE (orange)
+        // after completion = UNLOCKED (green)
+        if (achievement.tntType) {
+            const isUnlocked = unlockedTnts.includes(achievement.tntType);
+            if (isUnlocked) return { key: "unlocked", color: "§a", text: "UNLOCKED", order: 1 };
+            return { key: "active", color: "§6", text: "ACTIVE", order: 0 };
+        }
+
+        return { key: "locked", color: "§c", text: "LOCKED", order: 1 };
+    };
+
     const sortedMilestones = [...allMilestones].sort((a, b) => {
-        const aUnlocked = unlockedMilestones.includes(a.milestoneNumber);
-        const bUnlocked = unlockedMilestones.includes(b.milestoneNumber);
-        if (aUnlocked === bUnlocked) {
-            return a.milestoneNumber - b.milestoneNumber; // If same status, sort by number
-        }
-        return aUnlocked ? 1 : -1; // Locked first
+        const sa = getStatusForAchievement(a);
+        const sb = getStatusForAchievement(b);
+        if (sa.order !== sb.order) return sa.order - sb.order;
+        return (a.milestoneNumber ?? 0) - (b.milestoneNumber ?? 0);
     });
 
-    // Sort TNT achievements: locked first, then unlocked
     const sortedTntAchievements = [...allTntAchievements].sort((a, b) => {
-        const aUnlocked = unlockedTnts.includes(a.tntType);
-        const bUnlocked = unlockedTnts.includes(b.tntType);
-        if (aUnlocked === bUnlocked) {
-            return a.name.localeCompare(b.name); // If same status, sort alphabetically
-        }
-        return aUnlocked ? 1 : -1; // Locked first
+        const sa = getStatusForAchievement(a);
+        const sb = getStatusForAchievement(b);
+        if (sa.order !== sb.order) return sa.order - sb.order;
+        return (a.name || "").localeCompare(b.name || "");
     });
 
-    // Combine: milestones first, then TNT achievements
     const allAchievements = [...sortedMilestones, ...sortedTntAchievements];
     const totalUnlocked = unlockedMilestones.length + unlockedTnts.length;
     const totalCount = allAchievements.length;
 
     const form = new ActionFormData()
         .title("§l§5Achievements§r")
-        .body(`§fUnlocked: §e${totalUnlocked}/${totalCount}§r\n\n`)
+        .body(`§fUnlocked: §e${totalUnlocked}/${totalCount}§r\n\n`);
 
-    // Add buttons for all achievements
     for (const achievement of allAchievements) {
-        let isUnlocked = false;
-        if (achievement.milestoneNumber !== undefined) {
-            isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
-        } else if (achievement.tntType) {
-            isUnlocked = unlockedTnts.includes(achievement.tntType);
-        }
-
-        const statusColor = isUnlocked ? "§a" : "§c";
-        const statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
-        const buttonText = `§l§d${achievement.name}§r\n${statusColor}Status: ${statusText}§r`;
+        const s = getStatusForAchievement(achievement);
+        const buttonText = `§l§d${achievement.name}§r\n${s.color}Status: ${s.text}§r`;
         form.button(buttonText, achievement.icon);
     }
 
@@ -540,11 +586,9 @@ async function showAchievementListPage(player) {
             return;
         }
         if (response.selection === allAchievements.length) {
-            // Back button
             showMainPage(player);
-            player.playSound("goe_tnt:book_page_change_music"); // add sound
+            player.playSound("goe_tnt:book_page_change_music");
         } else {
-            // Achievement selected - show details
             const selectedAchievement = allAchievements[response.selection];
             showAchievementDetailsPage(player, selectedAchievement, () => {
                 showAchievementListPage(player);
@@ -554,30 +598,54 @@ async function showAchievementListPage(player) {
 }
 
 async function showAchievementDetailsPage(player, achievement, backCallback) {
-    player.playSound("goe_tnt:button_click_music"); // add sound
+    player.playSound("goe_tnt:button_click_music");
 
-    let isUnlocked = false;
     let statusText = "";
     let statusColor = "";
 
-    // Check if it's a TNT individual achievement or milestone
+    // details page uses same status logic:
+    // unlocked = completed
+    // active = currently available
+    // locked = milestone not yet available
     if (achievement.tntType) {
         const unlockedTnts = achievements.getUnlockedTntAchievements(player);
-        isUnlocked = unlockedTnts.includes(achievement.tntType);
-    } else if (achievement.milestoneNumber !== undefined) {
-        const unlockedMilestones = achievements.getUnlockedMilestones(player);
-        isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
-    }
+        const isUnlocked = unlockedTnts.includes(achievement.tntType);
 
-    statusColor = isUnlocked ? "§a" : "§c";
-    statusText = isUnlocked ? "UNLOCKED" : "LOCKED";
+        statusColor = isUnlocked ? "§a" : "§6";
+        statusText = isUnlocked ? "UNLOCKED" : "ACTIVE";
+    } else if (achievement.milestoneNumber !== undefined) {
+        const allMilestones = getAchievementsByCategory("milestones");
+        const unlockedMilestones = achievements.getUnlockedMilestones(player);
+
+        const milestonesSortedByNumber = [...allMilestones].sort((a, b) => (a.milestoneNumber ?? 0) - (b.milestoneNumber ?? 0));
+
+        let activeMilestoneNumber = undefined;
+        for (let i = 0; i < milestonesSortedByNumber.length; i++) {
+            const m = milestonesSortedByNumber[i];
+            const n = m.milestoneNumber;
+            if (n === undefined) continue;
+
+            const isUnlocked = unlockedMilestones.includes(n);
+            if (isUnlocked) continue;
+
+            activeMilestoneNumber = n;
+            break;
+        }
+
+        const isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
+        const isActive = achievement.milestoneNumber === activeMilestoneNumber;
+
+        statusColor = isUnlocked ? "§a" : (isActive ? "§6" : "§c");
+        statusText = isUnlocked ? "UNLOCKED" : (isActive ? "ACTIVE" : "LOCKED");
+    } else {
+        statusColor = "§c";
+        statusText = "LOCKED";
+    }
 
     let body = "";
     if (achievement.milestoneNumber !== undefined) {
-        // Milestone: use info
         body = `§f${achievement.info || ""}\n\n`;
     } else if (achievement.tntType) {
-        // tnt_individual: use name
         body = `§fUse "${achievement.name || ""}" once to unlock this achievement.\n\n`;
     } else {
         body = `§f${achievement.info || achievement.name || ""}\n\n`;
@@ -595,8 +663,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
             return;
         }
         if (response.selection === 0) {
-            // Back button
-            player.playSound("goe_tnt:book_page_change_music"); // add sound
+            player.playSound("goe_tnt:book_page_change_music");
             if (backCallback) {
                 backCallback();
             }

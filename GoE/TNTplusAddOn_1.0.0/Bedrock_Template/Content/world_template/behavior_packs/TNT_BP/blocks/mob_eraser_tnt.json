@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Mob Eraser TNT",
+      "minecraft:display_name": "§4Mob Eraser TNT§f\nErase all nearby mobs in the blast area!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

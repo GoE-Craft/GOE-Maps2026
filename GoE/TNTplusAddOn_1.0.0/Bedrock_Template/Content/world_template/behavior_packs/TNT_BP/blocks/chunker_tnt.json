@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Chunker TNT",
+      "minecraft:display_name": "§4Chunker TNT§f\nExplosion digs up and down tunnel through the chunk!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

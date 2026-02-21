@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Thief TNT",
+      "minecraft:display_name": "§cThief TNT§f\nGets all the items around after the explosion!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

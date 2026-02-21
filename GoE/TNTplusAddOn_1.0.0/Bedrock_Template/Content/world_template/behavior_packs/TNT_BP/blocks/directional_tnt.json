@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Directional TNT",
+      "minecraft:display_name": "§6Directional TNT§f\nCreate tunnel in its facing direction where TNT block points.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

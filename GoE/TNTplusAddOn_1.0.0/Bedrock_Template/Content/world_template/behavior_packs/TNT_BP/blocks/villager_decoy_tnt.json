@@ -22,7 +22,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Villager Decoy TNT",
+      "minecraft:display_name": "§4Villager Decoy TNT§f\nLure zombies to the trap and explodes!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

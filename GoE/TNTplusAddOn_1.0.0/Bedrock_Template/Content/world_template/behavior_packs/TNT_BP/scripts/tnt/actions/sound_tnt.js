@@ -1,7 +1,7 @@
 import { system, world } from "@minecraft/server";
 
 export function* soundTNTAction(dimension, chargeLevel, location, entity) {
-
+/* 
     const radius = 10;
     const radiusSq = radius * radius;
 
@@ -92,5 +92,5 @@ function getSoundTNTTotalDamage() {
     if (diff === "hard") return 45.25;
     if (diff === "normal") return 30.5;
     if (diff === "easy") return 20;
-    return 0;
+    return 0; */
 }

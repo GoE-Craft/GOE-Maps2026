@@ -482,7 +482,7 @@ export function onLoad() {
  * @param {Player} player - The player to show the hint to
  * @param {string} blockTypeId - The block type ID of the placed TNT
  */
-export function showTntPlaceHint(player, blockTypeId) {
+/* export function showTntPlaceHint(player, blockTypeId) {
     try {
         if (!player) return;
 
@@ -580,7 +580,7 @@ export function showTntPlaceHint(player, blockTypeId) {
 
         pendingHintTimeouts.set(player.id, timeoutId);
     } catch { }
-}
+} */
 
 /**
  * Restore TNT states after script reload

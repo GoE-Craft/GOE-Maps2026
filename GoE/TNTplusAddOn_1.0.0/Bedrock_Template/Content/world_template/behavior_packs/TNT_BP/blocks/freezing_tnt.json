@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Freezing TNT",
+      "minecraft:display_name": "§9Freezing TNT§f\nUnleash a blizzard which freeze and hurt all nearby mobs!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
