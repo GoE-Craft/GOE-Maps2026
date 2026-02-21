@@ -1,0 +1,224 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.silent_tnt.charge": {
+			"animation_length": 2.5,
+			"bones": {
+				"bb_main": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0833": [0, 0, 5],
+						"0.2083": [0, 0, 5],
+						"0.2917": [0, 0, -5],
+						"0.4167": [0, 0, -5],
+						"0.5": [0, 0, 5],
+						"0.5833": [0, 0, 5],
+						"0.7083": [0, 0, -5],
+						"0.7917": [0, 0, -5],
+						"0.9167": [0, 0, 5],
+						"1.0": [0, 0, 5],
+						"1.0833": [0, 0, -5],
+						"1.2083": [0, 0, 0],
+						"1.2917": [0, 0, 0],
+						"1.4167": [0, 0, 5],
+						"1.5": [0, 0, -5],
+						"1.5833": [0, 0, -5],
+						"1.7083": [0, 0, 5],
+						"1.7917": [0, 0, 5],
+						"1.9167": [0, 0, -5],
+						"2.0": [0, 0, -5],
+						"2.0833": [0, 0, 5],
+						"2.2083": [0, 0, 5],
+						"2.2917": [0, 0, -5],
+						"2.4167": [0, 0, 0],
+						"2.5": [0, 0, 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.0833": [0, 3, 0],
+						"0.2083": [0, 0, 0],
+						"0.2917": [0, 3, 0],
+						"0.4167": [0, 0, 0],
+						"0.5": [0, 3, 0],
+						"0.5833": [0, 0, 0],
+						"0.7083": [0, 3, 0],
+						"0.7917": [0, 0, 0],
+						"0.9167": [0, 3, 0],
+						"1.0": [0, 0, 0],
+						"1.0833": [0, 3, 0],
+						"1.2083": [0, 0, 0],
+						"1.2917": [0, 0, 0],
+						"1.4167": [0, 0, 0],
+						"1.5": [0, 3, 0],
+						"1.5833": [0, 0, 0],
+						"1.7083": [0, 3, 0],
+						"1.7917": [0, 0, 0],
+						"1.9167": [0, 3, 0],
+						"2.0": [0, 0, 0],
+						"2.0833": [0, 3, 0],
+						"2.2083": [0, 0, 0],
+						"2.2917": [0, 3, 0],
+						"2.4167": [0, 0, 0],
+						"2.5": [0, 0, 0]
+					},
+					"scale": {
+						"0.7083": [1, 1, 1],
+						"0.7917": [1.02, 1.22, 1.02],
+						"1.0": [1, 0.6, 1],
+						"1.0833": [1.45, 1.55, 1.15],
+						"1.2917": [1.2, 0.5, 1.3],
+						"1.4167": [1.2, 1.3, 1.3],
+						"1.5": [1.7, 0.6, 1.7],
+						"1.7083": [1.7, 2.1, 1.7],
+						"1.7917": [2.2, 0.8, 2.2],
+						"1.9167": [2.2, 0.8, 2.2],
+						"2.0833": [2.2, 2.1, 2.2],
+						"2.2083": [2.2, 1.3, 2.2],
+						"2.4167": [1.8, 2.6, 1.8],
+						"2.5": [2.5, 2.5, 2.5]
+					}
+				},
+				"tnt": {
+					"rotation": {
+						"0.25": ["-math.sin(query.anim_time * 1080)", 0, "math.sin(query.anim_time * 1080)"],
+						"1.5": ["-math.cos(query.anim_time * 1080) * 90", 0, "math.sin(query.anim_time * 1080) * 90"],
+						"2.5": ["-math.cos(query.anim_time * 2160) * 360", 0, "math.sin(query.anim_time * 2160) * 360"]
+					},
+					"position": [0, 0, 0],
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.25": [0.5, 0.5, 0.5]
+					}
+				},
+				"spark_center": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.75": [3, -3, 0]
+					}
+				},
+				"spark_left": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.75": [-4, -4, 0]
+					}
+				},
+				"spark_right": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.75": [4, -4, 0]
+					}
+				},
+				"spark_top": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.75": [0, -4, 4]
+					}
+				},
+				"spark_bottom": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.75": [0, -4, -4]
+					}
+				}
+			},
+			"particle_effects": {
+				"0.0": [
+					{
+						"effect": "party_sparks",
+						"locator": "spark_center"
+					},
+					{
+						"effect": "party_sparks",
+						"locator": "spark_right"
+					},
+					{
+						"effect": "party_sparks",
+						"locator": "spark_left"
+					},
+					{
+						"effect": "party_sparks",
+						"locator": "spark_top"
+					},
+					{
+						"effect": "party_sparks",
+						"locator": "spark_bottom"
+					}
+				],
+				"1.0": {
+					"effect": "silent_circle",
+					"locator": "center"
+				},
+				"1.0417": [
+					{
+						"effect": "silent_circle_smoke",
+						"locator": "window_front"
+					},
+					{
+						"effect": "silent_circle_smoke",
+						"locator": "window_back"
+					},
+					{
+						"effect": "silent_circle_smoke",
+						"locator": "window_left"
+					},
+					{
+						"effect": "silent_circle_smoke",
+						"locator": "window_right"
+					},
+					{
+						"effect": "silent_circle_smoke",
+						"locator": "window_top"
+					}
+				]
+			}
+		},
+		"animation.silent_tnt.explosion": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 2,
+			"bones": {
+				"shell": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"0.0417": [1.2, 1.2, 1.2],
+						"0.1667": [0, 0, 0]
+					}
+				},
+				"tnt": {
+					"rotation": ["-math.cos(query.anim_time * 2160) * 360", 0, "math.sin(query.anim_time * 2160) * 360"],
+					"scale": {
+						"0.1667": [0.5, 0.5, 0.5],
+						"0.2083": [0.7, 0.7, 0.7],
+						"0.3333": [0, 0, 0]
+					}
+				},
+				"spark": {
+					"scale": 0
+				}
+			},
+			"particle_effects": {
+				"0.1667": {
+					"effect": "silent_orb",
+					"locator": "center"
+				},
+				"0.2083": [
+					{
+						"effect": "silent_ring",
+						"locator": "center"
+					},
+					{
+						"effect": "silent_explosion",
+						"locator": "center"
+					}
+				],
+				"0.3333": {
+					"effect": "silent_explosion_flash",
+					"locator": "center"
+				},
+				"0.4167": {
+					"effect": "silent_shell_explosion",
+					"locator": "center"
+				}
+			}
+		}
+	}
+}

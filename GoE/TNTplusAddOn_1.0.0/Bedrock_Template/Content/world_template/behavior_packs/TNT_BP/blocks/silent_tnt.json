@@ -26,8 +26,8 @@
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
-      "minecraft:geometry": "geometry.tnt",
-      "minecraft:material_instances": { "*": { "texture": "tnt", "render_method": "alpha_test", "face_dimming": true} },
+      "minecraft:geometry": "geometry.silent_tnt",
+      "minecraft:material_instances": { "*": { "texture": "silent_tnt", "render_method": "alpha_test", "face_dimming": true} },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
       },

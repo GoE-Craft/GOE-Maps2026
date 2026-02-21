@@ -1,29 +1,41 @@
 {
-	"format_version": "1.19.0",
-	"minecraft:client_entity": {
-		"description": {
-			"identifier": "goe_tnt:silent_tnt",
-			"materials": {
-				"default": "entity_alphatest"
-			},
-			"textures": {
-				"default": "textures/goe/tnt/entity/tnt"
-			},
-			"geometry": {
-				"default": "geometry.tnt"
-			},
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:silent_tnt",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/silent_tnt"
+      },
+      "geometry": {
+        "default": "geometry.silent_tnt"
+      },
 			"scripts": {
-				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
-				],
-				"animate": [
-				{"tnt_swelling": "v.should_swell"}
-				]
-					},
-			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"}
+        ]
 			},
-      		"render_controllers": [ "controller.render.tnt" ]
-		}
-	}
+      "animations": {
+        "charge": "animation.silent_tnt.charge",
+        "explode": "animation.silent_tnt.explosion"
+      },
+      "particle_effects": {
+        "silent_explosion": "goe_tnt:silent_explosion",
+        "silent_explosion_flash": "goe_tnt:silent_explosion_flash",
+        "silent_orb": "goe_tnt:silent_orb",
+        "silent_ring": "goe_tnt:silent_ring",
+        "silent_circle": "goe_tnt:silent_circle",
+        "silent_circle_smoke": "goe_tnt:silent_circle_smoke",
+        "party_sparks": "goe_tnt:party_sparks",
+        "silent_shell_explosion": "goe_tnt:silent_shell_explosion"
+      },
+      "render_controllers": [ "controller.render.tnt" ]
+    }
+  }
 }
