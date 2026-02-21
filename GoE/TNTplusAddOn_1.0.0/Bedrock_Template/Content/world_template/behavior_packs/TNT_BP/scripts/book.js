@@ -578,7 +578,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
         body = `§f${achievement.info || ""}\n\n`;
     } else if (achievement.tntType) {
         // tnt_individual: use name
-        body = `§fUse "${achievement.name || ""}" to unlock this achievement.\n\n`;
+        body = `§fUse "${achievement.name || ""}" once to unlock this achievement.\n\n`;
     } else {
         body = `§f${achievement.info || achievement.name || ""}\n\n`;
     }

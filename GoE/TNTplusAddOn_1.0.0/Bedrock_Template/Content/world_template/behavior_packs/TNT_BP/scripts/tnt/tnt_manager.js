@@ -29,7 +29,7 @@ export function activateTNTBlock(block, player) {
     const timerState = block.permutation.getState("goe_tnt:timer");
 
     let timerSeconds = timerState * 10; // Default to timer state * 10 seconds
-    
+
     const location = block.center();
     location.y -= 0.5; // Adjust to bottom center
 
@@ -155,7 +155,7 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
  * @param {object} tntData - The TNT data object (for blockHeight)
  */
 function startCountdown(entity, timerRemaining, tntData) {
-    const blockHeight = tntData?.blockHeight ?? 2; // Y offset for timer particles from tntData // 2 if not defined
+    const blockHeight = tntData?.blockHeight ?? 2;
     const startTick = system.currentTick;
     const endTick = startTick + timerRemaining;
     const initialTimer = Math.ceil(timerRemaining / 20);
@@ -166,6 +166,11 @@ function startCountdown(entity, timerRemaining, tntData) {
     let textLocation = { x: location.x, y: location.y, z: location.z };
     dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
     dim.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
+
+    // beep sound on timer start
+    playSoundsForPlayers(location, dim, "random.click", 0.3, 1.5, 10);
+
+    let lastBeepSecond = -1;
 
     const intervalId = system.runInterval(() => {
         if (!entity.isValid) {
@@ -180,9 +185,35 @@ function startCountdown(entity, timerRemaining, tntData) {
             location = { ...entity.location };
             location.y += blockHeight;
             if (dim.isChunkLoaded(location) === false) return;
+
             textLocation = { x: location.x, y: location.y, z: location.z };
             dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
             dim.spawnParticle(`goe_tnt:timer_particle_${seconds}`, location);
+
+            if (seconds !== lastBeepSecond) {
+                let beepEvery = 0;
+
+                if (seconds > 30) beepEvery = 10;
+                else if (seconds > 5) beepEvery = 5;
+                else beepEvery = 1;
+
+                const shouldBeep = beepEvery === 1 || (seconds % beepEvery === 0);
+
+                if (shouldBeep) {
+                    lastBeepSecond = seconds;
+
+                    let soundEffect = "random.click";
+                    let soundPitch = 0.3;
+                    let soundVolume = 1.5;
+
+                    if (seconds <= 5) {
+                        const t = (5 - seconds) / 4;
+                        soundPitch = 0.3 + ((5 - seconds) * 0.05); 
+                    }
+
+                    playSoundsForPlayers(location, dim, soundEffect, soundPitch, soundVolume, 10);
+                }
+            }
         } else {
             dim.spawnParticle(`goe_tnt:timer_particle`, textLocation);
             dim.spawnParticle(`goe_tnt:timer_particle_0`, location);
@@ -362,7 +393,7 @@ function triggerExplosionEffects(entity, tntData, player) {
 
             system.runTimeout(() => {
                 if (entity.isValid) entity.remove();
-            }, animationLength*20);
+            }, animationLength * 20);
         } catch (e) {
             // If the entity doesn't support the explode trigger, just remove it
             // This is by design for certain TNT types that don't have custom explosion animations
@@ -499,7 +530,7 @@ export function showTntPlaceHint(player, blockTypeId) {
         let notBefore = 0;
         try {
             notBefore = player.getDynamicProperty("goe_tnt_hint_not_before_tick") ?? 0;
-        } catch {}
+        } catch { }
 
         const delayTicks = Math.max(0, Number(notBefore) - nowTick);
 
@@ -507,7 +538,7 @@ export function showTntPlaceHint(player, blockTypeId) {
 
         const old = pendingHintTimeouts.get(player.id);
         if (old !== undefined) {
-            try { system.clearRun(old); } catch {}
+            try { system.clearRun(old); } catch { }
             pendingHintTimeouts.delete(player.id);
         }
 
@@ -523,7 +554,7 @@ export function showTntPlaceHint(player, blockTypeId) {
                 let notBefore2 = 0;
                 try {
                     notBefore2 = player.getDynamicProperty("goe_tnt_hint_not_before_tick") ?? 0;
-                } catch {}
+                } catch { }
 
                 const now2 = system.currentTick;
                 const waitMore = Math.max(0, Number(notBefore2) - now2);
@@ -536,7 +567,7 @@ export function showTntPlaceHint(player, blockTypeId) {
                             const latest2 = pendingHintMessages.get(player.id);
                             if (!latest2) return;
                             player.onScreenDisplay?.setActionBar(latest2);
-                        } catch {}
+                        } catch { }
                     }, waitMore);
 
                     pendingHintTimeouts.set(player.id, timeoutId2);
@@ -544,11 +575,11 @@ export function showTntPlaceHint(player, blockTypeId) {
                 }
 
                 player.onScreenDisplay?.setActionBar(latest);
-            } catch {}
+            } catch { }
         }, delayTicks);
 
         pendingHintTimeouts.set(player.id, timeoutId);
-    } catch {}
+    } catch { }
 }
 
 /**
@@ -618,15 +649,23 @@ export function processExplosion(block) {
     }
 }
 
-export function playSoundsForPlayers(location, dimension, soundEffect, soundPitch) {
+export function playSoundsForPlayers(location, dimension, soundEffect, soundPitch, soundVolume, soundDistance) {
 
     function* job() {
         try {
-            const players = dimension.getEntities({location: location, maxDistance: 40, families: ["player"]});
+            const players = dimension.getEntities({
+                location: location,
+                maxDistance: soundDistance ?? 40, // default stays 40 for everything else
+                families: ["player"]
+            });
+
             for (const player of players) {
                 if (!player?.isValid) continue;
                 try {
-                    player.playSound(soundEffect, { pitch: soundPitch ?? 1 });
+                    player.playSound(soundEffect, {
+                        pitch: soundPitch ?? 1,
+                        volume: soundVolume ?? 1
+                    });
                 } catch (e) {
                     console.log("Error playing sound for player " + player.name + ": " + e);
                 }

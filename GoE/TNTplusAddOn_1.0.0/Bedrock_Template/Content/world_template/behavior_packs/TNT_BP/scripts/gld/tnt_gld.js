@@ -50,7 +50,7 @@ export const TNT_GLD = [
             summonDelay: 0,
             specialAction: "directional_drill"
         },
-        blockHeight: 1.4
+        blockHeight: 1.3
     },
     {
         blockId: "goe_tnt:party_tnt",
@@ -206,7 +206,7 @@ export const TNT_GLD = [
         blockHeight: 1.6
     },
     {
-blockId: "goe_tnt:hacker_tnt",
+        blockId: "goe_tnt:hacker_tnt",
         fuseTime: 100,
         power: 0,
         fuseEffects: {
@@ -352,7 +352,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 2.3
+        blockHeight: 1.9
     },
     {
         blockId: "goe_tnt:orbital_cannon_tnt",
@@ -438,7 +438,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.7
+        blockHeight: 1.6
     },
     {
         blockId: "goe_tnt:teleportation_tnt",
@@ -626,7 +626,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.9
+        blockHeight: 1.8
     },
     {
         blockId: "goe_tnt:angry_bee_tnt",
@@ -942,6 +942,35 @@ blockId: "goe_tnt:hacker_tnt",
         blockHeight: 1.7
     },
     {
+        blockId: "goe_tnt:silent_tnt",
+        fuseTime: 80,
+        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            particleEffect: "goe_tnt:big_explosion_white",
+            particleDelay: 0,
+            soundEffect: "random.explode",
+            soundDelay: 0
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "silent"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
         blockId: "goe_tnt:matrix_tnt",
         fuseTime: 70,
         power: 0,
@@ -1018,7 +1047,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.4
+        blockHeight: 1.5
     },
     {
         blockId: "goe_tnt:proxy_tnt",
@@ -1248,7 +1277,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+        blockHeight: 2.2 // if not defined, defaults to 2 - timer height depends on this
     },
     {
         blockId: "goe_tnt:specialized_tnt",
