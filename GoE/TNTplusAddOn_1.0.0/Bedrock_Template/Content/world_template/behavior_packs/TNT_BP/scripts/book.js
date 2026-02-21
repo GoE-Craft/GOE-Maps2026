@@ -183,7 +183,7 @@ async function showMechaSuitPage(player) {
     const form = new ActionFormData()
         .title("§l§4TNT Mecha Suit§r")
         .body(
-            "§fThe §4TNT Mecha Sui§f is a powerful combat mount that lets you launch any custom §4TNT block§f as a projectile. The TNT Mecha Suit has high durability; it moves 30%% faster than a normal player and jumps higher.\n\n" +
+            "§fThe §4TNT Mecha Suit§f is a powerful combat mount that lets you launch any custom §4TNT block§f as a projectile. The TNT Mecha Suit has high durability; it moves 30%% faster than a normal player and jumps higher.\n\n" +
             "§f- Hold any §4TNT block§f (including §4vanilla TNT§f) while mounted in the suit and interact to launch it far away.\n" +
             "§f- Airborne: Hold an §eElytra§f and interact on the suit to make it §eflyable§f.\n\n"
         )

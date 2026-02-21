@@ -1307,7 +1307,7 @@ blockId: "goe_tnt:hacker_tnt",
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+        blockHeight: 1.9 // if not defined, defaults to 2 - timer height depends on this
     }
 ]
 
