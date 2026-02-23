@@ -4,8 +4,8 @@
     "description": {
       "identifier": "goe_tnt:fungi_tnt",
       "materials": {
-        "default": "goe_tnt_fuse:entity_alphatest",
-		"fuse": "entity_alphatest"
+        "default": "goe_tnt_anim_alphatest",
+		    "fuse": "goe_tnt_anim_alphatest"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/fungi_tnt",

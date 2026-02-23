@@ -12,6 +12,7 @@ import { fireLaser } from "../components/items/tnt_detonator";
  */
 
 const tntTimers = new Map();
+const tntBoostLevels = new Map();
 
 export const TntCustomComponent = {
     onPlayerInteract(eventData) {
@@ -31,38 +32,8 @@ export const TntCustomComponent = {
             // Manually place the block on the clicked face
             placeBlockOnFace(block, face, itemInHand, player);
         } else if (itemInHand?.typeId === "minecraft:gunpowder") {
-            const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
-            if (chargeLevel >= 4) {
-                player.onScreenDisplay.setActionBar(`§o§cMax boost level reached§o§c`);
-                player.playSound("goe_tnt:tnt_maxed_out", player.location);
-                return;
-            }
-            const targetCharge = Math.min(chargeLevel + 1, 4);
-            block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
-            // Color codes: 1=§e, 2=§6, 3=§c, 4=§4
-            let color;
-            switch (targetCharge) {
-                case 1:
-                    color = "§e"; // yellow
-                    break;
-                case 2:
-                    color = "§6"; // orange
-                    break;
-                case 3:
-                    color = "§c"; // red
-                    break;
-                case 4:
-                    color = "§4"; // Dark Red
-                    break;
-                default:
-                    color = "§a"; // Green fallback
-            }
-            const visibleBoostLevel = targetCharge + 1;
-            player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${visibleBoostLevel}§o`);
-            player.playSound("random.pop", block.location);
-            const location = block.center();
-            location.y += 1;
-            block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location);
+            // Handle gunpowder interaction: increment boost level
+            incrementBoostLevel(block, player);
         } else if (itemInHand?.typeId === "goe_tnt:tnt_detonator") {
             // This overrides the item use on event so we are handling it here
             const comp = itemInHand.getComponent("goe_tnt:tnt_detonator");
@@ -264,3 +235,53 @@ function printTimer(dimension, location, time) {
     dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
     dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
 }
+
+function incrementBoostLevel(block, player) {
+    const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
+    if (chargeLevel >= 4) {
+        player.onScreenDisplay.setActionBar(`§o§cMax boost level reached§o§c`);
+        player.playSound("goe_tnt:tnt_maxed_out", player.location);
+        return;
+    }
+
+    const location = block.center();
+    
+    let entity = block.dimension.getEntitiesAtBlockLocation(location)[0];
+    if (!entity || entity.typeId !== "goe_tnt:tnt_boost_level") {
+        entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", {x: location.x, y: location.y - 0.5, z: location.z});
+    }
+
+    const targetCharge = Math.min(chargeLevel + 1, 4);
+    block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
+    entity.triggerEvent(`goe_tnt:boost_${targetCharge}`);
+    // Color codes: 1=§e, 2=§6, 3=§c, 4=§4
+    let color;
+    switch (targetCharge) {
+        case 1:
+            color = "§e"; // yellow
+            break;
+        case 2:
+            color = "§6"; // orange
+            break;
+        case 3:
+            color = "§c"; // red
+            break;
+        case 4:
+            color = "§4"; // Dark Red
+            break;
+        default:
+            color = "§a"; // Green fallback
+    }
+    const visibleBoostLevel = targetCharge + 1;
+    player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${visibleBoostLevel}§o`);
+    player.playSound("random.pop", location);
+    location.y += 1;
+    block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location);
+}
+
+function lockBoostLevelEntityToBlock(block) {
+}
+
+function restoreBoostLevelEntity(block) {
+}
+

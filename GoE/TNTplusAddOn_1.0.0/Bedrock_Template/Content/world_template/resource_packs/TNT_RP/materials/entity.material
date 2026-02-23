@@ -2,21 +2,10 @@
   "materials": {
     "version": "1.0.0",
 
-    "goe_tnt_fuse:entity_alphatest": {
-      "+defines": ["USE_UV_ANIM"]
-    },
-
-    "goe_mob:entity_alphatest": {},
-
     "goe_tnt_border:entity_beam_additive": {
       "+defines": ["USE_UV_ANIM"]
     },
-
-    "goe_tnt_structure_border:entity_beam_additive": {
-      "+defines": ["USE_UV_ANIM", "USE_OVERLAY"],
-      "+states": [ "DisableCulling", "DisableDepthWrite", "DisableAlphaWrite" ]
-    },
-    "goe_tnt_border_roots:entity_alphatest": {
+    "goe_tnt_anim_alphatest:entity_alphatest": {
       "+defines": ["USE_UV_ANIM"]
     },
     "goe_tnt_slash:entity_alphablend": {

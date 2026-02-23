@@ -41,7 +41,7 @@ export function onBlockPlace(event) {
     if (block.typeId === "minecraft:tnt") {
         system.run(() => {
             block.setPermutation(BlockPermutation.resolve("goe_tnt:tnt"));
-            tnt_manager.showTntPlaceHint(player, "goe_tnt:tnt");
+            // tnt_manager.showTntPlaceHint(player, "goe_tnt:tnt");
         });
         return;
     }
