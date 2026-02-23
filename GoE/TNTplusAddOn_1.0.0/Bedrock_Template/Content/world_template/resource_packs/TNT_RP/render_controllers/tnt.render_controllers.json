@@ -12,9 +12,9 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
-     "controller.render.endermite_decoy_tnt": {
+    "controller.render.endermite_decoy_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default", "alphatest": "Material.alphatest", "transparent": "Material.transparent"} ],
+      "materials": [ { "*": "Material.default", "alphatest": "Material.alphatest", "transparent": "Material.transparent" } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
         "r": "1.0",
@@ -25,7 +25,7 @@
     },
     "controller.render.hacker_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ 
+      "materials": [
         { "*": "Material.default" },
         { "beam": "Material.beam" },
         { "beam2": "Material.beam" },
@@ -55,7 +55,7 @@
     },
     "controller.render.hacker_mini_explode": {
       "geometry": "Geometry.default",
-      "materials": [ 
+      "materials": [
         { "*": "Material.default" },
         { "beam": "Material.beam" },
         { "beam2": "Material.beam" },
@@ -114,24 +114,24 @@
       "materials": [ { "*": "Material.glass" } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
-          "r": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0",
-          "g": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0",
-          "b": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0",
-          "a": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0"
+        "r": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0",
+        "g": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0",
+        "b": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0",
+        "a": "((variable.flash == 0.0) || (query.swelling_dir < 0.0)) ? this : 1.0"
       },
       "is_hurt_color": {
-          "r": "0.0",
-          "g": "0.0",
-          "b": "0.0",
-          "a": "0.0"
+        "r": "0.0",
+        "g": "0.0",
+        "b": "0.0",
+        "a": "0.0"
       },
       "on_fire_color": {
-          "r": "0.0",
-          "g": "0.0",
-          "b": "0.0",
-          "a": "0.0"
+        "r": "0.0",
+        "g": "0.0",
+        "b": "0.0",
+        "a": "0.0"
       }
-    },    
+    },
     "controller.render.tnt_glass": {
       "geometry": "Geometry.glass",
       "materials": [ { "*": "Material.glass" } ],
@@ -139,7 +139,7 @@
     },
     "controller.render.chunker_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ 
+      "materials": [
         { "*": "Material.default" },
         { "ui_perimeter": "Material.semi_transparent" },
         { "ui_perimeter_base": "Material.default" },
@@ -156,7 +156,7 @@
     },
     "controller.render.time_freeze_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default",  "bb_main" : "material.gold", "semitransparent": "material.semitransparent"} ],
+      "materials": [ { "*": "Material.default", "bb_main": "material.gold", "semitransparent": "material.semitransparent" } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
         "r": "1.0",
@@ -167,7 +167,7 @@
     },
     "controller.render.healing_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default",  "beam*" : "material.beam"} ],
+      "materials": [ { "*": "Material.default", "beam*": "material.beam" } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
         "r": "1.0",
@@ -178,7 +178,7 @@
     },
     "controller.render.beacon_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default",  "beam" : "material.beam"} ],
+      "materials": [ { "*": "Material.default", "beam": "material.beam" } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
         "r": "1.0",
@@ -189,22 +189,22 @@
     },
     "controller.render.beacon_tnt_perimiter": {
       "geometry": "Geometry.beacon_tnt_perimiter",
-      "materials": [ { "*": "Material.default", 
-      "perimiter": "material.perimiter",
-      "perimiter2": "material.perimiter",
-      "perimiter3": "material.perimiter",
-      "perimiter4": "material.perimiter",
-      "perimiter5": "material.perimiter",
-      "perimiter6": "material.perimiter",
-      "perimiter7": "material.perimiter",
-      "perimiter8": "material.perimiter",
-      "perimiter9": "material.perimiter",
-      "perimiter10": "material.perimiter",
-      "perimiter11": "material.perimiter",
-      "perimiter12": "material.perimiter",
-      "perimiter13": "material.perimiter"
-      
-      }],
+      "materials": [ { "*": "Material.default",
+          "perimiter": "material.perimiter",
+          "perimiter2": "material.perimiter",
+          "perimiter3": "material.perimiter",
+          "perimiter4": "material.perimiter",
+          "perimiter5": "material.perimiter",
+          "perimiter6": "material.perimiter",
+          "perimiter7": "material.perimiter",
+          "perimiter8": "material.perimiter",
+          "perimiter9": "material.perimiter",
+          "perimiter10": "material.perimiter",
+          "perimiter11": "material.perimiter",
+          "perimiter12": "material.perimiter",
+          "perimiter13": "material.perimiter"
+
+        } ],
       "textures": [ "Texture.default" ],
       "overlay_color": {
         "r": "1.0",
@@ -246,7 +246,7 @@
           "beam_day": "Material.beam_day",
           "beam_night": "Material.beam_night",
           "semitransparent": "Material.beam_night"
-  
+
         }
       ],
       "textures": [
@@ -259,9 +259,9 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
-     "controller.render.glass_tnt": {
+    "controller.render.glass_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ 
+      "materials": [
         { "*": "Material.default" },
         { "ui_perimeter": "Material.semi_transparent" },
         { "ui_perimeter_base": "Material.default" },
@@ -275,9 +275,9 @@
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
       }
     },
-     "controller.render.furnace_tnt": {
+    "controller.render.furnace_tnt": {
       "geometry": "Geometry.default",
-      "materials": [ 
+      "materials": [
         { "*": "Material.default" }
       ],
       "textures": [ "Texture.default" ],
@@ -308,6 +308,53 @@
         "g": "1.0",
         "b": "1.0",
         "a": "(query.property('goe_tnt:flashing') == true) ? 0.35 : 0.0"
+      }
+    },
+    "controller.render.fungi_tnt.main": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ],
+
+      "part_visibility": [
+        { "TNT": 1 },
+        { "fuse": 0 },
+        { "smallfungi": 0 },
+        { "smallfungi2": 0 },
+        { "smallfungi3": 0 }
+      ],
+
+      "uv_anim": {
+        "offset": [ 0, "math.mod(math.floor(q.life_time * 10), 4) / 4" ],
+        "scale": [ 1, "1 / 4" ]
+      },
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    },
+    "controller.render.fungi_tnt.fuse": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.fuse" } ],
+      "textures": [ "Texture.default" ],
+
+      "part_visibility": [
+        { "TNT": 0 },
+        { "fuse": 1 },
+        { "smallfungi": 1 },
+        { "smallfungi2": 1 },
+        { "smallfungi3": 1 }
+      ],
+      "uv_anim": {
+        "offset": [ 0, "math.mod(math.floor(q.life_time * 10), 4) / 4" ],
+        "scale": [ 1, "1 / 4" ]
+      },
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
       }
     }
   }

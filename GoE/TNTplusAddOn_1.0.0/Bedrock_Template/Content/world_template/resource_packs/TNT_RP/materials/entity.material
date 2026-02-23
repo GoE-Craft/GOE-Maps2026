@@ -1,6 +1,11 @@
 {
   "materials": {
     "version": "1.0.0",
+
+    "goe_tnt_fuse:entity_alphatest": {
+      "+defines": ["USE_UV_ANIM"]
+    },
+
     "goe_tnt_border:entity_beam_additive": {
       "+defines": ["USE_UV_ANIM"]
     },
@@ -10,23 +15,21 @@
     "goe_tnt_slash:entity_alphablend": {
       "+defines": ["USE_UV_ANIM"]
     },
+
     "goe_tnt_sun_light:entity_alphablend": {
-			"-defines": [
-				"FANCY"
-			],
-			"+states": [ "Blending", "DisableDepthWrite", "DisableCulling" ],
-			"blendSrc": "SourceAlpha",
-			"blendDst": "One",
-			"depthFunc": "LessEqual"
-		},
+      "-defines": ["FANCY"],
+      "+states": ["Blending", "DisableDepthWrite", "DisableCulling"],
+      "blendSrc": "SourceAlpha",
+      "blendDst": "One",
+      "depthFunc": "LessEqual"
+    },
+
     "goe_tnt_sun_source:entity_alphablend": {
-      "-defines": [
-				"FANCY"
-			],
-			"+states": [ "Blending", "DisableDepthWrite", "DisableCulling" ],
-			"blendSrc": "SourceAlpha",
-			"blendDst": "OneMinusSrcAlpha",
-			"depthFunc": "LessEqual"
-		}
+      "-defines": ["FANCY"],
+      "+states": ["Blending", "DisableDepthWrite", "DisableCulling"],
+      "blendSrc": "SourceAlpha",
+      "blendDst": "OneMinusSrcAlpha",
+      "depthFunc": "LessEqual"
+    }
   }
 }

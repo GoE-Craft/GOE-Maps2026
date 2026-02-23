@@ -1,34 +1,40 @@
 {
-	"format_version": "1.19.0",
-	"minecraft:client_entity": {
-		"description": {
-			"identifier": "goe_tnt:fungi_tnt",
-			"materials": {
-				"default": "entity_alphatest"
-			},
-			"textures": {
-				"default": "textures/goe/tnt/entity/fungi_tnt"
-			},
-			"geometry": {
-				"default": "geometry.fungi_tnt"
-			},
-			"scripts": {
-				"animate": [
-          			{"charge" : "q.mark_variant == 1"},
-          			{"explosion" : "q.mark_variant == 2"}
-        		]
-					},
-			"animations": {
-        		"charge" : "animation.fungi_tnt.charge",
-        		"explosion" : "animation.fungi_tnt.explode"
-			},
-			"particle_effects": {
-        		"tnt_charge_red": "goe_tnt:tnt_charge_red", 
-        		"fungi_cloud": "goe_tnt:fungi_cloud",
-				"ender_sparkle_explosion_rgb": "goe_tnt:ender_sparkle_explosion_rgb",
-				"fungi_impact" : "goe_tnt:fungi_impact"
-      		},
-      		"render_controllers": [ "controller.render.tnt" ]
-		}
-	}
+  "format_version": "1.19.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:fungi_tnt",
+      "materials": {
+        "default": "goe_tnt_fuse:entity_alphatest",
+		"fuse": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/fungi_tnt",
+        "fuse": "textures/goe/tnt/entity/fungi_tnt"
+      },
+      "geometry": {
+        "default": "geometry.fungi_tnt"
+      },
+      "scripts": {
+        "animate": [
+          { "charge": "q.mark_variant == 1" },
+          { "explosion": "q.mark_variant == 2" }
+        ]
+      },
+      "animations": {
+        "charge": "animation.fungi_tnt.charge",
+        "explosion": "animation.fungi_tnt.explode"
+      },
+      "particle_effects": {
+        "tnt_charge_red": "goe_tnt:tnt_charge_red",
+        "fungi_cloud": "goe_tnt:fungi_cloud",
+        "ender_sparkle_explosion_rgb": "goe_tnt:ender_sparkle_explosion_rgb",
+        "fungi_impact": "goe_tnt:fungi_impact"
+      },
+
+      "render_controllers": [
+        "controller.render.fungi_tnt.main",
+        "controller.render.fungi_tnt.fuse"
+      ]
+    }
+  }
 }
