@@ -1,7 +1,7 @@
 {
 	"format_version": "1.21.30",
 	"minecraft:texture_set": {
-		"color": "matrix_dimension_lines",
+		"color": "mob_eraser_explosion",
 		"metalness_emissive_roughness": [0, 25, 0]
 	}
 }
