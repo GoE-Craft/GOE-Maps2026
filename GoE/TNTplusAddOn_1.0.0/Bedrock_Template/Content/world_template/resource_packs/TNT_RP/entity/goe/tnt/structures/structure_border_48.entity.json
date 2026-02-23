@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:structure_border_48",
+      "materials": {
+        "default": "goe_tnt_structure_border"
+      },  
+      "textures": {
+        "default": "textures/goe/tnt/entity/structures/gradient/blue"
+      },
+      "geometry": {
+        "default": "geometry.goe_tnt.structure_border_48"
+      },
+      "render_controllers": [
+        "controller.render.goe_tnt.structure_border"
+      ],
+      "animations": {
+        "scale": "animation.goe_tnt.structure_border.scale"
+      },
+      "scripts": {
+        "animate": [
+          "scale"
+        ]
+      }
+    }
+  }
+}

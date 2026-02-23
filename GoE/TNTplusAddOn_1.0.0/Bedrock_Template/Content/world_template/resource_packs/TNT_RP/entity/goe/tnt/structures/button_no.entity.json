@@ -1,0 +1,33 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:client_entity": {
+      "description": {
+        "identifier": "goe_tnt:button_no",
+        "materials": { "default": "goe_mob", "semi": "goe_mob" },
+        "textures": {
+          "default": "textures/goe/tnt/entity/structures/button_no"
+        },
+        "geometry": { 
+          "default": "geometry.button_no"
+        },
+        "render_controllers": [
+          "controller.render.goe_tnt.button"
+        ],
+        "animations": {
+          "root": "controller.animation.goe_tnt.buttons.root",
+          "press": "animation.button_no.activate",
+          "summon": "animation.button_no.appear",
+          "despawn": "animation.button_no.disappear"
+        },
+        "particle_effects": {
+          "button_poof_red": "goe_tnt:button_poof_red"
+        },
+        "scripts": {
+          "animate": [
+            "root",
+            { "press": "q.mark_variant == 1" }
+          ]
+        }
+      }
+    }
+}

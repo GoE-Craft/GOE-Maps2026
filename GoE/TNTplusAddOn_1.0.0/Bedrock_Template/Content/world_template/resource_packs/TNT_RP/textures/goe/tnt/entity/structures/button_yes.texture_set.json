@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "button_yes",
+		"metalness_emissive_roughness": "button_yes_mer",
+		"heightmap": "button_yes_height"
+	}
+}
