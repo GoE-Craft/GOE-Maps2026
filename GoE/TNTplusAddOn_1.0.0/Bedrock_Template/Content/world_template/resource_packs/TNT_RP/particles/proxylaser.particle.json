@@ -5,7 +5,7 @@
 			"identifier": "goe_tnt:proxy_laser",
 			"basic_render_parameters": {
 				"material": "particles_blend",
-				"texture": "textures/particle/particles"
+				"texture": "textures/goe/tnt/particles/proxy_laser"
 			}
 		},
 		"components": {
@@ -29,10 +29,10 @@
 				"size": [1000, 0.5],
 				"facing_camera_mode": "direction_x",
 				"uv": {
-					"texture_width": 128,
-					"texture_height": 128,
+					"texture_width": 32,
+					"texture_height": 32,
 					"flipbook": {
-						"base_UV": [32, 16],
+						"base_UV": [0, 0],
 						"size_UV": [32, 32],
 						"step_UV": [32, 0],
 						"frames_per_second": 1,
