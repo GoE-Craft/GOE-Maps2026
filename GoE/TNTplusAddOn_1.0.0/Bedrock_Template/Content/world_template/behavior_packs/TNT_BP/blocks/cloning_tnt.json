@@ -22,7 +22,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Cloning TNT",
+      "minecraft:display_name": "§eCloning TNT§f\nDuplicate any Mob with a single explosion of the Cloning TNT.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Void TNT",
+      "minecraft:display_name": "§eVoid TNT§f\nSucks up everything in the void!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

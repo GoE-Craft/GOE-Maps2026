@@ -4,7 +4,7 @@ pack.description=TNT+ Add-On Resource Pack
 action.hint.exit.goe_tnt:mecha_suit=§6[Hint] Hold any TNT block in your hand and interact to launch it.\n 
 
 entity.goe_tnt:mecha_suit.name=Mecha Suit
-item.spawn_egg.entity.goe_tnt:mecha_suit.name=Mecha Suit
+item.spawn_egg.entity.goe_tnt:mecha_suit.name=§eMecha Suit§f\n§oPlace the Mecha Suit on the ground and interact to mount it!§r
 
 item.goe_tnt:tnt_detonator=TNT Detonator
 

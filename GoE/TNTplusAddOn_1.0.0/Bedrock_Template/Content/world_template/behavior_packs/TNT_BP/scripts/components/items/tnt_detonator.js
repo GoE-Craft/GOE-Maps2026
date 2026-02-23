@@ -85,7 +85,7 @@ function* activateBlocksInArea(centerLocation, width, height, depth, dimension, 
 function* shootLaserProjectile(player, maxDistance) {
     player.playSound("goe_tnt:tnt_detonator_laser", { volume: 1, pitch: 1 });
     const rightOffset = -0.4;
-    const step = 0.1;
+    const step = 0.02;
     const direction = player.getViewDirection();
     const up = { x: 0, y: 1, z: 0 };
     // Calculate right vector: right = view x up

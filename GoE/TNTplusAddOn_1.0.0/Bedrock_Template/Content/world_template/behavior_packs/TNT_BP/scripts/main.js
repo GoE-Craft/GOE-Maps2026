@@ -56,6 +56,7 @@ async function onLoad() {
   world.afterEvents.playerSpawn.subscribe(game_events.onPlayerSpawn);
   //world.afterEvents.playerJoin.subscribe(game_events.onPlayerJoin);
   world.afterEvents.entitySpawn.subscribe(game_events.onEntitySpawn);
+  world.afterEvents.playerInventoryItemChange.subscribe(game_events.onPlayerInventoryItemChange);
   //world.afterEvents.entityDie.subscribe(game_events.onEntityDie);
   //world.afterEvents.entityHurt.subscribe(game_events.onEntityHurt);
   //world.afterEvents.entityHealthChanged.subscribe(game_events.onEntityHealthChanged);

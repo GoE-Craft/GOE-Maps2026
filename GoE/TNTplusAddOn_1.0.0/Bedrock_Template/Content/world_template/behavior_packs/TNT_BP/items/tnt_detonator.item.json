@@ -11,6 +11,9 @@
 		"components": {
 			"minecraft:max_stack_size": 1,
 			"minecraft:icon": "tnt_detonator",
+			"minecraft:display_name": {
+				"value": "§eTNT Detonator§f\n§oInteract to detonate TNT blocks safely from a big distance!§r"
+			},
 			"minecraft:durability": {
 				"damage_chance": {
 					"max": 100,

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Hacker TNT",
+      "minecraft:display_name": "§eHacker TNT§f\nExplodes every enemy near you!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Matrix TNT",
+      "minecraft:display_name": "§eMatrix TNT§f\nSummons small scatters that follow enemies and explode!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

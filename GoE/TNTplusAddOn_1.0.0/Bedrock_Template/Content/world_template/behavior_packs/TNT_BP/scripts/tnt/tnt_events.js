@@ -183,3 +183,62 @@ function* processExplosionEvent(impactedBlocks) {
         yield;
     }
 }
+
+/**
+ * Handle player inventory item change events to update item lore
+ * 
+ * @param {object} event - The player inventory item change event object
+ */
+export function onPlayerInventoryItemChange(event) {
+    const player = event.player;
+    const itemStack = event.itemStack;
+
+    // Only process when an item is added (not removed)
+    if (!itemStack) return;
+
+    try {
+        const itemType = itemStack.typeId;
+        
+        // Check if the item needs lore update
+        if (itemType === "minecraft:clock") {
+            system.run(() => {
+                updateClockLore(player);
+            });
+        }
+    } catch (e) {
+        console.warn("Error in onPlayerInventoryItemChange: " + e);
+    }
+}
+
+/**
+ * Updates all clocks in player inventory with custom lore
+ * @param {Player} player - Target player
+ */
+function updateClockLore(player) {
+    try {
+        const inventory = player.getComponent("minecraft:inventory")?.container;
+        if (!inventory) return;
+
+        const clockLore = [
+            "§eInteract on TNT block to set a timer for up to 120 seconds!§r"
+        ];
+
+        for (let i = 0; i < inventory.size; i++) {
+            const item = inventory.getItem(i);
+            
+            if (item && item.typeId === "minecraft:clock") {
+                // Check if the lore is already set to avoid unnecessary updates
+                const currentLore = item.getLore();
+                const loreMatches = currentLore.length === clockLore.length && 
+                                   currentLore.every((line, index) => line === clockLore[index]);
+                
+                if (!loreMatches) {
+                    item.setLore(clockLore);
+                    inventory.setItem(i, item);
+                }
+            }
+        }
+    } catch (e) {
+        console.warn("Error updating clock lore: " + e);
+    }
+}

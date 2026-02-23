@@ -22,7 +22,7 @@
 			}
 		},
 		"animation.tnt_detonator.push": {
-			"animation_length": 0.1667,
+			"animation_length": 0.5,
 			"bones": {
 				"button": {
 					"position": {
@@ -30,6 +30,20 @@
 						"0.1667": [0, -0.75, 0]
 					}
 				}
+			},
+			"particle_effects": {
+				"0.0": [
+					{
+						"effect": "radio",
+						"locator": "radio",
+						"pre_effect_script": "variable.direction = 1;"
+					},
+					{
+						"effect": "radio",
+						"locator": "radio",
+						"pre_effect_script": "variable.direction = -1;"
+					}
+				]
 			}
 		}
 	}

@@ -27,6 +27,10 @@ export async function onPlayerSpawn(event) {
       await book.onPlayerSpawn(event);
 }
 
+export async function onPlayerInventoryItemChange(event) {
+    tnt_events.onPlayerInventoryItemChange(event);
+}
+
 export async function onEntitySpawn(event) {
     tnt_events.onEntitySpawnEvent(event);
 }

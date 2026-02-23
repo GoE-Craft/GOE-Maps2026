@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Specialized TNT",
+      "minecraft:display_name": "§eSpecialized TNT§f\nDestroys large area of the blocks he is placed on!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
