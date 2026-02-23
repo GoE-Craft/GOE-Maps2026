@@ -1,29 +1,54 @@
 {
-	"format_version": "1.19.0",
-	"minecraft:client_entity": {
-		"description": {
-			"identifier": "goe_tnt:mega_crater_tnt",
-			"materials": {
-				"default": "entity_alphatest"
-			},
-			"textures": {
-				"default": "textures/goe/tnt/entity/tnt"
-			},
-			"geometry": {
-				"default": "geometry.tnt"
-			},
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:mega_crater_tnt",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam" : "goe_tnt_border",
+        "crack" : "goe_tnt_border",
+        "cracks" : "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/mega_crater_tnt",
+        "cracks" : "textures/goe/tnt/entity/mega_crater_cracks"
+      },
+      "geometry": {
+        "default": "geometry.mega_crater_tnt",
+        "cracks" : "geometry.mega_crater_cracks"
+      },
 			"scripts": {
-				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
-				],
-				"animate": [
-				{"tnt_swelling": "v.should_swell"}
-				]
-					},
-			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          //{"swell" : "q.mark_variant == 1"},
+          {"charge" : "q.mark_variant == 1"},
+          {"cracks_charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"}
+        ]
 			},
-      		"render_controllers": [ "controller.render.tnt" ]
-		}
-	}
+      "animations": {
+        // "swell" : "animation.mega_crater_tnt.swell",
+        "cracks_charge" : "animation.mega_crater_cracks.cracks_charge", 
+        "charge" : "animation.mega_crater_tnt.charge",
+        "explosion" : "animation.mega_crater_tnt.explode"
+      },
+      "particle_effects": {
+        "beams" : "goe_tnt:dragon_beam",
+        "pull_stone" : "goe_tnt:mega_crater_pull_stone",
+        "fuse" : "goe_tnt:mega_crater_fuse",
+        "fire" : "goe_tnt:mega_crater_fire",
+        //"circle" : "goe_tnt:mega_crater_circle",
+        //"ring_pull" : "goe_tnt:mega_crater_ring_pull",
+        "explosion" : "goe_tnt:mega_crater_explosion",
+        "explosion_realistic" : "goe_tnt:explosion_puff",
+        "ring" : "goe_tnt:mega_crater_ring"
+      },
+      "render_controllers": [ 
+        "controller.render.mega_crater_tnt",
+        {"controller.render.mega_crater_cracks" : "q.mark_variant == 1"}
+      ]
+    }
+  }
 }

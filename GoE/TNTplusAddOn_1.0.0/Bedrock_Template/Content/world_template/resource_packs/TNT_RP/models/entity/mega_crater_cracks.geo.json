@@ -1,0 +1,367 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.mega_crater_cracks",
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 18,
+				"visible_bounds_height": 5,
+				"visible_bounds_offset": [0, 0.5, 0]
+			},
+			"bones": [
+				{
+					"name": "floor_cracks",
+					"pivot": [0, 2, 0]
+				},
+				{
+					"name": "fullcracks",
+					"parent": "floor_cracks",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{
+							"origin": [-87.89535, 2.0666, -93.95595],
+							"size": [170.496, 0, 170.496],
+							"uv": {
+								"up": {"uv": [0, 0], "uv_size": [256, 256]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_x_z",
+					"parent": "floor_cracks",
+					"pivot": [-11, 0, -8],
+					"cubes": [
+						{
+							"origin": [-32.89535, 2.0666, -43.95595],
+							"size": [27.496, 0, 45.496],
+							"uv": {
+								"up": {"uv": [81, 115], "uv_size": [43, 63]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_x_z3",
+					"parent": "crack_x_z",
+					"pivot": [-32.55, 0, -20],
+					"cubes": [
+						{
+							"origin": [-96.44535, 2.0666, -23.80595],
+							"size": [63.496, 0, 42.346],
+							"uv": {
+								"up": {"uv": [0, 89], "uv_size": [81, 62]}
+							}
+						},
+						{
+							"origin": [-53.44535, 2.0666, -23.80595],
+							"size": [20.496, 0, 22.346],
+							"uv": {
+								"up": {"uv": [56, 120], "uv_size": [25, 31]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_x_z5",
+					"parent": "crack_x_z3",
+					"pivot": [-38.55, 0, -22.35],
+					"cubes": [
+						{
+							"origin": [-59.44535, 2.0666, -42.15595],
+							"size": [26.496, 0, 18.346],
+							"uv": {
+								"up": {"uv": [47, 151], "uv_size": [34, 31]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_x_z4",
+					"parent": "crack_x_z5",
+					"pivot": [-54.975, 0, -41.6],
+					"cubes": [
+						{
+							"origin": [-95.87035, 2.0666, -54.40595],
+							"size": [43.496, 0, 12.346],
+							"uv": {
+								"up": {"uv": [11, 174], "uv_size": [47, 15]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_x_z6",
+					"parent": "crack_x_z4",
+					"pivot": [-89.975, 0, -41.3],
+					"cubes": [
+						{
+							"origin": [-103.47035, 2.0666, -42.10595],
+							"size": [16.671, 0, 24.246],
+							"uv": {
+								"up": {"uv": [2, 145], "uv_size": [19, 29]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_x_z2",
+					"parent": "crack_x_z",
+					"pivot": [-24.825, 0, -44],
+					"cubes": [
+						{
+							"origin": [-50.17035, 2.0666, -105.95595],
+							"size": [48.946, 0, 62.496],
+							"uv": {
+								"up": {"uv": [58, 179], "uv_size": [70, 77]}
+							}
+						}
+					]
+				},
+				{
+					"name": "cracks_x",
+					"parent": "floor_cracks",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "cracks_x2",
+					"parent": "cracks_x",
+					"pivot": [-2, 2, 8],
+					"cubes": [
+						{
+							"origin": [-37.89535, 2.0666, 7.04405],
+							"size": [37.496, 0, 28.496],
+							"uv": {
+								"up": {"uv": [78, 64], "uv_size": [51, 40]}
+							}
+						}
+					]
+				},
+				{
+					"name": "cracks_x5",
+					"parent": "cracks_x2",
+					"pivot": [-32.475, 2, 35.525],
+					"cubes": [
+						{
+							"origin": [-45.92035, 2.0666, 34.56905],
+							"size": [26.221, 0, 48.096],
+							"uv": {
+								"up": {"uv": [74, 2], "uv_size": [38, 69]}
+							}
+						}
+					]
+				},
+				{
+					"name": "cracks_x7",
+					"parent": "cracks_x5",
+					"pivot": [-46, 0, 49],
+					"cubes": [
+						{
+							"origin": [-79.92035, 2.0666, 47.56905],
+							"size": [34.221, 0, 32.096],
+							"uv": {
+								"up": {"uv": [25, 2], "uv_size": [49, 47]}
+							}
+						}
+					]
+				},
+				{
+					"name": "cracks_x6",
+					"parent": "cracks_x5",
+					"pivot": [-19.275, 2, 49.05],
+					"cubes": [
+						{
+							"origin": [-19.72035, 2.0666, 37.09405],
+							"size": [21.696, 0, 45.096],
+							"uv": {
+								"up": {"uv": [113, 2], "uv_size": [35, 67]}
+							}
+						}
+					]
+				},
+				{
+					"name": "cracks_x4",
+					"parent": "cracks_x2",
+					"pivot": [-39, 2, 17],
+					"cubes": [
+						{
+							"origin": [-74.89535, 2.0666, 16.04405],
+							"size": [37.496, 0, 25.496],
+							"uv": {
+								"up": {"uv": [24, 59], "uv_size": [54, 31]}
+							}
+						}
+					]
+				},
+				{
+					"name": "cracks_x3",
+					"parent": "cracks_x2",
+					"pivot": [-0.525, 2, 28.6],
+					"cubes": [
+						{
+							"origin": [-0.42035, 2.0666, 14.74405],
+							"size": [22.496, 0, 17.271],
+							"uv": {
+								"up": {"uv": [129, 69], "uv_size": [32, 24]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crakc_n_x",
+					"parent": "floor_cracks",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "crakc_n_x2",
+					"parent": "crakc_n_x",
+					"pivot": [5.4, 2.075, -1.45],
+					"cubes": [
+						{
+							"origin": [5.10465, 2.0666, -6.95595],
+							"size": [24.496, 0, 20.496],
+							"uv": {
+								"up": {"uv": [141, 96], "uv_size": [33, 29]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crakc_n_x4",
+					"parent": "crakc_n_x2",
+					"pivot": [29.4, 1.925, 11.65],
+					"cubes": [
+						{
+							"origin": [28.50465, 2.0666, 9.31905],
+							"size": [65.171, 0, 30.096],
+							"uv": {
+								"up": {"uv": [172.45, 58], "uv_size": [83.55, 44]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crakc_n_x5",
+					"parent": "crakc_n_x4",
+					"pivot": [49.4, 2.075, 39.65],
+					"cubes": [
+						{
+							"origin": [28.50465, 2.0666, 39.31905],
+							"size": [65.171, 0, 30.096],
+							"uv": {
+								"up": {"uv": [172.45, 14], "uv_size": [83.55, 44]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crakc_n_x7",
+					"parent": "crakc_n_x5",
+					"pivot": [41, 0, 33],
+					"cubes": [
+						{
+							"origin": [21.50465, 2.0666, 34.31905],
+							"size": [65.171, 0, 30.096],
+							"pivot": [42, 0, 33],
+							"rotation": [0, -75, 0],
+							"uv": {
+								"up": {"uv": [172.45, 14], "uv_size": [83.55, 44]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crakc_n_x3",
+					"parent": "crakc_n_x2",
+					"pivot": [27.4, 0, 0.65],
+					"cubes": [
+						{
+							"origin": [28.50465, 2.0666, -9.68095],
+							"size": [65.171, 0, 20.096],
+							"uv": {
+								"up": {"uv": [172.45, 100], "uv_size": [83.55, 28]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crakc_n_x6",
+					"parent": "crakc_n_x3",
+					"pivot": [68.4, 2.075, -9.6],
+					"cubes": [
+						{
+							"origin": [53.50465, 2.0666, -36.68095],
+							"size": [40.171, 0, 27.096],
+							"uv": {
+								"up": {"uv": [204.45, 129], "uv_size": [51.55, 41]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_n_z",
+					"parent": "floor_cracks",
+					"pivot": [9.9, 2.05, -10.325]
+				},
+				{
+					"name": "crack_n_z2",
+					"parent": "crack_n_z",
+					"pivot": [9.9, 0.05, -10.325],
+					"cubes": [
+						{
+							"origin": [-4.49935, 2.1166, -37.28095],
+							"size": [28, 0, 30],
+							"uv": {
+								"up": {"uv": [127, 125], "uv_size": [39, 47]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_n_z3",
+					"parent": "crack_n_z2",
+					"pivot": [13.55, 0.05, -36.6],
+					"cubes": [
+						{
+							"origin": [-6.14935, 2.1166, -66.55595],
+							"size": [50.175, 0, 30],
+							"uv": {
+								"up": {"uv": [123.25, 170], "uv_size": [71.75, 45]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_n_z4",
+					"parent": "crack_n_z3",
+					"pivot": [20.55, 0.05, -66.55],
+					"cubes": [
+						{
+							"origin": [-6.14935, 2.1166, -96.50595],
+							"size": [50.175, 0, 30],
+							"uv": {
+								"up": {"uv": [124.25, 215], "uv_size": [71.75, 41]}
+							}
+						}
+					]
+				},
+				{
+					"name": "crack_n_z5",
+					"parent": "crack_n_z3",
+					"pivot": [41.525, 0.05, -46.6],
+					"cubes": [
+						{
+							"origin": [41.50065, 2.1166, -70.55595],
+							"size": [30, 0, 34],
+							"uv": {
+								"up": {"uv": [194, 171], "uv_size": [43, 50]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

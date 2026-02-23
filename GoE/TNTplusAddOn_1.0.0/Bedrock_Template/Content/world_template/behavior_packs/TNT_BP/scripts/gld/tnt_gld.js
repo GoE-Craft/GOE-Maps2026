@@ -1147,7 +1147,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:mega_crater_tnt",
         fuseTime: 40,
-        power: 9, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -1155,10 +1155,11 @@ export const TNT_GLD = [
             soundDelay: 0
         },
         explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "random.explode",
-            soundDelay: 0
+            explosionAnimationLength: 1
+            // particleEffect: "goe_tnt:big_explosion_white",
+            // particleDelay: 0,
+            // soundEffect: "random.explode",
+            // soundDelay: 0
         },
         explosionProperties: {
             createsFire: false,

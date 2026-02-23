@@ -22,7 +22,7 @@
     "proxy_tnt": { "textures": "textures/goe/tnt/entity/proxy_tnt" },
     "chunker_tnt": { "textures": "textures/goe/tnt/entity/chunker_tnt" },
     "comet_tnt": { "textures": "textures/goe/tnt/entity/comet_tnt" },
-    "crater_tnt": { "textures": "textures/goe/tnt/entity/crater_tnt" },
+    "mega_crater_tnt": { "textures": "textures/goe/tnt/entity/mega_crater_tnt" },
     "crops_tnt": { "textures": "textures/goe/tnt/entity/crops_tnt" },
     "cursed_tnt": { "textures": "textures/goe/tnt/entity/cursed_tnt" },
     "cyclone_tnt": { "textures": "textures/goe/tnt/entity/cyclone_tnt" },
