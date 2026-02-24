@@ -711,3 +711,31 @@ replace=gray_stained_glass structure_void
 type=area
 location=309 1 287 329 21 307
 replace=gray_stained_glass structure_void
+
+///////////////////////////////////////////////////
+//////// TESTING AREA STRUCTURES //////////////////
+
+#farm_testing_area
+type=area
+location=1 1 250 48 19 297
+replace=gray_stained_glass structure_void
+
+#village_testing_area
+type=area
+location=51 1 250 98 20 297
+replace=gray_stained_glass structure_void
+
+#hotel_testing_area
+type=area
+location=101 1 250 148 39 297
+replace=gray_stained_glass structure_void
+
+#cabins_testing_area
+type=area
+location=151 1 250 198 27 297
+replace=gray_stained_glass structure_void
+
+#construction_site_testing_area
+type=area
+location=201 1 250 248 37 297
+replace=gray_stained_glass structure_void

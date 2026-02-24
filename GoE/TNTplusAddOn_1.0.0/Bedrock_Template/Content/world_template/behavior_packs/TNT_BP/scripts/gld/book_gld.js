@@ -28,7 +28,6 @@ export const ShopItems = {
             itemId: "minecraft:clock"
         }
     ],
-
     // TNT's category
     tnts: [
         // {
@@ -348,40 +347,40 @@ export const ShopItems = {
         }
     ],
 
-    // TNT Structures category
+        // TNT Structures category
     structures: [
-        //Structure items will be added here
         {
-            id: "structure_id",
-            name: "Directional TNT",
-            price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/directional_tnt"
+            id: "goe_tnt:farm_testing_area",
+            name: "Farm",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/farm_testing_area"
         },
         {
-            id: "structure_id",
-            name: "Party TNT",
-            price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/party_tnt"
+            id: "goe_tnt:village_testing_area",
+            name: "Village",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/village_testing_area"
         },
         {
-            id: "structure_id",
-            name: "Magnet TNT",
-            price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/magnet_tnt"
+            id: "goe_tnt:hotel_testing_area",
+            name: "Hotel",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/hotel_testing_area"
         },
         {
-            id: "structure_id",
-            name: "Ultron TNT",
-            price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/ultron_tnt"
+            id: "goe_tnt:cabins_testing_area",
+            name: "Cabins",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/cabins_testing_area"
         },
         {
-            id: "structure_id",
-            name: "Chunker TNT",
-            price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/chunker_tnt"
+            id: "goe_tnt:construction_site_testing_area",
+            name: "Construction Site",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/structures/construction_site_testing_area"
         }
-    ]
+    ],
+
 };
 
 // Helper function to format price text

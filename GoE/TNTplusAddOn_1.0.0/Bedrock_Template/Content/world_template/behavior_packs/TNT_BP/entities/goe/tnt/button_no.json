@@ -11,7 +11,7 @@
       "goe_tnt:pressed": {
         "minecraft:mark_variant": { "value": 1 },
         "minecraft:timer": {
-          "time": 0.3,
+          "time":0.3,
           "looping": false,
           "time_down_event": { "event": "goe_tnt:reset" }
         }
@@ -47,7 +47,7 @@
       "minecraft:water_movement": { "drag_factor": 0.0 },
       "minecraft:push_through": { "value": 1 },
       "minecraft:health": { "value": 30, "max": 30 },
-      "minecraft:collision_box": { "width": 0.5, "height": 1.0 },
+      "minecraft:collision_box": { "width": 1, "height": 2 },
       //"minecraft:damage_sensor": { "triggers": { "cause": "all", "deals_damage": false } },
       "minecraft:knockback_resistance": { "value": 100, "max": 100 },
       "minecraft:physics": { "has_collision": true, "has_gravity": false }

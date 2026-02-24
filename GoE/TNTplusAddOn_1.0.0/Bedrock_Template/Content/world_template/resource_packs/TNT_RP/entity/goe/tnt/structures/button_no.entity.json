@@ -25,7 +25,8 @@
         "scripts": {
           "animate": [
             "root",
-            { "press": "q.mark_variant == 1" }
+            { "press": "q.mark_variant == 1" },
+            { "despawn": "q.mark_variant == 2" }
           ]
         }
       }

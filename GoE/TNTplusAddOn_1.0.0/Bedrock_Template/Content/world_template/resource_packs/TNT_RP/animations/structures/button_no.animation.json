@@ -40,13 +40,14 @@
 				}
 			},
 			"particle_effects": {
-				"0.4583": {
+				"0.0": {
 					"effect": "button_poof_red",
 					"locator": "center"
 				}
 			}
 		},
 		"animation.button_no.disappear": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 1,
 			"bones": {
 				"bb_main": {

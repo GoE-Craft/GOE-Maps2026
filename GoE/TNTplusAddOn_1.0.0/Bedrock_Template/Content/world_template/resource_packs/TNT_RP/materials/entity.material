@@ -37,6 +37,10 @@
       "+states": [ "DisableCulling", "DisableDepthWrite", "DisableAlphaWrite" ]
     },
 
-    "goe_mob:entity_alphatest": {}
+    "goe_mob:entity_alphatest": {},
+
+    "goe_tnt_alphablend_doublesided:entity_alphablend": {
+      "+states": [ "DisableCulling" ]
+    }
   }
 }

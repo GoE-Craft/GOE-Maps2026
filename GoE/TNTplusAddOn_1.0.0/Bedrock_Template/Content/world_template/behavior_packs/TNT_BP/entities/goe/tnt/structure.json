@@ -1,0 +1,81 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "goe_tnt:structure",
+			"is_spawnable": false,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"component_groups": {
+			"goe_tnt:instant_despawn": {
+				"minecraft:instant_despawn": {}
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": ["util", "furniture"]
+			},
+			"minecraft:health": {
+				"value": 2,
+				"max": 2
+			},
+			"minecraft:knockback_resistance": {
+				"value": 1
+			},
+			"minecraft:damage_sensor": {
+				"triggers": [{
+					"cause": "all",
+					"deals_damage": false
+				}]
+			},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": false
+			},
+			"minecraft:collision_box": {
+				"width": 0,
+				"height": 0
+			},
+			"minecraft:scale": {
+				"value": 0
+			},
+			"minecraft:physics": {
+				"has_gravity": false
+			}
+		},
+		"events": {
+			"goe_tnt:remove": {
+				"add": {
+					"component_groups": ["goe_tnt:instant_despawn"]
+				}
+			},
+			"goe_tnt:farm_testing_area": {
+				"queue_command": {
+					"command": ["scriptevent goe_tnt:structure_load farm_testing_area"]
+				}
+			},
+			"goe_tnt:village_testing_area": {
+				"queue_command": {
+					"command": ["scriptevent goe_tnt:structure_load village_testing_area"]
+				}
+			},
+			"goe_tnt:hotel_testing_area": {
+				"queue_command": {
+					"command": ["scriptevent goe_tnt:structure_load hotel_testing_area"]
+				}
+			},
+			"goe_tnt:cabins_testing_area": {
+				"queue_command": {
+					"command": ["scriptevent goe_tnt:structure_load cabins_testing_area"]
+				}
+			},
+			"goe_tnt:construction_site_testing_area": {
+				"queue_command": {
+					"command": ["scriptevent goe_tnt:structure_load construction_site_testing_area"]
+				}
+			}
+		}
+	}
+}
+

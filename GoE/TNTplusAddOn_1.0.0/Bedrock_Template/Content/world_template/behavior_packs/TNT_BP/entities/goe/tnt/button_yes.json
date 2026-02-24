@@ -45,7 +45,7 @@
       "minecraft:water_movement": { "drag_factor": 0.0 },
       "minecraft:push_through": {"value": 1},
       "minecraft:health": { "value": 30, "max": 30 },
-      "minecraft:collision_box": { "width": 0.5, "height": 1.0 },
+      "minecraft:collision_box": { "width": 1, "height": 2 },
       "minecraft:knockback_resistance": { "value": 100, "max": 100 },
       "minecraft:physics": { "has_collision": false, "has_gravity": false }
     },
