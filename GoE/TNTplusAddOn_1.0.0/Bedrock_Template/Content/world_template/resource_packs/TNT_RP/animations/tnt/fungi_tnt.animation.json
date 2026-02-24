@@ -325,16 +325,19 @@
 			"particle_effects": {
 				"0.0": [
 					{
-						"effect": "fungi_cloud"
+						"effect": "ender_sparkle_explosion_rgb"
 					},
 					{
-						"effect": "ender_sparkle_explosion_rgb"
+						"effect": "fungi_cloud"
 					}
 				],
 				"0.0417": {
 					"effect": "fungi_impact"
 				},
 				"0.1667": {
+					"effect": "ender_sparkle_explosion_rgb"
+				},
+				"0.3333": {
 					"effect": "ender_sparkle_explosion_rgb"
 				}
 			}
