@@ -1530,7 +1530,7 @@
 					"name": "locators",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"locator": [0, 8, 0],
+						"mob_eraser_tnt_locator": [0, 8, 0],
 						"pulse": [0, 0.1, 0],
 						"mob_heads": [0, 0, 0]
 					}

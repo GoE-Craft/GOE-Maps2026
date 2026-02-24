@@ -15,22 +15,22 @@
 					"name": "locators",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"locator": {
+						"tree_planter_tnt_locator": {
 							"offset": [0, 0, 0],
 							"rotation": [180, 0, 0]
 						},
-						"locator2": {
+						"tree_planter_tnt_locator2": {
 							"offset": [0, 0, 0],
 							"rotation": [180, 0, 0]
 						},
-						"locator3": [0, 0, 0]
+						"tree_planter_tnt_locator3": [0, 0, 0]
 					}
 				},
 				{
 					"name": "explosion_locator",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"locator4": [0, 0, 0]
+						"tree_planter_tnt_locator4": [0, 0, 0]
 					}
 				},
 				{

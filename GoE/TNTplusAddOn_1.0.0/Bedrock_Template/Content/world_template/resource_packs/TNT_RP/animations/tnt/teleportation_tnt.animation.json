@@ -83,7 +83,7 @@
 			"particle_effects": {
 				"0.0": {
 					"effect": "tnt_charge_blue",
-					"locator": "locator_charge"
+					"locator": "teleportation_tnt_locator_charge"
 				}
 			}
 		},
@@ -401,7 +401,7 @@
 				},
 				"2.5": {
 					"effect": "tnt_charge_matrix_blue",
-					"locator": "locator_charge"
+					"locator": "teleportation_tnt_locator_charge"
 				}
 			}
 		}

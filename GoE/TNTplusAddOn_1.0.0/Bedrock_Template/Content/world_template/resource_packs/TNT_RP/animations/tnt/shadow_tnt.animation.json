@@ -48,7 +48,7 @@
 				},
 				"0.75": {
 					"effect": "shadow_puddle",
-					"locator": "locator"
+					"locator": "shadow_tnt_locator"
 				},
 				"1.0": {
 					"effect": "shadow_dust"

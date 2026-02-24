@@ -186,7 +186,7 @@
 					},
 					{
 						"effect": "thief_implosion",
-						"locator": "center_locator"
+						"locator": "thief_tnt_center_locator"
 					},
 					{
 						"effect": "mask"

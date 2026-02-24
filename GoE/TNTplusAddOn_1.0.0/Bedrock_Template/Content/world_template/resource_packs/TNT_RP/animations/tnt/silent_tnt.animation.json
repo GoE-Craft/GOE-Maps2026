@@ -146,7 +146,7 @@
 				],
 				"1.0": {
 					"effect": "silent_circle",
-					"locator": "center"
+					"locator": "silent_tnt_center"
 				},
 				"1.0417": [
 					{
@@ -198,25 +198,25 @@
 			"particle_effects": {
 				"0.1667": {
 					"effect": "silent_orb",
-					"locator": "center"
+					"locator": "silent_tnt_center"
 				},
 				"0.2083": [
 					{
 						"effect": "silent_ring",
-						"locator": "center"
+						"locator": "silent_tnt_center"
 					},
 					{
 						"effect": "silent_explosion",
-						"locator": "center"
+						"locator": "silent_tnt_center"
 					}
 				],
 				"0.3333": {
 					"effect": "silent_explosion_flash",
-					"locator": "center"
+					"locator": "silent_tnt_center"
 				},
 				"0.4167": {
 					"effect": "silent_shell_explosion",
-					"locator": "center"
+					"locator": "silent_tnt_center"
 				}
 			}
 		}

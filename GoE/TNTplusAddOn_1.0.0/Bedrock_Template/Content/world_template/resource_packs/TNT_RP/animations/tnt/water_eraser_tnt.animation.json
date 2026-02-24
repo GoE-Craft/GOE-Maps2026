@@ -83,7 +83,7 @@
 			"particle_effects": {
 				"0.0": {
 					"effect": "tnt_charge",
-					"locator": "center_locator"
+					"locator": "water_eraser_tnt_center_locator"
 				}
 			}
 		},

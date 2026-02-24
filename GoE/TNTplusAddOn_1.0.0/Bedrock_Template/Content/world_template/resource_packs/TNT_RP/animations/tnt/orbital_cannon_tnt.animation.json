@@ -733,11 +733,11 @@
 			"particle_effects": {
 				"1.0": {
 					"effect": "tnt_charge_purple",
-					"locator": "root"
+					"locator": "orbital_cannon_tnt_root"
 				},
 				"2.0": {
 					"effect": "tnt_charge_purple",
-					"locator": "root"
+					"locator": "orbital_cannon_tnt_root"
 				}
 			}
 		},
@@ -871,7 +871,7 @@
 				"0.0": [
 					{
 						"effect": "detonator_impact_purple",
-						"locator": "root"
+						"locator": "orbital_cannon_tnt_root"
 					},
 					{
 						"effect": "goe_tnt:pulse_purple",
@@ -879,7 +879,7 @@
 					},
 					{
 						"effect": "tnt_charge_purple",
-						"locator": "root"
+						"locator": "orbital_cannon_tnt_root"
 					}
 				]
 			}

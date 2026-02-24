@@ -1922,7 +1922,7 @@
 						}
 					],
 					"locators": {
-						"locator": [0, 8, 0]
+						"matrix_tnt_locator": [0, 8, 0]
 					}
 				},
 				{

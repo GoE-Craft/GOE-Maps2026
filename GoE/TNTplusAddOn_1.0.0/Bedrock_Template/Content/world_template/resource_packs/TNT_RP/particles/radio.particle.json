@@ -36,7 +36,7 @@
 				"linear_drag_coefficient": 0.5
 			},
 			"minecraft:particle_appearance_billboard": {
-				"size": ["math.lerp(0.05, 0.2, v.particle_age / v.particle_lifetime)", "math.lerp(0.05, 0.2, v.particle_age / v.particle_lifetime)"],
+				"size": ["math.lerp(0.5, 1, v.particle_age / v.particle_lifetime)", "math.lerp(0.5, 1, v.particle_age / v.particle_lifetime)"],
 				"facing_camera_mode": "emitter_transform_xz",
 				"uv": {
 					"texture_width": 32,

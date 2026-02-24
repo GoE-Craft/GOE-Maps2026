@@ -91,39 +91,39 @@
 				"0.5": [
 					{
 						"effect": "light_charge",
-						"locator": "locator"
+						"locator": "light_tnt_locator"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator2"
+						"locator": "light_tnt_locator2"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator3"
+						"locator": "light_tnt_locator3"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator4"
+						"locator": "light_tnt_locator4"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator5"
+						"locator": "light_tnt_locator5"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator6"
+						"locator": "light_tnt_locator6"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator7"
+						"locator": "light_tnt_locator7"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator8"
+						"locator": "light_tnt_locator8"
 					},
 					{
 						"effect": "light_charge",
-						"locator": "locator9"
+						"locator": "light_tnt_locator9"
 					}
 				],
 				"1.0": {

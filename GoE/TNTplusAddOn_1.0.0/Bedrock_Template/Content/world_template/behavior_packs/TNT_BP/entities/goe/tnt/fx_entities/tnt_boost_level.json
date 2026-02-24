@@ -1,0 +1,71 @@
+{
+    "format_version": "1.21.130",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "goe_tnt:tnt_boost_level",
+            "is_spawnable": false,
+            "is_summonable": true,
+            "properties": {
+                "goe_tnt:boost_level": {
+                    "client_sync": true,
+                    "type": "int",
+                    "default": 1,
+                    "range": [1,4]
+                },
+                "goe_tnt:tnt_type": {
+                    "client_sync": true,
+                    "type": "int",
+                    "default": 0,
+                    "range": [0,100]
+                }
+            }
+        },
+        "component_groups": {
+        },
+        "components": {
+            "minecraft:collision_box": {
+                "height": 0,
+                "width": 0
+            },
+            "minecraft:type_family": {
+                "family": [
+                    "tnt_fx"
+                ]
+            },
+            "minecraft:health": {
+                "value": 10,
+                "max": 10
+            },
+            "minecraft:damage_sensor": {
+                "triggers": {
+                    "cause": "all",
+                    "deals_damage": "no"
+                }
+            },
+            "minecraft:rotation_axis_aligned": {},
+            "minecraft:body_rotation_blocked": {}
+        },
+        "events": {
+            "goe_tnt:boost_1": {
+                "set_property": {
+                    "goe_tnt:boost_level": 1
+                }
+            },
+            "goe_tnt:boost_2": {
+                "set_property": {
+                    "goe_tnt:boost_level": 2
+                }
+            },
+            "goe_tnt:boost_3": {
+                "set_property": {
+                    "goe_tnt:boost_level": 3
+                }
+            },
+            "goe_tnt:boost_4": {
+                "set_property": {
+                    "goe_tnt:boost_level": 4
+                }
+            }
+        }
+    }
+}

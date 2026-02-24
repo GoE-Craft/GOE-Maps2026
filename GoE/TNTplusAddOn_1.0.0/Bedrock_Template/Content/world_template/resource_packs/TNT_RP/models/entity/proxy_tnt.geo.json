@@ -808,7 +808,7 @@
 						}
 					],
 					"locators": {
-						"locator1": [5.9, 13.5, 5.8]
+						"proxy_tnt_locator1": [5.9, 13.5, 5.8]
 					}
 				},
 				{
@@ -830,7 +830,7 @@
 						}
 					],
 					"locators": {
-						"locator2": [0.3, 13.5, 5.8]
+						"proxy_tnt_locator2": [0.3, 13.5, 5.8]
 					}
 				},
 				{
@@ -852,7 +852,7 @@
 						}
 					],
 					"locators": {
-						"locator3": [-6.1, 13.5, 5.8]
+						"proxy_tnt_locator3": [-6.1, 13.5, 5.8]
 					}
 				},
 				{
@@ -874,7 +874,7 @@
 						}
 					],
 					"locators": {
-						"locator4": [-6.1, 13.5, 0.2]
+						"proxy_tnt_locator4": [-6.1, 13.5, 0.2]
 					}
 				},
 				{
@@ -896,7 +896,7 @@
 						}
 					],
 					"locators": {
-						"locator5": [-6.1, 13.5, -5.4]
+						"proxy_tnt_locator5": [-6.1, 13.5, -5.4]
 					}
 				},
 				{
@@ -918,7 +918,7 @@
 						}
 					],
 					"locators": {
-						"locator6": [0.3, 13.5, -5.4]
+						"proxy_tnt_locator6": [0.3, 13.5, -5.4]
 					}
 				},
 				{
@@ -940,7 +940,7 @@
 						}
 					],
 					"locators": {
-						"locator7": [5.9, 13.5, -5.4]
+						"proxy_tnt_locator7": [5.9, 13.5, -5.4]
 					}
 				},
 				{
@@ -962,7 +962,7 @@
 						}
 					],
 					"locators": {
-						"locator8": [5.9, 13.5, 0.2]
+						"proxy_tnt_locator8": [5.9, 13.5, 0.2]
 					}
 				},
 				{
@@ -1357,7 +1357,7 @@
 					"parent": "sparks",
 					"pivot": [0.12, 23.1, -0.08],
 					"locators": {
-						"sparks": [0.12, 23.1, -0.08]
+						"proxy_tnt_sparks": [0.12, 23.1, -0.08]
 					}
 				},
 				{
@@ -1365,7 +1365,7 @@
 					"parent": "sparks",
 					"pivot": [0.12, 23.1, -0.08],
 					"locators": {
-						"spark_north": [0.12, 23.1, -0.08]
+						"proxy_tnt_spark_north": [0.12, 23.1, -0.08]
 					}
 				},
 				{
@@ -1373,7 +1373,7 @@
 					"parent": "sparks",
 					"pivot": [0.12, 23.1, -0.08],
 					"locators": {
-						"spark_east": [0.12, 23.1, -0.08]
+						"proxy_tnt_spark_east": [0.12, 23.1, -0.08]
 					}
 				},
 				{
@@ -1381,7 +1381,7 @@
 					"parent": "sparks",
 					"pivot": [0.12, 23.1, -0.08],
 					"locators": {
-						"spark_west": [0.12, 23.1, -0.08]
+						"proxy_tnt_spark_west": [0.12, 23.1, -0.08]
 					}
 				},
 				{
@@ -1389,14 +1389,14 @@
 					"parent": "sparks",
 					"pivot": [0.12, 23.1, -0.08],
 					"locators": {
-						"spark_south": [0.12, 23.1, -0.08]
+						"proxy_tnt_spark_south": [0.12, 23.1, -0.08]
 					}
 				},
 				{
 					"name": "locators",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"center": [0, 8, 0]
+						"proxy_tnt_center": [0, 8, 0]
 					}
 				}
 			]

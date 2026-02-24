@@ -228,20 +228,20 @@
 				"0.0": [
 					{
 						"effect": "big_explosion_yellow",
-						"locator": "explosion_locator"
+						"locator": "time_freeze_tnt_explosion_locator"
 					},
 					{
 						"effect": "time_freeze_explosion",
-						"locator": "explosion_locator"
+						"locator": "time_freeze_tnt_explosion_locator"
 					},
 					{
 						"effect": "sand_explosion",
-						"locator": "explosion_locator"
+						"locator": "time_freeze_tnt_explosion_locator"
 					}
 				],
 				"0.125": {
 					"effect": "sand_explosion",
-					"locator": "explosion_locator"
+					"locator": "time_freeze_tnt_explosion_locator"
 				}
 			}
 		}

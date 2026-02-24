@@ -15,7 +15,7 @@
 					"name": "alphatest",
 					"pivot": [0, 6.9, 0],
 					"locators": {
-						"explosion_locator": [0, 56, 0]
+						"time_freeze_tnt_explosion_locator": [0, 56, 0]
 					}
 				},
 				{

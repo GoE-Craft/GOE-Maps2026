@@ -40,15 +40,15 @@
 					"parent": "locators",
 					"pivot": [7.6887, 1.9226, -8.0272],
 					"locators": {
-						"locator": [8, 2, 8],
-						"locator2": [-8, 3, 8],
-						"locator3": [-8, 15, 8],
-						"locator4": [8, 15, 8],
-						"locator5": [-8, 15, -7],
-						"locator6": [-8, 2, -8],
-						"locator8": [8, 2, -8],
-						"locator9": [8, 15, -8],
-						"locator7": [-8, 3, 8]
+						"light_tnt_locator": [8, 2, 8],
+						"light_tnt_locator2": [-8, 3, 8],
+						"light_tnt_locator3": [-8, 15, 8],
+						"light_tnt_locator4": [8, 15, 8],
+						"light_tnt_locator5": [-8, 15, -7],
+						"light_tnt_locator6": [-8, 2, -8],
+						"light_tnt_locator8": [8, 2, -8],
+						"light_tnt_locator9": [8, 15, -8],
+						"light_tnt_locator7": [-8, 3, 8]
 					}
 				},
 				{

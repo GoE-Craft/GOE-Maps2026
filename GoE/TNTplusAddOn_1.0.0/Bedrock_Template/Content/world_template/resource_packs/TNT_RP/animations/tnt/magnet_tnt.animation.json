@@ -41,19 +41,19 @@
 					},
 					{
 						"effect": "magnet_pulsating_blue",
-						"locator": "locator2"
+						"locator": "magnet_tnt_locator2"
 					},
 					{
 						"effect": "magnet_pulsating_red",
-						"locator": "locator3"
+						"locator": "magnet_tnt_locator3"
 					},
 					{
 						"effect": "magnet_pulsating_blue",
-						"locator": "locator4"
+						"locator": "magnet_tnt_locator4"
 					},
 					{
 						"effect": "magnet_pulsating_red",
-						"locator": "locator"
+						"locator": "magnet_tnt_locator"
 					}
 				],
 				"0.3333": {

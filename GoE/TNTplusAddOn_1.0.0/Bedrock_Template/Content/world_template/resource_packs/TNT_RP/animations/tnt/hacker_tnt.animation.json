@@ -195,7 +195,7 @@
 				"0.0": [
 					{
 						"effect": "scan",
-						"locator": "locator"
+						"locator": "hacker_tnt_locator"
 					},
 					{
 						"effect": "tnt_charge_green",
@@ -590,7 +590,7 @@
 				"0.0": [
 					{
 						"effect": "scan",
-						"locator": "locator"
+						"locator": "hacker_tnt_locator"
 					},
 					{
 						"effect": "tnt_charge_green",
@@ -1058,7 +1058,7 @@
 				"0.0": [
 					{
 						"effect": "scan",
-						"locator": "locator"
+						"locator": "hacker_tnt_locator"
 					},
 					{
 						"effect": "tnt_charge_green",

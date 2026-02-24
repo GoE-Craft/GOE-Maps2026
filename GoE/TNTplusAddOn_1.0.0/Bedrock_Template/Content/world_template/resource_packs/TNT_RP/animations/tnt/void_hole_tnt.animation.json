@@ -102,7 +102,7 @@
 					},
 					{
 						"effect": "tnt_charge_white",
-						"locator": "center"
+						"locator": "void_tnt_center"
 					}
 				],
 				"0.5": [

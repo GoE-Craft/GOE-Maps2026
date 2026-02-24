@@ -238,6 +238,8 @@ function printTimer(dimension, location, time) {
 
 function incrementBoostLevel(block, player) {
     const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
+    const gld = tnt_gld.getTntDataByBlockId(block.typeId);
+    const typeId = gld.tntType;
     if (chargeLevel >= 4) {
         player.onScreenDisplay.setActionBar(`§o§cMax boost level reached§o§c`);
         player.playSound("goe_tnt:tnt_maxed_out", player.location);
@@ -249,6 +251,7 @@ function incrementBoostLevel(block, player) {
     let entity = block.dimension.getEntitiesAtBlockLocation(location)[0];
     if (!entity || entity.typeId !== "goe_tnt:tnt_boost_level") {
         entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", {x: location.x, y: location.y - 0.5, z: location.z});
+        entity.setProperty("goe_tnt:tnt_type", typeId);
     }
 
     const targetCharge = Math.min(chargeLevel + 1, 4);

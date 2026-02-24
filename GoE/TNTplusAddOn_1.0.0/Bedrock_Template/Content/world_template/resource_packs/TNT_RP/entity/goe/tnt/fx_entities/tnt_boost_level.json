@@ -1,0 +1,111 @@
+{
+    "format_version": "1.21.130",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "goe_tnt:tnt_boost_level",
+            "materials": {
+                "default": "goe_tnt_additive"
+            },
+            "textures": {
+                "default": "textures/goe/tnt/entity/tnt",
+                "directional_tnt": "textures/goe/tnt/entity/directional_tnt",
+                "party_tnt": "textures/goe/tnt/entity/party_tnt",
+                "magnet_tnt": "textures/goe/tnt/entity/magnet_tnt",
+                "chunker_tnt": "textures/goe/tnt/entity/chunker_tnt",
+                "ultron_tnt": "textures/goe/tnt/entity/ultron_tnt",
+                "freezing_tnt": "textures/goe/tnt/entity/freezing_tnt",
+                "hacker_tnt": "textures/goe/tnt/entity/hacker_tnt",
+                "tree_planter_tnt": "textures/goe/tnt/entity/tree_planter_tnt",
+                "thunderstorm_tnt": "textures/goe/tnt/entity/thunderstorm_tnt",
+                "eraser_tnt": "textures/goe/tnt/entity/eraser_tnt",
+                "weather_station_tnt": "textures/goe/tnt/entity/weather_station_tnt",
+                "orbital_cannon_tnt": "textures/goe/tnt/entity/orbital_cannon_tnt",
+                "time_freeze_tnt": "textures/goe/tnt/entity/time_freeze_tnt",
+                "arrow_tnt": "textures/goe/tnt/entity/arrow_tnt",
+                "teleportation_tnt": "textures/goe/tnt/entity/teleportation_tnt",
+                "prison_tnt": "textures/goe/tnt/entity/prison_tnt",
+                "structure_tnt": "textures/goe/tnt/entity/structure_tnt",
+                "daytime_tnt": "textures/goe/tnt/entity/daytime_tnt",
+                "healing_tnt": "textures/goe/tnt/entity/healing_tnt",
+                "villager_decoy_tnt": "textures/goe/tnt/entity/villager_decoy_tnt",
+                "angry_bee_tnt": "textures/goe/tnt/entity/angry_bee_tnt",
+                "cloning_tnt": "textures/goe/tnt/entity/cloning_tnt",
+                "beacon_tnt": "textures/goe/tnt/entity/beacon_tnt",
+                "endermite_decoy_tnt": "textures/goe/tnt/entity/endermite_decoy_tnt",
+                "glass_tnt": "textures/goe/tnt/entity/glass_tnt",
+                "furnace_tnt": "textures/goe/tnt/entity/furnace_tnt",
+                "mob_eraser_tnt": "textures/goe/tnt/entity/mob_eraser_tnt",
+                "magma_eraser_tnt": "textures/goe/tnt/entity/eruption_tnt",
+                "light_tnt": "textures/goe/tnt/entity/light_tnt",
+                "thief_tnt": "textures/goe/tnt/entity/thief_tnt",
+                "silent_tnt": "textures/goe/tnt/entity/silent_tnt",
+                "matrix_tnt": "textures/goe/tnt/entity/matrix_tnt",
+                "balloon_tnt": "textures/goe/tnt/entity/balloon_tnt",
+                "water_eraser_tnt": "textures/goe/tnt/entity/water_eraser_tnt",
+                "proxy_tnt": "textures/goe/tnt/entity/proxy_tnt",
+                "void_tnt": "textures/goe/tnt/entity/void_tnt",
+                "shadow_tnt": "textures/goe/tnt/entity/shadow_tnt",
+                "mega_crater_tnt": "textures/goe/tnt/entity/mega_crater_tnt",
+                "knockback_tnt": "textures/goe/tnt/entity/knockback_tnt",
+                "fungi_tnt": "textures/goe/tnt/entity/fungi_tnt",
+                "snapshot_tnt": "textures/goe/tnt/entity/tnt", // Not implemented yet, will use default texture for now
+                "sound_tnt": "textures/goe/tnt/entity/sound_tnt",
+                "specialized_tnt": "textures/goe/tnt/entity/tnt", // Not implemented yet, will use default texture for now
+                "glitch_tnt": "textures/goe/tnt/entity/glitch_tnt"
+            },
+            "render_controllers": [
+                "controller.render.boosted_tnt"
+            ],
+            "geometry": {
+                "default": "geometry.tnt",
+                "directional_tnt": "geometry.directional_tnt",
+                "party_tnt": "geometry.party_tnt",
+                "magnet_tnt": "geometry.magnet_tnt",
+                "chunker_tnt": "geometry.chunker_tnt",
+                "ultron_tnt": "geometry.ultron_tnt",
+                "freezing_tnt": "geometry.freezing_tnt",
+                "hacker_tnt": "geometry.hacker_tnt",
+                "tree_planter_tnt": "geometry.tree_planter_tnt",
+                "thunderstorm_tnt": "geometry.thunderstorm_tnt",
+                "eraser_tnt": "geometry.eraser_tnt",
+                "weather_station_tnt": "geometry.weather_station_tnt",
+                "orbital_cannon_tnt": "geometry.orbital_cannon_tnt",
+                "time_freeze_tnt": "geometry.time_freeze_tnt",
+                "arrow_tnt": "geometry.arrow_tnt",
+                "teleportation_tnt": "geometry.teleportation_tnt",
+                "prison_tnt": "geometry.prison_tnt",
+                "structure_tnt": "geometry.structure_tnt",
+                "daytime_tnt": "geometry.daytime_tnt",
+                "healing_tnt": "geometry.healing_tnt",
+                "villager_decoy_tnt": "geometry.villager_decoy_tnt",
+                "angry_bee_tnt": "geometry.angry_bee_tnt",
+                "cloning_tnt": "geometry.cloning_tnt",
+                "beacon_tnt": "geometry.beacon_tnt",
+                "endermite_decoy_tnt": "geometry.endermite_decoy_tnt",
+                "glass_tnt": "geometry.glass_tnt",
+                "furnace_tnt": "geometry.furnace_tnt",
+                "mob_eraser_tnt": "geometry.mob_eraser_tnt",
+                "magma_eraser_tnt": "geometry.eruption_tnt",
+                "light_tnt": "geometry.light_tnt",
+                "thief_tnt": "geometry.thief_tnt",
+                "silent_tnt": "geometry.silent_tnt",
+                "matrix_tnt": "geometry.matrix_tnt",
+                "balloon_tnt": "geometry.balloon_tnt",
+                "water_eraser_tnt": "geometry.water_eraser_tnt",
+                "proxy_tnt": "geometry.proxy_tnt",
+                "void_tnt": "geometry.void_tnt",
+                "shadow_tnt": "geometry.shadow_tnt",
+                "mega_crater_tnt": "geometry.mega_crater_tnt",
+                "knockback_tnt": "geometry.knockback_tnt",
+                "fungi_tnt": "geometry.fungi_tnt",
+                "snapshot_tnt": "geometry.tnt", // Not implemented yet, will use default geometry for now
+                "sound_tnt": "geometry.sound_tnt",
+                "specialized_tnt": "geometry.tnt", // Not implemented yet, will use default geometry for now
+                "glitch_tnt": "geometry.glitch_tnt"
+            },
+            "scripts": {
+                "scale": "1.1"
+            }
+        }
+    }
+}

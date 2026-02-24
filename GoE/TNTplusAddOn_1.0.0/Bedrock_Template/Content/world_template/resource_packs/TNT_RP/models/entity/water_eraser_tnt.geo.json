@@ -570,7 +570,7 @@
 						}
 					],
 					"locators": {
-						"center_locator": [0, 7, 0]
+						"water_eraser_tnt_center_locator": [0, 7, 0]
 					}
 				},
 				{

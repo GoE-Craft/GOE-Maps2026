@@ -19,7 +19,7 @@
 			"particle_effects": {
 				"0.0": {
 					"effect": "leaves_explosion",
-					"locator": "locator4"
+					"locator": "tree_planter_tnt_locator4"
 				}
 			}
 		},
@@ -228,15 +228,15 @@
 				"0.0": [
 					{
 						"effect": "leaves_tornado",
-						"locator": "locator"
+						"locator": "tree_planter_tnt_locator"
 					},
 					{
 						"effect": "leaves_tornado_smaller",
-						"locator": "locator2"
+						"locator": "tree_planter_tnt_locator2"
 					},
 					{
 						"effect": "forest_lines",
-						"locator": "locator3"
+						"locator": "tree_planter_tnt_locator3"
 					}
 				]
 			}

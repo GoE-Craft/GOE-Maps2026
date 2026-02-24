@@ -31,6 +31,9 @@
 					},
 					"detonator_controller"
 				]
+			},
+			"particle_effects": {
+				"radio": "goe_tnt:radio"
 			}
 		}
 	}

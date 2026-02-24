@@ -621,7 +621,7 @@
 					"parent": "bb_main",
 					"pivot": [-0.3, 0, -0.55],
 					"locators": {
-						"locator": [-0.3, 0, -0.55]
+						"mega_crater_tnt_locator": [-0.3, 0, -0.55]
 					}
 				},
 				{

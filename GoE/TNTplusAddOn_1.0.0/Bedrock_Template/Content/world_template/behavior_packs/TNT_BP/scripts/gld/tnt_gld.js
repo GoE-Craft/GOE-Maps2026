@@ -1,6 +1,7 @@
 export const TNT_GLD = [
     {
         blockId: "goe_tnt:tnt",
+        tntType: 0,
         fuseTime: 80,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -30,6 +31,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:directional_tnt",
+        tntType: 1,
         fuseTime: 40,
         power: 1,
         fuseEffects: {
@@ -54,6 +56,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:party_tnt",
+        tntType: 2,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -85,6 +88,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:magnet_tnt",
+        tntType: 3,
         fuseTime: 40,
         power: 2,
         fuseEffects: {
@@ -115,6 +119,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:chunker_tnt",
+        tntType: 4,
         fuseTime: 80,
         power: 0,
         fuseEffects: {
@@ -147,6 +152,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:ultron_tnt",
+        tntType: 5,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -180,6 +186,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:freezing_tnt",
+        tntType: 6,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -207,6 +214,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:hacker_tnt",
+        tntType: 7,
         fuseTime: 100,
         power: 0,
         fuseEffects: {
@@ -231,6 +239,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:tree_planter_tnt",
+        tntType: 8,
         fuseTime: 40,
         power: 0.5,
         fuseEffects: {
@@ -262,6 +271,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:thunderstorm_tnt",
+        tntType: 9,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -294,6 +304,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:eraser_tnt",
+        tntType: 10,
         fuseTime: 60,
         power: 0,
         fuseEffects: {
@@ -325,6 +336,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:weather_station_tnt",
+        tntType: 11,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -356,6 +368,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:orbital_cannon_tnt",
+        tntType: 12,
         fuseTime: 60,
         power: 0,
         fuseEffects: {
@@ -380,6 +393,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:time_freeze_tnt",
+        tntType: 13,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -411,6 +425,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:arrow_tnt",
+        tntType: 14,
         fuseTime: 40,
         power: 5,
         fuseEffects: {
@@ -442,6 +457,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:teleportation_tnt",
+        tntType: 15,
         fuseTime: 80,
         power: 0,
         fuseEffects: {
@@ -475,6 +491,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:prison_tnt",
+        tntType: 16,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -506,6 +523,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:structure_tnt",
+        tntType: 17,
         fuseTime: 50,
         power: 1.5,
         fuseEffects: {
@@ -537,6 +555,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:daytime_tnt",
+        tntType: 18,
         fuseTime: 40,
         power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -568,6 +587,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:healing_tnt",
+        tntType: 19,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -599,6 +619,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:villager_decoy_tnt",
+        tntType: 20,
         fuseTime: 82,
         power: 4,
         fuseEffects: {
@@ -630,6 +651,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:angry_bee_tnt",
+        tntType: 21,
         fuseTime: 40,
         power: 2,
         fuseEffects: {
@@ -661,6 +683,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:cloning_tnt",
+        tntType: 22,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -692,6 +715,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:beacon_tnt",
+        tntType: 23,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -723,6 +747,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:endermite_decoy_tnt",
+        tntType: 24,
         fuseTime: 100,
         power: 4,
         fuseEffects: {
@@ -754,6 +779,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:glass_tnt",
+        tntType: 25,
         fuseTime: 40,
         power: 1,
         fuseEffects: {
@@ -785,6 +811,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:furnace_tnt",
+        tntType: 26,
         fuseTime: 40,
         power: 4,
         fuseEffects: {
@@ -819,6 +846,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:mob_eraser_tnt",
+        tntType: 27,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -850,6 +878,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:magma_eraser_tnt",
+        tntType: 28,
         fuseTime: 40,
         power: 2,
         fuseEffects: {
@@ -881,6 +910,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:light_tnt",
+        tntType: 29,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -912,6 +942,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:thief_tnt",
+        tntType: 30,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -943,6 +974,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:silent_tnt",
+        tntType: 31,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -974,6 +1006,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:matrix_tnt",
+        tntType: 32,
         fuseTime: 70,
         power: 0,
         fuseEffects: {
@@ -1001,6 +1034,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:balloon_tnt",
+        tntType: 33,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1027,6 +1061,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:water_eraser_tnt",
+        tntType: 34,
         fuseTime: 40,
         power: 0,
         fuseEffects: {
@@ -1053,6 +1088,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:proxy_tnt",
+        tntType: 35,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1084,6 +1120,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:void_tnt",
+        tntType: 36,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1115,6 +1152,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:shadow_tnt",
+        tntType: 37,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1146,6 +1184,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:mega_crater_tnt",
+        tntType: 38,
         fuseTime: 40,
         power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -1176,6 +1215,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:knockback_tnt",
+        tntType: 39,
         fuseTime: 50,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -1202,6 +1242,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:fungi_tnt",
+        tntType: 40,
         fuseTime: 60,
         power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -1229,6 +1270,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:snapshot_tnt",
+        tntType: 41,
         fuseTime: 40,
         power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
@@ -1258,6 +1300,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:sound_tnt",
+        tntType: 42,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1284,6 +1327,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:specialized_tnt",
+        tntType: 43,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1310,6 +1354,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:glitch_tnt",
+        tntType: 44,
         fuseTime: 50,
         power: 0,
         fuseEffects: {

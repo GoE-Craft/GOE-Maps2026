@@ -65,7 +65,7 @@
 					"parent": "locators",
 					"pivot": [0, 0.5, 0],
 					"locators": {
-						"center": [0, 8, 0]
+						"void_tnt_center": [0, 8, 0]
 					}
 				},
 				{

@@ -15,19 +15,19 @@
 					"name": "bb_main",
 					"pivot": [-0.075, 0, -0.1],
 					"locators": {
-						"locator": {
+						"magnet_tnt_locator": {
 							"offset": [-1.6708, 6.3832, -3.2916],
 							"rotation": [0, 135, 0]
 						},
-						"locator2": {
+						"magnet_tnt_locator2": {
 							"offset": [1.5208, 6.3832, -3.2916],
 							"rotation": [0, 45, 0]
 						},
-						"locator3": {
+						"magnet_tnt_locator3": {
 							"offset": [1.5208, 6.3832, 3.0916],
 							"rotation": [0, -45, 0]
 						},
-						"locator4": {
+						"magnet_tnt_locator4": {
 							"offset": [-1.6708, 6.3832, 3.0916],
 							"rotation": [0, -135, 0]
 						}

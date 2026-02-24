@@ -698,11 +698,11 @@
 				},
 				"2.625": {
 					"effect": "detonator_impact_green",
-					"locator": "locator"
+					"locator": "matrix_tnt_locator"
 				},
 				"3.5": {
 					"effect": "detonator_impact_green",
-					"locator": "locator"
+					"locator": "matrix_tnt_locator"
 				},
 				"3.5417": {
 					"effect": "matrix_explode"
@@ -942,7 +942,7 @@
 			"particle_effects": {
 				"0.0417": {
 					"effect": "detonator_impact_green",
-					"locator": "locator"
+					"locator": "matrix_tnt_locator"
 				},
 				"0.0833": {
 					"effect": "matrix_explode"

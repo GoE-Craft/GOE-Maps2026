@@ -15,8 +15,8 @@
 					"name": "bb_main",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"locator": [0, 0, 0],
-						"locator_charge": [0, 10, 0]
+						"teleportation_tnt_locator": [0, 0, 0],
+						"teleportation_tnt_locator_charge": [0, 10, 0]
 					}
 				},
 				{

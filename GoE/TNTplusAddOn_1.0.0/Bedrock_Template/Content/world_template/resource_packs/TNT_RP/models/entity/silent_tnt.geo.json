@@ -15,7 +15,7 @@
 					"name": "bb_main2",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"center": [0, 8, 0]
+						"silent_tnt_center": [0, 8, 0]
 					}
 				},
 				{

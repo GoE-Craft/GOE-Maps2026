@@ -29,8 +29,8 @@
     },
 
     "goe_tnt_additive:entity_beam_additive": {
-        "+defines": ["USE_UV_ANIM", "USE_OVERLAY"],
-        "+states": [ "DisableCulling", "DisableDepthWrite", "DisableAlphaWrite" ]
+        "+defines": ["USE_OVERLAY"],
+        "+states": [ "DisableCulling", "DisableDepthWrite" ]
     },
     "goe_tnt_structure_border:entity_beam_additive": {
       "+defines": ["USE_UV_ANIM", "USE_OVERLAY"],

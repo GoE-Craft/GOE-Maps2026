@@ -15,14 +15,14 @@
 					"name": "bb_main3",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"center_locator": [0, 10, 0]
+						"thief_tnt_center_locator": [0, 10, 0]
 					}
 				},
 				{
 					"name": "bb_main2",
 					"pivot": [0, 0, 0],
 					"locators": {
-						"locator": [0, 0, 0]
+						"thief_tnt_locator": [0, 0, 0]
 					}
 				},
 				{

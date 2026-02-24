@@ -163,11 +163,11 @@
 				"0.5": [
 					{
 						"effect": "daytime_rotate_night",
-						"locator": "dot_1"
+						"locator": "daytime_tnt_dot_1"
 					},
 					{
 						"effect": "daytime_rotate_night",
-						"locator": "dot_2"
+						"locator": "daytime_tnt_dot_2"
 					},
 					{
 						"effect": "daytime_ring_night"
@@ -347,11 +347,11 @@
 				"0.5": [
 					{
 						"effect": "daytime_rotate_day",
-						"locator": "dot_1"
+						"locator": "daytime_tnt_dot_1"
 					},
 					{
 						"effect": "daytime_rotate_day",
-						"locator": "dot_2"
+						"locator": "daytime_tnt_dot_2"
 					},
 					{
 						"effect": "daytime_ring_day"
@@ -508,11 +508,11 @@
 				"0.5": [
 					{
 						"effect": "daytime_rotate",
-						"locator": "dot_1"
+						"locator": "daytime_tnt_dot_1"
 					},
 					{
 						"effect": "daytime_rotate",
-						"locator": "dot_2"
+						"locator": "daytime_tnt_dot_2"
 					},
 					{
 						"effect": "daytime_ring"
