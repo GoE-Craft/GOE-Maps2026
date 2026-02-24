@@ -1202,7 +1202,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:fungi_tnt",
-        fuseTime: 62,
+        fuseTime: 60,
         power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",

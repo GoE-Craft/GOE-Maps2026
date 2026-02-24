@@ -28,6 +28,8 @@
         "tnt_charge_red": "goe_tnt:tnt_charge_red",
         "fungi_cloud": "goe_tnt:fungi_cloud",
         "ender_sparkle_explosion_rgb": "goe_tnt:ender_sparkle_explosion_rgb",
+        "fungi_explosion": "goe_tnt:fungi_explosion",
+        "fungi_orb": "goe_tnt:fungi_orb",
         "fungi_impact": "goe_tnt:fungi_impact"
       },
 
