@@ -16,19 +16,19 @@
         },
         ///////////STRUCTURE ITEMS//////////
         "goe_tnt:farm_testing_area": {
-            "textures": "textures/goe/tnt/items/structure/farm_testing_area"
+            "textures": "textures/goe/tnt/items/structure/farm"
         },
         "goe_tnt:cabins_testing_area": {
-            "textures": "textures/goe/tnt/items/structure/cabins_testing_area"
+            "textures": "textures/goe/tnt/items/structure/cabins"
         },
         "goe_tnt:hotel_testing_area": {
-            "textures": "textures/goe/tnt/items/structure/hotel_testing_area"
+            "textures": "textures/goe/tnt/items/structure/hotel"
         },
         "goe_tnt:construction_site_testing_area": {
-            "textures": "textures/goe/tnt/items/structure/construction_site_testing_area"
+            "textures": "textures/goe/tnt/items/structure/construction_site"
         },
         "goe_tnt:village_testing_area": {
-            "textures": "textures/goe/tnt/items/structure/village_testing_area"
+            "textures": "textures/goe/tnt/items/structure/village"
         }
     }
 }

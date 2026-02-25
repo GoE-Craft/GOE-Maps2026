@@ -7,7 +7,7 @@
                 "default": "entity_alphatest"
             },
             "textures": {
-                "default": "textures/goe/tnt/items/structure/hotel_testing_area"
+                "default": "textures/goe/tnt/items/structure/hotel"
             },
             "geometry": {
                 "default": "geometry.goe_tnt.display_item"

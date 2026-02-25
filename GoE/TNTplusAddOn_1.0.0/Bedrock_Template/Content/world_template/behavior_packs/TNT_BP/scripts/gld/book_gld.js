@@ -353,31 +353,31 @@ export const ShopItems = {
             id: "goe_tnt:farm_testing_area",
             name: "Farm",
             price: { type: "iron_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/farm_testing_area"
+            icon: "textures/goe/tnt/ui/shop/structures/farm"
         },
         {
             id: "goe_tnt:village_testing_area",
             name: "Village",
             price: { type: "iron_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/village_testing_area"
+            icon: "textures/goe/tnt/ui/shop/structures/village"
         },
         {
             id: "goe_tnt:hotel_testing_area",
             name: "Hotel",
             price: { type: "iron_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/hotel_testing_area"
+            icon: "textures/goe/tnt/ui/shop/structures/hotel"
         },
         {
             id: "goe_tnt:cabins_testing_area",
             name: "Cabins",
             price: { type: "iron_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/cabins_testing_area"
+            icon: "textures/goe/tnt/ui/shop/structures/cabins"
         },
         {
             id: "goe_tnt:construction_site_testing_area",
             name: "Construction Site",
             price: { type: "iron_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/structures/construction_site_testing_area"
+            icon: "textures/goe/tnt/ui/shop/structures/construction_site"
         }
     ],
 

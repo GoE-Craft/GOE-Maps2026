@@ -7,7 +7,7 @@
                 "default": "entity_alphatest"
             },
             "textures": {
-                "default": "textures/goe/tnt/items/structure/construction_site_testing_area"
+                "default": "textures/goe/tnt/items/structure/construction_site"
             },
             "geometry": {
                 "default": "geometry.goe_tnt.display_item"
