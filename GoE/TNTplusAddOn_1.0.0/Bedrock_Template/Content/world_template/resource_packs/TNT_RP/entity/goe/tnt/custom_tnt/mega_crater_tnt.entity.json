@@ -22,14 +22,14 @@
           "v.should_swell = query.property('goe_tnt:swell');"
         ],
         "animate": [
-          //{"swell" : "q.mark_variant == 1"},
+          {"swell" : "q.mark_variant == 1"},
           {"charge" : "q.mark_variant == 1"},
           {"cracks_charge" : "q.mark_variant == 1"},
           {"explosion" : "q.mark_variant == 2"}
         ]
 			},
       "animations": {
-        // "swell" : "animation.mega_crater_tnt.swell",
+        "swell" : "animation.mega_crater_tnt.swell",
         "cracks_charge" : "animation.mega_crater_cracks.cracks_charge", 
         "charge" : "animation.mega_crater_tnt.charge",
         "explosion" : "animation.mega_crater_tnt.explode"
@@ -39,10 +39,8 @@
         "pull_stone" : "goe_tnt:mega_crater_pull_stone",
         "fuse" : "goe_tnt:mega_crater_fuse",
         "fire" : "goe_tnt:mega_crater_fire",
-        //"circle" : "goe_tnt:mega_crater_circle",
-        //"ring_pull" : "goe_tnt:mega_crater_ring_pull",
         "explosion" : "goe_tnt:mega_crater_explosion",
-        "explosion_realistic" : "goe_tnt:explosion_puff",
+        "explosion_realistic" : "goe_tnt:mega_crater_big_explosion",
         "ring" : "goe_tnt:mega_crater_ring"
       },
       "render_controllers": [ 
