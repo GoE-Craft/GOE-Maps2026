@@ -59,9 +59,7 @@ export async function onItemUseOn(event) { }
 export async function onPlayerBreakBlock(event) { }
 
 export async function onScriptEventReceive(event) {
-    if (event.id === "goe_tnt:structure") {
-        structure.onScriptEventReceive(event);
-    }
+    structure.onScriptEventReceive(event);
     if (event.id === "goe_tnt:spawn_monsters") {
         test_area.spawnTestMonsters();
     }

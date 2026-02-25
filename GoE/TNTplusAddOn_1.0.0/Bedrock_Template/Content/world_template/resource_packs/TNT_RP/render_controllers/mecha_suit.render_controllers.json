@@ -20,7 +20,8 @@
       "textures": ["Array.textures[query.variant]"],
       "materials": [
         {
-          "*": "Material.default"
+          "*": "Material.default",
+          "jetpack": "Material.jetpack"
         }
       ],
       "part_visibility": [

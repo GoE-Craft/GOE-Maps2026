@@ -204,50 +204,73 @@ export async function summonStructureBorder(player, structureData, structureItem
 }
 
 export async function onScriptEventReceive(event) {
+
+	// ignore script events not coming from entities
+	if (!event || !event.sourceEntity) return;
+
+	// only react to confirm/cancel messages
+	if (event.message !== "confirm" && event.message !== "cancel") return;
+
 	let sourceEntity = event.sourceEntity;
+
+	// buttons MUST have these props
+	let borderId = sourceEntity.getDynamicProperty("goe_tnt_border_id");
+	if (!borderId) return;
+
 	let borderLocation = sourceEntity.getDynamicProperty("goe_tnt_border_location");
 	if (borderLocation === undefined)
 		borderLocation = sourceEntity.location;
-	let borderId = sourceEntity.getDynamicProperty("goe_tnt_border_id");
+
+	let structureBorder = await utils.getEntityInLocation(borderId, sourceEntity.dimension, borderLocation);
+	if (!structureBorder) return;
+
+
 	if (event.message === "confirm") {
-		let structureBorder = await utils.getEntityInLocation(borderId, sourceEntity.dimension, borderLocation);
+
 		await hideStructureSummonMobs(sourceEntity, structureBorder);
-		let structureId = await structureBorder.getDynamicProperty("goe_tnt_structure_id");
-		let structureDegrees = await structureBorder.getDynamicProperty("goe_tnt_structure_degrees");
-		// Use stored border location instead of current location to avoid drift
-		let storedLocation = await structureBorder.getDynamicProperty("goe_tnt_border_location");
+
+		let structureId = structureBorder.getDynamicProperty("goe_tnt_structure_id");
+		let structureDegrees = structureBorder.getDynamicProperty("goe_tnt_structure_degrees");
+
+		let storedLocation = structureBorder.getDynamicProperty("goe_tnt_border_location");
 		let centerLocation = storedLocation ? Vector3.copy(storedLocation) : Vector3.copyFloor(structureBorder.location);
+
 		const structureData = getStructureData(structureId);
-		if (structureData === undefined)
-			return;
+		if (structureData === undefined) return;
+
 		const cornerOffset = structureData.size / 2;
+
 		let corner1 = Vector3.copy(centerLocation).add({ x: -cornerOffset, y: 0, z: -cornerOffset }).toLocation();
 		let corner2 = Vector3.copy(centerLocation).add({ x: cornerOffset, y: 0, z: cornerOffset }).toLocation();
+
 		utils.runMobCommand(sourceEntity, `tickingarea add ${corner1.x} ${corner1.y} ${corner1.z} ${corner2.x} ${corner2.y} ${corner2.z} goe_tnt_structure`);
+
 		const height = Math.max(centerLocation.y + structureData.offset, utils.overworld.heightRange.min + 1);
 		const loadX = Math.floor(centerLocation.x - cornerOffset);
 		const loadZ = Math.floor(centerLocation.z - cornerOffset);
 
-		// Select particle based on structure size
 		let particleName;
 		let spiralParticleName;
+
 		if (structureData.size === 16) {
 			particleName = "goe_tnt:construction_smoke_16";
 			spiralParticleName = "goe_tnt:construction_spiral_16";
 		} else if (structureData.size === 28) {
 			particleName = "goe_tnt:construction_smoke_28";
 			spiralParticleName = "goe_tnt:construction_spiral_28";
-		}
-		 else if (structureData.size === 32) {
+		} else if (structureData.size === 32) {
 			particleName = "goe_tnt:construction_smoke_32";
 			spiralParticleName = "goe_tnt:construction_spiral_32";
 		} else if (structureData.size === 48) {
 			particleName = "goe_tnt:construction_smoke_48";
 			spiralParticleName = "goe_tnt:construction_spiral_48";
 		}
-		
-		await sourceEntity.dimension.spawnParticle(particleName, centerLocation.toLocation());
-		await sourceEntity.dimension.spawnParticle(spiralParticleName, centerLocation.toLocation());
+
+		if (particleName)
+			await sourceEntity.dimension.spawnParticle(particleName, centerLocation.toLocation());
+
+		if (spiralParticleName)
+			await sourceEntity.dimension.spawnParticle(spiralParticleName, centerLocation.toLocation());
 
 		await utils.runMobCommand(sourceEntity, `playsound goe_tnt:build_structure @a[r=48] ~ ~ ~ 100 1 1`);
 		await utils.runMobCommand(sourceEntity, `playsound goe_tnt:structure_button_appear @a[r=48] ~ ~ ~ 100 1 1`);
@@ -255,11 +278,13 @@ export async function onScriptEventReceive(event) {
 
 		system.runTimeout(() => { structureLoadStep2(sourceEntity, structureData, structureDegrees, height); }, 70);
 	}
+
 	else if (event.message === "cancel") {
-		let structureBorder = await utils.getEntityInLocation(borderId, sourceEntity.dimension, borderLocation);
-		let structureId = await structureBorder.getDynamicProperty("goe_tnt_structure_id");
+
+		let structureId = structureBorder.getDynamicProperty("goe_tnt_structure_id");
 
 		await hideStructureSummonMobs(sourceEntity, structureBorder);
+
 		system.runTimeout(() => { structureCancelLoad(sourceEntity, structureBorder, structureId); }, 30);
 	}
 }
