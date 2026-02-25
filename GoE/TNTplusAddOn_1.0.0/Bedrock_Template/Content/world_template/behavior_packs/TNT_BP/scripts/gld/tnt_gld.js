@@ -994,7 +994,7 @@ export const TNT_GLD = [
         explosionProperties: {
             createsFire: false,
             allowUnderwater: false,
-            breaksBlocks: false,
+            breaksBlocks: true,
             summonMob: null,
             summonDelay: 10,
             specialAction: "silent"
@@ -1052,7 +1052,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: null
+            specialAction: "balloon"
         },
         preExplosionProperties: {
             specialAction: null
@@ -1217,7 +1217,7 @@ export const TNT_GLD = [
         blockId: "goe_tnt:knockback_tnt",
         tntType: 39,
         fuseTime: 50,
-        power: 4, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
+        power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

@@ -1,0 +1,76 @@
+{
+  "format_version": "1.21.130",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "goe_tnt:proxy_mini_explode",
+      "is_spawnable": false,
+      "is_summonable": true
+    },
+    "component_groups": {
+      "goe_tnt:despawn": {
+        "minecraft:instant_despawn": {
+          "remove_child_entities": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:collision_box": {
+        "height": 0.5,
+        "width": 0.5
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:type_family": {
+        "family": [
+          "tnt_fx"
+        ]
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": "no"
+        }
+      },
+      "minecraft:timer": {
+        "time": 5,
+        "looping": false,
+        "time_down_event": {
+          "event": "goe_tnt:despawn",
+          "target": "self"
+        }
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.0
+      },
+      "minecraft:push_through": {
+        "value": 0.0
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:navigation.generic": {
+        "can_path_over_water": true,
+        "can_swim": true,
+        "can_walk": true,
+        "can_jump": true
+      }
+    },
+    "events": {
+      "goe_tnt:despawn": {
+        "add": {
+          "component_groups": [
+            "goe_tnt:despawn"
+          ]
+        }
+      }
+    }
+  }
+}

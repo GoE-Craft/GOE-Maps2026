@@ -36,6 +36,10 @@ import { waterEraserTNTAction } from "./actions/water_eraser_tnt";
 import { soundTNTAction } from "./actions/sound_tnt";
 import { glitchTNTAction } from "./actions/glitch_tnt";
 import { fungiTNTAction } from "./actions/fungi_tnt";
+import { silentTNTAction } from "./actions/silent_tnt";
+import { knockbackTNTAction } from "./actions/knockback_tnt";
+import { balloonTNTAction } from "./actions/balloon_tnt";
+import { proxyTNTAction } from "./actions/proxy_tnt";
 
 /**
  * TNT Actions Module
@@ -194,7 +198,19 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "fungi":
             system.runJob(fungiTNTAction(dimension, chargeLevel, location));
-             break;
+            break;
+        case "silent":
+            system.runJob(silentTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "knockback":
+            system.runJob(knockbackTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "balloon":
+            system.runJob(balloonTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "proxy":
+            system.runJob(proxyTNTAction(dimension, chargeLevel, location, entity));
+            break;
         default:
             break;
     }
