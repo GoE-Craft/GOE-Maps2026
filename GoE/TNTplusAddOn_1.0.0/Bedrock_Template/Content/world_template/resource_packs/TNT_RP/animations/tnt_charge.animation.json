@@ -1,0 +1,13 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.tnt.boost_scale": {
+			"loop": true,
+			"bones": {
+				"bb_main_boost_level": {
+					"scale": "v.boost_scale"
+				}
+			}
+		}
+	}
+}

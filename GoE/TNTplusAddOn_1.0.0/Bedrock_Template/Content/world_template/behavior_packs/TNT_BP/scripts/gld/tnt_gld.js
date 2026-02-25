@@ -27,7 +27,7 @@ export const TNT_GLD = [
         preExplosionProperties: {
             specialAction: null
         },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+        blockHeight: 1.7 // if not defined, defaults to 2 - timer height depends on this
     },
     {
         blockId: "goe_tnt:directional_tnt",

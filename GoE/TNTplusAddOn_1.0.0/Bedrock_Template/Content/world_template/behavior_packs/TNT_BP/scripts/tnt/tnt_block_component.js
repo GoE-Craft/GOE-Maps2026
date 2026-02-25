@@ -223,23 +223,19 @@ function* updateTimerParticles() {
 }
 
 function printTimer(dimension, location, time) {
-    // Get the block at the location to determine the TNT type
-    const block = dimension.getBlock({ x: location.x, y: location.y, z: location.z });
-    let blockHeight = 2.5;
-    if (block && block.typeId && block.typeId.startsWith("goe_tnt:")) {
-        const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
-        if (tntData && typeof tntData.blockHeight === "number") { // blockHeight here too
-            blockHeight = tntData.blockHeight;
-        }
-    }
+    const block = dimension.getBlock(location);
+    const chargeLevel = block.permutation.getState("goe_tnt:charge_level") ?? 0;
+
+    const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
+    
+    const blockHeight = (tntData?.blockHeight ?? 2) + (chargeLevel * 0.1); // Raise timer display higher for boosted TNT
+
     dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
     dimension.spawnParticle(`goe_tnt:timer_particle_${time}`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
 }
 
 function incrementBoostLevel(block, player) {
     const chargeLevel = block.permutation.getState("goe_tnt:charge_level");
-    const gld = tnt_gld.getTntDataByBlockId(block.typeId);
-    const typeId = gld.tntType;
     if (chargeLevel >= 4) {
         player.onScreenDisplay.setActionBar(`§o§cMax boost level reached§o§c`);
         player.playSound("goe_tnt:tnt_maxed_out", player.location);
@@ -248,10 +244,9 @@ function incrementBoostLevel(block, player) {
 
     const location = block.center();
     
-    let entity = block.dimension.getEntitiesAtBlockLocation(location)[0];
+    let entity = getBoostEntity(location, block.dimension);
     if (!entity || entity.typeId !== "goe_tnt:tnt_boost_level") {
-        entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", {x: location.x, y: location.y - 0.5, z: location.z});
-        entity.setProperty("goe_tnt:tnt_type", typeId);
+        entity = spawnBoostLevelEntity(block);
     }
 
     const targetCharge = Math.min(chargeLevel + 1, 4);
@@ -282,9 +277,23 @@ function incrementBoostLevel(block, player) {
     block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location);
 }
 
-function lockBoostLevelEntityToBlock(block) {
+export function getBoostEntity(location, dimension) {
+    const entity = dimension.getEntities({closest: 1, location: location, maxDistance: 0.5, type: "goe_tnt:tnt_boost_level"})[0];
+    return entity;
 }
 
-function restoreBoostLevelEntity(block) {
-}
+export function spawnBoostLevelEntity(block) {
+    const location = block.center();
+    
+    const gld = tnt_gld.getTntDataByBlockId(block.typeId);
+    const typeId = gld.tntType;
 
+    const entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", {x: location.x, y: location.y - 0.5, z: location.z});
+    entity.setProperty("goe_tnt:tnt_type", typeId);
+
+    const direction = block.permutation.getState("minecraft:cardinal_direction");
+    const yaw = utils.getYawFromFace(direction);
+    entity.setRotation({x: 0, y: yaw});
+
+    return entity;
+}

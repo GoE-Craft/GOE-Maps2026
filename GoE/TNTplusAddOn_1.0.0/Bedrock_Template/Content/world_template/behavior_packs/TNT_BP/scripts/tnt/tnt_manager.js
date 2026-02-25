@@ -3,6 +3,7 @@ import * as tnt_gld from "../gld/tnt_gld";
 import * as book_gld from "../gld/book_gld";
 import * as utils from "../utils";
 import * as tnt_actions from "./tnt_actions";
+import { getBoostEntity } from "./tnt_block_component";
 
 /**
  * TNT Manager Module
@@ -15,10 +16,6 @@ import * as tnt_actions from "./tnt_actions";
 // In-memory tracking of active timeouts and countdown intervals
 const activeTimeouts = new Map();
 const countdownIntervals = new Map();
-const lastPlaceHintTick = new Map();
-
-const pendingHintTimeouts = new Map();
-const pendingHintMessages = new Map();
 
 /**
  * Activate a TNT block at the given location
@@ -42,6 +39,12 @@ export function activateTNTBlock(block, player) {
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const dimension = block.dimension;
     block.setPermutation(BlockPermutation.resolve("minecraft:air"))
+    if (chargeLevel > 0) {
+        const boostEntity = getBoostEntity(location, block.dimension);
+        if (boostEntity && boostEntity.isValid) {
+            boostEntity.remove();
+        }
+    }
 
     system.run(() => {
         // Try to derive spawn yaw from block facing state/properties
@@ -65,11 +68,13 @@ export function activateTNTBlock(block, player) {
  * @param {number} spawnYaw - (Optional) Yaw to spawn the TNT entity with
  * @param {Player} player - (Optional) The player who activated the TNT
  */
-
 export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tntData, dimension, impulse, spawnYaw, player) {
     const dim = world.getDimension(dimension);
     const yaw = spawnYaw ?? 0;
     const entity = dim.spawnEntity(tntData.blockId, location, { initialRotation: yaw });
+
+    entity.setProperty("goe_tnt:boost_level", chargeLevel);
+    
     const startTick = system.currentTick;
 
     if (player) {
@@ -124,7 +129,7 @@ export function igniteTNT(location, chargeLevel, timerDuration, fuseDuration, tn
 function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntData, spawnYaw, player) {
     if (timerRemaining > 0) {
         // Start countdown display (every second = 20 ticks)
-        startCountdown(entity, timerRemaining, tntData);
+        startCountdown(entity, timerRemaining, tntData, chargeLevel);
 
         const timeoutId = system.runTimeout(() => {
             if (!entity.isValid) return;
@@ -154,8 +159,9 @@ function scheduleTimer(entity, chargeLevel, timerRemaining, fuseDuration, tntDat
  * @param {number} timerRemaining - The remaining timer duration in ticks
  * @param {object} tntData - The TNT data object (for blockHeight)
  */
-function startCountdown(entity, timerRemaining, tntData) {
-    const blockHeight = tntData?.blockHeight ?? 2;
+function startCountdown(entity, timerRemaining, tntData, chargeLevel) {
+    const blockHeight = (tntData?.blockHeight ?? 2) + (chargeLevel * 0.1); // Raise timer display higher for boosted TNT
+
     const startTick = system.currentTick;
     const endTick = startTick + timerRemaining;
     const initialTimer = Math.ceil(timerRemaining / 20);
@@ -247,6 +253,7 @@ function stopCountdown(entity) {
  * @param {number} spawnYaw - (Optional) Yaw to spawn the TNT entity with
  */
 function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw, player) {
+
     // Start fuse effects (continuous particle + initial sound)
     startFuseEffects(entity, tntData, fuseRemaining, player);
     startChargeEffects(entity, tntData, player);
@@ -262,8 +269,6 @@ function scheduleFuse(entity, chargeLevel, fuseRemaining, tntData, spawnYaw, pla
 
     activeTimeouts.set(entity.id, timeoutId);
 }
-
-
 
 /**
  * Start fuse effects - particles and sounds
@@ -366,7 +371,6 @@ function explode(entity, chargeLevel, tntData, spawnYaw, player) {
  * @param {object} player - The player who ignited the TNT  
  * Note: Some TNT types may not have explosion effects or may not support the explode trigger event.
 */
-
 function triggerExplosionEffects(entity, tntData, player) {
     const dimension = entity.dimension;
     const loc = entity.location;
@@ -470,119 +474,6 @@ function handleSummonMob(dimension, location, tntData) {
 }
 
 /**
- * On load behavior - restore TNT states after script reload
- */
-export function onLoad() {
-    system.run(() => restoreTNT());
-}
-
-/**
- * Show TNT placement hint to player
- * 
- * @param {Player} player - The player to show the hint to
- * @param {string} blockTypeId - The block type ID of the placed TNT
- */
-/* export function showTntPlaceHint(player, blockTypeId) {
-    try {
-        if (!player) return;
-
-        const now = system.currentTick;
-        const last = lastPlaceHintTick.get(player.id) ?? -999999;
-        if (now - last < 10) return; // 0.5s throttle
-        lastPlaceHintTick.set(player.id, now);
-
-        // map "goe_tnt:directional_tnt" -> "directional_tnt"
-        const suffix = (blockTypeId || "").startsWith("goe_tnt:")
-            ? blockTypeId.substring("goe_tnt:".length)
-            : blockTypeId;
-
-        const entry = book_gld.Achievements?.tnt_individual?.find(a =>
-            a?.tntType === suffix || a?.id === suffix
-        );
-
-        if (!entry) return;
-
-        let info = entry.info ?? "";
-        const tips = entry.tips ?? "";
-
-        // If info is too long, break into two lines (rows)
-        const maxLineLength = 60;
-        let infoLines = [];
-        if (info.length > maxLineLength) {
-            // Try to break at a space before maxLineLength
-            let breakIdx = info.lastIndexOf(' ', maxLineLength);
-            if (breakIdx === -1) breakIdx = maxLineLength;
-            infoLines.push(info.substring(0, breakIdx));
-            infoLines.push(info.substring(breakIdx).trim());
-        } else {
-            infoLines.push(info);
-        }
-
-        // Compose the message: info (1 or 2 lines), then tip
-        let message = `§9Info:§r ${infoLines[0]}`;
-        if (infoLines.length > 1) {
-            message += `\n${infoLines[1]}`;
-        }
-        message += `\n§6Tip:§r ${tips}`;
-
-        const nowTick = system.currentTick;
-
-        let notBefore = 0;
-        try {
-            notBefore = player.getDynamicProperty("goe_tnt_hint_not_before_tick") ?? 0;
-        } catch { }
-
-        const delayTicks = Math.max(0, Number(notBefore) - nowTick);
-
-        pendingHintMessages.set(player.id, message);
-
-        const old = pendingHintTimeouts.get(player.id);
-        if (old !== undefined) {
-            try { system.clearRun(old); } catch { }
-            pendingHintTimeouts.delete(player.id);
-        }
-
-        const timeoutId = system.runTimeout(() => {
-            pendingHintTimeouts.delete(player.id);
-
-            try {
-                if (!player?.isValid) return;
-
-                const latest = pendingHintMessages.get(player.id);
-                if (!latest) return;
-
-                let notBefore2 = 0;
-                try {
-                    notBefore2 = player.getDynamicProperty("goe_tnt_hint_not_before_tick") ?? 0;
-                } catch { }
-
-                const now2 = system.currentTick;
-                const waitMore = Math.max(0, Number(notBefore2) - now2);
-
-                if (waitMore > 0) {
-                    const timeoutId2 = system.runTimeout(() => {
-                        pendingHintTimeouts.delete(player.id);
-                        try {
-                            if (!player?.isValid) return;
-                            const latest2 = pendingHintMessages.get(player.id);
-                            if (!latest2) return;
-                            player.onScreenDisplay?.setActionBar(latest2);
-                        } catch { }
-                    }, waitMore);
-
-                    pendingHintTimeouts.set(player.id, timeoutId2);
-                    return;
-                }
-
-                player.onScreenDisplay?.setActionBar(latest);
-            } catch { }
-        }, delayTicks);
-
-        pendingHintTimeouts.set(player.id, timeoutId);
-    } catch { }
-} */
-
-/**
  * Restore TNT states after script reload
  * 
  */
@@ -678,4 +569,12 @@ export function playSoundsForPlayers(location, dimension, soundEffect, soundPitc
     }
 
     system.runJob(job());
+}
+
+
+/**
+ * On load behavior - restore TNT states after script reload
+ */
+export function onLoad() {
+    system.run(() => restoreTNT());
 }

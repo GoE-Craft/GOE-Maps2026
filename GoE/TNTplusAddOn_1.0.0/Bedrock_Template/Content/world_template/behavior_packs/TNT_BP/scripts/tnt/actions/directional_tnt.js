@@ -59,7 +59,9 @@ export function* directionalTNTAction(dimension, chargeLevel, location, vec, len
 
         const loc = { x: centerX, y: bottomY, z: centerZ };
         if (tntData?.explosionEffects) {
-            dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+            if(dimension.isChunkLoaded(loc)) {
+                dimension.spawnParticle(tntData.explosionEffects.particleEffect, loc);
+            }
         }
 
         if (s % 5 === 0 && drillEntity.isValid) {

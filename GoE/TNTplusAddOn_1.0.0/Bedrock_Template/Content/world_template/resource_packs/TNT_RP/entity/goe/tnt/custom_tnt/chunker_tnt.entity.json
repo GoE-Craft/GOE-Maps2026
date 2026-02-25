@@ -5,28 +5,33 @@
       "identifier": "goe_tnt:chunker_tnt",
       "materials": {
         "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive",
         "semi_transparent": "goe_tnt_border"
       },
       "textures": {
 				"default": "textures/goe/tnt/entity/chunker_tnt"
       },
       "geometry": {
-				"default": "geometry.chunker_tnt"
+				"default": "geometry.chunker_tnt",
+        "boost_level": "geometry.chunker_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+				  "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell && q.mark_variant != 2"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+					{"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell",
         "charge": "animation.chunker_tnt.charge",
-        "explode": "animation.chunker_tnt.explosion"
+        "explode": "animation.chunker_tnt.explosion",
+				"boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "big_explosion_white": "goe_tnt:big_explosion_white",
@@ -37,7 +42,10 @@
         "chunker_explosion2" : "goe_tnt:chunker_explosion2",
         "chunker_explosion3" : "goe_tnt:chunker_explosion3"
       },
-      "render_controllers": [ "controller.render.chunker_tnt" ]
+      "render_controllers": [ 
+        "controller.render.chunker_tnt",  
+				{	"controller.render.tnt_boost_scale": "v.boost_scale > 1" } 
+      ]
     }
   }
 }
