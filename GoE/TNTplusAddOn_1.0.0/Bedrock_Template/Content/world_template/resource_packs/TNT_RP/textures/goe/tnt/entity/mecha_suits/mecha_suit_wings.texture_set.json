@@ -2,7 +2,7 @@
 	"format_version": "1.21.30",
 	"minecraft:texture_set": {
 		"color": "mecha_suit_wings",
-		"metalness_emissive_roughness": "mecha_suit_wingst_mer",
-		"heightmap": "mecha_suit_wings_height"
+		"metalness_emissive_roughness": "mecha_suit_mer",
+		"heightmap": "mecha_suit_height"
 	}
 }
