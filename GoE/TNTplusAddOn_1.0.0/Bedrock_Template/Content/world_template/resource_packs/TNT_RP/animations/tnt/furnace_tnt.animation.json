@@ -105,7 +105,11 @@
 					{
 						"effect": "furnace_smoke"
 					}
-				]
+				],
+				"0.25": {
+					"effect": "tnt_charge_red",
+					"locator": "furnace_locator"
+				}
 			}
 		},
 		"animation.furnace_tnt.explode": {

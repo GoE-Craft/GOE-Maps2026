@@ -12,6 +12,13 @@
 			},
 			"bones": [
 				{
+					"name": "bb_main2",
+					"pivot": [0, 0, 0],
+					"locators": {
+						"furnace_locator": [0, 12, 0]
+					}
+				},
+				{
 					"name": "menu",
 					"pivot": [-10.5, 0.5, -13.1],
 					"rotation": [0, 30, 0],
