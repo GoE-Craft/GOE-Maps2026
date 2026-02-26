@@ -24,7 +24,6 @@
       "minecraft:display_name": "§nArrow TNT§f\nLaunches a powerful blast of arrows!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.arrow_tnt",
       "minecraft:material_instances": { "*": { "texture": "arrow_tnt", "render_method": "alpha_test" } },

@@ -24,7 +24,6 @@
       "minecraft:display_name": "§eWater Eraser TNT§f\nRemoves all water in its blast area.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.water_eraser_tnt",
       "minecraft:material_instances": { "*": { "texture": "water_eraser_tnt", "render_method": "alpha_test" } },
