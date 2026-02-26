@@ -41,6 +41,7 @@ import { knockbackTNTAction } from "./actions/knockback_tnt";
 import { balloonTNTAction } from "./actions/balloon_tnt";
 import { proxyTNTAction } from "./actions/proxy_tnt";
 import { specializedTNTAction } from "./actions/specialized_tnt";
+import { snapshotTNTAction } from "./actions/snapshot_tnt";
 
 /**
  * TNT Actions Module
@@ -192,7 +193,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             system.runJob(waterEraserTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "sound":
-            system.runJob(soundTNTAction(dimension, chargeLevel, location, entity));
+            // system.runJob(soundTNTAction(dimension, chargeLevel, location, entity));
             break;
         case "glitch":
             system.runJob(glitchTNTAction(dimension, chargeLevel, location, entity));
@@ -214,6 +215,10 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "specialized":
             system.runJob(specializedTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "snapshot":
+            console.log("Activating Snapshot TNT action");
+            snapshotTNTAction(dimension, chargeLevel, location, entity)
             break;
         default:
             break;
