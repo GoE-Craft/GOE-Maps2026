@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:balloon_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/balloon_tnt"
       },
       "geometry": {
-        "default": "geometry.balloon_tnt"
+        "default": "geometry.balloon_tnt",
+        "boost_level": "geometry.balloon_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge" : "q.mark_variant == 1"},
-          {"explosion" : "q.mark_variant == 2"}
+          {"explosion" : "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge" : "animation.balloon_tnt.charge",
-        "explosion" : "animation.balloon_tnt.explosion"
+        "explosion" : "animation.balloon_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "balloon_pop" : "goe_tnt:balloon_pop",
@@ -48,7 +53,10 @@
       "sound_effects": {
         "firework.blast": "firework.blast"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

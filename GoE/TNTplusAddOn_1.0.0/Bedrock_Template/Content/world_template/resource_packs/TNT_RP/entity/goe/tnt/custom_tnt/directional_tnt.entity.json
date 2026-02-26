@@ -4,28 +4,36 @@
     "description": {
       "identifier": "goe_tnt:directional_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/directional_tnt"
       },
       "geometry": {
-        "default": "geometry.directional_tnt"
+        "default": "geometry.directional_tnt",
+        "boost_level": "geometry.directional_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+				  "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell"},
-          {"directional_tnt_drill": "q.mark_variant == 1"}
+          {"directional_tnt_drill": "q.mark_variant == 1"},
+					{"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell",
-        "directional_tnt_drill": "animation.directional_tnt.drill"
+        "directional_tnt_drill": "animation.directional_tnt.drill",
+				"boost_scale": "animation.tnt.boost_scale"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+          "controller.render.tnt",  
+          {"controller.render.tnt_boost_scale": "v.boost_scale > 1"} 
+      ]
     }
   }
 }

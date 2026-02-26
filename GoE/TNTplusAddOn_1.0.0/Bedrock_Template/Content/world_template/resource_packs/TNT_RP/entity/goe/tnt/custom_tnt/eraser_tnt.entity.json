@@ -12,36 +12,43 @@
         "beam_light_left": "entity_beam_additive",
         "beam_light_right": "entity_beam_additive",
         "beam_light_front": "entity_beam_additive",
-        "beam_light_back": "entity_beam_additive"
-        
+        "beam_light_back": "entity_beam_additive",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/eraser_tnt"
       },
       "geometry": {
-        "default": "geometry.eraser_tnt"
+        "default": "geometry.eraser_tnt",
+        "boost_level": "geometry.eraser_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell_dimension",
         "explode":"animation.eraser_tnt.explode",
-        "charge":"animation.eraser_tnt.charge"
+        "charge":"animation.eraser_tnt.charge",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "dimension_beam": "goe_tnt:dimension_beam",
         "dimension_beam_explode": "goe_tnt:dimension_beam_explode"
        
       }, 
-      "render_controllers": [ "controller.render.eraser_tnt" ]
+      "render_controllers": [ 
+        "controller.render.eraser_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

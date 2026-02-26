@@ -5,33 +5,41 @@
       "identifier": "goe_tnt:orbital_cannon_tnt",
       "materials": {
         "default": "entity_alphablend",
-        "semi_transparent": "goe_tnt_border"
+        "semi_transparent": "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/orbital_cannon_tnt"
       },
       "geometry": {
-        "default": "geometry.orbital_cannon_tnt"
+        "default": "geometry.orbital_cannon_tnt",
+        "boost_level": "geometry.orbital_cannon_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.orbital_cannon_tnt.charge",
-        "explode": "animation.orbital_cannon_tnt.explode"
+        "explode": "animation.orbital_cannon_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "random_pulses_purple": "goe_tnt:random_pulses_purple",
         "detonator_impact_purple": "goe_tnt:detonator_impact_purple",
         "tnt_charge_purple": "goe_tnt:tnt_charge_purple"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

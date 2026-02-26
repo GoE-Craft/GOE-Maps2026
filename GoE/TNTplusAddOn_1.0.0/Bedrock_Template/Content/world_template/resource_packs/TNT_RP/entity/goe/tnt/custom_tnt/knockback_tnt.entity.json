@@ -4,26 +4,31 @@
 		"description": {
 			"identifier": "goe_tnt:knockback_tnt",
 			"materials": {
-				"default": "entity_alphatest"
+				"default": "entity_alphatest",
+				"boost_level": "goe_tnt_additive"
 			},
 			"textures": {
 				"default": "textures/goe/tnt/entity/knockback_tnt"
 			},
 			"geometry": {
-				"default": "geometry.knockback_tnt"
+				"default": "geometry.knockback_tnt",
+				"boost_level": "geometry.knockback_tnt_boost_level"
 			},
 			"scripts": {
 				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
+				"v.should_swell = query.property('goe_tnt:swell');",
+				"v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
 				],
 				"animate": [
           			{"charge" : "q.mark_variant == 1"},
-          			{"explode" : "q.mark_variant == 2"}
+          			{"explode" : "q.mark_variant == 2"},
+          			{"boost_scale": "v.boost_scale > 1"}
 				]
 					},
 			"animations": {
         		"charge" : "animation.knockback_tnt.charge",
-        		"explode" : "animation.knockback_tnt.explode"
+        		"explode" : "animation.knockback_tnt.explode",
+        		"boost_scale": "animation.tnt.boost_scale"
 			},
 			"particle_effects": {
         		"tnt_charge_blue" : "goe_tnt:tnt_charge_blue",
@@ -33,7 +38,10 @@
 				"light_up_big_explosion" : "goe_tnt:light_big_explosion",
 				"atmosphere_impact_radius_night" : "goe_tnt:daytime_impact_radius_night"
 			},
-      		"render_controllers": [ "controller.render.tnt" ]
+      		"render_controllers": [ 
+        		"controller.render.tnt",
+        		{"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      		]
 		}
 	}
 }

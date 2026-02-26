@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:sound_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/sound_tnt"
       },
       "geometry": {
-        "default": "geometry.sound_tnt"
+        "default": "geometry.sound_tnt",
+        "boost_level": "geometry.sound_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge" : "q.mark_variant == 1"},
-          {"explosion" : "q.mark_variant == 2"}
+          {"explosion" : "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge" : "animation.sound_tnt.charge",
-        "explosion" : "animation.sound_tnt.explode"
+        "explosion" : "animation.sound_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "sound_bass" : "goe_tnt:sound_bass",
@@ -42,7 +47,10 @@
         "sound_charging": "goe_tnt:healing_tnt_charging",
         "sound_blast": "goe_tnt:dimensional_tnt_explode"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

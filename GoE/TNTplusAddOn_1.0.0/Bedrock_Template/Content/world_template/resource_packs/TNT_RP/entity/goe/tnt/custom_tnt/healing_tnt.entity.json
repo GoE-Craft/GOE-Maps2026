@@ -5,26 +5,31 @@
       "identifier": "goe_tnt:healing_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "beam" : "goe_tnt_border"
+        "beam" : "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/healing_tnt"
       },
       "geometry": {
-        "default": "geometry.healing_tnt"
+        "default": "geometry.healing_tnt",
+        "boost_level": "geometry.healing_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge" : "q.mark_variant == 1"},
-          {"explosion" : "q.mark_variant == 2"}
+          {"explosion" : "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge" : "animation.healing_tnt.charge",
-        "explosion" : "animation.healing_tnt.explode"
+        "explosion" : "animation.healing_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "tnt_charge" : "goe_tnt:tnt_charge_red",
@@ -34,7 +39,10 @@
         "healing_explosion_heart" : "goe_tnt:heart_explosion",
         "heart_pulsating" : "goe_tnt:healing_pulsating"
       },
-      "render_controllers": [ "controller.render.healing_tnt" ]
+      "render_controllers": [ 
+        "controller.render.healing_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

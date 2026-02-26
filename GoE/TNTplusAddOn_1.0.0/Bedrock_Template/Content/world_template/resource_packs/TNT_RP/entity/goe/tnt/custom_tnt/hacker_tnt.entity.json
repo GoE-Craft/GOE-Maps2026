@@ -5,23 +5,30 @@
       "identifier": "goe_tnt:hacker_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "beam": "entity_alphablend"
+        "beam": "entity_alphablend",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/hacker_tnt"
       },
       "geometry": {
-        "default": "geometry.hacker_tnt"
+        "default": "geometry.hacker_tnt",
+        "boost_level": "geometry.hacker_tnt_boost_level"
       },
 			"scripts": {
+        "pre_animation": [
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
+        ],
         "animate": [
           {"charge" : "q.mark_variant == 1"},
-          {"explosion" : "q.mark_variant == 2"}
+          {"explosion" : "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge" : "animation.hacker_tnt.charge",
-        "explosion" : "animation.hacker_tnt.explode"
+        "explosion" : "animation.hacker_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "scan": "goe_tnt:scan",
@@ -35,7 +42,10 @@
         "explosion_pixels_green": "goe_tnt:explosion_pixels_green",
         "explosion_hacking": "goe_tnt:explosion_hacking"
       },
-      "render_controllers": [ "controller.render.hacker_tnt" ]
+      "render_controllers": [ 
+        "controller.render.hacker_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

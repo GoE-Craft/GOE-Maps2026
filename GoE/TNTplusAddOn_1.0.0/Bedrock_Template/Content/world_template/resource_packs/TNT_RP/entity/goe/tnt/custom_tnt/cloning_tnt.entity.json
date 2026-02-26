@@ -5,17 +5,20 @@
       "identifier": "goe_tnt:cloning_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "beam" : "goe_tnt_border"
+        "beam" : "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/cloning_tnt"
       },
       "geometry": {
-        "default": "geometry.cloning_tnt"
+        "default": "geometry.cloning_tnt",
+        "boost_level": "geometry.cloning_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "initialize": [
           "v.goe_random_rot = math.random(0,360);"
@@ -23,13 +26,15 @@
         "animate": [
           {"tnt_swelling": "q.mark_variant == 1"},
           {"charge" : "q.mark_variant == 1"},
-          {"explosion" : "q.mark_variant == 2"}
+          {"explosion" : "q.mark_variant == 2"},
+          "boost_scale"
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.cloning_tnt.swell",
         "charge" : "animation.cloning_tnt.charge",
-        "explosion" : "animation.cloning_tnt.explosion"
+        "explosion" : "animation.cloning_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "tnt_charge": "goe_tnt:tnt_charge_blue_and_red",
@@ -37,7 +42,10 @@
         "cloning_atom_explosion" : "goe_tnt:cloning_atom_explosion",
         "cloning_explosion": "goe_tnt:cloning_explosion"
       },
-      "render_controllers": [ "controller.render.healing_tnt"]
+      "render_controllers": [
+        "controller.render.healing_tnt",
+        {"controller.render.tnt_boost_scale": "query.property('goe_tnt:boost_level') > 0"}
+      ]
     }
   }
 }

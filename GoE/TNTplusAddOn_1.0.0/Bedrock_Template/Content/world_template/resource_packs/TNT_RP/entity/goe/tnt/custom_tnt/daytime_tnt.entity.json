@@ -9,22 +9,26 @@
         "beam_night": "entity_beam_additive",
         "semitransparent_1": "entity_alphablend",
         "semitransparent_2": "entity_alphablend",
-        "semitransparent_3": "entity_alphablend"
+        "semitransparent_3": "entity_alphablend",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/daytime_tnt"
       },
       "geometry": {
-        "default": "geometry.daytime_tnt"
+        "default": "geometry.daytime_tnt",
+        "boost_level": "geometry.daytime_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          "boost_scale"
         ]
 			},
       "animations": {
@@ -32,7 +36,8 @@
         "charge": "animation.daytime_tnt.charge_night",
         "charge_day": "animation.daytime_tnt.charge_day",
         "explode": "animation.daytime_tnt.explode_night",
-        "explode_day": "animation.daytime_tnt.explode_day"
+        "explode_day": "animation.daytime_tnt.explode_day",
+        "boost_scale": "animation.tnt.boost_scale"
       },
        "particle_effects": {
         "daytime_day": "goe_tnt:daytime_day",
@@ -55,7 +60,10 @@
         "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow"
        
       }, 
-      "render_controllers": [ "controller.render.daytime_tnt" ]
+      "render_controllers": [
+        "controller.render.daytime_tnt",
+        {"controller.render.tnt_boost_scale": "query.property('goe_tnt:boost_level') > 0"}
+      ]
     }
   }
 }

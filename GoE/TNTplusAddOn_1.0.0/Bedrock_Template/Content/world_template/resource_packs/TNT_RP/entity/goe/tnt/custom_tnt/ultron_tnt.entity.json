@@ -5,26 +5,31 @@
       "identifier": "goe_tnt:ultron_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "beam": "goe_tnt_border"
+        "beam": "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
 				"default": "textures/goe/tnt/entity/ultron_tnt"
       },
       "geometry": {
-				"default": "geometry.ultron_tnt"
+				"default": "geometry.ultron_tnt",
+        "boost_level": "geometry.ultron_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
-          {"charge": "q.mark_variant == 1"}
+          {"charge": "q.mark_variant == 1"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.ultron_tnt.swell",
-        "charge": "animation.ultron_tnt.charge"
+        "charge": "animation.ultron_tnt.charge",
+        "boost_scale": "animation.tnt.boost_scale"
         //"explode": ""
       },
       "particle_effects": {
@@ -33,7 +38,10 @@
         "ultron_impact": "goe_tnt:ultron_impact",
         "ultron_smoke_large": "goe_tnt:ultron_smoke_large"
       },
-      "render_controllers": [ "controller.render.ultron_tnt" ]
+      "render_controllers": [
+        "controller.render.ultron_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

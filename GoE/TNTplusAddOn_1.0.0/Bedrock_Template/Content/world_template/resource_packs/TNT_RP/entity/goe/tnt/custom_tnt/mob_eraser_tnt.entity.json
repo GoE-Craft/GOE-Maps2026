@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:mob_eraser_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/mob_eraser_tnt"
       },
       "geometry": {
-        "default": "geometry.mob_eraser_tnt"
+        "default": "geometry.mob_eraser_tnt",
+        "boost_level": "geometry.mob_eraser_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.mob_eraser_tnt.charge",
-        "explode": "animation.mob_eraser_tnt.explode"
+        "explode": "animation.mob_eraser_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "mob_eraser_explosion": "goe_tnt:mob_eraser_explosion",
@@ -36,7 +41,10 @@
         "mob_destroy": "goe_tnt:mob_destroy",
         "party_sparks": "goe_tnt:party_sparks"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

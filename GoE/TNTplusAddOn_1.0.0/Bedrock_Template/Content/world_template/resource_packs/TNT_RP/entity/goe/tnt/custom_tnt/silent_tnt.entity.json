@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:silent_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/silent_tnt"
       },
       "geometry": {
-        "default": "geometry.silent_tnt"
+        "default": "geometry.silent_tnt",
+        "boost_level": "geometry.silent_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.silent_tnt.charge",
-        "explode": "animation.silent_tnt.explosion"
+        "explode": "animation.silent_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "silent_explosion": "goe_tnt:silent_explosion",
@@ -35,7 +40,10 @@
         "party_sparks": "goe_tnt:party_sparks",
         "silent_shell_explosion": "goe_tnt:silent_shell_explosion"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

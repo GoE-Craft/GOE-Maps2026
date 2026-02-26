@@ -4,26 +4,34 @@
 		"description": {
 			"identifier": "goe_tnt:snapshot_tnt",
 			"materials": {
-				"default": "entity_alphatest"
+				"default": "entity_alphatest",
+				"boost_level": "goe_tnt_additive"
 			},
 			"textures": {
 				"default": "textures/goe/tnt/entity/tnt"
 			},
 			"geometry": {
-				"default": "geometry.tnt"
+				"default": "geometry.snapshot_tnt",
+				"boost_level": "geometry.snapshot_tnt_boost_level"
 			},
 			"scripts": {
 				"pre_animation": [
-				"v.should_swell = query.property('goe_tnt:swell');"
+				"v.should_swell = query.property('goe_tnt:swell');",
+				"v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
 				],
 				"animate": [
-				{"tnt_swelling": "v.should_swell"}
+				{"tnt_swelling": "v.should_swell"},
+				{"boost_scale": "v.boost_scale > 1"}
 				]
 					},
 			"animations": {
-				"tnt_swelling": "animation.tnt.swell"
+				"tnt_swelling": "animation.tnt.swell",
+				"boost_scale": "animation.tnt.boost_scale"
 			},
-      		"render_controllers": [ "controller.render.tnt" ]
+      		"render_controllers": [ 
+			"controller.render.tnt",
+			{"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+		  ]
 		}
 	}
 }

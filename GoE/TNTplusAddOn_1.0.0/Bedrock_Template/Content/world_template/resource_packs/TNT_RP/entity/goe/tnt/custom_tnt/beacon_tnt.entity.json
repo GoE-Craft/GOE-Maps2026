@@ -17,8 +17,8 @@
         "perimiter10": "goe_tnt_border",
         "perimiter11": "goe_tnt_border",
         "perimiter12": "goe_tnt_border",
-        "perimiter13": "goe_tnt_border"
-        
+        "perimiter13": "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/beacon_tnt",
@@ -26,20 +26,24 @@
       },
       "geometry": {
         "default": "geometry.beacon_tnt",
-        "beacon_tnt_perimiter" : "geometry.beacon_tnt_perimiter"
+        "beacon_tnt_perimiter" : "geometry.beacon_tnt_perimiter",
+        "boost_level": "geometry.beacon_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          "boost_scale"
         ]
 			},
       "animations": {
         "charge": "animation.beacon_tnt.charge",
-        "explode": "animation.beacon_tnt.explode"
+        "explode": "animation.beacon_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "buff_effects": "goe_tnt:buff_effects",
@@ -52,7 +56,8 @@
       },
       "render_controllers": [ 
         "controller.render.tnt",
-        {"controller.render.beacon_tnt_perimiter": "q.mark_variant == 2"}
+        {"controller.render.beacon_tnt_perimiter": "q.mark_variant == 2"},
+        {"controller.render.tnt_boost_scale": "query.property('goe_tnt:boost_level') > 0"}
       ]
     }
   }

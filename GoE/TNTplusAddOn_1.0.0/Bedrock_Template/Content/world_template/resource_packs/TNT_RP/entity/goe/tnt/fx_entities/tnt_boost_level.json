@@ -11,7 +11,7 @@
                 "directional_tnt": "textures/goe/tnt/entity/directional_tnt",
                 "party_tnt": "textures/goe/tnt/entity/party_tnt",
                 "magnet_tnt": "textures/goe/tnt/entity/magnet_tnt",
-                "chunker_tnt": "textures/goe/tnt/entity/chunker_tnt",
+                "chunker_tnt": "textures/goe/tnt/entity/boost_level_empty",
                 "ultron_tnt": "textures/goe/tnt/entity/ultron_tnt",
                 "freezing_tnt": "textures/goe/tnt/entity/freezing_tnt",
                 "hacker_tnt": "textures/goe/tnt/entity/hacker_tnt",

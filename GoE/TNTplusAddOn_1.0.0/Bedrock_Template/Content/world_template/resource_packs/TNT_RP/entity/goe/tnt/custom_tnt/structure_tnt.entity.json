@@ -4,7 +4,8 @@
     "description": {
       "identifier": "goe_tnt:structure_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/structure_tnt",
@@ -12,22 +13,26 @@
       },
       "geometry": {
         "default": "geometry.structure_tnt",
-        "structure_tnt_site": "geometry.structure_tnt_site"
+        "structure_tnt_site": "geometry.structure_tnt_site",
+        "boost_level": "geometry.structure_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"},
-          {"structure_site_appear": "q.mark_variant == 2"}
+          {"structure_site_appear": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.structure_tnt.swell",
         "explode": "animation.structure_tnt.explode",
-        "structure_site_appear": "animation.structure_tnt.structure_site_appear"
+        "structure_site_appear": "animation.structure_tnt.structure_site_appear",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow",
@@ -37,7 +42,8 @@
       },
       "render_controllers": [ 
         "controller.render.tnt",
-        {"controller.render.structure_tnt.site": "q.mark_variant == 2"}
+        {"controller.render.structure_tnt.site": "q.mark_variant == 2"},
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
       ]
     }
   }

@@ -4,28 +4,33 @@
     "description": {
       "identifier": "goe_tnt:party_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/party_tnt"
       },
       "geometry": {
-        "default": "geometry.party_tnt"
+        "default": "geometry.party_tnt",
+        "boost_level": "geometry.party_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell && q.mark_variant != 2"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell",
         "charge": "animation.party_tnt.charge",
-        "explode": "animation.party_tnt.explosion"
+        "explode": "animation.party_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "big_explosion_white": "goe_tnt:big_explosion_white",
@@ -33,7 +38,10 @@
         "cookie_explosion": "goe_tnt:cookie_explosion",
         "party_spark": "goe_tnt:party_sparks"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

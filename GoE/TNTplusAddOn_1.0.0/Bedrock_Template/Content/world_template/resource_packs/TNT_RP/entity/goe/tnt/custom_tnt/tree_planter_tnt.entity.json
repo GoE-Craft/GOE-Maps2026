@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:tree_planter_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/tree_planter_tnt"
       },
       "geometry": {
-        "default": "geometry.tree_planter_tnt"
+        "default": "geometry.tree_planter_tnt",
+        "boost_level": "geometry.tree_planter_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.tree_planter_tnt.charge",
-        "explode": "animation.tree_planter_tnt.explosion"
+        "explode": "animation.tree_planter_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "leaves_tornado": "goe_tnt:leaves_tornado",
@@ -31,7 +36,10 @@
         "forest_lines": "goe_tnt:forest_lines",
         "leaves_explosion": "goe_tnt:leaves_explosion"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

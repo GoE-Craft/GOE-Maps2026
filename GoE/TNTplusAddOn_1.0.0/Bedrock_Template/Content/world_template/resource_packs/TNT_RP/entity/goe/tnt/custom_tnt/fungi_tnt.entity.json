@@ -5,24 +5,31 @@
       "identifier": "goe_tnt:fungi_tnt",
       "materials": {
         "default": "goe_tnt_anim_alphatest",
-		    "fuse": "goe_tnt_anim_alphatest"
+		    "fuse": "goe_tnt_anim_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/fungi_tnt",
         "fuse": "textures/goe/tnt/entity/fungi_tnt"
       },
       "geometry": {
-        "default": "geometry.fungi_tnt"
+        "default": "geometry.fungi_tnt",
+        "boost_level": "geometry.fungi_tnt_boost_level"
       },
       "scripts": {
+        "pre_animation": [
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
+        ],
         "animate": [
           { "charge": "q.mark_variant == 1" },
-          { "explosion": "q.mark_variant == 2" }
+          { "explosion": "q.mark_variant == 2" },
+          {"boost_scale": "v.boost_scale > 1"}
         ]
       },
       "animations": {
         "charge": "animation.fungi_tnt.charge",
-        "explosion": "animation.fungi_tnt.explode"
+        "explosion": "animation.fungi_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "tnt_charge_red": "goe_tnt:tnt_charge_red",
@@ -35,7 +42,8 @@
 
       "render_controllers": [
         "controller.render.fungi_tnt.main",
-        "controller.render.fungi_tnt.fuse"
+        "controller.render.fungi_tnt.fuse",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
       ]
     }
   }

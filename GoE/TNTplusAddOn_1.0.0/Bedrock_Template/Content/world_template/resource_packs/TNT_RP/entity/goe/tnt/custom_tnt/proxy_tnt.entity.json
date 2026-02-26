@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:proxy_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/proxy_tnt"
       },
       "geometry": {
-        "default": "geometry.proxy_tnt"
+        "default": "geometry.proxy_tnt",
+        "boost_level": "geometry.proxy_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.proxy_tnt.charge",
-        "explode": "animation.proxy_tnt.explosion"
+        "explode": "animation.proxy_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects":{
         "party_sparks": "goe_tnt:party_sparks",
@@ -33,7 +38,10 @@
         "proxy_explosion": "goe_tnt:proxy_explosion",
         "proxy_circle_push": "goe_tnt:proxy_circle_push"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

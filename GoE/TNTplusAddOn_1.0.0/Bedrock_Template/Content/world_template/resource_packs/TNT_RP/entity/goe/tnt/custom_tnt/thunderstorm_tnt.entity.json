@@ -4,28 +4,33 @@
     "description": {
       "identifier": "goe_tnt:thunderstorm_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/thunderstorm_tnt"
       },
       "geometry": {
-        "default": "geometry.thunderstorm_tnt"
+        "default": "geometry.thunderstorm_tnt",
+        "boost_level": "geometry.thunderstorm_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "v.should_swell"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell_thunder",
         "explode":"animation.thunderstorm_tnt.explode",
-        "charge":"animation.thunderstorm_tnt.charge"
+        "charge":"animation.thunderstorm_tnt.charge",
+        "boost_scale": "animation.tnt.boost_scale"
       },
         "particle_effects": {
         "thunder_bolt": "goe_tnt:thunder_bolt",
@@ -36,7 +41,10 @@
         "thunder_cloud": "goe_tnt:thunder_cloud",
         "tnt_charge_yellow": "goe_tnt:tnt_charge_yellow"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

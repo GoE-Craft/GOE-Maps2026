@@ -109,7 +109,7 @@
                 "r": "query.property('goe_tnt:boost_level') / 4",
                 "g": "1.0 - (query.property('goe_tnt:boost_level') / 4)",
                 "b": "0.0",
-                "a": 0.25
+                "a": 1
             }
         }
     }

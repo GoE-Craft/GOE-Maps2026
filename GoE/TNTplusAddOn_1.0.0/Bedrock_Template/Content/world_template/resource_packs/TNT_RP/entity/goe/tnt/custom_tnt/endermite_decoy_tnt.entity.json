@@ -6,24 +6,31 @@
       "materials": {
         "default": "entity_alphatest",
         "alphatest": "entity_alphatest",
-        "transparent": "entity_beam_additive"
+        "transparent": "entity_beam_additive",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/endermite_decoy_tnt"
       },
       "geometry": {
-        "default": "geometry.endermite_decoy_tnt"
+        "default": "geometry.endermite_decoy_tnt",
+        "boost_level": "geometry.endermite_decoy_tnt_boost_level"
       },
 			"scripts": {
+        "pre_animation": [
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
+        ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.endermite_decoy_tnt.swell",
         "charge": "animation.endermite_decoy_tnt.charge",
-        "explode": "animation.endermite_decoy_tnt.explode"
+        "explode": "animation.endermite_decoy_tnt.explode",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "ender_sparkle_pink": "goe_tnt:ender_sparkle_pink",
@@ -35,7 +42,10 @@
         "enderman": "goe_tnt:enderman",
         "enderman2": "goe_tnt:enderman2"
       },
-      "render_controllers": [ "controller.render.endermite_decoy_tnt" ]
+      "render_controllers": [ 
+        "controller.render.endermite_decoy_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

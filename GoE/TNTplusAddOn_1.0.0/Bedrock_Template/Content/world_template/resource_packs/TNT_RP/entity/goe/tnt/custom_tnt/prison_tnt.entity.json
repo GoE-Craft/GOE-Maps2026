@@ -4,26 +4,31 @@
     "description": {
       "identifier": "goe_tnt:prison_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/prison_tnt"
       },
       "geometry": {
-        "default": "geometry.prison_tnt"
+        "default": "geometry.prison_tnt",
+        "boost_level": "geometry.prison_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.prison_tnt.charge",
-        "explode": "animation.prison_tnt.explosion"
+        "explode": "animation.prison_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "prison_chains": "goe_tnt:prison_chains",
@@ -35,7 +40,10 @@
         "prison_explosion": "goe_tnt:prison_explosion",
         "prison_fog": "goe_tnt:prison_fog"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

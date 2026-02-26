@@ -5,28 +5,33 @@
       "identifier": "goe_tnt:water_eraser_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "beam" : "goe_tnt_border"
+        "beam" : "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/water_eraser_tnt"
       },
       "geometry": {
-        "default": "geometry.water_eraser_tnt"
+        "default": "geometry.water_eraser_tnt",
+        "boost_level": "geometry.water_eraser_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling" : "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling" : "animation.water_eraser_tnt.swell",
         "charge": "animation.water_eraser_tnt.charge",
-        "explode": "animation.water_eraser_tnt.explosion"
+        "explode": "animation.water_eraser_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "tnt_charge" : "goe_tnt:tnt_charge_blue",
@@ -34,7 +39,10 @@
         "fog" : "goe_tnt:water_eraser_fog",
         "implosion" : "goe_tnt:water_eraser_implosion"
       },
-      "render_controllers": [ "controller.render.healing_tnt" ]
+      "render_controllers": [
+        "controller.render.healing_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

@@ -5,35 +5,43 @@
       "identifier": "goe_tnt:glass_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "semi_transparent": "goe_tnt_border"
+        "semi_transparent": "goe_tnt_border",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
 				"default": "textures/goe/tnt/entity/glass_tnt"
       },
       "geometry": {
-				"default": "geometry.glass_tnt"
+				"default": "geometry.glass_tnt",
+				"boost_level": "geometry.glass_tnt_boost_level"
       },
 			"scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"tnt_swelling": "q.mark_variant == 1"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "tnt_swelling": "animation.tnt.swell_weather_rain",
         "explode":"animation.glass_tnt.explosion",
-        "charge":"animation.glass_tnt.charge"
+        "charge":"animation.glass_tnt.charge",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "glass_explode": "goe_tnt:glass_explode",
         "glass_shine": "goe_tnt:glass_shine",
         "tnt_charge_darkblue": "goe_tnt:tnt_charge_darkblue"
       },
-      "render_controllers": [ "controller.render.glass_tnt" ]
+      "render_controllers": [ 
+        "controller.render.glass_tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

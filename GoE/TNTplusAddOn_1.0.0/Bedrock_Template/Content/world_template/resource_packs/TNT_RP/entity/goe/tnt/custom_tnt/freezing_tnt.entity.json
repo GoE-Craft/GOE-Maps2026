@@ -4,28 +4,33 @@
     "description": {
       "identifier": "goe_tnt:freezing_tnt",
       "materials": {
-        "default": "entity_alphatest"
+        "default": "entity_alphatest",
+        "boost_level": "goe_tnt_additive"
       },
       "textures": {
         "default": "textures/goe/tnt/entity/freezing_tnt"
       },
       "geometry": {
-        "default": "geometry.freezing_tnt"
+        "default": "geometry.freezing_tnt",
+        "boost_level": "geometry.freezing_tnt_boost_level"
       },
       "scripts": {
         "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
         ],
         "animate": [
           {"freezing_tnt_swelling": "q.mark_variant == 1 || v.should_swell"},
           {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
+          {"explode": "q.mark_variant == 2"},
+          {"boost_scale": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "freezing_tnt_swelling": "animation.freeze_tnt.swell",
         "charge": "animation.freezing_tnt.charge",
-        "explode": "animation.freezing_tnt.explosion"
+        "explode": "animation.freezing_tnt.explosion",
+        "boost_scale": "animation.tnt.boost_scale"
       },
       "particle_effects": {
         "freezing_blizzard": "goe_tnt:freezing_blizzard",
@@ -36,7 +41,10 @@
         "charge" : "goe_tnt:freezing_tnt_charge",
         "explosion" : "goe_tnt:freezing_tnt_explosion"
       },
-      "render_controllers": [ "controller.render.tnt" ]
+      "render_controllers": [ 
+        "controller.render.tnt",
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
     }
   }
 }

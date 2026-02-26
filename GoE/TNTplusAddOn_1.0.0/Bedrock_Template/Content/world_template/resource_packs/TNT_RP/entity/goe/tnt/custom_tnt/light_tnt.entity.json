@@ -1,41 +1,30 @@
 {
-  "format_version": "1.10.0",
-  "minecraft:client_entity": {
-    "description": {
-      "identifier": "goe_tnt:light_tnt",
-      "materials": {
-        "default": "entity_alphatest"
-      },
-      "textures": {
-        "default": "textures/goe/tnt/entity/light_tnt"
-      },
-      "geometry": {
-        "default": "geometry.light_tnt"
-      },
-			"scripts": {
-        "pre_animation": [
-          "v.should_swell = query.property('goe_tnt:swell');"
-        ],
-        "animate": [
-          {"charge": "q.mark_variant == 1"},
-          {"explode": "q.mark_variant == 2"}
-        ]
-			},
-      "animations": {
-        "charge": "animation.light_tnt.charge",
-        "explode": "animation.light_tnt.explode"
-      },
-      "particle_effects": {
-        "light_charge_yellow": "goe_tnt:light_charge_yellow",
-        "light_charge": "goe_tnt:light_charge",
-        "light_sparkles": "goe_tnt:light_sparkles",
-        "light_explosion": "goe_tnt:light_explosion",
-        "light_big_explosion": "goe_tnt:light_big_explosion",
-        "light_sphere": "goe_tnt:light_sphere",
-        "light_leftover_sparks": "goe_tnt:light_leftover_sparks",
-        "light_extended": "goe_tnt:light_extended"
-      },
-      "render_controllers": [ "controller.render.tnt" ]
+    "format_version": "1.10.0",
+    "minecraft:client_entity": {
+        "description": {
+            "identifier": "goe_tnt:light_tnt",
+            "materials": { "default": "entity_alphatest", "boost_level": "goe_tnt_additive" },
+            "textures": { "default": "textures/goe/tnt/entity/light_tnt" },
+            "geometry": { 
+                "default": "geometry.light_tnt", 
+                "boost_level": "geometry.light_tnt_boost_level" 
+            },
+            "scripts": {
+                "pre_animation": ["v.should_swell = query.property('goe_tnt:swell');", "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"],
+                "animate": [{ "charge": "q.mark_variant == 1" }, { "explode": "q.mark_variant == 2" }, { "boost_scale": "v.boost_scale > 1" }]
+            },
+            "animations": { "charge": "animation.light_tnt.charge", "explode": "animation.light_tnt.explode", "boost_scale": "animation.tnt.boost_scale" },
+            "particle_effects": {
+                "light_charge_yellow": "goe_tnt:light_charge_yellow",
+                "light_charge": "goe_tnt:light_charge",
+                "light_sparkles": "goe_tnt:light_sparkles",
+                "light_explosion": "goe_tnt:light_explosion",
+                "light_big_explosion": "goe_tnt:light_big_explosion",
+                "light_sphere": "goe_tnt:light_sphere",
+                "light_leftover_sparks": "goe_tnt:light_leftover_sparks",
+                "light_extended": "goe_tnt:light_extended"
+            },
+            "render_controllers": ["controller.render.tnt", { "controller.render.tnt_boost_scale": "v.boost_scale > 1" }]
+        }
     }
-  }
 }
