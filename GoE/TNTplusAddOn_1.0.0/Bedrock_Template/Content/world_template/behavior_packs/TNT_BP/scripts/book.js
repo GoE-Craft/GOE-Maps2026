@@ -530,7 +530,7 @@ async function showAchievementListPage(player) {
         // remaining future milestones = locked (red)
         if (achievement.milestoneNumber !== undefined) {
             const isUnlocked = unlockedMilestones.includes(achievement.milestoneNumber);
-            if (isUnlocked) return { key: "unlocked", color: "§a", text: "UNLOCKED", order: 2 };
+            if (isUnlocked) return { key: "unlocked", color: "§a", text: "COMPLETED", order: 2 };
 
             const isActive = achievement.milestoneNumber === activeMilestoneNumber;
             if (isActive) return { key: "active", color: "§6", text: "ACTIVE", order: 0 };
@@ -543,7 +543,7 @@ async function showAchievementListPage(player) {
         // after completion = UNLOCKED (green)
         if (achievement.tntType) {
             const isUnlocked = unlockedTnts.includes(achievement.tntType);
-            if (isUnlocked) return { key: "unlocked", color: "§a", text: "UNLOCKED", order: 1 };
+            if (isUnlocked) return { key: "unlocked", color: "§a", text: "COMPLETED", order: 1 };
             return { key: "active", color: "§6", text: "ACTIVE", order: 0 };
         }
 
@@ -612,7 +612,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
         const isUnlocked = unlockedTnts.includes(achievement.tntType);
 
         statusColor = isUnlocked ? "§a" : "§6";
-        statusText = isUnlocked ? "UNLOCKED" : "ACTIVE";
+        statusText = isUnlocked ? "COMPLETED" : "ACTIVE";
     } else if (achievement.milestoneNumber !== undefined) {
         const allMilestones = getAchievementsByCategory("milestones");
         const unlockedMilestones = achievements.getUnlockedMilestones(player);
@@ -636,7 +636,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
         const isActive = achievement.milestoneNumber === activeMilestoneNumber;
 
         statusColor = isUnlocked ? "§a" : (isActive ? "§6" : "§c");
-        statusText = isUnlocked ? "UNLOCKED" : (isActive ? "ACTIVE" : "LOCKED");
+        statusText = isUnlocked ? "COMPLETED" : (isActive ? "ACTIVE" : "LOCKED");
     } else {
         statusColor = "§c";
         statusText = "LOCKED";
