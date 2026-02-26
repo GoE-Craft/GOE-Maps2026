@@ -1,274 +1,197 @@
-import { system, world, BlockPermutation } from "@minecraft/server";
-
-const GLITCH_TNT_DEBUG = true;
+import { BlockPermutation, world } from "@minecraft/server";
 
 export function* glitchTNTAction(dimension, chargeLevel, location, entity) {
 
-    const tntOriginBlockX = Math.floor(location.x);
-    const tntOriginBlockY = Math.floor(location.y);
-    const tntOriginBlockZ = Math.floor(location.z);
+    const tntX = Math.floor(location.x);
+    const tntY = Math.floor(location.y);
+    const tntZ = Math.floor(location.z);
 
-    const tntCenterPosition = { x: tntOriginBlockX + 0.5, y: tntOriginBlockY + 0.5, z: tntOriginBlockZ + 0.5 };
+    const baseHalfSize = 8;
+    const halfSize = getScaledHalfSize(baseHalfSize, chargeLevel);
 
-    const airBlockPermutation = BlockPermutation.resolve("minecraft:air");
+    const chunkMinX = tntX - halfSize;
+    const chunkMaxX = tntX + (halfSize - 1);
 
-    const totalExplosionsCount = randInt(1, 5);
-    const explosionScatterRadius = 10;
-    const surfaceSnapSearchRange = 3;
-    const fixedExplosionRadius = 4;
+    const chunkMinY = tntY - halfSize;
+    const chunkMaxY = tntY + (halfSize - 1);
 
-    if (GLITCH_TNT_DEBUG) {
-        console.warn(
-            `[glitchTNT] start | tntCenter=${fmtVec(tntCenterPosition)} | explosionsCount=${totalExplosionsCount} | scatterRadius=${explosionScatterRadius} | surfaceSnapRange=${surfaceSnapSearchRange} | fixedRadius=${fixedExplosionRadius}`
-        );
-    }
+    const chunkMinZ = tntZ - halfSize;
+    const chunkMaxZ = tntZ + (halfSize - 1);
 
-    for (let explosionLoopIndex = 0; explosionLoopIndex < totalExplosionsCount; explosionLoopIndex++) {
+    const airPerm = BlockPermutation.resolve("minecraft:air");
 
-        const randomScatterOffset = randomOffsetInSphere(explosionScatterRadius);
+    const clumpCount = randInt(4, 8);
 
-        const explosionCenterBlockX = Math.floor(tntCenterPosition.x + randomScatterOffset.x);
-        const explosionCenterBlockZ = Math.floor(tntCenterPosition.z + randomScatterOffset.z);
+    for (let c = 0; c < clumpCount; c++) {
 
-        const snappedSurfaceBlockY = findSurfaceAirYWithinRange(
-            dimension,
-            explosionCenterBlockX,
-            tntOriginBlockY,
-            explosionCenterBlockZ,
-            surfaceSnapSearchRange
-        );
+        const clumpX = randInt(chunkMinX, chunkMaxX);
+        const clumpY = randInt(chunkMinY, chunkMaxY);
+        const clumpZ = randInt(chunkMinZ, chunkMaxZ);
+        const clumpRadius = randInt(2, 5);
 
-        const explosionCenterBlockY = snappedSurfaceBlockY;
+        const sourceBlocks = [];
 
-        const selectedShapeIndex = chooseShapeOutcomeWeighted();
-        const selectedShapeName = getShapeName(selectedShapeIndex);
+        for (let dx = -clumpRadius; dx <= clumpRadius; dx++) {
+            for (let dy = -clumpRadius; dy <= clumpRadius; dy++) {
+                for (let dz = -clumpRadius; dz <= clumpRadius; dz++) {
 
-        if (GLITCH_TNT_DEBUG) {
-            const verticalOffsetFromTNT = explosionCenterBlockY - tntOriginBlockY;
-            console.warn(
-                `[glitchTNT] explosion #${explosionLoopIndex + 1}/${totalExplosionsCount} | shape=${selectedShapeName} | radius=${fixedExplosionRadius} | pos=${fmtVec({ x: explosionCenterBlockX, y: explosionCenterBlockY, z: explosionCenterBlockZ })} | yDelta=${verticalOffsetFromTNT}`
-            );
+                    const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                    const threshold = clumpRadius * (0.6 + Math.random() * 0.5);
+                    if (dist > threshold) continue;
+
+                    const bx = clumpX + dx;
+                    const by = clumpY + dy;
+                    const bz = clumpZ + dz;
+
+                    if (bx < chunkMinX || bx > chunkMaxX) continue;
+                    if (by < chunkMinY || by > chunkMaxY) continue;
+                    if (bz < chunkMinZ || bz > chunkMaxZ) continue;
+
+                    try {
+                        const block = dimension.getBlock({ x: bx, y: by, z: bz });
+                        if (!block) continue;
+                        if (block.typeId === "minecraft:air") continue;
+                        if (block.typeId === "minecraft:bedrock") continue;
+
+                        sourceBlocks.push({ perm: block.permutation, dx, dy, dz });
+                        block.setPermutation(airPerm);
+
+                    } catch {}
+                }
+            }
         }
 
-        if (selectedShapeIndex === 0) {
-            removeSphere(dimension, airBlockPermutation, explosionCenterBlockX, explosionCenterBlockY, explosionCenterBlockZ, fixedExplosionRadius);
-        } else if (selectedShapeIndex === 1) {
-            removeCube(dimension, airBlockPermutation, explosionCenterBlockX, explosionCenterBlockY, explosionCenterBlockZ, fixedExplosionRadius);
-        } else if (selectedShapeIndex === 2) {
-            removeDiamond(dimension, airBlockPermutation, explosionCenterBlockX, explosionCenterBlockY, explosionCenterBlockZ, fixedExplosionRadius);
-        } else if (selectedShapeIndex === 3) {
-            removeCylinder(dimension, airBlockPermutation, explosionCenterBlockX, explosionCenterBlockY, explosionCenterBlockZ, fixedExplosionRadius);
-        } else {
-            removeWeirdCombo(dimension, airBlockPermutation, explosionCenterBlockX, explosionCenterBlockY, explosionCenterBlockZ, fixedExplosionRadius);
+        if (sourceBlocks.length === 0) {
+            yield;
+            continue;
         }
+
+        const destAX = randInt(chunkMinX, chunkMaxX);
+        const destAY = randInt(chunkMinY, chunkMaxY);
+        const destAZ = randInt(chunkMinZ, chunkMaxZ);
+
+        const displacedBlocks = [];
+
+        for (const src of sourceBlocks) {
+
+            const tx = clampInt(destAX + src.dx, chunkMinX, chunkMaxX);
+            const ty = clampInt(destAY + src.dy, chunkMinY, chunkMaxY);
+            const tz = clampInt(destAZ + src.dz, chunkMinZ, chunkMaxZ);
+
+            try {
+                const target = dimension.getBlock({ x: tx, y: ty, z: tz });
+                if (!target) continue;
+                if (target.typeId === "minecraft:bedrock") continue;
+
+                if (target.typeId !== "minecraft:air") {
+                    displacedBlocks.push({ perm: target.permutation, dx: src.dx, dy: src.dy, dz: src.dz });
+                }
+
+                target.setPermutation(src.perm);
+
+            } catch {}
+        }
+
+        if (displacedBlocks.length === 0) {
+            yield;
+            continue;
+        }
+
+        const destBX = randInt(chunkMinX, chunkMaxX);
+        const destBY = randInt(chunkMinY, chunkMaxY);
+        const destBZ = randInt(chunkMinZ, chunkMaxZ);
+
+        for (const disp of displacedBlocks) {
+
+            const tx = clampInt(destBX + disp.dx, chunkMinX, chunkMaxX);
+            const ty = clampInt(destBY + disp.dy, chunkMinY, chunkMaxY);
+            const tz = clampInt(destBZ + disp.dz, chunkMinZ, chunkMaxZ);
+
+            try {
+                const target = dimension.getBlock({ x: tx, y: ty, z: tz });
+                if (!target) continue;
+                if (target.typeId === "minecraft:bedrock") continue;
+
+                target.setPermutation(disp.perm);
+
+            } catch {}
+        }
+
+        yield;
     }
 
-    if (GLITCH_TNT_DEBUG) {
-        console.warn("[glitchTNT] done");
-    }
+    damageMobsInGlitchArea(
+        dimension,
+        { x: tntX + 0.5, y: tntY + 0.5, z: tntZ + 0.5 },
+        chunkMinY,
+        chunkMaxY,
+        halfSize
+    );
 
     yield;
 }
 
-function getGlitchTNTTotalDamage() {
-    const difficultyName = String(world.getDifficulty()).toLowerCase();
-    if (difficultyName === "hard") return 49.25;
-    if (difficultyName === "normal") return 33.5;
-    if (difficultyName === "easy") return 17.5;
-    return 0;
+function getScaledHalfSize(baseHalfSize, chargeLevel) {
+    const numericChargeLevel = Number(chargeLevel);
+    const safeChargeLevel = Number.isFinite(numericChargeLevel) ? Math.max(0, numericChargeLevel) : 0;
+    return baseHalfSize + Math.round(baseHalfSize * 0.10 * safeChargeLevel);
 }
 
-function getShapeName(shapeOutcomeIndex) {
-    if (shapeOutcomeIndex === 0) return "sphere";
-    if (shapeOutcomeIndex === 1) return "cube";
-    if (shapeOutcomeIndex === 2) return "diamond";
-    if (shapeOutcomeIndex === 3) return "cylinder";
-    return "weird_combo";
+function damageMobsInGlitchArea(dimension, center, minY, maxY, halfSize) {
+    const damage = getGlitchDamage();
+    const radius = halfSize;
+
+    let entities = [];
+    try {
+        entities = dimension.getEntities({ location: center, maxDistance: radius, excludeTypes: ["minecraft:player"] });
+    } catch {
+        return;
+    }
+
+    for (const e of entities) {
+        try {
+            if (!e?.isValid) continue;
+
+            const tid = e.typeId;
+            if (tid === "minecraft:player") continue;
+            if (tid === "goe_tnt:mecha_suit") continue;
+            if (typeof tid === "string" && tid.includes("tnt")) continue;
+
+            const p = e.location;
+            if (!p) continue;
+            if (p.y < minY || p.y > maxY) continue;
+
+            e.applyDamage(damage);
+        } catch {}
+    }
 }
 
-function chooseShapeOutcomeWeighted() {
-    const randomRoll = Math.random();
-    if (randomRoll < 0.50) return 4;
-    const normalizedRoll = (randomRoll - 0.50) / 0.50;
-    const normalShapeIndex = Math.floor(normalizedRoll * 4);
-    return normalShapeIndex;
-}
+function getGlitchDamage() {
+    let d;
+    try {
+        d = world.getDifficulty?.();
+    } catch {
+        d = undefined;
+    }
 
-function fmtVec(vector) {
-    const vx = (vector?.x ?? 0).toFixed ? vector.x.toFixed(2) : String(vector?.x ?? 0);
-    const vy = (vector?.y ?? 0).toFixed ? vector.y.toFixed(2) : String(vector?.y ?? 0);
-    const vz = (vector?.z ?? 0).toFixed ? vector.z.toFixed(2) : String(vector?.z ?? 0);
-    return `(${vx}, ${vy}, ${vz})`;
+    const easy = 35;
+    const normal = 67;
+    const hard = 98.5;
+
+    const s = String(d ?? "").toLowerCase();
+    if (s.includes("hard")) return hard;
+    if (s.includes("normal")) return normal;
+    if (s.includes("easy")) return easy;
+
+    return normal;
 }
 
 function randInt(minValue, maxValue) {
-    return (minValue + Math.floor(Math.random() * (maxValue - minValue + 1)));
+    return minValue + Math.floor(Math.random() * (maxValue - minValue + 1));
 }
 
-function randFloat(minValue, maxValue) {
-    return (minValue + (Math.random() * (maxValue - minValue)));
-}
-
-function randomOffsetInSphere(radius) {
-    const randomU = Math.random();
-    const randomV = Math.random();
-    const thetaAngle = 2 * Math.PI * randomU;
-    const phiAngle = Math.acos(2 * randomV - 1);
-
-    const radialDistance = Math.cbrt(Math.random()) * radius;
-
-    const sinPhi = Math.sin(phiAngle);
-    return {
-        x: radialDistance * sinPhi * Math.cos(thetaAngle),
-        y: radialDistance * Math.cos(phiAngle),
-        z: radialDistance * sinPhi * Math.sin(thetaAngle),
-    };
-}
-
-function findSurfaceAirYWithinRange(dimension, blockX, baseBlockY, blockZ, searchRange) {
-
-    for (let scanY = baseBlockY + searchRange; scanY >= baseBlockY - searchRange; scanY--) {
-
-        const isAirAtScanY = isAirBlock(dimension, blockX, scanY, blockZ);
-        if (!isAirAtScanY) continue;
-
-        const isSolidBelow = !isAirBlock(dimension, blockX, scanY - 1, blockZ);
-        if (!isSolidBelow) continue;
-
-        return scanY;
-    }
-
-    return baseBlockY;
-}
-
-function isAirBlock(dimension, blockX, blockY, blockZ) {
-    try {
-        const blockRef = dimension.getBlock({ x: blockX, y: blockY, z: blockZ });
-        if (!blockRef) return true;
-        return blockRef.typeId === "minecraft:air";
-    } catch {
-        return true;
-    }
-}
-
-function setAirSafe(dimension, airBlockPermutation, blockX, blockY, blockZ) {
-    try {
-        const targetBlock = dimension.getBlock({ x: blockX, y: blockY, z: blockZ });
-        if (!targetBlock) return;
-        if (targetBlock.typeId === "minecraft:air") return;
-        if (targetBlock.typeId === "minecraft:bedrock") return;
-        targetBlock.setPermutation(airBlockPermutation);
-    } catch { }
-}
-
-function removeSphere(dimension, airBlockPermutation, centerBlockX, centerBlockY, centerBlockZ, radius) {
-    const radiusSquared = radius * radius;
-
-    for (let blockX = centerBlockX - radius; blockX <= centerBlockX + radius; blockX++) {
-        for (let blockY = centerBlockY - radius; blockY <= centerBlockY + radius; blockY++) {
-            for (let blockZ = centerBlockZ - radius; blockZ <= centerBlockZ + radius; blockZ++) {
-
-                const deltaX = blockX - centerBlockX;
-                const deltaY = blockY - centerBlockY;
-                const deltaZ = blockZ - centerBlockZ;
-
-                if ((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) > radiusSquared) continue;
-
-                setAirSafe(dimension, airBlockPermutation, blockX, blockY, blockZ);
-            }
-        }
-    }
-}
-
-function removeCube(dimension, airBlockPermutation, centerBlockX, centerBlockY, centerBlockZ, radius) {
-    for (let blockX = centerBlockX - radius; blockX <= centerBlockX + radius; blockX++) {
-        for (let blockY = centerBlockY - radius; blockY <= centerBlockY + radius; blockY++) {
-            for (let blockZ = centerBlockZ - radius; blockZ <= centerBlockZ + radius; blockZ++) {
-                setAirSafe(dimension, airBlockPermutation, blockX, blockY, blockZ);
-            }
-        }
-    }
-}
-
-function removeDiamond(dimension, airBlockPermutation, centerBlockX, centerBlockY, centerBlockZ, radius) {
-    for (let blockX = centerBlockX - radius; blockX <= centerBlockX + radius; blockX++) {
-        for (let blockY = centerBlockY - radius; blockY <= centerBlockY + radius; blockY++) {
-            for (let blockZ = centerBlockZ - radius; blockZ <= centerBlockZ + radius; blockZ++) {
-
-                const manhattanDistance =
-                    Math.abs(blockX - centerBlockX) +
-                    Math.abs(blockY - centerBlockY) +
-                    Math.abs(blockZ - centerBlockZ);
-
-                if (manhattanDistance > radius) continue;
-
-                setAirSafe(dimension, airBlockPermutation, blockX, blockY, blockZ);
-            }
-        }
-    }
-}
-
-function removeCylinder(dimension, airBlockPermutation, centerBlockX, centerBlockY, centerBlockZ, radius) {
-    const halfHeight = randInt(Math.max(2, Math.floor(radius * 0.6)), Math.max(3, Math.floor(radius * 1.6)));
-    const radiusSquared = radius * radius;
-
-    for (let blockX = centerBlockX - radius; blockX <= centerBlockX + radius; blockX++) {
-        for (let blockY = centerBlockY - halfHeight; blockY <= centerBlockY + halfHeight; blockY++) {
-            for (let blockZ = centerBlockZ - radius; blockZ <= centerBlockZ + radius; blockZ++) {
-
-                const deltaX = blockX - centerBlockX;
-                const deltaZ = blockZ - centerBlockZ;
-
-                if ((deltaX * deltaX + deltaZ * deltaZ) > radiusSquared) continue;
-
-                setAirSafe(dimension, airBlockPermutation, blockX, blockY, blockZ);
-            }
-        }
-    }
-}
-
-function removeWeirdCombo(dimension, airBlockPermutation, centerBlockX, centerBlockY, centerBlockZ, radius) {
-
-    const radiusSquared = radius * radius;
-
-    const waveFrequency = randFloat(0.2, 0.75);
-    const spikeModifier = randFloat(0.0, 0.6);
-
-    for (let blockX = centerBlockX - radius; blockX <= centerBlockX + radius; blockX++) {
-        for (let blockY = centerBlockY - radius; blockY <= centerBlockY + radius; blockY++) {
-            for (let blockZ = centerBlockZ - radius; blockZ <= centerBlockZ + radius; blockZ++) {
-
-                const deltaX = blockX - centerBlockX;
-                const deltaY = blockY - centerBlockY;
-                const deltaZ = blockZ - centerBlockZ;
-
-                const insideSphere = ((deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ) <= radiusSquared);
-                const insideCube =
-                    (Math.abs(deltaX) <= radius) &&
-                    (Math.abs(deltaY) <= radius) &&
-                    (Math.abs(deltaZ) <= radius);
-
-                const insideDiamond =
-                    (Math.abs(deltaX) + Math.abs(deltaY) + Math.abs(deltaZ)) <=
-                    (radius + Math.floor(radius * spikeModifier));
-
-                const waveValue =
-                    Math.sin((deltaX + deltaZ) * waveFrequency) +
-                    Math.cos(deltaY * waveFrequency);
-
-                const wavePass = waveValue > 0.25;
-
-                const shouldErase = (insideSphere && wavePass) || (insideCube && insideDiamond);
-                if (!shouldErase) continue;
-
-                const isInsideCoreCarve =
-                    (Math.abs(deltaX) + Math.abs(deltaZ)) < Math.floor(radius * 0.35) &&
-                    Math.abs(deltaY) < Math.floor(radius * 0.6);
-
-                if (isInsideCoreCarve) continue;
-
-                setAirSafe(dimension, airBlockPermutation, blockX, blockY, blockZ);
-            }
-        }
-    }
+function clampInt(value, min, max) {
+    if (value < min) return min;
+    if (value > max) return max;
+    return value;
 }
