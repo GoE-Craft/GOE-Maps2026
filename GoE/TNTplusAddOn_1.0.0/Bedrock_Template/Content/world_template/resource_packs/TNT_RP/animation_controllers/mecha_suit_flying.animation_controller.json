@@ -19,7 +19,32 @@
 						{
 							"effect": "mecha_suit_flying",
 							"locator": "jetpack_left"
+						},
+						{
+							"effect": "mecha_suit_fire_my",
+							"locator": "jetpack_right"
+						},
+						{
+							"effect": "mecha_suit_fire_my",
+							"locator": "jetpack_left"
+						},
+						{
+							"effect": "mecha_suit_fire_pixels",
+							"locator": "jetpack_right"
+						},
+						{
+							"effect": "mecha_suit_fire_pixels",
+							"locator": "jetpack_left"
+						},
+						{
+							"effect": "mech_suit_wind",
+							"locator": "jetpack_right"
+						},
+						{
+							"effect": "mech_suit_wind",
+							"locator": "jetpack_left"
 						}
+
 					],
 					"transitions": [
 						{ "not_flying": "!q.property('goe_tnt:is_flying')" }
