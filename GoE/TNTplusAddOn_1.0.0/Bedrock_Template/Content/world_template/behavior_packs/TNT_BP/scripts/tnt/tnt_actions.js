@@ -40,6 +40,7 @@ import { silentTNTAction } from "./actions/silent_tnt";
 import { knockbackTNTAction } from "./actions/knockback_tnt";
 import { balloonTNTAction } from "./actions/balloon_tnt";
 import { proxyTNTAction } from "./actions/proxy_tnt";
+import { specializedTNTAction } from "./actions/specialized_tnt";
 
 /**
  * TNT Actions Module
@@ -210,6 +211,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "proxy":
             system.runJob(proxyTNTAction(dimension, chargeLevel, location, entity));
+            break;
+        case "specialized":
+            system.runJob(specializedTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;

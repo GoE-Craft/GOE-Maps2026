@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eSnapshot TNT§f\nBlinds players for a short time and makes mobs move uncontrollably.§r",
+      "minecraft:display_name": "§8Snapshot TNT§f\nBlinds players for a short time and makes mobs move uncontrollably.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },

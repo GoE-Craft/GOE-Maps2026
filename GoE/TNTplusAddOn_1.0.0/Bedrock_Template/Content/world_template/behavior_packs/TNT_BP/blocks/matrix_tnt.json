@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eMatrix TNT§f\nSpawns wandering Matrix mobs that explode after spreading out.§r",
+      "minecraft:display_name": "§aMatrix TNT§f\nSpawns wandering Matrix mobs that explode after spreading out.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
