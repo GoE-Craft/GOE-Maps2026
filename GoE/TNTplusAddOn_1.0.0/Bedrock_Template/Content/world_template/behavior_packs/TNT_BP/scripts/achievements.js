@@ -5,6 +5,19 @@ import * as utils from "./utils";
 
 const RANDOM_REWARD_STRUCTURES = 10; // random_reward_1 ... random_reward_10
 
+const STRIP_FORMATTING = (text = "") => text.replace(/§./g, "");
+
+function getMaxAchievementNameLength() {
+    let max = 14;
+    for (const ach of Achievements.tnt_individual) {
+        const len = STRIP_FORMATTING(ach.name).length;
+        if (len > max) max = len;
+    }
+    return max;
+}
+
+const ACHIEVEMENT_NAME_TARGET = getMaxAchievementNameLength();
+
 function getRandomTntRewardStructureId() {
     const num = Math.floor(Math.random() * RANDOM_REWARD_STRUCTURES) + 1;
     return `goe_tnt:random_reward_${num}`;
@@ -92,9 +105,17 @@ function bumpTntHintDelay(player) {
 
 
 function centerAchievementName(name, extraSpaces = 0) {
-    const plain = name.replace(/§[0-9a-fklmnor]/gi, "");
-    const pad = Math.max(0, (14 - plain.length) + extraSpaces);
+    // Strip formatting codes so spacing stays aligned even when coloured or underlined
+    const plain = STRIP_FORMATTING(name);
+    const pad = Math.max(0, Math.floor((ACHIEVEMENT_NAME_TARGET - plain.length) / 2) + extraSpaces);
     return " ".repeat(pad) + name;
+}
+
+function getColoredAchievementName(tntType, baseName) {
+    const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
+    const prefix = achievement?.colorCode;
+    if (!prefix) return baseName;
+    return `${prefix}${baseName}§r`;
 }
 
 function unlockTntAchievement(player, tntType) {
@@ -108,6 +129,7 @@ function unlockTntAchievement(player, tntType) {
     // Find achievement name from Achievements structure
     const achievement = Achievements.tnt_individual.find(ach => ach.tntType === tntType);
     const achievementName = achievement ? achievement.name : tntType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const coloredAchievementName = getColoredAchievementName(tntType, achievementName);
 
     // 1 achievement sound
     player.playSound("goe_tnt:discovery_achievement_music"); // 1 achievement sound
@@ -121,9 +143,8 @@ function unlockTntAchievement(player, tntType) {
 
 
     // ACHIEVEMENT MESSAGES /////////
-    utils.actionbar(player, "@s", `§aNew TNT unlocked\n${centerAchievementName(achievementName)}§f`);
-    utils.tellraw(player, "@s", `§aNew TNT unlocked - ${achievementName}§f`);
-    /*     utils.actionbar(player, "@s", `§a Achievement Discovered! §7(${newTotal}/${Achievements.tnt_individual.length + Achievements.milestones.length})`); */
+    utils.actionbar(player, "@s", `§aNew TNT unlocked\n${centerAchievementName(coloredAchievementName)}§f`);
+    utils.tellraw(player, "@s", `§aNew TNT unlocked - ${coloredAchievementName}§f`);
 
     bumpTntHintDelay(player);
 

@@ -454,6 +454,7 @@ export const Achievements = {
             tips: "Place a Directional TNT to dig holes.",
             tntType: "directional_tnt",
             icon: "textures/goe/tnt/ui/achievements/directional_tnt",
+            colorCode: "§6",
             rewardStructure: "goe_tnt:directional_tnt_reward"
         },
         {
@@ -463,6 +464,7 @@ export const Achievements = {
             tips: "Eat cake from the Party TNT.",
             tntType: "party_tnt",
             icon: "textures/goe/tnt/ui/achievements/party_tnt",
+            colorCode: "§d",
             rewardStructure: "goe_tnt:party_tnt_reward"
         },
         {
@@ -472,6 +474,7 @@ export const Achievements = {
             tips: "Pull in dozens of mobs with the Magnet TNT.",
             tntType: "magnet_tnt",
             icon: "textures/goe/tnt/ui/achievements/magnet_tnt",
+            colorCode: "§1",
             rewardStructure: "goe_tnt:magnet_tnt_reward"
         },
         {
@@ -481,6 +484,7 @@ export const Achievements = {
             tips: "Use the Chunk TNT to destroy 1 chunk.",
             tntType: "chunker_tnt",
             icon: "textures/goe/tnt/ui/achievements/chunker_tnt",
+            colorCode: "§4",
             rewardStructure: "goe_tnt:chunker_tnt_reward"
         },
         {
@@ -490,6 +494,7 @@ export const Achievements = {
             tips: "Use the Ultron TNT smartly to avoid dying.",
             tntType: "ultron_tnt",
             icon: "textures/goe/tnt/ui/achievements/ultron_tnt",
+            colorCode: "§e",
             rewardStructure: "goe_tnt:ultron_tnt_reward"
         },
         {
@@ -499,6 +504,7 @@ export const Achievements = {
             tips: "Slow down mobs with the Freezing TNT.",
             tntType: "freezing_tnt",
             icon: "textures/goe/tnt/ui/achievements/freezing_tnt",
+            colorCode: "§9",
             rewardStructure: "goe_tnt:freezing_tnt_reward"
         },
         {
@@ -508,6 +514,7 @@ export const Achievements = {
             tips: "Use the Tree Planter TNT to build a forest.",
             tntType: "tree_planter_tnt",
             icon: "textures/goe/tnt/ui/achievements/tree_planter_tnt",
+            colorCode: "§a",
             rewardStructure: "goe_tnt:tree_planter_tnt_reward"
         },
         {
@@ -517,6 +524,7 @@ export const Achievements = {
             tips: "Charge Creepers using the Thunderstorm TNT.",
             tntType: "thunderstorm_tnt",
             icon: "textures/goe/tnt/ui/achievements/thunderstorm_tnt",
+            colorCode: "§g",
             rewardStructure: "goe_tnt:thunderstorm_tnt_reward"
         },
         {
@@ -526,6 +534,7 @@ export const Achievements = {
             tips: "Remove mobs with the Eraser TNT.",
             tntType: "eraser_tnt",
             icon: "textures/goe/tnt/ui/achievements/eraser_tnt",
+            colorCode: "§u",
             rewardStructure: "goe_tnt:eraser_tnt_reward"
         },
         {
@@ -535,6 +544,7 @@ export const Achievements = {
             tips: "Change the weather using the Weather TNT.",
             tntType: "weather_station_tnt",
             icon: "textures/goe/tnt/ui/achievements/weather_station_tnt",
+            colorCode: "§9",
             rewardStructure: null
         },
         {
@@ -544,6 +554,7 @@ export const Achievements = {
             tips: "Slow everyone down using the Time Freeze TNT.",
             tntType: "time_freeze_tnt",
             icon: "textures/goe/tnt/ui/achievements/time_freeze_tnt",
+            colorCode: "§p",
             rewardStructure: "goe_tnt:time_freezing_tnt_reward"
         },
         {
@@ -553,6 +564,7 @@ export const Achievements = {
             tips: "Kill waves of mobs using the Arrow TNT.",
             tntType: "arrow_tnt",
             icon: "textures/goe/tnt/ui/achievements/arrow_tnt",
+            colorCode: "§n",
             rewardStructure: "goe_tnt:arrow_tnt_reward"
         },
         {
@@ -562,6 +574,7 @@ export const Achievements = {
             tips: "Use the Teleportation TNT to get back to your spawn point.",
             tntType: "teleportation_tnt",
             icon: "textures/goe/tnt/ui/achievements/teleportation_tnt",
+            colorCode: "§5",
             rewardStructure: null
         },
         {
@@ -571,6 +584,7 @@ export const Achievements = {
             tips: "Trap mobs using the Prison TNT.",
             tntType: "prison_tnt",
             icon: "textures/goe/tnt/ui/achievements/prison_tnt",
+            colorCode: "§i",
             rewardStructure: null
         },
         {
@@ -580,6 +594,7 @@ export const Achievements = {
             tips: "Build any vanilla structure using the Structure TNT.",
             tntType: "structure_tnt",
             icon: "textures/goe/tnt/ui/achievements/structure_tnt",
+            colorCode: "§8",
             rewardStructure: null
         },
         {
@@ -589,6 +604,7 @@ export const Achievements = {
             tips: "Use the Daytime TNT to change the daytime.",
             tntType: "daytime_tnt",
             icon: "textures/goe/tnt/ui/achievements/daytime_tnt",
+            colorCode: "§e",
             rewardStructure: "goe_tnt:daytime_tnt_reward"
         },
         {
@@ -598,6 +614,7 @@ export const Achievements = {
             tips: "Heal yourself with the Healing TNT.",
             tntType: "healing_tnt",
             icon: "textures/goe/tnt/ui/achievements/healing_tnt",
+            colorCode: "§q",
             rewardStructure: "goe_tnt:healing_tnt_reward"
         },
         {
@@ -607,6 +624,7 @@ export const Achievements = {
             tips: "Trick hostile mobs using the Villager Decoy TNT.",
             tntType: "villager_decoy_tnt",
             icon: "textures/goe/tnt/ui/achievements/villager_decoy_tnt",
+            colorCode: "§4",
             rewardStructure: "goe_tnt:decoy_tnt_reward"
         },
         {
@@ -616,6 +634,7 @@ export const Achievements = {
             tips: "Release mad bees with the Angry Bee TNT.",
             tntType: "angry_bee_tnt",
             icon: "textures/goe/tnt/ui/achievements/angry_bee_tnt",
+            colorCode: "§n",
             rewardStructure: "goe_tnt:angry_bee_tnt_reward"
         },
         {
@@ -625,6 +644,7 @@ export const Achievements = {
             tips: "Duplicate any mob with a single explosion of the Cloning TNT.",
             tntType: "cloning_tnt",
             icon: "textures/goe/tnt/ui/achievements/cloning_tnt",
+            colorCode: "§e",
             rewardStructure: "goe_tnt:cloning_tnt_reward"
         },
         {
@@ -634,6 +654,7 @@ export const Achievements = {
             tips: "Use the Beacon TNT to gain powerful stats.",
             tntType: "beacon_tnt",
             icon: "textures/goe/tnt/ui/achievements/beacon_tnt",
+            colorCode: "§b",
             rewardStructure: "goe_tnt:beacon_tnt_reward"
         },
         {
@@ -643,6 +664,7 @@ export const Achievements = {
             tips: "Bait Endermen using the Endermite Decoy TNT.",
             tntType: "endermite_decoy_tnt",
             icon: "textures/goe/tnt/ui/achievements/endermite_decoy_tnt",
+            colorCode: "§5",
             rewardStructure: "goe_tnt:endermite_decoy_tnt_reward"
         },
         {
@@ -652,6 +674,7 @@ export const Achievements = {
             tips: "Use the Glass TNT to find valuable ores.",
             tntType: "glass_tnt",
             icon: "textures/goe/tnt/ui/achievements/glass_tnt",
+            colorCode: "§3",
             rewardStructure: "goe_tnt:glass_tnt_reward"
         },
         {
@@ -661,6 +684,7 @@ export const Achievements = {
             tips: "Use the Furnace TNT to get ores and other goodies.",
             tntType: "furnace_tnt",
             icon: "textures/goe/tnt/ui/achievements/furnace_tnt",
+            colorCode: "§6",
             rewardStructure: "goe_tnt:furnace_tnt_reward"
         },
         {
@@ -670,6 +694,7 @@ export const Achievements = {
             tips: "Remove all mobs in the area using the Mob Eraser TNT.",
             tntType: "mob_eraser_tnt",
             icon: "textures/goe/tnt/ui/achievements/mob_eraser_tnt",
+            colorCode: "§4",
             rewardStructure: "goe_tnt:mob_eraser_tnt_reward"
         },
         {
@@ -679,6 +704,7 @@ export const Achievements = {
             tips: " Use the Magma Eraser TNT to remove all the lava around you.",
             tntType: "magma_eraser_tnt",
             icon: "textures/goe/tnt/ui/achievements/magma_eraser_tnt",
+            colorCode: "§6",
             rewardStructure: "goe_tnt:magma_eraser_tnt_reward"
         },
         {
@@ -688,6 +714,7 @@ export const Achievements = {
             tips: "Use the Light TNT to light your way out of dark places.",
             tntType: "light_tnt",
             icon: "textures/goe/tnt/ui/achievements/light_tnt",
+            colorCode: "§a",
             rewardStructure: "goe_tnt:light_tnt_reward"
         },
         {
@@ -697,6 +724,7 @@ export const Achievements = {
             tips: "Get everything in one move with the Thief TNT.",
             tntType: "thief_tnt",
             icon: "textures/goe/tnt/ui/achievements/thief_tnt",
+            colorCode: "§c",
             rewardStructure: "goe_tnt:thief_tnt_reward"
         },
         {
@@ -706,6 +734,7 @@ export const Achievements = {
             tips: "Use Silent TNT to disorientate enemies.",
             tntType: "silent_tnt",
             icon: "textures/goe/tnt/ui/achievements/silent_tnt",
+            colorCode: "§7",
             rewardStructure: "goe_tnt:silent_tnt_reward"
         },
         {
@@ -715,6 +744,7 @@ export const Achievements = {
             tips: "Use Mega Crater TNT only in wide open areas.",
             tntType: "mega_crater_tnt",
             icon: "textures/goe/tnt/ui/achievements/mega_crater_tnt",
+            colorCode: "§6",
             rewardStructure: "goe_tnt:mega_crater_tnt_reward"
         },
         {
@@ -724,6 +754,7 @@ export const Achievements = {
             tips: "Use Knockback TNT to sent mobs flying.",
             tntType: "knockback_tnt",
             icon: "textures/goe/tnt/ui/achievements/knockback_tnt",
+            colorCode: "§a",
             rewardStructure: "goe_tnt:knockback_tnt_reward"
         },
         {
@@ -733,6 +764,7 @@ export const Achievements = {
             tips: "Use it far from builds, there is no wway to recover what it removes.",
             tntType: "void_tnt",
             icon: "textures/goe/tnt/ui/achievements/void_tnt",
+            colorCode: "§8",
             rewardStructure: "goe_tnt:void_tnt_reward"
         },
         {
@@ -742,6 +774,7 @@ export const Achievements = {
             tips: "Light it and run, the strike has a short delay but huge impact.",
             tntType: "orbital_cannon_tnt",
             icon: "textures/goe/tnt/ui/achievements/orbital_cannon_tnt",
+            colorCode: "§c",
             rewardStructure: "goe_tnt:orbital_cannon_tnt_reward"
         },
         {
@@ -751,6 +784,7 @@ export const Achievements = {
             tips: "Bring night vision or torches to survive inside shadow zone.",
             tntType: "shadow_tnt",
             icon: "textures/goe/tnt/ui/achievements/shadow_tnt",
+            colorCode: "§8",
             rewardStructure: "goe_tnt:shadow_tnt_reward"
         },
         {
@@ -760,6 +794,7 @@ export const Achievements = {
             tips: "Use it only with caution, results are impossible to control.",
             tntType: "hacker_tnt",
             icon: "textures/goe/tnt/ui/achievements/hacker_tnt",
+            colorCode: "§a",
             rewardStructure: "goe_tnt:hacker_tnt_reward"
         },
         {
@@ -769,6 +804,7 @@ export const Achievements = {
             tips: "If you want your wrold to look weird, use it.",
             tntType: "glitch_tnt",
             icon: "textures/goe/tnt/ui/achievements/glitch_tnt",
+            colorCode: "§3",
             rewardStructure: "goe_tnt:glitch_tnt_reward"
         },
         {
@@ -778,6 +814,7 @@ export const Achievements = {
             tips: "Use it if you lack of mushroom soups.",
             tntType: "fungi_tnt",
             icon: "textures/goe/tnt/ui/achievements/fungi_tnt",
+            colorCode: "§6",
             rewardStructure: "goe_tnt:fungi_tnt_reward"
         },
         {
@@ -787,6 +824,7 @@ export const Achievements = {
             tips: "Mobs probably wont going to like it.",
             tntType: "snapshot_tnt",
             icon: "textures/goe/tnt/ui/achievements/snapshot_tnt",
+            colorCode: "§8",
             rewardStructure: "goe_tnt:snapshot_tnt_reward"
         },
         {
@@ -796,6 +834,7 @@ export const Achievements = {
             tips: "Activate it near cliffs or over water for funny results.",
             tntType: "balloon_tnt",
             icon: "textures/goe/tnt/ui/achievements/balloon_tnt",
+            colorCode: "§3",
             rewardStructure: "goe_tnt:balloon_tnt_reward"
         },
         {
@@ -805,6 +844,7 @@ export const Achievements = {
             tips: "Use on flat terrain to clearly see the full effect.",
             tntType: "matrix_tnt",
             icon: "textures/goe/tnt/ui/achievements/matrix_tnt",
+            colorCode: "§a",
             rewardStructure: "goe_tnt:matrix_tnt_reward"
         },
         {
@@ -814,6 +854,7 @@ export const Achievements = {
             tips: "Perfect for clearing oceans or flooded caves quickly.",
             tntType: "water_eraser_tnt",
             icon: "textures/goe/tnt/ui/achievements/water_eraser_tnt",
+            colorCode: "§9",
             rewardStructure: "goe_tnt:water_eraser_tnt_reward"
         },
         {
@@ -823,6 +864,7 @@ export const Achievements = {
             tips: "Pick a smart direction to run after igniting it.",
             tntType: "proxy_tnt",
             icon: "textures/goe/tnt/ui/achievements/proxy_tnt",
+            colorCode: "§c",
             rewardStructure: "goe_tnt:proxy_tnt_reward"
         },
         {
@@ -832,6 +874,7 @@ export const Achievements = {
             tips: "Use it to damage mobs without destroying terrain.",
             tntType: "sound_tnt",
             icon: "textures/goe/tnt/ui/achievements/sound_tnt",
+            colorCode: "§3",
             rewardStructure: "goe_tnt:sound_tnt_reward"
         },
         {
@@ -841,6 +884,7 @@ export const Achievements = {
             tips: "Experiment with different blocks.",
             tntType: "specialized_tnt",
             icon: "textures/goe/tnt/ui/achievements/specialized_tnt",
+            colorCode: "§6",
             rewardStructure: "goe_tnt:specialized_tnt_reward"
         }
     ],

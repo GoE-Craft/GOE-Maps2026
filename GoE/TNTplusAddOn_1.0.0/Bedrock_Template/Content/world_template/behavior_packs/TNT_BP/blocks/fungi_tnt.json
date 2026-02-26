@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eFungi TNT§f\nCovers the area with mushrooms and mycelium.§r",
+      "minecraft:display_name": "§6Fungi TNT§f\nCovers the area with mushrooms and mycelium.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
