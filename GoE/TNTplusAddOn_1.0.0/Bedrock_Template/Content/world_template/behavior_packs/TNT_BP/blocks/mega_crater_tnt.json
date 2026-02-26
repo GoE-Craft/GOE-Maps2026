@@ -24,7 +24,6 @@
       "minecraft:display_name": "§eMega Crater TNT§f\nCreates a massive crater far bigger than normal TNT.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
       "minecraft:geometry": "geometry.mega_crater_tnt",
       "minecraft:material_instances": { "*": { "texture": "mega_crater_tnt", "render_method": "alpha_test", "face_dimming": true} },

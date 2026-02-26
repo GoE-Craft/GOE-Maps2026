@@ -275,7 +275,7 @@ function incrementBoostLevel(block, player) {
     player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${visibleBoostLevel}§o`);
     player.playSound("random.pop", location);
     location.y += 1;
-    block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location);
+/*     block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location); */
 }
 
 export function getBoostEntity(location, dimension) {

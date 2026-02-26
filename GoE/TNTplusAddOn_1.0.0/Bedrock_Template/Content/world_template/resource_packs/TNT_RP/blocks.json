@@ -2,5 +2,137 @@
     "format_version": "1.21.40",
     "goe_tnt:tnt": {
         "sound": "grass"
+    },
+    "goe_tnt:angry_bee_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:arrow_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:balloon_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:beacon_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:chunker_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:cloning_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:daytime_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:directional_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:endermite_decoy_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:eraser_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:freezing_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:fungi_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:furnace_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:glass_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:glitch_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:hacker_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:healing_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:knockback_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:light_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:magma_eraser_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:magnet_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:matrix_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:mega_crater_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:mob_eraser_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:orbital_cannon_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:party_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:prison_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:proxy_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:shadow_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:silent_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:snapshot_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:sound_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:specialized_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:structure_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:teleportation_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:thief_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:thunderstorm_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:time_freeze_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:tree_planter_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:ultron_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:villager_decoy_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:void_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:water_eraser_tnt": {
+        "sound": "grass"
+    },
+    "goe_tnt:weather_station_tnt": {
+        "sound": "grass"
     }
 }

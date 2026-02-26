@@ -24,7 +24,6 @@
       "minecraft:display_name": "§eProxy TNT§f\nLaunches small TNT blocks when exploded.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.proxy_tnt",
       "minecraft:material_instances": { "*": { "texture": "proxy_tnt", "render_method": "alpha_test" } },

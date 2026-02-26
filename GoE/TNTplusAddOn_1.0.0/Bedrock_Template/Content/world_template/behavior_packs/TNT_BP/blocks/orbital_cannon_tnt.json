@@ -24,7 +24,6 @@
       "minecraft:display_name": "§eOrbital Cannon TNT§f\nFires a powerful beam from the sky that obliterates the target area.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.orbital_cannon_tnt",
       "minecraft:material_instances": { "*": { "texture": "orbital_cannon_tnt", "render_method": "alpha_test" } },

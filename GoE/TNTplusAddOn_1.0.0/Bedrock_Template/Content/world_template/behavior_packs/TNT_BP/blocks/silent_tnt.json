@@ -24,7 +24,6 @@
       "minecraft:display_name": "§eSilent TNT§f\nExplodes without making any sound.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
       "minecraft:geometry": "geometry.silent_tnt_block",
       "minecraft:material_instances": { "*": { "texture": "silent_tnt", "render_method": "alpha_test", "face_dimming": true} },

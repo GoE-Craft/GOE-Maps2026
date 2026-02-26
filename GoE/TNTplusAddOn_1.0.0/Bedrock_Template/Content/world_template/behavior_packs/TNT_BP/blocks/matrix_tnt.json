@@ -24,7 +24,6 @@
       "minecraft:display_name": "§eMatrix TNT§f\nSpawns wandering Matrix mobs that explode after spreading out.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.matrix_tnt_block",
       "minecraft:material_instances": { "*": { "texture": "matrix_tnt", "render_method": "blend" } },

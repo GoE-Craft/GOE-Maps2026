@@ -25,7 +25,6 @@
       "minecraft:display_name": "§qHealing TNT§f\nHeals everyone in nearby range!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.healing_tnt",
       "minecraft:material_instances": { "*": { "texture": "healing_tnt", "render_method": "alpha_test" } },

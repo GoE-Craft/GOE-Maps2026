@@ -24,7 +24,6 @@
       "minecraft:display_name": "§4Mob Eraser TNT§f\nErase all nearby mobs in the blast area!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.mob_eraser_tnt_block",
       "minecraft:material_instances": { "*": { "texture": "mob_eraser_tnt", "render_method": "alpha_test" } },

@@ -24,7 +24,6 @@
       "minecraft:display_name": "§nAngry Bee TNT§f\nRelease angry bees at enemies!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
-      "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
       "minecraft:geometry": "geometry.angry_bee_tnt",
       "minecraft:material_instances": { "*": { "texture": "angry_bee_tnt", "render_method": "alpha_test" } },
