@@ -241,9 +241,9 @@ function incrementBoostLevel(block, player) {
         player.playSound("goe_tnt:tnt_maxed_out", player.location);
         return;
     }
-
+ 
     const location = block.center();
-    
+
     let entity = getBoostEntity(location, block.dimension);
     if (!entity || entity.typeId !== "goe_tnt:tnt_boost_level") {
         entity = spawnBoostLevelEntity(block);
@@ -251,6 +251,7 @@ function incrementBoostLevel(block, player) {
 
     const targetCharge = Math.min(chargeLevel + 1, 4);
     block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
+    block.dimension.spawnParticle("goe_tnt:charge_arrows", location);
     entity.triggerEvent(`goe_tnt:boost_${targetCharge}`);
     // Color codes: 1=§e, 2=§6, 3=§c, 4=§4
     let color;
