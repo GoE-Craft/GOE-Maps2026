@@ -38,7 +38,8 @@
 				"land_sound": "goe_tnt:mecha_suit_land_sound",
 				"spawn_sound": "goe_tnt:mecha_suit_spawn_sound",
 				"fly_sound": "goe_tnt:mecha_suit_fly_sound",
-				"mount_sound": "goe_tnt:mecha_suit_mount_sound"
+				"mount_sound": "goe_tnt:mecha_suit_mount_sound",
+				"dismount_sound": "goe_tnt:mecha_suit_dismount_sound"
 			},
 			"animations": {
 				"controller.mecha_suit": "controller.animation.goe.tnt.mecha_suit",

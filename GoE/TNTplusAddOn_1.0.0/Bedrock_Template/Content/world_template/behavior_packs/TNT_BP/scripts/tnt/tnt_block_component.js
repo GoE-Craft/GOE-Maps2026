@@ -71,14 +71,14 @@ function handleTimer(block, player) {
     if (timer === 12) {
         // keep max (120s), just notify
         player.onScreenDisplay.setActionBar(`§r§c§oMax timer reached§o`);
-        player.playSound(`block.copper_bulb.turn_off`, player.location);
+        player.playSound(`goe_tnt:tnt_timer_max`, block.location);
         return;
     }
 
     const targetState = timer + 1;
     block.setPermutation(block.permutation.withState("goe_tnt:timer", targetState));
     player.onScreenDisplay.setActionBar(`§oTNT Timer: §a${targetState * 10}§o\n§r§c§oUse Flint and Steel, TNT Detonator, or any other way to activate.§o`);
-    player.playSound(`block.copper_bulb.turn_on`, player.location);
+    player.playSound(`goe_tnt:tnt_timer_added`, block.location);
     const location = block.center();
     location.y += 0.5;
     block.dimension.spawnParticle(`goe_tnt:timer_on`, location);
@@ -269,7 +269,7 @@ function incrementBoostLevel(block, player) {
     block.dimension.spawnParticle(particleId, location);
     const visibleBoostLevel = targetCharge + 1;
     player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${visibleBoostLevel}§o`);
-    player.playSound("random.pop", location);
+    player.playSound("goe_tnt:tnt_boost", location);
     location.y += 1;
     /*     block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location); */
 }

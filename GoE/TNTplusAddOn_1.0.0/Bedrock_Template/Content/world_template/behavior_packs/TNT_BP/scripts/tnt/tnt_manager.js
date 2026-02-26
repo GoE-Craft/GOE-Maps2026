@@ -174,7 +174,7 @@ function startCountdown(entity, timerRemaining, tntData, chargeLevel) {
     dim.spawnParticle(`goe_tnt:timer_particle_${initialTimer}`, location);
 
     // beep sound on timer start
-    playSoundsForPlayers(location, dim, "random.click", 0.3, 1.5, 10);
+    playSoundsForPlayers(location, dim, "goe_tnt:tnt_timer", 0.3, 1.5, 10);
 
     let lastBeepSecond = -1;
 
@@ -208,7 +208,7 @@ function startCountdown(entity, timerRemaining, tntData, chargeLevel) {
                 if (shouldBeep) {
                     lastBeepSecond = seconds;
 
-                    let soundEffect = "random.click";
+                    let soundEffect = "goe_tnt:tnt_timer";
                     let soundPitch = 0.3;
                     let soundVolume = 1.5;
 

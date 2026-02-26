@@ -1,4 +1,4 @@
-import { world, system, ItemStack, InputButton, ButtonState } from "@minecraft/server";
+import { world, system, ItemStack, InputButton, ButtonState, GameMode } from "@minecraft/server";
 import * as tnt_manager from "./tnt/tnt_manager.js";
 import * as tnt_gld from "./gld/tnt_gld.js";
 import * as utils from "./utils.js";
@@ -962,7 +962,10 @@ function setupMechaRidingModeLock() {
 				}
 
 				if (previousGameMode) {
-					try { player.runCommand(`gamemode ${previousGameMode}`); } catch { }
+					try { 
+						player.runCommand(`gamemode ${previousGameMode}`);
+						player.playSound("goe_tnt:mecha_suit_dismount_sound", { volume: 1, pitch: 1 });
+					} catch { }
 				}
 
 				previousGameModeByPlayer.delete(player.id);
@@ -1064,11 +1067,9 @@ function registerButtonInput(event) {
 	const state = event.newButtonState;
 
 	if (state === ButtonState.Pressed) {
-		console.log("Jump button pressed while riding mecha");
 		playerMechaFlyMap.set(player.id, riding.id);
 		riding.setProperty("goe_tnt:is_flying", true);
 	} else if (state === ButtonState.Released) {
-		console.log("Jump button released while riding mecha");
 		playerMechaFlyMap.delete(player.id);
 		riding.setProperty("goe_tnt:is_flying", false);
 	}
@@ -1090,7 +1091,9 @@ function upgradeMechaOnItemUseOn(event) {
 	console.log("Upgrading mecha for player:", player.name);
 	system.run(() => {
 		mecha.triggerEvent("goe_tnt:equip_elytra");
-		utils.setItemInHand(player, undefined);
+		player.playSound("goe_tnt:mecha_suit_upgrade_sound", { volume: 1, pitch: 1 });
+		if (player.getGameMode() !== GameMode.Creative) 
+			utils.setItemInHand(player, undefined);
 	});
 	event.cancel = true;
 }
@@ -1107,13 +1110,18 @@ function* flyJob() {
 		const mecha = world.getEntity(mechaId);
 		const player = world.getEntity(playerId);
 
-		if (!mecha || !mecha.isValid || !player || !player.isValid) {
+		let notValid = !mecha || !mecha.isValid || !player || !player.isValid;
+		const hasRider = mecha?.getComponent("minecraft:rideable")?.getRiders()?.length > 0;
+		if (notValid || !hasRider) {
+			notValid = true;
+		}
+
+		if (notValid) {
 			playerMechaFlyMap.delete(playerId);
 			continue;
 		}
 		
         const input = player.inputInfo.getMovementVector();
-		console.log(JSON.stringify(input));
 
 		const rot = mecha.getRotation();
         const yaw = (rot.y * Math.PI) / 180;
@@ -1131,6 +1139,7 @@ function* flyJob() {
 		};
 		try {
 			mecha.applyImpulse(impulse);
+			player.playSound("goe_tnt:mecha_suit_fly_sound", { volume: 0.5, pitch: 1 });
 		} catch (error) {
 			console.log("Failed to apply impulse to mecha for player:", player.name, "Error:", error);
 		}
