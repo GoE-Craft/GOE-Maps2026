@@ -1,6 +1,4 @@
 ﻿pack.name=TNT+ Add-On
-pack.description=TNT+ Add-On Resource Pack
-
 action.hint.exit.goe_tnt:mecha_suit=§6[Hint] Hold any TNT block in your hand and interact to launch it.\n 
 
 entity.goe_tnt:mecha_suit.name=Mecha Suit
@@ -50,3 +48,5 @@ entity.goe_tnt:water_eraser_tnt.name=Water Eraser TNT
 entity.goe_tnt:proxy_tnt.name=Proxy TNT
 entity.goe_tnt:sound_tnt.name=Sound TNT
 entity.goe_tnt:specialized_tnt.name=Specialized TNT
+
+pack.description=Add over §440+ EPIC TNTs§f to your own world with §4TNT+ Add-On!§f\n\nUnleash §4MASSIVE EXPLOSIONS§f, use advanced detonation tech, pilot a §4MECHA SUIT§f, and §4DEMOLISH§f everything in your way!
