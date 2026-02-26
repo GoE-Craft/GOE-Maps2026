@@ -1,4 +1,6 @@
 import { system } from "@minecraft/server";
+import * as tnt_manager from "../tnt_manager";
+import * as tnt_gld from "../../gld/tnt_gld";
 
 export function* proxyTNTAction(dimension, chargeLevel, location, entity) {
 
@@ -8,35 +10,45 @@ export function* proxyTNTAction(dimension, chargeLevel, location, entity) {
 
     const spawnPos = { x: cx + 0.5, y: cy + 1.5, z: cz + 0.5 };
 
-    const miniCount = 10;
+    // Amount scales with charge level, base 10 + 2 per charge level
+    const extraCount = 10 + (chargeLevel * 2);
 
-    const minHorizontalStrength = 0.5;
-    const maxHorizontalStrength = 2;
+    const minHorizontalStrength = 0.3;
+    const maxHorizontalStrength = 0.6;
+    const minVerticalStrength = 0.1;
+    const maxVerticalStrength = 0.2;
 
-    const minis = [];
-
-    for (let i = 0; i < miniCount; i++) {
+    for (let i = 0; i < extraCount; i++) {
         try {
+            // Get TNT data for goe_tnt:tnt
+            const tntData = tnt_gld.getTntDataByBlockId("goe_tnt:tnt");
+            if (!tntData) continue;
 
-            // temporary test: spawn cows
-            const ent = dimension.spawnEntity("minecraft:cow", spawnPos);
+            // Random fuse between 1 and 2 seconds (20-40 ticks)
+            const fuseTicks = 20 + Math.floor(Math.random() * 21);
 
+            // Random impulse
             const angle = Math.random() * Math.PI * 2;
-
             const horizontalStrength = minHorizontalStrength + Math.random() * (maxHorizontalStrength - minHorizontalStrength);
-
+            const verticalStrength = minVerticalStrength + Math.random() * (maxVerticalStrength - minVerticalStrength);
             const impulse = {
                 x: Math.cos(angle) * horizontalStrength,
-                y: 0.55 + Math.random() * 0.35,
+                y: verticalStrength,
                 z: Math.sin(angle) * horizontalStrength
             };
 
-            try { ent.applyImpulse(impulse); } catch {}
-
-            try { ent.applyKnockback(Math.cos(angle), Math.sin(angle), horizontalStrength * 0.6, 0.2); } catch {}
-
-            minis.push(ent);
-
+            // Spawn TNT with default charge (not scaled)
+            tnt_manager.igniteTNT(
+                spawnPos,
+                0, // chargeLevel for spawned TNT (not scaled)
+                0, // timerDuration (no delay)
+                fuseTicks,
+                tntData,
+                dimension.id,
+                impulse,
+                undefined, // spawnYaw
+                undefined  // player
+            );
         } catch {}
     }
 
