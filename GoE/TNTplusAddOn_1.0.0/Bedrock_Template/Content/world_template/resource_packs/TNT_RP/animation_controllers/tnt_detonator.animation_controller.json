@@ -6,15 +6,18 @@
 			"states" : {
 				"default" : {
 					"transitions": [
-                        {"push": "q.cooldown_time_remaining('item_use') > 0"}
-                    ]
+            {"push": "q.cooldown_time_remaining('item_use') > 0"}
+          ]
 				},
 				"push" : {
-					"animations" : [ "push" ],
+					"animations" : [ 
+						"push", 
+						"push_wave",
+						"push_pulse"
+					],
 					"transitions" : [
 						{ "default": "q.cooldown_time_remaining('item_use') <= 0 && q.all_animations_finished" }
-					],
-					"blend_transition" : 0.1
+					]
 				}
 			}
 		}

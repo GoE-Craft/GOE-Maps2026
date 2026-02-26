@@ -22,12 +22,26 @@
 			}
 		},
 		"animation.tnt_detonator.push": {
+			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
 				"button": {
 					"position": {
 						"0.0": [0, 0, 0],
-						"0.1667": [0, -0.75, 0]
+						"0.05": {
+							"pre": [0, -0.75, 0],
+							"post": [0, -0.75, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.35": {
+							"post": [0, -0.75, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.45": {
+							"post": [0, 0, 0],
+							"lerp_mode": "catmullrom"
+						},
+						"0.5": [0, 0, 0]
 					}
 				}
 			},
@@ -44,6 +58,79 @@
 						"pre_effect_script": "variable.direction = -1;"
 					}
 				]
+			}
+		},
+		"animation.tnt_detonator.push_wave": {
+			"animation_length": 0.5,
+			"bones": {
+				"signal": {
+					"scale": {
+						"0.0": [0, 0, 0],
+						"0.3": {
+							"pre": [1, 1, 1],
+							"post": [1, 1, 1],
+							"lerp_mode": "catmullrom"
+						},
+						"0.4": {
+							"post": [1, 1, 1],
+							"lerp_mode": "catmullrom"
+						},
+						"0.5": [0, 0, 0]
+					}
+				},
+				"signals": {
+					"scale": 10
+				},
+				"signal3": {
+					"rotation": [0, "-q.anim_time * 500 - 45", 0],
+					"position": [0, -0.025, 0],
+					"scale": {
+						"0.0": [0, 0, 0],
+						"0.1": [0, 0, 0],
+						"0.4": [3, 3, 3],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"signal4": {
+					"rotation": [0, "-q.anim_time * 360", 0],
+					"position": [0, 0.05, 0],
+					"scale": {
+						"0.0": [0, 0, 0],
+						"0.2": [0, 0, 0],
+						"0.5": [3, 3, 3]
+					}
+				},
+				"signal2": {
+					"rotation": [0, "-q.anim_time * 360 - 30", 0],
+					"scale": {
+						"0.0": [0, 0, 0],
+						"0.3": [3, 3, 3],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"top": {
+					"scale": 1.2
+				}
+			}
+		},
+		"animation.tnt_detonator.push_pulse": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.5,
+			"bones": {
+				"top": {
+					"scale": 1.2
+				},
+				"signal_laser": {
+					"rotation": ["31.0964255185 * c.is_first_person", "-56.0150124636 * c.is_first_person", "40.8668186851 * c.is_first_person"],
+					"position": [0, 0, -0.525],
+					"scale": {
+						"0.0": [0, 0, 0],
+						"0.1": [1, 1, 480]
+					}
+				},
+				"signal_laser_parent": {
+					"rotation": ["v.look_at_x + 25*!c.is_first_person", "v.look_at_y", 0]
+				}
 			}
 		}
 	}
