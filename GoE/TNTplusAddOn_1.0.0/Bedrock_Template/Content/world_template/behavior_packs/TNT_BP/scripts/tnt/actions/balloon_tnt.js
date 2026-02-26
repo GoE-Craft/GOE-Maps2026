@@ -1,7 +1,7 @@
 import { system, BlockPermutation } from "@minecraft/server";
 
 export function* balloonTNTAction(dimension, chargeLevel, location, entity) {
-    const baseRadius = 3;
+/*     const baseRadius = 3;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
     const airPerm = BlockPermutation.resolve("minecraft:air");
@@ -38,7 +38,7 @@ export function* balloonTNTAction(dimension, chargeLevel, location, entity) {
         }, delayTicks);
     }
 
-    yield;
+    yield; */
 }
 
 function rotateOffsetYaw(off, yawRad) {

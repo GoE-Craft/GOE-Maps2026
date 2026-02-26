@@ -646,7 +646,7 @@ async function showAchievementDetailsPage(player, achievement, backCallback) {
     if (achievement.milestoneNumber !== undefined) {
         body = `§f${achievement.info || ""}\n\n`;
     } else if (achievement.tntType) {
-        body = `§fUse "${achievement.name || ""}" once to unlock this achievement.\n\n`;
+        body = `§fUse the "${achievement.name || ""}" once to unlock this achievement.\n\n`;
     } else {
         body = `§f${achievement.info || achievement.name || ""}\n\n`;
     }
