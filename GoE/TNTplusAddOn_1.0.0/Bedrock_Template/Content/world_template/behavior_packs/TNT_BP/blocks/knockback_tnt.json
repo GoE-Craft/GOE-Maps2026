@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eKnockback TNT§f\nKnocks back all enemies!§r",
+      "minecraft:display_name": "§eKnockback TNT§f\nLaunches mobs far away instead of destroying blocks.!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

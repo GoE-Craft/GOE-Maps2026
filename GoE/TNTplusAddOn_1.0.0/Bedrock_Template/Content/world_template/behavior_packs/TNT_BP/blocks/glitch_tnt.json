@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eGlitch TNT§f\nDoes uncontrolled explosions!§r",
+      "minecraft:display_name": "§eGlitch TNT§f\nDistorts blocks and entities in unpredictable ways.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

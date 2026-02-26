@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eSilent TNT§f\nSilent Explosion!§r",
+      "minecraft:display_name": "§eSilent TNT§f\nExplodes without making any sound.§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

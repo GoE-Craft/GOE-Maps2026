@@ -22,7 +22,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eShadow TNT§f\nBlind your enemies in the blast area!§r",
+      "minecraft:display_name": "§eShadow TNT§f\nSpreads darkness and damages nearby mobs after exploding.!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },
