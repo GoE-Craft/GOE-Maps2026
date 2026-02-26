@@ -23,7 +23,7 @@
 			},
 			"minecraft:cooldown": {
 				"category": "item_use",
-				"duration": 0.2
+				"duration": 0.5
 			},
 			"goe_tnt:tnt_detonator": {
 				"range": 30,

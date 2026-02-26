@@ -227,7 +227,7 @@ function printTimer(dimension, location, time) {
     const chargeLevel = block.permutation.getState("goe_tnt:charge_level") ?? 0;
 
     const tntData = tnt_gld.getTntDataByBlockId(block.typeId);
-    
+
     const blockHeight = (tntData?.blockHeight ?? 2) + (chargeLevel * 0.1); // Raise timer display higher for boosted TNT
 
     dimension.spawnParticle(`goe_tnt:timer_particle`, { x: location.x + 0.5, y: location.y + blockHeight, z: location.z + 0.5 });
@@ -241,7 +241,7 @@ function incrementBoostLevel(block, player) {
         player.playSound("goe_tnt:tnt_maxed_out", player.location);
         return;
     }
- 
+
     const location = block.center();
 
     let entity = getBoostEntity(location, block.dimension);
@@ -251,50 +251,46 @@ function incrementBoostLevel(block, player) {
 
     const targetCharge = Math.min(chargeLevel + 1, 4);
     block.setPermutation(block.permutation.withState("goe_tnt:charge_level", targetCharge));
-    block.dimension.spawnParticle("goe_tnt:charge_arrows", location);
     entity.triggerEvent(`goe_tnt:boost_${targetCharge}`);
-    // Color codes: 1=§e, 2=§6, 3=§c, 4=§4
-    let color;
-    switch (targetCharge) {
-        case 1:
-            color = "§e"; // yellow
-            break;
-        case 2:
-            color = "§6"; // orange
-            break;
-        case 3:
-            color = "§c"; // red
-            break;
-        case 4:
-            color = "§4"; // Dark Red
-            break;
-        default:
-            color = "§a"; // Green fallback
-    }
+
+    // Match each boost level to its dedicated particle (identifiers use underscores)
+    const chargeParticles = [
+        "goe_tnt:charge_arrows_1",
+        "goe_tnt:charge_arrows_2",
+        "goe_tnt:charge_arrows_3",
+        "goe_tnt:charge_arrows_4",
+    ];
+
+    const colors = ["§e", "§6", "§c", "§4"]; // 1=yellow, 2=orange, 3=red, 4=dark red
+
+    const particleId = chargeParticles[targetCharge - 1] ?? chargeParticles[0];
+    const color = colors[targetCharge - 1] ?? "§a";
+
+    block.dimension.spawnParticle(particleId, location);
     const visibleBoostLevel = targetCharge + 1;
     player.onScreenDisplay.setActionBar(`§oTNT boost Level: ${color}${visibleBoostLevel}§o`);
     player.playSound("random.pop", location);
     location.y += 1;
-/*     block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location); */
+    /*     block.dimension.spawnParticle(`minecraft:critical_hit_emitter`, location); */
 }
 
 export function getBoostEntity(location, dimension) {
-    const entity = dimension.getEntities({closest: 1, location: location, maxDistance: 0.5, type: "goe_tnt:tnt_boost_level"})[0];
+    const entity = dimension.getEntities({ closest: 1, location: location, maxDistance: 0.5, type: "goe_tnt:tnt_boost_level" })[0];
     return entity;
 }
 
 export function spawnBoostLevelEntity(block) {
     const location = block.center();
-    
+
     const gld = tnt_gld.getTntDataByBlockId(block.typeId);
     const typeId = gld.tntType;
 
-    const entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", {x: location.x, y: location.y - 0.5, z: location.z});
+    const entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", { x: location.x, y: location.y - 0.5, z: location.z });
     entity.setProperty("goe_tnt:tnt_type", typeId);
 
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const yaw = utils.getYawFromFace(direction);
-    entity.setRotation({x: 0, y: yaw});
+    entity.setRotation({ x: 0, y: yaw });
 
     return entity;
 }
