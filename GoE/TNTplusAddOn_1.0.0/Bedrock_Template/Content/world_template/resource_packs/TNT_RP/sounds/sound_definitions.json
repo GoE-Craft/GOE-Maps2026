@@ -718,6 +718,158 @@
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/thief_tnt/tnt_thief_explode", "volume": 1 }
 			]
+		},
+		// Balloon TNT
+		"goe_tnt:balloon_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/balloon_tnt/tnt_balloon_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:balloon_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/balloon_tnt/tnt_balloon_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:balloon_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/balloon_tnt/tnt_balloon_explode", "volume": 1 }
+			]
+		},
+		// Fungi TNT
+		"goe_tnt:fungi_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/fungi_tnt/tnt_fungi_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:fungi_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/fungi_tnt/tnt_fungi_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:fungi_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/fungi_tnt/tnt_fungi_explode", "volume": 1 }
+			]
+		},
+		// Knockback TNT
+		"goe_tnt:knockback_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/knockback_tnt/tnt_knockback_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:knockback_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/knockback_tnt/tnt_knockback_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:knockback_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/knockback_tnt/tnt_knockback_explode", "volume": 1 }
+			]
+		},
+		// Matrix TNT
+		"goe_tnt:matrix_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/matrix_tnt/tnt_matrix_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:matrix_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/matrix_tnt/tnt_matrix_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:matrix_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/matrix_tnt/tnt_matrix_explode", "volume": 1 }
+			]
+		},
+		// Proxy TNT
+		"goe_tnt:proxy_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/proxy_tnt/tnt_proxy_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:proxy_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/proxy_tnt/tnt_proxy_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:proxy_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/proxy_tnt/tnt_proxy_explode", "volume": 1 }
+			]
+		},
+		// Snapshot TNT
+		"goe_tnt:snapshot_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/snapshot_tnt/tnt_snapshot_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:snapshot_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/snapshot_tnt/tnt_snapshot_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:snapshot_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/snapshot_tnt/tnt_snapshot_explode", "volume": 1 }
+			]
+		},
+		// Sound TNT
+		"goe_tnt:sound_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:sound_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:sound_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_explode", "volume": 1 }
+			]
+		},
+		// Water Eraser TNT
+		"goe_tnt:water_eraser_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/water_eraser_tnt/tnt_water_eraser_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:water_eraser_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/water_eraser_tnt/tnt_water_eraser_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:water_eraser_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/water_eraser_tnt/tnt_water_eraser_explode", "volume": 1 }
+			]
 		}
 	}
 }

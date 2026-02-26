@@ -1012,11 +1012,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:matrix_tnt_fuse",
             soundDelay: 0
         },
+        chargeEffects: {
+            soundEffect: "goe_tnt:matrix_tnt_charging",
+            soundDelay: 5
+        },
         explosionEffects: {
-            soundEffect: "random.explode",
+            soundEffect: "goe_tnt:matrix_tnt_explode",
             explosionAnimationLength: 1.5,
         },
         explosionProperties: {
@@ -1040,10 +1044,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:balloon_tnt_fuse",
             soundDelay: 0
         },
+        chargeEffects: {
+            soundEffect: "goe_tnt:balloon_tnt_charging",
+            soundDelay: 5
+        },
         explosionEffects: {
+            soundEffect: "goe_tnt:balloon_tnt_explode",
             explosionAnimationLength: 1.5
         },
         explosionProperties: {
@@ -1067,10 +1076,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:water_eraser_tnt_fuse",
             soundDelay: 0
         },
+        chargeEffects: {
+            soundEffect: "goe_tnt:water_eraser_tnt_charging",
+            soundDelay: 5
+        },
         explosionEffects: {
+            soundEffect: "goe_tnt:water_eraser_tnt_explode",
             explosionAnimationLength: 1.5
         },
         explosionProperties: {
@@ -1094,15 +1108,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:proxy_tnt_fuse",
             soundDelay: 0
         },
         chargeEffects: {
-            soundEffect: "goe_tnt:proxy_tnt_charge",
-            soundDelay: 0
+            soundEffect: "goe_tnt:proxy_tnt_charging",
+            soundDelay: 5
         },
         explosionEffects: {
-            soundEffect: "goe_tnt:proxy_tnt_explosion",
+            soundEffect: "goe_tnt:proxy_tnt_explode",
             explosionAnimationLength: 2
         },
         explosionProperties: {
@@ -1221,10 +1235,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:knockback_tnt_fuse",
             soundDelay: 0
         },
+        chargeEffects: {
+            soundEffect: "goe_tnt:knockback_tnt_charging",
+            soundDelay: 5
+        },
         explosionEffects: {
+            soundEffect: "goe_tnt:knockback_tnt_explode",
             explosionAnimationLength: 1
         },
         explosionProperties: {
@@ -1248,11 +1267,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:fungi_tnt_fuse",
             soundDelay: 0
         },
+        chargeEffects: {
+            soundEffect: "goe_tnt:fungi_tnt_charging",
+            soundDelay: 5
+        },
         explosionEffects: {
-            soundEffect: "goe_tnt:shadow_tnt_explosion",
+            soundEffect: "goe_tnt:fungi_tnt_explode",
             explosionAnimationLength: 2
         },
         explosionProperties: {
@@ -1276,13 +1299,17 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:snapshot_tnt_fuse",
             soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:snapshot_tnt_charging",
+            soundDelay: 5
         },
         explosionEffects: {
             particleEffect: "goe_tnt:big_explosion_white",
             particleDelay: 0,
-            soundEffect: "random.explode",
+            soundEffect: "goe_tnt:snapshot_tnt_explode",
             soundDelay: 0
         },
         explosionProperties: {
@@ -1306,10 +1333,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "random.fuse",
+            soundEffect: "goe_tnt:sound_tnt_fuse",
             soundDelay: 0
         },
+        chargeEffects: {
+            soundEffect: "goe_tnt:sound_tnt_charging",
+            soundDelay: 5
+        },
         explosionEffects: {
+            soundEffect: "goe_tnt:sound_tnt_explode",
             explosionAnimationLength: 2
         },
         explosionProperties: {
