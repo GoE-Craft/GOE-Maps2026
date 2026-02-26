@@ -1,194 +1,35 @@
 import { system, BlockPermutation, MolangVariableMap, world } from "@minecraft/server";
 import * as tnt_actions from "../tnt_actions";
 
-// Store respawn point when player right-clicks a bed
-export function registerRespawnStorage() {
-    world.afterEvents.playerInteractWithBlock.subscribe((event) => {
-        try {
-            const player = event.player;
-            const interactedBlock = event.block;
-
-            if (!player || !interactedBlock || !player.isValid) return;
-
-            const blockTypeId = interactedBlock.typeId || "";
-            if (!blockTypeId.endsWith("_bed")) return;
-
-            const blockPermutation = interactedBlock.permutation;
-            const bedPart = blockPermutation.getState("minecraft:bed_part");
-            const facingDirection = blockPermutation.getState("minecraft:facing_direction");
-
-            const facingToOffset = {
-                2: { x: 0, z: 1 },
-                3: { x: 0, z: -1 },
-                4: { x: 1, z: 0 },
-                5: { x: -1, z: 0 }
-            };
-
-            const facingOffset = facingToOffset[facingDirection];
-            if (!facingOffset) return;
-
-            let otherBedHalfLocation;
-
-            if (bedPart === "head") {
-                otherBedHalfLocation = {
-                    x: interactedBlock.location.x - facingOffset.x,
-                    y: interactedBlock.location.y,
-                    z: interactedBlock.location.z - facingOffset.z
-                };
-            } else {
-                otherBedHalfLocation = {
-                    x: interactedBlock.location.x + facingOffset.x,
-                    y: interactedBlock.location.y,
-                    z: interactedBlock.location.z + facingOffset.z
-                };
-            }
-
-            const bedCenterLocation = {
-                x: (interactedBlock.location.x + otherBedHalfLocation.x) / 2 + 0.5,
-                y: interactedBlock.location.y,
-                z: (interactedBlock.location.z + otherBedHalfLocation.z) / 2 + 0.5
-            };
-
-            player.setDynamicProperty("goe_tnt_respawn_x", bedCenterLocation.x);
-            player.setDynamicProperty("goe_tnt_respawn_y", bedCenterLocation.y);
-            player.setDynamicProperty("goe_tnt_respawn_z", bedCenterLocation.z);
-            player.setDynamicProperty("goe_tnt_respawn_dim", player.dimension.id);
-
-        } catch {}
-    });
-}
-
 // Teleportation TNT Action
 export function* teleportationTNTAction(dimension, chargeLevel, location, tntEntity) {
 
     const baseRadius = 8;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
 
-    const explosionLocation = {
-        x: Number(location?.x ?? 0),
-        y: Number(location?.y ?? 0),
-        z: Number(location?.z ?? 0)
-    };
-
-    yield;
-
-    // Resolve activating player
-    let activatingPlayer;
-
-    try {
-        if (tntEntity?.typeId === "minecraft:player") {
-            activatingPlayer = tntEntity;
-        }
-    } catch {}
-
-    // 1) Try Dynamic properties on the TNT entity 
-    try {
-        if (!activatingPlayer && tntEntity?.getDynamicProperty) {
-            const activatorId =
-                tntEntity.getDynamicProperty("goe_tnt_activator_id") ??
-                tntEntity.getDynamicProperty("goe_tnt_owner_id") ??
-                tntEntity.getDynamicProperty("goe_tnt_player_id");
-
-            if (activatorId) {
-                const idStr = String(activatorId);
-                activatingPlayer = dimension.getPlayers().find(p => p?.isValid && p.id === idStr);
-            }
-        }
-    } catch {}
-
-    // 2) Try excludePlayer map (original behavior)
-    try {
-        if (!activatingPlayer && tntEntity?.id) {
-            const excludedPlayerId = tnt_actions.excludePlayer.get(tntEntity.id);
-            if (excludedPlayerId) {
-                activatingPlayer = dimension.getPlayers().find(playerCandidate => playerCandidate.id === excludedPlayerId);
-            }
-        }
-    } catch {}
-
-    // 3) Fallback: nearest player to the explosion 
-    try {
-        if (!activatingPlayer) {
-            const players = dimension.getPlayers();
-            let best = undefined;
-            let bestD2 = Infinity;
-
-            for (const p of players) {
-                try {
-                    if (!p?.isValid) continue;
-                    const pl = p.location;
-                    const dx = (pl.x - explosionLocation.x);
-                    const dy = (pl.y - explosionLocation.y);
-                    const dz = (pl.z - explosionLocation.z);
-                    const d2 = dx * dx + dy * dy + dz * dz;
-                    if (d2 < bestD2) {
-                        bestD2 = d2;
-                        best = p;
-                    }
-                } catch {}
-            }
-
-            // only accept if reasonably close (prevents random remote player being chosen)
-            if (best && bestD2 <= (64 * 64)) {
-                activatingPlayer = best;
-            }
-        }
-    } catch {}
-
-    if (!activatingPlayer) return;
+    const playerId = tnt_actions.excludePlayer.get(tntEntity.id);
+    const player = world.getEntity(playerId);
+    if (!player || !player.isValid) return;
+    
+    const playerSpawn = player.getSpawnPoint();
+    const overworld = world.getDimension("overworld"); // Spawn will always be in the overworld, even if TNT is in another dimension like Nether or End
 
     let targetRespawnLocation;
-    let targetRespawnDimension;
-
-    // Stored Respawn (bed center)
-    try {
-        const respawnX = activatingPlayer.getDynamicProperty("goe_tnt_respawn_x");
-        const respawnY = activatingPlayer.getDynamicProperty("goe_tnt_respawn_y");
-        const respawnZ = activatingPlayer.getDynamicProperty("goe_tnt_respawn_z");
-        const respawnDimensionId = activatingPlayer.getDynamicProperty("goe_tnt_respawn_dim");
-
-        if (Number.isFinite(respawnX) && Number.isFinite(respawnY) && Number.isFinite(respawnZ) && respawnDimensionId) {
-            targetRespawnLocation = { x: respawnX, y: respawnY, z: respawnZ };
-            targetRespawnDimension = world.getDimension(respawnDimensionId);
-        }
-    } catch {}
-
-    // Vanilla Respawn
-    if (!targetRespawnLocation) {
-        try {
-            const vanillaSpawnPoint = activatingPlayer.getSpawnPoint?.();
-
-            if (vanillaSpawnPoint) {
-                if (vanillaSpawnPoint.location && vanillaSpawnPoint.dimension) {
-                    targetRespawnLocation = vanillaSpawnPoint.location;
-                    targetRespawnDimension = vanillaSpawnPoint.dimension;
-                } else {
-                    targetRespawnLocation = vanillaSpawnPoint;
-                    targetRespawnDimension = activatingPlayer.dimension;
-                }
-            }
-        } catch {}
+    if (playerSpawn) {
+        targetRespawnLocation = playerSpawn;
+    } else {
+        targetRespawnLocation = world.getDefaultSpawnLocation();
+        const y = overworld.getTopmostBlock({x: targetRespawnLocation.x, z: targetRespawnLocation.z}).location.y;
+        targetRespawnLocation.y = y + 1; // Teleport player above the ground to prevent suffocation
     }
-
-    // World Default Spawn
-    if (!targetRespawnLocation) {
-        try {
-            const defaultWorldSpawnLocation = world.getDefaultSpawnLocation();
-
-            if (defaultWorldSpawnLocation) {
-                targetRespawnLocation = defaultWorldSpawnLocation;
-                targetRespawnDimension = world.getDimension("overworld");
-            }
-        } catch {}
-    }
-
-    if (!targetRespawnLocation || !targetRespawnDimension) return;
+    yield; // Yield to ensure the TNT explosion effect happens before teleportation
 
     // Teleport nearby players and mobs
     const nearbyEntities = dimension.getEntities({
-        location: explosionLocation,
+        location: location,
         maxDistance: radius
     });
+    console.log(`Found ${nearbyEntities.length} nearby entities to teleport.`);
 
     for (const nearbyEntity of nearbyEntities) {
         try {
@@ -199,16 +40,12 @@ export function* teleportationTNTAction(dimension, chargeLevel, location, tntEnt
 
             if (!isPlayerEntity && !isLivingMobEntity) continue;
 
-            const teleportDestination = {
-                x: targetRespawnLocation.x,
-                y: targetRespawnLocation.y + 1,
-                z: targetRespawnLocation.z
-            };
+            nearbyEntity.teleport(targetRespawnLocation, { dimension: overworld });
 
-            nearbyEntity.teleport(teleportDestination, { dimension: targetRespawnDimension });
-
-        } catch {}
+        } catch (error) {
+            console.warn(`Failed to teleport entity with ID: ${nearbyEntity.id}`, error);
+        }
+        yield;
     }
 
-    yield;
 }
