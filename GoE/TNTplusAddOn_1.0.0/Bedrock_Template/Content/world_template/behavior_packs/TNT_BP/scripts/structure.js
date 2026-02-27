@@ -22,15 +22,15 @@ export const StructureComponent = {
 
 const MAX_WORLD_HEIGHT = 318;
 
-const locNNW = { x: -1, y: 0, z: -3 };
-const locNNE = { x: 1, y: 0, z: -3 };
-const locSSW = { x: -1, y: 0, z: 3 };
-const locSSE = { x: 1, y: 0, z: 3 };
+const locNNW = { x: -1.5, y: 0, z: -2 };
+const locNNE = { x: 1.5, y: 0, z: -2 };
+const locSSW = { x: -1.5, y: 0, z: 2 };
+const locSSE = { x: 1.5, y: 0, z: 2 };
 
-const locWNW = { x: -3, y: 0, z: -1 };
-const locENE = { x: 3, y: 0, z: -1 };
-const locWSW = { x: -3, y: 0, z: 1 };
-const locESE = { x: 3, y: 0, z: 1 };
+const locWNW = { x: -2, y: 0, z: -1.5 };
+const locENE = { x: 2, y: 0, z: -1.5 };
+const locWSW = { x: -2, y: 0, z: 1.5 };
+const locESE = { x: 2, y: 0, z: 1.5 };
 const structureSummonArea = {
 	"south": {
 		NW: { x: -1, y: 0, z: 0 }, SE: { x: 1, y: 1, z: 3 }, degrees: 180, facing: Vector3.North,
