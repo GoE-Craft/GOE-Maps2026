@@ -104,13 +104,85 @@
             },
             "geometry": "Array.geos[query.property('goe_tnt:tnt_type')]",
             "materials": [{ "*": "Material.default" }],
-            "textures": ["Array.textures[query.property('goe_tnt:tnt_type')]"],
+            "textures": ["Array.textures[query.property('goe_tnt:tnt_type')]"]
+        },
+        "controller.render.boosted_tnt_overlay": {
+            "arrays": {
+                "geometries": {
+                    "Array.geos": [
+                        "Geometry.overlay_default",
+                        "Geometry.overlay_directional_tnt",
+                        "Geometry.overlay_party_tnt",
+                        "Geometry.overlay_magnet_tnt",
+                        "Geometry.overlay_chunker_tnt",
+                        "Geometry.overlay_ultron_tnt",
+                        "Geometry.overlay_freezing_tnt",
+                        "Geometry.overlay_hacker_tnt",
+                        "Geometry.overlay_tree_planter_tnt",
+                        "Geometry.overlay_thunderstorm_tnt",
+                        "Geometry.overlay_eraser_tnt",
+                        "Geometry.overlay_weather_station_tnt",
+                        "Geometry.overlay_orbital_cannon_tnt",
+                        "Geometry.overlay_time_freeze_tnt",
+                        "Geometry.overlay_arrow_tnt",
+                        "Geometry.overlay_teleportation_tnt",
+                        "Geometry.overlay_prison_tnt",
+                        "Geometry.overlay_structure_tnt",
+                        "Geometry.overlay_daytime_tnt",
+                        "Geometry.overlay_healing_tnt",
+                        "Geometry.overlay_villager_decoy_tnt",
+                        "Geometry.overlay_angry_bee_tnt",
+                        "Geometry.overlay_cloning_tnt",
+                        "Geometry.overlay_beacon_tnt",
+                        "Geometry.overlay_endermite_decoy_tnt",
+                        "Geometry.overlay_glass_tnt",
+                        "Geometry.overlay_furnace_tnt",
+                        "Geometry.overlay_mob_eraser_tnt",
+                        "Geometry.overlay_magma_eraser_tnt",
+                        "Geometry.overlay_light_tnt",
+                        "Geometry.overlay_thief_tnt",
+                        "Geometry.overlay_silent_tnt",
+                        "Geometry.overlay_matrix_tnt",
+                        "Geometry.overlay_balloon_tnt",
+                        "Geometry.overlay_water_eraser_tnt",
+                        "Geometry.overlay_proxy_tnt",
+                        "Geometry.overlay_void_tnt",
+                        "Geometry.overlay_shadow_tnt",
+                        "Geometry.overlay_mega_crater_tnt",
+                        "Geometry.overlay_knockback_tnt",
+                        "Geometry.overlay_fungi_tnt",
+                        "Geometry.overlay_snapshot_tnt",
+                        "Geometry.overlay_sound_tnt",
+                        "Geometry.overlay_specialized_tnt",
+                        "Geometry.overlay_glitch_tnt"
+                    ]
+                },
+                "textures": {
+                    "Array.textures": [
+                        "Texture.boost_level_0",
+                        "Texture.boost_level_1",
+                        "Texture.boost_level_2",
+                        "Texture.boost_level_3",
+                        "Texture.boost_level_4"
+                    ]
+                }
+            },
+            "geometry": "Array.geos[query.property('goe_tnt:tnt_type')]",
+            "materials": [{ "*": "Material.boost_level" }],
+            "textures": ["Array.textures[query.property('goe_tnt:boost_level')]"],
             "overlay_color": {
-                "r": "query.property('goe_tnt:boost_level') / 4",
-                "g": "1.0 - (query.property('goe_tnt:boost_level') / 4)",
-                "b": "0.0",
-                "a": 1
-            }
+                "r": 1.0,
+                "g": 1.0,
+                "b": 1.0,
+                "a": 1.0
+            },
+            "uv_anim": {
+                "offset": [ "(v.boost_scale > 1) ? (Math.floor(query.life_time * 20.0) + query.frame_alpha) * v.anim_speed : 0.0", 
+                            "(v.boost_scale > 1) ? (Math.floor(query.life_time * 20.0) + query.frame_alpha) * v.anim_speed : 0.0" ],
+                "scale": [ "v.anim_overlay", "v.anim_overlay" ]
+            },
+            "light_color_multiplier": 0.5,
+            "ignore_lighting" : true
         }
     }
 }

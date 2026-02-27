@@ -4,9 +4,18 @@
         "description": {
             "identifier": "goe_tnt:tnt_boost_level",
             "materials": {
-                "default": "goe_tnt_additive"
+                "default": "entity_alphatest",
+                "boost_level": "charged_creeper"
             },
             "textures": {
+                //Boost Level Textures
+                "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+                "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+                "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+                "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+                "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+                //TNT Texture Variants
                 "default": "textures/goe/tnt/entity/tnt",
                 "directional_tnt": "textures/goe/tnt/entity/directional_tnt",
                 "party_tnt": "textures/goe/tnt/entity/party_tnt",
@@ -54,9 +63,11 @@
                 "glitch_tnt": "textures/goe/tnt/entity/glitch_tnt"
             },
             "render_controllers": [
-                "controller.render.boosted_tnt"
+                "controller.render.boosted_tnt",
+                "controller.render.boosted_tnt_overlay"
             ],
             "geometry": {
+                //Regular TNT Geometry Variants
                 "default": "geometry.tnt",
                 "directional_tnt": "geometry.directional_tnt",
                 "party_tnt": "geometry.party_tnt",
@@ -101,10 +112,68 @@
                 "snapshot_tnt": "geometry.tnt", // Not implemented yet, will use default geometry for now
                 "sound_tnt": "geometry.sound_tnt",
                 "specialized_tnt": "geometry.tnt", // Not implemented yet, will use default geometry for now
-                "glitch_tnt": "geometry.glitch_tnt"
+                "glitch_tnt": "geometry.glitch_tnt",
+
+                //Overlay Geometry Variants (if needed, can be used for different boost levels or other visual effects)
+                "overlay_default": "geometry.overlay_tnt",
+                "overlay_directional_tnt": "geometry.overlay_directional_tnt",
+                "overlay_party_tnt": "geometry.overlay_party_tnt",
+                "overlay_magnet_tnt": "geometry.overlay_magnet_tnt",
+                "overlay_chunker_tnt": "geometry.overlay_chunker_tnt",
+                "overlay_ultron_tnt": "geometry.overlay_ultron_tnt",
+                "overlay_freezing_tnt": "geometry.overlay_freezing_tnt",
+                "overlay_hacker_tnt": "geometry.overlay_hacker_tnt",
+                "overlay_tree_planter_tnt": "geometry.overlay_tree_planter_tnt",
+                "overlay_thunderstorm_tnt": "geometry.overlay_thunderstorm_tnt",
+                "overlay_eraser_tnt": "geometry.overlay_eraser_tnt",
+                "overlay_weather_station_tnt": "geometry.overlay_weather_station_tnt",
+                "overlay_orbital_cannon_tnt": "geometry.overlay_orbital_cannon_tnt",
+                "overlay_time_freeze_tnt": "geometry.overlay_time_freeze_tnt",
+                "overlay_arrow_tnt": "geometry.overlay_arrow_tnt",
+                "overlay_teleportation_tnt": "geometry.overlay_teleportation_tnt",
+                "overlay_prison_tnt": "geometry.overlay_prison_tnt",
+                "overlay_structure_tnt": "geometry.overlay_structure_tnt",
+                "overlay_daytime_tnt": "geometry.overlay_daytime_tnt",
+                "overlay_healing_tnt": "geometry.overlay_healing_tnt",
+                "overlay_villager_decoy_tnt": "geometry.overlay_villager_decoy_tnt",
+                "overlay_angry_bee_tnt": "geometry.overlay_angry_bee_tnt",
+                "overlay_cloning_tnt": "geometry.overlay_cloning_tnt",
+                "overlay_beacon_tnt": "geometry.overlay_beacon_tnt",
+                "overlay_endermite_decoy_tnt": "geometry.overlay_endermite_decoy_tnt",
+                "overlay_glass_tnt": "geometry.overlay_glass_tnt",
+                "overlay_furnace_tnt": "geometry.overlay_furnace_tnt",
+                "overlay_mob_eraser_tnt": "geometry.overlay_mob_eraser_tnt",
+                "overlay_magma_eraser_tnt": "geometry.eruption_tnt",
+                "overlay_light_tnt": "geometry.overlay_light_tnt",
+                "overlay_thief_tnt": "geometry.overlay_thief_tnt",
+                "overlay_silent_tnt": "geometry.overlay_silent_tnt",
+                "overlay_matrix_tnt": "geometry.overlay_matrix_tnt",
+                "overlay_balloon_tnt": "geometry.overlay_balloon_tnt",
+                "overlay_water_eraser_tnt": "geometry.overlay_water_eraser_tnt",
+                "overlay_proxy_tnt": "geometry.overlay_proxy_tnt",
+                "overlay_void_tnt": "geometry.overlay_void_tnt",
+                "overlay_shadow_tnt": "geometry.overlay_shadow_tnt",
+                "overlay_mega_crater_tnt": "geometry.overlay_mega_crater_tnt",
+                "overlay_knockback_tnt": "geometry.overlay_knockback_tnt",
+                "overlay_fungi_tnt": "geometry.overlay_fungi_tnt",
+                "overlay_snapshot_tnt": "geometry.overlay_tnt", // Not implemented yet, will use default geometry for now
+                "overlay_sound_tnt": "geometry.overlay_sound_tnt",
+                "overlay_specialized_tnt": "geometry.overlay_tnt", // Not implemented yet, will use default geometry for now
+                "overlay_glitch_tnt": "geometry.overlay_glitch_tnt"
             },
             "scripts": {
-                "scale": "1"
+                "scale": "1",
+                "pre_animation": [
+                    "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+				    "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+                    "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
+                ],
+                "animate": [
+                    "overlay_size"   
+                ]
+            },
+            "animations": {
+                "overlay_size": "animation.tnt.overlay_size"
             }
         }
     }

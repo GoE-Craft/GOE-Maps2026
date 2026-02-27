@@ -1,11 +1,11 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.tnt.boost_scale": {
+		"animation.tnt.overlay_size": {
 			"loop": true,
 			"bones": {
-				"bb_main_boost_level": {
-					"scale": "v.boost_scale"
+				"root": {
+					"scale": "1.1"
 				}
 			}
 		}
