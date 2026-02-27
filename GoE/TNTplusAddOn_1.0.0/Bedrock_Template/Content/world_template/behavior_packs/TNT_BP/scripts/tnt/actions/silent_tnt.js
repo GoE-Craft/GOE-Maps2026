@@ -7,115 +7,78 @@ export function* silentTNTAction(dimension, chargeLevel, location, entity) {
     const cz = Math.floor(location?.z ?? 0);
 
     const baseRadius = 10;
-    const explosionRadius = baseRadius + Math.round(baseRadius * 0.25 * (chargeLevel ?? 0));
+    const explosionRadius = baseRadius + Math.round(baseRadius * 0.10 * (chargeLevel ?? 0));
 
     const center = { x: cx + 0.5, y: cy + 0.5, z: cz + 0.5 };
 
-    const playersToProtect = collectPlayersInRadius(dimension, center, explosionRadius + 2);
-    const mechaSuitsToProtect = collectEntitiesOfTypeInRadius(dimension, center, explosionRadius + 2, "goe_tnt:mecha_suit");
-
-    for (const player of playersToProtect) {
-        try {
-            player.addEffect("resistance", 5, { amplifier: 4, showParticles: false });
-            player.addEffect("fire_resistance", 5, { amplifier: 0, showParticles: false });
-        } catch {}
-    }
-
-    for (const suit of mechaSuitsToProtect) {
-        try {
-            suit.addEffect?.("resistance", 5, { amplifier: 4, showParticles: false });
-            suit.addEffect?.("fire_resistance", 5, { amplifier: 0, showParticles: false });
-        } catch {}
-    }
-
-    try {
-        dimension.createExplosion(center, explosionRadius, {
-            breaksBlocks: true,
-            causesFire: false,
-            allowUnderwater: true,
-            source: entity ?? undefined
-        });
-    } catch {}
-
+    // Delay the scripted explosion and damage using system.runTimeout
     system.runTimeout(() => {
-        for (const player of playersToProtect) {
-            try {
-                player.removeEffect("resistance");
-                player.removeEffect("fire_resistance");
-            } catch {}
-        }
+        try {
+            runSilentExplosion(dimension, center, explosionRadius);
+        } catch {}
+    }, 8); // ~0.4 seconds at 20 tps
 
-        for (const suit of mechaSuitsToProtect) {
-            try {
-                suit.removeEffect?.("resistance");
-                suit.removeEffect?.("fire_resistance");
-            } catch {}
-        }
-    }, 1);
-
+    // End the job immediately; explosion happens asynchronously
     yield;
 }
 
-function collectPlayersInRadius(targetDimension, center, radius) {
-
-    const out = [];
+function runSilentExplosion(dimension, center, radius) {
     const rSq = radius * radius;
 
-    let players = [];
+    // Damage entities in radius, respecting difficulty and skipping players / mecha suits
+    let difficulty = "normal";
     try {
-        if (targetDimension?.getPlayers) {
-            players = targetDimension.getPlayers();
-        } else {
-            players = world.getPlayers();
-        }
-    } catch { players = world.getPlayers(); }
+        difficulty = String(dimension?.world?.getDifficulty?.() ?? dimension?.getDifficulty?.() ?? "normal").toLowerCase();
+    } catch {}
 
-    for (const player of players) {
-        try {
-            if (!player?.isValid) continue;
+    // Hearts of damage by difficulty
+    let damageHearts = 18; // normal
+    if (difficulty === "easy") damageHearts = 9;
+    else if (difficulty === "hard") damageHearts = 28;
 
-            const loc = player.location;
-            if (!loc) continue;
-
-            const dx = loc.x - center.x;
-            const dy = loc.y - center.y;
-            const dz = loc.z - center.z;
-
-            if ((dx * dx + dy * dy + dz * dz) > rSq) continue;
-
-            out.push(player);
-        } catch {}
-    }
-
-    return out;
-}
-
-function collectEntitiesOfTypeInRadius(targetDimension, center, radius, typeId) {
-
-    const out = [];
-    const rSq = radius * radius;
+    const damageAmount = damageHearts * 2; // convert hearts -> health points
 
     let entities = [];
     try {
-        entities = targetDimension.getEntities({ type: typeId, location: center, maxDistance: radius });
+        entities = dimension.getEntities({ location: center, maxDistance: radius });
     } catch { entities = []; }
 
-    for (const entity of entities) {
+    for (const e of entities) {
         try {
-            if (!entity?.isValid) continue;
+            if (!e?.isValid) continue;
 
-            const loc = entity.location;
+            // Never damage players or mecha suits
+            if (e.typeId === "minecraft:player") continue;
+            if (e.typeId === "goe_tnt:mecha_suit") continue;
+
+            const loc = e.location;
             if (!loc) continue;
 
             const dx = loc.x - center.x;
             const dy = loc.y - center.y;
             const dz = loc.z - center.z;
+            const distSq = dx * dx + dy * dy + dz * dz;
+            if (distSq > rSq) continue;
 
-            if ((dx * dx + dy * dy + dz * dz) > rSq) continue;
-
-            out.push(entity);
+            e.applyDamage(damageAmount);
         } catch {}
     }
 
-    return out;
+    // Break blocks in a sphere around the center
+    for (let x = Math.floor(center.x - radius); x <= Math.floor(center.x + radius); x++) {
+        for (let y = Math.floor(center.y - radius); y <= Math.floor(center.y + radius); y++) {
+            for (let z = Math.floor(center.z - radius); z <= Math.floor(center.z + radius); z++) {
+                const dx = x + 0.5 - center.x;
+                const dy = y + 0.5 - center.y;
+                const dz = z + 0.5 - center.z;
+                if ((dx * dx + dy * dy + dz * dz) > rSq) continue;
+
+                try {
+                    const block = dimension.getBlock({ x, y, z });
+                    if (!block || block.isAir) continue;
+                    block.setType("minecraft:air");
+                } catch {}
+            }
+        }
+    }
 }
