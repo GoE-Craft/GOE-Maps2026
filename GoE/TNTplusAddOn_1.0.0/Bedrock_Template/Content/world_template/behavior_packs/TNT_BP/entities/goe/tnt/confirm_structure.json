@@ -30,7 +30,7 @@
       "minecraft:collision_box": { "width": 0, "height": 0 },
       "minecraft:knockback_resistance": { "value": 100, "max": 100 },
       "minecraft:physics": { "has_collision": false, "has_gravity": false },
-		  "minecraft:scale": { "value": 0.5 }
+		  "minecraft:scale": { "value": 1 }
     },
   
     "events": {
