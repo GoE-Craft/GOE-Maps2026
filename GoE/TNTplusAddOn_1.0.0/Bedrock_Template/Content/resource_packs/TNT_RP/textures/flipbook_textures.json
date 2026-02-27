@@ -1,0 +1,7 @@
+[
+  {
+    "flipbook_texture": "textures/goe/tnt/entity/fungi_tnt",
+    "atlas_tile": "fungi_tnt",
+    "ticks_per_frame": 10
+  }
+]

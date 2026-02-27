@@ -1,0 +1,24 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.goe_tnt.item.hold.tp": {
+			"loop": "hold_on_last_frame",
+			"bones": {
+				"rightitem": {
+					"rotation": [72.77061, -7.04613, 17.64205],
+					"position": [0.89161, -1.291, -1.9359],
+					"scale": 1
+				}
+			}
+		},
+		"animation.goe_tnt.item.hold.fp": {
+			"loop": true,
+			"bones": {
+				"rightitem": {
+					"rotation": [150.45231, 2.85956, 18.33209],
+					"position": [-8.03088, 5.06347, -3.98324]
+				}
+			}
+		}
+	}
+}

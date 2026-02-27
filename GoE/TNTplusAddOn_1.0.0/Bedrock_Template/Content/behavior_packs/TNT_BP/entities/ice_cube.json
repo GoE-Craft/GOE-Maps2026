@@ -1,0 +1,82 @@
+{
+  "format_version": "1.20.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "goe_tnt:ice_cube",
+      "is_spawnable": false,
+      "is_summonable": true
+    },
+    "component_groups": {
+      "goe_tnt:despawn": {
+        "minecraft:instant_despawn": {
+          "remove_child_entities": false
+        }
+      },
+/*       "goe_tnt:decorative": {
+        "minecraft:variant": { "value": 1 },
+        "minecraft:timer": {
+          "time": 3,
+          "looping": false,
+          "time_down_event": {
+            "event": "goe_tnt:despawn",
+            "target": "self"
+          }
+        }
+      }, */
+      "goe_tnt:despawn_later": {
+        "minecraft:timer": {
+          "time": 5,
+          "looping": false,
+          "time_down_event": {
+            "event": "goe_tnt:despawn",
+            "target": "self"
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:scale": {
+        "value": 1
+      },
+      "minecraft:collision_box": {
+        "height": 0,
+        "width": 0
+      },
+      "minecraft:physics": {
+        "has_collision": false,
+        "has_gravity": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          { "cause": "all", "deals_damage": false }
+        ]
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "goe_tnt:despawn_later"
+          ]
+        }
+      },
+      "goe_tnt:despawn": {
+        "add": {
+          "component_groups": ["goe_tnt:despawn"]
+        }
+      }/* ,
+      "goe_tnt:decorative": {
+        "remove": {
+          "component_groups": ["goe_tnt:despawn_later"]
+        },
+        "add": {
+          "component_groups": ["goe_tnt:decorative"]
+        }
+      } */
+    }
+  }
+}

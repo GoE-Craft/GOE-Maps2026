@@ -1,0 +1,79 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:black_hole_tnt",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam" : "goe_tnt_border"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/black_hole_tnt_entity",
+        "stone":"textures/blocks/stone",
+        "grass" : "textures/blocks/dirt",
+        "tree" : "textures/goe/tnt/entity/tree",
+        "cow" : "textures/entity/cow/cow",
+        "pig" : "textures/entity/pig/pig"
+      },
+      "geometry": {
+        "default": "geometry.black_hole_tnt_entity",
+        "stone": "geometry.black_hole_stone",
+        "grass": "geometry.black_hole_grass",
+        "tree": "geometry.black_hole_tree",
+        "cow": "geometry.black_hole_cow",
+        "pig": "geometry.black_hole_pig"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"},
+          "stone",
+          "grass",
+          "tree",
+          "cow",
+          "pig"
+        ]
+			},
+      "animations": {
+        "charge": "animation.goe_tnt.black_hole_tnt.charge",
+        "explode": "animation.goe_tnt.black_hole_tnt.explosion",
+        "stone": "animation.goe_tnt.black_hole_stone.fly",
+        "grass": "animation.goe_tnt.black_hole_grass.fly",
+        "tree": "animation.goe_tnt.black_hole_tree.fly",
+        "cow": "animation.goe_tnt.black_hole_cow.fly",
+        "pig": "animation.goe_tnt.black_hole_pig.fly"
+      },
+      "particle_effects":{
+        "black_hole_effect": "goe_tnt:black_hole_effect",
+        "black_hole_sparkle": "goe_tnt:black_hole_sparkle",
+        "black_hole_bubbles": "goe_tnt:black_hole_bubbles",
+        "black_hole_explosion": "goe_tnt:black_hole_explosion",
+        "black_hole_bubbles_explosion": "goe_tnt:black_hole_bubbles_explosion",
+        "black_hole_charge": "goe_tnt:black_hole_charge",
+        "black_hole_ring": "goe_tnt:black_hole_ring",
+        "black_hole_flash": "goe_tnt:black_hole_flash",
+        "black_hole_smoke_explode": "goe_tnt:black_hole_smoke_explosion",
+        "black_hole_ring_explode" : "goe_tnt:black_hole_ring_explode",
+        "black_hole_ring_push" : "goe_tnt:black_hole_ring_push",
+        "black_hole_beam" : "goe_tnt:black_hole_beam"
+      },
+      "sound_effects": {
+        "black_hole_charge": "goe_tnt:endermite_tnt_charging",
+        "black_hole_explode": "goe_tnt:endermite_tnt_explode",
+        "black_hole_beam": "goe_tnt:dimensional_tnt_fuse",
+        "black_hole_explode_end" : "goe_tnt:dimensional_tnt_explode"
+      },
+      "render_controllers": [
+        "controller.render.goe_tnt.black_hole_tnt", 
+        "controller.render.goe_tnt.black_hole_stone",
+        "controller.render.goe_tnt.black_hole_grass",
+        "controller.render.goe_tnt.black_hole_tree",
+        "controller.render.goe_tnt.black_hole_cow",
+        "controller.render.goe_tnt.black_hole_pig"
+      ]
+    }
+  }
+}

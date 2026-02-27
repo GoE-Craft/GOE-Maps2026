@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "shadow_tnt",
+		"metalness_emissive_roughness": "shadow_tnt_mer",
+		"heightmap": "shadow_tnt_height"
+	}
+}

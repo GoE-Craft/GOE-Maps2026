@@ -1,0 +1,66 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:sound_tnt",
+      "materials": {
+        "default": "entity_alphatest",
+        "overlay_tnt": "charged_creeper"
+      },
+      "textures": {
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+				"default": "textures/goe/tnt/entity/sound_tnt"
+      },
+      "geometry": {
+        "default": "geometry.sound_tnt",
+        "overlay_tnt": "geometry.overlay_sound_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+          "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+          "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
+        ],
+        "animate": [
+          {"charge" : "q.mark_variant == 1"},
+          {"explosion" : "q.mark_variant == 2"},
+          {"overlay_size": "v.boost_scale > 1"}
+        ]
+			},
+      "animations": {
+        "charge" : "animation.goe_tnt.sound_tnt.charge",
+        "explosion" : "animation.goe_tnt.sound_tnt.explode",
+        "overlay_size": "animation.goe_tnt.tnt.overlay_size"
+      },
+      "particle_effects": {
+        "sound_bass" : "goe_tnt:sound_bass",
+        "note_blast" : "goe_tnt:sound_notes",
+        "note_blast2" : "goe_tnt:sound_notes_blast",
+        "disco_ball" : "goe_tnt:disco_ball",
+        "disco_light" : "goe_tnt:disco_ball_light",
+        "disco_light_red" : "goe_tnt:disco_ball_light_red",
+        "disco_light_blue" : "goe_tnt:disco_ball_light_blue",
+        "disco_flash_yellow" : "goe_tnt:balloon_flash_yellow",
+        "disco_flash_blue" : "goe_tnt:balloon_flash_blue",
+        "disco_flash_red" : "goe_tnt:balloon_flash_red",
+        "disco_flash_green" : "goe_tnt:balloon_flash_green"
+      },
+      "sound_effects": {
+        "sound_charging": "goe_tnt:healing_tnt_charging",
+        "sound_blast": "goe_tnt:dimensional_tnt_explode"
+      },
+      "render_controllers": [ 
+        "controller.render.goe_tnt.tnt",
+        {"controller.render.goe_tnt.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
+    }
+  }
+}

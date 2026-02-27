@@ -1,0 +1,215 @@
+import { world, system, StructureRotation } from "@minecraft/server";
+import { getBiomeAtLocation } from "../../biome_utils";
+
+const STRUCTURE_PREFIX = "goe_tnt:";
+const LEAVES_PARTICLE = "goe_tnt:leaves_tornado_smaller";
+const LEAVES_EXPLOSION_PARTICLE = "goe_tnt:leaves_explosion";
+const CELL_SIZE = 8;
+const SMALL_COUNT = 4;   // base small trees
+const MEDIUM_COUNT = 2;  // base medium trees
+const DELAY_TICKS_BETWEEN_TREES = 3; 
+const TREE_ANIMATION_SECONDS = 0.4; 
+
+const GRID_RADIUS = 1;   // fixed grid radius (3x3 cells around center)
+const TREE_Y_OFFSET = -2;
+const TREE_BIOME_GLD_DEFAULT = "oak";
+
+const TREE_BIOME_GLD = [
+    { treeKey: "chorus", biomes: ["the_end", "end_barren", "end_highlands", "end_midlands"] },
+    { treeKey: "crimson", biomes: ["crimson_forest"] },
+    { treeKey: "warped", biomes: ["warped_forest"] },
+    { treeKey: "cherry", biomes: ["cherry_grove"] },
+    { treeKey: "pale_oak", biomes: ["pale_garden"] },
+    { treeKey: "mangrove", biomes: ["mangrove_swamp", "mangrove"] },
+    { treeKey: "dark_oak", biomes: ["roofed_forest", "dark_forest"] },
+    { treeKey: "brown_mushroom", biomes: ["swampland"] },
+    { treeKey: "red_mushroom", biomes: ["mooshroom", "mushroom_fields", "roofed_forest", "dark_forest", "swamp"] },
+    { treeKey: "birch", biomes: ["birch_forest"] },
+    { treeKey: "jungle", biomes: ["jungle", "bamboo_jungle", "sparse_jungle"] },
+    { treeKey: "acacia", biomes: ["savanna"] },
+    { treeKey: "large_spruce", biomes: ["mega_taiga", "redwood_taiga", "old_growth_pine_taiga", "old_growth_spruce_taiga"] },
+    { treeKey: "spruce", biomes: ["taiga", "cold_taiga", "extreme_hills_plus_trees", "windswept_forest"] },
+    { treeKey: "oak", biomes: ["forest", "plains", "sunflower_plains", "meadow", "extreme_hills", "windswept_hills", "river", "beach", "flower_forest"] }
+];
+
+
+function getStructureId(treeKey, size) {
+    return STRUCTURE_PREFIX + treeKey + "_tree_" + size;
+}
+
+function getTreeKeyForBiome(biomeId) {
+    if (!biomeId || typeof biomeId !== "string") return TREE_BIOME_GLD_DEFAULT;
+    const id = biomeId.toLowerCase();
+    for (const row of TREE_BIOME_GLD) {
+        if (row.biomes.some(b => id.includes(b.toLowerCase()))) return row.treeKey;
+    }
+    return TREE_BIOME_GLD_DEFAULT;
+}
+
+function getCellIndices() {
+    const cells = [];
+    for (let i = -GRID_RADIUS; i <= GRID_RADIUS; i++) {
+        for (let j = -GRID_RADIUS; j <= GRID_RADIUS; j++) {
+            cells.push([i, j]);
+        }
+    }
+    return cells;
+}
+
+function getTreeCountsForChargeLevel(chargeLevel) {
+    const level = Math.max(0, Number(chargeLevel) || 0);
+
+    const baseTrees = SMALL_COUNT + MEDIUM_COUNT;
+    let totalTrees = baseTrees;
+
+    // First boost: flat +3 trees (6 -> 9)
+    if (level === 1) {
+        totalTrees = baseTrees + 3;
+    }
+    // Subsequent boosts: increase max trees by +2 per level after the first
+    else if (level > 1) {
+        // level 2 -> 11, level 3 -> 13, level 4 -> 15, etc.
+        totalTrees = (baseTrees + 3) + 2 * (level - 1);
+    }
+
+    // Preserve the original small/medium ratio as closely as possible
+    const smallRatio = SMALL_COUNT / baseTrees;
+    let smallCount = Math.max(1, Math.round(totalTrees * smallRatio));
+    let mediumCount = Math.max(0, totalTrees - smallCount);
+
+    return { level, totalTrees, smallCount, mediumCount };
+}
+
+const ONE_BLOCK_OFFSETS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+
+function getRandomOneBlockOffset() {
+    const [dx, dz] = ONE_BLOCK_OFFSETS[Math.floor(Math.random() * ONE_BLOCK_OFFSETS.length)];
+    return { dx, dz };
+}
+
+function pickRandomUnique(arr, n) {
+    const copy = arr.slice();
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy.slice(0, n);
+}
+
+function getGroundY(dimension, x, yStart, z) {
+    // Scan down from yStart to find the first non-air, non-leaves block
+    for (let y = Math.floor(yStart); y > 0; y--) {
+        try {
+            const block = dimension.getBlock({ x, y, z });
+            if (!block) continue;
+            const id = block.typeId;
+            if (!block.isAir && !id.includes("leaves") && id !== "minecraft:log" && id !== "minecraft:log2" && id !== "minecraft:log3") {
+                return y + 1; // Place tree above ground
+            }
+        } catch (e) {}
+    }
+    return Math.floor(yStart); // fallback
+}
+
+function placeTree(dimension, structureManager, baseX, baseZ, centerY, structureId) {
+    try {
+        const structure = structureManager.get(structureId);
+        if (!structure) return;
+
+        // Find ground Y at the center of the structure's base
+        const centerX = baseX + Math.floor(structure.size.x / 2);
+        const centerZ = baseZ + Math.floor(structure.size.z / 2);
+        const groundY = getGroundY(dimension, centerX, centerY, centerZ) + TREE_Y_OFFSET;
+
+        // Scan upward from the ground block for water; if any water is found above, skip placement
+        const scanStartY = groundY - TREE_Y_OFFSET - 1;
+        const scanEndY = scanStartY + 20; // Scan up to 20 blocks above ground, can bump this up
+        for (let y = scanStartY; y <= scanEndY; y++) {
+            const block = dimension.getBlock({ x: centerX, y, z: centerZ });
+            if (block && (block.typeId === "minecraft:water" || block.typeId === "minecraft:flowing_water")) {
+                return; // Don't place tree if water is found above
+            }
+        }
+
+        const particleX = baseX + structure.size.x / 2;
+        const particleZ = baseZ + structure.size.z / 2;
+        const particleY = groundY + 0.5;
+
+        dimension.spawnParticle(LEAVES_PARTICLE, { x: particleX, y: particleY, z: particleZ });
+        dimension.spawnParticle(LEAVES_EXPLOSION_PARTICLE, { x: particleX, y: particleY, z: particleZ });
+
+        const soundLoc = { x: particleX, y: particleY, z: particleZ };
+        dimension.playSound("block.bell.hit", soundLoc, { volume: 0.8, pitch: 0.9 });
+
+        structureManager.place(structure, dimension, { x: baseX, y: groundY, z: baseZ }, {
+            includeBlocks: true,
+            includeEntities: true,
+            rotation: StructureRotation.None,
+            animationMode: "Layers",
+            animationSeconds: TREE_ANIMATION_SECONDS
+        });
+    } catch (e) {
+    }
+}
+
+export function treePlanterAction(dimension, chargeLevel, location, entity) {
+    try {
+        const biomeId = getBiomeAtLocation(dimension, location);
+        const treeKey = getTreeKeyForBiome(biomeId);
+
+        const { totalTrees, smallCount, mediumCount } = getTreeCountsForChargeLevel(chargeLevel);
+
+        const structureManager = world.structureManager;
+        const baseX = Math.floor(location.x) - Math.floor(CELL_SIZE / 2);
+        const baseZ = Math.floor(location.z) - Math.floor(CELL_SIZE / 2);
+        const centerY = location.y;
+
+        const centerCell = [0, 0];
+        const nonCenterCells = getCellIndices().filter(([i, j]) => i !== 0 || j !== 0);
+        // Shuffle available cells once; we can reuse them when tree count exceeds cell count
+        const chosenOther = pickRandomUnique(nonCenterCells, nonCenterCells.length);
+
+        const placements = [];
+
+        // Always place one small tree near the center
+        const offsetCenter = getRandomOneBlockOffset();
+        placements.push({
+            x: baseX + centerCell[0] * CELL_SIZE + offsetCenter.dx,
+            z: baseZ + centerCell[1] * CELL_SIZE + offsetCenter.dz,
+            structureId: getStructureId(treeKey, "small")
+        });
+
+        let idx = 0;
+        const otherSmallCount = Math.max(0, smallCount - 1);
+
+        // Additional small trees (may place multiple per cell if needed)
+        for (let i = 0; i < otherSmallCount; i++, idx++) {
+            const [ci, cj] = chosenOther[idx % chosenOther.length];
+            const offset = getRandomOneBlockOffset();
+            placements.push({
+                x: baseX + ci * CELL_SIZE + offset.dx,
+                z: baseZ + cj * CELL_SIZE + offset.dz,
+                structureId: getStructureId(treeKey, "small")
+            });
+        }
+
+        // Medium trees
+        for (let i = 0; i < mediumCount; i++, idx++) {
+            const [ci, cj] = chosenOther[idx % chosenOther.length];
+            const offset = getRandomOneBlockOffset();
+            placements.push({
+                x: baseX + ci * CELL_SIZE + offset.dx,
+                z: baseZ + cj * CELL_SIZE + offset.dz,
+                structureId: getStructureId(treeKey, "medium")
+            });
+        }
+
+        placements.forEach((p, i) => {
+            const delayTicks = i * DELAY_TICKS_BETWEEN_TREES;
+            system.runTimeout(() => {
+                placeTree(dimension, structureManager, p.x, p.z, centerY, p.structureId);
+            }, delayTicks);
+        });
+    } catch (e) {
+    }
+}

@@ -1,0 +1,87 @@
+{
+	"format_version": "1.19.0",
+	"minecraft:client_entity": {
+		"description": {
+			"identifier": "goe_tnt:mecha_suit",
+			"materials": {
+				"default": "entity_alphatest",
+				"jetpack": "entity_alphatest"
+			},
+			"textures": {
+				"default": "textures/goe/tnt/entity/mecha_suits/mecha_suit",
+				"variant2": "textures/goe/tnt/entity/mecha_suits/mecha_suit_wings"
+			},
+			"geometry": {
+				"default": "geometry.goe_tnt.mecha_suit",
+				"variant2": "geometry.goe_tnt.mecha_suit_wings"
+			},
+			"render_controllers": [ "controller.render.goe_tnt.mecha_suit" ],
+
+			"particle_effects": {
+				"mecha_suit_fire": "goe_tnt:mecha_suit_fire",
+				"mecha_suit_jump": "goe_tnt:mecha_suit_jump",
+				"mecha_suit_land": "goe_tnt:mecha_suit_land",
+				"mecha_suit_flying": "goe_tnt:mecha_suit_flying",
+				"mecha_suit_fire_my" : "goe_tnt:mecha_suit_fire_my",
+				"mecha_suit_fire_pixels" : "goe_tnt:mecha_suit_fire_pixels",
+				"mech_suit_wind" : "goe_tnt:mech_suit_wind"
+			},
+			"sound_effects": {
+				"walk": "goe_tnt:mecha_suit_walk",
+				"death": "goe_tnt:mecha_suit_death",
+				"hurt": "goe_tnt:mecha_suit_hurt",
+				"fire_right_sound": "goe_tnt:mecha_suit_fire_right_sound",
+				"fire_left_sound": "goe_tnt:mecha_suit_fire_left_sound",
+				"charge_sound": "goe_tnt:mecha_suit_charge_sound",
+				"discharge_sound": "goe_tnt:mecha_suit_discharge_sound",
+				"jump_sound": "goe_tnt:mecha_suit_jump_sound",
+				"land_sound": "goe_tnt:mecha_suit_land_sound",
+				"spawn_sound": "goe_tnt:mecha_suit_spawn_sound",
+				"fly_sound": "goe_tnt:mecha_suit_fly_sound",
+				"mount_sound": "goe_tnt:mecha_suit_mount_sound",
+				"dismount_sound": "goe_tnt:mecha_suit_dismount_sound"
+			},
+			"animations": {
+				"controller.mecha_suit": "controller.animation.goe_tnt.goe.tnt.mecha_suit",
+				"controller.mecha_suit_tnt": "controller.animation.goe_tnt.goe.tnt.mecha_suit_tnt",
+				"land_controller" : "controller.animation.goe_tnt.goe.tnt.mecha_suit.land",
+				"spawn_controller": "controller.animation.goe_tnt.mecha_suit_spawn",
+				"mount_controller": "controller.animation.goe_tnt.mecha_suit_mount",
+				"look_at_target_controller" : "controller.animation.goe_tnt.tnt_look_at_target",
+				"flying_controller": "controller.animation.goe_tnt.mecha_suit_flying",
+
+				"idle": "animation.goe_tnt.mecha_suit.idle",
+				"spawn" : "animation.goe_tnt.mecha_suit.spawn",
+				"death" : "animation.goe_tnt.mecha_suit.death",
+				"charged": "animation.goe_tnt.mecha_suit.charged",
+				"walk_forward": "animation.goe_tnt.mecha_suit.walk",
+				"walk_to_idle": "animation.goe_tnt.mecha_suit.walk_to_idle",
+				"charge": "animation.goe_tnt.mecha_suit.charge",
+				"discharge": "animation.goe_tnt.mecha_suit.discharge",
+				"fire_right": "animation.goe_tnt.mecha_suit.fire_right",
+				"fire_left": "animation.goe_tnt.mecha_suit.fire_left",
+				"jump": "animation.goe_tnt.mecha_suit.jump",
+				"jump_walk": "animation.goe_tnt.mecha_suit.jump_walk",
+				"look_at": "animation.goe_tnt.mecha_suit.look_at",
+				"land" : "animation.goe_tnt.mecha_suit.land",
+				"fly": "animation.goe_tnt.mecha_suit.flying"
+			},
+
+			"scripts": {
+				"pre_animation": [
+					"v.look_at = q.has_rider ? query.rider_head_x_rotation(0) : 0;"
+				],
+				"animate": [
+					"controller.mecha_suit",
+					{"controller.mecha_suit_tnt" : "q.mark_variant != 2"},
+					{"land_controller" : "q.mark_variant != 2"},
+					{"spawn_controller": "q.mark_variant != 2"},
+					{"mount_controller": "q.mark_variant != 2"},
+					{"look_at_target_controller": "q.mark_variant != 2"},
+					"flying_controller"
+				]
+			},
+			"spawn_egg": { "texture": "goe_tnt:mecha_suit_spawn_egg" }
+		}
+	}
+}

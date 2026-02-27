@@ -1,0 +1,70 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:tnt_charge_matrix_blue",
+			"basic_render_parameters": {
+				"material": "particles_add",
+				"texture": "textures/goe/tnt/particles/matrix_dimension_lines"
+			}
+		},
+		"curves": {
+			"variable.stretch": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 3, 0]
+			},
+			"variable.scale": {
+				"type": "catmull_rom",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 1, 1, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_local_space": {
+				"position": true,
+				"rotation": false,
+				"velocity": true
+			},
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 110,
+				"max_particles": 130
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 2
+			},
+			"minecraft:emitter_shape_sphere": {
+				"radius": 0.3,
+				"surface_only": true,
+				"direction": "inwards"
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": "math.random(0.3,0.5)"
+			},
+			"minecraft:particle_initial_spin": {
+				"rotation": 90
+			},
+			"minecraft:particle_initial_speed": 8,
+			"minecraft:particle_motion_parametric": {
+				"direction": [0, 5, 0]
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["0.05 * v.particle_random_3", "5.3 * v.stretch"],
+				"facing_camera_mode": "lookat_direction"
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.0": "#0082D2FF",
+						"0.48": "#FF63DBFF",
+						"1.42": "#FF92F1FF",
+						"2.0": "#0038CDFF"
+					}
+				}
+			}
+		}
+	}
+}

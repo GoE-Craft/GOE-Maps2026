@@ -1,0 +1,8 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:texture_set": {
+		"color": "confirm_button",
+		"metalness_emissive_roughness": "confirm_button_mer",
+		"heightmap": "confirm_button_height"
+	}
+}

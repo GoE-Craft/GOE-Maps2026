@@ -1,0 +1,41 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:proxy_mini_explode",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam": "entity_alphablend"
+      },
+      "textures": {
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+				"default": "textures/goe/tnt/entity/hacker_tnt"
+      },
+      "geometry": {
+        "default": "geometry.hacker_mini_explode"
+      },
+      "scripts": {
+        "animate": [
+          {"explosion": 1}
+        ]
+      },
+      "animations": {
+        "explosion": "animation.goe_tnt.hacker_mini_explode.explode"
+      },
+      "particle_effects": {
+        "pulse_green": "goe_tnt:pulse_green",
+        "explosion_pixels_green": "goe_tnt:explosion_pixels_green",
+        "explosion_hacking": "goe_tnt:explosion_hacking",
+        "explosion_hacking_mini": "goe_tnt:explosion_hacking_mini"
+      },
+      "render_controllers": [ "controller.render.goe_tnt.hacker_mini_explode" ]
+    }
+  }
+}

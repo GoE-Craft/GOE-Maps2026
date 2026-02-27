@@ -1,0 +1,85 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:silent_explosion",
+			"basic_render_parameters": {
+				"material": "particles_add",
+				"texture": "textures/goe/tnt/particles/silent_explosion"
+			}
+		},
+		"curves": {
+			"variable.gradient": {
+				"type": "catmull_rom",
+				"input": "variable.particle_random_1",
+				"horizontal_range": 1,
+				"nodes": [0, 0.19, 0.5, 0.13, 0.78, 0.35, 1, 0]
+			},
+			"variable.explosion": {
+				"type": "catmull_rom",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 0, 1, 2.55, 4.08, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 30,
+				"max_particles": 20
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 0.4
+			},
+			"minecraft:emitter_shape_point": {
+				"offset": ["math.random(-0.1,0.1)", "math.random(-0.1,0.1)", "math.random(-0.1,0.1)"]
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": "Math.random(0.5, 0.8)"
+			},
+			"minecraft:particle_initial_spin": {
+				"rotation": "math.random(-360,360)",
+				"rotation_rate": "math.random(-30,30)"
+			},
+			"minecraft:particle_initial_speed": 0,
+			"minecraft:particle_motion_dynamic": {},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["((2 * 1+v.particle_random_1) * 2+v.particle_age)*variable.explosion", "((2 * 1+v.particle_random_1) * 2+v.particle_age)*variable.explosion"],
+				"facing_camera_mode": "lookat_xyz",
+				"uv": {
+					"texture_width": 256,
+					"texture_height": 768,
+					"flipbook": {
+						"base_UV": [0, 0],
+						"size_UV": [256, 256],
+						"step_UV": [0, 256],
+						"frames_per_second": 18,
+						"max_frame": 3,
+						"loop": true
+					}
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "(v.particle_age * v.particle_lifetime)*v.gradient",
+					"gradient": {
+						"0.0": "#FFFFFFFF",
+						"0.05": "#FFFFBA00",
+						"0.1": "#70000000",
+						"0.15": "#FFFFFFFF",
+						"0.22": "#FFFFA97F",
+						"0.28": "#80000000",
+						"0.33": "#FFFFFFFF",
+						"0.38": "#78000000",
+						"0.44": "#42FFEE00",
+						"0.5": "#54000000",
+						"0.55": "#FFFFFFFF",
+						"0.6": "#87000000",
+						"0.66": "#FFFF6000",
+						"0.72": "#61000000",
+						"0.8": "#FFFFFFFF"
+					}
+				}
+			}
+		}
+	}
+}

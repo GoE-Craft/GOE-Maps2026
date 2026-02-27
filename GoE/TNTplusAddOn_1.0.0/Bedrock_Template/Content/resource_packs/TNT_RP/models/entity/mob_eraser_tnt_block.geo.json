@@ -1,0 +1,78 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.mob_eraser_tnt_block",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 13,
+				"visible_bounds_height": 9,
+				"visible_bounds_offset": [0, 2.5, 0]
+			},
+			"bones": [
+				{
+					"name": "bb_main",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-8, 0, -8], "size": [16, 16, 16], "uv": [0, 0]},
+						{
+							"origin": [0, 16, -7.2],
+							"size": [0, 8, 13],
+							"uv": {
+								"north": {"uv": [16, 48], "uv_size": [0, 8]},
+								"east": {"uv": [0, 46.5], "uv_size": [16.5, 9.5]},
+								"south": {"uv": [32, 48], "uv_size": [0, 8]},
+								"west": {"uv": [16, 48], "uv_size": [16, 8]},
+								"up": {"uv": [16, 32], "uv_size": [0, 16]},
+								"down": {"uv": [16, 48], "uv_size": [0, -16]}
+							}
+						},
+						{
+							"origin": [-8, 11, 12],
+							"size": [0, 1.4, 1.4],
+							"uv": {
+								"north": {"uv": [32, 34], "uv_size": [0, 2]},
+								"east": {"uv": [32, 34], "uv_size": [0.5, 2]},
+								"south": {"uv": [33.5, 34], "uv_size": [0, 2]},
+								"west": {"uv": [31.5, 34], "uv_size": [2, 2]},
+								"up": {"uv": [32, 32], "uv_size": [0, 2]},
+								"down": {"uv": [32, 34], "uv_size": [0, -2]}
+							}
+						}
+					]
+				},
+				{
+					"name": "spark_locators",
+					"parent": "bb_main",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "sparks",
+					"parent": "spark_locators",
+					"pivot": [0, 22, -1],
+					"locators": {
+						"sparks": [0, 22, -1]
+					}
+				},
+				{
+					"name": "sparks2",
+					"parent": "spark_locators",
+					"pivot": [0, 22, -1],
+					"locators": {
+						"sparks2": [0, 22, -1]
+					}
+				},
+				{
+					"name": "locators",
+					"pivot": [0, 0, 0],
+					"locators": {
+						"locator": [0, 8, 0],
+						"pulse": [0, 0.1, 0],
+						"mob_heads": [0, 0, 0]
+					}
+				}
+			]
+		}
+	]
+}

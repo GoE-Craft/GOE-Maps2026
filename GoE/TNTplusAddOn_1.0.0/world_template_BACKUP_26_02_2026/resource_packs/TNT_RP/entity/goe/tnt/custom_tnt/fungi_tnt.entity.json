@@ -1,0 +1,60 @@
+{
+  "format_version": "1.19.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:fungi_tnt",
+      "materials": {
+        "default": "goe_tnt_anim_alphatest",
+		    "fuse": "goe_tnt_anim_alphatest",
+        "overlay_tnt": "charged_creeper"
+      },
+      "textures": {
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+				"default": "textures/goe/tnt/entity/fungi_tnt",
+        "fuse": "textures/goe/tnt/entity/fungi_tnt"
+      },
+      "geometry": {
+        "default": "geometry.fungi_tnt",
+        "overlay_tnt": "geometry.overlay_fungi_tnt"
+      },
+      "scripts": {
+        "pre_animation": [
+          				  "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+          "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+          "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
+        ],
+        "animate": [
+          { "charge": "q.mark_variant == 1" },
+          { "explosion": "q.mark_variant == 2" },
+          {"overlay_size": "v.boost_scale > 1"}
+        ]
+      },
+      "animations": {
+        "charge": "animation.goe_tnt.fungi_tnt.charge",
+        "explosion": "animation.goe_tnt.fungi_tnt.explode",
+        "overlay_size": "animation.goe_tnt.tnt.overlay_size"
+      },
+      "particle_effects": {
+        "tnt_charge_red": "goe_tnt:tnt_charge_red",
+        "fungi_cloud": "goe_tnt:fungi_cloud",
+        "ender_sparkle_explosion_rgb": "goe_tnt:ender_sparkle_explosion_rgb",
+        "fungi_explosion": "goe_tnt:fungi_explosion",
+        "fungi_orb": "goe_tnt:fungi_orb",
+        "fungi_impact": "goe_tnt:fungi_impact"
+      },
+
+      "render_controllers": [
+        "controller.render.goe_tnt.fungi_tnt.main",
+        "controller.render.goe_tnt.fungi_tnt.fuse",
+        {"controller.render.goe_tnt.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
+    }
+  }
+}

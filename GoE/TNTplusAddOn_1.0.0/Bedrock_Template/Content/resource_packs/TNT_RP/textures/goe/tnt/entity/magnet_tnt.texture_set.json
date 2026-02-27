@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "magnet_tnt",
+		"metalness_emissive_roughness": "magnet_tnt_mer",
+		"heightmap": "magnet_tnt_height"
+	}
+}

@@ -1,0 +1,83 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:mech_suit_wind",
+			"basic_render_parameters": {
+				"material": "particles_blend",
+				"texture": "textures/goe/tnt/particles/mech_suit_wind"
+			}
+		},
+		"curves": {
+			"variable.grow": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [3.4, 1.59, 0, 0]
+			},
+			"variable.radius": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 1, 0.52]
+			},
+			"variable.crazy": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 0.5, -0.5, 1, -1, 1.5, -1.5, 2, -2, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_local_space": {
+				"position": true,
+				"rotation": true,
+				"velocity": true
+			},
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 50,
+				"max_particles": 1000
+			},
+			"minecraft:emitter_lifetime_looping": {
+				"active_time": 5
+			},
+			"minecraft:emitter_shape_point": {
+				"offset": [0, -3, -0.2],
+				"direction": ["variable.radius*math.sin(variable.particle_age*1080)", "v.particle_age * 13", "variable.radius*math.cos(variable.particle_age*1080)"]
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": "math.random(1.5,2)"
+			},
+			"minecraft:particle_initial_spin": {
+				"rotation": "math.random(2, 180)",
+				"rotation_rate": 200
+			},
+			"minecraft:particle_initial_speed": 5,
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": ["v.crazy * math.random(-2,2)", 2, "v.crazy * math.random(-2,2)"],
+				"rotation_acceleration": 100
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["(0.2* v.grow ) * 1 * (0.8+v.particle_random_2)", "(0.2 * v.grow ) * 1 * (0.8+v.particle_random_2)"],
+				"facing_camera_mode": "emitter_transform_xz",
+				"uv": {
+					"texture_width": 128,
+					"texture_height": 128,
+					"uv": ["math.floor(v.particle_random_2 * 2) *64", "math.floor(v.particle_random_3 * 2) *64"],
+					"uv_size": [64, 64]
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.0": "#00FFFFFF",
+						"0.25": "#2BFFFFFF",
+						"0.65": "#00FFFFFF",
+						"1.0": "#00000000"
+					}
+				}
+			}
+		}
+	}
+}

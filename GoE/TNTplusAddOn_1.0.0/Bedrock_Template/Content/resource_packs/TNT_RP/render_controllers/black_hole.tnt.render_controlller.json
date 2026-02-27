@@ -1,0 +1,72 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.goe_tnt.black_hole_tnt": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default",  "beam*" : "material.beam"} ],
+      "textures": [ "Texture.default" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    },
+    "controller.render.goe_tnt.black_hole_stone": {
+      "geometry": "Geometry.stone",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.stone" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    },
+    "controller.render.goe_tnt.black_hole_grass": {
+      "geometry": "Geometry.grass",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.grass" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    },
+    "controller.render.goe_tnt.black_hole_tree": {
+      "geometry": "Geometry.tree",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.tree" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    },
+    "controller.render.goe_tnt.black_hole_cow": {
+      "geometry": "Geometry.cow",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.cow" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    },
+    "controller.render.goe_tnt.black_hole_pig": {
+      "geometry": "Geometry.pig",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.pig" ],
+      "overlay_color": {
+        "r": "1.0",
+        "g": "1.0",
+        "b": "1.0",
+        "a": "0.0"
+      }
+    }
+  }
+}
+    

@@ -1,0 +1,52 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.food_tnt",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "tnt",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-8, 2, -8], "size": [16, 16, 16], "uv": [0, 22]},
+						{"origin": [-6.7, 19.6, 3.5], "size": [15, 10, 0], "uv": [64, 22]},
+						{"origin": [-10, 0, -10], "size": [20, 2, 20], "uv": [0, 0]},
+						{"origin": [-6.6, 18, 2], "size": [3, 4, 3], "uv": [72, 60]},
+						{"origin": [-7.6, 22, 1], "size": [5, 1, 5], "uv": [72, 54]}
+					]
+				},
+				{
+					"name": "menu",
+					"parent": "tnt",
+					"pivot": [-10.5, 5.5, -13.1],
+					"rotation": [0, 30, 0],
+					"cubes": [
+						{"origin": [-15, 0, -11.2], "size": [9, 11, 0], "pivot": [-10.5, 5.5, -11.2], "rotation": [20, 0, 0], "uv": [64, 43]},
+						{"origin": [-15, 0, -15], "size": [9, 11, 0], "pivot": [-10.5, 5.5, -15], "rotation": [-20, 0, 0], "uv": [64, 32]},
+						{
+							"origin": [-13.6042, 3.72868, -14.56558],
+							"size": [6.474, 6.474, 0],
+							"pivot": [-10.3672, 6.96568, -14.56558],
+							"rotation": [-19.35572, 0.76146, -0.24562],
+							"uv": {
+								"north": {"uv": [102.06, 75.06], "uv_size": [9.88, 9.88]},
+								"east": {"uv": [101.94, 75.06], "uv_size": [0, 9.88]},
+								"south": {"uv": [112.06, 75.06], "uv_size": [9.88, 9.88]},
+								"west": {"uv": [111.94, 75.06], "uv_size": [0, 9.88]},
+								"up": {"uv": [102.06, 74.94], "uv_size": [9.88, 0]},
+								"down": {"uv": [112.06, 74.94], "uv_size": [9.88, 0]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

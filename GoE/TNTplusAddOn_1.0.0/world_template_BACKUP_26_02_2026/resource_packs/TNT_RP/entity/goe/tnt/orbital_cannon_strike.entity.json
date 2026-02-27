@@ -1,0 +1,30 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:orbital_cannon_strike",
+      "materials": {
+        "default": "entity_alphablend"
+      },
+      "textures": {
+        "default": "textures/goe/tnt/entity/orbital_cannon_tnt"
+      },
+      "geometry": {
+        "default": "geometry.orbital_cannon_strike"
+      },
+			"scripts": {
+        "animate": [
+          {"explosion": 1}
+        ]
+			},
+      "animations": {
+        "explosion": "animation.goe_tnt.orbital_cannon_strike.explosion"
+      },
+      "particle_effects": {
+        "explosion_pixels_purple" : "goe_tnt:explosion_pixels_purple",
+        "pulse_purple" : "goe_tnt:pulse_purple"
+      },
+      "render_controllers": [ "controller.render.goe_tnt.default"]
+    }
+  }
+}

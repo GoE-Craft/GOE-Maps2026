@@ -1,0 +1,28 @@
+{
+	"format_version" : "1.10.0",
+	"animation_controllers" : {
+		"controller.animation.goe_tnt.matrix_mob.basic" : {
+			"initial_state" : "default",
+			"states" : {
+				"default" : {
+					"animations" : [ "falling" ],
+					"transitions": [
+						{"bouncing": "q.mark_variant == 1"}
+					],
+					"blend_transition": 0.1
+				},
+				"bouncing" : {
+					"animations" : [ "bounce" ],
+					"transitions": [
+						{ "walking": "q.mark_variant == 2"}
+					],
+					"blend_transition": 0.1
+				},
+				"walking" : {
+					"animations" : [ "walk" ],
+					"blend_transition": 0.1
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,66 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.goe_tnt.goe.tnt.mecha_suit_tnt": {
+      "initial_state": "idle",
+      "states": {
+        "idle": {
+          "animations": [ "idle" ],
+          "transitions": [
+            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" },
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" }
+          ]
+        },
+        "charge": {
+          "animations": [ "charge" ],
+          "sound_effects": [ { "effect": "charge_sound" } ],
+          "transitions": [
+            { "charged": "query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "charged": {
+          "animations": [ "charged" ],
+          "transitions": [
+            { "fire_right": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'right'" },
+            { "fire_left": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'left'" },
+            { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_via_shortest_path": true
+        },
+        "discharge": {
+          "animations": [ "discharge" ],
+          "sound_effects": [ { "effect": "discharge_sound" } ],
+          "transitions": [
+            { "idle": "query.property('goe_tnt:tnt_action') == 'idle'" },
+            { "charge": "query.property('goe_tnt:tnt_action') == 'charge'" }
+          ],
+          "blend_transition": 0.3,
+          "blend_via_shortest_path": true
+        },
+        "fire_right": {
+          "animations": [ "fire_left" ],
+          "sound_effects": [ { "effect": "fire_right_sound" } ],
+          "transitions": [
+            { "fire_left": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'left'" },
+            { "charged": "query.all_animations_finished && query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_via_shortest_path": true
+        },
+        "fire_left": {
+          "animations": [ "fire_right" ],
+          "sound_effects": [ { "effect": "fire_left_sound" } ],
+          "transitions": [
+            { "fire_right": "query.property('goe_tnt:tnt_action') == 'fire' && query.property('goe_tnt:fire_hand') == 'right'" },
+            { "charged": "query.all_animations_finished && query.property('goe_tnt:tnt_action') == 'charged'" },
+            { "discharge": "query.property('goe_tnt:tnt_action') == 'idle'" }
+          ],
+          "blend_via_shortest_path": true
+        }
+      }
+    }
+  }
+}

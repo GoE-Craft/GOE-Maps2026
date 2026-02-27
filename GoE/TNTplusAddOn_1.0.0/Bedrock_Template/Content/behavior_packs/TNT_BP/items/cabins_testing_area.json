@@ -1,0 +1,19 @@
+{
+    "format_version": "1.21.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "goe_tnt:cabins_testing_area",
+            "menu_category": {
+                "category": "items"
+            }
+        },
+        "components": {
+            "minecraft:icon": "goe_tnt:cabins_testing_area",
+            "minecraft:display_name": {
+                "value": "§7Cabins Testing Area\n§i§oInteract to build the structure"
+            },
+            "minecraft:max_stack_size": 1,
+            "goe_tnt:structure": {}
+        }
+    }
+}

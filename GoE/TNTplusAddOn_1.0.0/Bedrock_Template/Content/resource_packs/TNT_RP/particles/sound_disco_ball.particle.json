@@ -1,0 +1,62 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:disco_ball",
+			"basic_render_parameters": {
+				"material": "particles_blend",
+				"texture": "textures/goe/tnt/particles/disco_ball"
+			}
+		},
+		"curves": {
+			"variable.gradient": {
+				"type": "linear",
+				"input": "variable.particle_random_1",
+				"horizontal_range": 1,
+				"nodes": [0, 1, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_rate_instant": {
+				"num_particles": 1
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 1
+			},
+			"minecraft:emitter_shape_point": {},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": 2
+			},
+			"minecraft:particle_initial_speed": 0,
+			"minecraft:particle_motion_dynamic": {},
+			"minecraft:particle_appearance_billboard": {
+				"size": [0.8, 0.8],
+				"facing_camera_mode": "lookat_xyz",
+				"uv": {
+					"texture_width": 64,
+					"texture_height": 450,
+					"flipbook": {
+						"base_UV": [-1, 386],
+						"size_UV": [64, 64],
+						"step_UV": [0, -64],
+						"frames_per_second": 20,
+						"max_frame": 7,
+						"stretch_to_lifetime": true,
+						"loop": true
+					}
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.0": "#00818181",
+						"0.13": "#ffffffff",
+						"0.92": "#ffffffff",
+						"1.0": "#00818181"
+					}
+				}
+			}
+		}
+	}
+}

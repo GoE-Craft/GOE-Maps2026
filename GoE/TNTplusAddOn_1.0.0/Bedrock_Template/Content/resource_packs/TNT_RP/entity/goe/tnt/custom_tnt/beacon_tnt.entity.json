@@ -1,0 +1,74 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:beacon_tnt",
+      "materials": {
+        "default": "entity_alphablend",
+        "perimiter": "goe_tnt_border",
+        "perimiter2": "goe_tnt_border",
+        "perimiter3": "goe_tnt_border",
+        "perimiter4": "goe_tnt_border",
+        "perimiter5": "goe_tnt_border",
+        "perimiter6": "goe_tnt_border",
+        "perimiter7": "goe_tnt_border",
+        "perimiter8": "goe_tnt_border",
+        "perimiter9": "goe_tnt_border",
+        "perimiter10": "goe_tnt_border",
+        "perimiter11": "goe_tnt_border",
+        "perimiter12": "goe_tnt_border",
+        "perimiter13": "goe_tnt_border",
+        "overlay_tnt": "charged_creeper"
+      },
+      "textures": {
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+				"default": "textures/goe/tnt/entity/beacon_tnt",
+        "beacon_tnt_perimiter" : "textures/goe/tnt/entity/beacon_tnt"
+      },
+      "geometry": {
+        "default": "geometry.beacon_tnt",
+        "beacon_tnt_perimiter" : "geometry.beacon_tnt_perimiter",
+        "overlay_tnt": "geometry.overlay_beacon_tnt"
+      },
+			"scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');",
+          				  "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+          "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+          "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
+        ],
+        "animate": [
+          {"charge": "q.mark_variant == 1"},
+          {"explode": "q.mark_variant == 2"},
+          "overlay_size"
+        ]
+			},
+      "animations": {
+        "charge": "animation.goe_tnt.beacon_tnt.charge",
+        "explode": "animation.goe_tnt.beacon_tnt.explode",
+        "overlay_size": "animation.goe_tnt.tnt.overlay_size"
+      },
+      "particle_effects": {
+        "buff_effects": "goe_tnt:buff_effects",
+        "blue_collapsing_small": "goe_tnt:blue_collapsing_small",
+        "blue_collapsing_lines": "goe_tnt:blue_collapsing_lines",
+        "blue_pulsing": "goe_tnt:blue_pulsing",
+        "atmosphere_impact_blue":"goe_tnt:atmosphere_impact_blue",
+        "border":"goe_tnt:border",
+        "border_small":"goe_tnt:border_small"
+      },
+      "render_controllers": [ 
+        "controller.render.goe_tnt.tnt",
+        {"controller.render.goe_tnt.beacon_tnt_perimiter": "q.mark_variant == 2"},
+        {"controller.render.goe_tnt.tnt_boost_scale": "query.property('goe_tnt:boost_level') > 0"}
+      ]
+    }
+  }
+}

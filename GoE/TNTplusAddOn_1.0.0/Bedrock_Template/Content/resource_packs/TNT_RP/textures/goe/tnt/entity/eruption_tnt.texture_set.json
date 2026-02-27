@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "eruption_tnt",
+		"metalness_emissive_roughness": "eruption_tnt_mer",
+		"heightmap": "eruption_tnt_height"
+	}
+}

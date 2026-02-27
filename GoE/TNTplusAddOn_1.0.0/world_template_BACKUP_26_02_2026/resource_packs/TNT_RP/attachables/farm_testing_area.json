@@ -1,0 +1,30 @@
+{
+    "format_version": "1.10.0",
+    "minecraft:attachable": {
+        "description": {
+            "identifier": "goe_tnt:farm_testing_area",
+            "materials": {
+                "default": "entity_alphatest"
+            },
+            "textures": {
+                "default": "textures/goe/tnt/items/structure/farm"
+            },
+            "geometry": {
+                "default": "geometry.goe_tnt.display_item"
+            },
+            "render_controllers": [
+                "controller.render.goe_tnt.default"
+            ],
+            "animations": {
+				"hold.fp": "animation.goe_tnt.item.hold.fp",
+				"hold.tp": "animation.goe_tnt.item.hold.tp"
+			},
+			"scripts": {
+				"animate": [ 
+					{ "hold.fp": "c.is_first_person" },
+					{ "hold.tp": "!c.is_first_person" }
+				]
+			}
+        }
+    }
+}

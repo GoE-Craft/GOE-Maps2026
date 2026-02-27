@@ -1,0 +1,71 @@
+{
+	"format_version": "1.10.0",
+	"particle_effect": {
+		"description": {
+			"identifier": "goe_tnt:thief_fountain",
+			"basic_render_parameters": {
+				"material": "particles_alpha",
+				"texture": "textures/goe/tnt/particles/thief_mask"
+			}
+		},
+		"curves": {
+			"variable.gravity": {
+				"type": "bezier",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_age",
+				"nodes": [14.95, 15.49, 18.21, -1.1]
+			},
+			"variable.shrink": {
+				"type": "linear",
+				"input": "v.particle_age",
+				"horizontal_range": "v.particle_lifetime",
+				"nodes": [0, 1, 0]
+			}
+		},
+		"components": {
+			"minecraft:emitter_initialization": {
+				"creation_expression": "v.size = 0.5;v.speed = 12;"
+			},
+			"minecraft:emitter_rate_steady": {
+				"spawn_rate": 30,
+				"max_particles": 400
+			},
+			"minecraft:emitter_lifetime_once": {
+				"active_time": 1.5
+			},
+			"minecraft:emitter_shape_disc": {
+				"offset": [0, 0.5, 0],
+				"radius": 7.5,
+				"surface_only": true,
+				"direction": "inwards"
+			},
+			"minecraft:particle_lifetime_expression": {
+				"max_lifetime": 1
+			},
+			"minecraft:particle_initial_speed": 8,
+			"minecraft:particle_motion_dynamic": {
+				"linear_acceleration": [0, "variable.gravity * v.speed", 0],
+				"linear_drag_coefficient": 0.2
+			},
+			"minecraft:particle_appearance_billboard": {
+				"size": ["v.particle_random_1* v.size", "v.particle_random_1* v.size"],
+				"facing_camera_mode": "rotate_xyz",
+				"uv": {
+					"texture_width": 32,
+					"texture_height": 32,
+					"uv": [0, 0],
+					"uv_size": [32, 32]
+				}
+			},
+			"minecraft:particle_appearance_tinting": {
+				"color": {
+					"interpolant": "v.particle_age / v.particle_lifetime",
+					"gradient": {
+						"0.45": "#FFFFFFFF",
+						"0.75": "#FFFF00FB"
+					}
+				}
+			}
+		}
+	}
+}

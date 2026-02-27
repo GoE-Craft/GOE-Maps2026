@@ -1,0 +1,68 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:mega_crater_tnt",
+      "materials": {
+        "default": "entity_alphatest",
+        "beam": "goe_tnt_border",
+        "crack": "goe_tnt_border",
+        "cracks": "entity_alphatest",
+        "overlay_tnt": "charged_creeper"
+      },
+      "textures": {
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+        "default": "textures/goe/tnt/entity/mega_crater_tnt",
+        "cracks": "textures/goe/tnt/entity/mega_crater_cracks"
+      },
+      "geometry": {
+        "default": "geometry.mega_crater_tnt",
+        "cracks": "geometry.mega_crater_cracks",
+        "overlay_tnt": "geometry.overlay_mega_crater_tnt"
+      },
+      "scripts": {
+        "pre_animation": [
+          "v.should_swell = query.property('goe_tnt:swell');",
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+          "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+          "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
+        ],
+        "animate": [
+          {"swell": "q.mark_variant == 1"},
+          {"charge": "q.mark_variant == 1"},
+          {"cracks_charge": "q.mark_variant == 1"},
+          {"explosion": "q.mark_variant == 2"},
+          {"overlay_size": "v.boost_scale > 1"}
+        ]
+      },
+      "animations": {
+        "swell": "animation.goe_tnt.mega_crater_tnt.swell",
+        "cracks_charge": "animation.goe_tnt.mega_crater_cracks.cracks_charge",
+        "charge": "animation.goe_tnt.mega_crater_tnt.charge",
+        "explosion": "animation.goe_tnt.mega_crater_tnt.explode",
+        "overlay_size": "animation.goe_tnt.tnt.overlay_size" 
+      },
+      "particle_effects": {
+        "beams": "goe_tnt:dragon_beam",
+        "pull_stone": "goe_tnt:mega_crater_pull_stone",
+        "fuse": "goe_tnt:mega_crater_fuse",
+        "fire": "goe_tnt:mega_crater_fire",
+        "explosion": "goe_tnt:mega_crater_explosion",
+        "explosion_realistic": "goe_tnt:mega_crater_big_explosion",
+        "ring": "goe_tnt:mega_crater_ring"
+      },
+      "render_controllers": [
+        "controller.render.goe_tnt.mega_crater_tnt",
+        {"controller.render.goe_tnt.mega_crater_cracks": "q.mark_variant == 1"},
+        {"controller.render.goe_tnt.tnt_boost_scale": "v.boost_scale > 1"}
+      ]
+    }
+  }
+}

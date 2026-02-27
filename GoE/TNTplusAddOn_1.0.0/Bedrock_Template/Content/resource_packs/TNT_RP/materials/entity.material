@@ -1,0 +1,46 @@
+{
+  "materials": {
+    "version": "1.0.0",
+
+    "goe_tnt_border:entity_beam_additive": {
+      "+defines": ["USE_UV_ANIM"]
+    },
+    "goe_tnt_anim_alphatest:entity_alphatest": {
+      "+defines": ["USE_UV_ANIM"]
+    },
+    "goe_tnt_slash:entity_alphablend": {
+      "+defines": ["USE_UV_ANIM"]
+    },
+
+    "goe_tnt_sun_light:entity_alphablend": {
+      "-defines": ["FANCY"],
+      "+states": ["Blending", "DisableDepthWrite", "DisableCulling"],
+      "blendSrc": "SourceAlpha",
+      "blendDst": "One",
+      "depthFunc": "LessEqual"
+    },
+
+    "goe_tnt_sun_source:entity_alphablend": {
+      "-defines": ["FANCY"],
+      "+states": ["Blending", "DisableDepthWrite", "DisableCulling"],
+      "blendSrc": "SourceAlpha",
+      "blendDst": "OneMinusSrcAlpha",
+      "depthFunc": "LessEqual"
+    },
+
+    "goe_tnt_additive:entity_beam_additive": {
+        "+defines": ["USE_OVERLAY"],
+        "+states": [ "DisableCulling", "DisableDepthWrite" ]
+    },
+    "goe_tnt_structure_border:entity_beam_additive": {
+      "+defines": ["USE_UV_ANIM", "USE_OVERLAY"],
+      "+states": [ "DisableCulling", "DisableDepthWrite", "DisableAlphaWrite" ]
+    },
+
+    "goe_mob:entity_alphatest": {},
+
+    "goe_tnt_alphablend_doublesided:entity_alphablend": {
+      "+states": [ "DisableCulling" ]
+    }
+  }
+}

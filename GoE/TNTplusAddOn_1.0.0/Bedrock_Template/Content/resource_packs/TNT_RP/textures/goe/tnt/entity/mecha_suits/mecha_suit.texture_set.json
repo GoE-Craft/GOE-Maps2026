@@ -1,0 +1,8 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "mecha_suit",
+		"metalness_emissive_roughness": "mecha_suit_mer",
+		"heightmap": "mecha_suit_height"
+	}
+}
