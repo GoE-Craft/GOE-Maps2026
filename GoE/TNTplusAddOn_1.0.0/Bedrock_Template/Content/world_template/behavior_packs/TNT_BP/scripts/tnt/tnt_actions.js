@@ -43,6 +43,7 @@ import { proxyTNTAction } from "./actions/proxy_tnt";
 import { specializedTNTAction } from "./actions/specialized_tnt";
 import { snapshotTNTAction } from "./actions/snapshot_tnt";
 import { matrixTNTAction } from "./actions/matrix_tnt";
+import { blackHoleTNTAction } from "./actions/black_hole_tnt";
 
 /**
  * TNT Actions Module
@@ -223,6 +224,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "matrix":
             matrixTNTAction(dimension, chargeLevel, location, entity);
+            break;
+        case "black_hole":
+            blackHoleTNTAction(dimension, chargeLevel, location);
             break;
         default:
             break;

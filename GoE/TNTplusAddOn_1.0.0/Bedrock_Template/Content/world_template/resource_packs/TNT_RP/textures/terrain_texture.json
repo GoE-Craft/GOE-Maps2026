@@ -12,6 +12,7 @@
     "daytime_tnt": { "textures": "textures/goe/tnt/entity/daytime_tnt" },
     "balloon_tnt": { "textures": "textures/goe/tnt/entity/balloon_tnt" },
     "beacon_tnt": { "textures": "textures/goe/tnt/entity/beacon_tnt" },
+    "black_hole_tnt": { "textures": "textures/goe/tnt/entity/black_hole_tnt" },
     "blind_tnt": { "textures": "textures/goe/tnt/entity/blind_tnt" },
     "blink_tnt": { "textures": "textures/goe/tnt/entity/blink_tnt" },
     "bloom_tnt": { "textures": "textures/goe/tnt/entity/bloom_tnt" },

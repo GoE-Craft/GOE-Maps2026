@@ -54,7 +54,7 @@
 					"parent": "bb_model",
 					"pivot": [0, 14.5, 0],
 					"locators": {
-						"tornado": {
+						"void_tornado": {
 							"offset": [0, 15, 0],
 							"rotation": [0, 0, -180]
 						}
@@ -135,7 +135,7 @@
 					"parent": "bb_model",
 					"pivot": [0, 14.5, 0],
 					"locators": {
-						"tornado": {
+						"void_tornado": {
 							"offset": [0, 15, 0],
 							"rotation": [0, 0, -180]
 						}

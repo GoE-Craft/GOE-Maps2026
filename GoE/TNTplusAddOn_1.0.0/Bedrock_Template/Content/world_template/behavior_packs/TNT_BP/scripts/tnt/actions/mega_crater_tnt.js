@@ -16,8 +16,8 @@ function* destroySphere(dimension, location, radius) {
 
     // Layer by layer, yield after each shell
     for (let currentShellRadius = 0; currentShellRadius <= radius; currentShellRadius++) {
-        for (let blockOffsetX = -radius; blockOffsetX <= radius; blockOffsetX++) {
-            for (let blockOffsetY = -radius; blockOffsetY <= radius; blockOffsetY++) {
+        for (let blockOffsetY = -radius; blockOffsetY <= radius; blockOffsetY++) {
+            for (let blockOffsetX = -radius; blockOffsetX <= radius; blockOffsetX++) {
                 for (let blockOffsetZ = -radius; blockOffsetZ <= radius; blockOffsetZ++) {
 
                     const distanceSquared =
@@ -37,21 +37,22 @@ function* destroySphere(dimension, location, radius) {
                             y: targetBlockY,
                             z: targetBlockZ
                         });
-
+                        const blockId = targetBlock?.typeId;
                         if (
-                            targetBlock &&
-                            targetBlock.typeId !== "minecraft:air" &&
-                            targetBlock.typeId !== "minecraft:bedrock"
+                            blockId &&
+                            blockId !== "minecraft:air" &&
+                            blockId !== "minecraft:bedrock"
                         ) {
                             targetBlock.setType("minecraft:air");
                         }
                     } catch (error) {
+                        console.log(`Error processing block at (${targetBlockX}, ${targetBlockY}, ${targetBlockZ}): ${error}`);
                         // optional error handling
                     }
                 }
             }
         }
-        yield;
+        yield; // Yield after processing each shell to allow for better performance and responsiveness
     }
 
     // entities

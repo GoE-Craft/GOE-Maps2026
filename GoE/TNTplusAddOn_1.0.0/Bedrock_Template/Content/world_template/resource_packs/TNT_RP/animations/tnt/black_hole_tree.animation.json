@@ -1,0 +1,28 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.black_hole_tree.fly": {
+			"animation_length": 8.5,
+			"bones": {
+				"tree": {
+					"rotation": ["-q.anim_time * 100", 0, 0],
+					"position": {
+						"2.8": [156, -21, 285],
+						"6.1": [0, -21, -4]
+					},
+					"scale": {
+						"0.0": [0, 0, 0],
+						"2.7": [0, 0, 0],
+						"2.8": [1, 1, 1],
+						"5.6": [1, 1, 1],
+						"6.1": [0, 0, 0],
+						"8.5": [0, 0, 0]
+					}
+				},
+				"tree_rotation": {
+					"rotation": [0, "-q.anim_time *-200", 0]
+				}
+			}
+		}
+	}
+}

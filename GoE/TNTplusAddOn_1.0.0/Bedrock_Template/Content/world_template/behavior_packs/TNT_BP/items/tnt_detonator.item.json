@@ -28,7 +28,7 @@
 			"goe_tnt:tnt_detonator": {
 				"range": 30,
 				"area": true,
-				"radius": 6
+				"radius": 50
 			},
 			"minecraft:use_modifiers": {
 				"use_duration": 0

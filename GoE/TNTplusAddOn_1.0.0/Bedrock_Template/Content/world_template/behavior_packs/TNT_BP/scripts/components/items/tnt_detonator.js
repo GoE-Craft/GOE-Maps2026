@@ -13,7 +13,6 @@ export const TntDetonatorComponent = {
         const comp = item.getComponent("minecraft:cooldown");
         if (comp) {
             comp.startCooldown(player);
-            return;
         }
 
         // Damage the held item
@@ -29,7 +28,6 @@ export const TntDetonatorComponent = {
         const comp = item.getComponent("minecraft:cooldown");
         if (comp) {
             comp.startCooldown(player);
-            return;
         }
 
         // Damage the held item
@@ -143,7 +141,9 @@ function* shootLaserProjectile(player, maxDistance) {
             } else {
                 return;
             }
-        } catch(e) {}
+        } catch(e) {
+            console.log(`Error in laser projectile at ${point.x}, ${point.y}, ${point.z}: ${e}`);
+        }
         yield;
     }
 }
