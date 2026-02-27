@@ -47,7 +47,7 @@
         "cracks_charge": "animation.mega_crater_cracks.cracks_charge",
         "charge": "animation.mega_crater_tnt.charge",
         "explosion": "animation.mega_crater_tnt.explode",
-        "overlay_size": "animation.tnt.boost_scale"
+        "overlay_size": "animation.tnt.overlay_size" 
       },
       "particle_effects": {
         "beams": "goe_tnt:dragon_beam",

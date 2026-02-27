@@ -38,7 +38,7 @@
       "animations": {
         "tnt_swelling": "animation.magnet_tnt.swell",
         "charge": "animation.magnet_tnt.charge",
-        "overlay_size": "animation.tnt.boost_scale"
+        "overlay_size": "animation.tnt.overlay_size" 
       },
       "particle_effects": {
         "magnet_explosion": "goe_tnt:magnet_explosion",

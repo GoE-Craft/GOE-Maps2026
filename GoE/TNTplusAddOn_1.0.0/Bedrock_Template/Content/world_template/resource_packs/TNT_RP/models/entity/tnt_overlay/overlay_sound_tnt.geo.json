@@ -12,17 +12,17 @@
 			},
 			"bones": [
 				{
-					"name": "root",
+					"name": "Main",
 					"pivot": [0, 0, 0]
 				},
 				{
-					"name": "bb_main",
-					"parent": "root",
-					"pivot": [7, 0, -7],
+					"name": "TNT",
+					"parent": "Main",
+					"pivot": [0, 0, 0],
 					"cubes": [
 						{
-							"origin": [-10, 0, -10],
-							"size": [20, 15.5, 20],
+							"origin": [-12, 0, -13],
+							"size": [24, 17.5, 25],
 							"uv": {
 								"north": {"uv": [0, 16], "uv_size": [16, 16]},
 								"east": {"uv": [0, 16], "uv_size": [16, 16]},
