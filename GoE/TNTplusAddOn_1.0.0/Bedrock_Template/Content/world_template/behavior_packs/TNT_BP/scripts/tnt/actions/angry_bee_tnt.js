@@ -1,7 +1,7 @@
-import { system, BlockPermutation, MolangVariableMap } from "@minecraft/server";
+import { system, BlockPermutation, MolangVariableMap, EntityDamageCause } from "@minecraft/server";
 
 // Spawn bees and replace blocks in a spherical radius with honey blocks (skips air/water/lava), scaled by charge level
-export function* angryBeeTNTAction(dimension, chargeLevel, location, sourceEntity) {
+export function* angryBeeTNTAction(dimension, chargeLevel, location, sourceEntity, excludePlayerId) {
 
     const baseRadius = 5;
     const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
@@ -20,6 +20,8 @@ export function* angryBeeTNTAction(dimension, chargeLevel, location, sourceEntit
         y: Number(location?.y ?? 0),
         z: Number(location?.z ?? 0)
     };
+
+    const playerScanRadius = radius * 2;
 
     const explosionBlockBase = {
         x: Math.floor(explosionLocation.x),
@@ -53,6 +55,51 @@ export function* angryBeeTNTAction(dimension, chargeLevel, location, sourceEntit
     try {
         dimension.runCommand(`event entity @e[type=bee,x=${explosionBlockBase.x},y=${explosionBlockBase.y},z=${explosionBlockBase.z},r=8] attacked`);
     } catch {}
+
+    let nearbyPlayers = [];
+    try {
+        nearbyPlayers = dimension.getPlayers({
+            location: explosionLocation,
+            maxDistance: playerScanRadius
+        }).filter(p => !excludePlayerId || p.id !== excludePlayerId);
+    } catch {}
+
+    let nearbyMonsters = [];
+    try {
+        nearbyMonsters = dimension.getEntities({
+            families: ["monster"],
+            location: explosionLocation,
+            maxDistance: playerScanRadius
+        });
+    } catch {}
+
+    const potentialTargets = [...nearbyPlayers, ...nearbyMonsters].filter(e => e?.isValid);
+
+    if (potentialTargets.length > 0) {
+        let bees = [];
+        try {
+            bees = dimension.getEntities({
+                type: "minecraft:bee",
+                location: explosionLocation,
+                maxDistance: radius + 8
+            });
+        } catch {}
+
+        for (const bee of bees) {
+            try {
+                if (!bee?.isValid) continue;
+
+                const targetEntity = potentialTargets[Math.floor(Math.random() * potentialTargets.length)];
+                if (!targetEntity?.isValid) continue;
+
+                // Poke the bee with damage attributed to the target so it aggroes on that entity
+                bee.applyDamage(1, {
+                    cause: EntityDamageCause.entityAttack,
+                    damagingEntity: targetEntity
+                });
+            } catch {}
+        }
+    }
 
     const radiusSquared = radius * radius;
     let operationCounter = 0;

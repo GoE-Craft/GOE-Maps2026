@@ -149,9 +149,12 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "villager_decoy":
             system.runJob(villagerDecoyTNTAction(dimension, chargeLevel, location, entity));
             break;
-        case "angry_bee":
-            system.runJob(angryBeeTNTAction(dimension, chargeLevel, location, entity));
+        case "angry_bee": {
+            const excludePlayerId = excludePlayer.get(entity?.id);
+            if (entity?.id && excludePlayer.has(entity.id)) excludePlayer.delete(entity.id);
+            system.runJob(angryBeeTNTAction(dimension, chargeLevel, location, entity, excludePlayerId));
             break;
+        }
         case "cloning":
             system.runJob(cloningTNTAction(dimension, chargeLevel, location, entity));
             break;

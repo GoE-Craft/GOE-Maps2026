@@ -6,21 +6,21 @@
 			"category": "music",
 			"min_distance": 10.0,
 			"sounds": [
-				"sounds/structures/confirm_button"
+				"sounds/structures/button_press_structure_builder"
 			]
 		},
 		"goe_tnt:cancel_button": {
 			"category": "music",
 			"min_distance": 10.0,
 			"sounds": [
-				"sounds/structures/cancel_button"
+				"sounds/structures/tnt_deny"
 			]
 		},
 		"goe_tnt:structure_place": {
 			"category": "music",
 			"sounds": [
 				{
-					"name": "sounds/structures/structure_place",
+					"name": "sounds/structures/place_build_menu",
 					"volume": 1
 				}
 			]
@@ -37,7 +37,7 @@
 			"category": "music",
 			"sounds": [
 				{
-					"name": "sounds/structures/structure_button_appear",
+					"name": "sounds/structures/place_build_menu",
 					"volume": 1
 				}
 			]
@@ -46,7 +46,7 @@
 			"category": "music",
 			"sounds": [
 				{
-					"name": "sounds/structures/structure_button_appear",
+					"name": "sounds/structures/remove_build_menu",
 					"volume": 1
 				}
 			]
@@ -295,6 +295,12 @@
 			"category": "music",
 			"sounds": [
 				{ "name": "sounds/goe/tnt/sfx/orbital_cannon_tnt/tnt_orbital_cannon_explode", "volume": 1 }
+			]
+		},
+		"goe_tnt:orbital_cannon_tnt_explosion": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/orbital_cannon_tnt/tnt_orbital_cannon_explosion", "volume": 1, "pitch": 0.3 }
 			]
 		},
 		// Shadow TNT
@@ -1025,7 +1031,7 @@
 		"goe_tnt:tnt_detonator_laser": {
 			"category": "player",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/laser", "volume": 0.2, "pitch": 1.2 }
+				{ "name": "sounds/goe/tnt/sfx/tnt_detonator", "volume": 1, "pitch": 1 }
 			]
 		},
 		"goe_tnt:ice_blast": {
@@ -1037,19 +1043,19 @@
 		"goe_tnt:tnt_boost": {
 			"category": "player",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/tnt_boost", "volume": 1, "pitch": 1.2 }
+				{ "name": "sounds/goe/tnt/sfx/tnt_boost3", "volume": 1, "pitch": 1 }
 			]
 		},
 		"goe_tnt:tnt_maxed_out": {
 			"category": "player",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/tnt_boost_max", "volume": 1, "pitch": 1.2 }
+				{ "name": "sounds/goe/tnt/sfx/tnt_boost_v2", "volume": 1, "pitch": 1 }
 			]
 		},
 		"goe_tnt:tnt_timer_added": {
 			"category": "player",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/tnt_boost_timer", "volume": 1, "pitch": 1.2 }
+				{ "name": "sounds/goe/tnt/sfx/increasing_timer", "volume": 1, "pitch": 1 }
 			]
 		},
 		"goe_tnt:tnt_timer": {

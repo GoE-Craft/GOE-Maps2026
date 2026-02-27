@@ -393,7 +393,8 @@ export const TNT_GLD = [
             soundDelay: 5
         },
         explosionEffects: {
-            soundEffect: "goe_tnt:orbital_cannon_tnt_explode",
+            soundEffect: "goe_tnt:orbital_cannon_tnt_explosion",
+            soundDelay: 5,
             explosionAnimationLength: 2
         },
         explosionProperties: {

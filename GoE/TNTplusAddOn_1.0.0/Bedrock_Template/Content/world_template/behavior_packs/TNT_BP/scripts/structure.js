@@ -273,7 +273,7 @@ export async function onScriptEventReceive(event) {
 			await sourceEntity.dimension.spawnParticle(spiralParticleName, centerLocation.toLocation());
 
 		await utils.runMobCommand(sourceEntity, `playsound goe_tnt:build_structure @a[r=48] ~ ~ ~ 100 1 1`);
-		await utils.runMobCommand(sourceEntity, `playsound goe_tnt:structure_button_appear @a[r=48] ~ ~ ~ 100 1 1`);
+		await utils.runMobCommand(sourceEntity, `playsound goe_tnt:structure_button_disappear @a[r=48] ~ ~ ~ 100 1 1`);
 		await utils.runMobCommand(structureBorder, `structure load ${structureId} ${loadX} ${height} ${loadZ} ${structureDegrees}_degrees none layer_by_layer 3 false true`);
 
 		system.runTimeout(() => { structureLoadStep2(sourceEntity, structureData, structureDegrees, height); }, 70);
