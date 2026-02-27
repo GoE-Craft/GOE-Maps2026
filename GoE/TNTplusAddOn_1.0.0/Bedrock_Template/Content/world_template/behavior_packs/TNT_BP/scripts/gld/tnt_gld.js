@@ -1439,7 +1439,7 @@ export const TNT_GLD = [
             specialAction: null
         },
         blockHeight: 1.9 // if not defined, defaults to 2 - timer height depends on this
-    }
+    },
     {
         blockId: "goe_tnt:black_hole_tnt",
         fuseTime: 55,
@@ -1466,9 +1466,6 @@ export const TNT_GLD = [
             summonMob: null,
             summonDelay: 10,
             specialAction: "black_hole"
-        },
-        preExplosionProperties: {
-            specialAction: null
         },
         blockHeight: 1.5
     },
