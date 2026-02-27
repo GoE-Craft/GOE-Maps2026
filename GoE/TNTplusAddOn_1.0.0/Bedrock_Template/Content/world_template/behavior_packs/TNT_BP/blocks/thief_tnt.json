@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§cThief TNT§f\nGets all the items around after the explosion!§r",
+      "minecraft:display_name": "§cThief TNT§f\nPulls dropped items to you!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

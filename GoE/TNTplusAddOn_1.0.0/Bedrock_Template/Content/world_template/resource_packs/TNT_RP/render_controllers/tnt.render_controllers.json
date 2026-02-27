@@ -13,15 +13,33 @@
       }
     },
     "controller.render.tnt_boost_scale": {
-      "geometry": "Geometry.boost_level",
-      "materials": [ { "*": "Material.boost_level" } ],
-      "textures": [ "Texture.default" ],
+      "arrays": {
+          "textures": {
+              "Array.textures": [
+                  "Texture.boost_level_0",
+                  "Texture.boost_level_1",
+                  "Texture.boost_level_2",
+                  "Texture.boost_level_3",
+                  "Texture.boost_level_4"
+              ]
+          }
+      },
+      "geometry": "Geometry.overlay_tnt",
+      "materials": [{ "*": "Material.overlay_tnt" }],
+      "textures": ["Array.textures[query.property('goe_tnt:boost_level')]"],
       "overlay_color": {
-          "r": "query.property('goe_tnt:boost_level') / 4",
-          "g": "1.0 - (query.property('goe_tnt:boost_level') / 4)",
-          "b": "0.0",
-          "a": 0.25
-      }
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+      },
+      "uv_anim": {
+          "offset": [ "(v.boost_scale > 1) ? (Math.floor(query.life_time * 20.0) + query.frame_alpha) * v.anim_speed : 0.0", 
+                      "(v.boost_scale > 1) ? (Math.floor(query.life_time * 20.0) + query.frame_alpha) * v.anim_speed : 0.0" ],
+          "scale": [ "v.anim_overlay", "v.anim_overlay" ]
+      },
+      "light_color_multiplier": 0.5,
+      "ignore_lighting" : true
     },
     "controller.render.endermite_decoy_tnt": {
       "geometry": "Geometry.default",

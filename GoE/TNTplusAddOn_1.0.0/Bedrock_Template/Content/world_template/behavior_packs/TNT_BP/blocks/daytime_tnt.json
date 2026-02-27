@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eDaytime TNT§f\nUse the Daytime TNT to change the day time.§r",
+      "minecraft:display_name": "§eDaytime TNT§f\nInstantly changes the daytime!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

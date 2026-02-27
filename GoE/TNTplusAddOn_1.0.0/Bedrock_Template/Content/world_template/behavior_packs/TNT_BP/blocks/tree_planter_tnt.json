@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§aTree Planter TNT§f\nPlants a small forest!§r",
+      "minecraft:display_name": "§aTree Planter TNT§f\nGrows a mini forest instantly!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

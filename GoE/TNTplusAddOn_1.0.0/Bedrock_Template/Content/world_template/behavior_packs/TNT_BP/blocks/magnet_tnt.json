@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§1Magnet TNT§f\nPulls nearby mobs into the blast area and explodes.§r",
+      "minecraft:display_name": "§1Magnet TNT§f\nPulls mobs in before exploding!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },
