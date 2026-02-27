@@ -1,7 +1,8 @@
 import { system, world, Player } from "@minecraft/server";
 
 export function snapshotTNTAction(dimension, chargeLevel, location, entity) {
-    const radius = 5;
+    const baseRadius = 5;
+    const radius = baseRadius + Math.round(baseRadius * 0.25 * chargeLevel);
     const blindDurationSeconds = 5;
     const blindDurationTicks = blindDurationSeconds * 20;
 

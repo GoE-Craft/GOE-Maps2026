@@ -42,6 +42,7 @@ import { balloonTNTAction } from "./actions/balloon_tnt";
 import { proxyTNTAction } from "./actions/proxy_tnt";
 import { specializedTNTAction } from "./actions/specialized_tnt";
 import { snapshotTNTAction } from "./actions/snapshot_tnt";
+import { matrixTNTAction } from "./actions/matrix_tnt";
 
 /**
  * TNT Actions Module
@@ -219,6 +220,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
         case "snapshot":
             console.log("Activating Snapshot TNT action");
             snapshotTNTAction(dimension, chargeLevel, location, entity)
+            break;
+        case "matrix":
+            matrixTNTAction(dimension, chargeLevel, location, entity);
             break;
         default:
             break;

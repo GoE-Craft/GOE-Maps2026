@@ -1029,7 +1029,7 @@ export const TNT_GLD = [
             breaksBlocks: false,
             summonMob: null,
             summonDelay: 10,
-            specialAction: ""
+            specialAction: "matrix"
         },
         preExplosionProperties: {
             specialAction: null

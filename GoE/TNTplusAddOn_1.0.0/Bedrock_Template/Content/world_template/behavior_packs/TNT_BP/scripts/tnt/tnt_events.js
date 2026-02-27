@@ -80,7 +80,7 @@ export function onPlayerBreakBlockBefore(event) {
  */
 export function onEntitySpawnEvent(event) {
     const entity = event?.entity || event.entity;
-    if (!entity) return;
+    if (!entity || !entity.isValid) return;
 
     // Only care about item entities (things dropped by dispensers are item entities)
     if (entity.typeId !== "minecraft:item") return;
