@@ -36,7 +36,7 @@ export function startGuideBookReminderInterval() {
             }
 
             if (!hasGuideBook) {
-                utils.tellraw(player, "@s", "§aYou do not have a §4TNT Guide§r§a. Use a vanilla §4TNT + Book§a to craft one.§r");
+                utils.tellraw(player, "@s", "§aYou do not have a §cTNT Guide§r§a. Use a vanilla §cTNT + Book§a to craft one.§r");
                 player.playSound("random.orb");
             }
         }

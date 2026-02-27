@@ -93,13 +93,7 @@
     "goe_tnt:silent_tnt": {
         "sound": "grass"
     },
-    "goe_tnt:snapshot_tnt": {
-        "sound": "grass"
-    },
     "goe_tnt:sound_tnt": {
-        "sound": "grass"
-    },
-    "goe_tnt:specialized_tnt": {
         "sound": "grass"
     },
     "goe_tnt:structure_tnt": {

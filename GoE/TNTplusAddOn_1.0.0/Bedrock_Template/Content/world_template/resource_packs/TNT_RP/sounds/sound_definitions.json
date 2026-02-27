@@ -1,13 +1,6 @@
 {
 	"format_version": "1.20.20",
 	"sound_definitions": {
-		"goe_tnt:directional_tnt": {
-			"category": "block",
-			"max_distance": 20.0,
-			"sounds": [
-				"sounds/sfx/tnt/directional_tnt"
-			]
-		},
 		//#region Structure Sounds
 		"goe_tnt:confirm_button": {
 			"category": "music",
@@ -68,7 +61,7 @@
 			]
 		},
 		//endregion
-		
+
 		//#region Book UI Sounds
 		"goe_tnt:book_close_music": {
 			"category": "music",
@@ -111,7 +104,7 @@
 			"sounds": [ { "name": "sounds/goe/tnt/sfx/goe_tnt_shop_decline", "volume": 1 } ]
 		},
 		//#endregion
-		
+
 		//#region Mecha Suit Sounds
 
 		"goe_tnt:mecha_suit_death": {
@@ -206,9 +199,162 @@
 			]
 		},
 		//#endregion
-		
+
 		//#region Custom TNT Sounds
 
+		// Directional TNT
+		"goe_tnt:directional_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/directional_tnt/tnt_directional_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:directional_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/directional_tnt/tnt_directional_explode", "volume": 1 }
+			]
+		},
+		"goe_tnt:directional_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/directional_tnt/tnt_directional_charging", "volume": 1 }
+			]
+		},
+		// Glitch TNT
+		"goe_tnt:glitch_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/glitch_tnt/tnt_glitch_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:glitch_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/glitch_tnt/tnt_glitch_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:glitch_tnt_explosion": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/glitch_tnt/tnt_glitch_explosion", "volume": 1 }
+			]
+		},
+		// Hacker TNT
+		"goe_tnt:hacker_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/hacker_tnt/tnt_hacker_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:hacker_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/hacker_tnt/tnt_hacker_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:hacker_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/hacker_tnt/tnt_hacker_explode", "volume": 1 }
+			]
+		},
+		// Mega Crater TNT
+		"goe_tnt:mega_crater_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/mega_crater_tnt/tnt_mega_crater_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:mega_crater_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/mega_crater_tnt/tnt_mega_crater_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:mega_crater_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/mega_crater_tnt/tnt_mega_crater_explode", "volume": 1 }
+			]
+		},
+		// Orbital Cannon TNT
+		"goe_tnt:orbital_cannon_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/orbital_cannon_tnt/tnt_orbital_cannon_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:orbital_cannon_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/orbital_cannon_tnt/tnt_orbital_cannon_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:orbital_cannon_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/orbital_cannon_tnt/tnt_orbital_cannon_explode", "volume": 1 }
+			]
+		},
+		// Shadow TNT
+		"goe_tnt:shadow_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/shadow_tnt/tnt_shadow_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:shadow_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/shadow_tnt/tnt_shadow_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:shadow_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/shadow_tnt/tnt_shadow_explode", "volume": 1 }
+			]
+		},
+		// Silent TNT
+		"goe_tnt:silent_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/silent_tnt/tnt_silent_fuse", "volume": 0.1 }
+			]
+		},
+		"goe_tnt:silent_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/silent_tnt/tnt_silent_charging", "volume": 0.1 }
+			]
+		},
+		"goe_tnt:silent_tnt_explode": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/silent_tnt/tnt_silent_explode", "volume": 0.1 }
+			]
+		},
+		// Void TNT
+		"goe_tnt:void_tnt_fuse": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/void_tnt/tnt_void_fuse", "volume": 1 }
+			]
+		},
+		"goe_tnt:void_tnt_charging": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/void_tnt/tnt_void_charging", "volume": 1 }
+			]
+		},
+		"goe_tnt:void_tnt_explosion": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/void_tnt/tnt_void_explosion", "volume": 1 }
+			]
+		},
+		// Magnet TNT
 		"goe_tnt:magnet_tnt_fuse": {
 			"category": "music",
 			"sounds": [
@@ -873,9 +1019,9 @@
 			]
 		},
 		//#endregion
-		
+
 		//#region Miscellaneous Sounds
-		
+
 		"goe_tnt:tnt_detonator_laser": {
 			"category": "player",
 			"sounds": [

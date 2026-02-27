@@ -48,6 +48,12 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
                 z: nearbyEntity.location.z
             };
 
+            const dx = iceCubeSpawnLocation.x - explosionLocation.x;
+            const dy = iceCubeSpawnLocation.y - explosionLocation.y;
+            const dz = iceCubeSpawnLocation.z - explosionLocation.z;
+
+            if ((dx * dx + dy * dy + dz * dz) > (radius * radius)) continue;
+
             dimension.spawnEntity("goe_tnt:ice_cube", iceCubeSpawnLocation);
             nearbyEntity.clearVelocity();
         } catch {}
@@ -148,6 +154,53 @@ export function* freezingTNTAction(dimension, chargeLevel, location, sourceEntit
                 // freeze only the surface block (1 thick)
                 tryFreeze(x, y, z);
             }
+        }
+    }
+
+    // Spawn a few extra ice cubes on the ground within the radius
+    const extraIceCubes = 3;
+
+    for (let i = 0; i < extraIceCubes; i++) {
+        let spawned = false;
+
+        for (let attempt = 0; attempt < 10 && !spawned; attempt++) {
+            const angle = Math.random() * Math.PI * 2;
+            const r = Math.random() * radius;
+
+            const px = Math.floor(explosionBlockBase.x + Math.cos(angle) * r);
+            const pz = Math.floor(explosionBlockBase.z + Math.sin(angle) * r);
+
+            // Find ground: scan downward a bit from explosion height
+            let groundY = null;
+            for (let py = explosionBlockBase.y + 3; py >= explosionBlockBase.y - 5; py--) {
+                const typeId = getTypeId(px, py, pz);
+                if (!typeId || airIds.has(typeId)) continue; // still air
+                if (skipIds.has(typeId)) break; // bedrock/invalid, abort this column
+
+                const aboveType = getTypeId(px, py + 1, pz);
+                if (!aboveType || airIds.has(aboveType)) {
+                    groundY = py + 1;
+                }
+                break;
+            }
+
+            if (groundY === null) continue;
+
+            const dx = px - explosionBlockBase.x;
+            const dy = groundY - explosionBlockBase.y;
+            const dz = pz - explosionBlockBase.z;
+            if ((dx * dx + dy * dy + dz * dz) > (radius * radius)) continue;
+
+            const spawnLocation = {
+                x: px + 0.5,
+                y: groundY,
+                z: pz + 0.5
+            };
+
+            try {
+                dimension.spawnEntity("goe_tnt:ice_cube", spawnLocation);
+                spawned = true;
+            } catch {}
         }
     }
 

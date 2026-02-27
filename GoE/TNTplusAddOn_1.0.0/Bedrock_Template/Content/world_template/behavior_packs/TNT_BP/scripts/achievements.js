@@ -28,8 +28,7 @@ function getMilestoneRewardStructure(milestoneNumber) {
     return milestone?.rewardStructure ?? null;
 }
 
- // Adding 2, length starts at 0 we need to compensate
-const TOTAL_ACHIEVEMENTS = () => Achievements.tnt_individual.length + Achievements.milestones.length + 2;
+const TOTAL_ACHIEVEMENTS = () => Achievements.tnt_individual.length + Achievements.milestones.length;
 
 function unlockAllCompleteReward(player) {
     player.setDynamicProperty("goe_tnt_all_achievements_reward_received", true);
@@ -40,7 +39,7 @@ function unlockAllCompleteReward(player) {
     system.runTimeout(() => {
         player.playSound("goe_tnt:done_all_achievements_music");
         utils.title(player, "@s", `§d§lAll Achievements Complete!`);
-        utils.tellraw(player, "@s", `§d[Completion] §eTNT Master §r- You have discovered every TNT achievement!`);
+        utils.tellraw(player, "@s", `§d[Completion] §cTNT Master §r- You have discovered every TNT achievement!`);
 
         if (allComplete.rewardStructure) {
             placeAchievementRewardStructure(player, allComplete.rewardStructure);

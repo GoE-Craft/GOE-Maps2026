@@ -1,5 +1,32 @@
 import { system } from "@minecraft/server";
 
+function entityHasMobFamily(targetEntity) {
+    let typeFamilyComponent;
+    try {
+        typeFamilyComponent = targetEntity.getComponent("minecraft:type_family");
+    } catch {
+        return false;
+    }
+
+    if (!typeFamilyComponent) return false;
+
+    try {
+        if (typeof typeFamilyComponent.hasTypeFamily === "function") {
+            return typeFamilyComponent.hasTypeFamily("mob");
+        }
+    } catch {}
+
+    try {
+        if (typeof typeFamilyComponent.getTypeFamilies === "function") {
+            const families = typeFamilyComponent.getTypeFamilies() ?? [];
+            return Array.isArray(families) && families.includes("mob");
+        }
+    } catch {}
+
+    const fallbackFamilies = typeFamilyComponent.family ?? typeFamilyComponent.families ?? [];
+    return Array.isArray(fallbackFamilies) && fallbackFamilies.includes("mob");
+}
+
 export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
     const cx = Math.floor(location?.x ?? 0);
@@ -25,6 +52,7 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
         try {
             if (!target?.isValid) continue;
+            if (!entityHasMobFamily(target)) continue;
 
             const p = target.location;
             if (!p) continue;
@@ -35,6 +63,7 @@ export function* hackerTNTAction(dimension, chargeLevel, location, entity) {
 
             try {
                 dimension.spawnEntity("goe_tnt:hacker_mini_explode", explodePos);
+                dimension.playSound("goe_tnt:hacker_tnt_explode", explodePos, { volume: 1, pitch: 1 });
             } catch {}
 
         } catch {}
