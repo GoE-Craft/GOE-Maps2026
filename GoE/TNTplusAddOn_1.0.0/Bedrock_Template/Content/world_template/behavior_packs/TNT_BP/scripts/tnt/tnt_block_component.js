@@ -3,6 +3,7 @@ import * as utils from "../utils";
 import * as tnt_manager from "./tnt_manager";
 import * as tnt_gld from "../gld/tnt_gld";
 import { fireLaser } from "../components/items/tnt_detonator";
+import { onPlayerBreakBlock } from "../game_events";
 
 /**
  * TNT Block Component Module
@@ -26,6 +27,7 @@ export const TntCustomComponent = {
             handleTimer(block, player);
             player.playSound("minecraft:item.book.page_turn", block.location);
         } else if (itemInHand?.typeId === "minecraft:flint_and_steel") {
+            clearBoostEntity(block);
             tnt_manager.activateTNTBlock(block, player);
             updateTimerSet(block.location, block.dimension.id, false);
         } else if (itemInHand && isPlaceableBlock(itemInHand.typeId)) {
@@ -58,12 +60,32 @@ export const TntCustomComponent = {
         // Check adjacent blocks for redstone power
         try {
             if (isReceivingRedstonePower(block)) {
+                clearBoostEntity(block);
                 tnt_manager.activateTNTBlock(block);
                 updateTimerSet(block.location, block.dimension.id, false);
             }
         } catch (e) { }
     },
+    onBreak(eventData) {
+        const block = eventData.block;
+        
+        clearBoostEntity(block);
+    }
 };
+
+export function clearBoostEntity(block){
+    const location = block.center();
+    const key = `{"x": ${location.x}, "y": ${location.y}, "z": ${location.z}}`;
+    if (tntBoostLevels.has(key)) {
+        const entityId = tntBoostLevels.get(key);
+        const entity = world.getEntity(entityId);
+        if (entity && entity.isValid) {
+            entity.remove();
+        }
+        tntBoostLevels.delete(key);
+        world.setDynamicProperty("goe_tnt:tnt_boost_levels", JSON.stringify([...tntBoostLevels]));
+    }
+}
 
 function handleTimer(block, player) {
     const timer = block.permutation.getState("goe_tnt:timer");
@@ -284,13 +306,30 @@ export function spawnBoostLevelEntity(block) {
 
     const gld = tnt_gld.getTntDataByBlockId(block.typeId);
     const typeId = gld.tntType;
+    const key = `{"x": ${location.x}, "y": ${location.y}, "z": ${location.z}}`;
 
     const entity = block.dimension.spawnEntity("goe_tnt:tnt_boost_level", { x: location.x, y: location.y - 0.5, z: location.z });
+    
+    tntBoostLevels.set(key, entity.id);
+
     entity.setProperty("goe_tnt:tnt_type", typeId);
 
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const yaw = utils.getYawFromFace(direction);
     entity.setRotation({ x: 0, y: yaw });
 
+    world.setDynamicProperty("goe_tnt:tnt_boost_levels", JSON.stringify([...tntBoostLevels]));
+
     return entity;
+}
+
+export function loadBoostLevels() {
+    const storedBoosts = world.getDynamicProperty("goe_tnt:tnt_boost_levels") || "[]";
+    const parsedBoosts = JSON.parse(storedBoosts);
+    tntBoostLevels.clear();
+    if (parsedBoosts.length > 0) {
+        for (const [loc, entityId] of parsedBoosts) {
+            tntBoostLevels.set(loc, entityId);
+        }
+    }
 }

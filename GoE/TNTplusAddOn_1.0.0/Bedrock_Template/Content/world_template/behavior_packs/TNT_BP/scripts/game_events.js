@@ -7,6 +7,7 @@ import * as book from "./book";
 import * as light_tnt from "./tnt/actions/light_tnt";
 import * as test_area from "./utilities/test_area";
 import * as structure from "./structure";
+import * as tnt_block_component from "./tnt/tnt_block_component";
 
 
 export async function onLoadFirstTime(player0) { }
@@ -18,6 +19,7 @@ export async function onLoad() {
     tnt_events.onLoad();
     book.startGuideBookReminderInterval();
     system.runJob(light_tnt.startLightCleanupJob());
+    tnt_block_component.loadBoostLevels();
 }
 
 export async function onTick() { }

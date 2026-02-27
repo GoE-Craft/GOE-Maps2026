@@ -1,6 +1,7 @@
 import { world, system, BlockPermutation, GameMode, EquipmentSlot, Direction } from "@minecraft/server";
 import * as tnt_manager from "../../tnt/tnt_manager";
 import * as utils from "../../utils.js";
+import { clearBoostEntity } from "../../tnt/tnt_block_component";
 
 // Helper script component for TNT Detonator item
 
@@ -49,6 +50,7 @@ export function fireLaser(player, params) {
     if (!block) return;
 
     if (block.isValid && block.hasTag("goe_tnt:custom_tnt")) {
+        clearBoostEntity(block);
         tnt_manager.activateTNTBlock(block, player);
     }
 
@@ -73,6 +75,7 @@ function* activateBlocksInArea(centerLocation, width, height, depth, dimension, 
                         z: startZ + z,
                     });
                     if (block && block.isValid && block.hasTag("goe_tnt:custom_tnt")) {
+                        clearBoostEntity(block);
                         tnt_manager.activateTNTBlock(block, player);
                     }
                 } catch(e) {}

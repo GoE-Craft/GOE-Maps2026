@@ -3,7 +3,7 @@ import * as tnt_gld from "../gld/tnt_gld";
 import * as book_gld from "../gld/book_gld";
 import * as utils from "../utils";
 import * as tnt_actions from "./tnt_actions";
-import { getBoostEntity } from "./tnt_block_component";
+import { clearBoostEntity } from "./tnt_block_component";
 
 /**
  * TNT Manager Module
@@ -39,12 +39,6 @@ export function activateTNTBlock(block, player) {
     const direction = block.permutation.getState("minecraft:cardinal_direction");
     const dimension = block.dimension;
     block.setPermutation(BlockPermutation.resolve("minecraft:air"))
-    if (chargeLevel > 0) {
-        const boostEntity = getBoostEntity(location, block.dimension);
-        if (boostEntity && boostEntity.isValid) {
-            boostEntity.remove();
-        }
-    }
 
     system.run(() => {
         // Try to derive spawn yaw from block facing state/properties
@@ -533,6 +527,7 @@ export function processExplosion(block) {
         const power = perm.getState("goe_tnt:charge_level") ?? 0;
         const direction = perm.getState("minecraft:cardinal_direction");
         const spawnYaw = utils.getYawFromFace(direction);
+        clearBoostEntity(block);
         igniteTNT(block.location, power, 0, chainFuseTicks, gld, block.dimension.id, undefined, spawnYaw);
         block.setPermutation(BlockPermutation.resolve("minecraft:air"));
     } catch (e) {
