@@ -5,12 +5,12 @@ const STRUCTURE_PREFIX = "goe_tnt:";
 const LEAVES_PARTICLE = "goe_tnt:leaves_tornado_smaller";
 const LEAVES_EXPLOSION_PARTICLE = "goe_tnt:leaves_explosion";
 const CELL_SIZE = 8;
-const SMALL_COUNT = 4;
-const MEDIUM_COUNT = 2;
+const SMALL_COUNT = 4;   // base small trees
+const MEDIUM_COUNT = 2;  // base medium trees
 const DELAY_TICKS_BETWEEN_TREES = 3; 
 const TREE_ANIMATION_SECONDS = 0.4; 
 
-const GRID_RADIUS = 1;
+const GRID_RADIUS = 1;   // fixed grid radius (3x3 cells around center)
 const TREE_Y_OFFSET = -2;
 const TREE_BIOME_GLD_DEFAULT = "oak";
 
@@ -54,6 +54,30 @@ function getCellIndices() {
         }
     }
     return cells;
+}
+
+function getTreeCountsForChargeLevel(chargeLevel) {
+    const level = Math.max(0, Number(chargeLevel) || 0);
+
+    const baseTrees = SMALL_COUNT + MEDIUM_COUNT;
+    let totalTrees = baseTrees;
+
+    // First boost: flat +3 trees (6 -> 9)
+    if (level === 1) {
+        totalTrees = baseTrees + 3;
+    }
+    // Subsequent boosts: increase max trees by +2 per level after the first
+    else if (level > 1) {
+        // level 2 -> 11, level 3 -> 13, level 4 -> 15, etc.
+        totalTrees = (baseTrees + 3) + 2 * (level - 1);
+    }
+
+    // Preserve the original small/medium ratio as closely as possible
+    const smallRatio = SMALL_COUNT / baseTrees;
+    let smallCount = Math.max(1, Math.round(totalTrees * smallRatio));
+    let mediumCount = Math.max(0, totalTrees - smallCount);
+
+    return { level, totalTrees, smallCount, mediumCount };
 }
 
 const ONE_BLOCK_OFFSETS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
@@ -128,10 +152,12 @@ function placeTree(dimension, structureManager, baseX, baseZ, centerY, structure
     }
 }
 
-export function treePlanterAction(dimension, location, entity) {
+export function treePlanterAction(dimension, chargeLevel, location, entity) {
     try {
         const biomeId = getBiomeAtLocation(dimension, location);
         const treeKey = getTreeKeyForBiome(biomeId);
+
+        const { totalTrees, smallCount, mediumCount } = getTreeCountsForChargeLevel(chargeLevel);
 
         const structureManager = world.structureManager;
         const baseX = Math.floor(location.x) - Math.floor(CELL_SIZE / 2);
@@ -140,10 +166,12 @@ export function treePlanterAction(dimension, location, entity) {
 
         const centerCell = [0, 0];
         const nonCenterCells = getCellIndices().filter(([i, j]) => i !== 0 || j !== 0);
-        const chosenOther = pickRandomUnique(nonCenterCells, SMALL_COUNT + MEDIUM_COUNT - 1);
+        // Shuffle available cells once; we can reuse them when tree count exceeds cell count
+        const chosenOther = pickRandomUnique(nonCenterCells, nonCenterCells.length);
 
         const placements = [];
 
+        // Always place one small tree near the center
         const offsetCenter = getRandomOneBlockOffset();
         placements.push({
             x: baseX + centerCell[0] * CELL_SIZE + offsetCenter.dx,
@@ -151,8 +179,12 @@ export function treePlanterAction(dimension, location, entity) {
             structureId: getStructureId(treeKey, "small")
         });
 
-        for (let i = 0; i < SMALL_COUNT - 1; i++) {
-            const [ci, cj] = chosenOther[i];
+        let idx = 0;
+        const otherSmallCount = Math.max(0, smallCount - 1);
+
+        // Additional small trees (may place multiple per cell if needed)
+        for (let i = 0; i < otherSmallCount; i++, idx++) {
+            const [ci, cj] = chosenOther[idx % chosenOther.length];
             const offset = getRandomOneBlockOffset();
             placements.push({
                 x: baseX + ci * CELL_SIZE + offset.dx,
@@ -160,8 +192,10 @@ export function treePlanterAction(dimension, location, entity) {
                 structureId: getStructureId(treeKey, "small")
             });
         }
-        for (let i = SMALL_COUNT - 1; i < SMALL_COUNT + MEDIUM_COUNT - 1; i++) {
-            const [ci, cj] = chosenOther[i];
+
+        // Medium trees
+        for (let i = 0; i < mediumCount; i++, idx++) {
+            const [ci, cj] = chosenOther[idx % chosenOther.length];
             const offset = getRandomOneBlockOffset();
             placements.push({
                 x: baseX + ci * CELL_SIZE + offset.dx,
