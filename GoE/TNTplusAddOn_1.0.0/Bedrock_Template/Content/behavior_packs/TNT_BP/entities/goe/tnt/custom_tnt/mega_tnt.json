@@ -2,7 +2,7 @@
     "format_version": "1.21.130",
     "minecraft:entity": {
         "description": {
-            "identifier": "goe_tnt:tnt",
+            "identifier": "goe_tnt:mega_tnt",
             "is_spawnable": false,
             "is_summonable": true,
             "properties": {
@@ -26,12 +26,8 @@
         },
         "component_groups": {
             "goe_tnt:ignite": {
-                "minecraft:explode": {
-                    "power": 0,
-                    "causes_fire": false,
-                    "breaks_blocks": false,
-                    "fuse_length": 5,
-                    "fuse_lit": true
+                "minecraft:mark_variant": {
+                    "value": 1
                 },
                 "minecraft:timer": {
                     "time": 0.5,
@@ -41,9 +37,17 @@
                         "target": "self"
                     }
                 }
+            },
+            "goe_tnt:explode": {
+                "minecraft:mark_variant": {
+                    "value": 2
+                }
             }
         },
         "components": {
+            "minecraft:type_family": {
+                "family": [ "custom_tnt", "inanimate" ]
+            },
             "minecraft:damage_sensor": {
                 "triggers": [
                     {
@@ -62,9 +66,10 @@
                 "has_collision": true,
                 "has_gravity": true
             },
+            "minecraft:pushable": { "is_pushable": false, "is_pushable_by_piston": false },  
             "minecraft:collision_box": {
-                "height": 0.3,
-                "width": 0.3
+                "height": 0.98,
+                "width": 0.98
             },
             "minecraft:projectile": {
                 "gravity": 0.001,

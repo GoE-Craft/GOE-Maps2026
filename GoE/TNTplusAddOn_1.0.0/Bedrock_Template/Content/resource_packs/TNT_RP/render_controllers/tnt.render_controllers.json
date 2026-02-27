@@ -1,6 +1,22 @@
 {
   "format_version": "1.8.0",
   "render_controllers": {
+    "controller.render.goe_tnt.default": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    },
+    "controller.render.goe_tnt.item_default": {
+      "geometry": "Geometry.default",
+      "materials": [
+        { "*": "Material.default" },
+        { "*": "Material.enchanted" }
+      ],
+      "textures": [
+        "Texture.default",
+        "Texture.enchanted"
+      ]
+    },
     "controller.render.goe_tnt.tnt": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],

@@ -47,6 +47,9 @@ entity.goe_tnt:matrix_tnt.name=Matrix TNT
 entity.goe_tnt:water_eraser_tnt.name=Water Eraser TNT
 entity.goe_tnt:proxy_tnt.name=Proxy TNT
 entity.goe_tnt:sound_tnt.name=Sound TNT
-entity.goe_tnt:specialized_tnt.name=Specialized TNT
+entity.goe_tnt:allay_tnt.name=Allay TNT
+entity.goe_tnt:zombie_tnt.name=Zombie TNT
+entity.goe_tnt:hostile_mob_tnt.name=Hostile Mob TNT
+entity.goe_tnt:mega_tnt.name=Mega TNT
 
 pack.description=Add over §440+ EPIC TNTs§f to your own world with §4TNT+ Add-On!§f\n\nUnleash §4MASSIVE EXPLOSIONS§f, use advanced detonation tech, pilot a §4MECHA SUIT§f, and §4DEMOLISH§f everything in your way!
