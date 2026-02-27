@@ -132,6 +132,7 @@
       "geometry": "Geometry.structure_tnt_site",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.structure_tnt_site" ],
+      "ignore_lighting": true,
       "overlay_color": {
         "r": "1.0",
         "g": "1.0",

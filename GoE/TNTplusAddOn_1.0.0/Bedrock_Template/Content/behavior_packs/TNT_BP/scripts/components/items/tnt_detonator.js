@@ -23,6 +23,8 @@ export const TntDetonatorComponent = {
     onUseOn(eventData, { params }) {
         // Prevent default use on behavior
         const player = eventData.source;
+        const item = eventData.itemStack;
+        if (!item) return;
         console.log("TNT Detonator used on block");
         
         const comp = item.getComponent("minecraft:cooldown");

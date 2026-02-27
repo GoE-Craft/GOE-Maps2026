@@ -13,10 +13,10 @@ export function* proxyTNTAction(dimension, chargeLevel, location, entity) {
     // Amount scales with charge level, base 10 + 2 per charge level
     const extraCount = 10 + (chargeLevel * 2);
 
-    const minHorizontalStrength = 0.3;
-    const maxHorizontalStrength = 0.6;
-    const minVerticalStrength = 0.1;
-    const maxVerticalStrength = 0.2;
+    const minHorizontalStrength = 0.4;
+    const maxHorizontalStrength = 0.8;
+    const minVerticalStrength = 0.15;
+    const maxVerticalStrength = 0.3;
 
     for (let i = 0; i < extraCount; i++) {
         try {

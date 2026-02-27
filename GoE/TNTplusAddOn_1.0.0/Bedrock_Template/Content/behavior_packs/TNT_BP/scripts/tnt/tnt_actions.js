@@ -83,8 +83,7 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
 
     switch (action) {
         case "void": {
-            const radius = 10;
-            system.runJob(voidTNTAction(dimension, location, radius, entity));
+            system.runJob(voidTNTAction(dimension, location, chargeLevel, entity));
             break;
         }
         case "directional_drill": {

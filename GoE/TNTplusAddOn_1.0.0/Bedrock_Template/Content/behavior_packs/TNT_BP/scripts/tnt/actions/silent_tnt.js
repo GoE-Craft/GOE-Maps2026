@@ -76,6 +76,7 @@ function runSilentExplosion(dimension, center, radius) {
                 try {
                     const block = dimension.getBlock({ x, y, z });
                     if (!block || block.isAir) continue;
+                    if (block.typeId === "minecraft:bedrock") continue; // skip bedrock
                     block.setType("minecraft:air");
                 } catch {}
             }

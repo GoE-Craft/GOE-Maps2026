@@ -21,13 +21,15 @@ export function* orbitalCannonTNTAction(dimension, chargeLevel, location, entity
     const minDistance = 4;
     const offsets = generateUniqueOffsetsInCircle(strikeAreaRadius, randomStrikesCount, minDistance);
 
+        playSoundsForPlayers(center, dimension, "random.explode", undefined, 1);
+
+
+
     // 1) center strike on surface immediately
     system.runTimeout(() => {
         const surfaceCenter = findSurfaceAtXZ(dimension, center.x, center.z, cy);
         spawnOrbitalStrikeEntity(dimension, surfaceCenter);
-        system.runTimeout(() => {
-            playSoundsForPlayers(surfaceCenter, dimension, "goe_tnt:orbital_cannon_tnt_explosion", undefined, 1);
-        }, 5);
+
 
         // block destruction as background job (spreads over ticks)
         system.runJob(destroyImpactSphere(dimension, surfaceCenter, impactRadius));
@@ -50,6 +52,7 @@ export function* orbitalCannonTNTAction(dimension, chargeLevel, location, entity
             spawnOrbitalStrikeEntity(dimension, surfaceImpact);
             system.runTimeout(() => {
                 playSoundsForPlayers(surfaceImpact, dimension, "goe_tnt:orbital_cannon_tnt_explosion", undefined, 1);
+                playSoundsForPlayers(surfaceImpact, dimension, "random.explode", undefined, 1);
             }, 5);
 
             system.runJob(destroyImpactSphere(dimension, surfaceImpact, impactRadius));

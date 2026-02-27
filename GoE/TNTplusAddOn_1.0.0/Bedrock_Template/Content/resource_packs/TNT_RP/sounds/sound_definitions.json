@@ -13,7 +13,10 @@
 			"category": "music",
 			"min_distance": 10.0,
 			"sounds": [
-				"sounds/goe/tnt/structure/tnt_deny"
+				{
+					"name": "sounds/goe/tnt/structure/tnt_deny",
+					"volume": 1.2
+				}
 			]
 		},
 		"goe_tnt:structure_place": {
@@ -33,7 +36,7 @@
 				"sounds/goe/tnt/structure/build_structure_v2"
 			]
 		},
-		"goe_tnt:structure_button_appear": {
+/* 		"goe_tnt:structure_button_appear": {
 			"category": "music",
 			"sounds": [
 				{
@@ -41,7 +44,7 @@
 					"volume": 1
 				}
 			]
-		},
+		}, */
 		"goe_tnt:structure_button_disappear": {
 			"category": "music",
 			"sounds": [
