@@ -77,3 +77,54 @@ export function* explode(dimension, centerLocation, explosionRadius, chargeLevel
         });
     }
 }
+
+export function pullEntities(dimension, location, radius, pullStrength, maxPull, pullDuration) {
+    const interval = system.runInterval(() => {
+        system.runJob(pullEntitiesJob(dimension, location, radius, pullStrength, maxPull));
+    }, 5); // Repeat every 5 ticks (0.25 seconds)
+
+    system.runTimeout(() => {
+        system.clearRun(interval);
+    }, pullDuration); // Stop after the specified duration
+}
+
+export function* pullEntitiesJob(dimension, location, radius, pullStrength, maxPull) {
+
+    let nearbyEntities = [];
+    try {
+        nearbyEntities = dimension.getEntities({ location: location, maxDistance: radius });
+    } catch {}
+
+    for (const nearbyEntity of nearbyEntities) {
+        try {
+            if (!nearbyEntity?.isValid) continue;
+
+            if (nearbyEntity.typeId === "minecraft:player") continue;
+            if (nearbyEntity.typeId === "minecraft:item") continue;
+            if ((nearbyEntity.typeId || "").startsWith("goe_tnt:")) continue;
+
+            const deltaX = location.x - nearbyEntity.location.x;
+            const deltaY = (location.y + 0.5) - nearbyEntity.location.y;
+            const deltaZ = location.z - nearbyEntity.location.z;
+
+            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+            if (distance < 0.001) continue;
+
+            const directionX = deltaX / distance;
+            const directionY = deltaY / distance;
+            const directionZ = deltaZ / distance;
+
+            const distanceRatio = Math.min(1, distance / radius);
+            const scaledPull = pullStrength + (0.02 * (1 - distanceRatio));
+            const impulseScale = Math.min(maxPull, scaledPull);
+
+            nearbyEntity.applyImpulse({
+                x: directionX * impulseScale,
+                y: directionY * impulseScale,
+                z: directionZ * impulseScale
+            });
+        } catch {}
+
+        yield;
+    }
+}
