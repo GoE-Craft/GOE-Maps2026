@@ -28,7 +28,8 @@ function getMilestoneRewardStructure(milestoneNumber) {
     return milestone?.rewardStructure ?? null;
 }
 
-const TOTAL_ACHIEVEMENTS = () => Achievements.tnt_individual.length + Achievements.milestones.length;
+ // Adding 2, length starts at 0 we need to compensate
+const TOTAL_ACHIEVEMENTS = () => Achievements.tnt_individual.length + Achievements.milestones.length + 2;
 
 function unlockAllCompleteReward(player) {
     player.setDynamicProperty("goe_tnt_all_achievements_reward_received", true);
