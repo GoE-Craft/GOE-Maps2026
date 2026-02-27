@@ -1,0 +1,7 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:texture_set": {
+		"color": "boost_level_2",
+		"metalness_emissive_roughness": [0, 70, 255]
+	}
+}
