@@ -13,6 +13,9 @@ export function* fungiTNTAction(dimension, chargeLevel, location, sourceEntity) 
 function* fungiTNTActionJob(dimension, radius, location) {
 
     let treeCap = 4;
+    const minTreeDistance = 6; // Minimum distance between trees
+    const treePositions = []; // Track spawned tree positions
+
     for (let dx = -radius; dx <= radius; dx++) {
             for (let dz = -radius; dz <= radius; dz++) {
                 // Checking in a circular radius instead of a cube for better visuals
@@ -49,9 +52,34 @@ function* fungiTNTActionJob(dimension, radius, location) {
                                     // Stop spawning trees after reaching the cap to avoid excess amounts of trees in large explosions
                                     continue;
                                 }
-                                //system.runJob(spawnMushroomTree(block));
-                                system.runJob(spawnMushroomTree(block));
-                                treeCap--;
+                                
+                                // Check minimum distance from other trees and ensure within circle
+                                const treePos = { x: blockPos.x, y: blockPos.y, z: blockPos.z };
+                                let tooClose = false;
+                                
+                                // Verify tree stays within circular range from center
+                                const treeDx = treePos.x - location.x;
+                                const treeDz = treePos.z - location.z;
+                                const treeDistSq = treeDx * treeDx + treeDz * treeDz;
+                                
+                                if (treeDistSq <= radius * radius) {
+                                    // Check distance from other trees
+                                    for (const existingTree of treePositions) {
+                                        const distX = treePos.x - existingTree.x;
+                                        const distZ = treePos.z - existingTree.z;
+                                        const dist = Math.sqrt(distX * distX + distZ * distZ);
+                                        if (dist < minTreeDistance) {
+                                            tooClose = true;
+                                            break;
+                                        }
+                                    }
+                                    
+                                    if (!tooClose) {
+                                        system.runJob(spawnMushroomTree(block));
+                                        treePositions.push(treePos);
+                                        treeCap--;
+                                    }
+                                }
                             }
 
                         } else {
@@ -67,13 +95,22 @@ function* fungiTNTActionJob(dimension, radius, location) {
     }
 }
 
+const MUSHROOM_TREE_STRUCTURES = [
+    "goe_tnt:mooshroom_tree",
+    "goe_tnt:mooshroom_tree1",
+    "goe_tnt:mooshroom_tree2",
+    "goe_tnt:mooshroom_tree3",
+    "goe_tnt:mooshroom_tree4",
+];
+
 function* spawnMushroomTree(block) {
     const treeLocation = block.above();
     if (!treeLocation || !treeLocation.isAir) return;
 
     const structureManager = world.structureManager;
     try {
-        const structure = structureManager.place("goe_tnt:mooshroom_tree", block.dimension, treeLocation);
+        const structureId = MUSHROOM_TREE_STRUCTURES[Math.floor(Math.random() * MUSHROOM_TREE_STRUCTURES.length)];
+        const structure = structureManager.place(structureId, block.dimension, treeLocation);
     } catch (e) {
         console.log("Error spawning mushroom tree: " + e);
     }
