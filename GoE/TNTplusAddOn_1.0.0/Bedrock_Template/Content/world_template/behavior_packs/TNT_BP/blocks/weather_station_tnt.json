@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§9Weather TNT§f\nGrants full control over the weather!§r",
+      "minecraft:display_name": "§9Weather TNT§f\nChanges the weather instantly!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

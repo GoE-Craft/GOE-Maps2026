@@ -1,31 +1,52 @@
 {
-    "format_version": "1.10.0",
-    "minecraft:client_entity": {
-        "description": {
-            "identifier": "goe_tnt:matrix_tnt",
-            "materials": { "default": "entity_alphatest", "boost_level": "goe_tnt_additive" },
-            "textures": { "default": "textures/goe/tnt/entity/matrix_tnt" },
-            "geometry": { 
-                "default": "geometry.matrix_tnt", 
-                "boost_level": "geometry.matrix_tnt_boost_level" 
-            },
-            "scripts": {
-                "animate": [
-                    { "charge": "q.mark_variant == 1" }, 
-                    { "explosion": "q.mark_variant == 2" }, 
-                    { "boost_scale": "v.boost_scale > 1" }
-                ],
-                "pre_animation": [
-                    "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
-                ]
-            },
-            "animations": { 
-                "charge": "animation.matrix_tnt.charge", 
-                "explosion": "animation.matrix_tnt.split", 
-                "boost_scale": "animation.tnt.boost_scale" 
-            },
-            "particle_effects": { "detonator_impact_green": "goe_tnt:detonator_impact_green", "matrix_explode": "goe_tnt:matrix_explode" },
-            "render_controllers": ["controller.render.tnt", { "controller.render.tnt_boost_scale": "v.boost_scale > 1" }]
-        }
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "goe_tnt:matrix_tnt",
+      "materials": { 
+        "default": "entity_alphatest", 
+        "overlay_tnt": "charged_creeper" 
+      },
+      "textures": {         
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+        "default": "textures/goe/tnt/entity/matrix_tnt"
+      },
+      "geometry": { 
+        "default": "geometry.matrix_tnt", 
+        "overlay_tnt": "geometry.overlay_matrix_tnt" 
+      },
+      "scripts": {
+        "animate": [
+          { "charge": "q.mark_variant == 1" }, 
+          { "explosion": "q.mark_variant == 2" }, 
+          { "overlay_size": "v.boost_scale > 1" }
+        ],
+        "pre_animation": [
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+          "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+          "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
+        ]
+      },
+      "animations": { 
+        "charge": "animation.matrix_tnt.charge", 
+        "explosion": "animation.matrix_tnt.split", 
+        "overlay_size": "animation.tnt.overlay_size" 
+      },
+      "particle_effects": { 
+        "detonator_impact_green": "goe_tnt:detonator_impact_green", 
+        "matrix_explode": "goe_tnt:matrix_explode" 
+      },
+      "render_controllers": [
+        "controller.render.tnt", 
+        {"controller.render.tnt_boost_scale": "v.boost_scale > 1" }
+      ]
     }
+  }
 }

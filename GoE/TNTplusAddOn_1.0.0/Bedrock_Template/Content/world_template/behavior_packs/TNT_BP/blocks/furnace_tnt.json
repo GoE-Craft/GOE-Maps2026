@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§6Furnace TNT§f\nMelts your ores and other goodies!§r",
+      "minecraft:display_name": "§6Furnace TNT§f\nSmelts nearby ores instantly!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§cOrbital Cannon TNT§f\nFires a powerful beam from the sky that obliterates the target area.§r",
+      "minecraft:display_name": "§cOrbital Cannon TNT§f\nFires a giant laser from the sky!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

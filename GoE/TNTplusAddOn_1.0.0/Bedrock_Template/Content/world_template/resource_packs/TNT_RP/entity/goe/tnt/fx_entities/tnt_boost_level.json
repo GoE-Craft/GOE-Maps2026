@@ -5,7 +5,7 @@
             "identifier": "goe_tnt:tnt_boost_level",
             "materials": {
                 "default": "entity_alphatest",
-                "boost_level": "charged_creeper"
+                "overlay_tnt": "charged_creeper"
             },
             "textures": {
                 //Boost Level Textures

@@ -5,30 +5,40 @@
       "identifier": "goe_tnt:prison_tnt",
       "materials": {
         "default": "entity_alphatest",
-        "boost_level": "goe_tnt_additive"
+        "overlay_tnt": "charged_creeper"
       },
       "textures": {
-        "default": "textures/goe/tnt/entity/prison_tnt"
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+				"default": "textures/goe/tnt/entity/prison_tnt"
       },
       "geometry": {
         "default": "geometry.prison_tnt",
-        "boost_level": "geometry.prison_tnt_boost_level"
+        "overlay_tnt": "geometry.overlay_prison_tnt"
       },
 			"scripts": {
         "pre_animation": [
           "v.should_swell = query.property('goe_tnt:swell');",
-          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');"
+          "v.boost_scale = 1 + 0.1 * query.property('goe_tnt:boost_level');",
+          "v.anim_speed = (query.property('goe_tnt:boost_level') == 0) ? 0.013 : ((query.property('goe_tnt:boost_level') == 1) ? 0.013: ((query.property('goe_tnt:boost_level') == 2) ? 0.03 : ((query.property('goe_tnt:boost_level') == 3) ? 0.04 : 0.04)));",
+          "v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
         ],
         "animate": [
           {"charge": "q.mark_variant == 1"},
           {"explode": "q.mark_variant == 2"},
-          {"boost_scale": "v.boost_scale > 1"}
+          {"overlay_size": "v.boost_scale > 1"}
         ]
 			},
       "animations": {
         "charge": "animation.prison_tnt.charge",
         "explode": "animation.prison_tnt.explosion",
-        "boost_scale": "animation.tnt.boost_scale"
+        "overlay_size": "animation.tnt.overlay_size"
       },
       "particle_effects": {
         "prison_chains": "goe_tnt:prison_chains",

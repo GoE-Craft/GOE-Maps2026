@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§5Endermite Decoy TNT§f\nBaits Endermans in a trap and explode.§r",
+      "minecraft:display_name": "§5Endermite Decoy TNT§f\nBaits Endermen into a trap and explodes!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

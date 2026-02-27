@@ -168,7 +168,7 @@
                 }
             },
             "geometry": "Array.geos[query.property('goe_tnt:tnt_type')]",
-            "materials": [{ "*": "Material.boost_level" }],
+            "materials": [{ "*": "Material.overlay_tnt" }],
             "textures": ["Array.textures[query.property('goe_tnt:boost_level')]"],
             "overlay_color": {
                 "r": 1.0,

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§9Water Eraser TNT§f\nRemoves all water in its blast area.§r",
+      "minecraft:display_name": "§9Water Eraser TNT§f\nRemoves all water nearby!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

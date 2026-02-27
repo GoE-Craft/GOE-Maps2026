@@ -7,7 +7,7 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/goe/tnt/entity/matrix_mob/matrix_mob"
+				"default": "textures/goe/tnt/entity/matrix_mob/matrix_mob"
       },
       "geometry": {
         "default": "geometry.matrix_mob"

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§aHacker TNT§f\nMakes nearby hostile mobs explode.§r",
+      "minecraft:display_name": "§aHacker TNT§f\nMakes hostile mobs to explode!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

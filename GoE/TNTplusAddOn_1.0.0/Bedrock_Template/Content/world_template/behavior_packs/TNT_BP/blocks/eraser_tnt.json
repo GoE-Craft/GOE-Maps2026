@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§uEraser TNT§f\nCompletely erase a terrain in the blast area!§r",
+      "minecraft:display_name": "§uEraser TNT§f\nErases all blocks in the blast area!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

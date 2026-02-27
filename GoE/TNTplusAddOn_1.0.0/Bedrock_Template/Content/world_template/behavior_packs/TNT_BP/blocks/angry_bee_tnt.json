@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§nAngry Bee TNT§f\nRelease angry bees at enemies!§r",
+      "minecraft:display_name": "§nAngry Bee TNT§f\nReleases a swarm of angry bees at your enemies!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

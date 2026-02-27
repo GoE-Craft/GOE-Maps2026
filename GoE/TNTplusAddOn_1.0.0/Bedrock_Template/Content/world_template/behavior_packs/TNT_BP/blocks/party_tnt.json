@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§dParty TNT§f\nMakes a rain of cookies and cakes.§r",
+      "minecraft:display_name": "§dParty TNT§f\nRains cakes from the sky!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

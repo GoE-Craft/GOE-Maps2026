@@ -8,7 +8,15 @@
         "beam": "entity_alphablend"
       },
       "textures": {
-        "default": "textures/goe/tnt/entity/hacker_tnt"
+        //Boost Level Textures
+        "boost_level_0": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_1": "textures/goe/tnt/entity/boost_level_1",
+        "boost_level_2": "textures/goe/tnt/entity/boost_level_2",
+        "boost_level_3": "textures/goe/tnt/entity/boost_level_3",
+        "boost_level_4": "textures/goe/tnt/entity/boost_level_4",
+
+        //TNT Texture
+				"default": "textures/goe/tnt/entity/hacker_tnt"
       },
       "geometry": {
         "default": "geometry.hacker_mini_explode"
