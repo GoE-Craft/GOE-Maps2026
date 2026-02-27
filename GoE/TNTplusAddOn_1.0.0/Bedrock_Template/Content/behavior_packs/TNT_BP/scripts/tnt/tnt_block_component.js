@@ -184,8 +184,15 @@ function placeBlockOnFace(block, face, itemInHand, player) {
     try {
         const targetBlock = block.dimension.getBlock(targetLoc);
         if (targetBlock && targetBlock.isAir) {
+
+            // If the item in hand is TNT, we want to place our custom TNT instead
+            let blockToPlace = itemInHand.typeId;
+            if (blockToPlace === "minecraft:tnt") {
+                blockToPlace = "goe_tnt:tnt";
+            }
+
             // Place the block
-            targetBlock.setPermutation(BlockPermutation.resolve(itemInHand.typeId));
+            targetBlock.setPermutation(BlockPermutation.resolve(blockToPlace));
             if (player.getGameMode() === GameMode.Creative) return;
             // Decrease item count (creative mode auto-handles this)
             const equipment = player.getComponent("minecraft:equippable");
@@ -297,7 +304,7 @@ function incrementBoostLevel(block, player) {
 }
 
 export function getBoostEntity(location, dimension) {
-    const entity = dimension.getEntities({ closest: 1, location: location, maxDistance: 0.5, type: "goe_tnt:tnt_boost_level" })[0];
+    const entity = dimension.getEntities({ closest: 1, location: location, maxDistance: 0, type: "goe_tnt:tnt_boost_level" })[0];
     return entity;
 }
 

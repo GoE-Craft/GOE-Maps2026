@@ -1470,6 +1470,137 @@ export const TNT_GLD = [
         },
         blockHeight: 1.5
     },
+    {
+        blockId: "goe_tnt:mega_tnt",
+        tntType: 46,
+        fuseTime: 50,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "goe_tnt:silent_tnt_fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:silent_tnt_charging",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:silent_tnt_explode",
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: true,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "silent"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:allay_tnt",
+        tntType: 47,
+        fuseTime: 50,
+        power: 4,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "goe_tnt:allay_tnt_fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:allay_tnt_charging",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:allay_tnt_explode",
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: "minecraft:allay",
+            summonCount: 3,
+            summonDelay: 10,
+            specialAction: null
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:hostile_mob_tnt",
+        tntType: 48,
+        fuseTime: 50,
+        power: 4,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "goe_tnt:hostile_mob_tnt_fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:hostile_mob_tnt_charging",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:hostile_mob_tnt_explode",
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: "minecraft:creeper",
+            summonCount: 3,
+            summonDelay: 10,
+            specialAction: "hostile_mob"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
+    {
+        blockId: "goe_tnt:zombie_tnt",
+        tntType: 49,
+        fuseTime: 50,
+        power: 4,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "goe_tnt:zombie_tnt_fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:zombie_tnt_charging",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:zombie_tnt_explode",
+            explosionAnimationLength: 2
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: "minecraft:zombie",
+            summonCount: 3,
+            summonDelay: 10,
+            specialAction: null
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
+    },
 ]
 
 export function getTntDataByName(tntName) {
