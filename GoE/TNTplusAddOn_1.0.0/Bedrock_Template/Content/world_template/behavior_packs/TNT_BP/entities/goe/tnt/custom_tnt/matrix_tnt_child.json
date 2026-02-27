@@ -25,7 +25,7 @@
                     "value": 1
                 },
                 "minecraft:timer": {
-                    "time": 1,
+                    "time": 2.21,
                     "looping": true,
                     "time_down_event": {
                         "event": "goe_tnt:activate",
@@ -55,12 +55,9 @@
                     "value": 2
                 },
                 "minecraft:explode": {
-                    "breaks_blocks": true,
                     "causes_fire": false,
                     "destroy_affected_by_griefing": true,
-                    "fire_affected_by_griefing": true,
                     "fuse_lit": true,
-                    "max_resistance": 0,
                     "fuse_length": [
                         2,
                         3

@@ -12,7 +12,16 @@
       "geometry": {
         "default": "geometry.matrix_mob"
       },
+      "animations": {
+        "walk": "animation.matrix_mob.walk",
+        "falling": "animation.matrix_mob.falling",
+        "bounce": "animation.matrix_mob.bounce_and_transform",
+        "controller": "controller.animation.matrix_mob.basic"
+      },
 			"scripts": {
+        "animate": [
+          "controller"
+        ]
 			},
       "render_controllers": [ "controller.render.default" ]
     }

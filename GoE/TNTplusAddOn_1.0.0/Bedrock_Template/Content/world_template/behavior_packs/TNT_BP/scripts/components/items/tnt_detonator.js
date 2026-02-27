@@ -13,6 +13,7 @@ export const TntDetonatorComponent = {
         const comp = item.getComponent("minecraft:cooldown");
         if (comp) {
             comp.startCooldown(player);
+            return;
         }
 
         // Damage the held item
@@ -24,9 +25,12 @@ export const TntDetonatorComponent = {
         // Prevent default use on behavior
         const player = eventData.source;
         console.log("TNT Detonator used on block");
-
-        const item = utils.getItemInHand(player);
-        if (item?.typeId !== "goe_tnt:tnt_detonator") return;
+        
+        const comp = item.getComponent("minecraft:cooldown");
+        if (comp) {
+            comp.startCooldown(player);
+            return;
+        }
 
         // Damage the held item
         utils.damageHeldItem(player, 1);
