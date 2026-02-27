@@ -16,9 +16,9 @@
 					"pivot": [0, 0, 0]
 				},
 				{
-					"name": "bb_main",
+					"name": "del",
 					"parent": "root",
-					"pivot": [7, 0, -7],
+					"pivot": [0, 0, 0],
 					"cubes": [
 						{
 							"origin": [-13.5, 0, -14],

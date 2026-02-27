@@ -18,7 +18,7 @@
 				{
 					"name": "bb_main",
 					"parent": "root",
-					"pivot": [7, 0, -7],
+					"pivot": [0, 0, 0],
 					"cubes": [
 						{
 							"origin": [-7, 0, -7.5],

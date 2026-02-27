@@ -145,7 +145,7 @@
                 "overlay_glass_tnt": "geometry.overlay_glass_tnt",
                 "overlay_furnace_tnt": "geometry.overlay_furnace_tnt",
                 "overlay_mob_eraser_tnt": "geometry.overlay_mob_eraser_tnt",
-                "overlay_magma_eraser_tnt": "geometry.eruption_tnt",
+                "overlay_magma_eraser_tnt": "geometry.overlay_eruption_tnt",
                 "overlay_light_tnt": "geometry.overlay_light_tnt",
                 "overlay_thief_tnt": "geometry.overlay_thief_tnt",
                 "overlay_silent_tnt": "geometry.overlay_silent_tnt",
