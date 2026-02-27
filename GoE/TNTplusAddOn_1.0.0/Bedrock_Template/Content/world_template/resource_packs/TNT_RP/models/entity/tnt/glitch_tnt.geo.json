@@ -16,7 +16,7 @@
 					"pivot": [0, 0, 0],
 					"locators": {
 						"charge": [0, 10, 0],
-						"center": [0, 0, 0],
+						"glitch_center": [0, 0, 0],
 						"explosion": [0, 32, 0]
 					}
 				},
@@ -295,7 +295,7 @@
 					"pivot": [0, 0, 0],
 					"locators": {
 						"charge": [0, 10, 0],
-						"center": [0, 0, 0],
+						"glitch_center": [0, 0, 0],
 						"explosion": [0, 32, 0]
 					}
 				},

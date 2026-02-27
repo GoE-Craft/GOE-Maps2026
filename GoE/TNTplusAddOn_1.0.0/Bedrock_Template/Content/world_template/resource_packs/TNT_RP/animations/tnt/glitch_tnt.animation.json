@@ -1055,11 +1055,11 @@
 				},
 				"0.125": {
 					"effect": "glitch_text_smooth",
-					"locator": "center"
+					"locator": "glitch_center"
 				},
 				"0.25": {
 					"effect": "glitch_numbers",
-					"locator": "center"
+					"locator": "glitch_center"
 				},
 				"0.5": {
 					"effect": "glitch_shadows",
@@ -1104,7 +1104,7 @@
 				},
 				"0.25": {
 					"effect": "glitch_leftover_text",
-					"locator": "center"
+					"locator": "glitch_center"
 				}
 			}
 		}

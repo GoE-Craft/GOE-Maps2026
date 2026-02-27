@@ -1439,6 +1439,38 @@ export const TNT_GLD = [
         },
         blockHeight: 1.9 // if not defined, defaults to 2 - timer height depends on this
     }
+    {
+        blockId: "goe_tnt:black_hole_tnt",
+        fuseTime: 55,
+        tntType: 45,
+        power: 0,
+        fuseEffects: {
+            particleEffect: "minecraft:basic_smoke_particle",
+            particleDelay: 10,
+            soundEffect: "random.fuse",
+            soundDelay: 0
+        },
+        chargeEffects: {
+            soundEffect: "goe_tnt:void_tnt_charge",
+            soundDelay: 0
+        },
+        explosionEffects: {
+            soundEffect: "goe_tnt:void_tnt_explosion",
+            explosionAnimationLength: 5
+        },
+        explosionProperties: {
+            createsFire: false,
+            allowUnderwater: false,
+            breaksBlocks: false,
+            summonMob: null,
+            summonDelay: 10,
+            specialAction: "black_hole"
+        },
+        preExplosionProperties: {
+            specialAction: null
+        },
+        blockHeight: 1.5
+    },
 ]
 
 export function getTntDataByName(tntName) {

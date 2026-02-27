@@ -60,7 +60,8 @@
                 "snapshot_tnt": "textures/goe/tnt/entity/tnt", // Not implemented yet, will use default texture for now
                 "sound_tnt": "textures/goe/tnt/entity/sound_tnt",
                 "specialized_tnt": "textures/goe/tnt/entity/tnt", // Not implemented yet, will use default texture for now
-                "glitch_tnt": "textures/goe/tnt/entity/glitch_tnt"
+                "glitch_tnt": "textures/goe/tnt/entity/glitch_tnt",
+                "black_hole_tnt": "textures/goe/tnt/entity/black_hole_tnt"
             },
             "render_controllers": [
                 "controller.render.boosted_tnt",
@@ -113,6 +114,7 @@
                 "sound_tnt": "geometry.sound_tnt",
                 "specialized_tnt": "geometry.tnt", // Not implemented yet, will use default geometry for now
                 "glitch_tnt": "geometry.glitch_tnt",
+                "black_hole_tnt": "geometry.black_hole_tnt_entity",
 
                 //Overlay Geometry Variants (if needed, can be used for different boost levels or other visual effects)
                 "overlay_default": "geometry.overlay_tnt",
@@ -159,7 +161,8 @@
                 "overlay_snapshot_tnt": "geometry.overlay_tnt", // Not implemented yet, will use default geometry for now
                 "overlay_sound_tnt": "geometry.overlay_sound_tnt",
                 "overlay_specialized_tnt": "geometry.overlay_tnt", // Not implemented yet, will use default geometry for now
-                "overlay_glitch_tnt": "geometry.overlay_glitch_tnt"
+                "overlay_glitch_tnt": "geometry.overlay_glitch_tnt",
+                "overlay_black_hole_tnt": "geometry.overlay_black_hole_tnt_entity"
             },
             "scripts": {
                 "scale": "1",

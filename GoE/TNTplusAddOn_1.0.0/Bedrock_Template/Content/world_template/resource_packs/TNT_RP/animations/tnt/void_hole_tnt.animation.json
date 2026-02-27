@@ -98,7 +98,7 @@
 					},
 					{
 						"effect": "void_tornado",
-						"locator": "tornado"
+						"locator": "void_tornado"
 					},
 					{
 						"effect": "tnt_charge_white",
