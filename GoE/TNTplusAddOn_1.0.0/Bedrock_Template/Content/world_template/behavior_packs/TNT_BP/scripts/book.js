@@ -5,7 +5,6 @@ import { purchaseItem, getPlayerResourceAmount } from "./shop";
 import * as achievements from "./achievements";
 import * as utils from "./utils";
 
-
 export const GuideBookComponent = {
     onUse(event, params) {
         const player = event.source;
@@ -16,8 +15,6 @@ export const GuideBookComponent = {
         }
     }
 };
-
-
 
 // Check if we have the book in the inventory every 3 minutes
 export function startGuideBookReminderInterval() {
@@ -77,7 +74,7 @@ export async function showIntroPage(player) {
         .body(
             `§fWelcome, §a${name}§r!\n\n` +
             "§fUnleash chaos with many new, craftable §eTNT blocks§r§f, pilot the §eTNT Mecha Suit§r§f, and destroy new, §ecustom Structures§r§f that naturally spawn all across your world.\n\n" +
-            "§fOpen the §eTNT Guide§r§f to access the shop, achievements and settings§r§f.\n\n" +
+            "§fOpen the §eTNT Guide§r§f to access the shop and achievements§r§f.\n\n" +
             "§fEnjoy §aTNT+ Add-On§r§f and please give a §l§e5-STAR RATING§r§f on the Marketplace!§r"
         )
         .button("§l§2LET'S EXPLODE!§r");
@@ -103,7 +100,7 @@ export async function showMainPage(player) {
         .button("§l§cInfo§r", "textures/goe/tnt/ui/info")
         .button("§l§2Shop§r", "textures/goe/tnt/ui/shop")
         .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements")
-        .button("§l§1Settings§r", "textures/goe/tnt/ui/settings");
+        //.button("§l§1Settings§r", "textures/goe/tnt/ui/settings");
 
     form.show(player).then((response) => {
         if (response.canceled) {
@@ -121,9 +118,9 @@ export async function showMainPage(player) {
             case 2:
                 showAchievementListPage(player);
                 break;
-            case 3:
-                showSettingsPage(player);
-                break;
+            // case 3:
+            //     showSettingsPage(player);
+            //     break;
         }
     });
 }
@@ -137,7 +134,7 @@ async function showInfoPage(player) {
         .button("§l§nStructures§r", "textures/goe/tnt/ui/structures")
         .button("§l§2Shop§r", "textures/goe/tnt/ui/shop")
         .button("§l§5Achievements§r", "textures/goe/tnt/ui/achievements")
-        .button("§l§1Settings§r", "textures/goe/tnt/ui/settings")
+        //.button("§l§1Settings§r", "textures/goe/tnt/ui/settings")
         .button("§l§cBack§r", "textures/goe/tnt/ui/back");
 
     form.show(player).then((response) => {
@@ -167,11 +164,11 @@ async function showInfoPage(player) {
                 player.playSound("goe_tnt:button_click_music"); // add sound
                 showAchievementsInfoPage(player);
                 break;
+            // case 5:
+            //     player.playSound("goe_tnt:button_click_music"); // add sound
+            //     showSettingsInfoPage(player);
+            //     break;
             case 5:
-                player.playSound("goe_tnt:button_click_music"); // add sound
-                showSettingsInfoPage(player);
-                break;
-            case 6:
                 showMainPage(player);
                 player.playSound("goe_tnt:book_page_change_music"); // add sound
                 break;
