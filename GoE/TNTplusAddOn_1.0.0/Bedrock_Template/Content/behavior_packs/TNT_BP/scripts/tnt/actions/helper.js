@@ -3,7 +3,7 @@ import { system, world, Difficulty } from "@minecraft/server";
 export function* explode(dimension, centerLocation, explosionRadius, chargeLevel, squashFactor = 1) {
     const { x: cx, y: cy, z: cz } = centerLocation;
 
-    const radius = explosionRadius + Math.round(explosionRadius * 0.25 * chargeLevel);
+    const radius = explosionRadius + Math.round(explosionRadius * 0.10 * chargeLevel);
 
     // CONFIGURATION
     const horizontalRadius = radius;       

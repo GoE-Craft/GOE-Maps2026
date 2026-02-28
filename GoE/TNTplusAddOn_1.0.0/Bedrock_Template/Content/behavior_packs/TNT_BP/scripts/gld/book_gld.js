@@ -297,13 +297,6 @@ export const ShopItems = {
             itemId: "goe_tnt:fungi_tnt"
         },
         {
-            id: "snapshot_tnt",
-            name: "Snapshot TNT",
-            price: { type: "copper_ingot", amount: 10 },
-            icon: "textures/goe/tnt/ui/shop/tnt/snapshot_tnt",
-            itemId: "goe_tnt:snapshot_tnt"
-        },
-        {
             id: "balloon_tnt",
             name: "Balloon TNT",
             price: { type: "copper_ingot", amount: 10 },
@@ -339,11 +332,32 @@ export const ShopItems = {
             itemId: "goe_tnt:sound_tnt"
         },
         {
-            id: "specialized_tnt",
-            name: "Specialized TNT",
-            price: { type: "gold_ingot", amount: 5 },
-            icon: "textures/goe/tnt/ui/shop/tnt/specialized_tnt",
-            itemId: "goe_tnt:specialized_tnt"
+            id: "allay_tnt",
+            name: "Allay TNT",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/allay_tnt",
+            itemId: "goe_tnt:allay_tnt"
+        },
+        {
+            id: "zombie_tnt",
+            name: "Zombie TNT",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/zombie_tnt",
+            itemId: "goe_tnt:zombie_tnt"
+        },
+        {
+            id: "mega_tnt",
+            name: "Mega TNT",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/mega_tnt",
+            itemId: "goe_tnt:mega_tnt"
+        },
+        {
+            id: "hostile_mob_tnt",
+            name: "Hostile Mob TNT",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/hostile_mob_tnt",
+            itemId: "goe_tnt:hostile_mob_tnt"
         }
     ],
 
@@ -818,16 +832,6 @@ export const Achievements = {
             rewardStructure: "goe_tnt:fungi_tnt_reward"
         },
         {
-            id: "snapshot_tnt",
-            name: "Snapshot TNT",
-            info: "Blinds all the mobs that are in the radius of Snapshot TNT.",
-            tips: "Mobs probably wont going to like it.",
-            tntType: "snapshot_tnt",
-            icon: "textures/goe/tnt/ui/achievements/snapshot_tnt",
-            colorCode: "§8",
-            rewardStructure: "goe_tnt:snapshot_tnt_reward"
-        },
-        {
             id: "balloon_tnt",
             name: "Balloon TNT",
             info: "Balloon TNT flies and explodes if he hits something in the air.",
@@ -878,14 +882,44 @@ export const Achievements = {
             rewardStructure: "goe_tnt:sound_tnt_reward"
         },
         {
-            id: "specialized_tnt",
-            name: "Specialized TNT",
-            info: "Adapts its effect based on the block he is standing on destroying just that one.",
-            tips: "Experiment with different blocks.",
-            tntType: "specialized_tnt",
-            icon: "textures/goe/tnt/ui/achievements/specialized_tnt",
-            colorCode: "§6",
-            rewardStructure: "goe_tnt:specialized_tnt_reward"
+            id: "allay_tnt",
+            name: "Allay TNT",
+            info: "Releases helpful allays that assist in collecting items.",
+            tips: "Use it to gather resources efficiently.",
+            tntType: "allay_tnt",
+            icon: "textures/goe/tnt/ui/achievements/allay_tnt",
+            colorCode: "§3",
+            rewardStructure: "goe_tnt:allay_tnt_reward"
+        },
+        {
+            id: "zombie_tnt",
+            name: "Zombie TNT",
+            info: "Releases powerful zombies that attack nearby mobs.",
+            tips: "Use it to damage mobs without destroying terrain.",
+            tntType: "zombie_tnt",
+            icon: "textures/goe/tnt/ui/achievements/zombie_tnt",
+            colorCode: "§e",
+            rewardStructure: "goe_tnt:zombie_tnt_reward"
+        },
+        {
+            id: "mega_tnt",
+            name: "Mega TNT",
+            info: "Releases a massive explosion with increased radius and damage.",
+            tips: "Use it for maximum destruction.",
+            tntType: "mega_tnt",
+            icon: "textures/goe/tnt/ui/achievements/mega_tnt",
+            colorCode: "§5",
+            rewardStructure: "goe_tnt:mega_tnt_reward"
+        },
+        {
+            id: "hostile_mob_tnt",
+            name: "Hostile Mob TNT",
+            info: "Releases powerful hostile mobs that attack nearby entities.",
+            tips: "Use it to damage mobs without destroying terrain.",
+            tntType: "hostile_mob_tnt",
+            icon: "textures/goe/tnt/ui/achievements/hostile_mob_tnt",
+            colorCode: "§4",
+            rewardStructure: "goe_tnt:hostile_mob_tnt_reward"
         }
     ],
 
@@ -943,6 +977,33 @@ export const Achievements = {
             milestoneNumber: 30,
             icon: "textures/goe/tnt/ui/achievements/milestone_30",
             rewardStructure: "goe_tnt:milestone_30_reward"
+        },
+        {
+            id: "milestone_35",
+            name: "Master Demolitionist",
+            info: "Discover 35 different types of §4TNT blocks§f to unlock this achievement.",
+            tips: "",
+            milestoneNumber: 35,
+            icon: "textures/goe/tnt/ui/achievements/milestone_35",
+            rewardStructure: "goe_tnt:milestone_35_reward"
+        },
+        {
+            id: "milestone_40",
+            name: "Master Demolitionist",
+            info: "Discover 40 different types of §4TNT blocks§f to unlock this achievement.",
+            tips: "",
+            milestoneNumber: 40,
+            icon: "textures/goe/tnt/ui/achievements/milestone_40",
+            rewardStructure: "goe_tnt:milestone_40_reward"
+        },
+        {
+            id: "milestone_45",
+            name: "Master Demolitionist",
+            info: "Discover 45 different types of §4TNT blocks§f to unlock this achievement.",
+            tips: "",
+            milestoneNumber: 45,
+            icon: "textures/goe/tnt/ui/achievements/milestone_45",
+            rewardStructure: "goe_tnt:milestone_45_reward"
         }
     ],
 
