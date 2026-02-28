@@ -45,7 +45,17 @@ function applyKnockbackAndDamage(dimension, center, radius, pushStrength) {
         });
     } catch { nearbyMobs = []; }
 
-    for (const mob of nearbyMobs) {
+    let nearbyPlayers = [];
+    try {
+        nearbyPlayers = dimension.getPlayers({
+            location: center,
+            maxDistance: radius,
+        });
+    } catch { nearbyPlayers = []; }
+
+    const targets = [...nearbyMobs, ...nearbyPlayers];
+
+    for (const mob of targets) {
         try {
             if (!mob?.isValid) continue;
 
