@@ -1413,15 +1413,15 @@ export const TNT_GLD = [
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
-            soundEffect: "goe_tnt:silent_tnt_fuse",
+            soundEffect: "goe_tnt:mega_tnt_fuse",
             soundDelay: 0
         },
         chargeEffects: {
-            soundEffect: "goe_tnt:silent_tnt_charging",
+            soundEffect: "goe_tnt:mega_tnt_charging",
             soundDelay: 0
         },
         explosionEffects: {
-            soundEffect: "goe_tnt:silent_tnt_explode",
+            soundEffect: "goe_tnt:mega_tnt_explode",
             explosionAnimationLength: 2
         },
         explosionProperties: {
