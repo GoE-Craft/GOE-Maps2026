@@ -26,6 +26,13 @@ export const ShopItems = {
             price: { type: "iron_ingot", amount: 6 },
             icon: "textures/items/clock_item",
             itemId: "minecraft:clock"
+        },
+        {
+            id: "minecraft:gunpowder",
+            name: "Gunpowder",
+            price: { type: "iron_ingot", amount: 2 },
+            icon: "textures/items/gunpowder",
+            itemId: "minecraft:gunpowder"
         }
     ],
     // TNT's category

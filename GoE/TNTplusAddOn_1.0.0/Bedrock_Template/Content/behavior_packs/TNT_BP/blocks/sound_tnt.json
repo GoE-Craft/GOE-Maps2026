@@ -22,7 +22,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§dSound TNT§f\nDamages enemies with sound waves!§r",
+      "minecraft:display_name": "§dSound TNT§f\nPlays a random music track when it explodes!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

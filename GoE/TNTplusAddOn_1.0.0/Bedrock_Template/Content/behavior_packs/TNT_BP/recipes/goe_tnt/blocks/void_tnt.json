@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:obsidian"
+      "R": "minecraft:obsidian",
+      "S": "minecraft:end_stone"
     },
     "unlock": {
       "context": "AlwaysUnlocked"
