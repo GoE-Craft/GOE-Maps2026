@@ -14,7 +14,7 @@
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:arrow"
+      "R": "minecraft:arrow:0"
     },
     "unlock": {
       "context": "AlwaysUnlocked"
