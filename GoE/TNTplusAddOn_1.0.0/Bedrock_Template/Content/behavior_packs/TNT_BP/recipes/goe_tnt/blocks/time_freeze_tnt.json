@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:clock"
+      "R": "minecraft:gold_ingot",
+      "S": "minecraft:sand"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

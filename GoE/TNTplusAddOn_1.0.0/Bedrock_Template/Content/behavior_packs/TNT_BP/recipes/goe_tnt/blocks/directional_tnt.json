@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "TPT",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:redstone"
+      "R": "minecraft:iron_ingot",
+      "T": "minecraft:redstone_torch"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

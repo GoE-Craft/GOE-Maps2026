@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:rotten_flesh"
+      "R": "minecraft:rotten_flesh",
+      "S": "minecraft:bone"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

@@ -8,11 +8,11 @@
       "crafting_table"
     ],
     "pattern": [
-      "P",
-      "R"
+      " P ",
+      " R "
     ],
     "key": {
-      "P": "minecraft:redstone",
+      "P": "minecraft:redstone_torch",
       "R": "minecraft:iron_ingot"
     },
     "unlock": {

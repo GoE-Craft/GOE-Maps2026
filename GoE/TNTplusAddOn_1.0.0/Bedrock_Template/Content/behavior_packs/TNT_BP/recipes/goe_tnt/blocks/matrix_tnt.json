@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:glow_ink_sac"
+      "R": "minecraft:glow_ink_sac",
+      "S": "minecraft:spider_eye"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

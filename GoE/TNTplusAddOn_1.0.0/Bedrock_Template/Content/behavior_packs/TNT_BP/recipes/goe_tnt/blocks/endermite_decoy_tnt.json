@@ -14,7 +14,7 @@
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:end_stone"
+      "R": "minecraft:ender_pearl"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

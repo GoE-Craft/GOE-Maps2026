@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:diamond"
+      "R": "minecraft:diamond",
+      "S": "minecraft:obsidian"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

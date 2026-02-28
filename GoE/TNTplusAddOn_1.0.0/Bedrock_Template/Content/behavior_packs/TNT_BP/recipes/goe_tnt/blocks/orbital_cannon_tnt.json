@@ -9,12 +9,15 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
-      "PRP"
+      "SPT",
+      "PUP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:iron_block"
+      "R": "minecraft:diamond",
+      "S": "minecraft:emerald",
+      "T": "minecraft:gold_ingot",
+      "U": "minecraft:redstone"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

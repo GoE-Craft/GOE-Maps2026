@@ -14,7 +14,7 @@
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:comparator"
+      "R": "minecraft:redstone_torch"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

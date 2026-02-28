@@ -14,7 +14,7 @@
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:potion"
+      "R": "minecraft:glass_bottle"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

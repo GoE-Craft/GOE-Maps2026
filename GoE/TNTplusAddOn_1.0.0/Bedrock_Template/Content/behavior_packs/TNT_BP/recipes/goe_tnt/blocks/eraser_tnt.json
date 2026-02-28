@@ -14,7 +14,7 @@
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:ender_pearl"
+      "R": "minecraft:crying_obsidian"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

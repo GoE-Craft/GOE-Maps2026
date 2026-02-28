@@ -14,7 +14,7 @@
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:hopper"
+      "R": "minecraft:chest"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

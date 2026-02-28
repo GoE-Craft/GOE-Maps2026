@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:firework_rocket"
+      "R": "minecraft:firework_rocket",
+      "S": "minecraft:cake"
     },
     "unlock": {
       "context": "AlwaysUnlocked"

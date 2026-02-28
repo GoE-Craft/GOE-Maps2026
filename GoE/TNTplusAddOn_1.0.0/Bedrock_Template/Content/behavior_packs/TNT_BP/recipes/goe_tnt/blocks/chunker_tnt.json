@@ -9,12 +9,13 @@
     ],
     "pattern": [
       "PRP",
-      "RPR",
+      "SPS",
       "PRP"
     ],
     "key": {
       "P": "minecraft:gunpowder",
-      "R": "minecraft:obsidian"
+      "R": "minecraft:netherite_scrap",
+      "S": "minecraft:tnt"
     },
     "unlock": {
       "context": "AlwaysUnlocked"
