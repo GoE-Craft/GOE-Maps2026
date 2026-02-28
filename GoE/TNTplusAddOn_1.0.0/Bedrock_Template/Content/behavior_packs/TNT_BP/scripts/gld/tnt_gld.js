@@ -1332,7 +1332,6 @@ export const TNT_GLD = [
             soundDelay: 5
         },
         explosionEffects: {
-            soundEffect: "goe_tnt:sound_tnt_explode",
             explosionAnimationLength: 2
         },
         explosionProperties: {

@@ -993,19 +993,31 @@
 		"goe_tnt:sound_tnt_fuse": {
 			"category": "music",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_fuse", "volume": 1 }
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_fuse", "volume": 0.6 }
 			]
 		},
 		"goe_tnt:sound_tnt_charging": {
 			"category": "music",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_charging", "volume": 1 }
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_charging", "volume": 0.6 }
 			]
 		},
-		"goe_tnt:sound_tnt_explode": {
+		"goe_tnt:sound_tnt_music_1": {
 			"category": "music",
 			"sounds": [
-				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_explode", "volume": 1 }
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_music_1", "volume": 0.8 }
+			]
+		},
+		"goe_tnt:sound_tnt_music_2": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_music_2", "volume": 0.8 }
+			]
+		},
+		"goe_tnt:sound_tnt_music_3": {
+			"category": "music",
+			"sounds": [
+				{ "name": "sounds/goe/tnt/sfx/sound_tnt/tnt_sound_music_3", "volume": 0.8 }
 			]
 		},
 		// Water Eraser TNT
