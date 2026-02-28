@@ -3,5 +3,10 @@
     "flipbook_texture": "textures/goe/tnt/entity/fungi_tnt",
     "atlas_tile": "fungi_tnt",
     "ticks_per_frame": 10
+  },
+    {
+    "flipbook_texture": "textures/goe/tnt/entity/black_hole_tnt",
+    "atlas_tile": "black_hole_tnt",
+    "ticks_per_frame": 5
   }
 ]
