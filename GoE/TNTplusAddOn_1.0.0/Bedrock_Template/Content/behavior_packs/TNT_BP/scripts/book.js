@@ -400,8 +400,19 @@ async function showAccessoriesPage(player) {
     });
 }
 
+const SHOP_PRICE_TYPE_ORDER = { copper_ingot: 0, iron_ingot: 1, gold_ingot: 2, emerald: 3 };
+
+function sortShopTntsByPrice(items) {
+    return [...items].sort((a, b) => {
+        const orderA = SHOP_PRICE_TYPE_ORDER[a.price?.type] ?? 999;
+        const orderB = SHOP_PRICE_TYPE_ORDER[b.price?.type] ?? 999;
+        if (orderA !== orderB) return orderA - orderB;
+        return (a.price?.amount ?? 0) - (b.price?.amount ?? 0);
+    });
+}
+
 async function showTntsPage(player) {
-    const items = ShopItems.tnts || [];
+    const items = sortShopTntsByPrice(ShopItems.tnts || []);
 
     const form = new ActionFormData()
         .title("§l§4TNT Blocks§r")
