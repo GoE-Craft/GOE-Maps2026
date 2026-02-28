@@ -55,7 +55,7 @@
         "weather_sun": "goe_tnt:weather_sun",
         "weather_sun_explode": "goe_tnt:weather_sun_explode",
         "weather_sun_fall": "goe_tnt:weather_sun_fall",
-        "tnt_charge_blue": "goe_tnt:tnt_charge_blue"
+        "tnt_charge_darkblue": "goe_tnt:tnt_charge_darkblue"
       },
       "render_controllers": [ 
         "controller.render.goe_tnt.tnt", 
