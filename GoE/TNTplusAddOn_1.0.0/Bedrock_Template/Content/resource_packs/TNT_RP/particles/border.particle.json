@@ -31,7 +31,7 @@
 				"facing_camera_mode": "emitter_transform_yz"
 			},
 			"minecraft:particle_appearance_tinting": {
-				"color": [1, 1, 1, 0.50196]
+				"color": [1, 1, 1, 0.76863]
 			}
 		}
 	}
