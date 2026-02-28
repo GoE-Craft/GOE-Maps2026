@@ -1,7 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "ender_dragon_beam_orange_yellow",
-		"metalness_emissive_roughness_subsurface": [0, 5, 255, 0]
-	}
-}

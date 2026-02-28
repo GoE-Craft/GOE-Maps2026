@@ -1,7 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "dot_white_large",
-		"metalness_emissive_roughness": [255, 1, 255]
-	}
-}

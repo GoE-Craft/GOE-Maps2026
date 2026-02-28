@@ -1,7 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "timer_particles",
-		"metalness_emissive_roughness": "timer_particles_mer"
-	}
-}

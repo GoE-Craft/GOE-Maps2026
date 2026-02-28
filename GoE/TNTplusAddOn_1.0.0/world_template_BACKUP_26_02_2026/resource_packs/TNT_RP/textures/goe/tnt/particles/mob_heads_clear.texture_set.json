@@ -1,7 +1,0 @@
-{
-	"format_version": "1.21.30",
-	"minecraft:texture_set": {
-		"color": "mob_heads_clear",
-		"metalness_emissive_roughness": [0, 2, 255]
-	}
-}
