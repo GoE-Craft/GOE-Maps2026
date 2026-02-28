@@ -358,6 +358,13 @@ export const ShopItems = {
             price: { type: "iron_ingot", amount: 10 },
             icon: "textures/goe/tnt/ui/shop/tnt/hostile_mob_tnt",
             itemId: "goe_tnt:hostile_mob_tnt"
+        },
+        {
+            id: "black_hole_tnt",
+            name: "Black Hole TNT",
+            price: { type: "iron_ingot", amount: 10 },
+            icon: "textures/goe/tnt/ui/shop/tnt/black_hole_tnt",
+            itemId: "goe_tnt:black_hole_tnt"
         }
     ],
 
@@ -920,6 +927,16 @@ export const Achievements = {
             icon: "textures/goe/tnt/ui/achievements/hostile_mob_tnt",
             colorCode: "§4",
             rewardStructure: "goe_tnt:hostile_mob_tnt_reward"
+        },
+        {
+            id: "black_hole_tnt",
+            name: "Black Hole TNT",
+            info: "Creates a powerful black hole that pulls in nearby entities.",
+            tips: "Use it to control the battlefield and gather mobs.",
+            tntType: "black_hole_tnt",
+            icon: "textures/goe/tnt/ui/achievements/black_hole_tnt",
+            colorCode: "§4",
+            rewardStructure: "goe_tnt:black_hole_tnt_reward"
         }
     ],
 
