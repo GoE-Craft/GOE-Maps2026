@@ -14,7 +14,7 @@
 				{
 					"name": "bb_main",
 					"pivot": [0, 8, 0],
-					"rotation": [-180, 0, 180]
+					"rotation": [0, 0, 0]
 				},
 				{
 					"name": "tnt",

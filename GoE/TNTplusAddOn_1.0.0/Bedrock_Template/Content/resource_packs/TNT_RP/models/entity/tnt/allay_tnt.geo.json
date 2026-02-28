@@ -12,7 +12,13 @@
 			},
 			"bones": [
 				{
+					"name": "main",
+					"pivot": [0, 0, 0],
+					"rotation": [0, 180, 0]
+				},
+				{
 					"name": "bb_main",
+					"parent": "main",
 					"pivot": [0, 16, 0],
 					"rotation": [-170, 0, 180]
 				},
