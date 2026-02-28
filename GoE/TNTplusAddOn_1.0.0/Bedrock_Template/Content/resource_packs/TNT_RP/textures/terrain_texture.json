@@ -46,6 +46,8 @@
     "golem_tnt": { "textures": "textures/goe/tnt/entity/golem_tnt" },
     "gravity_tnt": { "textures": "textures/goe/tnt/entity/gravity_tnt" },
     "hacker_tnt": { "textures": "textures/goe/tnt/entity/hacker_tnt" },
+    "hostile_mob_tnt": { "textures": "textures/goe/tnt/entity/hostile_mob_tnt" },
+    "mega_tnt": { "textures": "textures/goe/tnt/entity/mega_tnt" },
     "healing_tnt": { "textures": "textures/goe/tnt/entity/healing_tnt" },
     "angry_bee_tnt": { "textures": "textures/goe/tnt/entity/angry_bee_tnt" },
     "inferno_tnt": { "textures": "textures/goe/tnt/entity/inferno_tnt" },
