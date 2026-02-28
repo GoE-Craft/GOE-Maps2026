@@ -429,7 +429,7 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
     // Summon mobs via main thread dispatch to avoid API issues
     try {
         if (tntData?.explosionProperties?.summonMob) {
-            try { system.run(() => handleSummonMob(dimension, loc, tntData)); } catch (e) { }
+            try { system.run(() => handleSummonMob(dimension, loc, tntData, chargeLevel)); } catch (e) { }
         }
     } catch (e) { }
 }
@@ -440,19 +440,33 @@ function* explodeJob(dimension, entity, chargeLevel, tntData, loc, rot) {
  * @param {Dimension} dimension - The dimension where the explosion occurs
  * @param {object} location - The location of the explosion
  * @param {object} tntData - The TNT data object
+ * @param {number} chargeLevel - The charge level of the TNT
  */
-function handleSummonMob(dimension, location, tntData) {
+function handleSummonMob(dimension, location, tntData, chargeLevel) {
     const mobId = tntData.explosionProperties.summonMob;
     if (!mobId) return;
 
     const delay = tntData.explosionProperties.summonDelay || 0;
-    const count = tntData.explosionProperties.summonMobCount || 1;
+    const baseCount = tntData.explosionProperties.summonMobCount || 1;
+
+    // Scale count by charge level: each level adds 50% more mobs
+    const count = Math.round(baseCount * (1 + chargeLevel * 0.5));
+
+    // Spawn radius grows with mob count: 0 for a single mob, wider for more
+    const spawnRadius = count <= 1 ? 0 : Math.min(Math.sqrt(count) * 4, 20);
 
     system.runTimeout(() => {
         for (let i = 0; i < count; i++) {
+            let offsetX = 0;
+            let offsetZ = 0;
 
-            const offsetX = (Math.random() * 2 - 1) * 10;
-            const offsetZ = (Math.random() * 2 - 1) * 10;
+            if (spawnRadius > 0) {
+                // Uniform distribution within a circle
+                const angle = Math.random() * Math.PI * 2;
+                const r = spawnRadius * Math.sqrt(Math.random());
+                offsetX = Math.cos(angle) * r;
+                offsetZ = Math.sin(angle) * r;
+            }
 
             const spawnLoc = {
                 x: location.x + offsetX,

@@ -1,7 +1,7 @@
 import { system, world, Player } from "@minecraft/server";
 
 export function matrixTNTAction(dimension, chargeLevel, location, entity) {
-    const baseCount = 5;
+    const baseCount = 8;
     const count = baseCount + (2 * chargeLevel);
 
     const childEntityId = "goe_tnt:matrix_tnt_child";

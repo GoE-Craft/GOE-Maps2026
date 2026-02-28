@@ -26,7 +26,7 @@
 				"duration": 0.5
 			},
 			"goe_tnt:tnt_detonator": {
-				"range": 30,
+				"range": 50,
 				"area": true,
 				"radius": 6
 			},

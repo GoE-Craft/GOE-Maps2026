@@ -1317,42 +1317,8 @@ export const TNT_GLD = [
         blockHeight: 1.9 // if not defined, defaults to 2 - timer height depends on this
     },
     {
-        blockId: "goe_tnt:snapshot_tnt",
-        tntType: 41,
-        fuseTime: 40,
-        power: 0, // Setting this to 0 will cancel out the explosion entirely (no default explosion sound effects/particles)
-        fuseEffects: {
-            particleEffect: "minecraft:basic_smoke_particle",
-            particleDelay: 10,
-            soundEffect: "goe_tnt:snapshot_tnt_fuse",
-            soundDelay: 0
-        },
-        chargeEffects: {
-            soundEffect: "goe_tnt:snapshot_tnt_charging",
-            soundDelay: 5
-        },
-        explosionEffects: {
-            particleEffect: "goe_tnt:big_explosion_white",
-            particleDelay: 0,
-            soundEffect: "goe_tnt:snapshot_tnt_explode",
-            soundDelay: 0
-        },
-        explosionProperties: {
-            createsFire: false,
-            allowUnderwater: false,
-            breaksBlocks: true,
-            summonMob: null,
-            summonDelay: 10,
-            specialAction: "snapshot"
-        },
-        preExplosionProperties: {
-            specialAction: null
-        },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
-    },
-    {
         blockId: "goe_tnt:sound_tnt",
-        tntType: 42,
+        tntType: 41,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1383,35 +1349,8 @@ export const TNT_GLD = [
         blockHeight: 2.2 // if not defined, defaults to 2 - timer height depends on this
     },
     {
-        blockId: "goe_tnt:specialized_tnt",
-        tntType: 43,
-        fuseTime: 50,
-        power: 0,
-        fuseEffects: {
-            particleEffect: "minecraft:basic_smoke_particle",
-            particleDelay: 10,
-            soundEffect: "random.fuse",
-            soundDelay: 0
-        },
-        explosionEffects: {
-            explosionAnimationLength: 2
-        },
-        explosionProperties: {
-            createsFire: false,
-            allowUnderwater: false,
-            breaksBlocks: false,
-            summonMob: null,
-            summonDelay: 10,
-            specialAction: "specialized"
-        },
-        preExplosionProperties: {
-            specialAction: null
-        },
-        blockHeight: 1.5 // if not defined, defaults to 2 - timer height depends on this
-    },
-    {
         blockId: "goe_tnt:glitch_tnt",
-        tntType: 44,
+        tntType: 42,
         fuseTime: 50,
         power: 4,
         fuseEffects: {
@@ -1444,7 +1383,7 @@ export const TNT_GLD = [
     {
         blockId: "goe_tnt:black_hole_tnt",
         fuseTime: 55,
-        tntType: 45,
+        tntType: 43,
         power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
@@ -1472,7 +1411,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:mega_tnt",
-        tntType: 46,
+        tntType: 44,
         fuseTime: 50,
         power: 0,
         fuseEffects: {
@@ -1504,7 +1443,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:allay_tnt",
-        tntType: 47,
+        tntType: 45,
         fuseTime: 50,
         power: 4,
         fuseEffects: {
@@ -1526,7 +1465,7 @@ export const TNT_GLD = [
             allowUnderwater: false,
             breaksBlocks: false,
             summonMob: "minecraft:allay",
-            summonCount: 3,
+            summonMobCount: 3,
             summonDelay: 10,
             specialAction: null
         },
@@ -1537,7 +1476,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:hostile_mob_tnt",
-        tntType: 48,
+        tntType: 46,
         fuseTime: 50,
         power: 4,
         fuseEffects: {
@@ -1559,7 +1498,7 @@ export const TNT_GLD = [
             allowUnderwater: false,
             breaksBlocks: false,
             summonMob: "minecraft:creeper",
-            summonCount: 3,
+            summonMobCount: 3,
             summonDelay: 10,
             specialAction: "hostile_mob"
         },
@@ -1570,7 +1509,7 @@ export const TNT_GLD = [
     },
     {
         blockId: "goe_tnt:zombie_tnt",
-        tntType: 49,
+        tntType: 47,
         fuseTime: 50,
         power: 4,
         fuseEffects: {
@@ -1592,7 +1531,7 @@ export const TNT_GLD = [
             allowUnderwater: false,
             breaksBlocks: false,
             summonMob: "minecraft:zombie",
-            summonCount: 3,
+            summonMobCount: 3,
             summonDelay: 10,
             specialAction: null
         },

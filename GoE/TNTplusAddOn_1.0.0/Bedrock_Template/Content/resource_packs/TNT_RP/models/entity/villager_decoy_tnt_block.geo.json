@@ -1,5 +1,5 @@
 {
-	"format_version": "1.12.0",
+	"format_version": "1.21.0",
 	"minecraft:geometry": [
 		{
 			"description": {
@@ -13,7 +13,8 @@
 			"bones": [
 				{
 					"name": "bb_main",
-					"pivot": [0, -5, 0]
+					"pivot": [0, -5, 0],
+					"rotation": [0, 180, 0]
 				},
 				{
 					"name": "body_root",
@@ -152,7 +153,17 @@
 						{"origin": [-8, 0, -8], "size": [16, 2, 16], "uv": [0, 56]}
 					]
 				}
-			]
+			],
+			"item_display_transforms": {
+				"gui": {
+					"rotation": [30, 45, 0],
+					"translation": [0, 0, 0],
+					"scale": [1, 1, 1],
+					"rotation_pivot": [0, 0, 0],
+					"scale_pivot": [0, 0, 0],
+					"fit_to_frame": true
+				}
+			}
 		}
 	]
 }

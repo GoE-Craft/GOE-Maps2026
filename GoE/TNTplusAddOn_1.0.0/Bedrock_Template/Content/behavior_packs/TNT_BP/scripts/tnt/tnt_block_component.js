@@ -191,24 +191,172 @@ function placeBlockOnFace(block, face, itemInHand, player) {
                 blockToPlace = "goe_tnt:tnt";
             }
 
+            // Resolve permutation and apply facing/cardinal direction state
+            let perm = BlockPermutation.resolve(blockToPlace);
+            perm = applyFacingPermutation(perm, face, player);
+
             // Place the block
-            targetBlock.setPermutation(BlockPermutation.resolve(blockToPlace));
-            if (player.getGameMode() === GameMode.Creative) return;
-            // Decrease item count (creative mode auto-handles this)
-            const equipment = player.getComponent("minecraft:equippable");
-            if (equipment) {
-                const slot = equipment.getEquipmentSlot(EquipmentSlot.Mainhand);
-                if (slot && slot.amount > 1) {
-                    slot.amount -= 1;
-                } else if (slot) {
-                    slot.setItem(undefined);
+            targetBlock.setPermutation(perm);
+            if (player.getGameMode() !== GameMode.Creative) {
+                // Decrease item count (creative mode auto-handles this)
+                const equipment = player.getComponent("minecraft:equippable");
+                if (equipment) {
+                    const slot = equipment.getEquipmentSlot(EquipmentSlot.Mainhand);
+                    if (slot && slot.amount > 1) {
+                        slot.amount -= 1;
+                    } else if (slot) {
+                        slot.setItem(undefined);
+                    }
                 }
             }
-
-            // Play place sound
-            block.dimension.playSound("dig.stone", targetLoc);
+            
+            const soundId = getBlockPlaceSound(blockToPlace);
+            console.log(`Played sound ${soundId} for placing block ${blockToPlace}`);
+            // Play place sound matching the block's material
+            block.dimension.playSound(soundId, targetLoc);
+            
         }
-    } catch (e) { }
+    } catch (e) {
+        console.warn(`Failed to place block ${itemInHand.typeId} at ${JSON.stringify(targetLoc)}: ${e.message}`);
+    }
+}
+
+/**
+ * Return the appropriate placement sound identifier for a given block typeId.
+ * Matches Bedrock's built-in sound categories by pattern-matching the block name.
+ */
+function getBlockPlaceSound(typeId) {
+    const id = typeId.replace(/^[^:]+:/, ""); // strip namespace
+    console.log(`Determining place sound for block id: ${id}`);
+
+    // Wood / planks / logs / fences / doors / trapdoors
+    if (/wood|log|plank|fence|door|trapdoor|barrel|bookshelf|chest|crafting|ladder|sign|boat|bamboo|mangrove|cherry|stripped/.test(id))
+        return "dig.wood";
+
+    // Dirt / grass / mycelium / podzol / path / farmland
+    if (/^(dirt|grass|mycelium|podzol|farmland|grass_path|mud|rooted_dirt|moss)/.test(id) || /grass|dirt|mud/.test(id))
+        return "dig.grass";
+
+    // Sand / gravel / soul_sand / soul_soil
+    if (/^sand|gravel|soul_sand|soul_soil|suspicious_sand|suspicious_gravel/.test(id))
+        return "dig.sand";
+
+    // Gravel specifically (has its own sound in some versions)
+    if (/^gravel/.test(id))
+        return "dig.gravel";
+
+    // Glass / glass pane
+    if (/glass/.test(id))
+        return "dig.glass";
+
+    // Cloth / wool / carpet
+    if (/wool|carpet/.test(id))
+        return "dig.cloth";
+
+    // Snow / powder_snow
+    if (/snow/.test(id))
+        return "dig.snow";
+
+    // Metal / iron / gold / copper / netherite / chain / anvil
+    if (/iron|gold|copper|netherite|chain|anvil|lantern|bell|cauldron/.test(id))
+        return "dig.metal";
+
+    // Nether brick / nether wart / nether stuff
+    if (/nether_brick/.test(id))
+        return "dig.stone";
+
+    // Coral / sponge / wet_sponge
+    if (/sponge/.test(id))
+        return "dig.grass";
+
+    // Slime / honey
+    if (/slime|honey_block/.test(id))
+        return "mob.slime.big";
+
+    // TNT / custom TNT
+    if (/tnt/.test(id))
+        return "dig.grass";
+
+    // Leaves
+    if (/leaves|azalea/.test(id))
+        return "dig.grass";
+
+    // Shroomlight / glowstone / sea lantern / jack o lantern / pumpkin
+    if (/glowstone|sea_lantern|shroomlight/.test(id))
+        return "dig.glass";
+
+    // Sandstone / stone variants / bricks / cobblestone / obsidian / bedrock / concrete / terracotta
+    return "dig.stone";
+}
+
+/**
+ * Attempt to apply a facing or cardinal direction state to a BlockPermutation.
+ * - minecraft:cardinal_direction: 4-way horizontal, always a string (custom & vanilla)
+ * - minecraft:facing_direction: 6-way, string for custom blocks, number for vanilla blocks
+ *   vanilla mapping: 0=down, 1=up, 2=north, 3=south, 4=west, 5=east
+ */
+function applyFacingPermutation(perm, face, player) {
+    const cardinalStr = getCardinalFromYaw(player.getRotation().y);
+    const facingStr = faceToFacingString(face);
+    const facingNum = faceToFacingNumber(face);
+
+    // Try cardinal direction first (horizontal-only blocks, always string)
+    try { return perm.withState("minecraft:cardinal_direction", cardinalStr); } catch {
+    }
+
+    // Try facing_direction with string (custom blocks)
+    try { return perm.withState("minecraft:facing_direction", facingStr); } catch {
+    }
+
+    // Try facing_direction with number (vanilla blocks)
+    try { return perm.withState("minecraft:facing_direction", facingNum); } catch {
+    }
+
+    // Try facing_direction with number (vanilla blocks)
+    try { return perm.withState("facing_direction", facingNum); } catch {
+    }
+
+    // Try weirdo_direction with number (stairs)
+    try { return perm.withState("weirdo_direction", facingNum); } catch {
+    }
+
+    return perm;
+}
+
+/** Derive a cardinal direction string from a player yaw angle. */
+function getCardinalFromYaw(yaw) {
+    yaw = ((yaw % 360) + 360) % 360;
+    if (yaw > 180) yaw -= 360;
+    if (yaw >= -45 && yaw < 45)   return "south";
+    if (yaw >= 45  && yaw < 135)  return "west";
+    if (yaw >= -135 && yaw < -45) return "east";
+    return "north";
+}
+
+/** Convert a clicked face to a facing direction string. */
+function faceToFacingString(face) {
+    switch (face) {
+        case Direction.Up:    return "up";
+        case Direction.Down:  return "down";
+        case Direction.North: return "north";
+        case Direction.South: return "south";
+        case Direction.East:  return "east";
+        case Direction.West:  return "west";
+        default:              return "south";
+    }
+}
+
+/** Convert a clicked face to a vanilla facing_direction number. */
+function faceToFacingNumber(face) {
+    switch (face) {
+        case Direction.Down:  return 0;
+        case Direction.Up:    return 1;
+        case Direction.North: return 2;
+        case Direction.South: return 3;
+        case Direction.West:  return 4;
+        case Direction.East:  return 5;
+        default:              return 3;
+    }
 }
 
 export function restoreTimers() {
@@ -304,6 +452,7 @@ function incrementBoostLevel(block, player) {
 }
 
 export function getBoostEntity(location, dimension) {
+    location.y -= 0.5; // Boost entity is centered on the block, so adjust search location accordingly
     const entity = dimension.getEntities({ closest: 1, location: location, maxDistance: 0, type: "goe_tnt:tnt_boost_level" })[0];
     return entity;
 }
