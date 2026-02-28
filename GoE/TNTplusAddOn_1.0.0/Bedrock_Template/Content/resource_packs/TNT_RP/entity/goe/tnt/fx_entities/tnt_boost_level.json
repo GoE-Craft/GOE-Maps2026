@@ -5,7 +5,8 @@
             "identifier": "goe_tnt:tnt_boost_level",
             "materials": {
                 "default": "entity_alphatest",
-                "overlay_tnt": "charged_creeper"
+                "overlay_tnt": "charged_creeper",
+                "goe_mob_animated": "goe_mob_animated"
             },
             "textures": {
                 //Boost Level Textures
@@ -67,7 +68,8 @@
 
             },
             "render_controllers": [
-                "controller.render.goe_tnt.boosted_tnt",
+                {"controller.render.goe_tnt.boosted_tnt": "query.property('goe_tnt:tnt_type') != 43"},
+                {"controller.render.goe_tnt.boosted_tnt.black_hole": "query.property('goe_tnt:tnt_type') == 43"},
                 "controller.render.goe_tnt.boosted_tnt_overlay"
             ],
             "geometry": {
@@ -79,7 +81,7 @@
                 "chunker_tnt": "geometry.chunker_tnt",
                 "ultron_tnt": "geometry.ultron_tnt",
                 "freezing_tnt": "geometry.freezing_tnt",
-                "hacker_tnt": "geometry.hacker_tnt",
+                "hacker_tnt": "geometry.hacker_tnt_block",
                 "tree_planter_tnt": "geometry.tree_planter_tnt",
                 "thunderstorm_tnt": "geometry.thunderstorm_tnt",
                 "eraser_tnt": "geometry.eraser_tnt",
@@ -92,7 +94,7 @@
                 "structure_tnt": "geometry.structure_tnt",
                 "daytime_tnt": "geometry.daytime_tnt",
                 "healing_tnt": "geometry.healing_tnt",
-                "villager_decoy_tnt": "geometry.villager_decoy_tnt",
+                "villager_decoy_tnt": "geometry.villager_decoy_tnt_block",
                 "angry_bee_tnt": "geometry.angry_bee_tnt",
                 "cloning_tnt": "geometry.cloning_tnt",
                 "beacon_tnt": "geometry.beacon_tnt",
@@ -104,19 +106,19 @@
                 "light_tnt": "geometry.light_tnt",
                 "thief_tnt": "geometry.thief_tnt",
                 "silent_tnt": "geometry.silent_tnt",
-                "matrix_tnt": "geometry.matrix_tnt",
+                "matrix_tnt": "geometry.matrix_tnt_block",
                 "balloon_tnt": "geometry.balloon_tnt",
                 "water_eraser_tnt": "geometry.water_eraser_tnt",
                 "proxy_tnt": "geometry.proxy_tnt",
                 "void_tnt": "geometry.void_tnt",
                 "shadow_tnt": "geometry.shadow_tnt",
                 "mega_crater_tnt": "geometry.mega_crater_tnt",
-                "knockback_tnt": "geometry.knockback_tnt",
+                "knockback_tnt": "geometry.knockback_tnt_block",
                 "fungi_tnt": "geometry.fungi_tnt",
                 "sound_tnt": "geometry.sound_tnt",
                 "glitch_tnt": "geometry.glitch_tnt",
-                "black_hole_tnt": "geometry.black_hole_tnt_entity",
-                "allay_tnt": "geometry.allay_tnt",
+                "black_hole_tnt": "geometry.black_hole_tnt_entity_frames",
+                "allay_tnt": "geometry.allay_tnt_block",
                 "hostile_mob_tnt": "geometry.hostile_mob_tnt",
                 "mega_tnt": "geometry.mega_tnt",
                 "zombie_tnt": "geometry.zombie_tnt",

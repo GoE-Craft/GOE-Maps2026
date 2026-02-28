@@ -49,9 +49,9 @@
                         "Geometry.sound_tnt",
                         "Geometry.glitch_tnt",
                         "Geometry.black_hole_tnt",
+                        "Geometry.mega_tnt",
                         "Geometry.allay_tnt",
                         "Geometry.hostile_mob_tnt",
-                        "Geometry.mega_tnt",
                         "Geometry.zombie_tnt"
                     ]
                 },
@@ -101,9 +101,9 @@
                         "Texture.sound_tnt",
                         "Texture.glitch_tnt",
                         "Texture.black_hole_tnt",
+                        "Texture.mega_tnt",
                         "Texture.allay_tnt",
                         "Texture.hostile_mob_tnt",
-                        "Texture.mega_tnt",
                         "Texture.zombie_tnt"
                     ]
                 }
@@ -160,9 +160,9 @@
                         "Geometry.overlay_sound_tnt",
                         "Geometry.overlay_glitch_tnt",
                         "Geometry.overlay_black_hole_tnt",
+                        "Geometry.overlay_mega_tnt",
                         "Geometry.overlay_allay_tnt",
                         "Geometry.overlay_hostile_mob_tnt",
-                        "Geometry.overlay_mega_tnt",
                         "Geometry.overlay_zombie_tnt"
                     ]
                 },
@@ -192,6 +192,16 @@
             },
             "light_color_multiplier": 0.5,
             "ignore_lighting" : true
+        },
+        "controller.render.goe_tnt.boosted_tnt.black_hole": {
+            "geometry": "Geometry.black_hole_tnt",
+            "materials": [ { "*": "Material.goe_mob_animated" } ],
+            "textures": [ "Texture.black_hole_tnt" ],
+            "uv_anim": {
+                "offset": [ "0.0", 
+                            "(v.boost_scale > 1) ? (math.mod(math.floor(query.life_time * 12), 6) / 6) : 0.0" ],
+                "scale": [ 1, 1 ]
+            }
         }
     }
 }

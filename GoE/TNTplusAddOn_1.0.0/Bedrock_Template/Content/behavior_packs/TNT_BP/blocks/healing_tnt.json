@@ -22,7 +22,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§qHealing TNT§f\nHeals nearby players!§r",
+      "minecraft:display_name": "§2Healing TNT§f\nHeals nearby players!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§aMob Eraser TNT§f\nErases all nearby mobs!§r",
+      "minecraft:display_name": "§4Mob Eraser TNT§f\nErases all nearby mobs!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

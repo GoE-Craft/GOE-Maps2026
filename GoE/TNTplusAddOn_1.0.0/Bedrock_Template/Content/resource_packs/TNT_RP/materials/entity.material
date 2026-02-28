@@ -38,7 +38,15 @@
     },
 
     "goe_mob:entity_alphatest": {},
-
+    "goe_mob_animated:entity_static": {
+      "+defines": [ "USE_UV_ANIM", "ALPHA_TEST" ],
+      "+samplerStates": [
+        {
+          "samplerIndex": 0,
+          "textureWrap": "Repeat"
+        }
+      ]
+    },
     "goe_tnt_alphablend_doublesided:entity_alphablend": {
       "+states": [ "DisableCulling" ]
     }
