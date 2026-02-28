@@ -119,8 +119,6 @@ SetContainerSlot 338 14 219 12 goe_tnt:water_eraser_tnt 0 3
 SetContainerSlot 322 20 122 5 goe_tnt:proxy_tnt 0 3
 SetContainerSlot 347 20 103 3 goe_tnt:proxy_tnt 0 3
 
-SetContainerSlot 335 16 156 14 goe_tnt:specialized_tnt 0 3
-
 SetContainerSlot 136 12 156 13 goe_tnt:fungi_tnt 0 3
 SetContainerSlot 132 12 158 13 goe_tnt:fungi_tnt 0 3
 
@@ -144,5 +142,3 @@ SetContainerSlot 430 14 121 23 goe_tnt:shadow_tnt 0 2
 SetContainerSlot 477 5 211 14 goe_tnt:hacker_tnt 0 4
 
 SetContainerSlot 481 2 166 11 goe_tnt:glitch_tnt 0 4
-
-SetContainerSlot 472 11 119 12 goe_tnt:snapshot_tnt 0 5
