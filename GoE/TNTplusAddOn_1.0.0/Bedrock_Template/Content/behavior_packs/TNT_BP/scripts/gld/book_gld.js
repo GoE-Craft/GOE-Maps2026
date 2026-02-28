@@ -40,7 +40,7 @@ export const ShopItems = {
         {
             id: "directional_tnt",
             name: "Directional TNT",
-            price: { type: "iron_ingot", amount: 15 },
+            price: { type: "iron_ingot", amount: 6 },
             icon: "textures/goe/tnt/ui/shop/tnt/directional_tnt",
             itemId: "goe_tnt:directional_tnt"
         },
@@ -671,7 +671,7 @@ export const Achievements = {
         {
             id: "beacon_tnt",
             name: "Beacon TNT",
-            info: "Summons a glowing beam that grants powerful effects to nearby players and lasts for 5 minutes.",
+            info: "Summons a glowing beam that grants powerful effects to nearby players and lasts for 2 minutes.",
             tips: "Use the Beacon TNT to gain powerful stats.",
             tntType: "beacon_tnt",
             icon: "textures/goe/tnt/ui/achievements/beacon_tnt",

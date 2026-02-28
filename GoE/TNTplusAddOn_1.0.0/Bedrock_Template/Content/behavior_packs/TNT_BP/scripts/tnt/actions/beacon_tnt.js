@@ -4,7 +4,7 @@ export function* beaconTNTAction(dimension, chargeLevel, location, entity) {
     const radius = 32;
 
     const applyEveryTicks = 2 * 20;        // 2 seconds
-    const totalDurationTicks = 5 * 60 * 20;
+    const totalDurationTicks = 2 * 60 * 20; // 2 minutes
     const effectDurationTicks = 10 * 20;   // 10 seconds
 
     const amplifier = Math.floor(Number(chargeLevel));
