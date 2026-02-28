@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§gThunderstorm TNT§f\nStrikes mobs with lightning!§r",
+      "minecraft:display_name": "§6Thunderstorm TNT§f\nStrikes mobs with lightning!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

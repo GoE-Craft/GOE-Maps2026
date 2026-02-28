@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eUltron TNT§f\nCreates a giant explosion in a wide area!§r",
+      "minecraft:display_name": "§6Ultron TNT§f\nCreates a giant explosion in a wide area!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 1 },

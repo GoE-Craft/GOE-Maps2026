@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "Black Hole TNT",
+      "minecraft:display_name": "§5Black Hole TNT§f\nCreates a devastating black hole that pulls in everything before obliterating it!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_mining": { "seconds_to_destroy": 0.1 },

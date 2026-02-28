@@ -22,7 +22,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eZombie TNT§f\n Zombie description§r",
+      "minecraft:display_name": "§eZombie TNT§f\nSummons an unstoppable horde of raging zombies!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },

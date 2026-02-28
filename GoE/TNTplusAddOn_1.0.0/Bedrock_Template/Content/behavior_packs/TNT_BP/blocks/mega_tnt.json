@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "minecraft:display_name": "§eMega TNT§f\n Mega description§r",
+      "minecraft:display_name": "§4Mega TNT§f\nUnleashes a mega explosion!§r",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
