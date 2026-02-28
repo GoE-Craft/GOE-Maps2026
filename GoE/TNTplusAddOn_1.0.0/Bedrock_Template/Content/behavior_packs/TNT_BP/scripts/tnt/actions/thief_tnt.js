@@ -1,4 +1,24 @@
-import { world, Difficulty, BlockPermutation, system } from "@minecraft/server";
+import { world, Difficulty, BlockPermutation, ItemStack, system } from "@minecraft/server";
+
+// Blocks that should NOT drop items (non-obtainable, technical, or liquid blocks)
+const NO_DROP_BLOCKS = new Set([
+    "minecraft:air", "minecraft:cave_air", "minecraft:void_air",
+    "minecraft:bedrock", "minecraft:barrier",
+    "minecraft:water", "minecraft:flowing_water",
+    "minecraft:lava", "minecraft:flowing_lava",
+    "minecraft:fire", "minecraft:soul_fire",
+    "minecraft:portal", "minecraft:end_portal",
+    "minecraft:end_portal_frame", "minecraft:end_gateway",
+    "minecraft:command_block", "minecraft:chain_command_block", "minecraft:repeating_command_block",
+    "minecraft:structure_block", "minecraft:structure_void",
+    "minecraft:jigsaw", "minecraft:light_block",
+    "minecraft:deny", "minecraft:allow", "minecraft:border_block",
+    "minecraft:piston_arm_collision", "minecraft:sticky_piston_arm_collision",
+    "minecraft:moving_block", "minecraft:info_update", "minecraft:info_update2",
+    "minecraft:reserved6", "minecraft:unknown",
+    "minecraft:mob_spawner", "minecraft:budding_amethyst",
+    "minecraft:frosted_ice", "minecraft:reinforced_deepslate"
+]);
 
 export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
 
@@ -30,11 +50,9 @@ export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
         z: cz + 0.5
     };
 
-    const air = BlockPermutation.resolve("minecraft:air");
-
     let op = 0;
 
-    // destroy blocks in spherical radius
+    // destroy blocks in spherical radius and spawn their items at center
     for (let x = -radius; x <= radius; x++) {
         for (let y = -radius; y <= radius; y++) {
             for (let z = -radius; z <= radius; z++) {
@@ -46,14 +64,23 @@ export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
                 const by = cy + y;
                 const bz = cz + z;
 
-                try{
+                try {
                     const block = dimension.getBlock({ x: bx, y: by, z: bz });
-                    if (block && block.typeId !== "minecraft:air" && block.typeId !== "minecraft:bedrock") {
-                        block.setType("minecraft:air");
+                    if (!block) continue;
+
+                    const typeId = block.typeId;
+                    if (NO_DROP_BLOCKS.has(typeId)) continue;
+
+                    // Spawn the block as an item at the center
+                    try {
+                        dimension.spawnItem(new ItemStack(typeId, 1), teleportTo);
+                    } catch {
+                        // Some blocks can't become items – that's fine, just destroy them
                     }
+
+                    block.setType("minecraft:air");
                 } catch (e) {
                     // Ignore out of bounds errors or any other issues
-                    console.log(`Error processing block at ${bx}, ${by}, ${bz}: ${e}`);
                 }
 
                 op++;
@@ -64,7 +91,7 @@ export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
 
     yield;
 
-    // entities: damage living, teleport items/xp, start fuse for TNT
+    // entities: damage living, teleport items/xp to center, start fuse for TNT
     let entities = [];
     try {
         entities = dimension.getEntities({
@@ -85,7 +112,7 @@ export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
             if (typeId === "minecraft:player") continue;
             if (typeId === "goe_tnt:mecha_suit") continue;
 
-            // teleport drops to explosion
+            // teleport drops to center
             if (typeId === "minecraft:item" || typeId === "minecraft:xp_orb") {
                 e.teleport(teleportTo, { dimension });
                 continue;
@@ -110,12 +137,12 @@ export function* thiefTNTAction(dimension, chargeLevel, location, entity) {
         if ((op2 % 25) === 0) yield;
     }
 
-    // SECOND PASS: pull late drops after mobs finish dying
+    // SECOND PASS: pull late drops (mob loot, etc.) to center after mobs finish dying
     system.runTimeout(() => {
         try {
             const lateEntities = dimension.getEntities({
                 location: explosionLocation,
-                maxDistance: radius
+                maxDistance: radius + 5 // slightly wider to catch drops that bounced
             });
 
             for (const e of lateEntities) {
