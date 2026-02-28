@@ -38,7 +38,7 @@ function unlockAllCompleteReward(player) {
 
     system.runTimeout(() => {
         player.playSound("goe_tnt:done_all_achievements_music");
-        utils.title(player, "@s", `§d§lAll Achievements Complete!`);
+        utils.actionbar(player, "@s", `§d§lAll Achievements Complete!`);
         utils.tellraw(player, "@s", `§d[Completion] §cTNT Master §r- You have discovered every TNT achievement!`);
 
         if (allComplete.rewardStructure) {
@@ -231,11 +231,18 @@ export function onPlayerPlaceBlock(event) {
     const newCount = (currentCount !== undefined ? currentCount : 0) + 1;
     player.setDynamicProperty("goe_tnt_unique_tnts_count", newCount);
 
-    // Check for milestone achievements (every 5 unique TNTs)
+    // Check for milestone achievements (every 5 unique TNTs, up to 40)
     const milestoneNumber = Math.floor(newCount / 5) * 5;
-    if (milestoneNumber > 0 && milestoneNumber % 5 === 0) {
+    if (milestoneNumber > 0 && milestoneNumber <= 40 && milestoneNumber % 5 === 0) {
         if (!hasMilestoneAchievement(player, milestoneNumber)) {
             unlockMilestoneAchievement(player, milestoneNumber);
+        }
+    }
+
+    // Final milestone: all 47 unique TNTs
+    if (newCount === 47) {
+        if (!hasMilestoneAchievement(player, 47)) {
+            unlockMilestoneAchievement(player, 47);
         }
     }
 }

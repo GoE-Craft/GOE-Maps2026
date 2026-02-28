@@ -1,0 +1,30 @@
+{
+  "format_version": "1.21.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "goe_tnt:hostile_mob_tnt"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "PRP",
+      "CPA",
+      "PBP"
+    ],
+    "key": {
+      "P": "minecraft:gunpowder",
+      "R": "minecraft:rotten_flesh",
+      "C": "minecraft:bone",
+      "A": "minecraft:spider_eye",
+      "B": "minecraft:blaze_powder"
+    },
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "result": {
+      "item": "goe_tnt:mega_tnt",
+      "count": 1
+    }
+  }
+}

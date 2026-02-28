@@ -260,6 +260,7 @@ async function showTntsInfoPage(player) {
         .body(
             "§fThis Add-On adds many new custom §4TNT Blocks§f with unique effects and useful abilities.\n\n" +
             "§f- All TNT blocks can be activated with vanilla methods such as flint and steel or redstone.\n\n" +
+            "§f- All TNT crafting recipes are available in the Crafting Table and can be viewed directly from the recipe list.\n\n" +
             "§4- Remote Detonation:\n" +
             "§fUse a §eTNT Detonator§f to activate TNT blocks from a distance. Look at remote TNT blocks and interact while holding the §eTNT Detonator§f to activate.\n\n" +
             "§4- Delayed Activation:\n" +

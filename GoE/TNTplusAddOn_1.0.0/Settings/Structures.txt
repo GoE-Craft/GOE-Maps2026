@@ -305,7 +305,27 @@ item=minecraft:iron_ingot 0 10
 type=items
 item=minecraft:emerald 0 5
 
+#black_hole_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
 #thief_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#allay_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#hostile_mob_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#zombie_tnt_reward
+type=items
+item=minecraft:emerald 0 5
+
+#mega_tnt_reward
 type=items
 item=minecraft:emerald 0 5
 
@@ -341,10 +361,27 @@ item=minecraft:experience_bottle 0 15
 
 #milestone_30_reward
 type=items
-item=goe_tnt:ultron_tnt 0 5
-item=minecraft:gold_ingot 0 10
-item=minecraft:golden_apple 0 3
+item=goe_tnt:healing_tnt 0 5
+item=minecraft:iron_ingot 0 20
+item=minecraft:experience_bottle 0 15
 
+#milestone_35_reward
+type=items
+item=goe_tnt:allay_tnt 0 10
+item=minecraft:gold_ingot 0 15
+item=minecraft:golden_apple 0 5
+
+#milestone_40_reward
+type=items
+item=goe_tnt:mega_tnt 0 15
+item=minecraft:emerald 0 10
+item=minecraft:enchanted_golden_apple 0 5
+
+#milestone_47_reward
+type=items
+item=goe_tnt:void_tnt 0 20
+item=minecraft:emerald 0 25
+item=minecraft:enchanted_golden_apple 0 10
 
 //////////////////// GUIDE BOOK ////////////////////
 
