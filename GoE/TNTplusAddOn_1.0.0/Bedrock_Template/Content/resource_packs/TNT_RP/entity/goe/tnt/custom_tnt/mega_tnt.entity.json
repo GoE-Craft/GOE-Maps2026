@@ -16,11 +16,11 @@
 				"boost_level_4": "textures/goe/tnt/entity/boost_level_4",
 
 				//TNT Texture
-				"default": "textures/goe/tnt/entity/tnt"
+				"default": "textures/goe/tnt/entity/mega_tnt"
 			},
 			"geometry": {
-				"default": "geometry.goe_tnt",
-				"overlay_tnt": "geometry.overlay_tnt"
+				"default": "geometry.mega_tnt",
+				"overlay_tnt": "geometry.overlay_mega_tnt"
 			},
 			"scripts": {
 				"pre_animation": [
@@ -30,13 +30,24 @@
 					"v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
 				],
 				"animate": [
-					{ "tnt_swelling": "v.should_swell" },
-					{ "overlay_size": "v.boost_scale > 1" }
+					{"charge": "q.mark_variant == 1"},
+					{"explode": "q.mark_variant == 2"},
+					{"overlay_size": "v.boost_scale > 1"}
 				]
 			},
 			"animations": {
-				"tnt_swelling": "animation.goe_tnt.tnt.swell",
+				"charge": "animation.goe_tnt.mega_tnt.charge",
+				"explode": "animation.goe_tnt.mega_tnt.explosion",
 				"overlay_size": "animation.goe_tnt.tnt.overlay_size"
+			},
+			"particle_effects": {
+				"mega_explosion": "goe_tnt:mega_explosion",
+				"mega_explosion_flash": "goe_tnt:mega_explosion_flash",
+				"mega_orb": "goe_tnt:mega_orb",
+				"mega_ring": "goe_tnt:mega_ring",
+				"mega_circle": "goe_tnt:mega_circle",
+				"mega_circle_smoke": "goe_tnt:mega_circle_smoke",
+				"mega_shell_explosion": "goe_tnt:mega_shell_explosion"
 			},
 			"render_controllers": [
 				"controller.render.goe_tnt.tnt",

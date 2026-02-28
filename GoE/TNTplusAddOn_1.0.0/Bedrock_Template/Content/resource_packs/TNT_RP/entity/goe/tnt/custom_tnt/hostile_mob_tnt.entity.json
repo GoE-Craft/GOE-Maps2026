@@ -16,11 +16,11 @@
 				"boost_level_4": "textures/goe/tnt/entity/boost_level_4",
 
 				//TNT Texture
-				"default": "textures/goe/tnt/entity/tnt"
+				"default": "textures/goe/tnt/entity/hostile_mob_tnt"
 			},
 			"geometry": {
-				"default": "geometry.goe_tnt",
-				"overlay_tnt": "geometry.overlay_tnt"
+				"default": "geometry.hostile_mob_tnt",
+				"overlay_tnt": "geometry.overlay_hostile_mob_tnt"
 			},
 			"scripts": {
 				"pre_animation": [
@@ -30,14 +30,24 @@
 					"v.anim_overlay = (query.property('goe_tnt:boost_level') == 0) ? 1.8 : ((query.property('goe_tnt:boost_level') == 1) ? 1.8: ((query.property('goe_tnt:boost_level') == 2) ? 1.55 : ((query.property('goe_tnt:boost_level') == 3) ? 1.2 : 0.6)));"
 				],
 				"animate": [
-					{ "tnt_swelling": "v.should_swell" },
-					{ "overlay_size": "v.boost_scale > 1" }
+					{"charge": "q.mark_variant == 1"},
+					{"explode": "q.mark_variant == 2"},
+					{"overlay_size": "v.boost_scale > 1"}
 				]
 			},
 			"animations": {
-				"tnt_swelling": "animation.goe_tnt.tnt.swell",
+				"charge": "animation.goe_tnt.hostile_mob_tnt.charge",
+				"explode": "animation.goe_tnt.hostile_mob_tnt.explosion",
 				"overlay_size": "animation.goe_tnt.tnt.overlay_size"
 			},
+			"particle_effects": {
+				"tnt_charge_red": "goe_tnt:tnt_charge_red",
+				"hostile_mob_orb": "goe_tnt:hostile_mob_orb",
+				"hostile_mob_ring": "goe_tnt:hostile_mob_ring",
+				"hostile_mob_explosion": "goe_tnt:hostile_mob_explosion",
+				"hostile_mob_explosion_flash": "goe_tnt:hostile_mob_explosion_flash",
+				"hostile_mob_particles_explosion": "goe_tnt:hostile_mob_particles_explosion"	
+			},  
 			"render_controllers": [
 				"controller.render.goe_tnt.tnt",
 				{ "controller.render.goe_tnt.tnt_boost_scale": "v.boost_scale > 1" }

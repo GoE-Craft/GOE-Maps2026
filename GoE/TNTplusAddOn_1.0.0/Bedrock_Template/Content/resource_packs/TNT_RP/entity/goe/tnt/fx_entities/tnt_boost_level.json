@@ -57,11 +57,14 @@
                 "mega_crater_tnt": "textures/goe/tnt/entity/mega_crater_tnt",
                 "knockback_tnt": "textures/goe/tnt/entity/knockback_tnt",
                 "fungi_tnt": "textures/goe/tnt/entity/fungi_tnt",
-                "snapshot_tnt": "textures/goe/tnt/entity/tnt", // Not implemented yet, will use default texture for now
                 "sound_tnt": "textures/goe/tnt/entity/sound_tnt",
-                "specialized_tnt": "textures/goe/tnt/entity/tnt", // Not implemented yet, will use default texture for now
                 "glitch_tnt": "textures/goe/tnt/entity/glitch_tnt",
-                "black_hole_tnt": "textures/goe/tnt/entity/black_hole_tnt"
+                "black_hole_tnt": "textures/goe/tnt/entity/black_hole_tnt",
+                "allay_tnt": "textures/goe/tnt/entity/allay_tnt",
+                "hostile_mob_tnt": "textures/goe/tnt/entity/hostile_mob_tnt",
+                "mega_tnt": "textures/goe/tnt/entity/mega_tnt",
+                "zombie_tnt": "textures/goe/tnt/entity/zombie_tnt"
+
             },
             "render_controllers": [
                 "controller.render.goe_tnt.boosted_tnt",
@@ -110,11 +113,13 @@
                 "mega_crater_tnt": "geometry.mega_crater_tnt",
                 "knockback_tnt": "geometry.knockback_tnt",
                 "fungi_tnt": "geometry.fungi_tnt",
-                "snapshot_tnt": "geometry.goe_tnt", // Not implemented yet, will use default geometry for now
                 "sound_tnt": "geometry.sound_tnt",
-                "specialized_tnt": "geometry.goe_tnt", // Not implemented yet, will use default geometry for now
                 "glitch_tnt": "geometry.glitch_tnt",
                 "black_hole_tnt": "geometry.black_hole_tnt_entity",
+                "allay_tnt": "geometry.allay_tnt",
+                "hostile_mob_tnt": "geometry.hostile_mob_tnt",
+                "mega_tnt": "geometry.mega_tnt",
+                "zombie_tnt": "geometry.zombie_tnt",
 
                 //Overlay Geometry Variants (if needed, can be used for different boost levels or other visual effects)
                 "overlay_default": "geometry.overlay_tnt",
@@ -158,11 +163,13 @@
                 "overlay_mega_crater_tnt": "geometry.overlay_mega_crater_tnt",
                 "overlay_knockback_tnt": "geometry.overlay_knockback_tnt",
                 "overlay_fungi_tnt": "geometry.overlay_fungi_tnt",
-                "overlay_snapshot_tnt": "geometry.overlay_tnt", // Not implemented yet, will use default geometry for now
                 "overlay_sound_tnt": "geometry.overlay_sound_tnt",
-                "overlay_specialized_tnt": "geometry.overlay_tnt", // Not implemented yet, will use default geometry for now
                 "overlay_glitch_tnt": "geometry.overlay_glitch_tnt",
-                "overlay_black_hole_tnt": "geometry.overlay_black_hole_tnt_entity"
+                "overlay_black_hole_tnt": "geometry.overlay_black_hole_tnt_entity",
+                "overlay_allay_tnt": "geometry.overlay_allay_tnt",
+                "overlay_hostile_mob_tnt": "geometry.overlay_hostile_mob_tnt",
+                "overlay_mega_tnt": "geometry.overlay_mega_tnt",
+                "overlay_zombie_tnt": "geometry.overlay_zombie_tnt"
             },
             "scripts": {
                 "scale": "1",

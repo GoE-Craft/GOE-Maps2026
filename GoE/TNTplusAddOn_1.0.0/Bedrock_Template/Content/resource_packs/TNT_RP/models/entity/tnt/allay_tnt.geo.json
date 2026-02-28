@@ -12,16 +12,21 @@
 			},
 			"bones": [
 				{
-					"name": "bone",
+					"name": "bb_main",
 					"pivot": [0, 16, 0],
-					"rotation": [10, 0, 0],
+					"rotation": [-170, 0, 180]
+				},
+				{
+					"name": "tnt",
+					"parent": "bb_main",
+					"pivot": [0, 14, 0],
 					"cubes": [
 						{"origin": [-8, 8, -8], "size": [16, 16, 16], "uv": [0, 0]}
 					]
 				},
 				{
 					"name": "skirt",
-					"parent": "bone",
+					"parent": "tnt",
 					"pivot": [0.1463, 4.7283, -0.1463],
 					"cubes": [
 						{
@@ -53,21 +58,53 @@
 				},
 				{
 					"name": "hands",
-					"parent": "bone",
-					"pivot": [-0.2, 9.58134, 1.71131],
+					"parent": "tnt",
+					"pivot": [-0.2, 9.58134, 1.71131]
+				},
+				{
+					"name": "hand_left",
+					"parent": "hands",
+					"pivot": [-7.2, 15.5, 1.5],
 					"cubes": [
-						{"origin": [-10.7, 8, -1], "size": [3, 9, 7], "pivot": [-9.2, 11.5, 2.5], "rotation": [24.66569, -4.20854, 31.57947], "uv": [32, 53]},
+						{"origin": [-10.7, 8, -1], "size": [3, 9, 7], "pivot": [-9.2, 11.5, 2.5], "rotation": [24.66569, -4.20854, 31.57947], "uv": [32, 53]}
+					]
+				},
+				{
+					"name": "hand_right",
+					"parent": "hands",
+					"pivot": [6.8, 15.5, 0.5],
+					"cubes": [
 						{"origin": [7.3, 8, -1], "size": [3, 9, 7], "pivot": [8.8, 11.5, 2.5], "rotation": [24.91643, 2.11089, -27.03359], "uv": [32, 53]}
 					]
 				},
 				{
 					"name": "Wings",
-					"parent": "bone",
-					"pivot": [0, 22, 7],
+					"parent": "tnt",
+					"pivot": [0, 22, 7]
+				},
+				{
+					"name": "wing_left",
+					"parent": "Wings",
+					"pivot": [-7.8, 18.3, 3],
 					"cubes": [
-						{"origin": [-10.8, 17.3, -1], "size": [0, 8, 16], "pivot": [-10.8, 21.3, 7], "rotation": [148.42937, 25.4462, 165.85536], "uv": [0, 53]},
+						{"origin": [-10.8, 17.3, -1], "size": [0, 8, 16], "pivot": [-10.8, 21.3, 7], "rotation": [148.42937, 25.4462, 165.85536], "uv": [0, 53]}
+					]
+				},
+				{
+					"name": "wing_right",
+					"parent": "Wings",
+					"pivot": [7.8, 19.1, 2],
+					"cubes": [
 						{"origin": [10.8, 17.1, -1], "size": [0, 8, 16], "pivot": [10.8, 21.1, 7], "rotation": [27.91028, 25.67283, 12.75314], "uv": [0, 53]}
 					]
+				},
+				{
+					"name": "locator",
+					"parent": "bb_main",
+					"pivot": [0, 14, 0],
+					"locators": {
+						"allay_center": [0, 14, 0]
+					}
 				}
 			]
 		}

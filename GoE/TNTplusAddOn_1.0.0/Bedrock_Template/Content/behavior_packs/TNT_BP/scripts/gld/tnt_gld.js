@@ -1445,7 +1445,7 @@ export const TNT_GLD = [
         blockId: "goe_tnt:allay_tnt",
         tntType: 45,
         fuseTime: 50,
-        power: 4,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -1478,7 +1478,7 @@ export const TNT_GLD = [
         blockId: "goe_tnt:hostile_mob_tnt",
         tntType: 46,
         fuseTime: 50,
-        power: 4,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,
@@ -1511,7 +1511,7 @@ export const TNT_GLD = [
         blockId: "goe_tnt:zombie_tnt",
         tntType: 47,
         fuseTime: 50,
-        power: 4,
+        power: 0,
         fuseEffects: {
             particleEffect: "minecraft:basic_smoke_particle",
             particleDelay: 10,

@@ -46,11 +46,13 @@
                         "Geometry.mega_crater_tnt",
                         "Geometry.knockback_tnt",
                         "Geometry.fungi_tnt",
-                        "Geometry.snapshot_tnt",
                         "Geometry.sound_tnt",
-                        "Geometry.specialized_tnt",
                         "Geometry.glitch_tnt",
-                        "Geometry.black_hole_tnt"
+                        "Geometry.black_hole_tnt",
+                        "Geometry.allay_tnt",
+                        "Geometry.hostile_mob_tnt",
+                        "Geometry.mega_tnt",
+                        "Geometry.zombie_tnt"
                     ]
                 },
                 "textures": {
@@ -96,11 +98,13 @@
                         "Texture.mega_crater_tnt",
                         "Texture.knockback_tnt",
                         "Texture.fungi_tnt",
-                        "Texture.snapshot_tnt",
                         "Texture.sound_tnt",
-                        "Texture.specialized_tnt",
                         "Texture.glitch_tnt",
-                        "Texture.black_hole_tnt"
+                        "Texture.black_hole_tnt",
+                        "Texture.allay_tnt",
+                        "Texture.hostile_mob_tnt",
+                        "Texture.mega_tnt",
+                        "Texture.zombie_tnt"
                     ]
                 }
             },
@@ -153,11 +157,13 @@
                         "Geometry.overlay_mega_crater_tnt",
                         "Geometry.overlay_knockback_tnt",
                         "Geometry.overlay_fungi_tnt",
-                        "Geometry.overlay_snapshot_tnt",
                         "Geometry.overlay_sound_tnt",
-                        "Geometry.overlay_specialized_tnt",
                         "Geometry.overlay_glitch_tnt",
-                        "Geometry.overlay_black_hole_tnt"
+                        "Geometry.overlay_black_hole_tnt",
+                        "Geometry.overlay_allay_tnt",
+                        "Geometry.overlay_hostile_mob_tnt",
+                        "Geometry.overlay_mega_tnt",
+                        "Geometry.overlay_zombie_tnt"
                     ]
                 },
                 "textures": {
