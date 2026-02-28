@@ -16,7 +16,7 @@ export const ShopItems = {
         {
             id: "tnt_detonator",
             name: "TNT Detonator",
-            price: { type: "iron_ingot", amount: 1 },
+            price: { type: "iron_ingot", amount: 2 },
             icon: "textures/goe/tnt/ui/shop/accessories/tnt_detonator",
             itemId: "goe_tnt:tnt_detonator"
         },

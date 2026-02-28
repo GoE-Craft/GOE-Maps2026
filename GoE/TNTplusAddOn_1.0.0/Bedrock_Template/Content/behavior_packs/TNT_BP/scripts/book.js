@@ -357,7 +357,7 @@ async function showShopPage(player) {
 }
 
 async function showAccessoriesPage(player) {
-    const items = ShopItems.accessories || [];
+    const items = sortShopTntsByPrice(ShopItems.accessories || []);
 
     const form = new ActionFormData()
         .title("§l§9TNT Accessories§r");
