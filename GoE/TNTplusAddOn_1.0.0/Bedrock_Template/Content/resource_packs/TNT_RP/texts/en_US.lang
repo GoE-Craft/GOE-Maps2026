@@ -1,4 +1,5 @@
 ﻿pack.name=TNT+ Add-On
+pack.description=Add over §440+ EPIC TNTs§f to your own world with §4TNT+ Add-On!§fUnleash §4MASSIVE EXPLOSIONS§f, use advanced detonation tech, pilot a §4MECHA SUIT§f, and §4DEMOLISH§f everything in your way!
 action.hint.exit.goe_tnt:mecha_suit=§6[Hint] Hold any TNT block in your hand and interact to launch it.\n 
 
 entity.goe_tnt:mecha_suit.name=Mecha Suit
@@ -51,5 +52,3 @@ entity.goe_tnt:allay_tnt.name=Allay TNT
 entity.goe_tnt:zombie_tnt.name=Zombie TNT
 entity.goe_tnt:hostile_mob_tnt.name=Hostile Mob TNT
 entity.goe_tnt:mega_tnt.name=Mega TNT
-
-pack.description=Add over §440+ EPIC TNTs§f to your own world with §4TNT+ Add-On!§f\n\nUnleash §4MASSIVE EXPLOSIONS§f, use advanced detonation tech, pilot a §4MECHA SUIT§f, and §4DEMOLISH§f everything in your way!
