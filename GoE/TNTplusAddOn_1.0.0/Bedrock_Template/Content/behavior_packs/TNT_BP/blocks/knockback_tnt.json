@@ -25,7 +25,7 @@
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
       "minecraft:destructible_by_explosion": { "explosion_resistance": 10 },
-      "minecraft:geometry": "geometry.knockback_tnt",
+      "minecraft:geometry": "geometry.knockback_tnt_block",
       "minecraft:material_instances": { "*": { "texture": "knockback_tnt", "render_method": "alpha_test", "face_dimming": true} },
       "minecraft:redstone_conductivity": {
         "redstone_conductor": true
