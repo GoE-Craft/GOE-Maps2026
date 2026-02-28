@@ -44,6 +44,7 @@ import { specializedTNTAction } from "./actions/specialized_tnt";
 import { snapshotTNTAction } from "./actions/snapshot_tnt";
 import { matrixTNTAction } from "./actions/matrix_tnt";
 import { blackHoleTNTAction } from "./actions/black_hole_tnt";
+import { hostileMobTNTAction } from "./actions/hostile_mob_tnt";
 
 /**
  * TNT Actions Module
@@ -229,6 +230,9 @@ export function handleSpecialAction(dimension, location, tntData, chargeLevel, v
             break;
         case "black_hole":
             blackHoleTNTAction(dimension, chargeLevel, location);
+            break;
+        case "hostile_mob":
+            system.runJob(hostileMobTNTAction(dimension, chargeLevel, location, entity));
             break;
         default:
             break;

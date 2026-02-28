@@ -1493,8 +1493,7 @@ export const TNT_GLD = [
             createsFire: false,
             allowUnderwater: false,
             breaksBlocks: false,
-            summonMob: "minecraft:creeper",
-            summonMobCount: 3,
+            summonMob: null,
             summonDelay: 10,
             specialAction: "hostile_mob"
         },
