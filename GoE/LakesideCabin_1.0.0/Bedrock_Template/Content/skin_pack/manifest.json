@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "metadata" : {
+        "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+    },
+    "header": {
+        "name": "LakesideCabinSkinPack",
+        "uuid": "9222e962-c790-429a-aec1-aaa7975c1467",
+        "version": [1,0,0]
+    },
+    "modules": [
+        {
+            "type": "skin_pack",
+            "uuid": "7096e185-a42b-4850-9781-07d9dbdf12fc",
+            "version": [1,0,0]
+        }
+    ]
+}

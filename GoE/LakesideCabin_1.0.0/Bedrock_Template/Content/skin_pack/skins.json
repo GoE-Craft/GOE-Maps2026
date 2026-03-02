@@ -1,0 +1,78 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Dylan",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Dylan_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Hailey",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Hailey_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Logan",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Logan_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Tyler",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Tyler_customSlim.png",
+      "type": "paid"
+    },
+	{
+      "localization_name": "Cameron",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Cameron_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Parker",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Parker_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Maddison",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Maddison_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Chloe",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Chloe_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Taylor",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Taylor_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Alyssa",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Alyssa_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Siera",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Siera_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Brandon",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Brandon_customSlim.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "LakesideCabinSkinPack",
+  "localization_name": "LakesideCabinSkinPack"
+}
