@@ -1,7 +1,7 @@
 {
   "format_version": 2,
   "header": {
-    "base_game_version": [1, 21, 120],
+    "base_game_version": [1, 26, 0],
     "lock_template_options": true,
     "name": "pack.name",
     "description": "pack.description",
