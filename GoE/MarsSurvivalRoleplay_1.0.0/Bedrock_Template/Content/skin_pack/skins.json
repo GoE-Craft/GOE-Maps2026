@@ -1,0 +1,54 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Tera",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Tera_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Corion",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Corion_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Iris",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Iris_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Link",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Link_custom.png",
+      "type": "paid"
+    },
+	{
+      "localization_name": "Bit",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Bit_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Gadget",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Gadget_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Micro",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Micro_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Combot",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Combot_custom.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "MarsSurvivalRoleplaySkinPack",
+  "localization_name": "MarsSurvivalRoleplaySkinPack"
+}

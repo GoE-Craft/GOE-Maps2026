@@ -1,0 +1,3 @@
+WorldName=Mars Survival Roleplay
+InitialSpawn=2146 95 -1500
+Seed=32167
