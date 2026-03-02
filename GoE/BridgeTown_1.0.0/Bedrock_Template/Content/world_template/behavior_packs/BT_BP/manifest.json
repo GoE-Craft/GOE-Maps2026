@@ -1,0 +1,20 @@
+{
+  "format_version": 2,
+  "header": {
+    "min_engine_version": [1, 21, 130],
+    "name": "pack.name",
+    "description": "pack.description",
+    "uuid": "6d969ad5-fe45-4cad-a179-3d674b187c1f",
+    "version": [1, 0, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "da72290b-3199-4072-bc1c-b2002b7071ed",
+      "version": [1, 0, 0]
+    }
+  ],
+  "metadata": {
+    "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+  }
+}

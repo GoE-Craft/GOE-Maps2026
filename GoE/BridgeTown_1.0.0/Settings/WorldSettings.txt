@@ -1,0 +1,3 @@
+WorldName=Bridge Town
+InitialSpawn=371 133 319
+Seed=178652
