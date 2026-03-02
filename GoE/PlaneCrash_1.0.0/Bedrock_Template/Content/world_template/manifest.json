@@ -1,0 +1,21 @@
+{
+  "format_version": 2,
+  "header": {
+    "base_game_version": [1, 26, 0],
+    "lock_template_options": true,
+    "name": "pack.name",
+    "description": "pack.description",
+    "uuid": "85abc5f3-2c91-469a-8256-4dda05183db9",
+    "version": [1, 0, 0]
+  },
+  "modules": [
+    {
+      "type": "world_template",
+      "uuid": "1a1c662b-dd70-483e-a9c4-f93bb7af42fa",
+      "version": [1, 0, 0]
+    }
+  ],
+  "metadata": {
+    "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+  }
+}

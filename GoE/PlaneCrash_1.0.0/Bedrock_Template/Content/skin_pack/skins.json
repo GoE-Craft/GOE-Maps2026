@@ -1,0 +1,78 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Jack",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Jack_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Donald",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Donald_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Edward",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Edward_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Tony",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Tony_customSlim.png",
+      "type": "paid"
+    },
+	{
+      "localization_name": "Samuel",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Samuel_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Nick",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Nick_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Emma",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Emma_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Judy",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Judy_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Nilah",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Nilah_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Annie",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Annie_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Kendra",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Kendra_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Nancy",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Nancy_customSlim.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "PlaneCrashSkinPack",
+  "localization_name": "PlaneCrashSkinPack"
+}

@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "metadata" : {
+        "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+    },
+    "header": {
+        "name": "PlaneCrashSkinPack",
+        "uuid": "5e5912b3-1a02-4fdd-9640-f603c043b6f6",
+        "version": [1,0,0]
+    },
+    "modules": [
+        {
+            "type": "skin_pack",
+            "uuid": "d5c7f46f-6f38-43fc-a4b9-cfa362a308e2",
+            "version": [1,0,0]
+        }
+    ]
+}

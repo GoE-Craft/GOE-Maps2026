@@ -1,0 +1,3 @@
+WorldName=Plane Crash
+InitialSpawn=-56 89 72
+Seed=27594263
