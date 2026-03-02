@@ -1,0 +1,3 @@
+WorldName=Jurassic Village
+InitialSpawn=-308 74 316
+Seed=558687

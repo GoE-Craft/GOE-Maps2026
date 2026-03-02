@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "metadata" : {
+        "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+    },
+    "header": {
+        "name": "JurassicVillageSkinPack",
+        "uuid": "77bdfa79-8eea-4acc-9d35-017e1129fdb9",
+        "version": [1,0,0]
+    },
+    "modules": [
+        {
+            "type": "skin_pack",
+            "uuid": "745787d8-22e0-4e86-ab02-960ef4c37d0f",
+            "version": [1,0,0]
+        }
+    ]
+}

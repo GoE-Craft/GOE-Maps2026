@@ -1,0 +1,54 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Aiden",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Aiden_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Jackson",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Jackson_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Mia",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Mia_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Maddison",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Maddison_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Macon",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Macon_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Lucas",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Lucas_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Chloe",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Chloe_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Lily",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Lily_customSlim.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "JurassicVillageSkinPack",
+  "localization_name": "JurassicVillageSkinPack"
+}
