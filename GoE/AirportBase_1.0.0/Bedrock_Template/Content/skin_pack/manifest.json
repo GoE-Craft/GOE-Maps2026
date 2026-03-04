@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "metadata" : {
+        "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+    },
+    "header": {
+        "name": "AirportBaseSkinPack",
+        "uuid": "2b0c1bf1-c9b1-40db-8556-5272810cb66a",
+        "version": [1,0,0]
+    },
+    "modules": [
+        {
+            "type": "skin_pack",
+            "uuid": "a2dc038b-7eb5-470f-abfa-a0c76d449a6b",
+            "version": [1,0,0]
+        }
+    ]
+}

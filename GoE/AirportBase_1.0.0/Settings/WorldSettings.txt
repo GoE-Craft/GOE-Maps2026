@@ -1,0 +1,3 @@
+WorldName=Airport Base
+InitialSpawn=-44 71 -56
+Seed=123123

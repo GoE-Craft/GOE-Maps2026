@@ -1,0 +1,78 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Freya",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Freya_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Dorian",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Dorian_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Felix",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Felix_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Hugo",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Hugo_customSlim.png",
+      "type": "paid"
+    },
+	{
+      "localization_name": "Leo",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Leo_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Anthony",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Anthony_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Arie",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Arie_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Calliope",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Calliope_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Elara",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Elara_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Cassius",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Cassius_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Junipper",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Junipper_customSlim.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Seraphine",
+      "geometry": "geometry.humanoid.customSlim",
+      "texture": "Seraphine_customSlim.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "AirportBaseSkinPack",
+  "localization_name": "AirportBaseSkinPack"
+}
