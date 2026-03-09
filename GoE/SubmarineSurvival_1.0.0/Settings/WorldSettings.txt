@@ -1,0 +1,3 @@
+WorldName=Submarine Survival
+InitialSpawn=25 78 18
+Seed=134363
