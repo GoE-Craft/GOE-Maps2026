@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "metadata" : {
+        "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+    },
+    "header": {
+        "name": "DragonVillageSkinPack",
+        "uuid": "446d27a3-5e12-4d26-a533-5b93d9237b0b",
+        "version": [1,0,0]
+    },
+    "modules": [
+        {
+            "type": "skin_pack",
+            "uuid": "63e469b9-6410-40c3-9054-4aa4b32e5ebb",
+            "version": [1,0,0]
+        }
+    ]
+}

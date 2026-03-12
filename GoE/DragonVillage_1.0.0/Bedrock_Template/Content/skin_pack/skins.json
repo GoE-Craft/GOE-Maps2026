@@ -1,0 +1,54 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Pyro",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Pyro_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Ember",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Ember_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Draco",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Draco_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Sizzle",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Sizzle_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Sparky",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Sparky_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Blaze",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Blaze_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Flicker",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Flicker_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Flare",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Flare_custom.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "DragonVillageSkinPack",
+  "localization_name": "DragonVillageSkinPack"
+}
