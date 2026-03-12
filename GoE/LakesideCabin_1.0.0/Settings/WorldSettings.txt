@@ -1,5 +1,3 @@
 WorldName=Lakeside Cabin
-DefaultGameMode=survival
 InitialSpawn=11698 65 27067
 Seed=22713
-WorldType=normal
