@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "metadata" : {
+        "authors" : [ "GoE-Craft", "All Rights Reserved." ]
+    },
+    "header": {
+        "name": "ParanormalWorldSkinPack",
+        "uuid": "b9d3c6cd-f78c-424f-8c14-8588306edfd1",
+        "version": [1,0,0]
+    },
+    "modules": [
+        {
+            "type": "skin_pack",
+            "uuid": "7ebd80bd-4695-4439-ac3c-694e3187f86b",
+            "version": [1,0,0]
+        }
+    ]
+}

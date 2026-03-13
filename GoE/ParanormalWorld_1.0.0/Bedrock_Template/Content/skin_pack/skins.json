@@ -1,0 +1,54 @@
+  {
+  "skins": [
+    {
+      "localization_name": "Creeper",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Creeper_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Skeleton",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Skeleton_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "EnderDragon",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "EnderDragon_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Spider",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Spider_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Zombie",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Zombie_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Witch",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Witch_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Enderman",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Enderman_custom.png",
+      "type": "paid"
+    },
+    {
+      "localization_name": "Wolf",
+      "geometry": "geometry.humanoid.custom",
+      "texture": "Wolf_custom.png",
+      "type": "paid"
+    }
+  ],
+  "serialize_name": "ParanormalWorldSkinPack",
+  "localization_name": "ParanormalWorldSkinPack"
+}
